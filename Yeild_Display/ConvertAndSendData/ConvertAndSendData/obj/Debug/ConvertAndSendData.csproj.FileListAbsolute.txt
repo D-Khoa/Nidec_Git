@@ -10,3 +10,6 @@ D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAnd
 D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.View.SettingForm.resources
 D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\bin\Debug\npgsql.dll
 D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.csprojResolveAssemblyReference.cache
+D:\GIT\DangKhoa\Nidec_Git\Yeild_Display\ConvertAndSendData\ConvertAndSendData\bin\Debug\ConvertAndSendData.exe.config
+D:\GIT\DangKhoa\Nidec_Git\Yeild_Display\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.exe
+D:\GIT\DangKhoa\Nidec_Git\Yeild_Display\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.pdb
