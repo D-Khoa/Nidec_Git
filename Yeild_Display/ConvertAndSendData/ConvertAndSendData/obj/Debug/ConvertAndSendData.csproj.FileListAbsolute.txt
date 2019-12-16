@@ -1,0 +1,12 @@
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\bin\Debug\ConvertAndSendData.exe.config
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.View.InspectCell.resources
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.View.MainForm.resources
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.Properties.Resources.resources
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.csproj.GenerateResource.Cache
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\bin\Debug\ConvertAndSendData.exe
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\bin\Debug\ConvertAndSendData.pdb
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.exe
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.pdb
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.View.SettingForm.resources
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\bin\Debug\npgsql.dll
+D:\GIT\DangKhoa\MyGit\ConvertAndSendData\ConvertAndSendData\obj\Debug\ConvertAndSendData.csprojResolveAssemblyReference.cache
