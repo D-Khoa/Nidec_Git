@@ -38,10 +38,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsTimer = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnBrowserFrom = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtModel = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtNo = new System.Windows.Forms.TextBox();
+            this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.numTimer)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +119,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsStatus,
             this.tsTimer});
             this.statusStrip1.Location = new System.Drawing.Point(0, 127);
             this.statusStrip1.Name = "statusStrip1";
@@ -130,8 +130,7 @@
             // tsTimer
             // 
             this.tsTimer.Name = "tsTimer";
-            this.tsTimer.Size = new System.Drawing.Size(351, 17);
-            this.tsTimer.Spring = true;
+            this.tsTimer.Size = new System.Drawing.Size(21, 17);
             this.tsTimer.Text = "0 s";
             // 
             // btnBrowserFrom
@@ -144,26 +143,10 @@
             this.btnBrowserFrom.UseVisualStyleBackColor = true;
             this.btnBrowserFrom.Click += new System.EventHandler(this.btnBrowserFrom_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Model";
-            // 
-            // txtModel
-            // 
-            this.txtModel.Location = new System.Drawing.Point(48, 20);
-            this.txtModel.Name = "txtModel";
-            this.txtModel.Size = new System.Drawing.Size(121, 20);
-            this.txtModel.TabIndex = 17;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(194, 24);
+            this.label5.Location = new System.Drawing.Point(12, 30);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 18;
@@ -171,10 +154,17 @@
             // 
             // txtNo
             // 
-            this.txtNo.Location = new System.Drawing.Point(230, 20);
+            this.txtNo.Location = new System.Drawing.Point(48, 27);
             this.txtNo.Name = "txtNo";
             this.txtNo.Size = new System.Drawing.Size(121, 20);
             this.txtNo.TabIndex = 19;
+            // 
+            // tsStatus
+            // 
+            this.tsStatus.Name = "tsStatus";
+            this.tsStatus.Size = new System.Drawing.Size(299, 17);
+            this.tsStatus.Spring = true;
+            this.tsStatus.Text = "None";
             // 
             // MainFrm
             // 
@@ -184,8 +174,6 @@
             this.ClientSize = new System.Drawing.Size(366, 149);
             this.Controls.Add(this.txtNo);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtModel);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnBrowserFrom);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnStop);
@@ -218,10 +206,9 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsTimer;
         private System.Windows.Forms.Button btnBrowserFrom;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtModel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtNo;
+        private System.Windows.Forms.ToolStripStatusLabel tsStatus;
     }
 }
 
