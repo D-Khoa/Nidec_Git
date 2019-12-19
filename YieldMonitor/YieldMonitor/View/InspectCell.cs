@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace YieldMonitor.View
@@ -28,14 +29,15 @@ namespace YieldMonitor.View
 
         public Color color
         {
-            get { return pnlInfo.BackColor; }
-            set { pnlInfo.BackColor = value; }
+            get { return this.BackColor; }
+            set { this.BackColor = value; }
         }
 
         public InspectCell()
         {
             InitializeComponent();
         }
+
 
         public void InspectCell_Paint(object sender, PaintEventArgs e)
         {

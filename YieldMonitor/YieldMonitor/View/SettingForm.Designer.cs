@@ -37,6 +37,8 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lbModel = new System.Windows.Forms.Label();
+            this.btnAddAll = new System.Windows.Forms.Button();
+            this.btnRemoveAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnOK
@@ -137,6 +139,26 @@
             this.lbModel.TabIndex = 9;
             this.lbModel.Text = "None";
             // 
+            // btnAddAll
+            // 
+            this.btnAddAll.Location = new System.Drawing.Point(136, 127);
+            this.btnAddAll.Name = "btnAddAll";
+            this.btnAddAll.Size = new System.Drawing.Size(75, 23);
+            this.btnAddAll.TabIndex = 10;
+            this.btnAddAll.Text = "Add All";
+            this.btnAddAll.UseVisualStyleBackColor = true;
+            this.btnAddAll.Click += new System.EventHandler(this.btnAddAll_Click);
+            // 
+            // btnRemoveAll
+            // 
+            this.btnRemoveAll.Location = new System.Drawing.Point(136, 156);
+            this.btnRemoveAll.Name = "btnRemoveAll";
+            this.btnRemoveAll.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveAll.TabIndex = 11;
+            this.btnRemoveAll.Text = "Remove All";
+            this.btnRemoveAll.UseVisualStyleBackColor = true;
+            this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
+            // 
             // SettingForm
             // 
             this.AcceptButton = this.btnOK;
@@ -144,6 +166,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(357, 309);
+            this.Controls.Add(this.btnRemoveAll);
+            this.Controls.Add(this.btnAddAll);
             this.Controls.Add(this.lbModel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnRemove);
@@ -173,5 +197,7 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbModel;
+        private System.Windows.Forms.Button btnAddAll;
+        private System.Windows.Forms.Button btnRemoveAll;
     }
 }

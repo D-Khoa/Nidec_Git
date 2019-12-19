@@ -44,8 +44,8 @@ namespace YieldMonitor.View
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            listprocess.Add(lsbBefore.SelectedItem.ToString());
-            listTemp.Remove(lsbBefore.SelectedItem.ToString());
+            //listprocess.Add(lsbBefore.SelectedItem.ToString());
+            //listTemp.Remove(lsbBefore.SelectedItem.ToString());
             lsbAfter.Items.Add(lsbBefore.SelectedItem);
             lsbBefore.Items.Remove(lsbBefore.SelectedItem);
             if (lsbBefore.Items.Count > 0)
@@ -54,8 +54,8 @@ namespace YieldMonitor.View
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            listprocess.Remove(lsbAfter.SelectedItem.ToString());
-            listTemp.Add(lsbAfter.SelectedItem.ToString());
+            //listprocess.Remove(lsbAfter.SelectedItem.ToString());
+            //listTemp.Add(lsbAfter.SelectedItem.ToString());
             lsbBefore.Items.Add(lsbAfter.SelectedItem);
             lsbAfter.Items.Remove(lsbAfter.SelectedItem);
             if (lsbAfter.Items.Count > 0)
@@ -64,6 +64,16 @@ namespace YieldMonitor.View
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            listTemp.Clear();
+            listprocess.Clear();
+            foreach(string item in lsbBefore.Items)
+            {
+                listTemp.Add(item);
+            }
+            foreach (string item in lsbAfter.Items)
+            {
+                listprocess.Add(item);
+            }
             DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -91,6 +101,28 @@ namespace YieldMonitor.View
             }
             else
                 btnRemove.Enabled = false;
+        }
+
+        private void btnAddAll_Click(object sender, EventArgs e)
+        {
+            foreach(string p in listTemp)
+            {
+                //listprocess.Add(p);
+                lsbAfter.Items.Add(p);
+            }
+            lsbBefore.Items.Clear();
+            //listTemp.Clear();
+        }
+
+        private void btnRemoveAll_Click(object sender, EventArgs e)
+        {
+            foreach (string p in listprocess)
+            {
+                //listTemp.Add(p);
+                lsbBefore.Items.Add(p);
+            }
+            lsbAfter.Items.Clear();
+            //listprocess.Clear();
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsCounter = new System.Windows.Forms.ToolStripStatusLabel();
@@ -51,10 +52,33 @@
             this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbModel = new System.Windows.Forms.ComboBox();
+            this.grt_Main = new System.Windows.Forms.TabControl();
+            this.tab_YieldMonitor = new System.Windows.Forms.TabPage();
+            this.tab_Track = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbTotalInput = new System.Windows.Forms.Label();
+            this.lbTotalOutput = new System.Windows.Forms.Label();
+            this.lbTotalYield = new System.Windows.Forms.Label();
+            this.dgvDataTracking = new System.Windows.Forms.DataGridView();
+            this.assy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.process = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.process_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.process_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ng_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ng_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnTrackSetting = new System.Windows.Forms.Button();
+            this.lbModel = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).BeginInit();
+            this.grt_Main.SuspendLayout();
+            this.tab_YieldMonitor.SuspendLayout();
+            this.tab_Track.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataTracking)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -64,14 +88,14 @@
             this.tsCounter});
             this.statusStrip1.Location = new System.Drawing.Point(0, 382);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(816, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(883, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // tsStatus
             // 
             this.tsStatus.Name = "tsStatus";
-            this.tsStatus.Size = new System.Drawing.Size(765, 17);
+            this.tsStatus.Size = new System.Drawing.Size(832, 17);
             this.tsStatus.Spring = true;
             // 
             // tsCounter
@@ -102,9 +126,9 @@
             // 
             this.flpnlYeildShow.AutoScroll = true;
             this.flpnlYeildShow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpnlYeildShow.Location = new System.Drawing.Point(0, 88);
+            this.flpnlYeildShow.Location = new System.Drawing.Point(3, 91);
             this.flpnlYeildShow.Name = "flpnlYeildShow";
-            this.flpnlYeildShow.Size = new System.Drawing.Size(816, 294);
+            this.flpnlYeildShow.Size = new System.Drawing.Size(869, 259);
             this.flpnlYeildShow.TabIndex = 2;
             // 
             // panel1
@@ -123,9 +147,9 @@
             this.panel1.Controls.Add(this.cmbModel);
             this.panel1.Controls.Add(this.btnRun);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(816, 88);
+            this.panel1.Size = new System.Drawing.Size(869, 88);
             this.panel1.TabIndex = 3;
             // 
             // btnSetting
@@ -145,7 +169,7 @@
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(587, 0);
+            this.panel2.Location = new System.Drawing.Point(640, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(229, 88);
             this.panel2.TabIndex = 12;
@@ -296,13 +320,203 @@
             this.cmbModel.TabIndex = 2;
             this.cmbModel.TextChanged += new System.EventHandler(this.cmbModel_TextChanged);
             // 
+            // grt_Main
+            // 
+            this.grt_Main.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.grt_Main.Controls.Add(this.tab_YieldMonitor);
+            this.grt_Main.Controls.Add(this.tab_Track);
+            this.grt_Main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grt_Main.Location = new System.Drawing.Point(0, 0);
+            this.grt_Main.Name = "grt_Main";
+            this.grt_Main.SelectedIndex = 0;
+            this.grt_Main.Size = new System.Drawing.Size(883, 382);
+            this.grt_Main.TabIndex = 3;
+            // 
+            // tab_YieldMonitor
+            // 
+            this.tab_YieldMonitor.Controls.Add(this.flpnlYeildShow);
+            this.tab_YieldMonitor.Controls.Add(this.panel1);
+            this.tab_YieldMonitor.Location = new System.Drawing.Point(4, 25);
+            this.tab_YieldMonitor.Name = "tab_YieldMonitor";
+            this.tab_YieldMonitor.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_YieldMonitor.Size = new System.Drawing.Size(875, 353);
+            this.tab_YieldMonitor.TabIndex = 0;
+            this.tab_YieldMonitor.Text = "Yield Monitor";
+            this.tab_YieldMonitor.UseVisualStyleBackColor = true;
+            // 
+            // tab_Track
+            // 
+            this.tab_Track.Controls.Add(this.lbModel);
+            this.tab_Track.Controls.Add(this.label13);
+            this.tab_Track.Controls.Add(this.btnTrackSetting);
+            this.tab_Track.Controls.Add(this.dgvDataTracking);
+            this.tab_Track.Controls.Add(this.lbTotalYield);
+            this.tab_Track.Controls.Add(this.lbTotalOutput);
+            this.tab_Track.Controls.Add(this.lbTotalInput);
+            this.tab_Track.Controls.Add(this.label11);
+            this.tab_Track.Controls.Add(this.label10);
+            this.tab_Track.Controls.Add(this.label9);
+            this.tab_Track.Location = new System.Drawing.Point(4, 25);
+            this.tab_Track.Name = "tab_Track";
+            this.tab_Track.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Track.Size = new System.Drawing.Size(875, 353);
+            this.tab_Track.TabIndex = 1;
+            this.tab_Track.Text = "Tracking Data";
+            this.tab_Track.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(24, 35);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(120, 24);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Total Input :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(8, 59);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(136, 24);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Total Output :";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(75, 83);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 24);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Yield :";
+            // 
+            // lbTotalInput
+            // 
+            this.lbTotalInput.AutoSize = true;
+            this.lbTotalInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalInput.Location = new System.Drawing.Point(150, 35);
+            this.lbTotalInput.Name = "lbTotalInput";
+            this.lbTotalInput.Size = new System.Drawing.Size(56, 24);
+            this.lbTotalInput.TabIndex = 3;
+            this.lbTotalInput.Text = "Input";
+            // 
+            // lbTotalOutput
+            // 
+            this.lbTotalOutput.AutoSize = true;
+            this.lbTotalOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalOutput.Location = new System.Drawing.Point(150, 59);
+            this.lbTotalOutput.Name = "lbTotalOutput";
+            this.lbTotalOutput.Size = new System.Drawing.Size(72, 24);
+            this.lbTotalOutput.TabIndex = 4;
+            this.lbTotalOutput.Text = "Output";
+            // 
+            // lbTotalYield
+            // 
+            this.lbTotalYield.AutoSize = true;
+            this.lbTotalYield.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalYield.Location = new System.Drawing.Point(150, 83);
+            this.lbTotalYield.Name = "lbTotalYield";
+            this.lbTotalYield.Size = new System.Drawing.Size(57, 24);
+            this.lbTotalYield.TabIndex = 5;
+            this.lbTotalYield.Text = "Yield";
+            // 
+            // dgvDataTracking
+            // 
+            this.dgvDataTracking.AllowUserToAddRows = false;
+            this.dgvDataTracking.AllowUserToDeleteRows = false;
+            this.dgvDataTracking.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDataTracking.BackgroundColor = System.Drawing.Color.White;
+            this.dgvDataTracking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDataTracking.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.assy,
+            this.process,
+            this.process_in,
+            this.process_out,
+            this.ng_product,
+            this.ng_rate});
+            this.dgvDataTracking.Location = new System.Drawing.Point(228, 6);
+            this.dgvDataTracking.Name = "dgvDataTracking";
+            this.dgvDataTracking.ReadOnly = true;
+            this.dgvDataTracking.Size = new System.Drawing.Size(646, 341);
+            this.dgvDataTracking.TabIndex = 6;
+            // 
+            // assy
+            // 
+            this.assy.HeaderText = "Assy";
+            this.assy.Name = "assy";
+            this.assy.ReadOnly = true;
+            // 
+            // process
+            // 
+            this.process.HeaderText = "Process";
+            this.process.Name = "process";
+            this.process.ReadOnly = true;
+            // 
+            // process_in
+            // 
+            this.process_in.HeaderText = "Input";
+            this.process_in.Name = "process_in";
+            this.process_in.ReadOnly = true;
+            // 
+            // process_out
+            // 
+            this.process_out.HeaderText = "Output";
+            this.process_out.Name = "process_out";
+            this.process_out.ReadOnly = true;
+            // 
+            // ng_product
+            // 
+            this.ng_product.HeaderText = "NG Product";
+            this.ng_product.Name = "ng_product";
+            this.ng_product.ReadOnly = true;
+            // 
+            // ng_rate
+            // 
+            this.ng_rate.HeaderText = "NG Rate";
+            this.ng_rate.Name = "ng_rate";
+            this.ng_rate.ReadOnly = true;
+            // 
+            // btnTrackSetting
+            // 
+            this.btnTrackSetting.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackSetting.Image")));
+            this.btnTrackSetting.Location = new System.Drawing.Point(6, 326);
+            this.btnTrackSetting.Name = "btnTrackSetting";
+            this.btnTrackSetting.Size = new System.Drawing.Size(44, 24);
+            this.btnTrackSetting.TabIndex = 7;
+            this.btnTrackSetting.UseVisualStyleBackColor = true;
+            // 
+            // lbModel
+            // 
+            this.lbModel.AutoSize = true;
+            this.lbModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbModel.Location = new System.Drawing.Point(150, 11);
+            this.lbModel.Name = "lbModel";
+            this.lbModel.Size = new System.Drawing.Size(68, 24);
+            this.lbModel.TabIndex = 9;
+            this.lbModel.Text = "Model";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(64, 11);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 24);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Model :";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(816, 404);
-            this.Controls.Add(this.flpnlYeildShow);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(883, 404);
+            this.Controls.Add(this.grt_Main);
             this.Controls.Add(this.statusStrip1);
             this.Name = "MainForm";
             this.Text = "Yield Monitor";
@@ -314,6 +528,11 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).EndInit();
+            this.grt_Main.ResumeLayout(false);
+            this.tab_YieldMonitor.ResumeLayout(false);
+            this.tab_Track.ResumeLayout(false);
+            this.tab_Track.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataTracking)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -344,6 +563,25 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnSetting;
+        private System.Windows.Forms.TabControl grt_Main;
+        private System.Windows.Forms.TabPage tab_YieldMonitor;
+        private System.Windows.Forms.TabPage tab_Track;
+        private System.Windows.Forms.Label lbTotalYield;
+        private System.Windows.Forms.Label lbTotalOutput;
+        private System.Windows.Forms.Label lbTotalInput;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridView dgvDataTracking;
+        private System.Windows.Forms.DataGridViewTextBoxColumn assy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn process;
+        private System.Windows.Forms.DataGridViewTextBoxColumn process_in;
+        private System.Windows.Forms.DataGridViewTextBoxColumn process_out;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ng_product;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ng_rate;
+        private System.Windows.Forms.Button btnTrackSetting;
+        private System.Windows.Forms.Label lbModel;
+        private System.Windows.Forms.Label label13;
     }
 }
 

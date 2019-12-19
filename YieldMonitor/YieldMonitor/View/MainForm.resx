@@ -123,4 +123,38 @@
   <metadata name="bwSend.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>133, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnTrackSetting.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAAmJL
+        R0QAAKqNIzIAAAAHdElNRQfjCwsJGDfJonNFAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE5LTExLTExVDA5
+        OjI0OjU1KzAwOjAwg5POUwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0xMS0xMVQwOToyNDo1NSswMDow
+        MPLOdu8AAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAABWElEQVQ4T4WTuy5FQRRA
+        R6hQSJCgQDxDh/gRovAoKFQalL4BvyASGj6BIGg8Op2gUIjPsNbMmZu51w0rWcne+84989oT/mAPPyu3
+        LPxHOy5hV8xCeMF+HMd7C9CN69gZswILDjrDV3zAS5RWvMVHfMdTdGwH1tjA4xSGKZxPYR1zOJHCcIJr
+        KUy41A8cjFliAFcq/T0zgq6kN2YFTzibwrCIb7hfaWxNZtCxNTxh95gPypn9QzmrcVm7wmfcNfnGSWwz
+        gVV01kasuZ3MEH4Z+IFyP8t4kMI6DtHfpAWHMX7AhvHOL0ygcbmSa30xC+EGPYftmFV49/n68iE6qxov
+        oHjQjq3D7rOBpmOWcFaXrHlmGUU/2BOzClv4PIWxF/J1lthIYymM3VgeaHwHd3iENon7u0YPS43LVnZs
+        XSuL72ET8+F5z16V5sZx2U0fUzNskvycdyz8JoQf5gdEkiUhNksAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="assy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="process.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="process_in.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="process_out.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ng_product.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ng_rate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
