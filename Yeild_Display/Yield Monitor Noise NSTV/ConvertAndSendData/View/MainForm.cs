@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -29,8 +30,7 @@ namespace ConvertAndSendData.View
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            GetData.GetProcessToList(ref listTemp, cmbModel.Text);
-            cmbModel.GetModelToCombobox();
+            cmbModel.GetModelNSTV();
             cmbModel.Text = null;
             if (File.Exists(setfile))
             {
@@ -81,6 +81,7 @@ namespace ConvertAndSendData.View
                 e.Cancel = true;
             else
             {
+                e.Cancel = false;
                 setlist.Add("Model =" + cmbModel.Text);
                 setlist.Add("From =" + dtpDateFrom.Value.ToString());
                 setlist.Add("To =" + dtpDateTo.Value.ToString());
@@ -105,7 +106,7 @@ namespace ConvertAndSendData.View
         private void btnSetting_Click(object sender, EventArgs e)
         {
             if (listTemp.Count() == 0 && listProcess.Count() == 0)
-                GetData.GetProcessToList(ref listTemp, cmbModel.Text);
+                GetDataNSTV.GetNoNSTV(listTemp, cmbModel.Text);
             SettingForm stForm = new SettingForm();
             stForm.Model = cmbModel.Text;
             stForm.listTemp = listTemp;
@@ -197,19 +198,44 @@ namespace ConvertAndSendData.View
         #region SUB PROGRAM
         private void SearchEvent()
         {
-            StringBuilder table = new StringBuilder();
-            table.Append(cmbModel.Text).Append(dtpDateFrom.Value.ToString("yyyyMM"));
-            if (dtpDateFrom.Value.Month < dtpDateTo.Value.Month)
-            {
-                for (DateTime date = dtpDateFrom.Value; date <= dtpDateTo.Value; date.AddMonths(1))
-                {
-                    table.Append(",").Append(cmbModel.Text).Append(date.ToString("yyyyMM"));
-                }
-            }
+            string path = @"\\192.168.145.7\nstvnoise$\FCT_NOISE\" + cmbModel.Text + "\\";
             foreach (InspectCell cell in flpnlYeildShow.Controls.OfType<InspectCell>())
             {
-                cell.input = GetData.GetInput(cell.Name, table.ToString(), dtpDateFrom.Value, dtpDateTo.Value);
-                cell.output = GetData.GetOutput(cell.Name, table.ToString(), dtpDateFrom.Value, dtpDateTo.Value);
+                cell.input = 0;
+                cell.output = 0;
+                string nopath = path + cell.Name + "\\";
+                for (int i = dtpDateFrom.Value.Year; i <= dtpDateTo.Value.Year; i++)
+                {
+                    string yearpath = nopath + i + "\\";
+                    if (!Directory.Exists(yearpath))
+                        return;
+                    for (int j = dtpDateFrom.Value.Month; j <= dtpDateTo.Value.Month; j++)
+                    {
+                        string monthpath = yearpath + j + "\\";
+                        if (!Directory.Exists(monthpath))
+                            return;
+                        for (int k = dtpDateFrom.Value.Day; k <= dtpDateTo.Value.Day; k++)
+                        {
+                            string date = i + "-" + j + "-" + k;
+                            string[] files = Directory.GetFiles(monthpath);
+                            foreach (string f in files)
+                            {
+                                if (f.Contains(date))
+                                {
+                                    DataTable dt = new DataTable();
+                                    dt = CSVUtility.ConvertCSVtoDataTable(f);
+                                    cell.input += dt.Rows.Count;
+                                    foreach (DataRow dr in dt.Rows)
+                                    {
+                                        if (dr["\"\"Judge\"\""].ToString().Contains("OK"))
+                                            cell.output++;
+                                    }
+                                    dt.Clear();
+                                }
+                            }
+                        }
+                    }
+                }
                 if (cell.input > 0 && cell.output > 0)
                     cell.yeild = cell.output / cell.input;
                 else
@@ -224,6 +250,8 @@ namespace ConvertAndSendData.View
                     cell.color = Color.Silver;
                 cell.lbYeild.Text = (cell.yeild * 100).ToString("0.##") + "%";
             }
+
+
         }
 
         private void AddCells(string name)
@@ -239,5 +267,10 @@ namespace ConvertAndSendData.View
             flpnlYeildShow.Controls.Add(icell);
         }
         #endregion
+
+        private void cmbModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

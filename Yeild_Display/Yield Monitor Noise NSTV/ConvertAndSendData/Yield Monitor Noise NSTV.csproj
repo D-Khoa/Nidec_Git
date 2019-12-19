@@ -53,7 +53,9 @@
   <ItemGroup>
     <Compile Include="Controller\SearchEvent.cs" />
     <Compile Include="Model\BaseCell.cs" />
+    <Compile Include="Model\CSVUtility.cs" />
     <Compile Include="Model\GetData.cs" />
+    <Compile Include="Model\GetDataNSTV.cs" />
     <Compile Include="Model\SSQL.cs" />
     <Compile Include="Model\TfSQL.cs" />
     <Compile Include="View\InspectCell.cs">
