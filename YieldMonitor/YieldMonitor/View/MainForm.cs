@@ -6,19 +6,19 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using System.ComponentModel;
-using YieldMonitor.Model;
 using System.Collections.Generic;
+using YieldMonitor.Model;
 
 namespace YieldMonitor.View
 {
     public partial class MainForm : Form
     {
         int counter;
-        string setfile = @"D:\setting.ini";
+        string setfile = "setting.ini";
+        DateTime datechange = new DateTime();
         List<string> setlist = new List<string>();
         List<string> listTemp = new List<string>();
         List<string> listProcess = new List<string>();
-        DateTime datechange = new DateTime();
 
         public MainForm()
         {
@@ -56,6 +56,11 @@ namespace YieldMonitor.View
         }
 
         #region SUB EVENT
+        /// <summary>
+        /// When date from change, date to change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dtpDateFrom_ValueChanged(object sender, EventArgs e)
         {
             if (dtpDateFrom.Value > datechange)
@@ -65,6 +70,11 @@ namespace YieldMonitor.View
             datechange = dtpDateFrom.Value;
         }
 
+        /// <summary>
+        /// Clear process when choose model
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbModel_TextChanged(object sender, EventArgs e)
         {
             foreach (InspectCell cell in flpnlYeildShow.Controls.OfType<InspectCell>())
@@ -75,33 +85,41 @@ namespace YieldMonitor.View
             }
         }
 
+        /// <summary>
+        /// When form closing, save setting into setting.ini
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!btnRun.Enabled)
                 e.Cancel = true;
-            else
+
+            setlist.Add("Model =" + cmbModel.Text);
+            setlist.Add("From =" + dtpDateFrom.Value.ToString());
+            setlist.Add("To =" + dtpDateTo.Value.ToString());
+            setlist.Add("Timer =" + numCounter.Value.ToString());
+            int i = 0;
+            foreach (InspectCell cell in flpnlYeildShow.Controls.OfType<InspectCell>())
             {
-                setlist.Add("Model =" + cmbModel.Text);
-                setlist.Add("From =" + dtpDateFrom.Value.ToString());
-                setlist.Add("To =" + dtpDateTo.Value.ToString());
-                setlist.Add("Timer =" + numCounter.Value.ToString());
-                int i = 0;
-                foreach (InspectCell cell in flpnlYeildShow.Controls.OfType<InspectCell>())
-                {
-                    i++;
-                    setlist.Add("Process " + i + " =" + cell.Name);
-                }
-                if (!File.Exists(setfile))
-                {
-                    File.Create(setfile);
-                    File.GetAccessControl(setfile);
-                }
-                File.WriteAllLines(setfile, setlist);
+                i++;
+                setlist.Add("Process " + i + " =" + cell.Name);
             }
+            if (!File.Exists(setfile))
+            {
+                File.Create(setfile);
+                File.GetAccessControl(setfile);
+            }
+            File.WriteAllLines(setfile, setlist);
         }
         #endregion
 
         #region BUTTON SETUP
+        /// <summary>
+        /// Open setting form when click setting button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSetting_Click(object sender, EventArgs e)
         {
             if (listTemp.Count() == 0 && listProcess.Count() == 0)
@@ -122,11 +140,21 @@ namespace YieldMonitor.View
             }
         }
 
+        /// <summary>
+        /// Search data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             SearchEvent();
         }
 
+        /// <summary>
+        /// Start background worker
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRun_Click(object sender, EventArgs e)
         {
             if (!bwSend.IsBusy)
@@ -139,6 +167,11 @@ namespace YieldMonitor.View
             }
         }
 
+        /// <summary>
+        /// Stop background worker
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnStop_Click(object sender, EventArgs e)
         {
             if (bwSend.IsBusy)
@@ -151,6 +184,11 @@ namespace YieldMonitor.View
         }
         #endregion
 
+        /// <summary>
+        /// Setup background worker
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         #region BACKGROUND WORKER
         private void bwSend_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -179,7 +217,7 @@ namespace YieldMonitor.View
             if (e.Cancelled)
             {
                 tsStatus.Text = "Stopped!!!";
-                MessageBox.Show("Stop data syncing!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Stop data syncing!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (e.Error != null)
             {
@@ -195,6 +233,9 @@ namespace YieldMonitor.View
         #endregion
 
         #region SUB PROGRAM
+        /// <summary>
+        /// Search data and show yield rate
+        /// </summary>
         private void SearchEvent()
         {
             StringBuilder table = new StringBuilder();
@@ -226,6 +267,10 @@ namespace YieldMonitor.View
             }
         }
 
+        /// <summary>
+        /// Add a new cell
+        /// </summary>
+        /// <param name="name"></param>
         private void AddCells(string name)
         {
             InspectCell icell = new InspectCell();

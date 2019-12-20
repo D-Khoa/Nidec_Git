@@ -105,7 +105,7 @@
             this.lbInspectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbInspectName.Location = new System.Drawing.Point(0, 30);
             this.lbInspectName.Name = "lbInspectName";
-            this.lbInspectName.Size = new System.Drawing.Size(160, 30);
+            this.lbInspectName.Size = new System.Drawing.Size(158, 30);
             this.lbInspectName.TabIndex = 0;
             this.lbInspectName.Text = "Inspect Name";
             this.lbInspectName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,7 +117,7 @@
             this.lbmodel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbmodel.Location = new System.Drawing.Point(0, 0);
             this.lbmodel.Name = "lbmodel";
-            this.lbmodel.Size = new System.Drawing.Size(160, 30);
+            this.lbmodel.Size = new System.Drawing.Size(158, 30);
             this.lbmodel.TabIndex = 7;
             this.lbmodel.Text = "Model";
             this.lbmodel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -126,7 +126,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Gray;
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.lbInspectName);
             this.Controls.Add(this.lbYeild);
             this.Controls.Add(this.lb3);
@@ -136,7 +137,7 @@
             this.Controls.Add(this.lb2);
             this.Controls.Add(this.lb1);
             this.Name = "InspectCell";
-            this.Size = new System.Drawing.Size(160, 160);
+            this.Size = new System.Drawing.Size(158, 158);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.InspectCell_Paint);
             this.ResumeLayout(false);
 

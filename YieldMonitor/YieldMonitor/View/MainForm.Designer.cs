@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsCounter = new System.Windows.Forms.ToolStripStatusLabel();
@@ -55,12 +58,9 @@
             this.grt_Main = new System.Windows.Forms.TabControl();
             this.tab_YieldMonitor = new System.Windows.Forms.TabPage();
             this.tab_Track = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lbTotalInput = new System.Windows.Forms.Label();
-            this.lbTotalOutput = new System.Windows.Forms.Label();
-            this.lbTotalYield = new System.Windows.Forms.Label();
+            this.lbModel = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnTrackSetting = new System.Windows.Forms.Button();
             this.dgvDataTracking = new System.Windows.Forms.DataGridView();
             this.assy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.process = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,9 +68,15 @@
             this.process_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ng_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ng_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnTrackSetting = new System.Windows.Forms.Button();
-            this.lbModel = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lbTotalYield = new System.Windows.Forms.Label();
+            this.lbTotalOutput = new System.Windows.Forms.Label();
+            this.lbTotalInput = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tab_Chart = new System.Windows.Forms.TabPage();
+            this.chart_display = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dgvChartData = new System.Windows.Forms.DataGridView();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -79,6 +85,9 @@
             this.tab_YieldMonitor.SuspendLayout();
             this.tab_Track.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataTracking)).BeginInit();
+            this.tab_Chart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_display)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChartData)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -325,6 +334,7 @@
             this.grt_Main.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.grt_Main.Controls.Add(this.tab_YieldMonitor);
             this.grt_Main.Controls.Add(this.tab_Track);
+            this.grt_Main.Controls.Add(this.tab_Chart);
             this.grt_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grt_Main.Location = new System.Drawing.Point(0, 0);
             this.grt_Main.Name = "grt_Main";
@@ -364,65 +374,34 @@
             this.tab_Track.Text = "Tracking Data";
             this.tab_Track.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // lbModel
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(24, 35);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(120, 24);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Total Input :";
+            this.lbModel.AutoSize = true;
+            this.lbModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbModel.Location = new System.Drawing.Point(150, 11);
+            this.lbModel.Name = "lbModel";
+            this.lbModel.Size = new System.Drawing.Size(68, 24);
+            this.lbModel.TabIndex = 9;
+            this.lbModel.Text = "Model";
             // 
-            // label10
+            // label13
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(8, 59);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(136, 24);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Total Output :";
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(64, 11);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 24);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Model :";
             // 
-            // label11
+            // btnTrackSetting
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(75, 83);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(69, 24);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Yield :";
-            // 
-            // lbTotalInput
-            // 
-            this.lbTotalInput.AutoSize = true;
-            this.lbTotalInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalInput.Location = new System.Drawing.Point(150, 35);
-            this.lbTotalInput.Name = "lbTotalInput";
-            this.lbTotalInput.Size = new System.Drawing.Size(56, 24);
-            this.lbTotalInput.TabIndex = 3;
-            this.lbTotalInput.Text = "Input";
-            // 
-            // lbTotalOutput
-            // 
-            this.lbTotalOutput.AutoSize = true;
-            this.lbTotalOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalOutput.Location = new System.Drawing.Point(150, 59);
-            this.lbTotalOutput.Name = "lbTotalOutput";
-            this.lbTotalOutput.Size = new System.Drawing.Size(72, 24);
-            this.lbTotalOutput.TabIndex = 4;
-            this.lbTotalOutput.Text = "Output";
-            // 
-            // lbTotalYield
-            // 
-            this.lbTotalYield.AutoSize = true;
-            this.lbTotalYield.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalYield.Location = new System.Drawing.Point(150, 83);
-            this.lbTotalYield.Name = "lbTotalYield";
-            this.lbTotalYield.Size = new System.Drawing.Size(57, 24);
-            this.lbTotalYield.TabIndex = 5;
-            this.lbTotalYield.Text = "Yield";
+            this.btnTrackSetting.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackSetting.Image")));
+            this.btnTrackSetting.Location = new System.Drawing.Point(6, 326);
+            this.btnTrackSetting.Name = "btnTrackSetting";
+            this.btnTrackSetting.Size = new System.Drawing.Size(44, 24);
+            this.btnTrackSetting.TabIndex = 7;
+            this.btnTrackSetting.UseVisualStyleBackColor = true;
             // 
             // dgvDataTracking
             // 
@@ -482,34 +461,103 @@
             this.ng_rate.Name = "ng_rate";
             this.ng_rate.ReadOnly = true;
             // 
-            // btnTrackSetting
+            // lbTotalYield
             // 
-            this.btnTrackSetting.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackSetting.Image")));
-            this.btnTrackSetting.Location = new System.Drawing.Point(6, 326);
-            this.btnTrackSetting.Name = "btnTrackSetting";
-            this.btnTrackSetting.Size = new System.Drawing.Size(44, 24);
-            this.btnTrackSetting.TabIndex = 7;
-            this.btnTrackSetting.UseVisualStyleBackColor = true;
+            this.lbTotalYield.AutoSize = true;
+            this.lbTotalYield.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalYield.Location = new System.Drawing.Point(150, 83);
+            this.lbTotalYield.Name = "lbTotalYield";
+            this.lbTotalYield.Size = new System.Drawing.Size(57, 24);
+            this.lbTotalYield.TabIndex = 5;
+            this.lbTotalYield.Text = "Yield";
             // 
-            // lbModel
+            // lbTotalOutput
             // 
-            this.lbModel.AutoSize = true;
-            this.lbModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbModel.Location = new System.Drawing.Point(150, 11);
-            this.lbModel.Name = "lbModel";
-            this.lbModel.Size = new System.Drawing.Size(68, 24);
-            this.lbModel.TabIndex = 9;
-            this.lbModel.Text = "Model";
+            this.lbTotalOutput.AutoSize = true;
+            this.lbTotalOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalOutput.Location = new System.Drawing.Point(150, 59);
+            this.lbTotalOutput.Name = "lbTotalOutput";
+            this.lbTotalOutput.Size = new System.Drawing.Size(72, 24);
+            this.lbTotalOutput.TabIndex = 4;
+            this.lbTotalOutput.Text = "Output";
             // 
-            // label13
+            // lbTotalInput
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(64, 11);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(80, 24);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "Model :";
+            this.lbTotalInput.AutoSize = true;
+            this.lbTotalInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalInput.Location = new System.Drawing.Point(150, 35);
+            this.lbTotalInput.Name = "lbTotalInput";
+            this.lbTotalInput.Size = new System.Drawing.Size(56, 24);
+            this.lbTotalInput.TabIndex = 3;
+            this.lbTotalInput.Text = "Input";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(75, 83);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 24);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Yield :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(8, 59);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(136, 24);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Total Output :";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(24, 35);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(120, 24);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Total Input :";
+            // 
+            // tab_Chart
+            // 
+            this.tab_Chart.BackColor = System.Drawing.SystemColors.Control;
+            this.tab_Chart.Controls.Add(this.dgvChartData);
+            this.tab_Chart.Controls.Add(this.chart_display);
+            this.tab_Chart.Location = new System.Drawing.Point(4, 25);
+            this.tab_Chart.Name = "tab_Chart";
+            this.tab_Chart.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Chart.Size = new System.Drawing.Size(875, 353);
+            this.tab_Chart.TabIndex = 2;
+            this.tab_Chart.Text = "Chart";
+            // 
+            // chart_display
+            // 
+            this.chart_display.BorderlineColor = System.Drawing.Color.Black;
+            chartArea1.Name = "ChartArea1";
+            this.chart_display.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart_display.Legends.Add(legend1);
+            this.chart_display.Location = new System.Drawing.Point(8, 6);
+            this.chart_display.Name = "chart_display";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart_display.Series.Add(series1);
+            this.chart_display.Size = new System.Drawing.Size(423, 341);
+            this.chart_display.TabIndex = 0;
+            // 
+            // dgvChartData
+            // 
+            this.dgvChartData.BackgroundColor = System.Drawing.Color.White;
+            this.dgvChartData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChartData.GridColor = System.Drawing.Color.White;
+            this.dgvChartData.Location = new System.Drawing.Point(437, 6);
+            this.dgvChartData.Name = "dgvChartData";
+            this.dgvChartData.Size = new System.Drawing.Size(330, 341);
+            this.dgvChartData.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -533,6 +581,9 @@
             this.tab_Track.ResumeLayout(false);
             this.tab_Track.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataTracking)).EndInit();
+            this.tab_Chart.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart_display)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChartData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -582,6 +633,9 @@
         private System.Windows.Forms.Button btnTrackSetting;
         private System.Windows.Forms.Label lbModel;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TabPage tab_Chart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart_display;
+        private System.Windows.Forms.DataGridView dgvChartData;
     }
 }
 
