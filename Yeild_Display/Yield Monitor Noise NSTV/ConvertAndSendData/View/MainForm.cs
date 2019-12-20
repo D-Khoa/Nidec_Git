@@ -15,7 +15,7 @@ namespace ConvertAndSendData.View
     public partial class MainForm : Form
     {
         int counter;
-        string setfile = @"D:\setting.ini";
+        string setfile = "setting.ini";
         List<string> setlist = new List<string>();
         List<string> listTemp = new List<string>();
         List<string> listProcess = new List<string>();
@@ -32,6 +32,8 @@ namespace ConvertAndSendData.View
         {
             cmbModel.GetModelNSTV();
             cmbModel.Text = null;
+            //cmbExportModel.GetModelNSTV();
+            //cmbExportModel.Text = null;
             if (File.Exists(setfile))
             {
                 foreach (string line in File.ReadLines(setfile))
@@ -77,11 +79,10 @@ namespace ConvertAndSendData.View
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!btnRun.Enabled)
-                e.Cancel = true;
+            if (btnRun.Enabled)
+                return;
             else
             {
-                e.Cancel = false;
                 setlist.Add("Model =" + cmbModel.Text);
                 setlist.Add("From =" + dtpDateFrom.Value.ToString());
                 setlist.Add("To =" + dtpDateTo.Value.ToString());
@@ -211,12 +212,12 @@ namespace ConvertAndSendData.View
                         return;
                     for (int j = dtpDateFrom.Value.Month; j <= dtpDateTo.Value.Month; j++)
                     {
-                        string monthpath = yearpath + j + "\\";
+                        string monthpath = yearpath + j.ToString("00") + "\\";
                         if (!Directory.Exists(monthpath))
                             return;
                         for (int k = dtpDateFrom.Value.Day; k <= dtpDateTo.Value.Day; k++)
                         {
-                            string date = i + "-" + j + "-" + k;
+                            string date = i + "-" + j.ToString("00") + "-" + k;
                             string[] files = Directory.GetFiles(monthpath);
                             foreach (string f in files)
                             {
@@ -227,7 +228,7 @@ namespace ConvertAndSendData.View
                                     cell.input += dt.Rows.Count;
                                     foreach (DataRow dr in dt.Rows)
                                     {
-                                        if (dr["\"\"Judge\"\""].ToString().Contains("OK"))
+                                        if (dr["Judge"].ToString().Contains("OK"))
                                             cell.output++;
                                     }
                                     dt.Clear();
@@ -257,6 +258,7 @@ namespace ConvertAndSendData.View
         private void AddCells(string name)
         {
             InspectCell icell = new InspectCell();
+            icell.pnlInfo.Click += new EventHandler(Icell_Click);
             icell.Name = name;
             icell.model = cmbModel.Text;
             icell.input = 0;
@@ -266,11 +268,68 @@ namespace ConvertAndSendData.View
             icell.Height = 200;
             flpnlYeildShow.Controls.Add(icell);
         }
+
+        private void Icell_Click(object sender, EventArgs e)
+        {
+            var s = (Panel)sender;
+            MessageBox.Show(s.Parent.Name);
+            noname = s.Parent.Name;
+        }
         #endregion
 
         private void cmbModel_SelectedIndexChanged(object sender, EventArgs e)
         {
+            GetDataNSTV.GetNoNSTV(listTemp, cmbModel.Text);
+        }
 
+        string noname;
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(noname))
+            {
+                MessageBox.Show("Please select the machine number!!!", "Information", MessageBoxButtons.OK);
+                return;
+
+            }
+            try
+            {
+                string path = @"\\192.168.145.7\nstvnoise$\FCT_NOISE\" + cmbModel.Text + "\\";
+                SaveFileDialog sf = new SaveFileDialog();
+                sf.Filter = "CSV File (*.csv)|*.csv|All File (*.*)|*.*";
+                sf.FileName = "Select Folder";
+                if (sf.ShowDialog() == DialogResult.OK)
+                {
+                    //cell.input = 0;
+                    //cell.output = 0;
+                    string nopath = path + noname + "\\";
+                    for (int i = dtpDateFrom.Value.Year; i <= dtpDateTo.Value.Year; i++)
+                    {
+                        string yearpath = nopath + i + "\\";
+                        if (!Directory.Exists(yearpath))
+                            return;
+                        for (int j = dtpDateFrom.Value.Month; j <= dtpDateTo.Value.Month; j++)
+                        {
+                            string monthpath = yearpath + j.ToString("00") + "\\";
+                            if (!Directory.Exists(monthpath))
+                                return;
+                            for (int k = dtpDateFrom.Value.Day; k <= dtpDateTo.Value.Day; k++)
+                            {
+                                string date = i + "-" + j.ToString("00") + "-" + k;
+                                string[] files = Directory.GetFiles(monthpath);
+                                foreach (string f in files)
+                                {
+                                    if (f.Contains(date))
+                                        File.Copy(f, Path.GetDirectoryName(sf.FileName) + "\\" + Path.GetFileName(f));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsCounter = new System.Windows.Forms.ToolStripStatusLabel();
@@ -53,23 +54,13 @@
             this.cmbModel = new System.Windows.Forms.ComboBox();
             this.tabexport = new System.Windows.Forms.TabControl();
             this.tabYieldMonitor = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnExport = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.cmbExportNo = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dtpExportTo = new System.Windows.Forms.DateTimePicker();
-            this.dtpExportFrom = new System.Windows.Forms.DateTimePicker();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cmbExportModel = new System.Windows.Forms.ComboBox();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).BeginInit();
             this.tabexport.SuspendLayout();
             this.tabYieldMonitor.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -105,9 +96,9 @@
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(434, 9);
+            this.btnRun.Location = new System.Drawing.Point(423, 18);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(100, 69);
+            this.btnRun.Size = new System.Drawing.Size(64, 55);
             this.btnRun.TabIndex = 1;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -123,6 +114,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnExport);
             this.panel1.Controls.Add(this.btnSetting);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label4);
@@ -236,9 +228,9 @@
             // btnStop
             // 
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(540, 9);
+            this.btnStop.Location = new System.Drawing.Point(493, 18);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(100, 69);
+            this.btnStop.Size = new System.Drawing.Size(64, 55);
             this.btnStop.TabIndex = 9;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -246,9 +238,9 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(328, 9);
+            this.btnSearch.Location = new System.Drawing.Point(353, 18);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(100, 69);
+            this.btnSearch.Size = new System.Drawing.Size(64, 55);
             this.btnSearch.TabIndex = 8;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -313,11 +305,11 @@
             // tabexport
             // 
             this.tabexport.Controls.Add(this.tabYieldMonitor);
-            this.tabexport.Controls.Add(this.tabPage2);
+            this.tabexport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabexport.Location = new System.Drawing.Point(0, 0);
             this.tabexport.Name = "tabexport";
             this.tabexport.SelectedIndex = 0;
-            this.tabexport.Size = new System.Drawing.Size(891, 411);
+            this.tabexport.Size = new System.Drawing.Size(891, 382);
             this.tabexport.TabIndex = 4;
             // 
             // tabYieldMonitor
@@ -327,108 +319,20 @@
             this.tabYieldMonitor.Location = new System.Drawing.Point(4, 22);
             this.tabYieldMonitor.Name = "tabYieldMonitor";
             this.tabYieldMonitor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabYieldMonitor.Size = new System.Drawing.Size(883, 385);
+            this.tabYieldMonitor.Size = new System.Drawing.Size(883, 356);
             this.tabYieldMonitor.TabIndex = 0;
             this.tabYieldMonitor.Text = "Yield Mornitor ";
             this.tabYieldMonitor.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.btnExport);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.cmbExportNo);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.dtpExportTo);
-            this.tabPage2.Controls.Add(this.dtpExportFrom);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.cmbExportModel);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(883, 385);
-            this.tabPage2.TabIndex = 2;
-            this.tabPage2.Text = "Export Data";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(289, 38);
+            this.btnExport.Location = new System.Drawing.Point(563, 18);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(139, 45);
-            this.btnExport.TabIndex = 16;
+            this.btnExport.Size = new System.Drawing.Size(64, 55);
+            this.btnExport.TabIndex = 17;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = true;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(229, 14);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(21, 13);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "No";
-            // 
-            // cmbExportNo
-            // 
-            this.cmbExportNo.FormattingEnabled = true;
-            this.cmbExportNo.Location = new System.Drawing.Point(289, 11);
-            this.cmbExportNo.Name = "cmbExportNo";
-            this.cmbExportNo.Size = new System.Drawing.Size(139, 21);
-            this.cmbExportNo.TabIndex = 14;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 70);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(46, 13);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "Date To";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 44);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(56, 13);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "Date From";
-            // 
-            // dtpExportTo
-            // 
-            this.dtpExportTo.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dtpExportTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpExportTo.Location = new System.Drawing.Point(70, 64);
-            this.dtpExportTo.Name = "dtpExportTo";
-            this.dtpExportTo.Size = new System.Drawing.Size(139, 20);
-            this.dtpExportTo.TabIndex = 11;
-            // 
-            // dtpExportFrom
-            // 
-            this.dtpExportFrom.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dtpExportFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpExportFrom.Location = new System.Drawing.Point(70, 38);
-            this.dtpExportFrom.Name = "dtpExportFrom";
-            this.dtpExportFrom.Size = new System.Drawing.Size(139, 20);
-            this.dtpExportFrom.TabIndex = 10;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 14);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(36, 13);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "Model";
-            // 
-            // cmbExportModel
-            // 
-            this.cmbExportModel.FormattingEnabled = true;
-            this.cmbExportModel.Location = new System.Drawing.Point(70, 11);
-            this.cmbExportModel.Name = "cmbExportModel";
-            this.cmbExportModel.Size = new System.Drawing.Size(139, 21);
-            this.cmbExportModel.TabIndex = 8;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // MainForm
             // 
@@ -437,6 +341,7 @@
             this.ClientSize = new System.Drawing.Size(891, 404);
             this.Controls.Add(this.tabexport);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Yield Monitor Noise NSTV";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -449,8 +354,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).EndInit();
             this.tabexport.ResumeLayout(false);
             this.tabYieldMonitor.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -483,16 +386,7 @@
         private System.Windows.Forms.Button btnSetting;
         private System.Windows.Forms.TabControl tabexport;
         private System.Windows.Forms.TabPage tabYieldMonitor;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox cmbExportNo;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker dtpExportTo;
-        private System.Windows.Forms.DateTimePicker dtpExportFrom;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cmbExportModel;
     }
 }
 
