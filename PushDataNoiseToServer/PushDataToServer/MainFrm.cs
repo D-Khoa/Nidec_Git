@@ -33,8 +33,8 @@ namespace PushDataToServer
             }
             txtNo.Text = setString[0].Trim().Split('=')[1];
             txtFrom.Text = setString[1].Trim().Split('=')[1];
-            if(!string.IsNullOrEmpty(setString[2].Trim().Split('=')[1]))
-            serverfolder = setString[2].Trim().Split('=')[1];
+            if (!string.IsNullOrEmpty(setString[2].Trim().Split('=')[1]))
+                serverfolder = setString[2].Trim().Split('=')[1];
         }
 
         private void btnPush_Click(object sender, EventArgs e)
@@ -136,36 +136,40 @@ namespace PushDataToServer
 
         private void EditAndSendFile()
         {
-            filePath = Directory.GetFiles(txtFrom.Text, "*.csv");
-            if (filePath != null)
+            try
             {
-                foreach (string path in filePath)
+                filePath = Directory.GetFiles(txtFrom.Text, "*.csv");
+                if (filePath != null)
                 {
-                    file = Path.GetFileName(path);
-                    Model = file.Split('_')[1];
-                    string date = file.Split('_')[2];
-
-                    string modelfile = serverfolder + Model;
-                    string No = modelfile + @"\" + txtNo.Text;
-                    string fileserveryear = No + @"\" + date.Split('-')[0];
-                    string fileservermonth = fileserveryear + @"\" + date.Split('-')[1];
-                    if (!Directory.Exists(modelfile))
-                        Directory.CreateDirectory(Model);
-                    if (!Directory.Exists(No))
-                        Directory.CreateDirectory(No);
-                    if (!Directory.Exists(fileserveryear))
-                        Directory.CreateDirectory(fileserveryear);
-                    if (!Directory.Exists(fileservermonth))
-                        Directory.CreateDirectory(fileservermonth);
-
-                    if (File.Exists(path))
+                    foreach (string path in filePath)
                     {
-                        File.Delete(fileservermonth + @"\" + file);
-                    }
+                        file = Path.GetFileName(path);
+                        Model = file.Split('_')[1];
+                        string date = file.Split('_')[2];
 
-                    File.Move(path, fileservermonth + @"\" + file);
+                        string modelfile = serverfolder + Model;
+                        string No = modelfile + @"\" + txtNo.Text;
+                        string fileserveryear = No + @"\" + date.Split('-')[0];
+                        string fileservermonth = fileserveryear + @"\" + date.Split('-')[1];
+                        if (!Directory.Exists(modelfile))
+                            Directory.CreateDirectory(Model);
+                        if (!Directory.Exists(No))
+                            Directory.CreateDirectory(No);
+                        if (!Directory.Exists(fileserveryear))
+                            Directory.CreateDirectory(fileserveryear);
+                        if (!Directory.Exists(fileservermonth))
+                            Directory.CreateDirectory(fileservermonth);
+
+                        if (File.Exists(path))
+                        {
+                            File.Delete(fileservermonth + @"\" + file);
+                        }
+
+                        File.Move(path, fileservermonth + @"\" + file);
+                    }
                 }
             }
+            catch { }
         }
 
         private void MainFrm_FormClosing(object sender, FormClosingEventArgs e)
