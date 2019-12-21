@@ -88,6 +88,9 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Npgsql">
+      <HintPath>Z:\(01)Motor\(00)Public\Software NCVP\IPQC Motor v1.1\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -127,6 +130,12 @@
     <Compile Include="Common\TfImport.cs" />
     <Compile Include="Common\TfPrint.cs" />
     <Compile Include="Common\VBStrings.cs" />
+    <Compile Include="Form\RequestPC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\RequestPC.Designer.cs">
+      <DependentUpon>RequestPC.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form\FormStart.resx">
       <DependentUpon>FormStart.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -141,6 +150,9 @@
     <EmbeddedResource Include="Form\Form1.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\RequestPC.resx">
+      <DependentUpon>RequestPC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
