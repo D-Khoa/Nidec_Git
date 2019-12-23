@@ -32,6 +32,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsCounter = new System.Windows.Forms.ToolStripStatusLabel();
@@ -75,8 +78,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tab_Chart = new System.Windows.Forms.TabPage();
-            this.chart_display = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dgvChartData = new System.Windows.Forms.DataGridView();
+            this.chart_display = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -86,8 +89,8 @@
             this.tab_Track.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataTracking)).BeginInit();
             this.tab_Chart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_display)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChartData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_display)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -533,6 +536,16 @@
             this.tab_Chart.TabIndex = 2;
             this.tab_Chart.Text = "Chart";
             // 
+            // dgvChartData
+            // 
+            this.dgvChartData.BackgroundColor = System.Drawing.Color.White;
+            this.dgvChartData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChartData.GridColor = System.Drawing.Color.White;
+            this.dgvChartData.Location = new System.Drawing.Point(437, 6);
+            this.dgvChartData.Name = "dgvChartData";
+            this.dgvChartData.Size = new System.Drawing.Size(330, 341);
+            this.dgvChartData.TabIndex = 1;
+            // 
             // chart_display
             // 
             this.chart_display.BorderlineColor = System.Drawing.Color.Black;
@@ -543,21 +556,29 @@
             this.chart_display.Location = new System.Drawing.Point(8, 6);
             this.chart_display.Name = "chart_display";
             series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.RoyalBlue;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
+            series2.ChartArea = "ChartArea1";
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.Name = "Series2";
+            series3.BorderWidth = 2;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            series3.Legend = "Legend1";
+            series3.Name = "Series3";
+            series4.ChartArea = "ChartArea1";
+            series4.Color = System.Drawing.Color.Red;
+            series4.Legend = "Legend1";
+            series4.Name = "Series4";
             this.chart_display.Series.Add(series1);
+            this.chart_display.Series.Add(series2);
+            this.chart_display.Series.Add(series3);
+            this.chart_display.Series.Add(series4);
             this.chart_display.Size = new System.Drawing.Size(423, 341);
             this.chart_display.TabIndex = 0;
-            // 
-            // dgvChartData
-            // 
-            this.dgvChartData.BackgroundColor = System.Drawing.Color.White;
-            this.dgvChartData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvChartData.GridColor = System.Drawing.Color.White;
-            this.dgvChartData.Location = new System.Drawing.Point(437, 6);
-            this.dgvChartData.Name = "dgvChartData";
-            this.dgvChartData.Size = new System.Drawing.Size(330, 341);
-            this.dgvChartData.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -582,8 +603,8 @@
             this.tab_Track.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataTracking)).EndInit();
             this.tab_Chart.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart_display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChartData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_display)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
