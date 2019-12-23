@@ -36,6 +36,7 @@
             this.btnRun = new System.Windows.Forms.Button();
             this.flpnlYeildShow = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
@@ -54,13 +55,30 @@
             this.cmbModel = new System.Windows.Forms.ComboBox();
             this.tabexport = new System.Windows.Forms.TabControl();
             this.tabYieldMonitor = new System.Windows.Forms.TabPage();
-            this.btnExport = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnExportChart = new System.Windows.Forms.Button();
+            this.btnSettingChart = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numCouterChart = new System.Windows.Forms.NumericUpDown();
+            this.btnStopChart = new System.Windows.Forms.Button();
+            this.btnSearchChart = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dtpDateToChart = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateFromChart = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cmbModelChart = new System.Windows.Forms.ComboBox();
+            this.btnRunChart = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).BeginInit();
             this.tabexport.SuspendLayout();
             this.tabYieldMonitor.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCouterChart)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -132,6 +150,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(885, 87);
             this.panel1.TabIndex = 3;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(563, 18);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(64, 55);
+            this.btnExport.TabIndex = 17;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnSetting
             // 
@@ -305,6 +333,7 @@
             // tabexport
             // 
             this.tabexport.Controls.Add(this.tabYieldMonitor);
+            this.tabexport.Controls.Add(this.tabPage1);
             this.tabexport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabexport.Location = new System.Drawing.Point(0, 0);
             this.tabexport.Name = "tabexport";
@@ -324,15 +353,158 @@
             this.tabYieldMonitor.Text = "Yield Mornitor ";
             this.tabYieldMonitor.UseVisualStyleBackColor = true;
             // 
-            // btnExport
+            // tabPage1
             // 
-            this.btnExport.Location = new System.Drawing.Point(563, 18);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(64, 55);
-            this.btnExport.TabIndex = 17;
-            this.btnExport.Text = "Export";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            this.tabPage1.Controls.Add(this.panel3);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(883, 356);
+            this.tabPage1.TabIndex = 1;
+            this.tabPage1.Text = "Chart";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnExportChart);
+            this.panel3.Controls.Add(this.btnSettingChart);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.numCouterChart);
+            this.panel3.Controls.Add(this.btnStopChart);
+            this.panel3.Controls.Add(this.btnSearchChart);
+            this.panel3.Controls.Add(this.label10);
+            this.panel3.Controls.Add(this.label11);
+            this.panel3.Controls.Add(this.dtpDateToChart);
+            this.panel3.Controls.Add(this.dtpDateFromChart);
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.cmbModelChart);
+            this.panel3.Controls.Add(this.btnRunChart);
+            this.panel3.Location = new System.Drawing.Point(0, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(883, 89);
+            this.panel3.TabIndex = 0;
+            // 
+            // btnExportChart
+            // 
+            this.btnExportChart.Location = new System.Drawing.Point(559, 21);
+            this.btnExportChart.Name = "btnExportChart";
+            this.btnExportChart.Size = new System.Drawing.Size(64, 55);
+            this.btnExportChart.TabIndex = 30;
+            this.btnExportChart.Text = "Export";
+            this.btnExportChart.UseVisualStyleBackColor = true;
+            // 
+            // btnSettingChart
+            // 
+            this.btnSettingChart.Location = new System.Drawing.Point(229, 59);
+            this.btnSettingChart.Name = "btnSettingChart";
+            this.btnSettingChart.Size = new System.Drawing.Size(77, 23);
+            this.btnSettingChart.TabIndex = 29;
+            this.btnSettingChart.Text = "Setting";
+            this.btnSettingChart.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(229, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 20);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Timer (s)";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // numCouterChart
+            // 
+            this.numCouterChart.Location = new System.Drawing.Point(229, 35);
+            this.numCouterChart.Name = "numCouterChart";
+            this.numCouterChart.Size = new System.Drawing.Size(77, 20);
+            this.numCouterChart.TabIndex = 27;
+            this.numCouterChart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numCouterChart.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // btnStopChart
+            // 
+            this.btnStopChart.Enabled = false;
+            this.btnStopChart.Location = new System.Drawing.Point(489, 21);
+            this.btnStopChart.Name = "btnStopChart";
+            this.btnStopChart.Size = new System.Drawing.Size(64, 55);
+            this.btnStopChart.TabIndex = 26;
+            this.btnStopChart.Text = "Stop";
+            this.btnStopChart.UseVisualStyleBackColor = true;
+            // 
+            // btnSearchChart
+            // 
+            this.btnSearchChart.Location = new System.Drawing.Point(349, 21);
+            this.btnSearchChart.Name = "btnSearchChart";
+            this.btnSearchChart.Size = new System.Drawing.Size(64, 55);
+            this.btnSearchChart.TabIndex = 25;
+            this.btnSearchChart.Text = "Search";
+            this.btnSearchChart.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 68);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 13);
+            this.label10.TabIndex = 24;
+            this.label10.Text = "Date To";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(8, 42);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(56, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Date From";
+            // 
+            // dtpDateToChart
+            // 
+            this.dtpDateToChart.CustomFormat = "yyyy-MM-dd";
+            this.dtpDateToChart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateToChart.Location = new System.Drawing.Point(70, 62);
+            this.dtpDateToChart.Name = "dtpDateToChart";
+            this.dtpDateToChart.Size = new System.Drawing.Size(139, 20);
+            this.dtpDateToChart.TabIndex = 22;
+            // 
+            // dtpDateFromChart
+            // 
+            this.dtpDateFromChart.CustomFormat = "yyyy-MM-dd";
+            this.dtpDateFromChart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateFromChart.Location = new System.Drawing.Point(70, 36);
+            this.dtpDateFromChart.Name = "dtpDateFromChart";
+            this.dtpDateFromChart.Size = new System.Drawing.Size(139, 20);
+            this.dtpDateFromChart.TabIndex = 21;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 12);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(36, 13);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "Model";
+            // 
+            // cmbModelChart
+            // 
+            this.cmbModelChart.FormattingEnabled = true;
+            this.cmbModelChart.Location = new System.Drawing.Point(70, 9);
+            this.cmbModelChart.Name = "cmbModelChart";
+            this.cmbModelChart.Size = new System.Drawing.Size(139, 21);
+            this.cmbModelChart.TabIndex = 19;
+            this.cmbModelChart.TextChanged += new System.EventHandler(this.cmbModel_TextChanged);
+            // 
+            // btnRunChart
+            // 
+            this.btnRunChart.Location = new System.Drawing.Point(419, 21);
+            this.btnRunChart.Name = "btnRunChart";
+            this.btnRunChart.Size = new System.Drawing.Size(64, 55);
+            this.btnRunChart.TabIndex = 18;
+            this.btnRunChart.Text = "Run";
+            this.btnRunChart.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -354,6 +526,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).EndInit();
             this.tabexport.ResumeLayout(false);
             this.tabYieldMonitor.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCouterChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -387,6 +563,21 @@
         private System.Windows.Forms.TabControl tabexport;
         private System.Windows.Forms.TabPage tabYieldMonitor;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnExportChart;
+        private System.Windows.Forms.Button btnSettingChart;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown numCouterChart;
+        private System.Windows.Forms.Button btnStopChart;
+        private System.Windows.Forms.Button btnSearchChart;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dtpDateToChart;
+        private System.Windows.Forms.DateTimePicker dtpDateFromChart;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cmbModelChart;
+        private System.Windows.Forms.Button btnRunChart;
     }
 }
 

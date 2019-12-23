@@ -32,6 +32,8 @@ namespace ConvertAndSendData.View
         {
             cmbModel.GetModelNSTV();
             cmbModel.Text = null;
+            cmbModelChart.GetModelNSTV();
+            cmbModelChart.Text = null;
             //cmbExportModel.GetModelNSTV();
             //cmbExportModel.Text = null;
             if (File.Exists(setfile))
@@ -331,5 +333,7 @@ namespace ConvertAndSendData.View
                 MessageBox.Show(ex.Message);
             }
         }
+
+      
     }
 }
