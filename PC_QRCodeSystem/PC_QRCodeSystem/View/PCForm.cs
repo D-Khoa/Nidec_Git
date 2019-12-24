@@ -16,5 +16,20 @@ namespace PC_QRCodeSystem.View
         {
             InitializeComponent();
         }
+
+        private void btnStockIn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStockOut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStockDetail_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

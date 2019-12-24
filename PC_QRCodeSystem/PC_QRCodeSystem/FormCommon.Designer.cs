@@ -88,7 +88,7 @@
             this.panel3.ForeColor = System.Drawing.Color.Black;
             this.panel3.Location = new System.Drawing.Point(0, 69);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(196, 270);
+            this.panel3.Size = new System.Drawing.Size(145, 270);
             this.panel3.TabIndex = 1;
             // 
             // lbDept
@@ -114,9 +114,9 @@
             this.lbLoginTime.AutoSize = true;
             this.lbLoginTime.Location = new System.Drawing.Point(11, 70);
             this.lbLoginTime.Name = "lbLoginTime";
-            this.lbLoginTime.Size = new System.Drawing.Size(34, 13);
+            this.lbLoginTime.Size = new System.Drawing.Size(133, 13);
             this.lbLoginTime.TabIndex = 3;
-            this.lbLoginTime.Text = "Time";
+            this.lbLoginTime.Text = "yyyy-MM-dd HH:mm:ss";
             // 
             // label4
             // 
