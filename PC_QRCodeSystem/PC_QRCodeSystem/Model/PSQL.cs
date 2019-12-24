@@ -477,5 +477,27 @@ namespace PC_QRCodeSystem.Model
                 return false;
             }
         }
+
+        public bool sqlExecuteReader(string sql, ref DataTable dt)
+        {
+            dt = new DataTable();
+            try
+            {
+                connection = new NpgsqlConnection(strConnection);
+                connection.Open();
+                NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                NpgsqlDataReader reader = command.ExecuteReader();
+                dt.Load(reader);
+                connection.Close();
+                return (dt.Rows.Count > 0) ? true : false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("SQL executereader method failed." + System.Environment.NewLine + ex.Message
+                                , "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                connection.Close();
+                return false;
+            }
+        }
     }
 }

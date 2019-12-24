@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
@@ -7,8 +8,7 @@ namespace PC_QRCodeSystem
 {
     public partial class Login : Form
     {
-        PSQL SQL = new PSQL();
-        StringBuilder query = new StringBuilder();
+        GetData getData = new GetData();
 
         public Login()
         {
@@ -17,22 +17,20 @@ namespace PC_QRCodeSystem
 
         private void Login_Load(object sender, EventArgs e)
         {
-            query.Append("select distinct user_name from m_user order by user_name");
-            SQL.getComboBoxData(query.ToString(), ref cmbLoginname);
+            cmbLoginname.DataSource = getData.GetListUser();
             cmbLoginname.Text = null;
-            query.Clear();
+            cmbLoginname.Focus();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
             if (!string.IsNullOrEmpty(cmbLoginname.Text))
             {
-                query.Append("select user_pass from m_user where user_name = '").Append(cmbLoginname.Text).Append("'");
-                if (SQL.sqlExecuteScalarString(query.ToString()) == txtpass.Text)
+                if (getData.CheckLogin(cmbLoginname.Text, txtpass.Text))
                 {
                     MainForm main = new MainForm();
                     this.Hide();
+                    txtpass.Clear();
                     main.ShowDialog();
                     this.Show();
                 }
@@ -40,7 +38,6 @@ namespace PC_QRCodeSystem
                 {
                     MessageBox.Show("Wrong password!!!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                query.Clear();
             }
             else
             {
@@ -54,6 +51,9 @@ namespace PC_QRCodeSystem
             Application.Exit();
         }
 
-
+        private void cmbLoginname_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtpass.Focus();
+        }
     }
 }

@@ -45,23 +45,25 @@
             this.panel1.BackColor = System.Drawing.Color.Green;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.Location = new System.Drawing.Point(0, 4);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(448, 68);
+            this.panel1.Size = new System.Drawing.Size(446, 68);
             this.panel1.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(183, 19);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(152, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(254, 25);
+            this.label1.Size = new System.Drawing.Size(294, 68);
             this.label1.TabIndex = 3;
-            this.label1.Text = "NCVP QR CODE PRINTER";
+            this.label1.Text = "QR-Code System";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
@@ -100,7 +102,7 @@
             this.txtpass.Name = "txtpass";
             this.txtpass.PasswordChar = '*';
             this.txtpass.Size = new System.Drawing.Size(163, 20);
-            this.txtpass.TabIndex = 6;
+            this.txtpass.TabIndex = 2;
             // 
             // cmbLoginname
             // 
@@ -109,7 +111,8 @@
             this.cmbLoginname.Location = new System.Drawing.Point(179, 105);
             this.cmbLoginname.Name = "cmbLoginname";
             this.cmbLoginname.Size = new System.Drawing.Size(163, 21);
-            this.cmbLoginname.TabIndex = 5;
+            this.cmbLoginname.TabIndex = 1;
+            this.cmbLoginname.SelectedIndexChanged += new System.EventHandler(this.cmbLoginname_SelectedIndexChanged);
             // 
             // btnOK
             // 
@@ -117,17 +120,18 @@
             this.btnOK.Name = "btnOK";
             this.btnOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnOK.Size = new System.Drawing.Size(75, 36);
-            this.btnOK.TabIndex = 7;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(267, 187);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 36);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -146,12 +150,14 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
