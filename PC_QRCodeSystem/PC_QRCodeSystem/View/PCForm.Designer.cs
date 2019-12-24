@@ -33,16 +33,16 @@
             this.btnStockOut = new System.Windows.Forms.Button();
             this.btnStockIn = new System.Windows.Forms.Button();
             this.pnlRequest = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnDeny = new System.Windows.Forms.Button();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
-            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.request_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.request = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user_dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.request_string = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.btnDeny = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -111,16 +111,58 @@
             this.pnlRequest.Size = new System.Drawing.Size(557, 401);
             this.pnlRequest.TabIndex = 3;
             // 
-            // label1
+            // dgvRequest
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(557, 38);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Request";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dgvRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRequest.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.request_time,
+            this.user_name,
+            this.user_dept,
+            this.request_string,
+            this.confirm});
+            this.dgvRequest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvRequest.Location = new System.Drawing.Point(0, 38);
+            this.dgvRequest.Name = "dgvRequest";
+            this.dgvRequest.Size = new System.Drawing.Size(557, 309);
+            this.dgvRequest.TabIndex = 4;
+            // 
+            // request_time
+            // 
+            this.request_time.HeaderText = "Date Time";
+            this.request_time.Name = "request_time";
+            // 
+            // user_name
+            // 
+            this.user_name.HeaderText = "Name";
+            this.user_name.Name = "user_name";
+            this.user_name.ReadOnly = true;
+            // 
+            // user_dept
+            // 
+            this.user_dept.HeaderText = "Department";
+            this.user_dept.Name = "user_dept";
+            this.user_dept.ReadOnly = true;
+            // 
+            // request_string
+            // 
+            this.request_string.HeaderText = "Request";
+            this.request_string.Name = "request_string";
+            this.request_string.ReadOnly = true;
+            // 
+            // confirm
+            // 
+            this.confirm.HeaderText = "Confirm";
+            this.confirm.Name = "confirm";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btnAccept);
+            this.panel4.Controls.Add(this.btnDeny);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 347);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(557, 54);
+            this.panel4.TabIndex = 5;
             // 
             // btnAccept
             // 
@@ -142,58 +184,17 @@
             this.btnDeny.Text = "Deny";
             this.btnDeny.UseVisualStyleBackColor = true;
             // 
-            // dgvRequest
+            // label1
             // 
-            this.dgvRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRequest.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.time,
-            this.user_name,
-            this.dept,
-            this.request,
-            this.confirm});
-            this.dgvRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRequest.Location = new System.Drawing.Point(0, 38);
-            this.dgvRequest.Name = "dgvRequest";
-            this.dgvRequest.Size = new System.Drawing.Size(557, 309);
-            this.dgvRequest.TabIndex = 4;
-            // 
-            // time
-            // 
-            this.time.HeaderText = "Date Time";
-            this.time.Name = "time";
-            // 
-            // user_name
-            // 
-            this.user_name.HeaderText = "Name";
-            this.user_name.Name = "user_name";
-            this.user_name.ReadOnly = true;
-            // 
-            // dept
-            // 
-            this.dept.HeaderText = "Department";
-            this.dept.Name = "dept";
-            this.dept.ReadOnly = true;
-            // 
-            // request
-            // 
-            this.request.HeaderText = "Request";
-            this.request.Name = "request";
-            this.request.ReadOnly = true;
-            // 
-            // confirm
-            // 
-            this.confirm.HeaderText = "Confirm";
-            this.confirm.Name = "confirm";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.btnAccept);
-            this.panel4.Controls.Add(this.btnDeny);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 347);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(557, 54);
-            this.panel4.TabIndex = 5;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(557, 38);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Request";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PCForm
             // 
@@ -203,9 +204,7 @@
             this.Controls.Add(this.pnlRequest);
             this.Controls.Add(this.pnlSetting);
             this.dept = "";
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.logintime = new System.DateTime(((long)(0)));
-            this.MaximizeBox = false;
             this.name = "";
             this.Name = "PCForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -232,11 +231,11 @@
         private System.Windows.Forms.Button btnDeny;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.DataGridView dgvRequest;
-        private System.Windows.Forms.DataGridViewTextBoxColumn time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn user_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn request;
-        private System.Windows.Forms.DataGridViewTextBoxColumn confirm;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn request_time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn user_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn user_dept;
+        private System.Windows.Forms.DataGridViewTextBoxColumn request_string;
+        private System.Windows.Forms.DataGridViewTextBoxColumn confirm;
     }
 }
