@@ -32,10 +32,6 @@ namespace ConvertAndSendData.View
         {
             cmbModel.GetModelNSTV();
             cmbModel.Text = null;
-            cmbModelChart.GetModelNSTV();
-            cmbModelChart.Text = null;
-            //cmbExportModel.GetModelNSTV();
-            //cmbExportModel.Text = null;
             if (File.Exists(setfile))
             {
                 foreach (string line in File.ReadLines(setfile))
@@ -138,6 +134,7 @@ namespace ConvertAndSendData.View
                 btnStop.Enabled = true;
                 btnRun.Enabled = false;
                 btnSetting.Enabled = false;
+                btnExport.Enabled = false;
                 counter = (int)numCounter.Value;
                 bwSend.RunWorkerAsync();
             }
@@ -150,6 +147,7 @@ namespace ConvertAndSendData.View
                 btnStop.Enabled = false;
                 btnRun.Enabled = true;
                 btnSetting.Enabled = true;
+                btnExport.Enabled = true;
                 bwSend.CancelAsync();
             }
         }
@@ -219,7 +217,7 @@ namespace ConvertAndSendData.View
                             return;
                         for (int k = dtpDateFrom.Value.Day; k <= dtpDateTo.Value.Day; k++)
                         {
-                            string date = i + "-" + j.ToString("00") + "-" + k;
+                            string date = i + "-" + j.ToString("00") + "-" + k.ToString("00");
                             string[] files = Directory.GetFiles(monthpath);
                             foreach (string f in files)
                             {
@@ -297,8 +295,9 @@ namespace ConvertAndSendData.View
             {
                 string path = @"\\192.168.145.7\nstvnoise$\FCT_NOISE\" + cmbModel.Text + "\\";
                 SaveFileDialog sf = new SaveFileDialog();
-                sf.Filter = "CSV File (*.csv)|*.csv|All File (*.*)|*.*";
-                sf.FileName = "Select Folder";
+                List<string[]> fr = new List<string[]>();
+                sf.Filter = "Excel Files (*.xlsx)|*.xlsx|All File (*.*)|*.*";
+                //sf.FileName = "Select Folder";
                 if (sf.ShowDialog() == DialogResult.OK)
                 {
                     //cell.input = 0;
@@ -316,24 +315,32 @@ namespace ConvertAndSendData.View
                                 return;
                             for (int k = dtpDateFrom.Value.Day; k <= dtpDateTo.Value.Day; k++)
                             {
-                                string date = i + "-" + j.ToString("00") + "-" + k;
+                                string date = i + "-" + j.ToString("00") + "-" + k.ToString("00");
                                 string[] files = Directory.GetFiles(monthpath);
                                 foreach (string f in files)
                                 {
                                     if (f.Contains(date))
-                                        File.Copy(f, Path.GetDirectoryName(sf.FileName) + "\\" + Path.GetFileName(f));
+                                    // File.Copy(f, Path.GetDirectoryName(sf.FileName) + "\\" + Path.GetFileName(f));
+                                    {
+                                        ExcelClass2019.OpenExcelWorkBook(@"\\192.168.145.7\nstvnoise$\Excel Form\Histogram FCT.xlsx", 2);
+                                        Cursor.Current = Cursors.WaitCursor;
+                                        CSVUtility.ConvertCSVtoDataTable(f).DatasetToExcel();
+                                        if (MessageBox.Show("Export Successfully." + Environment.NewLine + "Do you want open this?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                                            sf.FileName.SaveAndExit(true);
+                                        else
+                                            sf.FileName.SaveAndExit(false);
+                                        Cursor.Current = Cursors.Default;
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
-      
     }
 }

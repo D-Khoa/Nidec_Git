@@ -5,7 +5,7 @@ using System.Data;
 using System.Collections.Generic;
 using cExcel = Microsoft.Office.Interop.Excel;
 
-namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common
+namespace ConvertAndSendData.Model
 {
     public static class ExcelClass2019
     {
@@ -14,20 +14,20 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common
         static cExcel.Workbook wb;
         static cExcel.Worksheet ws;
 
-        public static void CreateExcelWorkBook(this string filename)
+        public static void CreateExcelWorkBook(this string filename, int sheet)
         {
             app = new cExcel.Application();
             wb = app.Workbooks.Add();
-            ws = app.ActiveSheet;
+            ws = app.Worksheets[sheet];
         }
 
-        public static bool OpenExcelWorkBook(this string fileopen)
+        public static bool OpenExcelWorkBook(this string fileopen, int sheet)
         {
             if (File.Exists(fileopen))
             {
                 app = new cExcel.Application();
                 wb = app.Workbooks.Open(fileopen);
-                ws = app.ActiveSheet;
+                ws = app.Worksheets[sheet];
                 return true;
             }
             else
@@ -76,27 +76,28 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common
             }
         }
 
-        public static void DatasetToExcel(this DataSet ds)
+        public static void DatatableToExcel(this DataTable dt)
         {
-            int rows = ds.Tables[0].Rows.Count;
-            int cols = ds.Tables[0].Columns.Count;
-            int r = 0;
-            int c = 0;
-
-            object[,] dataarray = new object[rows + 1, cols + 1];
-            for (c = 0; c < cols; c++)
+            //cExcel.Range rng = ws.UsedRange;
+            //int index = rng.EntireRow.Count + 1;
+            ws.UsedRange.Clear();
+            List<string> query = (from col in dt.Columns.Cast<DataColumn>()
+                                  select col.ColumnName).ToList();
+            query.AddColumnsForExcel();
+            ////for (int i = 0; i < dt.Rows.Count; i++)
+            ////{
+            ////    //for (int j = 0; j < dt.Columns.Count; j++)
+            ////    //{
+            ////    //    ws.Cells[index + i, j + 1] = dt.Rows[i][j];
+            ////    //}
+            ////}
+            foreach (DataRow dr in dt.Rows)
             {
-                dataarray[r, c] = ds.Tables[0].Rows[r][c];
-            }
-            ws.Range["A2"].Resize[rows, cols].Value = dataarray;
-
-            for (c = 0; c < ds.Tables[0].Columns.Count; c++)
-            {
-                ws.Cells[1, c + 1] = ds.Tables[0].Columns[c].ColumnName;
+                AddRowToExcel(dr.ItemArray.Select(s => s.ToString()).ToArray());
             }
         }
 
-        public static void DatatableToExcel(this DataTable dt)
+        public static void DatasetToExcel(this DataTable dt)
         {
             int rows = dt.Rows.Count;
             int cols = dt.Columns.Count;
@@ -106,7 +107,9 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common
             object[,] dataarray = new object[rows + 1, cols + 1];
             for (c = 0; c < cols; c++)
             {
-                dataarray[r, c] = dt.Rows[r][c];
+                dataarray[r, c] = dt.Columns[c].ColumnName;
+                for (r = 0; r < rows; r++)
+                    dataarray[r, c] = dt.Rows[r][c];
             }
             ws.Range["A2"].Resize[rows, cols].Value = dataarray;
 
