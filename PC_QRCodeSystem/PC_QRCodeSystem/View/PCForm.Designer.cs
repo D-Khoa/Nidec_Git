@@ -34,15 +34,16 @@
             this.btnStockIn = new System.Windows.Forms.Button();
             this.pnlRequest = new System.Windows.Forms.Panel();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
-            this.request_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.user_dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.request_string = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.confirm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnDeny = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.request_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user_dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.confirm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -118,41 +119,14 @@
             this.request_time,
             this.user_name,
             this.user_dept,
-            this.request_string,
+            this.item,
+            this.qty,
             this.confirm});
             this.dgvRequest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRequest.Location = new System.Drawing.Point(0, 38);
             this.dgvRequest.Name = "dgvRequest";
             this.dgvRequest.Size = new System.Drawing.Size(557, 309);
             this.dgvRequest.TabIndex = 4;
-            // 
-            // request_time
-            // 
-            this.request_time.HeaderText = "Date Time";
-            this.request_time.Name = "request_time";
-            // 
-            // user_name
-            // 
-            this.user_name.HeaderText = "Name";
-            this.user_name.Name = "user_name";
-            this.user_name.ReadOnly = true;
-            // 
-            // user_dept
-            // 
-            this.user_dept.HeaderText = "Department";
-            this.user_dept.Name = "user_dept";
-            this.user_dept.ReadOnly = true;
-            // 
-            // request_string
-            // 
-            this.request_string.HeaderText = "Request";
-            this.request_string.Name = "request_string";
-            this.request_string.ReadOnly = true;
-            // 
-            // confirm
-            // 
-            this.confirm.HeaderText = "Confirm";
-            this.confirm.Name = "confirm";
             // 
             // panel4
             // 
@@ -196,6 +170,39 @@
             this.label1.Text = "Request";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // request_time
+            // 
+            this.request_time.HeaderText = "Date Time";
+            this.request_time.Name = "request_time";
+            // 
+            // user_name
+            // 
+            this.user_name.HeaderText = "Name";
+            this.user_name.Name = "user_name";
+            this.user_name.ReadOnly = true;
+            // 
+            // user_dept
+            // 
+            this.user_dept.HeaderText = "Department";
+            this.user_dept.Name = "user_dept";
+            this.user_dept.ReadOnly = true;
+            // 
+            // item
+            // 
+            this.item.HeaderText = "Item";
+            this.item.Name = "item";
+            this.item.ReadOnly = true;
+            // 
+            // qty
+            // 
+            this.qty.HeaderText = "Qty";
+            this.qty.Name = "qty";
+            // 
+            // confirm
+            // 
+            this.confirm.HeaderText = "Confirm";
+            this.confirm.Name = "confirm";
+            // 
             // PCForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,7 +242,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn request_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn user_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn user_dept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn request_string;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm;
     }
 }

@@ -75,7 +75,7 @@ namespace PC_QRCodeSystem
             {
                 foreach (Control control in controls)
                 {
-                    if (!UserData.role_permision.Contains(control.Tag))
+                    if (!UserData.role_permision.Contains(control.Tag) && (control.Tag != null))
                     {
                         control.Enabled = false;
                     }
@@ -87,6 +87,20 @@ namespace PC_QRCodeSystem
         {
             FormCommon frm = (FormCommon)sender;
             CheckPermision(frm.Controls);
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to exit?", "Noice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                foreach (Form frm in Application.OpenForms)
+                {
+                    if (frm.GetType().BaseType == typeof(FormCommon))
+                    {
+                        frm.Close();
+                    }
+                }
+            }
         }
     }
 }
