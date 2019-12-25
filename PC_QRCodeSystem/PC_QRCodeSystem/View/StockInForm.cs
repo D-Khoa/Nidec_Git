@@ -14,6 +14,7 @@ namespace PC_QRCodeSystem.View
 {
     public partial class StockInForm : FormCommon
     {
+        GetData getData = new GetData();
         PremacIn preitem = new PremacIn();
         StockInItem stockitem = new StockInItem();
         List<PremacIn> preitems = new List<PremacIn>();
@@ -31,6 +32,11 @@ namespace PC_QRCodeSystem.View
             grt_StockIn.SelectedTab = tab_StockIn;
         }
 
+        /// <summary>
+        /// Add item from premac file into list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddPremacItems_Click(object sender, EventArgs e)
         {
             try
@@ -43,7 +49,7 @@ namespace PC_QRCodeSystem.View
                 preitems = preitem.GetItemFromPremacFile(premacpath);
                 dgvStockIn.DataSource = preitems;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -75,6 +81,11 @@ namespace PC_QRCodeSystem.View
             grt_StockIn.SelectedTab = tab_Setting;
         }
 
+        /// <summary>
+        /// Select folder contains premac file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPremacFileBrowser_Click(object sender, EventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
@@ -85,10 +96,33 @@ namespace PC_QRCodeSystem.View
             }
         }
 
+        /// <summary>
+        /// Apply setting
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSettingApply_Click(object sender, EventArgs e)
         {
             premacpath = txtPremacURL.Text;
             grt_StockIn.SelectedTab = tab_StockIn;
+        }
+
+        /// <summary>
+        /// Add list item into database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            if (getData.InputStock(stockitems) && stockitems.Count > 0)
+                MessageBox.Show("Register complete!!!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Register incomplete!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void btnPrinter_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

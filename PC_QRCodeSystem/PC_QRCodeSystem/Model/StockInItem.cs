@@ -34,13 +34,13 @@ namespace PC_QRCodeSystem.Model
             foreach (PremacIn item in listpreitem)
             {
                 unit = gData.GetUnitQty(item.Item_Number);
-                if (unit == 0) unit = 1;
+                if (unit == 0) unit = item.Delivery_Qty;
                 qty = (int)(item.Delivery_Qty / unit);
                 for (int i = 0; i < qty; i++)
                 {
                     list.Add(new StockInItem
                     {
-                        Packing_Code = item.Item_Number + i.ToString(),
+                        Packing_Code = item.PO_No + "-" + i.ToString(),
                         Item_Number = item.Item_Number,
                         Item_Name = item.Item_Name,
                         Supplier_Name = item.Supplier_Name,
@@ -58,7 +58,7 @@ namespace PC_QRCodeSystem.Model
                     qtymod = item.Delivery_Qty - (qty * unit);
                     list.Add(new StockInItem
                     {
-                        Packing_Code = item.Item_Number + "-" + qty.ToString(),
+                        Packing_Code = item.PO_No + "-" + qty.ToString(),
                         Item_Number = item.Item_Number,
                         Item_Name = item.Item_Name,
                         Supplier_Name = item.Supplier_Name,

@@ -32,6 +32,7 @@
             this.tab_StockIn = new System.Windows.Forms.TabPage();
             this.dgvStockIn = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.btnImportExcel = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
@@ -44,29 +45,36 @@
             this.btnPremacFileBrowser = new System.Windows.Forms.Button();
             this.txtPremacURL = new System.Windows.Forms.TextBox();
             this.tab_Unit = new System.Windows.Forms.TabPage();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.txtUnitType = new System.Windows.Forms.TextBox();
+            this.txtQtyUnit = new System.Windows.Forms.TextBox();
+            this.txtItemName = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtItemNo = new System.Windows.Forms.TextBox();
             this.dgvUnit = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnDeleteUnitItem = new System.Windows.Forms.Button();
             this.btnUpdateUnitItem = new System.Windows.Forms.Button();
             this.btnAddUnitItem = new System.Windows.Forms.Button();
-            this.txtItemNo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtItemName = new System.Windows.Forms.TextBox();
-            this.txtQtyUnit = new System.Windows.Forms.TextBox();
-            this.txtUnitType = new System.Windows.Forms.TextBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.btnPrinter = new System.Windows.Forms.Button();
             this.grt_StockIn.SuspendLayout();
             this.tab_StockIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
             this.panel4.SuspendLayout();
             this.tab_Setting.SuspendLayout();
             this.tab_Unit.SuspendLayout();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnit)).BeginInit();
             this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // grt_StockIn
@@ -106,21 +114,29 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.btnImportExcel);
-            this.panel4.Controls.Add(this.btnAddItem);
+            this.panel4.Controls.Add(this.panel9);
+            this.panel4.Controls.Add(this.panel8);
+            this.panel4.Controls.Add(this.panel7);
             this.panel4.Controls.Add(this.btnSetting);
-            this.panel4.Controls.Add(this.btnManualPacking);
-            this.panel4.Controls.Add(this.btnAutoPacking);
-            this.panel4.Controls.Add(this.btnAddPremacItems);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(825, 50);
             this.panel4.TabIndex = 2;
             // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(3, 3);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(89, 41);
+            this.btnRegister.TabIndex = 7;
+            this.btnRegister.Text = "Register Packing";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
             // btnImportExcel
             // 
-            this.btnImportExcel.Location = new System.Drawing.Point(99, 3);
+            this.btnImportExcel.Location = new System.Drawing.Point(98, 3);
             this.btnImportExcel.Name = "btnImportExcel";
             this.btnImportExcel.Size = new System.Drawing.Size(89, 41);
             this.btnImportExcel.TabIndex = 6;
@@ -130,7 +146,7 @@
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(194, 3);
+            this.btnAddItem.Location = new System.Drawing.Point(193, 3);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(89, 41);
             this.btnAddItem.TabIndex = 5;
@@ -140,7 +156,7 @@
             // 
             // btnSetting
             // 
-            this.btnSetting.Location = new System.Drawing.Point(533, 3);
+            this.btnSetting.Location = new System.Drawing.Point(703, 3);
             this.btnSetting.Name = "btnSetting";
             this.btnSetting.Size = new System.Drawing.Size(89, 41);
             this.btnSetting.TabIndex = 4;
@@ -150,7 +166,7 @@
             // 
             // btnManualPacking
             // 
-            this.btnManualPacking.Location = new System.Drawing.Point(438, 3);
+            this.btnManualPacking.Location = new System.Drawing.Point(98, 3);
             this.btnManualPacking.Name = "btnManualPacking";
             this.btnManualPacking.Size = new System.Drawing.Size(89, 41);
             this.btnManualPacking.TabIndex = 3;
@@ -160,7 +176,7 @@
             // 
             // btnAutoPacking
             // 
-            this.btnAutoPacking.Location = new System.Drawing.Point(343, 3);
+            this.btnAutoPacking.Location = new System.Drawing.Point(3, 3);
             this.btnAutoPacking.Name = "btnAutoPacking";
             this.btnAutoPacking.Size = new System.Drawing.Size(89, 41);
             this.btnAutoPacking.TabIndex = 2;
@@ -170,7 +186,7 @@
             // 
             // btnAddPremacItems
             // 
-            this.btnAddPremacItems.Location = new System.Drawing.Point(4, 3);
+            this.btnAddPremacItems.Location = new System.Drawing.Point(3, 3);
             this.btnAddPremacItems.Name = "btnAddPremacItems";
             this.btnAddPremacItems.Size = new System.Drawing.Size(89, 41);
             this.btnAddPremacItems.TabIndex = 1;
@@ -241,6 +257,86 @@
             this.tab_Unit.Text = "Unit";
             this.tab_Unit.UseVisualStyleBackColor = true;
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.txtUnitType);
+            this.panel6.Controls.Add(this.txtQtyUnit);
+            this.panel6.Controls.Add(this.txtItemName);
+            this.panel6.Controls.Add(this.label8);
+            this.panel6.Controls.Add(this.label7);
+            this.panel6.Controls.Add(this.label5);
+            this.panel6.Controls.Add(this.label1);
+            this.panel6.Controls.Add(this.txtItemNo);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(3, 53);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(222, 334);
+            this.panel6.TabIndex = 7;
+            // 
+            // txtUnitType
+            // 
+            this.txtUnitType.Location = new System.Drawing.Point(80, 110);
+            this.txtUnitType.Name = "txtUnitType";
+            this.txtUnitType.Size = new System.Drawing.Size(121, 20);
+            this.txtUnitType.TabIndex = 15;
+            // 
+            // txtQtyUnit
+            // 
+            this.txtQtyUnit.Location = new System.Drawing.Point(80, 80);
+            this.txtQtyUnit.Name = "txtQtyUnit";
+            this.txtQtyUnit.Size = new System.Drawing.Size(121, 20);
+            this.txtQtyUnit.TabIndex = 14;
+            // 
+            // txtItemName
+            // 
+            this.txtItemName.Location = new System.Drawing.Point(80, 50);
+            this.txtItemName.Name = "txtItemName";
+            this.txtItemName.Size = new System.Drawing.Size(121, 20);
+            this.txtItemName.TabIndex = 10;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(21, 113);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Unit Type";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 83);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Qty per Unit";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 53);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Item Name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Item Number";
+            // 
+            // txtItemNo
+            // 
+            this.txtItemNo.Location = new System.Drawing.Point(80, 20);
+            this.txtItemNo.Name = "txtItemNo";
+            this.txtItemNo.Size = new System.Drawing.Size(121, 20);
+            this.txtItemNo.TabIndex = 5;
+            // 
             // dgvUnit
             // 
             this.dgvUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -290,85 +386,46 @@
             this.btnAddUnitItem.Text = "Add Item";
             this.btnAddUnitItem.UseVisualStyleBackColor = true;
             // 
-            // txtItemNo
+            // panel7
             // 
-            this.txtItemNo.Location = new System.Drawing.Point(80, 20);
-            this.txtItemNo.Name = "txtItemNo";
-            this.txtItemNo.Size = new System.Drawing.Size(121, 20);
-            this.txtItemNo.TabIndex = 5;
+            this.panel7.Controls.Add(this.btnImportExcel);
+            this.panel7.Controls.Add(this.btnAddPremacItems);
+            this.panel7.Controls.Add(this.btnAddItem);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(285, 50);
+            this.panel7.TabIndex = 3;
             // 
-            // label1
+            // panel8
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Item Number";
+            this.panel8.Controls.Add(this.btnAutoPacking);
+            this.panel8.Controls.Add(this.btnManualPacking);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel8.Location = new System.Drawing.Point(285, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(194, 50);
+            this.panel8.TabIndex = 3;
             // 
-            // panel6
+            // panel9
             // 
-            this.panel6.Controls.Add(this.txtUnitType);
-            this.panel6.Controls.Add(this.txtQtyUnit);
-            this.panel6.Controls.Add(this.txtItemName);
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.label7);
-            this.panel6.Controls.Add(this.label5);
-            this.panel6.Controls.Add(this.label1);
-            this.panel6.Controls.Add(this.txtItemNo);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(3, 53);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(222, 334);
-            this.panel6.TabIndex = 7;
+            this.panel9.Controls.Add(this.btnPrinter);
+            this.panel9.Controls.Add(this.btnRegister);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(479, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(192, 50);
+            this.panel9.TabIndex = 3;
             // 
-            // label5
+            // btnPrinter
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 53);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Item Name";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 83);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Qty per Unit";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 113);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 13);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Unit Type";
-            // 
-            // txtItemName
-            // 
-            this.txtItemName.Location = new System.Drawing.Point(80, 50);
-            this.txtItemName.Name = "txtItemName";
-            this.txtItemName.Size = new System.Drawing.Size(121, 20);
-            this.txtItemName.TabIndex = 10;
-            // 
-            // txtQtyUnit
-            // 
-            this.txtQtyUnit.Location = new System.Drawing.Point(80, 80);
-            this.txtQtyUnit.Name = "txtQtyUnit";
-            this.txtQtyUnit.Size = new System.Drawing.Size(121, 20);
-            this.txtQtyUnit.TabIndex = 14;
-            // 
-            // txtUnitType
-            // 
-            this.txtUnitType.Location = new System.Drawing.Point(80, 110);
-            this.txtUnitType.Name = "txtUnitType";
-            this.txtUnitType.Size = new System.Drawing.Size(121, 20);
-            this.txtUnitType.TabIndex = 15;
+            this.btnPrinter.Location = new System.Drawing.Point(98, 3);
+            this.btnPrinter.Name = "btnPrinter";
+            this.btnPrinter.Size = new System.Drawing.Size(89, 41);
+            this.btnPrinter.TabIndex = 8;
+            this.btnPrinter.Text = "Printer Label";
+            this.btnPrinter.UseVisualStyleBackColor = true;
+            this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
             // 
             // StockInForm
             // 
@@ -392,10 +449,13 @@
             this.tab_Setting.ResumeLayout(false);
             this.tab_Setting.PerformLayout();
             this.tab_Unit.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUnit)).EndInit();
-            this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnit)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -432,5 +492,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtItemNo;
         private System.Windows.Forms.TextBox txtUnitType;
+        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button btnPrinter;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel7;
     }
 }

@@ -108,5 +108,29 @@ namespace PC_QRCodeSystem.Model
             query.Clear();
             return qty;
         }
+
+        public bool InputStock(List<StockInItem> items)
+        {
+            string cmd = string.Empty;
+            foreach (StockInItem item in items)
+            {
+                cmd += "('" + item.Packing_Code + "','" + item.Item_Number + "','" + item.Supplier_Name + "','"
+                    + item.PO_No + "','" + item.Supplier_Invoice + "','" + item.Delivery_Qty + "','" + item.StockIn_Date
+                    + "','" + item.Stock_Qty + "','" + item.Incharge + "','" + item.Registrator_Date + "'),";
+            }
+            cmd = cmd.Remove(cmd.Length - 1, 1);
+            query.Append("INSERT INTO t_pc_stock(packing_cd, item_cd, supplier, po_no, invoice, delivery_qty, ");
+            query.Append("stock_in_date, stock_qty, user_name, registrator_date) VALUES ").Append(cmd);
+            if (SQL.sqlExecuteNonQueryInt(query.ToString(), false) > 0)
+            {
+                query.Clear();
+                return true;
+            }
+            else
+            {
+                query.Clear();
+                return false;
+            }
+        }
     }
 }
