@@ -14,12 +14,14 @@ namespace PC_QRCodeSystem.View
 {
     public partial class StockInForm : FormCommon
     {
+        string premacpath;
         GetData getData = new GetData();
+        TfPrint tfprinter = new TfPrint();
         PremacIn preitem = new PremacIn();
         StockInItem stockitem = new StockInItem();
         List<PremacIn> preitems = new List<PremacIn>();
         List<StockInItem> stockitems = new List<StockInItem>();
-        string premacpath;
+        List<StockInItem> printeditems = new List<StockInItem>();
 
         public StockInForm()
         {
@@ -48,6 +50,9 @@ namespace PC_QRCodeSystem.View
                 }
                 preitems = preitem.GetItemFromPremacFile(premacpath);
                 dgvStockIn.DataSource = preitems;
+                tsRows.Text = preitems.Count.ToString();
+                btnAutoPacking.Enabled = true;
+                btnManualPacking.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -65,10 +70,17 @@ namespace PC_QRCodeSystem.View
 
         }
 
+        /// <summary>
+        /// Auto cut lot follow unit qty in database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAutoPacking_Click(object sender, EventArgs e)
         {
             stockitems = stockitem.GetStockInItem(preitems);
             dgvStockIn.DataSource = stockitems;
+            dgvStockIn.Columns.Remove("Packing_ID");
+            tsRows.Text = stockitems.Count.ToString();
         }
 
         private void btnManualPacking_Click(object sender, EventArgs e)
@@ -114,15 +126,21 @@ namespace PC_QRCodeSystem.View
         /// <param name="e"></param>
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (getData.InputStock(stockitems) && stockitems.Count > 0)
-                MessageBox.Show("Register complete!!!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else
-                MessageBox.Show("Register incomplete!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (printeditems.Count > 0)
+            {
+                if (getData.InputStock(printeditems))
+                    MessageBox.Show("Register complete!!!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Register incomplete!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnPrinter_Click(object sender, EventArgs e)
         {
+        }
 
+        private void dgvStockIn_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }

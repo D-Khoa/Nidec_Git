@@ -63,6 +63,10 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btnPrinter = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grt_StockIn.SuspendLayout();
             this.tab_StockIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
@@ -75,6 +79,7 @@
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grt_StockIn
@@ -87,30 +92,37 @@
             this.grt_StockIn.Location = new System.Drawing.Point(145, 69);
             this.grt_StockIn.Name = "grt_StockIn";
             this.grt_StockIn.SelectedIndex = 0;
-            this.grt_StockIn.Size = new System.Drawing.Size(839, 419);
+            this.grt_StockIn.Size = new System.Drawing.Size(839, 472);
             this.grt_StockIn.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.grt_StockIn.TabIndex = 2;
             // 
             // tab_StockIn
             // 
+            this.tab_StockIn.Controls.Add(this.statusStrip1);
             this.tab_StockIn.Controls.Add(this.dgvStockIn);
             this.tab_StockIn.Controls.Add(this.panel4);
             this.tab_StockIn.Location = new System.Drawing.Point(4, 25);
             this.tab_StockIn.Name = "tab_StockIn";
             this.tab_StockIn.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_StockIn.Size = new System.Drawing.Size(831, 390);
+            this.tab_StockIn.Size = new System.Drawing.Size(831, 443);
             this.tab_StockIn.TabIndex = 0;
             this.tab_StockIn.Text = "Stock In";
             this.tab_StockIn.UseVisualStyleBackColor = true;
             // 
             // dgvStockIn
             // 
+            this.dgvStockIn.AllowUserToAddRows = false;
+            this.dgvStockIn.AllowUserToDeleteRows = false;
+            this.dgvStockIn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvStockIn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStockIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvStockIn.Location = new System.Drawing.Point(3, 53);
             this.dgvStockIn.Name = "dgvStockIn";
-            this.dgvStockIn.Size = new System.Drawing.Size(825, 334);
+            this.dgvStockIn.ReadOnly = true;
+            this.dgvStockIn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvStockIn.Size = new System.Drawing.Size(825, 387);
             this.dgvStockIn.TabIndex = 0;
+            this.dgvStockIn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockIn_CellClick);
             // 
             // panel4
             // 
@@ -126,7 +138,8 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(3, 3);
+            this.btnRegister.Enabled = false;
+            this.btnRegister.Location = new System.Drawing.Point(100, 3);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(89, 41);
             this.btnRegister.TabIndex = 7;
@@ -176,6 +189,7 @@
             // 
             // btnAutoPacking
             // 
+            this.btnAutoPacking.Enabled = false;
             this.btnAutoPacking.Location = new System.Drawing.Point(3, 3);
             this.btnAutoPacking.Name = "btnAutoPacking";
             this.btnAutoPacking.Size = new System.Drawing.Size(89, 41);
@@ -419,7 +433,8 @@
             // 
             // btnPrinter
             // 
-            this.btnPrinter.Location = new System.Drawing.Point(98, 3);
+            this.btnPrinter.Enabled = false;
+            this.btnPrinter.Location = new System.Drawing.Point(6, 3);
             this.btnPrinter.Name = "btnPrinter";
             this.btnPrinter.Size = new System.Drawing.Size(89, 41);
             this.btnPrinter.TabIndex = 8;
@@ -427,11 +442,44 @@
             this.btnPrinter.UseVisualStyleBackColor = true;
             this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel1,
+            this.tsRows});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 416);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(825, 24);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsRows
+            // 
+            this.tsRows.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsRows.Name = "tsRows";
+            this.tsRows.Size = new System.Drawing.Size(40, 19);
+            this.tsRows.Text = "None";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(45, 19);
+            this.toolStripStatusLabel1.Text = "Rows :";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(725, 19);
+            this.toolStripStatusLabel2.Spring = true;
+            // 
             // StockInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 488);
+            this.ClientSize = new System.Drawing.Size(984, 541);
             this.Controls.Add(this.grt_StockIn);
             this.dept = "";
             this.logintime = new System.DateTime(((long)(0)));
@@ -444,6 +492,7 @@
             this.Controls.SetChildIndex(this.grt_StockIn, 0);
             this.grt_StockIn.ResumeLayout(false);
             this.tab_StockIn.ResumeLayout(false);
+            this.tab_StockIn.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
             this.panel4.ResumeLayout(false);
             this.tab_Setting.ResumeLayout(false);
@@ -456,6 +505,8 @@
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -497,5 +548,9 @@
         private System.Windows.Forms.Button btnPrinter;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel tsRows;
     }
 }

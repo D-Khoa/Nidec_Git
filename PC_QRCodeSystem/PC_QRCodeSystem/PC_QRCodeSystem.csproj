@@ -76,9 +76,11 @@
     <Compile Include="Model\CSVUtility.cs" />
     <Compile Include="Model\EncryptDecrypt.cs" />
     <Compile Include="Model\GetData.cs" />
+    <Compile Include="Model\LKBPRINT.cs" />
     <Compile Include="Model\PSQL.cs" />
     <Compile Include="Model\PremacIn.cs" />
     <Compile Include="Model\StockInItem.cs" />
+    <Compile Include="Model\TfPrint.cs" />
     <Compile Include="Model\UserData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,7 +137,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\LKBSDK.dll" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FormIcon.ico" />
   </ItemGroup>
