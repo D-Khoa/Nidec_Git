@@ -32,13 +32,14 @@
             this.lbTittle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnChangePassword = new System.Windows.Forms.Button();
+            this.btnLogOut = new System.Windows.Forms.Button();
             this.lbDept = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lbLoginTime = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
-            this.btnLogOut = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +79,7 @@
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btnChangePassword);
             this.panel3.Controls.Add(this.btnLogOut);
             this.panel3.Controls.Add(this.lbDept);
             this.panel3.Controls.Add(this.label6);
@@ -93,10 +95,34 @@
             this.panel3.Size = new System.Drawing.Size(145, 270);
             this.panel3.TabIndex = 1;
             // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnChangePassword.Location = new System.Drawing.Point(14, 157);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(118, 47);
+            this.btnChangePassword.TabIndex = 6;
+            this.btnChangePassword.Text = "Change Password";
+            this.btnChangePassword.UseVisualStyleBackColor = true;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogOut.Location = new System.Drawing.Point(14, 210);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(118, 47);
+            this.btnLogOut.TabIndex = 2;
+            this.btnLogOut.Text = "Log Out";
+            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
             // lbDept
             // 
             this.lbDept.AutoSize = true;
-            this.lbDept.Location = new System.Drawing.Point(83, 30);
+            this.lbDept.Location = new System.Drawing.Point(10, 70);
             this.lbDept.Name = "lbDept";
             this.lbDept.Size = new System.Drawing.Size(34, 13);
             this.lbDept.TabIndex = 5;
@@ -114,7 +140,7 @@
             // lbLoginTime
             // 
             this.lbLoginTime.AutoSize = true;
-            this.lbLoginTime.Location = new System.Drawing.Point(11, 70);
+            this.lbLoginTime.Location = new System.Drawing.Point(11, 110);
             this.lbLoginTime.Name = "lbLoginTime";
             this.lbLoginTime.Size = new System.Drawing.Size(133, 13);
             this.lbLoginTime.TabIndex = 3;
@@ -123,7 +149,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 50);
+            this.label4.Location = new System.Drawing.Point(10, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 13);
             this.label4.TabIndex = 2;
@@ -132,7 +158,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 30);
+            this.label3.Location = new System.Drawing.Point(10, 50);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 1;
@@ -141,23 +167,11 @@
             // lbName
             // 
             this.lbName.AutoSize = true;
-            this.lbName.Location = new System.Drawing.Point(57, 10);
+            this.lbName.Location = new System.Drawing.Point(10, 30);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(39, 13);
             this.lbName.TabIndex = 0;
             this.lbName.Text = "Name";
-            // 
-            // btnLogOut
-            // 
-            this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Location = new System.Drawing.Point(14, 103);
-            this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(118, 47);
-            this.btnLogOut.TabIndex = 2;
-            this.btnLogOut.Text = "Log Out";
-            this.btnLogOut.UseVisualStyleBackColor = true;
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // FormCommon
             // 
@@ -190,5 +204,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Button btnChangePassword;
     }
 }

@@ -93,6 +93,8 @@ namespace PC_QRCodeSystem
         {
             if (MessageBox.Show("Are you sure to exit?", "Noice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                GetData gdata = new GetData();
+                gdata.LogOut();
                 foreach (Form frm in Application.OpenForms)
                 {
                     if (frm.GetType().BaseType == typeof(FormCommon))
@@ -101,6 +103,12 @@ namespace PC_QRCodeSystem
                     }
                 }
             }
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            ChangePasswordForm cpfrm = new ChangePasswordForm();
+            cpfrm.ShowDialog();
         }
     }
 }

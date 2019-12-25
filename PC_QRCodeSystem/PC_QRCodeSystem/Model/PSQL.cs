@@ -14,7 +14,7 @@ namespace PC_QRCodeSystem.Model
 
         public PSQL()
         {
-            strConnection = Properties.Settings.Default.CONNECTSTRING;
+            strConnection = Properties.Settings.Default.CONNECTSTRING_MES;
             //strConnection = "Server=192.168.145.12;Port=5432;UserId=pqm_ad;Password=dbuser;Database=pcdb;";
         }
         public void getComboBoxData(string sql, ref ComboBox cmb)

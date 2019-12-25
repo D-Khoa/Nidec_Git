@@ -33,7 +33,9 @@ namespace PC_QRCodeSystem
         private void btnServer_Click(object sender, EventArgs e)
         {
             PCForm pcf = new PCForm();
+            this.Hide();
             pcf.ShowDialog();
+            this.Close();
         }
 
         private void btnClient_Click(object sender, EventArgs e)

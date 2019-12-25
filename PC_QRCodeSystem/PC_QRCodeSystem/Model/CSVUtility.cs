@@ -4,7 +4,7 @@ using System.Linq;
 using System.Data;
 using System.IO;
 
-namespace ConvertAndSendData.Model
+namespace PC_QRCodeSystem.Model
 {
     public static class CSVUtility
     {

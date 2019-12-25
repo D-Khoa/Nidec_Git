@@ -40,7 +40,7 @@
             this.btnServer.Name = "btnServer";
             this.btnServer.Size = new System.Drawing.Size(145, 127);
             this.btnServer.TabIndex = 0;
-            this.btnServer.Tag = "4";
+            this.btnServer.Tag = "pc_stock";
             this.btnServer.Text = "PC Control";
             this.btnServer.UseVisualStyleBackColor = true;
             this.btnServer.Click += new System.EventHandler(this.btnServer_Click);
@@ -53,7 +53,7 @@
             this.btnClient.Name = "btnClient";
             this.btnClient.Size = new System.Drawing.Size(145, 127);
             this.btnClient.TabIndex = 1;
-            this.btnClient.Tag = "5";
+            this.btnClient.Tag = "pc_request";
             this.btnClient.Text = "Production";
             this.btnClient.UseVisualStyleBackColor = true;
             this.btnClient.Click += new System.EventHandler(this.btnClient_Click);

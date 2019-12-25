@@ -5,5 +5,8 @@
     <Setting Name="CONNECTSTRING" Type="System.String" Scope="User">
       <Value Profile="(Default)">Server=192.168.145.12;Port=5432;UserId=pqm_ad;Password=dbuser;Database=pcdb;</Value>
     </Setting>
+    <Setting Name="CONNECTSTRING_MES" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Server=192.168.145.12;Port=5432;UserId=mes;Password=dbuser;Database=mesdb;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

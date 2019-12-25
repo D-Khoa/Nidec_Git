@@ -17,22 +17,31 @@ namespace PC_QRCodeSystem
 
         private void Login_Load(object sender, EventArgs e)
         {
-            cmbLoginname.DataSource = getData.GetListUser();
-            cmbLoginname.Text = null;
-            cmbLoginname.Focus();
+            txtUsername.Focus();
+        }
+
+        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtpass.Focus();
+                AcceptButton = btnOK;
+            }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbLoginname.Text))
+            if (!string.IsNullOrEmpty(txtUsername.Text))
             {
-                if (getData.CheckLogin(cmbLoginname.Text, txtpass.Text))
+                if (getData.CheckLogin(txtUsername.Text, txtpass.Text))
                 {
                     MainForm main = new MainForm();
                     this.Hide();
                     txtpass.Clear();
                     main.ShowDialog();
+                    getData.LogOut();
                     this.Show();
+                    this.Focus();
                 }
                 else
                 {
@@ -49,11 +58,6 @@ namespace PC_QRCodeSystem
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void cmbLoginname_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtpass.Focus();
         }
     }
 }

@@ -19,7 +19,8 @@ namespace PC_QRCodeSystem.View
 
         private void btnStockIn_Click(object sender, EventArgs e)
         {
-
+            StockInForm inFrm = new StockInForm();
+            inFrm.ShowDialog();
         }
 
         private void btnStockOut_Click(object sender, EventArgs e)

@@ -34,9 +34,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtpass = new System.Windows.Forms.TextBox();
-            this.cmbLoginname = new System.Windows.Forms.ComboBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,16 +104,6 @@
             this.txtpass.Size = new System.Drawing.Size(163, 20);
             this.txtpass.TabIndex = 2;
             // 
-            // cmbLoginname
-            // 
-            this.cmbLoginname.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLoginname.FormattingEnabled = true;
-            this.cmbLoginname.Location = new System.Drawing.Point(179, 105);
-            this.cmbLoginname.Name = "cmbLoginname";
-            this.cmbLoginname.Size = new System.Drawing.Size(163, 21);
-            this.cmbLoginname.TabIndex = 1;
-            this.cmbLoginname.SelectedIndexChanged += new System.EventHandler(this.cmbLoginname_SelectedIndexChanged);
-            // 
             // btnOK
             // 
             this.btnOK.Location = new System.Drawing.Point(136, 187);
@@ -136,17 +126,24 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(179, 106);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(163, 20);
+            this.txtUsername.TabIndex = 1;
+            this.txtUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyDown);
+            // 
             // Login
             // 
-            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(446, 249);
+            this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtpass);
-            this.Controls.Add(this.cmbLoginname);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
@@ -171,8 +168,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtpass;
-        private System.Windows.Forms.ComboBox cmbLoginname;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtUsername;
     }
 }

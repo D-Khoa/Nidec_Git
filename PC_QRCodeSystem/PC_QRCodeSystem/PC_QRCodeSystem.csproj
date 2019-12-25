@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangePasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePasswordForm.Designer.cs">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCommon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,8 +74,11 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\CSVUtility.cs" />
+    <Compile Include="Model\EncryptDecrypt.cs" />
     <Compile Include="Model\GetData.cs" />
     <Compile Include="Model\PSQL.cs" />
+    <Compile Include="Model\PremacIn.cs" />
+    <Compile Include="Model\StockInItem.cs" />
     <Compile Include="Model\UserData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +94,9 @@
     <Compile Include="View\StockInForm.Designer.cs">
       <DependentUpon>StockInForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChangePasswordForm.resx">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCommon.resx">
       <DependentUpon>FormCommon.cs</DependentUpon>
     </EmbeddedResource>
