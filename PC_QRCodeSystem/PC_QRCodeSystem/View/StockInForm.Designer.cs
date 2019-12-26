@@ -30,15 +30,23 @@
         {
             this.grt_StockIn = new System.Windows.Forms.TabControl();
             this.tab_StockIn = new System.Windows.Forms.TabPage();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgvStockIn = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.btnPrinter = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.btnAutoPacking = new System.Windows.Forms.Button();
+            this.btnManualPacking = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.btnImportExcel = new System.Windows.Forms.Button();
+            this.btnAddPremacItems = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
-            this.btnManualPacking = new System.Windows.Forms.Button();
-            this.btnAutoPacking = new System.Windows.Forms.Button();
-            this.btnAddPremacItems = new System.Windows.Forms.Button();
             this.tab_Setting = new System.Windows.Forms.TabPage();
             this.btnSettingApply = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,27 +67,19 @@
             this.btnDeleteUnitItem = new System.Windows.Forms.Button();
             this.btnUpdateUnitItem = new System.Windows.Forms.Button();
             this.btnAddUnitItem = new System.Windows.Forms.Button();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.btnPrinter = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grt_StockIn.SuspendLayout();
             this.tab_StockIn.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
             this.panel4.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.tab_Setting.SuspendLayout();
             this.tab_Unit.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnit)).BeginInit();
             this.panel5.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grt_StockIn
@@ -109,6 +109,39 @@
             this.tab_StockIn.Text = "Stock In";
             this.tab_StockIn.UseVisualStyleBackColor = true;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel1,
+            this.tsRows});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 416);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(825, 24);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(725, 19);
+            this.toolStripStatusLabel2.Spring = true;
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(45, 19);
+            this.toolStripStatusLabel1.Text = "Rows :";
+            // 
+            // tsRows
+            // 
+            this.tsRows.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsRows.Name = "tsRows";
+            this.tsRows.Size = new System.Drawing.Size(40, 19);
+            this.tsRows.Text = "None";
+            // 
             // dgvStockIn
             // 
             this.dgvStockIn.AllowUserToAddRows = false;
@@ -136,6 +169,27 @@
             this.panel4.Size = new System.Drawing.Size(825, 50);
             this.panel4.TabIndex = 2;
             // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.btnPrinter);
+            this.panel9.Controls.Add(this.btnRegister);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(479, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(192, 50);
+            this.panel9.TabIndex = 3;
+            // 
+            // btnPrinter
+            // 
+            this.btnPrinter.Enabled = false;
+            this.btnPrinter.Location = new System.Drawing.Point(6, 3);
+            this.btnPrinter.Name = "btnPrinter";
+            this.btnPrinter.Size = new System.Drawing.Size(89, 41);
+            this.btnPrinter.TabIndex = 8;
+            this.btnPrinter.Text = "Printer Label";
+            this.btnPrinter.UseVisualStyleBackColor = true;
+            this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
+            // 
             // btnRegister
             // 
             this.btnRegister.Enabled = false;
@@ -147,6 +201,48 @@
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.btnAutoPacking);
+            this.panel8.Controls.Add(this.btnManualPacking);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel8.Location = new System.Drawing.Point(285, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(194, 50);
+            this.panel8.TabIndex = 3;
+            // 
+            // btnAutoPacking
+            // 
+            this.btnAutoPacking.Enabled = false;
+            this.btnAutoPacking.Location = new System.Drawing.Point(3, 3);
+            this.btnAutoPacking.Name = "btnAutoPacking";
+            this.btnAutoPacking.Size = new System.Drawing.Size(89, 41);
+            this.btnAutoPacking.TabIndex = 2;
+            this.btnAutoPacking.Text = "Auto Packing";
+            this.btnAutoPacking.UseVisualStyleBackColor = true;
+            this.btnAutoPacking.Click += new System.EventHandler(this.btnAutoPacking_Click);
+            // 
+            // btnManualPacking
+            // 
+            this.btnManualPacking.Location = new System.Drawing.Point(98, 3);
+            this.btnManualPacking.Name = "btnManualPacking";
+            this.btnManualPacking.Size = new System.Drawing.Size(89, 41);
+            this.btnManualPacking.TabIndex = 3;
+            this.btnManualPacking.Text = "Manual Packing";
+            this.btnManualPacking.UseVisualStyleBackColor = true;
+            this.btnManualPacking.Click += new System.EventHandler(this.btnManualPacking_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.btnImportExcel);
+            this.panel7.Controls.Add(this.btnAddPremacItems);
+            this.panel7.Controls.Add(this.btnAddItem);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(285, 50);
+            this.panel7.TabIndex = 3;
+            // 
             // btnImportExcel
             // 
             this.btnImportExcel.Location = new System.Drawing.Point(98, 3);
@@ -156,6 +252,16 @@
             this.btnImportExcel.Text = "Get Items From Excel";
             this.btnImportExcel.UseVisualStyleBackColor = true;
             this.btnImportExcel.Click += new System.EventHandler(this.btnImportExcel_Click);
+            // 
+            // btnAddPremacItems
+            // 
+            this.btnAddPremacItems.Location = new System.Drawing.Point(3, 3);
+            this.btnAddPremacItems.Name = "btnAddPremacItems";
+            this.btnAddPremacItems.Size = new System.Drawing.Size(89, 41);
+            this.btnAddPremacItems.TabIndex = 1;
+            this.btnAddPremacItems.Text = "Get Items From Premac";
+            this.btnAddPremacItems.UseVisualStyleBackColor = true;
+            this.btnAddPremacItems.Click += new System.EventHandler(this.btnAddPremacItems_Click);
             // 
             // btnAddItem
             // 
@@ -177,37 +283,6 @@
             this.btnSetting.UseVisualStyleBackColor = true;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
-            // btnManualPacking
-            // 
-            this.btnManualPacking.Location = new System.Drawing.Point(98, 3);
-            this.btnManualPacking.Name = "btnManualPacking";
-            this.btnManualPacking.Size = new System.Drawing.Size(89, 41);
-            this.btnManualPacking.TabIndex = 3;
-            this.btnManualPacking.Text = "Manual Packing";
-            this.btnManualPacking.UseVisualStyleBackColor = true;
-            this.btnManualPacking.Click += new System.EventHandler(this.btnManualPacking_Click);
-            // 
-            // btnAutoPacking
-            // 
-            this.btnAutoPacking.Enabled = false;
-            this.btnAutoPacking.Location = new System.Drawing.Point(3, 3);
-            this.btnAutoPacking.Name = "btnAutoPacking";
-            this.btnAutoPacking.Size = new System.Drawing.Size(89, 41);
-            this.btnAutoPacking.TabIndex = 2;
-            this.btnAutoPacking.Text = "Auto Packing";
-            this.btnAutoPacking.UseVisualStyleBackColor = true;
-            this.btnAutoPacking.Click += new System.EventHandler(this.btnAutoPacking_Click);
-            // 
-            // btnAddPremacItems
-            // 
-            this.btnAddPremacItems.Location = new System.Drawing.Point(3, 3);
-            this.btnAddPremacItems.Name = "btnAddPremacItems";
-            this.btnAddPremacItems.Size = new System.Drawing.Size(89, 41);
-            this.btnAddPremacItems.TabIndex = 1;
-            this.btnAddPremacItems.Text = "Get Items From Premac";
-            this.btnAddPremacItems.UseVisualStyleBackColor = true;
-            this.btnAddPremacItems.Click += new System.EventHandler(this.btnAddPremacItems_Click);
-            // 
             // tab_Setting
             // 
             this.tab_Setting.Controls.Add(this.btnSettingApply);
@@ -217,7 +292,7 @@
             this.tab_Setting.Location = new System.Drawing.Point(4, 25);
             this.tab_Setting.Name = "tab_Setting";
             this.tab_Setting.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Setting.Size = new System.Drawing.Size(831, 390);
+            this.tab_Setting.Size = new System.Drawing.Size(831, 443);
             this.tab_Setting.TabIndex = 1;
             this.tab_Setting.Text = "Setting";
             this.tab_Setting.UseVisualStyleBackColor = true;
@@ -266,7 +341,7 @@
             this.tab_Unit.Location = new System.Drawing.Point(4, 25);
             this.tab_Unit.Name = "tab_Unit";
             this.tab_Unit.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Unit.Size = new System.Drawing.Size(831, 390);
+            this.tab_Unit.Size = new System.Drawing.Size(831, 443);
             this.tab_Unit.TabIndex = 2;
             this.tab_Unit.Text = "Unit";
             this.tab_Unit.UseVisualStyleBackColor = true;
@@ -284,7 +359,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(3, 53);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(222, 334);
+            this.panel6.Size = new System.Drawing.Size(222, 387);
             this.panel6.TabIndex = 7;
             // 
             // txtUnitType
@@ -300,6 +375,7 @@
             this.txtQtyUnit.Name = "txtQtyUnit";
             this.txtQtyUnit.Size = new System.Drawing.Size(121, 20);
             this.txtQtyUnit.TabIndex = 14;
+            this.txtQtyUnit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQtyUnit_KeyPress);
             // 
             // txtItemName
             // 
@@ -381,6 +457,7 @@
             this.btnDeleteUnitItem.TabIndex = 4;
             this.btnDeleteUnitItem.Text = "Delete";
             this.btnDeleteUnitItem.UseVisualStyleBackColor = true;
+            this.btnDeleteUnitItem.Click += new System.EventHandler(this.btnDeleteUnitItem_Click);
             // 
             // btnUpdateUnitItem
             // 
@@ -390,6 +467,7 @@
             this.btnUpdateUnitItem.TabIndex = 3;
             this.btnUpdateUnitItem.Text = "Update Item";
             this.btnUpdateUnitItem.UseVisualStyleBackColor = true;
+            this.btnUpdateUnitItem.Click += new System.EventHandler(this.btnUpdateUnitItem_Click);
             // 
             // btnAddUnitItem
             // 
@@ -399,81 +477,7 @@
             this.btnAddUnitItem.TabIndex = 2;
             this.btnAddUnitItem.Text = "Add Item";
             this.btnAddUnitItem.UseVisualStyleBackColor = true;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.btnImportExcel);
-            this.panel7.Controls.Add(this.btnAddPremacItems);
-            this.panel7.Controls.Add(this.btnAddItem);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(285, 50);
-            this.panel7.TabIndex = 3;
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.btnAutoPacking);
-            this.panel8.Controls.Add(this.btnManualPacking);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(285, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(194, 50);
-            this.panel8.TabIndex = 3;
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.btnPrinter);
-            this.panel9.Controls.Add(this.btnRegister);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(479, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(192, 50);
-            this.panel9.TabIndex = 3;
-            // 
-            // btnPrinter
-            // 
-            this.btnPrinter.Enabled = false;
-            this.btnPrinter.Location = new System.Drawing.Point(6, 3);
-            this.btnPrinter.Name = "btnPrinter";
-            this.btnPrinter.Size = new System.Drawing.Size(89, 41);
-            this.btnPrinter.TabIndex = 8;
-            this.btnPrinter.Text = "Printer Label";
-            this.btnPrinter.UseVisualStyleBackColor = true;
-            this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel2,
-            this.toolStripStatusLabel1,
-            this.tsRows});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 416);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(825, 24);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // tsRows
-            // 
-            this.tsRows.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.tsRows.Name = "tsRows";
-            this.tsRows.Size = new System.Drawing.Size(40, 19);
-            this.tsRows.Text = "None";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(45, 19);
-            this.toolStripStatusLabel1.Text = "Rows :";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(725, 19);
-            this.toolStripStatusLabel2.Spring = true;
+            this.btnAddUnitItem.Click += new System.EventHandler(this.btnAddUnitItem_Click);
             // 
             // StockInForm
             // 
@@ -485,7 +489,6 @@
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "StockInForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Input Stock";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.StockInForm_Load);
@@ -493,8 +496,13 @@
             this.grt_StockIn.ResumeLayout(false);
             this.tab_StockIn.ResumeLayout(false);
             this.tab_StockIn.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
             this.panel4.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.tab_Setting.ResumeLayout(false);
             this.tab_Setting.PerformLayout();
             this.tab_Unit.ResumeLayout(false);
@@ -502,11 +510,6 @@
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnit)).EndInit();
             this.panel5.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }

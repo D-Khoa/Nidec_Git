@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -95,6 +95,81 @@ namespace PC_QRCodeSystem.Model
         }
         #endregion
 
+        #region UNIT MANAGER
+        /// <summary>
+        /// Add an unit item into database
+        /// </summary>
+        /// <param name="item_no"></param>
+        /// <param name="item_name"></param>
+        /// <param name="unit_qty"></param>
+        /// <param name="unit_type"></param>
+        /// <returns></returns>
+        public bool AddUnitItem(string item_no, string item_name, string unit_qty, string unit_type)
+        {
+            bool check;
+            query.Append("INSERT INTO m_pc_item(item_cd, item_name, unit_qty, unit_cd) ");
+            query.Append("VALUES ('").Append(item_no).Append("','").Append(item_name).Append("','");
+            query.Append(unit_qty).Append("','").Append(unit_type).Append("')");
+            check = SQL.sqlExecuteNonQuery(query.ToString(), false);
+            query.Clear();
+            return check;
+        }
+
+        /// <summary>
+        /// Add list unit item into database
+        /// </summary>
+        /// <param name="list_item"></param>
+        /// <returns></returns>
+        public int AddUnitItem(string list_item)
+        {
+            int n = 0;
+            query.Append("INSERT INTO m_pc_item(item_cd, item_name, unit_qty, unit_cd) VALUES ").Append(list_item);
+            n = SQL.sqlExecuteNonQueryInt(query.ToString(), false);
+            query.Clear();
+            return n;
+        }
+
+        /// <summary>
+        /// Update an unit item
+        /// </summary>
+        /// <param name="item_no"></param>
+        /// <param name="item_name"></param>
+        /// <param name="unit_qty"></param>
+        /// <param name="unit_type"></param>
+        /// <param name="old_item_no"></param>
+        /// <returns></returns>
+        public bool UpdateUnitItem(string item_no, string item_name, string unit_qty, string unit_type, string old_item_no)
+        {
+            bool check;
+            query.Append("UPDATE m_pc_item SET ");
+            if (!string.IsNullOrEmpty(item_no))
+                query.Append("item_cd ='").Append(item_no).Append("', ");
+            if (!string.IsNullOrEmpty(item_name))
+                query.Append("item_name ='").Append(item_name).Append("', ");
+            if (!string.IsNullOrEmpty(unit_qty))
+                query.Append("unit_qty ='").Append(unit_qty).Append("', ");
+            if (!string.IsNullOrEmpty(unit_type))
+                query.Append("unit_cd ='").Append(unit_type).Append("' ");
+            query.Append("WHERE item_no ='").Append(old_item_no).Append("'");
+            check = SQL.sqlExecuteNonQuery(query.ToString(), false);
+            query.Clear();
+            return check;
+        }
+
+        /// <summary>
+        /// Delete an unit item
+        /// </summary>
+        /// <param name="item_cd"></param>
+        /// <returns></returns>
+        public bool DeleteUnitItem(string item_cd)
+        {
+            bool check;
+            query.Append("DELETE FROM m_pc_item WHERE item_cd ='").Append(item_cd).Append("'");
+            check = SQL.sqlExecuteNonQuery(query.ToString(), false);
+            query.Clear();
+            return check;
+        }
+
         /// <summary>
         /// Get unit qty of each item
         /// </summary>
@@ -108,7 +183,13 @@ namespace PC_QRCodeSystem.Model
             query.Clear();
             return qty;
         }
+        #endregion
 
+        /// <summary>
+        /// Input stock item into database
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public bool InputStock(List<StockInItem> items)
         {
             string cmd = string.Empty;

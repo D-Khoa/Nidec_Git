@@ -34,16 +34,16 @@
             this.btnStockIn = new System.Windows.Forms.Button();
             this.pnlRequest = new System.Windows.Forms.Panel();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnDeny = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.request_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.user_dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.btnDeny = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -128,6 +128,39 @@
             this.dgvRequest.Size = new System.Drawing.Size(557, 309);
             this.dgvRequest.TabIndex = 4;
             // 
+            // request_time
+            // 
+            this.request_time.HeaderText = "Date Time";
+            this.request_time.Name = "request_time";
+            // 
+            // user_name
+            // 
+            this.user_name.HeaderText = "Name";
+            this.user_name.Name = "user_name";
+            this.user_name.ReadOnly = true;
+            // 
+            // user_dept
+            // 
+            this.user_dept.HeaderText = "Department";
+            this.user_dept.Name = "user_dept";
+            this.user_dept.ReadOnly = true;
+            // 
+            // item
+            // 
+            this.item.HeaderText = "Item";
+            this.item.Name = "item";
+            this.item.ReadOnly = true;
+            // 
+            // qty
+            // 
+            this.qty.HeaderText = "Qty";
+            this.qty.Name = "qty";
+            // 
+            // confirm
+            // 
+            this.confirm.HeaderText = "Confirm";
+            this.confirm.Name = "confirm";
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.btnAccept);
@@ -170,39 +203,6 @@
             this.label1.Text = "Request";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // request_time
-            // 
-            this.request_time.HeaderText = "Date Time";
-            this.request_time.Name = "request_time";
-            // 
-            // user_name
-            // 
-            this.user_name.HeaderText = "Name";
-            this.user_name.Name = "user_name";
-            this.user_name.ReadOnly = true;
-            // 
-            // user_dept
-            // 
-            this.user_dept.HeaderText = "Department";
-            this.user_dept.Name = "user_dept";
-            this.user_dept.ReadOnly = true;
-            // 
-            // item
-            // 
-            this.item.HeaderText = "Item";
-            this.item.Name = "item";
-            this.item.ReadOnly = true;
-            // 
-            // qty
-            // 
-            this.qty.HeaderText = "Qty";
-            this.qty.Name = "qty";
-            // 
-            // confirm
-            // 
-            this.confirm.HeaderText = "Confirm";
-            this.confirm.Name = "confirm";
-            // 
             // PCForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,8 +214,7 @@
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "PCForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "QR-Code System-PC";
+            this.Text = "PC Management";
             this.tittle = "FormCommon";
             this.Controls.SetChildIndex(this.pnlSetting, 0);
             this.Controls.SetChildIndex(this.pnlRequest, 0);

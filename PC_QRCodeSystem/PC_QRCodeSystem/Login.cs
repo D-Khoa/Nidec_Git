@@ -13,6 +13,7 @@ namespace PC_QRCodeSystem
         public Login()
         {
             InitializeComponent();
+            this.Text = lbTittle.Text + "-" + this.Text;
         }
 
         private void Login_Load(object sender, EventArgs e)

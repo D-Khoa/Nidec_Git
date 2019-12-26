@@ -63,6 +63,7 @@ namespace PC_QRCodeSystem
             logintime = UserData.logintime;
             listper = UserData.role_permision;
             tittle = this.Text;
+            this.Text = tittle + "-QRCode System";
         }
 
         /// <summary>

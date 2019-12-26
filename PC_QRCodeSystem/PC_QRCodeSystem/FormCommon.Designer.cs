@@ -181,6 +181,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "FormCommon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormCommon";
             this.Load += new System.EventHandler(this.FormCommon_Load);
             this.Shown += new System.EventHandler(this.FormCommon_Shown);

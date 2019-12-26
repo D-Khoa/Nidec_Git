@@ -141,6 +141,47 @@ namespace PC_QRCodeSystem.View
 
         private void dgvStockIn_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            foreach(DataGridViewRow dr in dgvStockIn.Rows)
+            {
+                if (dr.Cells["PO_No"].Value.ToString() == dgvStockIn.Rows[e.RowIndex].Cells["PO_No"].Value.ToString())
+                    dr.Selected = true;
+            }
         }
+
+        #region UNIT MANAGER
+        /// <summary>
+        /// Add unit item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddUnitItem_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtItemNo.Text) || string.IsNullOrEmpty(txtItemNo.Text) || string.IsNullOrEmpty(txtItemNo.Text))
+            {
+                MessageBox.Show("Please fill all infomations of item!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (getData.AddUnitItem(txtItemNo.Text, txtItemName.Text, txtQtyUnit.Text, txtUnitType.Text))
+                MessageBox.Show("Process complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Process incomplete!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void btnUpdateUnitItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeleteUnitItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtQtyUnit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                e.Handled = false;
+        }
+        #endregion
     }
 }
