@@ -60,11 +60,14 @@
     <ApplicationIcon>BarcodeIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="npgsql">
-      <HintPath>..\..\..\FW\NidecMES\Dll\npgsql.dll</HintPath>
+    <Reference Include="npgsql, Version=3.1.9.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FW\NidecMES\Dll\npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -100,16 +103,16 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\CSVUtility.cs" />
-    <Compile Include="Model\EncryptDecrypt.cs" />
+    <Compile Include="Model\Class\CSVUtility.cs" />
+    <Compile Include="Model\Class\EncryptDecrypt.cs" />
     <Compile Include="Model\GetData.cs" />
-    <Compile Include="Model\LKBPRINT.cs" />
-    <Compile Include="Model\PSQL.cs" />
+    <Compile Include="Model\Class\LKBPRINT.cs" />
+    <Compile Include="Model\Class\PSQL.cs" />
     <Compile Include="Model\Items\PremacIn.cs" />
     <Compile Include="Model\Items\StockInItem.cs" />
     <Compile Include="Model\TfPrint.cs" />
     <Compile Include="Model\Items\UnitItem.cs" />
-    <Compile Include="Model\UserData.cs" />
+    <Compile Include="Model\Items\UserData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\PCForm.cs">

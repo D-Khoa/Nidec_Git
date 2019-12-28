@@ -37,20 +37,22 @@
             this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pnlPrinter = new System.Windows.Forms.Panel();
+            this.btnPrintedList = new System.Windows.Forms.Button();
             this.btnPrinter = new System.Windows.Forms.Button();
             this.pnlPacking = new System.Windows.Forms.Panel();
             this.btnAutoPacking = new System.Windows.Forms.Button();
             this.btnManualPacking = new System.Windows.Forms.Button();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.pnlAddItems = new System.Windows.Forms.Panel();
             this.btnImportExcel = new System.Windows.Forms.Button();
             this.btnAddPremacItems = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
             this.tab_Setting = new System.Windows.Forms.TabPage();
+            this.lbStatusPrinter = new System.Windows.Forms.Label();
+            this.btnPrintCheck = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbPrinterName = new System.Windows.Forms.ComboBox();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.btnPrintedList = new System.Windows.Forms.Button();
             this.btnSettingBack = new System.Windows.Forms.Button();
             this.btnUnitManager = new System.Windows.Forms.Button();
             this.btnSettingApply = new System.Windows.Forms.Button();
@@ -80,6 +82,7 @@
             this.tsPrinterRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgvprinter = new System.Windows.Forms.DataGridView();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.btnRegisterItems = new System.Windows.Forms.Button();
             this.btnPrinterBack = new System.Windows.Forms.Button();
             this.grt_StockIn.SuspendLayout();
             this.tab_StockIn.SuspendLayout();
@@ -88,7 +91,7 @@
             this.panel4.SuspendLayout();
             this.pnlPrinter.SuspendLayout();
             this.pnlPacking.SuspendLayout();
-            this.panel7.SuspendLayout();
+            this.pnlAddItems.SuspendLayout();
             this.tab_Setting.SuspendLayout();
             this.panel10.SuspendLayout();
             this.tab_Unit.SuspendLayout();
@@ -112,7 +115,7 @@
             this.grt_StockIn.Location = new System.Drawing.Point(145, 69);
             this.grt_StockIn.Name = "grt_StockIn";
             this.grt_StockIn.SelectedIndex = 0;
-            this.grt_StockIn.Size = new System.Drawing.Size(839, 472);
+            this.grt_StockIn.Size = new System.Drawing.Size(774, 472);
             this.grt_StockIn.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.grt_StockIn.TabIndex = 2;
             // 
@@ -124,7 +127,7 @@
             this.tab_StockIn.Location = new System.Drawing.Point(4, 25);
             this.tab_StockIn.Name = "tab_StockIn";
             this.tab_StockIn.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_StockIn.Size = new System.Drawing.Size(831, 443);
+            this.tab_StockIn.Size = new System.Drawing.Size(766, 443);
             this.tab_StockIn.TabIndex = 0;
             this.tab_StockIn.Text = "Stock In";
             this.tab_StockIn.UseVisualStyleBackColor = true;
@@ -140,9 +143,10 @@
             this.dgvStockIn.Name = "dgvStockIn";
             this.dgvStockIn.ReadOnly = true;
             this.dgvStockIn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvStockIn.Size = new System.Drawing.Size(825, 363);
+            this.dgvStockIn.Size = new System.Drawing.Size(760, 363);
             this.dgvStockIn.TabIndex = 0;
             this.dgvStockIn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockIn_CellClick);
+            this.dgvStockIn.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockIn_CellDoubleClick);
             // 
             // statusStrip1
             // 
@@ -152,7 +156,7 @@
             this.tsRows});
             this.statusStrip1.Location = new System.Drawing.Point(3, 416);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(825, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(760, 24);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -160,7 +164,7 @@
             // 
             this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(725, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(660, 19);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel1
@@ -181,28 +185,40 @@
             // 
             this.panel4.Controls.Add(this.pnlPrinter);
             this.panel4.Controls.Add(this.pnlPacking);
-            this.panel4.Controls.Add(this.panel7);
+            this.panel4.Controls.Add(this.pnlAddItems);
             this.panel4.Controls.Add(this.btnSetting);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(825, 50);
+            this.panel4.Size = new System.Drawing.Size(760, 50);
             this.panel4.TabIndex = 2;
             // 
             // pnlPrinter
             // 
+            this.pnlPrinter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.pnlPrinter.Controls.Add(this.btnPrintedList);
             this.pnlPrinter.Controls.Add(this.btnPrinter);
             this.pnlPrinter.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlPrinter.Location = new System.Drawing.Point(479, 0);
+            this.pnlPrinter.Location = new System.Drawing.Point(470, 0);
             this.pnlPrinter.Name = "pnlPrinter";
-            this.pnlPrinter.Size = new System.Drawing.Size(192, 50);
+            this.pnlPrinter.Size = new System.Drawing.Size(190, 50);
             this.pnlPrinter.TabIndex = 3;
+            // 
+            // btnPrintedList
+            // 
+            this.btnPrintedList.Location = new System.Drawing.Point(100, 5);
+            this.btnPrintedList.Name = "btnPrintedList";
+            this.btnPrintedList.Size = new System.Drawing.Size(80, 40);
+            this.btnPrintedList.TabIndex = 9;
+            this.btnPrintedList.Text = "Printed List";
+            this.btnPrintedList.UseVisualStyleBackColor = true;
+            this.btnPrintedList.Click += new System.EventHandler(this.btnPrintedList_Click);
             // 
             // btnPrinter
             // 
-            this.btnPrinter.Location = new System.Drawing.Point(6, 3);
+            this.btnPrinter.Location = new System.Drawing.Point(10, 5);
             this.btnPrinter.Name = "btnPrinter";
-            this.btnPrinter.Size = new System.Drawing.Size(89, 41);
+            this.btnPrinter.Size = new System.Drawing.Size(80, 40);
             this.btnPrinter.TabIndex = 8;
             this.btnPrinter.Text = "Printer Label";
             this.btnPrinter.UseVisualStyleBackColor = true;
@@ -210,19 +226,20 @@
             // 
             // pnlPacking
             // 
+            this.pnlPacking.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.pnlPacking.Controls.Add(this.btnAutoPacking);
             this.pnlPacking.Controls.Add(this.btnManualPacking);
             this.pnlPacking.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlPacking.Location = new System.Drawing.Point(285, 0);
+            this.pnlPacking.Location = new System.Drawing.Point(280, 0);
             this.pnlPacking.Name = "pnlPacking";
-            this.pnlPacking.Size = new System.Drawing.Size(194, 50);
+            this.pnlPacking.Size = new System.Drawing.Size(190, 50);
             this.pnlPacking.TabIndex = 3;
             // 
             // btnAutoPacking
             // 
-            this.btnAutoPacking.Location = new System.Drawing.Point(3, 3);
+            this.btnAutoPacking.Location = new System.Drawing.Point(10, 5);
             this.btnAutoPacking.Name = "btnAutoPacking";
-            this.btnAutoPacking.Size = new System.Drawing.Size(89, 41);
+            this.btnAutoPacking.Size = new System.Drawing.Size(80, 40);
             this.btnAutoPacking.TabIndex = 2;
             this.btnAutoPacking.Text = "Auto Packing";
             this.btnAutoPacking.UseVisualStyleBackColor = true;
@@ -230,30 +247,31 @@
             // 
             // btnManualPacking
             // 
-            this.btnManualPacking.Location = new System.Drawing.Point(98, 3);
+            this.btnManualPacking.Location = new System.Drawing.Point(100, 5);
             this.btnManualPacking.Name = "btnManualPacking";
-            this.btnManualPacking.Size = new System.Drawing.Size(89, 41);
+            this.btnManualPacking.Size = new System.Drawing.Size(80, 40);
             this.btnManualPacking.TabIndex = 3;
             this.btnManualPacking.Text = "Manual Packing";
             this.btnManualPacking.UseVisualStyleBackColor = true;
             this.btnManualPacking.Click += new System.EventHandler(this.btnManualPacking_Click);
             // 
-            // panel7
+            // pnlAddItems
             // 
-            this.panel7.Controls.Add(this.btnImportExcel);
-            this.panel7.Controls.Add(this.btnAddPremacItems);
-            this.panel7.Controls.Add(this.btnAddItem);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(285, 50);
-            this.panel7.TabIndex = 3;
+            this.pnlAddItems.BackColor = System.Drawing.Color.Lime;
+            this.pnlAddItems.Controls.Add(this.btnImportExcel);
+            this.pnlAddItems.Controls.Add(this.btnAddPremacItems);
+            this.pnlAddItems.Controls.Add(this.btnAddItem);
+            this.pnlAddItems.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlAddItems.Location = new System.Drawing.Point(0, 0);
+            this.pnlAddItems.Name = "pnlAddItems";
+            this.pnlAddItems.Size = new System.Drawing.Size(280, 50);
+            this.pnlAddItems.TabIndex = 3;
             // 
             // btnImportExcel
             // 
-            this.btnImportExcel.Location = new System.Drawing.Point(98, 3);
+            this.btnImportExcel.Location = new System.Drawing.Point(100, 5);
             this.btnImportExcel.Name = "btnImportExcel";
-            this.btnImportExcel.Size = new System.Drawing.Size(89, 41);
+            this.btnImportExcel.Size = new System.Drawing.Size(80, 40);
             this.btnImportExcel.TabIndex = 6;
             this.btnImportExcel.Text = "Get Items From Excel";
             this.btnImportExcel.UseVisualStyleBackColor = true;
@@ -261,19 +279,20 @@
             // 
             // btnAddPremacItems
             // 
-            this.btnAddPremacItems.Location = new System.Drawing.Point(3, 3);
+            this.btnAddPremacItems.BackColor = System.Drawing.SystemColors.Control;
+            this.btnAddPremacItems.Location = new System.Drawing.Point(10, 5);
             this.btnAddPremacItems.Name = "btnAddPremacItems";
-            this.btnAddPremacItems.Size = new System.Drawing.Size(89, 41);
+            this.btnAddPremacItems.Size = new System.Drawing.Size(80, 40);
             this.btnAddPremacItems.TabIndex = 1;
             this.btnAddPremacItems.Text = "Get Items From Premac";
-            this.btnAddPremacItems.UseVisualStyleBackColor = true;
+            this.btnAddPremacItems.UseVisualStyleBackColor = false;
             this.btnAddPremacItems.Click += new System.EventHandler(this.btnAddPremacItems_Click);
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(193, 3);
+            this.btnAddItem.Location = new System.Drawing.Point(190, 5);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(89, 41);
+            this.btnAddItem.Size = new System.Drawing.Size(80, 40);
             this.btnAddItem.TabIndex = 5;
             this.btnAddItem.Text = "Add Item Manual";
             this.btnAddItem.UseVisualStyleBackColor = true;
@@ -281,9 +300,9 @@
             // 
             // btnSetting
             // 
-            this.btnSetting.Location = new System.Drawing.Point(703, 3);
+            this.btnSetting.Location = new System.Drawing.Point(670, 5);
             this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(89, 41);
+            this.btnSetting.Size = new System.Drawing.Size(80, 40);
             this.btnSetting.TabIndex = 4;
             this.btnSetting.Text = "Setting";
             this.btnSetting.UseVisualStyleBackColor = true;
@@ -291,6 +310,8 @@
             // 
             // tab_Setting
             // 
+            this.tab_Setting.Controls.Add(this.lbStatusPrinter);
+            this.tab_Setting.Controls.Add(this.btnPrintCheck);
             this.tab_Setting.Controls.Add(this.label9);
             this.tab_Setting.Controls.Add(this.cmbPrinterName);
             this.tab_Setting.Controls.Add(this.panel10);
@@ -300,10 +321,29 @@
             this.tab_Setting.Location = new System.Drawing.Point(4, 25);
             this.tab_Setting.Name = "tab_Setting";
             this.tab_Setting.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Setting.Size = new System.Drawing.Size(831, 443);
+            this.tab_Setting.Size = new System.Drawing.Size(766, 443);
             this.tab_Setting.TabIndex = 1;
             this.tab_Setting.Text = "Setting";
             this.tab_Setting.UseVisualStyleBackColor = true;
+            // 
+            // lbStatusPrinter
+            // 
+            this.lbStatusPrinter.AutoSize = true;
+            this.lbStatusPrinter.Location = new System.Drawing.Point(228, 125);
+            this.lbStatusPrinter.Name = "lbStatusPrinter";
+            this.lbStatusPrinter.Size = new System.Drawing.Size(33, 13);
+            this.lbStatusPrinter.TabIndex = 11;
+            this.lbStatusPrinter.Text = "None";
+            // 
+            // btnPrintCheck
+            // 
+            this.btnPrintCheck.Location = new System.Drawing.Point(285, 122);
+            this.btnPrintCheck.Name = "btnPrintCheck";
+            this.btnPrintCheck.Size = new System.Drawing.Size(75, 23);
+            this.btnPrintCheck.TabIndex = 10;
+            this.btnPrintCheck.Text = "Check";
+            this.btnPrintCheck.UseVisualStyleBackColor = true;
+            this.btnPrintCheck.Click += new System.EventHandler(this.btnPrintCheck_Click);
             // 
             // label9
             // 
@@ -320,47 +360,37 @@
             this.cmbPrinterName.FormattingEnabled = true;
             this.cmbPrinterName.Location = new System.Drawing.Point(11, 122);
             this.cmbPrinterName.Name = "cmbPrinterName";
-            this.cmbPrinterName.Size = new System.Drawing.Size(268, 21);
+            this.cmbPrinterName.Size = new System.Drawing.Size(211, 21);
             this.cmbPrinterName.TabIndex = 8;
+            this.cmbPrinterName.SelectedIndexChanged += new System.EventHandler(this.cmbPrinterName_SelectedIndexChanged);
             // 
             // panel10
             // 
-            this.panel10.Controls.Add(this.btnPrintedList);
             this.panel10.Controls.Add(this.btnSettingBack);
             this.panel10.Controls.Add(this.btnUnitManager);
             this.panel10.Controls.Add(this.btnSettingApply);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(3, 3);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(825, 56);
+            this.panel10.Size = new System.Drawing.Size(760, 50);
             this.panel10.TabIndex = 7;
-            // 
-            // btnPrintedList
-            // 
-            this.btnPrintedList.Location = new System.Drawing.Point(112, 4);
-            this.btnPrintedList.Name = "btnPrintedList";
-            this.btnPrintedList.Size = new System.Drawing.Size(100, 50);
-            this.btnPrintedList.TabIndex = 7;
-            this.btnPrintedList.Text = "Printed Items";
-            this.btnPrintedList.UseVisualStyleBackColor = true;
-            this.btnPrintedList.Click += new System.EventHandler(this.btnPrintedList_Click);
             // 
             // btnSettingBack
             // 
-            this.btnSettingBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSettingBack.Location = new System.Drawing.Point(713, 3);
+            this.btnSettingBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettingBack.Location = new System.Drawing.Point(670, 5);
             this.btnSettingBack.Name = "btnSettingBack";
-            this.btnSettingBack.Size = new System.Drawing.Size(100, 50);
+            this.btnSettingBack.Size = new System.Drawing.Size(80, 40);
             this.btnSettingBack.TabIndex = 6;
             this.btnSettingBack.Text = "Back";
             this.btnSettingBack.UseVisualStyleBackColor = true;
-            this.btnSettingBack.Click += new System.EventHandler(this.btnSettingBack_Click);
+            this.btnSettingBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnUnitManager
             // 
-            this.btnUnitManager.Location = new System.Drawing.Point(6, 4);
+            this.btnUnitManager.Location = new System.Drawing.Point(10, 5);
             this.btnUnitManager.Name = "btnUnitManager";
-            this.btnUnitManager.Size = new System.Drawing.Size(100, 50);
+            this.btnUnitManager.Size = new System.Drawing.Size(80, 40);
             this.btnUnitManager.TabIndex = 5;
             this.btnUnitManager.Text = "Unit Manager";
             this.btnUnitManager.UseVisualStyleBackColor = true;
@@ -368,10 +398,10 @@
             // 
             // btnSettingApply
             // 
-            this.btnSettingApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSettingApply.Location = new System.Drawing.Point(607, 3);
+            this.btnSettingApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettingApply.Location = new System.Drawing.Point(580, 5);
             this.btnSettingApply.Name = "btnSettingApply";
-            this.btnSettingApply.Size = new System.Drawing.Size(100, 50);
+            this.btnSettingApply.Size = new System.Drawing.Size(80, 40);
             this.btnSettingApply.TabIndex = 4;
             this.btnSettingApply.Text = "Apply";
             this.btnSettingApply.UseVisualStyleBackColor = true;
@@ -411,7 +441,7 @@
             this.tab_Unit.Location = new System.Drawing.Point(4, 25);
             this.tab_Unit.Name = "tab_Unit";
             this.tab_Unit.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Unit.Size = new System.Drawing.Size(831, 443);
+            this.tab_Unit.Size = new System.Drawing.Size(766, 443);
             this.tab_Unit.TabIndex = 2;
             this.tab_Unit.Text = "Unit";
             this.tab_Unit.UseVisualStyleBackColor = true;
@@ -505,7 +535,7 @@
             this.dgvUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUnit.Location = new System.Drawing.Point(231, 53);
             this.dgvUnit.Name = "dgvUnit";
-            this.dgvUnit.Size = new System.Drawing.Size(597, 334);
+            this.dgvUnit.Size = new System.Drawing.Size(532, 334);
             this.dgvUnit.TabIndex = 3;
             this.dgvUnit.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnit_CellClick);
             // 
@@ -518,15 +548,15 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(825, 50);
+            this.panel5.Size = new System.Drawing.Size(760, 50);
             this.panel5.TabIndex = 4;
             // 
             // btnUnitBack
             // 
             this.btnUnitBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUnitBack.Location = new System.Drawing.Point(731, 3);
+            this.btnUnitBack.Location = new System.Drawing.Point(670, 5);
             this.btnUnitBack.Name = "btnUnitBack";
-            this.btnUnitBack.Size = new System.Drawing.Size(89, 41);
+            this.btnUnitBack.Size = new System.Drawing.Size(80, 40);
             this.btnUnitBack.TabIndex = 5;
             this.btnUnitBack.Text = "Back";
             this.btnUnitBack.UseVisualStyleBackColor = true;
@@ -534,9 +564,9 @@
             // 
             // btnDeleteUnitItem
             // 
-            this.btnDeleteUnitItem.Location = new System.Drawing.Point(193, 3);
+            this.btnDeleteUnitItem.Location = new System.Drawing.Point(190, 5);
             this.btnDeleteUnitItem.Name = "btnDeleteUnitItem";
-            this.btnDeleteUnitItem.Size = new System.Drawing.Size(89, 41);
+            this.btnDeleteUnitItem.Size = new System.Drawing.Size(80, 40);
             this.btnDeleteUnitItem.TabIndex = 4;
             this.btnDeleteUnitItem.Text = "Delete";
             this.btnDeleteUnitItem.UseVisualStyleBackColor = true;
@@ -544,9 +574,9 @@
             // 
             // btnUpdateUnitItem
             // 
-            this.btnUpdateUnitItem.Location = new System.Drawing.Point(98, 3);
+            this.btnUpdateUnitItem.Location = new System.Drawing.Point(100, 5);
             this.btnUpdateUnitItem.Name = "btnUpdateUnitItem";
-            this.btnUpdateUnitItem.Size = new System.Drawing.Size(89, 41);
+            this.btnUpdateUnitItem.Size = new System.Drawing.Size(80, 40);
             this.btnUpdateUnitItem.TabIndex = 3;
             this.btnUpdateUnitItem.Text = "Update Item";
             this.btnUpdateUnitItem.UseVisualStyleBackColor = true;
@@ -554,9 +584,9 @@
             // 
             // btnAddUnitItem
             // 
-            this.btnAddUnitItem.Location = new System.Drawing.Point(3, 3);
+            this.btnAddUnitItem.Location = new System.Drawing.Point(10, 5);
             this.btnAddUnitItem.Name = "btnAddUnitItem";
-            this.btnAddUnitItem.Size = new System.Drawing.Size(89, 41);
+            this.btnAddUnitItem.Size = new System.Drawing.Size(80, 40);
             this.btnAddUnitItem.TabIndex = 2;
             this.btnAddUnitItem.Text = "Add Item";
             this.btnAddUnitItem.UseVisualStyleBackColor = true;
@@ -570,7 +600,7 @@
             this.tab_printer.Location = new System.Drawing.Point(4, 25);
             this.tab_printer.Name = "tab_printer";
             this.tab_printer.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_printer.Size = new System.Drawing.Size(831, 443);
+            this.tab_printer.Size = new System.Drawing.Size(766, 443);
             this.tab_printer.TabIndex = 3;
             this.tab_printer.Text = "Printer";
             this.tab_printer.UseVisualStyleBackColor = true;
@@ -583,7 +613,7 @@
             this.tsPrinterRows});
             this.statusStrip2.Location = new System.Drawing.Point(3, 416);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(825, 24);
+            this.statusStrip2.Size = new System.Drawing.Size(760, 24);
             this.statusStrip2.TabIndex = 2;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -591,7 +621,7 @@
             // 
             this.toolStripStatusLabel3.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(725, 19);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(660, 19);
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
@@ -612,36 +642,48 @@
             // 
             this.dgvprinter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvprinter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvprinter.Location = new System.Drawing.Point(3, 70);
+            this.dgvprinter.Location = new System.Drawing.Point(3, 53);
             this.dgvprinter.Name = "dgvprinter";
             this.dgvprinter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvprinter.Size = new System.Drawing.Size(825, 370);
+            this.dgvprinter.Size = new System.Drawing.Size(760, 387);
             this.dgvprinter.TabIndex = 1;
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.btnRegisterItems);
             this.panel11.Controls.Add(this.btnPrinterBack);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(3, 3);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(825, 67);
+            this.panel11.Size = new System.Drawing.Size(760, 50);
             this.panel11.TabIndex = 0;
+            // 
+            // btnRegisterItems
+            // 
+            this.btnRegisterItems.Location = new System.Drawing.Point(10, 5);
+            this.btnRegisterItems.Name = "btnRegisterItems";
+            this.btnRegisterItems.Size = new System.Drawing.Size(80, 40);
+            this.btnRegisterItems.TabIndex = 1;
+            this.btnRegisterItems.Text = "Register Items";
+            this.btnRegisterItems.UseVisualStyleBackColor = true;
+            this.btnRegisterItems.Click += new System.EventHandler(this.btnRegisterItems_Click);
             // 
             // btnPrinterBack
             // 
-            this.btnPrinterBack.Location = new System.Drawing.Point(745, 3);
+            this.btnPrinterBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrinterBack.Location = new System.Drawing.Point(670, 5);
             this.btnPrinterBack.Name = "btnPrinterBack";
-            this.btnPrinterBack.Size = new System.Drawing.Size(75, 53);
+            this.btnPrinterBack.Size = new System.Drawing.Size(80, 40);
             this.btnPrinterBack.TabIndex = 0;
             this.btnPrinterBack.Text = "Back";
             this.btnPrinterBack.UseVisualStyleBackColor = true;
-            this.btnPrinterBack.Click += new System.EventHandler(this.btnPrinterBack_Click);
+            this.btnPrinterBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // StockInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 541);
+            this.ClientSize = new System.Drawing.Size(919, 541);
             this.Controls.Add(this.grt_StockIn);
             this.dept = "";
             this.logintime = new System.DateTime(((long)(0)));
@@ -660,7 +702,7 @@
             this.panel4.ResumeLayout(false);
             this.pnlPrinter.ResumeLayout(false);
             this.pnlPacking.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
+            this.pnlAddItems.ResumeLayout(false);
             this.tab_Setting.ResumeLayout(false);
             this.tab_Setting.PerformLayout();
             this.panel10.ResumeLayout(false);
@@ -714,7 +756,7 @@
         private System.Windows.Forms.Panel pnlPrinter;
         private System.Windows.Forms.Button btnPrinter;
         private System.Windows.Forms.Panel pnlPacking;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel pnlAddItems;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -731,8 +773,11 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel tsPrinterRows;
-        private System.Windows.Forms.Button btnPrintedList;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cmbPrinterName;
+        private System.Windows.Forms.Button btnPrintCheck;
+        private System.Windows.Forms.Label lbStatusPrinter;
+        private System.Windows.Forms.Button btnPrintedList;
+        private System.Windows.Forms.Button btnRegisterItems;
     }
 }

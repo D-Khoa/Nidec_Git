@@ -2,7 +2,6 @@
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -15,62 +14,131 @@ namespace PC_QRCodeSystem.Model
 
         #region LOGIN
         /// <summary>
-        /// Check login password and user
+        /// Get data user into a table
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="usercode"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool CheckLogin(string usercode, string password)
+        public DataTable GetDataUserTable(string usercode, string password)
         {
             DataTable dt = new DataTable();
-            List<string> list = new List<string>();
             EncryptDecrypt edcrypt = new EncryptDecrypt();
             query.Append("select a.user_name, a.is_online from m_mes_user a left join m_login_password b ");
             query.Append("on a.user_cd = b.user_cd where b.user_cd = '").Append(usercode).Append("' ");
             password = edcrypt.Encrypt(password);
             query.Append("and b.password ='").Append(password).Append("'");
-            if (SQL.sqlExecuteReader(query.ToString(), ref dt))
-            {
-                //Check online status and notice
-                if ((bool)dt.Rows[0]["is_online"])
-                {
-                    if (MessageBox.Show("The user is now online." + Environment.NewLine + "Are you want to re-login?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                        return false;
-                }
-                query.Clear();
-                //Get name of user
-                UserData.usercode = usercode;
-                UserData.username = dt.Rows[0]["user_name"].ToString();
-                //Get list role_cd of user
-                query.Append("select role_cd from m_mes_user_role where user_cd='").Append(usercode).Append("'");
-                SQL.getListString(query.ToString(), ref list);
-                UserData.role_permision = list;
-                query.Clear();
-                //Get department of user
-                query.Append("select dept_cd from m_user_location where user_location_cd like '%");
-                query.Append(usercode).Append("%'");
-                UserData.dept = SQL.sqlExecuteScalarString(query.ToString());
-                query.Clear();
-                //Get login time of user
-                UserData.logintime = DateTime.Now;
-                //Save login time and check user is online
-                query.Append("update m_mes_user set last_login_time='").Append(DateTime.Now);
-                query.Append("', is_online ='TRUE' ");
-                query.Append("where user_cd='").Append(usercode).Append("'");
-                SQL.sqlExecuteNonQuery(query.ToString(), false);
-                query.Clear();
-                return true;
-            }
+            SQL.sqlExecuteReader(query.ToString(), ref dt);
             query.Clear();
-            return false;
+            if (dt.Rows.Count == 0)
+                throw new Exception("Wrong usercode or password! Please try again!");
+            return dt;
         }
 
+        /// <summary>
+        /// Check login password and user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        //public bool CheckLogin(string usercode, string password)
+        //{
+        //    DataTable dt = new DataTable();
+        //    List<string> list = new List<string>();
+        //    EncryptDecrypt edcrypt = new EncryptDecrypt();
+        //    query.Append("select a.user_name, a.is_online from m_mes_user a left join m_login_password b ");
+        //    query.Append("on a.user_cd = b.user_cd where b.user_cd = '").Append(usercode).Append("' ");
+        //    password = edcrypt.Encrypt(password);
+        //    query.Append("and b.password ='").Append(password).Append("'");
+        //    if (SQL.sqlExecuteReader(query.ToString(), ref dt))
+        //    {
+        //        //Check online status and notice
+        //        if ((bool)dt.Rows[0]["is_online"])
+        //        {
+        //            if (MessageBox.Show("The user is now online." + Environment.NewLine + "Are you want to re-login?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+        //                return false;
+        //        }
+        //        query.Clear();
+        //        //Get name of user
+        //        UserData.usercode = usercode;
+        //        UserData.username = dt.Rows[0]["user_name"].ToString();
+        //        //Get list role_cd of user
+        //        query.Append("select role_cd from m_mes_user_role where user_cd='").Append(usercode).Append("'");
+        //        SQL.getListString(query.ToString(), ref list);
+        //        UserData.role_permision = list;
+        //        query.Clear();
+        //        //Get department of user
+        //        query.Append("select dept_cd from m_user_location where user_location_cd like '%");
+        //        query.Append(usercode).Append("%'");
+        //        UserData.dept = SQL.sqlExecuteScalarString(query.ToString());
+        //        query.Clear();
+        //        //Get login time of user
+        //        UserData.logintime = DateTime.Now;
+        //        //Save login time and check user is online
+        //        query.Append("update m_mes_user set last_login_time='").Append(DateTime.Now);
+        //        query.Append("', is_online ='TRUE' ");
+        //        query.Append("where user_cd='").Append(usercode).Append("'");
+        //        SQL.sqlExecuteNonQuery(query.ToString());
+        //        query.Clear();
+        //        return true;
+        //    }
+        //    query.Clear();
+        //    return false;
+        //}
+
+        /// <summary>
+        /// Check online status of user
+        /// </summary>
+        /// <param name="usercode"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public bool CheckLogin(string usercode, string password)
+        {
+            return (bool)GetDataUserTable(usercode, password).Rows[0]["is_online"];
+        }
+
+        /// <summary>
+        /// Login and get data of user
+        /// </summary>
+        /// <param name="usercode"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public bool Login(string usercode, string password)
+        {
+            List<string> list = new List<string>();
+            DataTable dt = GetDataUserTable(usercode, password);
+            //Get name of user
+            UserData.usercode = usercode;
+            UserData.username = dt.Rows[0]["user_name"].ToString();
+            //Get list role_cd of user
+            query.Append("select role_cd from m_mes_user_role where user_cd='").Append(usercode).Append("'");
+            SQL.getListString(query.ToString(), ref list);
+            UserData.role_permision = list;
+            query.Clear();
+            //Get department of user
+            query.Append("select dept_cd from m_user_location where user_location_cd like '%");
+            query.Append(usercode).Append("%'");
+            UserData.dept = SQL.sqlExecuteScalarString(query.ToString());
+            query.Clear();
+            //Get login time of user
+            UserData.logintime = DateTime.Now;
+            //Save login time and check user is online
+            query.Append("update m_mes_user set last_login_time='").Append(DateTime.Now);
+            query.Append("', is_online ='TRUE' ");
+            query.Append("where user_cd='").Append(usercode).Append("'");
+            SQL.sqlExecuteNonQuery(query.ToString());
+            query.Clear();
+            return true;
+        }
+
+        /// <summary>
+        /// Logout and update online status of user
+        /// </summary>
         public void LogOut()
         {
             //Set user is offline
             query.Append("update m_mes_user set is_online ='FALSE' ");
             query.Append("where user_cd='").Append(UserData.usercode).Append("'");
-            SQL.sqlExecuteNonQuery(query.ToString(), false);
+            SQL.sqlExecuteNonQuery(query.ToString());
             query.Clear();
         }
 
@@ -85,7 +153,7 @@ namespace PC_QRCodeSystem.Model
             password = edcrypt.Encrypt(password);
             query.Append("update m_login_password set password='").Append(password);
             query.Append("' where user_cd ='").Append(UserData.usercode).Append("'");
-            if (SQL.sqlExecuteNonQuery(query.ToString(), false))
+            if (SQL.sqlExecuteNonQuery(query.ToString()))
             {
                 query.Clear();
                 return true;
@@ -121,7 +189,7 @@ namespace PC_QRCodeSystem.Model
             query.Append("Select * from m_pc_item order by item_cd");
             SQL.sqlExecuteReader(query.ToString(), ref dt);
             query.Clear();
-            if (dt.Rows.Count < 0)
+            if (dt.Rows.Count == 0)
                 return false;
             foreach (DataRow dr in dt.Rows)
             {
@@ -150,7 +218,7 @@ namespace PC_QRCodeSystem.Model
             query.Append("INSERT INTO m_pc_item(item_cd, item_name, unit_qty, unit_cd) ");
             query.Append("VALUES ('").Append(item.Item_Number).Append("','").Append(item.Item_Name).Append("','");
             query.Append(item.Unit_Qty.ToString()).Append("','").Append(item.Unit_Type).Append("')");
-            check = SQL.sqlExecuteNonQuery(query.ToString(), false);
+            check = SQL.sqlExecuteNonQuery(query.ToString());
             query.Clear();
             return check;
         }
@@ -164,7 +232,7 @@ namespace PC_QRCodeSystem.Model
         {
             int n = 0;
             query.Append("INSERT INTO m_pc_item(item_cd, item_name, unit_qty, unit_cd) VALUES ").Append(list_item);
-            n = SQL.sqlExecuteNonQueryInt(query.ToString(), false);
+            n = SQL.sqlExecuteNonQueryInt(query.ToString());
             query.Clear();
             return n;
         }
@@ -191,7 +259,7 @@ namespace PC_QRCodeSystem.Model
             if (!string.IsNullOrEmpty(unit_type))
                 query.Append("unit_cd ='").Append(unit_type).Append("' ");
             query.Append("WHERE item_cd ='").Append(old_item_no).Append("'");
-            check = SQL.sqlExecuteNonQuery(query.ToString(), false);
+            check = SQL.sqlExecuteNonQuery(query.ToString());
             query.Clear();
             return check;
         }
@@ -205,19 +273,21 @@ namespace PC_QRCodeSystem.Model
         {
             bool check;
             query.Append("DELETE FROM m_pc_item WHERE item_cd ='").Append(item_cd).Append("'");
-            check = SQL.sqlExecuteNonQuery(query.ToString(), false);
+            check = SQL.sqlExecuteNonQuery(query.ToString());
             query.Clear();
             return check;
         }
         #endregion
 
+        #region STOCKIN DATA INTO DATABASE
         /// <summary>
-        /// Input stock item into database
+        /// Input stock list item into database
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public bool InputStock(List<StockInItem> items)
+        public int InputStock(List<StockInItem> items)
         {
+            int n = 0;
             string cmd = string.Empty;
             foreach (StockInItem item in items)
             {
@@ -228,16 +298,33 @@ namespace PC_QRCodeSystem.Model
             cmd = cmd.Remove(cmd.Length - 1, 1);
             query.Append("INSERT INTO t_pc_stock(packing_cd, item_cd, supplier, po_no, invoice, delivery_qty, ");
             query.Append("stock_in_date, stock_qty, user_name, registrator_date) VALUES ").Append(cmd);
-            if (SQL.sqlExecuteNonQueryInt(query.ToString(), false) > 0)
-            {
-                query.Clear();
-                return true;
-            }
-            else
-            {
-                query.Clear();
-                return false;
-            }
+            n = SQL.sqlExecuteNonQueryInt(query.ToString());
+            query.Clear();
+            return n;
         }
+
+        /// <summary>
+        /// Input binding list items into database
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public int InputStock(System.ComponentModel.BindingList<StockInItem> items)
+        {
+            int n = 0;
+            string cmd = string.Empty;
+            foreach (StockInItem item in items)
+            {
+                cmd += "('" + item.Packing_Code + "','" + item.Item_Number + "','" + item.Supplier_Name + "','"
+                    + item.PO_No + "','" + item.Supplier_Invoice + "','" + item.Delivery_Qty + "','" + item.StockIn_Date
+                    + "','" + item.Stock_Qty + "','" + item.Incharge + "','" + item.Registrator_Date + "'),";
+            }
+            cmd = cmd.Remove(cmd.Length - 1, 1);
+            query.Append("INSERT INTO t_pc_stock(packing_cd, item_cd, supplier, po_no, invoice, delivery_qty, ");
+            query.Append("stock_in_date, stock_qty, user_name, registrator_date) VALUES ").Append(cmd);
+            n = SQL.sqlExecuteNonQueryInt(query.ToString());
+            query.Clear();
+            return n;
+        }
+        #endregion
     }
 }

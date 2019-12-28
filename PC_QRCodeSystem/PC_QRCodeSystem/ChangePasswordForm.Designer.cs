@@ -47,7 +47,7 @@
             this.txtConfirmPass.Location = new System.Drawing.Point(114, 141);
             this.txtConfirmPass.Name = "txtConfirmPass";
             this.txtConfirmPass.Size = new System.Drawing.Size(180, 20);
-            this.txtConfirmPass.TabIndex = 0;
+            this.txtConfirmPass.TabIndex = 2;
             this.txtConfirmPass.UseSystemPasswordChar = true;
             // 
             // txtNewPass
@@ -131,7 +131,7 @@
             this.btnOK.Location = new System.Drawing.Point(47, 167);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 37);
-            this.btnOK.TabIndex = 7;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -142,7 +142,7 @@
             this.btnCancel.Location = new System.Drawing.Point(183, 167);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 37);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);

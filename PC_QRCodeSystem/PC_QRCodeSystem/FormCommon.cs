@@ -49,6 +49,9 @@ namespace PC_QRCodeSystem
             set { lbLoginTime.Text = value.ToString("yyyy-MM-dd HH:mm:ss"); }
         }
 
+        /// <summary>
+        /// list role of user
+        /// </summary>
         public List<string> listper { get; set; }
 
         public FormCommon()
@@ -84,12 +87,22 @@ namespace PC_QRCodeSystem
             }
         }
 
+        /// <summary>
+        /// When form have been shown, check premision
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormCommon_Shown(object sender, EventArgs e)
         {
             FormCommon frm = (FormCommon)sender;
             CheckPermision(frm.Controls);
         }
 
+        /// <summary>
+        /// Set log out button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure to exit?", "Noice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -106,6 +119,11 @@ namespace PC_QRCodeSystem
             }
         }
 
+        /// <summary>
+        /// Set change password button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             ChangePasswordForm cpfrm = new ChangePasswordForm();

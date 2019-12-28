@@ -32,10 +32,16 @@ namespace PC_QRCodeSystem
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtUsername.Text))
+            try
             {
-                if (getData.CheckLogin(txtUsername.Text, txtpass.Text))
+                if (!string.IsNullOrEmpty(txtUsername.Text))
                 {
+                    if (getData.CheckLogin(txtUsername.Text, txtpass.Text))
+                    {
+                        if (MessageBox.Show("The user is now online." + Environment.NewLine + "Are you want to re-login?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                            return;
+                    }
+                    getData.Login(txtUsername.Text, txtpass.Text);
                     MainForm main = new MainForm();
                     this.Hide();
                     txtpass.Clear();
@@ -46,14 +52,13 @@ namespace PC_QRCodeSystem
                 }
                 else
                 {
-                    MessageBox.Show("Wrong password!!!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please choose username.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please choose username.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
