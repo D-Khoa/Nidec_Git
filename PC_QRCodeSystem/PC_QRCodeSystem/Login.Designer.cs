@@ -103,6 +103,7 @@
             this.txtpass.PasswordChar = '*';
             this.txtpass.Size = new System.Drawing.Size(163, 20);
             this.txtpass.TabIndex = 2;
+            this.txtpass.UseSystemPasswordChar = true;
             // 
             // btnOK
             // 

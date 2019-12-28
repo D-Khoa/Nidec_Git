@@ -30,16 +30,15 @@
         {
             this.grt_StockIn = new System.Windows.Forms.TabControl();
             this.tab_StockIn = new System.Windows.Forms.TabPage();
+            this.dgvStockIn = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
-            this.dgvStockIn = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.pnlPrinter = new System.Windows.Forms.Panel();
             this.btnPrinter = new System.Windows.Forms.Button();
-            this.btnRegister = new System.Windows.Forms.Button();
-            this.panel8 = new System.Windows.Forms.Panel();
+            this.pnlPacking = new System.Windows.Forms.Panel();
             this.btnAutoPacking = new System.Windows.Forms.Button();
             this.btnManualPacking = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -48,6 +47,12 @@
             this.btnAddItem = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
             this.tab_Setting = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbPrinterName = new System.Windows.Forms.ComboBox();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.btnPrintedList = new System.Windows.Forms.Button();
+            this.btnSettingBack = new System.Windows.Forms.Button();
+            this.btnUnitManager = new System.Windows.Forms.Button();
             this.btnSettingApply = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPremacFileBrowser = new System.Windows.Forms.Button();
@@ -64,22 +69,36 @@
             this.txtItemNo = new System.Windows.Forms.TextBox();
             this.dgvUnit = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnUnitBack = new System.Windows.Forms.Button();
             this.btnDeleteUnitItem = new System.Windows.Forms.Button();
             this.btnUpdateUnitItem = new System.Windows.Forms.Button();
             this.btnAddUnitItem = new System.Windows.Forms.Button();
+            this.tab_printer = new System.Windows.Forms.TabPage();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsPrinterRows = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dgvprinter = new System.Windows.Forms.DataGridView();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.btnPrinterBack = new System.Windows.Forms.Button();
             this.grt_StockIn.SuspendLayout();
             this.tab_StockIn.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel8.SuspendLayout();
+            this.pnlPrinter.SuspendLayout();
+            this.pnlPacking.SuspendLayout();
             this.panel7.SuspendLayout();
             this.tab_Setting.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.tab_Unit.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnit)).BeginInit();
             this.panel5.SuspendLayout();
+            this.tab_printer.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvprinter)).BeginInit();
+            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // grt_StockIn
@@ -88,6 +107,7 @@
             this.grt_StockIn.Controls.Add(this.tab_StockIn);
             this.grt_StockIn.Controls.Add(this.tab_Setting);
             this.grt_StockIn.Controls.Add(this.tab_Unit);
+            this.grt_StockIn.Controls.Add(this.tab_printer);
             this.grt_StockIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grt_StockIn.Location = new System.Drawing.Point(145, 69);
             this.grt_StockIn.Name = "grt_StockIn";
@@ -98,8 +118,8 @@
             // 
             // tab_StockIn
             // 
-            this.tab_StockIn.Controls.Add(this.statusStrip1);
             this.tab_StockIn.Controls.Add(this.dgvStockIn);
+            this.tab_StockIn.Controls.Add(this.statusStrip1);
             this.tab_StockIn.Controls.Add(this.panel4);
             this.tab_StockIn.Location = new System.Drawing.Point(4, 25);
             this.tab_StockIn.Name = "tab_StockIn";
@@ -108,6 +128,21 @@
             this.tab_StockIn.TabIndex = 0;
             this.tab_StockIn.Text = "Stock In";
             this.tab_StockIn.UseVisualStyleBackColor = true;
+            // 
+            // dgvStockIn
+            // 
+            this.dgvStockIn.AllowUserToAddRows = false;
+            this.dgvStockIn.AllowUserToDeleteRows = false;
+            this.dgvStockIn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvStockIn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStockIn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvStockIn.Location = new System.Drawing.Point(3, 53);
+            this.dgvStockIn.Name = "dgvStockIn";
+            this.dgvStockIn.ReadOnly = true;
+            this.dgvStockIn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvStockIn.Size = new System.Drawing.Size(825, 363);
+            this.dgvStockIn.TabIndex = 0;
+            this.dgvStockIn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockIn_CellClick);
             // 
             // statusStrip1
             // 
@@ -142,25 +177,10 @@
             this.tsRows.Size = new System.Drawing.Size(40, 19);
             this.tsRows.Text = "None";
             // 
-            // dgvStockIn
-            // 
-            this.dgvStockIn.AllowUserToAddRows = false;
-            this.dgvStockIn.AllowUserToDeleteRows = false;
-            this.dgvStockIn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dgvStockIn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStockIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStockIn.Location = new System.Drawing.Point(3, 53);
-            this.dgvStockIn.Name = "dgvStockIn";
-            this.dgvStockIn.ReadOnly = true;
-            this.dgvStockIn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvStockIn.Size = new System.Drawing.Size(825, 387);
-            this.dgvStockIn.TabIndex = 0;
-            this.dgvStockIn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockIn_CellClick);
-            // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.panel9);
-            this.panel4.Controls.Add(this.panel8);
+            this.panel4.Controls.Add(this.pnlPrinter);
+            this.panel4.Controls.Add(this.pnlPacking);
             this.panel4.Controls.Add(this.panel7);
             this.panel4.Controls.Add(this.btnSetting);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -169,19 +189,17 @@
             this.panel4.Size = new System.Drawing.Size(825, 50);
             this.panel4.TabIndex = 2;
             // 
-            // panel9
+            // pnlPrinter
             // 
-            this.panel9.Controls.Add(this.btnPrinter);
-            this.panel9.Controls.Add(this.btnRegister);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(479, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(192, 50);
-            this.panel9.TabIndex = 3;
+            this.pnlPrinter.Controls.Add(this.btnPrinter);
+            this.pnlPrinter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlPrinter.Location = new System.Drawing.Point(479, 0);
+            this.pnlPrinter.Name = "pnlPrinter";
+            this.pnlPrinter.Size = new System.Drawing.Size(192, 50);
+            this.pnlPrinter.TabIndex = 3;
             // 
             // btnPrinter
             // 
-            this.btnPrinter.Enabled = false;
             this.btnPrinter.Location = new System.Drawing.Point(6, 3);
             this.btnPrinter.Name = "btnPrinter";
             this.btnPrinter.Size = new System.Drawing.Size(89, 41);
@@ -190,30 +208,18 @@
             this.btnPrinter.UseVisualStyleBackColor = true;
             this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
             // 
-            // btnRegister
+            // pnlPacking
             // 
-            this.btnRegister.Enabled = false;
-            this.btnRegister.Location = new System.Drawing.Point(100, 3);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(89, 41);
-            this.btnRegister.TabIndex = 7;
-            this.btnRegister.Text = "Register Packing";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.btnAutoPacking);
-            this.panel8.Controls.Add(this.btnManualPacking);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(285, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(194, 50);
-            this.panel8.TabIndex = 3;
+            this.pnlPacking.Controls.Add(this.btnAutoPacking);
+            this.pnlPacking.Controls.Add(this.btnManualPacking);
+            this.pnlPacking.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlPacking.Location = new System.Drawing.Point(285, 0);
+            this.pnlPacking.Name = "pnlPacking";
+            this.pnlPacking.Size = new System.Drawing.Size(194, 50);
+            this.pnlPacking.TabIndex = 3;
             // 
             // btnAutoPacking
             // 
-            this.btnAutoPacking.Enabled = false;
             this.btnAutoPacking.Location = new System.Drawing.Point(3, 3);
             this.btnAutoPacking.Name = "btnAutoPacking";
             this.btnAutoPacking.Size = new System.Drawing.Size(89, 41);
@@ -285,7 +291,9 @@
             // 
             // tab_Setting
             // 
-            this.tab_Setting.Controls.Add(this.btnSettingApply);
+            this.tab_Setting.Controls.Add(this.label9);
+            this.tab_Setting.Controls.Add(this.cmbPrinterName);
+            this.tab_Setting.Controls.Add(this.panel10);
             this.tab_Setting.Controls.Add(this.label2);
             this.tab_Setting.Controls.Add(this.btnPremacFileBrowser);
             this.tab_Setting.Controls.Add(this.txtPremacURL);
@@ -297,11 +305,73 @@
             this.tab_Setting.Text = "Setting";
             this.tab_Setting.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 106);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(116, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Choose printer for use :";
+            // 
+            // cmbPrinterName
+            // 
+            this.cmbPrinterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPrinterName.FormattingEnabled = true;
+            this.cmbPrinterName.Location = new System.Drawing.Point(11, 122);
+            this.cmbPrinterName.Name = "cmbPrinterName";
+            this.cmbPrinterName.Size = new System.Drawing.Size(268, 21);
+            this.cmbPrinterName.TabIndex = 8;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.btnPrintedList);
+            this.panel10.Controls.Add(this.btnSettingBack);
+            this.panel10.Controls.Add(this.btnUnitManager);
+            this.panel10.Controls.Add(this.btnSettingApply);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(3, 3);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(825, 56);
+            this.panel10.TabIndex = 7;
+            // 
+            // btnPrintedList
+            // 
+            this.btnPrintedList.Location = new System.Drawing.Point(112, 4);
+            this.btnPrintedList.Name = "btnPrintedList";
+            this.btnPrintedList.Size = new System.Drawing.Size(100, 50);
+            this.btnPrintedList.TabIndex = 7;
+            this.btnPrintedList.Text = "Printed Items";
+            this.btnPrintedList.UseVisualStyleBackColor = true;
+            this.btnPrintedList.Click += new System.EventHandler(this.btnPrintedList_Click);
+            // 
+            // btnSettingBack
+            // 
+            this.btnSettingBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSettingBack.Location = new System.Drawing.Point(713, 3);
+            this.btnSettingBack.Name = "btnSettingBack";
+            this.btnSettingBack.Size = new System.Drawing.Size(100, 50);
+            this.btnSettingBack.TabIndex = 6;
+            this.btnSettingBack.Text = "Back";
+            this.btnSettingBack.UseVisualStyleBackColor = true;
+            this.btnSettingBack.Click += new System.EventHandler(this.btnSettingBack_Click);
+            // 
+            // btnUnitManager
+            // 
+            this.btnUnitManager.Location = new System.Drawing.Point(6, 4);
+            this.btnUnitManager.Name = "btnUnitManager";
+            this.btnUnitManager.Size = new System.Drawing.Size(100, 50);
+            this.btnUnitManager.TabIndex = 5;
+            this.btnUnitManager.Text = "Unit Manager";
+            this.btnUnitManager.UseVisualStyleBackColor = true;
+            this.btnUnitManager.Click += new System.EventHandler(this.btnUnitManager_Click);
+            // 
             // btnSettingApply
             // 
-            this.btnSettingApply.Location = new System.Drawing.Point(3, 355);
+            this.btnSettingApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSettingApply.Location = new System.Drawing.Point(607, 3);
             this.btnSettingApply.Name = "btnSettingApply";
-            this.btnSettingApply.Size = new System.Drawing.Size(64, 32);
+            this.btnSettingApply.Size = new System.Drawing.Size(100, 50);
             this.btnSettingApply.TabIndex = 4;
             this.btnSettingApply.Text = "Apply";
             this.btnSettingApply.UseVisualStyleBackColor = true;
@@ -310,7 +380,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 13);
+            this.label2.Location = new System.Drawing.Point(8, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(176, 13);
             this.label2.TabIndex = 3;
@@ -318,7 +388,7 @@
             // 
             // btnPremacFileBrowser
             // 
-            this.btnPremacFileBrowser.Location = new System.Drawing.Point(283, 27);
+            this.btnPremacFileBrowser.Location = new System.Drawing.Point(285, 81);
             this.btnPremacFileBrowser.Name = "btnPremacFileBrowser";
             this.btnPremacFileBrowser.Size = new System.Drawing.Size(75, 23);
             this.btnPremacFileBrowser.TabIndex = 2;
@@ -328,7 +398,7 @@
             // 
             // txtPremacURL
             // 
-            this.txtPremacURL.Location = new System.Drawing.Point(9, 29);
+            this.txtPremacURL.Location = new System.Drawing.Point(11, 83);
             this.txtPremacURL.Name = "txtPremacURL";
             this.txtPremacURL.Size = new System.Drawing.Size(268, 20);
             this.txtPremacURL.TabIndex = 1;
@@ -437,9 +507,11 @@
             this.dgvUnit.Name = "dgvUnit";
             this.dgvUnit.Size = new System.Drawing.Size(597, 334);
             this.dgvUnit.TabIndex = 3;
+            this.dgvUnit.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnit_CellClick);
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnUnitBack);
             this.panel5.Controls.Add(this.btnDeleteUnitItem);
             this.panel5.Controls.Add(this.btnUpdateUnitItem);
             this.panel5.Controls.Add(this.btnAddUnitItem);
@@ -448,6 +520,17 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(825, 50);
             this.panel5.TabIndex = 4;
+            // 
+            // btnUnitBack
+            // 
+            this.btnUnitBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUnitBack.Location = new System.Drawing.Point(731, 3);
+            this.btnUnitBack.Name = "btnUnitBack";
+            this.btnUnitBack.Size = new System.Drawing.Size(89, 41);
+            this.btnUnitBack.TabIndex = 5;
+            this.btnUnitBack.Text = "Back";
+            this.btnUnitBack.UseVisualStyleBackColor = true;
+            this.btnUnitBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnDeleteUnitItem
             // 
@@ -479,6 +562,81 @@
             this.btnAddUnitItem.UseVisualStyleBackColor = true;
             this.btnAddUnitItem.Click += new System.EventHandler(this.btnAddUnitItem_Click);
             // 
+            // tab_printer
+            // 
+            this.tab_printer.Controls.Add(this.statusStrip2);
+            this.tab_printer.Controls.Add(this.dgvprinter);
+            this.tab_printer.Controls.Add(this.panel11);
+            this.tab_printer.Location = new System.Drawing.Point(4, 25);
+            this.tab_printer.Name = "tab_printer";
+            this.tab_printer.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_printer.Size = new System.Drawing.Size(831, 443);
+            this.tab_printer.TabIndex = 3;
+            this.tab_printer.Text = "Printer";
+            this.tab_printer.UseVisualStyleBackColor = true;
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4,
+            this.tsPrinterRows});
+            this.statusStrip2.Location = new System.Drawing.Point(3, 416);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(825, 24);
+            this.statusStrip2.TabIndex = 2;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(725, 19);
+            this.toolStripStatusLabel3.Spring = true;
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(45, 19);
+            this.toolStripStatusLabel4.Text = "Rows :";
+            // 
+            // tsPrinterRows
+            // 
+            this.tsPrinterRows.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsPrinterRows.Name = "tsPrinterRows";
+            this.tsPrinterRows.Size = new System.Drawing.Size(40, 19);
+            this.tsPrinterRows.Text = "None";
+            // 
+            // dgvprinter
+            // 
+            this.dgvprinter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvprinter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvprinter.Location = new System.Drawing.Point(3, 70);
+            this.dgvprinter.Name = "dgvprinter";
+            this.dgvprinter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvprinter.Size = new System.Drawing.Size(825, 370);
+            this.dgvprinter.TabIndex = 1;
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.btnPrinterBack);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(3, 3);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(825, 67);
+            this.panel11.TabIndex = 0;
+            // 
+            // btnPrinterBack
+            // 
+            this.btnPrinterBack.Location = new System.Drawing.Point(745, 3);
+            this.btnPrinterBack.Name = "btnPrinterBack";
+            this.btnPrinterBack.Size = new System.Drawing.Size(75, 53);
+            this.btnPrinterBack.TabIndex = 0;
+            this.btnPrinterBack.Text = "Back";
+            this.btnPrinterBack.UseVisualStyleBackColor = true;
+            this.btnPrinterBack.Click += new System.EventHandler(this.btnPrinterBack_Click);
+            // 
             // StockInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,20 +654,27 @@
             this.grt_StockIn.ResumeLayout(false);
             this.tab_StockIn.ResumeLayout(false);
             this.tab_StockIn.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
             this.panel4.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
+            this.pnlPrinter.ResumeLayout(false);
+            this.pnlPacking.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.tab_Setting.ResumeLayout(false);
             this.tab_Setting.PerformLayout();
+            this.panel10.ResumeLayout(false);
             this.tab_Unit.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnit)).EndInit();
             this.panel5.ResumeLayout(false);
+            this.tab_printer.ResumeLayout(false);
+            this.tab_printer.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvprinter)).EndInit();
+            this.panel11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -546,14 +711,28 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtItemNo;
         private System.Windows.Forms.TextBox txtUnitType;
-        private System.Windows.Forms.Button btnRegister;
-        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel pnlPrinter;
         private System.Windows.Forms.Button btnPrinter;
-        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel pnlPacking;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tsRows;
+        private System.Windows.Forms.Button btnUnitManager;
+        private System.Windows.Forms.Button btnUnitBack;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Button btnSettingBack;
+        private System.Windows.Forms.TabPage tab_printer;
+        private System.Windows.Forms.DataGridView dgvprinter;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Button btnPrinterBack;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel tsPrinterRows;
+        private System.Windows.Forms.Button btnPrintedList;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmbPrinterName;
     }
 }

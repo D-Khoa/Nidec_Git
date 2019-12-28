@@ -8,7 +8,7 @@ namespace PC_QRCodeSystem.Model
     public class LKBPRINT
     {
         // Dll file name.
-        public const string SEWOODIR = "LKBSDK.dll";
+        public const string SEWOODIR = @"\Library\LKBSDK.dll";
 
         public LKBPRINT() { }
 

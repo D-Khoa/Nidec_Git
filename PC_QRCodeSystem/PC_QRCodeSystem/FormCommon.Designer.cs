@@ -103,6 +103,7 @@
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(118, 47);
             this.btnChangePassword.TabIndex = 6;
+            this.btnChangePassword.TabStop = false;
             this.btnChangePassword.Text = "Change Password";
             this.btnChangePassword.UseVisualStyleBackColor = true;
             this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
@@ -115,6 +116,7 @@
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(118, 47);
             this.btnLogOut.TabIndex = 2;
+            this.btnLogOut.TabStop = false;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
@@ -122,6 +124,7 @@
             // lbDept
             // 
             this.lbDept.AutoSize = true;
+            this.lbDept.BackColor = System.Drawing.Color.Yellow;
             this.lbDept.Location = new System.Drawing.Point(10, 70);
             this.lbDept.Name = "lbDept";
             this.lbDept.Size = new System.Drawing.Size(34, 13);
@@ -133,13 +136,14 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(10, 10);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 13);
+            this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Name :";
+            this.label6.Text = "User Name :";
             // 
             // lbLoginTime
             // 
             this.lbLoginTime.AutoSize = true;
+            this.lbLoginTime.BackColor = System.Drawing.Color.Aqua;
             this.lbLoginTime.Location = new System.Drawing.Point(11, 110);
             this.lbLoginTime.Name = "lbLoginTime";
             this.lbLoginTime.Size = new System.Drawing.Size(133, 13);
@@ -167,6 +171,7 @@
             // lbName
             // 
             this.lbName.AutoSize = true;
+            this.lbName.BackColor = System.Drawing.Color.Lime;
             this.lbName.Location = new System.Drawing.Point(10, 30);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(39, 13);

@@ -25,18 +25,6 @@ namespace PC_QRCodeSystem.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.145.12;Port=5432;UserId=pqm_ad;Password=dbuser;Database=pcdb;")]
-        public string CONNECTSTRING {
-            get {
-                return ((string)(this["CONNECTSTRING"]));
-            }
-            set {
-                this["CONNECTSTRING"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.145.12;Port=5432;UserId=mes;Password=dbuser;Database=mesdb;")]
         public string CONNECTSTRING_MES {
             get {

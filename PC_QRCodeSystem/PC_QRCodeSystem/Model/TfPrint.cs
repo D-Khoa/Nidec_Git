@@ -2,6 +2,8 @@
 {
     public class TfPrint
     {
+        public static string printerName = "LUKHAN Label Printer";
+
         // バーコードプリント機能
         public static void printBarCode(string itemNo, string itemName, string supplier, string invoice, string date, string qty, string validity)
         {
@@ -15,14 +17,18 @@
 
             long rtn;
             int x, y;
-            string printerName = "SEWOO Label Printer";
+            //string printerName = "SEWOO Label Printer";
 
             int xdots, model; // ydots;
             string TwoBAR_Command;
             string QRCode_data = itemNo + ";" + itemName + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + validity;
 
             /* 1. LK_OpenPrinter() */
-            if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS) { return; }
+            if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)
+            {
+                throw new System.Exception("Can't open printer!");
+                //return;
+            }
 
             /* 2. LK_SetupPrinter() */
             rtn = LKBPRINT.LK_SetupPrinter("102", 	// 10~104 (Unit is mm)
@@ -35,7 +41,12 @@
                 1				// 1 ~ 9999 copies
                 );
 
-            if (rtn != LKBPRINT.LK_SUCCESS) { LKBPRINT.LK_ClosePrinter(); return; }
+            if (rtn != LKBPRINT.LK_SUCCESS)
+            {
+                LKBPRINT.LK_ClosePrinter();
+                throw new System.Exception("Can't setup printer");
+                //return;
+            }
 
             /* 3-1. page 1 test */
             LKBPRINT.LK_StartPage();
@@ -59,16 +70,27 @@
             y = (6 + 9 * 0 - 1) * 8;
             LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, itemName);
 
+            string temp1 = string.Empty;
+            string temp2 = string.Empty;
+            if (itemNo.Length > 20)
+            {
+                temp1 = itemNo.Remove(20);
+                temp2 = itemNo.Remove(0, 20);
+            }
+            else
+            {
+                temp1 = itemNo;
+            }
             x = 5 * 8;
             y = (6 + 9 * 0 + 4) * 8;
-            //LKBPRINT.LK_PrintDeviceFont(x, y, 0, 5, 1, 1, 0, VBStrings.Left(itemNo, 20));
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 5, 1, 1, 0, temp1);
 
             // 品目番号が２１～３０桁が存在する場合に印字
-            if (itemNo.Length >= 21)
+            if (string.IsNullOrEmpty(temp2))
             {
                 x = 70 * 8;
                 y = (6 + 9 * 0 - 1) * 8;
-                //LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, VBStrings.Mid(itemNo, 21, 10));
+                LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, temp2);
             }
 
             x = 5 * 8;
@@ -121,7 +143,6 @@
 
             long rtn;
             int x, y;
-            string printerName = "SEWOO Label Printer";
 
             int xdots, model; // ydots;
             string TwoBAR_Command;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace PC_QRCodeSystem.Model
 {
     public class StockInItem
     {
-        public int Packing_ID { get; set; }
+        //public int Packing_ID { get; set; }
         public string Packing_Code { get; set; }
         public string Item_Number { get; set; }
         public string Item_Name { get; set; }
@@ -24,10 +25,10 @@ namespace PC_QRCodeSystem.Model
         public string Incharge { get; set; }
         public DateTime Registrator_Date { get; set; }
 
-        public List<StockInItem> GetStockInItem(List<PremacIn> listpreitem)
+        public BindingList<StockInItem> GetStockInItem(List<PremacIn> listpreitem)
         {
             GetData gData = new GetData();
-            List<StockInItem> list = new List<StockInItem>();
+            BindingList<StockInItem> list = new BindingList<StockInItem>();
             double unit = 1;
             int qty = 1;
             double qtymod = 0;

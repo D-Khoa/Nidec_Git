@@ -97,6 +97,46 @@ namespace PC_QRCodeSystem.Model
 
         #region UNIT MANAGER
         /// <summary>
+        /// Get unit qty of each item
+        /// </summary>
+        /// <param name="item_cd"></param>
+        /// <returns></returns>
+        public double GetUnitQty(string item_cd)
+        {
+            double qty;
+            query.Append("select unit_qty from m_pc_item where item_cd='").Append(item_cd).Append("'");
+            qty = SQL.sqlExecuteScalarDouble(query.ToString());
+            query.Clear();
+            return qty;
+        }
+
+        /// <summary>
+        /// Get all unit item into a list
+        /// </summary>
+        /// <param name="list_unit_item"></param>
+        /// <returns></returns>
+        public bool GetAllUnitItem(ref System.ComponentModel.BindingList<UnitItem> list_unit_item)
+        {
+            DataTable dt = new DataTable();
+            query.Append("Select * from m_pc_item order by item_cd");
+            SQL.sqlExecuteReader(query.ToString(), ref dt);
+            query.Clear();
+            if (dt.Rows.Count < 0)
+                return false;
+            foreach (DataRow dr in dt.Rows)
+            {
+                list_unit_item.Add(new UnitItem
+                {
+                    Item_Number = dr["item_cd"].ToString(),
+                    Item_Name = dr["item_name"].ToString(),
+                    Unit_Qty = (double)dr["unit_qty"],
+                    Unit_Type = dr["unit_cd"].ToString()
+                });
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Add an unit item into database
         /// </summary>
         /// <param name="item_no"></param>
@@ -104,12 +144,12 @@ namespace PC_QRCodeSystem.Model
         /// <param name="unit_qty"></param>
         /// <param name="unit_type"></param>
         /// <returns></returns>
-        public bool AddUnitItem(string item_no, string item_name, string unit_qty, string unit_type)
+        public bool AddUnitItem(UnitItem item)
         {
             bool check;
             query.Append("INSERT INTO m_pc_item(item_cd, item_name, unit_qty, unit_cd) ");
-            query.Append("VALUES ('").Append(item_no).Append("','").Append(item_name).Append("','");
-            query.Append(unit_qty).Append("','").Append(unit_type).Append("')");
+            query.Append("VALUES ('").Append(item.Item_Number).Append("','").Append(item.Item_Name).Append("','");
+            query.Append(item.Unit_Qty.ToString()).Append("','").Append(item.Unit_Type).Append("')");
             check = SQL.sqlExecuteNonQuery(query.ToString(), false);
             query.Clear();
             return check;
@@ -150,7 +190,7 @@ namespace PC_QRCodeSystem.Model
                 query.Append("unit_qty ='").Append(unit_qty).Append("', ");
             if (!string.IsNullOrEmpty(unit_type))
                 query.Append("unit_cd ='").Append(unit_type).Append("' ");
-            query.Append("WHERE item_no ='").Append(old_item_no).Append("'");
+            query.Append("WHERE item_cd ='").Append(old_item_no).Append("'");
             check = SQL.sqlExecuteNonQuery(query.ToString(), false);
             query.Clear();
             return check;
@@ -168,20 +208,6 @@ namespace PC_QRCodeSystem.Model
             check = SQL.sqlExecuteNonQuery(query.ToString(), false);
             query.Clear();
             return check;
-        }
-
-        /// <summary>
-        /// Get unit qty of each item
-        /// </summary>
-        /// <param name="item_cd"></param>
-        /// <returns></returns>
-        public double GetUnitQty(string item_cd)
-        {
-            double qty;
-            query.Append("select unit_qty from m_pc_item where item_cd='").Append(item_cd).Append("'");
-            qty = SQL.sqlExecuteScalarDouble(query.ToString());
-            query.Clear();
-            return qty;
         }
         #endregion
 
