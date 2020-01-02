@@ -327,5 +327,63 @@ namespace PC_QRCodeSystem.Model
             return n;
         }
         #endregion
+
+        #region GET STOCK DATA FROM DATABASE
+        /// <summary>
+        /// Get data of stock items
+        /// </summary>
+        /// <param name="iteminfo"></param>
+        /// <returns></returns>
+        public List<PCStockItem> GetPCStockItems(PCStockItem iteminfo)
+        {
+            DataTable dt = new DataTable();
+            List<PCStockItem> list = new List<PCStockItem>();
+            query.Append("Select a.packing_id, a.packing_cd, a.item_cd, b.item_name, a.supplier, a.po_no, a.invoice, a.delivery_qty, a.stock_in_date, a.stock_qty, a.user_name, a.registrator_date from t_pc_stock a left join m_pc_item b on a.item_cd = b.item_cd where 1=1 ");
+            if (iteminfo.Packing_ID > 0)
+                query.Append("and a.packing_id ='").Append(iteminfo.Packing_ID).Append("' ");
+            if (string.IsNullOrEmpty(iteminfo.Packing_Code))
+                query.Append("and a.packing_cd ='").Append(iteminfo.Packing_Code).Append("' ");
+            if (string.IsNullOrEmpty(iteminfo.Item_Number))
+                query.Append("and a.item_cd ='").Append(iteminfo.Item_Number).Append("' ");
+            if (string.IsNullOrEmpty(iteminfo.Item_Name))
+                query.Append("and b.item_name ='").Append(iteminfo.Item_Name).Append("' ");
+            if (string.IsNullOrEmpty(iteminfo.Supplier_Name))
+                query.Append("and a.supplier ='").Append(iteminfo.Supplier_Name).Append("' ");
+            if (string.IsNullOrEmpty(iteminfo.Supplier_Invoice))
+                query.Append("and a.invoice ='").Append(iteminfo.Supplier_Invoice).Append("' ");
+            if (string.IsNullOrEmpty(iteminfo.PO_No))
+                query.Append("and a.po_no ='").Append(iteminfo.PO_No).Append("' ");
+            if (string.IsNullOrEmpty(iteminfo.Incharge))
+                query.Append("and a.user_name ='").Append(iteminfo.Incharge).Append("' ");
+            if (iteminfo.CheckDateFrom)
+                query.Append("and a.stock_in_date >='").Append(iteminfo.FromDate).Append("' ");
+            if (iteminfo.CheckDateTo)
+                query.Append("and a.stock_in_date <='").Append(iteminfo.ToDate).Append("' ");
+            query.Append("order by a.packing_id");
+            if (SQL.sqlExecuteReader(query.ToString(), ref dt))
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new PCStockItem
+                    {
+                        Packing_ID = (int)dr["packing_id"],
+                        Packing_Code = dr["packing_cd"].ToString(),
+                        Item_Number = dr["item_cd"].ToString(),
+                        Item_Name = dr["item_name"].ToString(),
+                        Supplier_Name = dr["supplier"].ToString(),
+                        Supplier_Invoice = dr["invoice"].ToString(),
+                        PO_No = dr["po_no"].ToString(),
+                        Delivery_Qty = (double)dr["delivery_qty"],
+                        StockIn_Date = (DateTime)dr["stock_in_date"],
+                        Stock_Qty = (double)dr["stock_qty"],
+                        Incharge = dr["user_name"].ToString(),
+                        Registrator_Date = (DateTime)dr["registrator_date"]
+                    });
+                }
+            }
+            query.Clear();
+            return list;
+        }
+        #endregion
     }
 }

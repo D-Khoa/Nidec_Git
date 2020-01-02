@@ -30,6 +30,11 @@ namespace PC_QRCodeSystem
             }
         }
 
+        /// <summary>
+        /// Open PC window control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnServer_Click(object sender, EventArgs e)
         {
             PCForm pcf = new PCForm();
@@ -38,6 +43,11 @@ namespace PC_QRCodeSystem
             this.Close();
         }
 
+        /// <summary>
+        /// Open production window request
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClient_Click(object sender, EventArgs e)
         {
 
