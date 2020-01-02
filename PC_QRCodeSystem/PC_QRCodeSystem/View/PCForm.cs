@@ -17,17 +17,32 @@ namespace PC_QRCodeSystem.View
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Open Stock In Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnStockIn_Click(object sender, EventArgs e)
         {
             StockInForm inFrm = new StockInForm();
             inFrm.ShowDialog();
         }
 
+        /// <summary>
+        /// Open Stock Out Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnStockOut_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Open Stock Detail Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnStockDetail_Click(object sender, EventArgs e)
         {
 

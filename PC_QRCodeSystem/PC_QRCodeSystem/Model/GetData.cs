@@ -12,7 +12,7 @@ namespace PC_QRCodeSystem.Model
         PSQL SQL = new PSQL();
         StringBuilder query = new StringBuilder();
 
-        #region LOGIN
+        #region LOGIN & LOGOUT
         /// <summary>
         /// Get data user into a table
         /// </summary>
@@ -35,7 +35,7 @@ namespace PC_QRCodeSystem.Model
         }
 
         /// <summary>
-        /// Check login password and user
+        /// Check login password and user old
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -105,6 +105,7 @@ namespace PC_QRCodeSystem.Model
         public bool Login(string usercode, string password)
         {
             List<string> list = new List<string>();
+            //Get data of user
             DataTable dt = GetDataUserTable(usercode, password);
             //Get name of user
             UserData.usercode = usercode;

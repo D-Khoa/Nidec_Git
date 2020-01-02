@@ -36,9 +36,8 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.pnlPrinter = new System.Windows.Forms.Panel();
-            this.btnPrintedList = new System.Windows.Forms.Button();
-            this.btnPrinter = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCapacity = new System.Windows.Forms.TextBox();
             this.pnlPacking = new System.Windows.Forms.Panel();
             this.btnAutoPacking = new System.Windows.Forms.Button();
             this.btnManualPacking = new System.Windows.Forms.Button();
@@ -84,12 +83,22 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.btnRegisterItems = new System.Windows.Forms.Button();
             this.btnPrinterBack = new System.Windows.Forms.Button();
+            this.tab_Packing = new System.Windows.Forms.TabPage();
+            this.dgvPacking = new System.Windows.Forms.DataGridView();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.pnlPrinter = new System.Windows.Forms.Panel();
+            this.btnPrintedList = new System.Windows.Forms.Button();
+            this.btnPrinter = new System.Windows.Forms.Button();
+            this.btnPackingBack = new System.Windows.Forms.Button();
+            this.statusStrip3 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsPackingRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.grt_StockIn.SuspendLayout();
             this.tab_StockIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.pnlPrinter.SuspendLayout();
             this.pnlPacking.SuspendLayout();
             this.pnlAddItems.SuspendLayout();
             this.tab_Setting.SuspendLayout();
@@ -102,6 +111,11 @@
             this.statusStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvprinter)).BeginInit();
             this.panel11.SuspendLayout();
+            this.tab_Packing.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPacking)).BeginInit();
+            this.panel7.SuspendLayout();
+            this.pnlPrinter.SuspendLayout();
+            this.statusStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // grt_StockIn
@@ -111,6 +125,7 @@
             this.grt_StockIn.Controls.Add(this.tab_Setting);
             this.grt_StockIn.Controls.Add(this.tab_Unit);
             this.grt_StockIn.Controls.Add(this.tab_printer);
+            this.grt_StockIn.Controls.Add(this.tab_Packing);
             this.grt_StockIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grt_StockIn.Location = new System.Drawing.Point(145, 69);
             this.grt_StockIn.Name = "grt_StockIn";
@@ -145,8 +160,6 @@
             this.dgvStockIn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStockIn.Size = new System.Drawing.Size(760, 363);
             this.dgvStockIn.TabIndex = 0;
-            this.dgvStockIn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockIn_CellClick);
-            this.dgvStockIn.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockIn_CellDoubleClick);
             // 
             // statusStrip1
             // 
@@ -183,7 +196,6 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.pnlPrinter);
             this.panel4.Controls.Add(this.pnlPacking);
             this.panel4.Controls.Add(this.pnlAddItems);
             this.panel4.Controls.Add(this.btnSetting);
@@ -193,46 +205,36 @@
             this.panel4.Size = new System.Drawing.Size(760, 50);
             this.panel4.TabIndex = 2;
             // 
-            // pnlPrinter
+            // label10
             // 
-            this.pnlPrinter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.pnlPrinter.Controls.Add(this.btnPrintedList);
-            this.pnlPrinter.Controls.Add(this.btnPrinter);
-            this.pnlPrinter.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlPrinter.Location = new System.Drawing.Point(470, 0);
-            this.pnlPrinter.Name = "pnlPrinter";
-            this.pnlPrinter.Size = new System.Drawing.Size(190, 50);
-            this.pnlPrinter.TabIndex = 3;
+            this.label10.Location = new System.Drawing.Point(190, 15);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(50, 20);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Capacity";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnPrintedList
+            // txtCapacity
             // 
-            this.btnPrintedList.Location = new System.Drawing.Point(100, 5);
-            this.btnPrintedList.Name = "btnPrintedList";
-            this.btnPrintedList.Size = new System.Drawing.Size(80, 40);
-            this.btnPrintedList.TabIndex = 9;
-            this.btnPrintedList.Text = "Printed List";
-            this.btnPrintedList.UseVisualStyleBackColor = true;
-            this.btnPrintedList.Click += new System.EventHandler(this.btnPrintedList_Click);
-            // 
-            // btnPrinter
-            // 
-            this.btnPrinter.Location = new System.Drawing.Point(10, 5);
-            this.btnPrinter.Name = "btnPrinter";
-            this.btnPrinter.Size = new System.Drawing.Size(80, 40);
-            this.btnPrinter.TabIndex = 8;
-            this.btnPrinter.Text = "Printer Label";
-            this.btnPrinter.UseVisualStyleBackColor = true;
-            this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
+            this.txtCapacity.Location = new System.Drawing.Point(250, 15);
+            this.txtCapacity.Name = "txtCapacity";
+            this.txtCapacity.Size = new System.Drawing.Size(80, 20);
+            this.txtCapacity.TabIndex = 0;
+            this.txtCapacity.Text = "0";
+            this.txtCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCapacity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCapacity_KeyPress);
             // 
             // pnlPacking
             // 
             this.pnlPacking.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.pnlPacking.Controls.Add(this.txtCapacity);
+            this.pnlPacking.Controls.Add(this.label10);
             this.pnlPacking.Controls.Add(this.btnAutoPacking);
             this.pnlPacking.Controls.Add(this.btnManualPacking);
             this.pnlPacking.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlPacking.Location = new System.Drawing.Point(280, 0);
             this.pnlPacking.Name = "pnlPacking";
-            this.pnlPacking.Size = new System.Drawing.Size(190, 50);
+            this.pnlPacking.Size = new System.Drawing.Size(340, 50);
             this.pnlPacking.TabIndex = 3;
             // 
             // btnAutoPacking
@@ -300,12 +302,13 @@
             // 
             // btnSetting
             // 
+            this.btnSetting.BackColor = System.Drawing.SystemColors.Control;
             this.btnSetting.Location = new System.Drawing.Point(670, 5);
             this.btnSetting.Name = "btnSetting";
             this.btnSetting.Size = new System.Drawing.Size(80, 40);
             this.btnSetting.TabIndex = 4;
             this.btnSetting.Text = "Setting";
-            this.btnSetting.UseVisualStyleBackColor = true;
+            this.btnSetting.UseVisualStyleBackColor = false;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
             // tab_Setting
@@ -535,7 +538,9 @@
             this.dgvUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUnit.Location = new System.Drawing.Point(231, 53);
             this.dgvUnit.Name = "dgvUnit";
-            this.dgvUnit.Size = new System.Drawing.Size(532, 334);
+            this.dgvUnit.ReadOnly = true;
+            this.dgvUnit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvUnit.Size = new System.Drawing.Size(532, 384);
             this.dgvUnit.TabIndex = 3;
             this.dgvUnit.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnit_CellClick);
             // 
@@ -564,6 +569,7 @@
             // 
             // btnDeleteUnitItem
             // 
+            this.btnDeleteUnitItem.Enabled = false;
             this.btnDeleteUnitItem.Location = new System.Drawing.Point(190, 5);
             this.btnDeleteUnitItem.Name = "btnDeleteUnitItem";
             this.btnDeleteUnitItem.Size = new System.Drawing.Size(80, 40);
@@ -574,6 +580,7 @@
             // 
             // btnUpdateUnitItem
             // 
+            this.btnUpdateUnitItem.Enabled = false;
             this.btnUpdateUnitItem.Location = new System.Drawing.Point(100, 5);
             this.btnUpdateUnitItem.Name = "btnUpdateUnitItem";
             this.btnUpdateUnitItem.Size = new System.Drawing.Size(80, 40);
@@ -644,6 +651,7 @@
             this.dgvprinter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvprinter.Location = new System.Drawing.Point(3, 53);
             this.dgvprinter.Name = "dgvprinter";
+            this.dgvprinter.ReadOnly = true;
             this.dgvprinter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvprinter.Size = new System.Drawing.Size(760, 387);
             this.dgvprinter.TabIndex = 1;
@@ -679,6 +687,120 @@
             this.btnPrinterBack.UseVisualStyleBackColor = true;
             this.btnPrinterBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // tab_Packing
+            // 
+            this.tab_Packing.Controls.Add(this.dgvPacking);
+            this.tab_Packing.Controls.Add(this.panel7);
+            this.tab_Packing.Controls.Add(this.statusStrip3);
+            this.tab_Packing.Location = new System.Drawing.Point(4, 25);
+            this.tab_Packing.Name = "tab_Packing";
+            this.tab_Packing.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Packing.Size = new System.Drawing.Size(766, 443);
+            this.tab_Packing.TabIndex = 4;
+            this.tab_Packing.Text = "Packing";
+            this.tab_Packing.UseVisualStyleBackColor = true;
+            // 
+            // dgvPacking
+            // 
+            this.dgvPacking.AllowUserToAddRows = false;
+            this.dgvPacking.AllowUserToDeleteRows = false;
+            this.dgvPacking.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvPacking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPacking.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPacking.Location = new System.Drawing.Point(3, 53);
+            this.dgvPacking.Name = "dgvPacking";
+            this.dgvPacking.ReadOnly = true;
+            this.dgvPacking.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPacking.Size = new System.Drawing.Size(760, 363);
+            this.dgvPacking.TabIndex = 2;
+            this.dgvPacking.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPacking_CellClick);
+            this.dgvPacking.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPacking_CellDoubleClick);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.pnlPrinter);
+            this.panel7.Controls.Add(this.btnPackingBack);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(3, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(760, 50);
+            this.panel7.TabIndex = 1;
+            // 
+            // pnlPrinter
+            // 
+            this.pnlPrinter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.pnlPrinter.Controls.Add(this.btnPrintedList);
+            this.pnlPrinter.Controls.Add(this.btnPrinter);
+            this.pnlPrinter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlPrinter.Location = new System.Drawing.Point(0, 0);
+            this.pnlPrinter.Name = "pnlPrinter";
+            this.pnlPrinter.Size = new System.Drawing.Size(190, 50);
+            this.pnlPrinter.TabIndex = 4;
+            // 
+            // btnPrintedList
+            // 
+            this.btnPrintedList.Location = new System.Drawing.Point(100, 5);
+            this.btnPrintedList.Name = "btnPrintedList";
+            this.btnPrintedList.Size = new System.Drawing.Size(80, 40);
+            this.btnPrintedList.TabIndex = 9;
+            this.btnPrintedList.Text = "Printed List";
+            this.btnPrintedList.UseVisualStyleBackColor = true;
+            this.btnPrintedList.Click += new System.EventHandler(this.btnPrintedList_Click);
+            // 
+            // btnPrinter
+            // 
+            this.btnPrinter.Location = new System.Drawing.Point(10, 5);
+            this.btnPrinter.Name = "btnPrinter";
+            this.btnPrinter.Size = new System.Drawing.Size(80, 40);
+            this.btnPrinter.TabIndex = 8;
+            this.btnPrinter.Text = "Printer Label";
+            this.btnPrinter.UseVisualStyleBackColor = true;
+            this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
+            // 
+            // btnPackingBack
+            // 
+            this.btnPackingBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPackingBack.Location = new System.Drawing.Point(670, 5);
+            this.btnPackingBack.Name = "btnPackingBack";
+            this.btnPackingBack.Size = new System.Drawing.Size(80, 40);
+            this.btnPackingBack.TabIndex = 0;
+            this.btnPackingBack.Text = "Back";
+            this.btnPackingBack.UseVisualStyleBackColor = true;
+            this.btnPackingBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // statusStrip3
+            // 
+            this.statusStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel6,
+            this.tsPackingRows});
+            this.statusStrip3.Location = new System.Drawing.Point(3, 416);
+            this.statusStrip3.Name = "statusStrip3";
+            this.statusStrip3.Size = new System.Drawing.Size(760, 24);
+            this.statusStrip3.TabIndex = 0;
+            this.statusStrip3.Text = "statusStrip3";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(660, 19);
+            this.toolStripStatusLabel5.Spring = true;
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(45, 19);
+            this.toolStripStatusLabel6.Text = "Rows :";
+            // 
+            // tsPackingRows
+            // 
+            this.tsPackingRows.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsPackingRows.Name = "tsPackingRows";
+            this.tsPackingRows.Size = new System.Drawing.Size(40, 19);
+            this.tsPackingRows.Text = "None";
+            // 
             // StockInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -700,8 +822,8 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.pnlPrinter.ResumeLayout(false);
             this.pnlPacking.ResumeLayout(false);
+            this.pnlPacking.PerformLayout();
             this.pnlAddItems.ResumeLayout(false);
             this.tab_Setting.ResumeLayout(false);
             this.tab_Setting.PerformLayout();
@@ -717,6 +839,13 @@
             this.statusStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvprinter)).EndInit();
             this.panel11.ResumeLayout(false);
+            this.tab_Packing.ResumeLayout(false);
+            this.tab_Packing.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPacking)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.pnlPrinter.ResumeLayout(false);
+            this.statusStrip3.ResumeLayout(false);
+            this.statusStrip3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -753,8 +882,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtItemNo;
         private System.Windows.Forms.TextBox txtUnitType;
-        private System.Windows.Forms.Panel pnlPrinter;
-        private System.Windows.Forms.Button btnPrinter;
         private System.Windows.Forms.Panel pnlPacking;
         private System.Windows.Forms.Panel pnlAddItems;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -777,7 +904,19 @@
         private System.Windows.Forms.ComboBox cmbPrinterName;
         private System.Windows.Forms.Button btnPrintCheck;
         private System.Windows.Forms.Label lbStatusPrinter;
-        private System.Windows.Forms.Button btnPrintedList;
         private System.Windows.Forms.Button btnRegisterItems;
+        private System.Windows.Forms.TabPage tab_Packing;
+        private System.Windows.Forms.StatusStrip statusStrip3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel tsPackingRows;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Button btnPackingBack;
+        private System.Windows.Forms.DataGridView dgvPacking;
+        private System.Windows.Forms.Panel pnlPrinter;
+        private System.Windows.Forms.Button btnPrintedList;
+        private System.Windows.Forms.Button btnPrinter;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtCapacity;
     }
 }

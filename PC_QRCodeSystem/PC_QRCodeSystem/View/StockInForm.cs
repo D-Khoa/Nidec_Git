@@ -16,6 +16,7 @@ namespace PC_QRCodeSystem.View
 {
     public partial class StockInForm : FormCommon
     {
+        #region VARIABLE
         string premacpath, printername, settingpath = @"setting.ini";
         GetData getData = new GetData();
         TfPrint tfprinter = new TfPrint();
@@ -28,6 +29,7 @@ namespace PC_QRCodeSystem.View
         BindingList<StockInItem> stockitems = new BindingList<StockInItem>();
         BindingList<StockInItem> printeditems = new BindingList<StockInItem>();
         List<string> listprintername = System.Drawing.Printing.PrinterSettings.InstalledPrinters.Cast<string>().ToList();
+        #endregion
 
         public StockInForm()
         {
@@ -118,8 +120,7 @@ namespace PC_QRCodeSystem.View
             try
             {
                 stockitems = stockitem.GetStockInItem(preitems);
-                dgvStockIn.DataSource = stockitems;
-                tsRows.Text = stockitems.Count.ToString();
+                UpdatePackingGrid();
             }
             catch (Exception ex)
             {
@@ -134,41 +135,13 @@ namespace PC_QRCodeSystem.View
         /// <param name="e"></param>
         private void btnManualPacking_Click(object sender, EventArgs e)
         {
-
-        }
-        #endregion
-
-        #region PRINTER ITEM & SHOW PRINTER LIST
-        /// <summary>
-        /// Printer Barcode Label
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnPrinter_Click(object sender, EventArgs e)
-        {
             try
             {
-                //Move item into print list
-                List<StockInItem> list_print = new List<StockInItem>();
-                for (int i = 0; i < stockitems.Count; i++)
-                {
-                    if (stockitems[i].PO_No == stockitem.PO_No || stockitems[i].Packing_Code == stockitem.Packing_Code)
-                    {
-                        list_print.Add(stockitems[i]);
-                        printeditems.Add(stockitems[i]);
-                        stockitems.Remove(stockitems[i]);
-                        i--;
-                    }
-                }
-                //Print Items List
-                if (PrintItems(list_print))
-                {
-                    //Update datagrid
-                    dgvprinter.DataSource = printeditems;
-                    tsRows.Text = dgvStockIn.Rows.Count.ToString();
-                    tsPrinterRows.Text = dgvprinter.Rows.Count.ToString();
-                    MessageBox.Show("Print items complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                preitem = (PremacIn)dgvStockIn.CurrentRow.DataBoundItem;
+                if (string.IsNullOrEmpty(txtCapacity.Text))
+                    txtCapacity.Text = "0";
+                stockitems = stockitem.GetPackingItem(preitem, double.Parse(txtCapacity.Text));
+                UpdatePackingGrid();
             }
             catch (Exception ex)
             {
@@ -177,21 +150,20 @@ namespace PC_QRCodeSystem.View
         }
 
         /// <summary>
-        /// Show list of printed items
+        /// Capacity only allow input digit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnPrintedList_Click(object sender, EventArgs e)
+        private void txtCapacity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            grt_StockIn.SelectedTab = tab_printer;
-            if (printeditems.Count > 0)
-                btnRegisterItems.Enabled = true;
-            else
-                btnRegisterItems.Enabled = false;
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("Only input digit!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Handled = true;
+            }
         }
         #endregion
 
-        #region SETTING & DATAGRIDVIEW
         /// <summary>
         /// Open Setting Tab
         /// </summary>
@@ -201,42 +173,6 @@ namespace PC_QRCodeSystem.View
         {
             grt_StockIn.SelectedTab = tab_Setting;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvStockIn_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvStockIn.Columns.Contains("Packing_Code"))
-            {
-                stockitem.Packing_Code = dgvStockIn.Rows[e.RowIndex].Cells["Packing_Code"].Value.ToString();
-                stockitem.PO_No = null;
-            }
-            pnlPrinter.Visible = true;
-        }
-
-        /// <summary>
-        /// Choose all packing have a same PO
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvStockIn_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvStockIn.Columns.Contains("Packing_Code"))
-            {
-                stockitem.Packing_Code = null;
-                stockitem.PO_No = dgvStockIn.Rows[e.RowIndex].Cells["PO_No"].Value.ToString();
-                for (int i = 0; i < dgvStockIn.Rows.Count; i++)
-                {
-                    if (dgvStockIn.Rows[i].Cells["PO_No"].Value.ToString() == stockitem.PO_No)
-                        dgvStockIn.Rows[i].Selected = true;
-                }
-                pnlPrinter.Visible = true;
-            }
-        }
-        #endregion
         #endregion
 
         #region TAB_SETTING
@@ -289,8 +225,11 @@ namespace PC_QRCodeSystem.View
                 lbStatusPrinter.Text = "Online";
                 lbStatusPrinter.BackColor = Color.Green;
             }
-            lbStatusPrinter.Text = "Offline";
-            lbStatusPrinter.BackColor = Color.Red;
+            else
+            {
+                lbStatusPrinter.Text = "Offline";
+                lbStatusPrinter.BackColor = Color.Red;
+            }
         }
 
         /// <summary>
@@ -451,16 +390,15 @@ namespace PC_QRCodeSystem.View
         /// <returns>TRUE: OFFLINE, FALSE: ONLINE</returns>
         private bool CheckPrinterIsOffline(string printer)
         {
-            ManagementObjectSearcher search = new ManagementObjectSearcher("Select * from Win32_Printer");
-            foreach (ManagementBaseObject searchprint in search.Get())
+            ManagementObjectSearcher printerSearch = new ManagementObjectSearcher("Select * from Win32_Printer");
+            foreach (ManagementBaseObject searchprint in printerSearch.Get())
             {
                 if (searchprint["Name"].ToString() == printer)
                 {
                     return (Boolean)searchprint["WorkOffline"];
                 }
-                break;
             }
-            return true;
+            throw new Exception("Printer is not install");
         }
 
         /// <summary>
@@ -470,16 +408,17 @@ namespace PC_QRCodeSystem.View
         /// <returns></returns>
         public bool PrintItems(List<StockInItem> Items)
         {
-            if (CheckPrinterIsOffline(printername))
-            {
-                throw new Exception("Printer is offline!");
-            }
             TfPrint.printerName = printername;
             for (int i = 0; i < Items.Count; i++)
                 TfPrint.printBarCode(Items[i].Item_Number, Items[i].Item_Name, Items[i].Supplier_Name, Items[i].Supplier_Invoice, Items[i].StockIn_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), "");
             return true;
         }
 
+        /// <summary>
+        /// Input items into stock
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRegisterItems_Click(object sender, EventArgs e)
         {
             try
@@ -493,6 +432,112 @@ namespace PC_QRCodeSystem.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
+
+        #region PACKING TAB
+        #region PRINTER ITEM & SHOW PRINTER LIST
+        /// <summary>
+        /// Printer Barcode Label
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrinter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckPrinterIsOffline(printername))
+                {
+                    throw new Exception("Printer is offline!");
+                }
+                //Move item into print list
+                List<StockInItem> list_print = new List<StockInItem>();
+                for (int i = 0; i < stockitems.Count; i++)
+                {
+                    if (stockitems[i].PO_No == stockitem.PO_No || stockitems[i].Packing_Code == stockitem.Packing_Code)
+                    {
+                        list_print.Add(stockitems[i]);
+                        printeditems.Add(stockitems[i]);
+                        stockitems.Remove(stockitems[i]);
+                        i--;
+                    }
+                }
+                //Print Items List
+                if (PrintItems(list_print))
+                {
+                    //Update datagrid
+                    dgvprinter.DataSource = printeditems;
+                    tsRows.Text = dgvStockIn.Rows.Count.ToString();
+                    tsPrinterRows.Text = dgvprinter.Rows.Count.ToString();
+                    MessageBox.Show("Print items complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Show list of printed items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrintedList_Click(object sender, EventArgs e)
+        {
+            grt_StockIn.SelectedTab = tab_printer;
+            if (printeditems.Count > 0)
+                btnRegisterItems.Enabled = true;
+            else
+                btnRegisterItems.Enabled = false;
+        }
+        #endregion
+
+        #region DATAGRIDVIEW SETTING
+        /// <summary>
+        /// Update data of dgv packing
+        /// </summary>
+        private void UpdatePackingGrid()
+        {
+            dgvPacking.DataSource = stockitems;
+            tsPackingRows.Text = stockitems.Count.ToString();
+            grt_StockIn.SelectedTab = tab_Packing;
+        }
+
+        /// <summary>
+        /// Choose a packing with packing code
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvPacking_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvPacking.Columns.Contains("Packing_Code"))
+            {
+                stockitem.Packing_Code = dgvPacking.Rows[e.RowIndex].Cells["Packing_Code"].Value.ToString();
+                stockitem.PO_No = null;
+                pnlPrinter.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// Choose all packing have a same PO
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvPacking_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvPacking.Columns.Contains("Packing_Code"))
+            {
+                stockitem.Packing_Code = null;
+                stockitem.PO_No = dgvPacking.Rows[e.RowIndex].Cells["PO_No"].Value.ToString();
+                for (int i = 0; i < dgvPacking.Rows.Count; i++)
+                {
+                    if (dgvPacking.Rows[i].Cells["PO_No"].Value.ToString() == stockitem.PO_No)
+                        dgvPacking.Rows[i].Selected = true;
+                }
+                pnlPrinter.Visible = true;
+            }
+        }
+        #endregion
         #endregion
 
         /// <summary>
