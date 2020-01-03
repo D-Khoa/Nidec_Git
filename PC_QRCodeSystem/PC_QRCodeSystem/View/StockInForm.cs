@@ -357,7 +357,7 @@ namespace PC_QRCodeSystem.View
             //If key press is digit and control key then true
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
-                MessageBox.Show("Please only input number", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please only input number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Handled = true;
             }
         }
@@ -476,6 +476,7 @@ namespace PC_QRCodeSystem.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+       
 
         /// <summary>
         /// Show list of printed items
@@ -516,6 +517,11 @@ namespace PC_QRCodeSystem.View
                 stockitem.PO_No = null;
                 pnlPrinter.Visible = true;
             }
+        }
+
+        private void dgvStockIn_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         /// <summary>

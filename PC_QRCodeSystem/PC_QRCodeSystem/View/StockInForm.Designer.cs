@@ -36,9 +36,9 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtCapacity = new System.Windows.Forms.TextBox();
             this.pnlPacking = new System.Windows.Forms.Panel();
+            this.txtCapacity = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnAutoPacking = new System.Windows.Forms.Button();
             this.btnManualPacking = new System.Windows.Forms.Button();
             this.pnlAddItems = new System.Windows.Forms.Panel();
@@ -160,6 +160,7 @@
             this.dgvStockIn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStockIn.Size = new System.Drawing.Size(760, 363);
             this.dgvStockIn.TabIndex = 0;
+            this.dgvStockIn.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockIn_CellContentClick);
             // 
             // statusStrip1
             // 
@@ -205,25 +206,6 @@
             this.panel4.Size = new System.Drawing.Size(760, 50);
             this.panel4.TabIndex = 2;
             // 
-            // label10
-            // 
-            this.label10.Location = new System.Drawing.Point(190, 15);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 20);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Capacity";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtCapacity
-            // 
-            this.txtCapacity.Location = new System.Drawing.Point(250, 15);
-            this.txtCapacity.Name = "txtCapacity";
-            this.txtCapacity.Size = new System.Drawing.Size(80, 20);
-            this.txtCapacity.TabIndex = 0;
-            this.txtCapacity.Text = "0";
-            this.txtCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCapacity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCapacity_KeyPress);
-            // 
             // pnlPacking
             // 
             this.pnlPacking.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
@@ -236,6 +218,25 @@
             this.pnlPacking.Name = "pnlPacking";
             this.pnlPacking.Size = new System.Drawing.Size(340, 50);
             this.pnlPacking.TabIndex = 3;
+            // 
+            // txtCapacity
+            // 
+            this.txtCapacity.Location = new System.Drawing.Point(250, 15);
+            this.txtCapacity.Name = "txtCapacity";
+            this.txtCapacity.Size = new System.Drawing.Size(80, 20);
+            this.txtCapacity.TabIndex = 0;
+            this.txtCapacity.Text = "0";
+            this.txtCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCapacity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCapacity_KeyPress);
+            // 
+            // label10
+            // 
+            this.label10.Location = new System.Drawing.Point(190, 15);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(50, 20);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Capacity";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnAutoPacking
             // 

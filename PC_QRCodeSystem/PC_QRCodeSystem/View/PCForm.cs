@@ -35,7 +35,8 @@ namespace PC_QRCodeSystem.View
         /// <param name="e"></param>
         private void btnStockOut_Click(object sender, EventArgs e)
         {
-
+            StockOutForm outFrm = new StockOutForm();
+            outFrm.ShowDialog();
         }
 
         /// <summary>
@@ -45,6 +46,8 @@ namespace PC_QRCodeSystem.View
         /// <param name="e"></param>
         private void btnStockDetail_Click(object sender, EventArgs e)
         {
+            StockDetailForm dtlFrm = new StockDetailForm();
+            dtlFrm.ShowDialog();
 
         }
     }
