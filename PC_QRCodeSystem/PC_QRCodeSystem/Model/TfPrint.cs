@@ -24,7 +24,12 @@
             string QRCode_data = itemNo + ";" + itemName + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + validity;
 
             /* 1. LK_OpenPrinter() */
-            if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)
+            try
+            {
+                if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)
+                    throw new System.Exception("Can't open printer!");
+            }
+            catch
             {
                 throw new System.Exception("Can't open printer!");
                 //return;
