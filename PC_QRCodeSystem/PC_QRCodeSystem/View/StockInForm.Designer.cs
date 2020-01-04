@@ -288,7 +288,7 @@
             this.btnAddPremacItems.Size = new System.Drawing.Size(80, 40);
             this.btnAddPremacItems.TabIndex = 1;
             this.btnAddPremacItems.Text = "Get Items From Premac";
-            this.btnAddPremacItems.UseVisualStyleBackColor = false;
+            this.btnAddPremacItems.UseVisualStyleBackColor = true;
             this.btnAddPremacItems.Click += new System.EventHandler(this.btnAddPremacItems_Click);
             // 
             // btnAddItem
@@ -309,7 +309,7 @@
             this.btnSetting.Size = new System.Drawing.Size(80, 40);
             this.btnSetting.TabIndex = 4;
             this.btnSetting.Text = "Setting";
-            this.btnSetting.UseVisualStyleBackColor = false;
+            this.btnSetting.UseVisualStyleBackColor = true;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
             // tab_Setting
