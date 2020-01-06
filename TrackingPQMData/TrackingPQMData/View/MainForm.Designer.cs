@@ -31,6 +31,16 @@
             this.grt_Main = new System.Windows.Forms.TabControl();
             this.tab_Main = new System.Windows.Forms.TabPage();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.pnlButton = new System.Windows.Forms.Panel();
+            this.btnAOI5 = new System.Windows.Forms.Button();
+            this.btnAOI6 = new System.Windows.Forms.Button();
+            this.btnAOI1 = new System.Windows.Forms.Button();
+            this.btnAOI4 = new System.Windows.Forms.Button();
+            this.btnAOI2 = new System.Windows.Forms.Button();
+            this.btnAOI3 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numTimer = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
@@ -43,36 +53,39 @@
             this.cmbModel = new System.Windows.Forms.ComboBox();
             this.pnlButtonMain = new System.Windows.Forms.Panel();
             this.btnChartMain = new System.Windows.Forms.Button();
-            this.btnDataMain = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.tab_Chart = new System.Windows.Forms.TabPage();
             this.flp_Chart = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlButtonChart = new System.Windows.Forms.Panel();
-            this.btnDataChart = new System.Windows.Forms.Button();
-            this.btnMainMenuChart = new System.Windows.Forms.Button();
-            this.tab_Data = new System.Windows.Forms.TabPage();
-            this.flp_Data = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.tab_AOI = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dgvAOI1 = new System.Windows.Forms.DataGridView();
             this.pnlButtonData = new System.Windows.Forms.Panel();
-            this.btnChartData = new System.Windows.Forms.Button();
-            this.btnMainData = new System.Windows.Forms.Button();
+            this.btnBack1 = new System.Windows.Forms.Button();
             this.stt_Main = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsTimerCounter = new System.Windows.Forms.ToolStripStatusLabel();
+            this.bwTimer = new System.ComponentModel.BackgroundWorker();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.numTimer = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.tsDataRows = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsStopwatch = new System.Windows.Forms.ToolStripStatusLabel();
             this.grt_Main.SuspendLayout();
             this.tab_Main.SuspendLayout();
             this.pnlMain.SuspendLayout();
+            this.pnlButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimer)).BeginInit();
             this.pnlButtonMain.SuspendLayout();
             this.tab_Chart.SuspendLayout();
             this.pnlButtonChart.SuspendLayout();
-            this.tab_Data.SuspendLayout();
+            this.tab_AOI.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAOI1)).BeginInit();
             this.pnlButtonData.SuspendLayout();
             this.stt_Main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTimer)).BeginInit();
             this.SuspendLayout();
             // 
             // grt_Main
@@ -80,12 +93,12 @@
             this.grt_Main.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.grt_Main.Controls.Add(this.tab_Main);
             this.grt_Main.Controls.Add(this.tab_Chart);
-            this.grt_Main.Controls.Add(this.tab_Data);
+            this.grt_Main.Controls.Add(this.tab_AOI);
             this.grt_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grt_Main.Location = new System.Drawing.Point(0, 69);
             this.grt_Main.Name = "grt_Main";
             this.grt_Main.SelectedIndex = 0;
-            this.grt_Main.Size = new System.Drawing.Size(829, 391);
+            this.grt_Main.Size = new System.Drawing.Size(829, 389);
             this.grt_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.grt_Main.TabIndex = 1;
             // 
@@ -96,13 +109,14 @@
             this.tab_Main.Location = new System.Drawing.Point(4, 25);
             this.tab_Main.Name = "tab_Main";
             this.tab_Main.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Main.Size = new System.Drawing.Size(821, 362);
+            this.tab_Main.Size = new System.Drawing.Size(821, 360);
             this.tab_Main.TabIndex = 0;
             this.tab_Main.Text = "Main";
             this.tab_Main.UseVisualStyleBackColor = true;
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.pnlButton);
             this.pnlMain.Controls.Add(this.label7);
             this.pnlMain.Controls.Add(this.label6);
             this.pnlMain.Controls.Add(this.numTimer);
@@ -119,8 +133,117 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(3, 53);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(815, 306);
+            this.pnlMain.Size = new System.Drawing.Size(815, 304);
             this.pnlMain.TabIndex = 6;
+            // 
+            // pnlButton
+            // 
+            this.pnlButton.Controls.Add(this.btnAOI5);
+            this.pnlButton.Controls.Add(this.btnAOI6);
+            this.pnlButton.Controls.Add(this.btnAOI1);
+            this.pnlButton.Controls.Add(this.btnAOI4);
+            this.pnlButton.Controls.Add(this.btnAOI2);
+            this.pnlButton.Controls.Add(this.btnAOI3);
+            this.pnlButton.Location = new System.Drawing.Point(13, 180);
+            this.pnlButton.Name = "pnlButton";
+            this.pnlButton.Size = new System.Drawing.Size(280, 110);
+            this.pnlButton.TabIndex = 13;
+            // 
+            // btnAOI5
+            // 
+            this.btnAOI5.Location = new System.Drawing.Point(100, 60);
+            this.btnAOI5.Name = "btnAOI5";
+            this.btnAOI5.Size = new System.Drawing.Size(80, 40);
+            this.btnAOI5.TabIndex = 8;
+            this.btnAOI5.Text = "AOI5";
+            this.btnAOI5.UseVisualStyleBackColor = true;
+            this.btnAOI5.Click += new System.EventHandler(this.btnAOI5_Click);
+            // 
+            // btnAOI6
+            // 
+            this.btnAOI6.Location = new System.Drawing.Point(190, 60);
+            this.btnAOI6.Name = "btnAOI6";
+            this.btnAOI6.Size = new System.Drawing.Size(80, 40);
+            this.btnAOI6.TabIndex = 2;
+            this.btnAOI6.Text = "AOI6";
+            this.btnAOI6.UseVisualStyleBackColor = true;
+            this.btnAOI6.Click += new System.EventHandler(this.btnAOI6_Click);
+            // 
+            // btnAOI1
+            // 
+            this.btnAOI1.Location = new System.Drawing.Point(10, 10);
+            this.btnAOI1.Name = "btnAOI1";
+            this.btnAOI1.Size = new System.Drawing.Size(80, 40);
+            this.btnAOI1.TabIndex = 4;
+            this.btnAOI1.Text = "AOI1";
+            this.btnAOI1.UseVisualStyleBackColor = true;
+            this.btnAOI1.Click += new System.EventHandler(this.btnAOI1_Click);
+            // 
+            // btnAOI4
+            // 
+            this.btnAOI4.Location = new System.Drawing.Point(10, 60);
+            this.btnAOI4.Name = "btnAOI4";
+            this.btnAOI4.Size = new System.Drawing.Size(80, 40);
+            this.btnAOI4.TabIndex = 7;
+            this.btnAOI4.Text = "AOI4";
+            this.btnAOI4.UseVisualStyleBackColor = true;
+            this.btnAOI4.Click += new System.EventHandler(this.btnAOI4_Click);
+            // 
+            // btnAOI2
+            // 
+            this.btnAOI2.Location = new System.Drawing.Point(100, 10);
+            this.btnAOI2.Name = "btnAOI2";
+            this.btnAOI2.Size = new System.Drawing.Size(80, 40);
+            this.btnAOI2.TabIndex = 6;
+            this.btnAOI2.Text = "AOI2";
+            this.btnAOI2.UseVisualStyleBackColor = true;
+            this.btnAOI2.Click += new System.EventHandler(this.btnAOI2_Click);
+            // 
+            // btnAOI3
+            // 
+            this.btnAOI3.Location = new System.Drawing.Point(190, 10);
+            this.btnAOI3.Name = "btnAOI3";
+            this.btnAOI3.Size = new System.Drawing.Size(80, 40);
+            this.btnAOI3.TabIndex = 5;
+            this.btnAOI3.Text = "AOI3";
+            this.btnAOI3.UseVisualStyleBackColor = true;
+            this.btnAOI3.Click += new System.EventHandler(this.btnAOI3_Click);
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(190, 130);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 20);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "(min)";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(10, 130);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 20);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Timer";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numTimer
+            // 
+            this.numTimer.Location = new System.Drawing.Point(120, 130);
+            this.numTimer.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numTimer.Name = "numTimer";
+            this.numTimer.Size = new System.Drawing.Size(60, 20);
+            this.numTimer.TabIndex = 4;
+            this.numTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numTimer.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // label5
             // 
@@ -183,10 +306,13 @@
             this.trvProcess.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.trvProcess.CheckBoxes = true;
             this.trvProcess.Location = new System.Drawing.Point(370, 10);
             this.trvProcess.Name = "trvProcess";
-            this.trvProcess.Size = new System.Drawing.Size(440, 280);
+            this.trvProcess.Size = new System.Drawing.Size(440, 278);
             this.trvProcess.TabIndex = 3;
+            this.trvProcess.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvProcess_AfterCheck);
+            this.trvProcess.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvProcess_AfterCheck);
             // 
             // dtpBegin
             // 
@@ -216,11 +342,11 @@
             this.cmbModel.Name = "cmbModel";
             this.cmbModel.Size = new System.Drawing.Size(120, 21);
             this.cmbModel.TabIndex = 0;
+            this.cmbModel.TextChanged += new System.EventHandler(this.cmbModel_TextChanged);
             // 
             // pnlButtonMain
             // 
             this.pnlButtonMain.Controls.Add(this.btnChartMain);
-            this.pnlButtonMain.Controls.Add(this.btnDataMain);
             this.pnlButtonMain.Controls.Add(this.btnStop);
             this.pnlButtonMain.Controls.Add(this.btnStart);
             this.pnlButtonMain.Dock = System.Windows.Forms.DockStyle.Top;
@@ -231,23 +357,13 @@
             // 
             // btnChartMain
             // 
-            this.btnChartMain.Location = new System.Drawing.Point(725, 5);
+            this.btnChartMain.Location = new System.Drawing.Point(730, 5);
             this.btnChartMain.Name = "btnChartMain";
             this.btnChartMain.Size = new System.Drawing.Size(80, 40);
             this.btnChartMain.TabIndex = 3;
             this.btnChartMain.Text = "Chart";
             this.btnChartMain.UseVisualStyleBackColor = true;
             this.btnChartMain.Click += new System.EventHandler(this.OpenChart);
-            // 
-            // btnDataMain
-            // 
-            this.btnDataMain.Location = new System.Drawing.Point(635, 5);
-            this.btnDataMain.Name = "btnDataMain";
-            this.btnDataMain.Size = new System.Drawing.Size(80, 40);
-            this.btnDataMain.TabIndex = 2;
-            this.btnDataMain.Text = "Data";
-            this.btnDataMain.UseVisualStyleBackColor = true;
-            this.btnDataMain.Click += new System.EventHandler(this.OpenData);
             // 
             // btnStop
             // 
@@ -292,150 +408,144 @@
             // 
             // pnlButtonChart
             // 
-            this.pnlButtonChart.Controls.Add(this.btnDataChart);
-            this.pnlButtonChart.Controls.Add(this.btnMainMenuChart);
+            this.pnlButtonChart.Controls.Add(this.btnBack);
             this.pnlButtonChart.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlButtonChart.Location = new System.Drawing.Point(3, 3);
             this.pnlButtonChart.Name = "pnlButtonChart";
             this.pnlButtonChart.Size = new System.Drawing.Size(815, 50);
             this.pnlButtonChart.TabIndex = 0;
             // 
-            // btnDataChart
+            // btnBack
             // 
-            this.btnDataChart.Location = new System.Drawing.Point(635, 5);
-            this.btnDataChart.Name = "btnDataChart";
-            this.btnDataChart.Size = new System.Drawing.Size(80, 40);
-            this.btnDataChart.TabIndex = 3;
-            this.btnDataChart.Text = "Data";
-            this.btnDataChart.UseVisualStyleBackColor = true;
-            this.btnDataChart.Click += new System.EventHandler(this.OpenData);
+            this.btnBack.Location = new System.Drawing.Point(725, 5);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(80, 40);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.OpenMainMenu);
             // 
-            // btnMainMenuChart
+            // tab_AOI
             // 
-            this.btnMainMenuChart.Location = new System.Drawing.Point(725, 5);
-            this.btnMainMenuChart.Name = "btnMainMenuChart";
-            this.btnMainMenuChart.Size = new System.Drawing.Size(80, 40);
-            this.btnMainMenuChart.TabIndex = 1;
-            this.btnMainMenuChart.Text = "Main Menu";
-            this.btnMainMenuChart.UseVisualStyleBackColor = true;
-            this.btnMainMenuChart.Click += new System.EventHandler(this.OpenMainMenu);
+            this.tab_AOI.Controls.Add(this.panel3);
+            this.tab_AOI.Controls.Add(this.pnlButtonData);
+            this.tab_AOI.Location = new System.Drawing.Point(4, 25);
+            this.tab_AOI.Name = "tab_AOI";
+            this.tab_AOI.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_AOI.Size = new System.Drawing.Size(821, 360);
+            this.tab_AOI.TabIndex = 2;
+            this.tab_AOI.Text = "AOI Data";
+            this.tab_AOI.UseVisualStyleBackColor = true;
             // 
-            // tab_Data
+            // panel3
             // 
-            this.tab_Data.Controls.Add(this.flp_Data);
-            this.tab_Data.Controls.Add(this.pnlButtonData);
-            this.tab_Data.Location = new System.Drawing.Point(4, 25);
-            this.tab_Data.Name = "tab_Data";
-            this.tab_Data.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Data.Size = new System.Drawing.Size(821, 362);
-            this.tab_Data.TabIndex = 2;
-            this.tab_Data.Text = "Data";
-            this.tab_Data.UseVisualStyleBackColor = true;
+            this.panel3.Controls.Add(this.dgvAOI1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 53);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(815, 304);
+            this.panel3.TabIndex = 2;
             // 
-            // flp_Data
+            // dgvAOI1
             // 
-            this.flp_Data.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flp_Data.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flp_Data.Location = new System.Drawing.Point(3, 53);
-            this.flp_Data.Name = "flp_Data";
-            this.flp_Data.Size = new System.Drawing.Size(815, 306);
-            this.flp_Data.TabIndex = 2;
+            this.dgvAOI1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAOI1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvAOI1.Location = new System.Drawing.Point(0, 0);
+            this.dgvAOI1.Name = "dgvAOI1";
+            this.dgvAOI1.Size = new System.Drawing.Size(815, 304);
+            this.dgvAOI1.TabIndex = 0;
             // 
             // pnlButtonData
             // 
-            this.pnlButtonData.Controls.Add(this.btnChartData);
-            this.pnlButtonData.Controls.Add(this.btnMainData);
+            this.pnlButtonData.Controls.Add(this.btnBack1);
             this.pnlButtonData.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlButtonData.Location = new System.Drawing.Point(3, 3);
             this.pnlButtonData.Name = "pnlButtonData";
             this.pnlButtonData.Size = new System.Drawing.Size(815, 50);
             this.pnlButtonData.TabIndex = 1;
             // 
-            // btnChartData
+            // btnBack1
             // 
-            this.btnChartData.Location = new System.Drawing.Point(635, 5);
-            this.btnChartData.Name = "btnChartData";
-            this.btnChartData.Size = new System.Drawing.Size(80, 40);
-            this.btnChartData.TabIndex = 3;
-            this.btnChartData.Text = "Chart";
-            this.btnChartData.UseVisualStyleBackColor = true;
-            this.btnChartData.Click += new System.EventHandler(this.OpenChart);
-            // 
-            // btnMainData
-            // 
-            this.btnMainData.Location = new System.Drawing.Point(725, 5);
-            this.btnMainData.Name = "btnMainData";
-            this.btnMainData.Size = new System.Drawing.Size(80, 40);
-            this.btnMainData.TabIndex = 1;
-            this.btnMainData.Text = "Main Menu";
-            this.btnMainData.UseVisualStyleBackColor = true;
-            this.btnMainData.Click += new System.EventHandler(this.OpenMainMenu);
+            this.btnBack1.Location = new System.Drawing.Point(725, 5);
+            this.btnBack1.Name = "btnBack1";
+            this.btnBack1.Size = new System.Drawing.Size(80, 40);
+            this.btnBack1.TabIndex = 1;
+            this.btnBack1.Text = "Back";
+            this.btnBack1.UseVisualStyleBackColor = true;
+            this.btnBack1.Click += new System.EventHandler(this.OpenMainMenu);
             // 
             // stt_Main
             // 
             this.stt_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
-            this.toolStripStatusLabel3});
-            this.stt_Main.Location = new System.Drawing.Point(0, 460);
+            this.tsTimerCounter,
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel3,
+            this.tsDataRows,
+            this.toolStripStatusLabel5,
+            this.tsStopwatch});
+            this.stt_Main.Location = new System.Drawing.Point(0, 458);
             this.stt_Main.Name = "stt_Main";
-            this.stt_Main.Size = new System.Drawing.Size(829, 22);
+            this.stt_Main.Size = new System.Drawing.Size(829, 24);
             this.stt_Main.TabIndex = 3;
             this.stt_Main.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(738, 17);
-            this.toolStripStatusLabel1.Spring = true;
-            // 
             // toolStripStatusLabel2
             // 
+            this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(40, 17);
-            this.toolStripStatusLabel2.Text = "Time :";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(60, 19);
+            this.toolStripStatusLabel2.Text = "Counter :";
+            // 
+            // tsTimerCounter
+            // 
+            this.tsTimerCounter.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsTimerCounter.Name = "tsTimerCounter";
+            this.tsTimerCounter.Size = new System.Drawing.Size(40, 19);
+            this.tsTimerCounter.Text = "None";
+            // 
+            // bwTimer
+            // 
+            this.bwTimer.WorkerReportsProgress = true;
+            this.bwTimer.WorkerSupportsCancellation = true;
+            this.bwTimer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwTimer_DoWork);
+            this.bwTimer.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwTimer_ProgressChanged);
+            this.bwTimer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwTimer_RunWorkerCompleted);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(486, 19);
+            this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel3
             // 
+            this.toolStripStatusLabel3.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(36, 17);
-            this.toolStripStatusLabel3.Text = "None";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(69, 19);
+            this.toolStripStatusLabel3.Text = "Data rows :";
             // 
-            // numTimer
+            // tsDataRows
             // 
-            this.numTimer.Location = new System.Drawing.Point(120, 130);
-            this.numTimer.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.numTimer.Name = "numTimer";
-            this.numTimer.Size = new System.Drawing.Size(60, 20);
-            this.numTimer.TabIndex = 4;
-            this.numTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numTimer.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+            this.tsDataRows.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsDataRows.Name = "tsDataRows";
+            this.tsDataRows.Size = new System.Drawing.Size(40, 19);
+            this.tsDataRows.Text = "None";
             // 
-            // label6
+            // toolStripStatusLabel5
             // 
-            this.label6.Location = new System.Drawing.Point(10, 130);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 20);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Timer";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolStripStatusLabel5.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(79, 19);
+            this.toolStripStatusLabel5.Text = "Query Time :";
             // 
-            // label7
+            // tsStopwatch
             // 
-            this.label7.Location = new System.Drawing.Point(190, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 20);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "(min)";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsStopwatch.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsStopwatch.Name = "tsStopwatch";
+            this.tsStopwatch.Size = new System.Drawing.Size(40, 19);
+            this.tsStopwatch.Text = "None";
             // 
             // MainForm
             // 
@@ -453,14 +563,17 @@
             this.grt_Main.ResumeLayout(false);
             this.tab_Main.ResumeLayout(false);
             this.pnlMain.ResumeLayout(false);
+            this.pnlButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numTimer)).EndInit();
             this.pnlButtonMain.ResumeLayout(false);
             this.tab_Chart.ResumeLayout(false);
             this.pnlButtonChart.ResumeLayout(false);
-            this.tab_Data.ResumeLayout(false);
+            this.tab_AOI.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAOI1)).EndInit();
             this.pnlButtonData.ResumeLayout(false);
             this.stt_Main.ResumeLayout(false);
             this.stt_Main.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTimer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -486,22 +599,32 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.StatusStrip stt_Main;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel tsTimerCounter;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.Button btnMainMenuChart;
+        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnChartMain;
-        private System.Windows.Forms.Button btnDataMain;
-        private System.Windows.Forms.Button btnDataChart;
-        private System.Windows.Forms.TabPage tab_Data;
+        private System.Windows.Forms.Button btnAOI6;
+        private System.Windows.Forms.TabPage tab_AOI;
         private System.Windows.Forms.Panel pnlButtonData;
-        private System.Windows.Forms.Button btnChartData;
-        private System.Windows.Forms.Button btnMainData;
-        private System.Windows.Forms.FlowLayoutPanel flp_Data;
+        private System.Windows.Forms.Button btnBack1;
         private System.Windows.Forms.NumericUpDown numTimer;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.ComponentModel.BackgroundWorker bwTimer;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView dgvAOI1;
+        private System.Windows.Forms.Button btnAOI5;
+        private System.Windows.Forms.Button btnAOI4;
+        private System.Windows.Forms.Button btnAOI2;
+        private System.Windows.Forms.Button btnAOI3;
+        private System.Windows.Forms.Button btnAOI1;
+        private System.Windows.Forms.Panel pnlButton;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel tsDataRows;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel tsStopwatch;
     }
 }

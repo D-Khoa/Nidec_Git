@@ -63,7 +63,7 @@
     </Compile>
     <Compile Include="Model\CSVUtility.cs" />
     <Compile Include="Model\ExcelClass2019.cs" />
-    <Compile Include="Model\Data_LinQ.cs" />
+    <Compile Include="Model\DataLinQ.cs" />
     <Compile Include="Model\PSQL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

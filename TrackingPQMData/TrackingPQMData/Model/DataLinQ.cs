@@ -3,7 +3,7 @@ using System.Data;
 
 namespace TrackingPQMData.Model
 {
-    public static class Data_LinQ
+    public static class DataLinQ
     {
         public static DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
         {

@@ -24,27 +24,19 @@
             string QRCode_data = itemNo + ";" + itemName + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + validity;
 
             /* 1. LK_OpenPrinter() */
-            try
-            {
-                if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)
-                    throw new System.Exception("Can't open printer!");
-            }
-            catch
-            {
+            if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)
                 throw new System.Exception("Can't open printer!");
-                //return;
-            }
 
             /* 2. LK_SetupPrinter() */
-            rtn = LKBPRINT.LK_SetupPrinter("102", 	// 10~104 (Unit is mm)
-                "54", 		// 5~350 (Unit is mm)
-                0,				// 0=Label with Gap, 1=Label with Black Mark, 2=Label with Continuous.
-                "3",			// if(MediaType==0) <GapHeight> else <BlackMarkHeight>. (Unit is mm)
-                "0",			// if(MediaType==0) <not used> else <distance from BlackMark to perforation>. (Unit is mm)
-                8,				// 0 ~ 15
-                6,				// 2 ~ 6 (Unit is Inch)
-                1				// 1 ~ 9999 copies
-                );
+            rtn = LKBPRINT.LK_SetupPrinter("102",   // 10~104 (Unit is mm)
+                            "54",       // 5~350 (Unit is mm)
+                            0,              // 0=Label with Gap, 1=Label with Black Mark, 2=Label with Continuous.
+                            "3",            // if(MediaType==0) <GapHeight> else <BlackMarkHeight>. (Unit is mm)
+                            "0",            // if(MediaType==0) <not used> else <distance from BlackMark to perforation>. (Unit is mm)
+                            8,              // 0 ~ 15
+                            6,              // 2 ~ 6 (Unit is Inch)
+                            1               // 1 ~ 9999 copies
+                            );
 
             if (rtn != LKBPRINT.LK_SUCCESS)
             {
