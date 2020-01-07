@@ -349,7 +349,9 @@ namespace TrackingPQMData.Model
                 NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 dt.Load(reader);
+                reader.Close();
                 connection.Close();
+                connection.Dispose();
                 return (dt.Rows.Count > 0) ? true : false;
             }
             catch (Exception ex)

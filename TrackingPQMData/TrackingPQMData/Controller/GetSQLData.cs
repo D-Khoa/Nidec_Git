@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -90,10 +91,59 @@ namespace TrackingPQMData.Controller
                 //dt = DataLinQ.Pivot(dt, dt.Columns["inspect"], dt.Columns["inspectdata"]);
                 return dt;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Get data of inspect into point list
+        /// </summary>
+        /// <param name="list">list inspect</param>
+        /// <param name="table">table of model</param>
+        /// <param name="begin">begin time</param>
+        /// <param name="end">end time</param>
+        /// <returns></returns>
+        public BindingList<DataPointItem> InspectPointList(List<string> list, string table, string begin, string end)
+        {
+            try
+            {
+                if (list.Count == 0)
+                    return null;
+                string inspects = "";
+                DataTable dt = new DataTable();
+                BindingList<DataPointItem> dtlist = new BindingList<DataPointItem>();
+                foreach (string text in list)
+                {
+                    inspects += "'" + text + "',";
+                }
+                inspects = inspects.Remove(inspects.Length - 1);
+                Query.Clear();
+                Query.Append("select * from ").Append(table).Append(" where inspectdate >= '").Append(begin);
+                Query.Append("' and inspectdate <= '").Append(end).Append("' and inspect in (").Append(inspects);
+                Query.Append(") order by inspect, inspectdate");
+                SQL.sqlDataAdapterFillDatatable(Query.ToString(), ref dt);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DataPointItem item = new DataPointItem
+                    {
+                        serno = dr["serno"].ToString(),
+                        inspectdate = (DateTime)dr["inspectdate"],
+                        inspect = dr["inspect"].ToString(),
+                        inspectdata = (double)dr["inspectdata"],
+                        judge = dr["judge"].ToString()
+                    };
+                    dtlist.Add(item);
+                }
+                Query.Clear();
+                return dtlist;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

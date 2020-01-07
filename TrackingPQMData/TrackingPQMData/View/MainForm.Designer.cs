@@ -31,6 +31,18 @@
             this.grt_Main = new System.Windows.Forms.TabControl();
             this.tab_Main = new System.Windows.Forms.TabPage();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.pnlSetting = new System.Windows.Forms.Panel();
+            this.cmbModel = new System.Windows.Forms.ComboBox();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dtpBegin = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numTimer = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.pnlButton = new System.Windows.Forms.Panel();
             this.btnAOI5 = new System.Windows.Forms.Button();
             this.btnAOI6 = new System.Windows.Forms.Button();
@@ -38,19 +50,8 @@
             this.btnAOI4 = new System.Windows.Forms.Button();
             this.btnAOI2 = new System.Windows.Forms.Button();
             this.btnAOI3 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.numTimer = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.trvProcess = new System.Windows.Forms.TreeView();
-            this.dtpBegin = new System.Windows.Forms.DateTimePicker();
-            this.dtpDate = new System.Windows.Forms.DateTimePicker();
-            this.cmbModel = new System.Windows.Forms.ComboBox();
             this.pnlButtonMain = new System.Windows.Forms.Panel();
             this.btnChartMain = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
@@ -67,17 +68,18 @@
             this.stt_Main = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTimerCounter = new System.Windows.Forms.ToolStripStatusLabel();
-            this.bwTimer = new System.ComponentModel.BackgroundWorker();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsDataRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsStopwatch = new System.Windows.Forms.ToolStripStatusLabel();
+            this.bwTimer = new System.ComponentModel.BackgroundWorker();
             this.grt_Main.SuspendLayout();
             this.tab_Main.SuspendLayout();
             this.pnlMain.SuspendLayout();
-            this.pnlButton.SuspendLayout();
+            this.pnlSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTimer)).BeginInit();
+            this.pnlButton.SuspendLayout();
             this.pnlButtonMain.SuspendLayout();
             this.tab_Chart.SuspendLayout();
             this.pnlButtonChart.SuspendLayout();
@@ -116,25 +118,146 @@
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.pnlSetting);
             this.pnlMain.Controls.Add(this.pnlButton);
-            this.pnlMain.Controls.Add(this.label7);
-            this.pnlMain.Controls.Add(this.label6);
-            this.pnlMain.Controls.Add(this.numTimer);
-            this.pnlMain.Controls.Add(this.label5);
-            this.pnlMain.Controls.Add(this.dtpEnd);
             this.pnlMain.Controls.Add(this.label4);
-            this.pnlMain.Controls.Add(this.label3);
-            this.pnlMain.Controls.Add(this.label2);
-            this.pnlMain.Controls.Add(this.label1);
             this.pnlMain.Controls.Add(this.trvProcess);
-            this.pnlMain.Controls.Add(this.dtpBegin);
-            this.pnlMain.Controls.Add(this.dtpDate);
-            this.pnlMain.Controls.Add(this.cmbModel);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(3, 53);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(815, 304);
             this.pnlMain.TabIndex = 6;
+            // 
+            // pnlSetting
+            // 
+            this.pnlSetting.Controls.Add(this.cmbModel);
+            this.pnlSetting.Controls.Add(this.dtpDate);
+            this.pnlSetting.Controls.Add(this.label7);
+            this.pnlSetting.Controls.Add(this.dtpBegin);
+            this.pnlSetting.Controls.Add(this.label6);
+            this.pnlSetting.Controls.Add(this.label1);
+            this.pnlSetting.Controls.Add(this.numTimer);
+            this.pnlSetting.Controls.Add(this.label2);
+            this.pnlSetting.Controls.Add(this.label5);
+            this.pnlSetting.Controls.Add(this.label3);
+            this.pnlSetting.Controls.Add(this.dtpEnd);
+            this.pnlSetting.Location = new System.Drawing.Point(13, 6);
+            this.pnlSetting.Name = "pnlSetting";
+            this.pnlSetting.Size = new System.Drawing.Size(280, 168);
+            this.pnlSetting.TabIndex = 14;
+            // 
+            // cmbModel
+            // 
+            this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbModel.FormattingEnabled = true;
+            this.cmbModel.Location = new System.Drawing.Point(121, 5);
+            this.cmbModel.Name = "cmbModel";
+            this.cmbModel.Size = new System.Drawing.Size(120, 21);
+            this.cmbModel.TabIndex = 0;
+            this.cmbModel.TextChanged += new System.EventHandler(this.cmbModel_TextChanged);
+            // 
+            // dtpDate
+            // 
+            this.dtpDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDate.Location = new System.Drawing.Point(121, 35);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(120, 20);
+            this.dtpDate.TabIndex = 4;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(191, 125);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 20);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "(min)";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // dtpBegin
+            // 
+            this.dtpBegin.CustomFormat = "HH:mm";
+            this.dtpBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpBegin.Location = new System.Drawing.Point(121, 65);
+            this.dtpBegin.Name = "dtpBegin";
+            this.dtpBegin.ShowUpDown = true;
+            this.dtpBegin.Size = new System.Drawing.Size(120, 20);
+            this.dtpBegin.TabIndex = 5;
+            this.dtpBegin.Value = new System.DateTime(2020, 1, 4, 0, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(11, 125);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 20);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Timer";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(11, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Model";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numTimer
+            // 
+            this.numTimer.Location = new System.Drawing.Point(121, 125);
+            this.numTimer.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numTimer.Name = "numTimer";
+            this.numTimer.Size = new System.Drawing.Size(60, 20);
+            this.numTimer.TabIndex = 4;
+            this.numTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numTimer.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(11, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "End";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(11, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 20);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Date";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(11, 65);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Begin";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtpEnd
+            // 
+            this.dtpEnd.CustomFormat = "HH:mm";
+            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEnd.Location = new System.Drawing.Point(121, 95);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.ShowUpDown = true;
+            this.dtpEnd.Size = new System.Drawing.Size(120, 20);
+            this.dtpEnd.TabIndex = 9;
+            this.dtpEnd.Value = new System.DateTime(2020, 1, 4, 23, 59, 0, 0);
             // 
             // pnlButton
             // 
@@ -209,62 +332,6 @@
             this.btnAOI3.UseVisualStyleBackColor = true;
             this.btnAOI3.Click += new System.EventHandler(this.btnAOI3_Click);
             // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(190, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 20);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "(min)";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(10, 130);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 20);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Timer";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numTimer
-            // 
-            this.numTimer.Location = new System.Drawing.Point(120, 130);
-            this.numTimer.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.numTimer.Name = "numTimer";
-            this.numTimer.Size = new System.Drawing.Size(60, 20);
-            this.numTimer.TabIndex = 4;
-            this.numTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numTimer.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(10, 40);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 20);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Date";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dtpEnd
-            // 
-            this.dtpEnd.CustomFormat = "HH:mm";
-            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(120, 100);
-            this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.ShowUpDown = true;
-            this.dtpEnd.Size = new System.Drawing.Size(120, 20);
-            this.dtpEnd.TabIndex = 9;
-            this.dtpEnd.Value = new System.DateTime(2020, 1, 4, 23, 59, 0, 0);
-            // 
             // label4
             // 
             this.label4.Location = new System.Drawing.Point(260, 10);
@@ -273,33 +340,6 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Process";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(10, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Begin";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(10, 100);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "End";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(10, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Model";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // trvProcess
             // 
@@ -313,36 +353,6 @@
             this.trvProcess.TabIndex = 3;
             this.trvProcess.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvProcess_AfterCheck);
             this.trvProcess.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvProcess_AfterCheck);
-            // 
-            // dtpBegin
-            // 
-            this.dtpBegin.CustomFormat = "HH:mm";
-            this.dtpBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBegin.Location = new System.Drawing.Point(120, 70);
-            this.dtpBegin.Name = "dtpBegin";
-            this.dtpBegin.ShowUpDown = true;
-            this.dtpBegin.Size = new System.Drawing.Size(120, 20);
-            this.dtpBegin.TabIndex = 5;
-            this.dtpBegin.Value = new System.DateTime(2020, 1, 4, 0, 0, 0, 0);
-            // 
-            // dtpDate
-            // 
-            this.dtpDate.CustomFormat = "yyyy-MM-dd";
-            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDate.Location = new System.Drawing.Point(120, 40);
-            this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(120, 20);
-            this.dtpDate.TabIndex = 4;
-            // 
-            // cmbModel
-            // 
-            this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(120, 10);
-            this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(120, 21);
-            this.cmbModel.TabIndex = 0;
-            this.cmbModel.TextChanged += new System.EventHandler(this.cmbModel_TextChanged);
             // 
             // pnlButtonMain
             // 
@@ -367,6 +377,7 @@
             // 
             // btnStop
             // 
+            this.btnStop.Enabled = false;
             this.btnStop.Location = new System.Drawing.Point(100, 5);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(80, 40);
@@ -392,19 +403,21 @@
             this.tab_Chart.Location = new System.Drawing.Point(4, 25);
             this.tab_Chart.Name = "tab_Chart";
             this.tab_Chart.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Chart.Size = new System.Drawing.Size(821, 362);
+            this.tab_Chart.Size = new System.Drawing.Size(821, 360);
             this.tab_Chart.TabIndex = 1;
             this.tab_Chart.Text = "Chart";
             this.tab_Chart.UseVisualStyleBackColor = true;
             // 
             // flp_Chart
             // 
+            this.flp_Chart.AutoScroll = true;
             this.flp_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_Chart.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flp_Chart.Location = new System.Drawing.Point(3, 53);
             this.flp_Chart.Name = "flp_Chart";
-            this.flp_Chart.Size = new System.Drawing.Size(815, 306);
+            this.flp_Chart.Size = new System.Drawing.Size(815, 304);
             this.flp_Chart.TabIndex = 0;
+            this.flp_Chart.WrapContents = false;
             // 
             // pnlButtonChart
             // 
@@ -417,7 +430,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(725, 5);
+            this.btnBack.Location = new System.Drawing.Point(730, 5);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(80, 40);
             this.btnBack.TabIndex = 1;
@@ -504,14 +517,6 @@
             this.tsTimerCounter.Size = new System.Drawing.Size(40, 19);
             this.tsTimerCounter.Text = "None";
             // 
-            // bwTimer
-            // 
-            this.bwTimer.WorkerReportsProgress = true;
-            this.bwTimer.WorkerSupportsCancellation = true;
-            this.bwTimer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwTimer_DoWork);
-            this.bwTimer.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwTimer_ProgressChanged);
-            this.bwTimer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwTimer_RunWorkerCompleted);
-            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
@@ -547,6 +552,14 @@
             this.tsStopwatch.Size = new System.Drawing.Size(40, 19);
             this.tsStopwatch.Text = "None";
             // 
+            // bwTimer
+            // 
+            this.bwTimer.WorkerReportsProgress = true;
+            this.bwTimer.WorkerSupportsCancellation = true;
+            this.bwTimer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwTimer_DoWork);
+            this.bwTimer.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwTimer_ProgressChanged);
+            this.bwTimer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwTimer_RunWorkerCompleted);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -557,14 +570,16 @@
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.tittle = "FormCommon";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Controls.SetChildIndex(this.stt_Main, 0);
             this.Controls.SetChildIndex(this.grt_Main, 0);
             this.grt_Main.ResumeLayout(false);
             this.tab_Main.ResumeLayout(false);
             this.pnlMain.ResumeLayout(false);
-            this.pnlButton.ResumeLayout(false);
+            this.pnlSetting.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numTimer)).EndInit();
+            this.pnlButton.ResumeLayout(false);
             this.pnlButtonMain.ResumeLayout(false);
             this.tab_Chart.ResumeLayout(false);
             this.pnlButtonChart.ResumeLayout(false);
@@ -626,5 +641,6 @@
         private System.Windows.Forms.ToolStripStatusLabel tsDataRows;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel tsStopwatch;
+        private System.Windows.Forms.Panel pnlSetting;
     }
 }

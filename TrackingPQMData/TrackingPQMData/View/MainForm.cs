@@ -9,25 +9,36 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using TrackingPQMData.Controller;
+using TrackingPQMData.Model;
 
 namespace TrackingPQMData.View
 {
     public partial class MainForm : FormCommon
     {
         #region VARIABLE
-        int counter, ctimer, maxchoose = 6;
+        int counter, maxchoose = 6;
+        double ctimer;
         string SelectModel, ModelTable, FromTime, ToTime;
+        Task[] tasks = new Task[6];
+        Stopwatch stopwatch = new Stopwatch();
         GetSQLData getSQLData = new GetSQLData();
         List<int> listProcessIndex = new List<int>();
         List<string> listProcess = new List<string>();
         List<string> listInspect = new List<string>();
-        DataTable dtAOI1 = new DataTable();
-        DataTable dtAOI2 = new DataTable();
-        DataTable dtAOI3 = new DataTable();
-        DataTable dtAOI4 = new DataTable();
-        DataTable dtAOI5 = new DataTable();
-        DataTable dtAOI6 = new DataTable();
+        List<string> listInspect1 = new List<string>();
+        List<string> listInspect2 = new List<string>();
+        List<string> listInspect3 = new List<string>();
+        List<string> listInspect4 = new List<string>();
+        List<string> listInspect5 = new List<string>();
+        List<string> listInspect6 = new List<string>();
+        BindingList<DataPointItem> itemAOI1 = new BindingList<DataPointItem>();
+        BindingList<DataPointItem> itemAOI2 = new BindingList<DataPointItem>();
+        BindingList<DataPointItem> itemAOI3 = new BindingList<DataPointItem>();
+        BindingList<DataPointItem> itemAOI4 = new BindingList<DataPointItem>();
+        BindingList<DataPointItem> itemAOI5 = new BindingList<DataPointItem>();
+        BindingList<DataPointItem> itemAOI6 = new BindingList<DataPointItem>();
         #endregion
 
         public MainForm()
@@ -137,7 +148,6 @@ namespace TrackingPQMData.View
                                                   .Where(x => x.Checked)
                                                   .Select(x => x.Text).ToList();
         }
-        #endregion
 
         /// <summary>
         /// Get name of data table and time begin, time end
@@ -148,6 +158,7 @@ namespace TrackingPQMData.View
             FromTime = dtpDate.Value.ToString("yyyy-MM-dd") + " " + dtpBegin.Value.ToString("HH:mm");
             ToTime = dtpDate.Value.ToString("yyyy-MM-dd") + " " + dtpEnd.Value.ToString("HH:mm");
         }
+        #endregion
 
         #region CHANGE TAB
         /// <summary>
@@ -172,42 +183,48 @@ namespace TrackingPQMData.View
 
         private void btnAOI1_Click(object sender, EventArgs e)
         {
-            dgvAOI1.DataSource = dtAOI1;
+            //dgvAOI1.DataSource = dtAOI1;
+            dgvAOI1.DataSource = itemAOI1;
             grt_Main.SelectedTab = tab_AOI;
             tsDataRows.Text = dgvAOI1.Rows.Count.ToString();
         }
 
         private void btnAOI2_Click(object sender, EventArgs e)
         {
-            dgvAOI1.DataSource = dtAOI2;
+            //dgvAOI1.DataSource = dtAOI2;
+            dgvAOI1.DataSource = itemAOI2;
             grt_Main.SelectedTab = tab_AOI;
             tsDataRows.Text = dgvAOI1.Rows.Count.ToString();
         }
 
         private void btnAOI3_Click(object sender, EventArgs e)
         {
-            dgvAOI1.DataSource = dtAOI3;
+            //dgvAOI1.DataSource = dtAOI3;
+            dgvAOI1.DataSource = itemAOI3;
             grt_Main.SelectedTab = tab_AOI;
             tsDataRows.Text = dgvAOI1.Rows.Count.ToString();
         }
 
         private void btnAOI4_Click(object sender, EventArgs e)
         {
-            dgvAOI1.DataSource = dtAOI4;
+            //dgvAOI1.DataSource = dtAOI4;
+            dgvAOI1.DataSource = itemAOI4;
             grt_Main.SelectedTab = tab_AOI;
             tsDataRows.Text = dgvAOI1.Rows.Count.ToString();
         }
 
         private void btnAOI5_Click(object sender, EventArgs e)
         {
-            dgvAOI1.DataSource = dtAOI5;
+            //dgvAOI1.DataSource = dtAOI5;
+            dgvAOI1.DataSource = itemAOI5;
             grt_Main.SelectedTab = tab_AOI;
             tsDataRows.Text = dgvAOI1.Rows.Count.ToString();
         }
 
         private void btnAOI6_Click(object sender, EventArgs e)
         {
-            dgvAOI1.DataSource = dtAOI6;
+            //dgvAOI1.DataSource = dtAOI6;
+            dgvAOI1.DataSource = itemAOI6;
             grt_Main.SelectedTab = tab_AOI;
             tsDataRows.Text = dgvAOI1.Rows.Count.ToString();
         }
@@ -219,12 +236,28 @@ namespace TrackingPQMData.View
             counter = (int)numTimer.Value;
             if (!bwTimer.IsBusy)
                 bwTimer.RunWorkerAsync();
+            btnStop.Enabled = true;
+            btnStart.Enabled = false;
+            pnlSetting.Enabled = false;
+            GetTableName();
+            GetAllListInspect();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             if (bwTimer.IsBusy)
+            {
                 bwTimer.CancelAsync();
+                btnStart.Enabled = true;
+                btnStop.Enabled = false;
+                pnlSetting.Enabled = true;
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (btnStop.Enabled)
+                e.Cancel = true;
         }
 
         /// <summary>
@@ -234,7 +267,7 @@ namespace TrackingPQMData.View
         /// <param name="e"></param>
         private void bwTimer_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (int i = counter; i > 0; i--)
+            for (int i = counter; i >= 0; i--)
             {
                 //Report timer
                 bwTimer.ReportProgress(i);
@@ -243,10 +276,10 @@ namespace TrackingPQMData.View
                 {
                     e.Cancel = true;
                     bwTimer.ReportProgress(counter);
+                    return;
                 }
                 Thread.Sleep(1000);
             }
-            bwTimer.ReportProgress(0);
         }
 
         /// <summary>
@@ -279,79 +312,178 @@ namespace TrackingPQMData.View
                 this.Cursor = Cursors.WaitCursor;
                 #region TASK START
                 ctimer = 0;
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-                GetTableName();
-                var t1 = Task.Run(() => GetDataAOI1());
-                var t2 = Task.Run(() => GetDataAOI2());
-                var t3 = Task.Run(() => GetDataAOI3());
-                var t4 = Task.Run(() => GetDataAOI4());
-                var t5 = Task.Run(() => GetDataAOI5());
-                var t6 = Task.Run(() => GetDataAOI6());
-
-                Task.WaitAll(t1, t2, t3, t4, t5, t6);
+                //stopwatch.Restart();
+                //t1 = Task.Run(() => GetDataAOI1());
+                //t2 = Task.Run(() => GetDataAOI2());
+                //t3 = Task.Run(() => GetDataAOI3());
+                //t4 = Task.Run(() => GetDataAOI4());
+                //t5 = Task.Run(() => GetDataAOI5());
+                //t6 = Task.Run(() => GetDataAOI6());
+                //await Task.WhenAll(t1, t2, t3, t4, t5, t6);
+                tasks[0] = Task.Run(() => GetDataAOI1());
+                tasks[1] = Task.Run(() => GetDataAOI2());
+                tasks[2] = Task.Run(() => GetDataAOI3());
+                tasks[3] = Task.Run(() => GetDataAOI4());
+                tasks[4] = Task.Run(() => GetDataAOI5());
+                tasks[5] = Task.Run(() => GetDataAOI6());
+                Task.WaitAll(tasks);
+                foreach (Task t in tasks) t.Dispose();
                 #endregion
+                DrawChart("AOI1", listInspect1, itemAOI1);
+                DrawChart("AOI2", listInspect2, itemAOI2);
+                DrawChart("AOI3", listInspect3, itemAOI3);
+                DrawChart("AOI4", listInspect4, itemAOI4);
+                DrawChart("AOI5", listInspect5, itemAOI5);
+                DrawChart("AOI6", listInspect6, itemAOI6);
                 stopwatch.Stop();
-                tsStopwatch.Text = stopwatch.Elapsed.Seconds.ToString() + " s";
-                bwTimer.RunWorkerAsync();
+                ctimer = stopwatch.Elapsed.Milliseconds;
+                tsStopwatch.Text = (ctimer / 1000).ToString("0.00") + " s";
                 this.Cursor = Cursors.Default;
+                bwTimer.RunWorkerAsync();
             }
-        }
-
-        private void timerGetData_Tick(object sender, EventArgs e)
-        {
-            ctimer++;
-            tsTimerCounter.Text = ctimer + " s";
         }
         #endregion
 
-        #region GET DATA AOI INTO DATATABLE
+        #region ACTON GET DATA FROM AOI1 TO AOI6
+        /// <summary>
+        /// Get all list inspect of all process
+        /// </summary>
+        private void GetAllListInspect()
+        {
+            if (listProcessIndex.Count > 1)
+            {
+                listInspect1 = new List<string>();
+                listInspect1 = GetListInspectChoose(listProcessIndex[0]);
+            }
+            if (listProcessIndex.Count > 2)
+            {
+                listInspect2 = new List<string>();
+                listInspect2 = GetListInspectChoose(listProcessIndex[1]);
+            }
+            if (listProcessIndex.Count > 3)
+            {
+                listInspect3 = new List<string>();
+                listInspect3 = GetListInspectChoose(listProcessIndex[2]);
+            }
+            if (listProcessIndex.Count > 4)
+            {
+                listInspect4 = new List<string>();
+                listInspect4 = GetListInspectChoose(listProcessIndex[3]);
+            }
+            if (listProcessIndex.Count > 5)
+            {
+                listInspect5 = new List<string>();
+                listInspect5 = GetListInspectChoose(listProcessIndex[4]);
+            }
+            if (listProcessIndex.Count > 6)
+            {
+                listInspect1 = new List<string>();
+                listInspect6 = GetListInspectChoose(listProcessIndex[5]);
+            }
+        }
+
         private void GetDataAOI1()
         {
-            dtAOI1 = new DataTable();
-            List<string> list = new List<string>();
-            list = GetListInspectChoose(listProcessIndex[0]);
-            dtAOI1 = getSQLData.ProcessDatatable(list, ModelTable, FromTime, ToTime);
+            itemAOI1 = new BindingList<DataPointItem>();
+            itemAOI1 = getSQLData.InspectPointList(listInspect1, ModelTable, FromTime, ToTime);
         }
 
         private void GetDataAOI2()
         {
-            dtAOI2 = new DataTable();
-            List<string> list = new List<string>();
-            list = GetListInspectChoose(listProcessIndex[1]);
-            dtAOI2 = getSQLData.ProcessDatatable(list, ModelTable, FromTime, ToTime);
+            itemAOI2 = new BindingList<DataPointItem>();
+            itemAOI2 = getSQLData.InspectPointList(listInspect2, ModelTable, FromTime, ToTime);
         }
 
         private void GetDataAOI3()
         {
-            dtAOI3 = new DataTable();
-            List<string> list = new List<string>();
-            list = GetListInspectChoose(listProcessIndex[2]);
-            dtAOI3 = getSQLData.ProcessDatatable(list, ModelTable, FromTime, ToTime);
+            itemAOI3 = new BindingList<DataPointItem>();
+            itemAOI3 = getSQLData.InspectPointList(listInspect3, ModelTable, FromTime, ToTime);
         }
 
         private void GetDataAOI4()
         {
-            dtAOI4 = new DataTable();
-            List<string> list = new List<string>();
-            list = GetListInspectChoose(listProcessIndex[3]);
-            dtAOI4 = getSQLData.ProcessDatatable(list, ModelTable, FromTime, ToTime);
+            itemAOI4 = new BindingList<DataPointItem>();
+            itemAOI4 = getSQLData.InspectPointList(listInspect4, ModelTable, FromTime, ToTime);
         }
 
         private void GetDataAOI5()
         {
-            dtAOI5 = new DataTable();
-            List<string> list = new List<string>();
-            list = GetListInspectChoose(listProcessIndex[4]);
-            dtAOI5 = getSQLData.ProcessDatatable(list, ModelTable, FromTime, ToTime);
+            itemAOI5 = new BindingList<DataPointItem>();
+            itemAOI5 = getSQLData.InspectPointList(listInspect5, ModelTable, FromTime, ToTime);
         }
 
         private void GetDataAOI6()
         {
-            dtAOI6 = new DataTable();
-            List<string> list = new List<string>();
-            list = GetListInspectChoose(listProcessIndex[5]);
-            dtAOI6 = getSQLData.ProcessDatatable(list, ModelTable, FromTime, ToTime);
+            itemAOI6 = new BindingList<DataPointItem>();
+            itemAOI6 = getSQLData.InspectPointList(listInspect6, ModelTable, FromTime, ToTime);
+        }
+        #endregion
+
+        #region DRAW CHART
+        private void DrawChart(string name, List<string> list, BindingList<DataPointItem> dtlist)
+        {
+            if (list.Count == 0)
+            {
+                return;
+            }
+            foreach (string inspect in list)
+            {
+                Chart datachart = new Chart();
+                ChartArea area = new ChartArea();
+                Title title = new Title("tlt" + inspect);
+                title.Text = name + "-" + inspect;
+                datachart.Name = name + inspect;
+                datachart.Titles.Add(title);
+                datachart.Size = new Size(flp_Chart.Width, 300);
+                Series s1 = new Series
+                {
+                    Name = inspect,
+                    Color = Color.Blue,
+                    IsVisibleInLegend = false,
+                    IsXValueIndexed = true,
+                    ChartType = SeriesChartType.Point,
+                };
+                foreach (DataPointItem item in dtlist)
+                {
+                    if (item.inspect == inspect)
+                        s1.Points.AddXY(item.inspectdate.ToString("yyyy-MM-dd HH:mm:ss"), item.inspectdata);
+                }
+                if (!grt_Main.TabPages["tab_Chart"].Controls["flp_Chart"].Controls.Contains(datachart))
+                    grt_Main.TabPages["tab_Chart"].Controls["flp_Chart"].Controls.Add(datachart);
+                datachart.Series.Clear();
+                datachart.ChartAreas.Add(area);
+                datachart.Series.Add(s1);
+            }
+        }
+
+        private double findMin(BindingList<DataPointItem> dtlist)
+        {
+            int n = dtlist.Count;
+            double min = dtlist[0].inspectdata;
+            for (int i = 1; ; i++)
+            {
+                if (dtlist[i].inspectdata < min)
+                    min = dtlist[i].inspectdata;
+                if (i == n)
+                    break;
+            }
+            return min;
+        }
+
+        private double findMax(BindingList<DataPointItem> dtlist)
+        {
+            int n = dtlist.Count;
+            double max = dtlist[0].inspectdata;
+            for (int i = 1; ; i++)
+            {
+                if (dtlist[i].inspectdata > max)
+                    max = dtlist[i].inspectdata;
+                if (i == n)
+                {
+                    break;
+                }
+            }
+            return max;
         }
         #endregion
     }
