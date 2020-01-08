@@ -3,6 +3,7 @@ using Npgsql;
 using System.Data;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TrackingPQMData.Model
 {
@@ -359,6 +360,25 @@ namespace TrackingPQMData.Model
                 connection.Close();
                 throw new Exception(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Task adapter fill datatable
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public Task<DataTable> TaskAdapterFill(string sql)
+        {
+            DataTable dt = new DataTable();
+            return Task.Run(() =>
+            {
+                connection = new NpgsqlConnection(strConnection);
+                NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+                adapter.SelectCommand = command;
+                adapter.Fill(dt);
+                return dt;
+            });
         }
     }
 }

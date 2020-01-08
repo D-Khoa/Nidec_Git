@@ -105,7 +105,7 @@ namespace TrackingPQMData.Controller
         /// <param name="begin">begin time</param>
         /// <param name="end">end time</param>
         /// <returns></returns>
-        public BindingList<DataPointItem> InspectPointList(List<string> list, string table, string begin, string end)
+        public async Task<BindingList<DataPointItem>> InspectPointList(List<string> list, string table, string begin, string end)
         {
             try
             {
@@ -119,11 +119,13 @@ namespace TrackingPQMData.Controller
                     inspects += "'" + text + "',";
                 }
                 inspects = inspects.Remove(inspects.Length - 1);
+
                 Query.Clear();
                 Query.Append("select * from ").Append(table).Append(" where inspectdate >= '").Append(begin);
                 Query.Append("' and inspectdate <= '").Append(end).Append("' and inspect in (").Append(inspects);
                 Query.Append(") order by inspect, inspectdate");
-                SQL.sqlDataAdapterFillDatatable(Query.ToString(), ref dt);
+                dt = await SQL.TaskAdapterFill(Query.ToString());
+                Query.Clear();
                 foreach (DataRow dr in dt.Rows)
                 {
                     DataPointItem item = new DataPointItem
@@ -136,7 +138,6 @@ namespace TrackingPQMData.Controller
                     };
                     dtlist.Add(item);
                 }
-                Query.Clear();
                 return dtlist;
             }
             catch (Exception ex)
@@ -144,6 +145,5 @@ namespace TrackingPQMData.Controller
                 throw new Exception(ex.Message);
             }
         }
-
     }
 }

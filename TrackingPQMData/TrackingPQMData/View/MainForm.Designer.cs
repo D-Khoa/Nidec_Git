@@ -74,6 +74,8 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsStopwatch = new System.Windows.Forms.ToolStripStatusLabel();
             this.bwTimer = new System.ComponentModel.BackgroundWorker();
+            this.btnStop2 = new System.Windows.Forms.Button();
+            this.btnStart2 = new System.Windows.Forms.Button();
             this.grt_Main.SuspendLayout();
             this.tab_Main.SuspendLayout();
             this.pnlMain.SuspendLayout();
@@ -367,6 +369,7 @@
             // 
             // btnChartMain
             // 
+            this.btnChartMain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChartMain.Location = new System.Drawing.Point(730, 5);
             this.btnChartMain.Name = "btnChartMain";
             this.btnChartMain.Size = new System.Drawing.Size(80, 40);
@@ -421,6 +424,8 @@
             // 
             // pnlButtonChart
             // 
+            this.pnlButtonChart.Controls.Add(this.btnStop2);
+            this.pnlButtonChart.Controls.Add(this.btnStart2);
             this.pnlButtonChart.Controls.Add(this.btnBack);
             this.pnlButtonChart.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlButtonChart.Location = new System.Drawing.Point(3, 3);
@@ -430,6 +435,7 @@
             // 
             // btnBack
             // 
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBack.Location = new System.Drawing.Point(730, 5);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(80, 40);
@@ -479,6 +485,7 @@
             // 
             // btnBack1
             // 
+            this.btnBack1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBack1.Location = new System.Drawing.Point(725, 5);
             this.btnBack1.Name = "btnBack1";
             this.btnBack1.Size = new System.Drawing.Size(80, 40);
@@ -559,6 +566,27 @@
             this.bwTimer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwTimer_DoWork);
             this.bwTimer.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwTimer_ProgressChanged);
             this.bwTimer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwTimer_RunWorkerCompleted);
+            // 
+            // btnStop2
+            // 
+            this.btnStop2.Enabled = false;
+            this.btnStop2.Location = new System.Drawing.Point(100, 5);
+            this.btnStop2.Name = "btnStop2";
+            this.btnStop2.Size = new System.Drawing.Size(80, 40);
+            this.btnStop2.TabIndex = 3;
+            this.btnStop2.Text = "Stop";
+            this.btnStop2.UseVisualStyleBackColor = true;
+            this.btnStop2.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStart2
+            // 
+            this.btnStart2.Location = new System.Drawing.Point(10, 5);
+            this.btnStart2.Name = "btnStart2";
+            this.btnStart2.Size = new System.Drawing.Size(80, 40);
+            this.btnStart2.TabIndex = 2;
+            this.btnStart2.Text = "Start";
+            this.btnStart2.UseVisualStyleBackColor = true;
+            this.btnStart2.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // MainForm
             // 
@@ -642,5 +670,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel tsStopwatch;
         private System.Windows.Forms.Panel pnlSetting;
+        private System.Windows.Forms.Button btnStop2;
+        private System.Windows.Forms.Button btnStart2;
     }
 }
