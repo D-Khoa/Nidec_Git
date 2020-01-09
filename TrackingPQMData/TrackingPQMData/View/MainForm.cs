@@ -188,6 +188,12 @@ namespace TrackingPQMData.View
         #region CHANGE TAB
         private void OpenChart(object sender, EventArgs e)
         {
+            DrawChart("AOI1", listInspect1, itemAOI1);
+            DrawChart("AOI2", listInspect2, itemAOI2);
+            DrawChart("AOI3", listInspect3, itemAOI3);
+            DrawChart("AOI4", listInspect4, itemAOI4);
+            DrawChart("AOI5", listInspect5, itemAOI5);
+            DrawChart("AOI6", listInspect6, itemAOI6);
             //Select Chart tab
             grt_Main.SelectedTab = tab_Chart;
         }
@@ -340,6 +346,9 @@ namespace TrackingPQMData.View
         private void bwTimer_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             tsTimerCounter.Text = e.ProgressPercentage.ToString();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
         }
 
         /// <summary>
@@ -373,13 +382,6 @@ namespace TrackingPQMData.View
                 await Task.WhenAll(tasks);
                 foreach (Task t in tasks) t.Dispose();
                 #endregion
-                DrawChart("AOI1", listInspect1, itemAOI1);
-                DrawChart("AOI2", listInspect2, itemAOI2);
-                DrawChart("AOI3", listInspect3, itemAOI3);
-                DrawChart("AOI4", listInspect4, itemAOI4);
-                DrawChart("AOI5", listInspect5, itemAOI5);
-                DrawChart("AOI6", listInspect6, itemAOI6);
-                GC.Collect();
                 stopwatch.Stop();
                 ctimer = stopwatch.ElapsedMilliseconds;
                 tsStopwatch.Text = (ctimer / 1000).ToString("0.00") + " s";
