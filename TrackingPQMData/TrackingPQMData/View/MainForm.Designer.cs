@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grt_Main = new System.Windows.Forms.TabControl();
             this.tab_Main = new System.Windows.Forms.TabPage();
             this.pnlMain = new System.Windows.Forms.Panel();
@@ -59,6 +60,11 @@
             this.tab_Chart = new System.Windows.Forms.TabPage();
             this.flp_Chart = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlButtonChart = new System.Windows.Forms.Panel();
+            this.btnSpDown = new System.Windows.Forms.Button();
+            this.btnSpUp = new System.Windows.Forms.Button();
+            this.btnAutoScroll = new System.Windows.Forms.Button();
+            this.btnStop2 = new System.Windows.Forms.Button();
+            this.btnStart2 = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.tab_AOI = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -68,14 +74,13 @@
             this.stt_Main = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTimerCounter = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsRes = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsDataRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsStopwatch = new System.Windows.Forms.ToolStripStatusLabel();
             this.bwTimer = new System.ComponentModel.BackgroundWorker();
-            this.btnStop2 = new System.Windows.Forms.Button();
-            this.btnStart2 = new System.Windows.Forms.Button();
+            this.timerScroll = new System.Windows.Forms.Timer(this.components);
             this.grt_Main.SuspendLayout();
             this.tab_Main.SuspendLayout();
             this.pnlMain.SuspendLayout();
@@ -353,8 +358,10 @@
             this.trvProcess.Name = "trvProcess";
             this.trvProcess.Size = new System.Drawing.Size(440, 278);
             this.trvProcess.TabIndex = 3;
+            this.trvProcess.Visible = false;
             this.trvProcess.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvProcess_AfterCheck);
             this.trvProcess.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvProcess_AfterCheck);
+            this.trvProcess.VisibleChanged += new System.EventHandler(this.trvProcess_VisibleChanged);
             // 
             // pnlButtonMain
             // 
@@ -424,6 +431,9 @@
             // 
             // pnlButtonChart
             // 
+            this.pnlButtonChart.Controls.Add(this.btnSpDown);
+            this.pnlButtonChart.Controls.Add(this.btnSpUp);
+            this.pnlButtonChart.Controls.Add(this.btnAutoScroll);
             this.pnlButtonChart.Controls.Add(this.btnStop2);
             this.pnlButtonChart.Controls.Add(this.btnStart2);
             this.pnlButtonChart.Controls.Add(this.btnBack);
@@ -432,6 +442,62 @@
             this.pnlButtonChart.Name = "pnlButtonChart";
             this.pnlButtonChart.Size = new System.Drawing.Size(815, 50);
             this.pnlButtonChart.TabIndex = 0;
+            // 
+            // btnSpDown
+            // 
+            this.btnSpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSpDown.Location = new System.Drawing.Point(550, 5);
+            this.btnSpDown.Name = "btnSpDown";
+            this.btnSpDown.Size = new System.Drawing.Size(80, 40);
+            this.btnSpDown.TabIndex = 6;
+            this.btnSpDown.Text = "Speed Down";
+            this.btnSpDown.UseVisualStyleBackColor = true;
+            this.btnSpDown.Visible = false;
+            this.btnSpDown.Click += new System.EventHandler(this.btnSpDown_Click);
+            // 
+            // btnSpUp
+            // 
+            this.btnSpUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSpUp.Location = new System.Drawing.Point(460, 5);
+            this.btnSpUp.Name = "btnSpUp";
+            this.btnSpUp.Size = new System.Drawing.Size(80, 40);
+            this.btnSpUp.TabIndex = 5;
+            this.btnSpUp.Text = "Speed Up";
+            this.btnSpUp.UseVisualStyleBackColor = true;
+            this.btnSpUp.Visible = false;
+            this.btnSpUp.Click += new System.EventHandler(this.btnSpUp_Click);
+            // 
+            // btnAutoScroll
+            // 
+            this.btnAutoScroll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAutoScroll.Location = new System.Drawing.Point(640, 5);
+            this.btnAutoScroll.Name = "btnAutoScroll";
+            this.btnAutoScroll.Size = new System.Drawing.Size(80, 40);
+            this.btnAutoScroll.TabIndex = 4;
+            this.btnAutoScroll.Text = "AutoScroll";
+            this.btnAutoScroll.UseVisualStyleBackColor = true;
+            this.btnAutoScroll.Click += new System.EventHandler(this.btnAutoScroll_Click);
+            // 
+            // btnStop2
+            // 
+            this.btnStop2.Enabled = false;
+            this.btnStop2.Location = new System.Drawing.Point(100, 5);
+            this.btnStop2.Name = "btnStop2";
+            this.btnStop2.Size = new System.Drawing.Size(80, 40);
+            this.btnStop2.TabIndex = 3;
+            this.btnStop2.Text = "Stop";
+            this.btnStop2.UseVisualStyleBackColor = true;
+            this.btnStop2.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStart2
+            // 
+            this.btnStart2.Location = new System.Drawing.Point(10, 5);
+            this.btnStart2.Name = "btnStart2";
+            this.btnStart2.Size = new System.Drawing.Size(80, 40);
+            this.btnStart2.TabIndex = 2;
+            this.btnStart2.Text = "Start";
+            this.btnStart2.UseVisualStyleBackColor = true;
+            this.btnStart2.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnBack
             // 
@@ -499,7 +565,7 @@
             this.stt_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel2,
             this.tsTimerCounter,
-            this.toolStripStatusLabel1,
+            this.tsRes,
             this.toolStripStatusLabel3,
             this.tsDataRows,
             this.toolStripStatusLabel5,
@@ -524,12 +590,12 @@
             this.tsTimerCounter.Size = new System.Drawing.Size(40, 19);
             this.tsTimerCounter.Text = "None";
             // 
-            // toolStripStatusLabel1
+            // tsRes
             // 
-            this.toolStripStatusLabel1.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(486, 19);
-            this.toolStripStatusLabel1.Spring = true;
+            this.tsRes.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.tsRes.Name = "tsRes";
+            this.tsRes.Size = new System.Drawing.Size(486, 19);
+            this.tsRes.Spring = true;
             // 
             // toolStripStatusLabel3
             // 
@@ -567,26 +633,10 @@
             this.bwTimer.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwTimer_ProgressChanged);
             this.bwTimer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwTimer_RunWorkerCompleted);
             // 
-            // btnStop2
+            // timerScroll
             // 
-            this.btnStop2.Enabled = false;
-            this.btnStop2.Location = new System.Drawing.Point(100, 5);
-            this.btnStop2.Name = "btnStop2";
-            this.btnStop2.Size = new System.Drawing.Size(80, 40);
-            this.btnStop2.TabIndex = 3;
-            this.btnStop2.Text = "Stop";
-            this.btnStop2.UseVisualStyleBackColor = true;
-            this.btnStop2.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // btnStart2
-            // 
-            this.btnStart2.Location = new System.Drawing.Point(10, 5);
-            this.btnStart2.Name = "btnStart2";
-            this.btnStart2.Size = new System.Drawing.Size(80, 40);
-            this.btnStart2.TabIndex = 2;
-            this.btnStart2.Text = "Start";
-            this.btnStart2.UseVisualStyleBackColor = true;
-            this.btnStart2.Click += new System.EventHandler(this.btnStart_Click);
+            this.timerScroll.Interval = 30;
+            this.timerScroll.Tick += new System.EventHandler(this.timerScroll_Tick);
             // 
             // MainForm
             // 
@@ -600,6 +650,7 @@
             this.tittle = "FormCommon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.Controls.SetChildIndex(this.stt_Main, 0);
             this.Controls.SetChildIndex(this.grt_Main, 0);
             this.grt_Main.ResumeLayout(false);
@@ -664,7 +715,7 @@
         private System.Windows.Forms.Button btnAOI3;
         private System.Windows.Forms.Button btnAOI1;
         private System.Windows.Forms.Panel pnlButton;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel tsRes;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel tsDataRows;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
@@ -672,5 +723,9 @@
         private System.Windows.Forms.Panel pnlSetting;
         private System.Windows.Forms.Button btnStop2;
         private System.Windows.Forms.Button btnStart2;
+        private System.Windows.Forms.Button btnAutoScroll;
+        private System.Windows.Forms.Timer timerScroll;
+        private System.Windows.Forms.Button btnSpDown;
+        private System.Windows.Forms.Button btnSpUp;
     }
 }

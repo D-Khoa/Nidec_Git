@@ -20,8 +20,8 @@ namespace TrackingPQMData.View
     {
         #region VARIABLE
         double ctimer;
-        int counter, maxchoose = 6;
-        string SelectModel, ModelTable, FromTime, ToTime, setfile = "setting.ini";
+        int counter, maxchoose = 6, wchart = 1300, hchart = 250;
+        string SelectModel, ModelTable, FromTime, ToTime, setfile = @"C:\TrackingPQMData\setting.ini";
         Task[] tasks = new Task[6];
         GetSQLData getSQLData = new GetSQLData();
         List<int> listProcessIndex = new List<int>();
@@ -67,6 +67,11 @@ namespace TrackingPQMData.View
             }
         }
 
+        private void MainForm_Paint(object sender, PaintEventArgs e)
+        {
+            tsRes.Text = flp_Chart.Width + "x" + flp_Chart.Height;
+        }
+
         #region UPDATE MODEL, PROCESS AND INSPECT
         private void cmbModel_TextChanged(object sender, EventArgs e)
         {
@@ -77,7 +82,12 @@ namespace TrackingPQMData.View
                 SelectModel = cmbModel.Text;
                 trvProcess.Nodes.Clear();
                 TreeViewAddRoot();
+                trvProcess.Visible = true;
             }
+        }
+
+        private void trvProcess_VisibleChanged(object sender, EventArgs e)
+        {
             //Check process
             if (settinglist.Count > 0)
             {
@@ -188,12 +198,6 @@ namespace TrackingPQMData.View
         #region CHANGE TAB
         private void OpenChart(object sender, EventArgs e)
         {
-            DrawChart("AOI1", listInspect1, itemAOI1);
-            DrawChart("AOI2", listInspect2, itemAOI2);
-            DrawChart("AOI3", listInspect3, itemAOI3);
-            DrawChart("AOI4", listInspect4, itemAOI4);
-            DrawChart("AOI5", listInspect5, itemAOI5);
-            DrawChart("AOI6", listInspect6, itemAOI6);
             //Select Chart tab
             grt_Main.SelectedTab = tab_Chart;
         }
@@ -258,8 +262,14 @@ namespace TrackingPQMData.View
         #region TRACKING DATA
         private void btnStart_Click(object sender, EventArgs e)
         {
+            //Not run if no process checked
+            if (listProcessIndex.Count == 0 || listProcessIndex == null)
+            {
+                MessageBox.Show("Please choose process and inspect before run!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             //Set counter
-            counter = (int)numTimer.Value;
+            counter = (int)numTimer.Value * 60;
             //When couting, not allow edit setting
             if (!bwTimer.IsBusy)
             {
@@ -296,24 +306,35 @@ namespace TrackingPQMData.View
                 e.Cancel = true;
                 return;
             }
-            //Save setting file
-            if (!File.Exists(setfile))
-                File.Create(setfile);
             settinglist.Clear();
-            settinglist.Add("Model=" + cmbModel.Text);
-            settinglist.Add("Counter=" + numTimer.Value.ToString());
+            settinglist.Add("Model=" + cmbModel.Text + Environment.NewLine);
+            settinglist.Add("Counter=" + numTimer.Value.ToString() + Environment.NewLine);
             foreach (TreeNode root in trvProcess.Nodes)
             {
                 if (root.Checked)
                 {
-                    settinglist.Add("Process=" + root.Text);
+                    settinglist.Add("Process=" + root.Text + Environment.NewLine);
                     foreach (TreeNode node in root.Nodes)
                     {
-                        if (node.Checked) settinglist.Add("Inspect=" + node.Text);
+                        if (node.Checked) settinglist.Add("Inspect=" + node.Text + Environment.NewLine);
                     }
                 }
             }
-            File.WriteAllLines(setfile, settinglist);
+            if (!Directory.Exists(@"C:\TrackingPQMData\"))
+                Directory.CreateDirectory(@"C:\TrackingPQMData\");
+            //Save setting file
+            if (File.Exists(setfile))
+                File.Delete(setfile);
+            using (FileStream fs = File.Create(setfile))
+            {
+                foreach (string line in settinglist)
+                {
+                    byte[] setdata = new UTF8Encoding(true).GetBytes(line);
+                    fs.Write(setdata, 0, setdata.Length);
+                }
+                fs.Flush();
+                fs.Close();
+            }
         }
 
         /// <summary>
@@ -346,6 +367,11 @@ namespace TrackingPQMData.View
         private void bwTimer_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             tsTimerCounter.Text = e.ProgressPercentage.ToString();
+            //if(e.ProgressPercentage == (int)numAutoScroll.Value)
+            //{
+            //    flp_Chart.VerticalScroll.Value = flp_Chart.VerticalScroll.Minimum;
+            //    timerScroll.Enabled = true;
+            //}
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
@@ -368,25 +394,44 @@ namespace TrackingPQMData.View
             }
             else
             {
-                this.Cursor = Cursors.WaitCursor;
-                #region TASK START
-                ctimer = 0;
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-                tasks[0] = GetDataAOI1();
-                tasks[1] = GetDataAOI2();
-                tasks[2] = GetDataAOI3();
-                tasks[3] = GetDataAOI4();
-                tasks[4] = GetDataAOI5();
-                tasks[5] = GetDataAOI6();
-                await Task.WhenAll(tasks);
-                foreach (Task t in tasks) t.Dispose();
-                #endregion
-                stopwatch.Stop();
-                ctimer = stopwatch.ElapsedMilliseconds;
-                tsStopwatch.Text = (ctimer / 1000).ToString("0.00") + " s";
-                this.Cursor = Cursors.Default;
-                bwTimer.RunWorkerAsync();
+                try
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    pnlButtonMain.Enabled = false;
+                    pnlButtonChart.Enabled = false;
+                    #region TASK START
+                    ctimer = 0;
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    tasks[0] = GetDataAOI1();
+                    tasks[1] = GetDataAOI2();
+                    tasks[2] = GetDataAOI3();
+                    tasks[3] = GetDataAOI4();
+                    tasks[4] = GetDataAOI5();
+                    tasks[5] = GetDataAOI6();
+                    await Task.WhenAll(tasks);
+                    foreach (Task t in tasks) t.Dispose();
+                    #endregion
+                    //Draw chart
+                    DrawChart("AOI1", listInspect1, itemAOI1);
+                    DrawChart("AOI2", listInspect2, itemAOI2);
+                    DrawChart("AOI3", listInspect3, itemAOI3);
+                    DrawChart("AOI4", listInspect4, itemAOI4);
+                    DrawChart("AOI5", listInspect5, itemAOI5);
+                    DrawChart("AOI6", listInspect6, itemAOI6);
+                    flp_Chart.Refresh();
+                    stopwatch.Stop();
+                    pnlButtonMain.Enabled = true;
+                    pnlButtonChart.Enabled = true;
+                    ctimer = stopwatch.ElapsedMilliseconds;
+                    tsStopwatch.Text = (ctimer / 1000).ToString("0.00") + " s";
+                    this.Cursor = Cursors.Default;
+                    bwTimer.RunWorkerAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         #endregion
@@ -397,70 +442,97 @@ namespace TrackingPQMData.View
         /// </summary>
         private void GetAllListInspect()
         {
+            listInspect1.Clear();
+            listInspect2.Clear();
+            listInspect3.Clear();
+            listInspect4.Clear();
+            listInspect5.Clear();
+            listInspect6.Clear();
             if (listProcessIndex.Count > 0)
             {
-                listInspect1.Clear();
                 listInspect1 = GetListInspectChoose(listProcessIndex[0]);
             }
             if (listProcessIndex.Count > 1)
             {
-                listInspect2.Clear();
                 listInspect2 = GetListInspectChoose(listProcessIndex[1]);
             }
             if (listProcessIndex.Count > 2)
             {
-                listInspect3.Clear();
                 listInspect3 = GetListInspectChoose(listProcessIndex[2]);
             }
             if (listProcessIndex.Count > 3)
             {
-                listInspect4.Clear();
                 listInspect4 = GetListInspectChoose(listProcessIndex[3]);
             }
             if (listProcessIndex.Count > 4)
             {
-                listInspect5.Clear();
                 listInspect5 = GetListInspectChoose(listProcessIndex[4]);
             }
             if (listProcessIndex.Count > 5)
             {
-                listInspect6.Clear();
                 listInspect6 = GetListInspectChoose(listProcessIndex[5]);
             }
         }
 
         private async Task GetDataAOI1()
         {
+            if (listInspect1 == null)
+                await Task.Delay(0);
             itemAOI1.Clear();
             itemAOI1 = await getSQLData.InspectPointList(listInspect1, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI2()
         {
+            if (listInspect2 == null || listInspect2.Count == 0)
+            {
+                await Task.Delay(0);
+                return;
+            }
             itemAOI2.Clear();
             itemAOI2 = await getSQLData.InspectPointList(listInspect2, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI3()
         {
+            if (listInspect3 == null || listInspect3.Count == 0)
+            {
+                await Task.Delay(0);
+                return;
+            }
             itemAOI3.Clear();
             itemAOI3 = await getSQLData.InspectPointList(listInspect3, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI4()
         {
+            if (listInspect4 == null || listInspect4.Count == 0)
+            {
+                await Task.Delay(0);
+                return;
+            }
             itemAOI4.Clear();
             itemAOI4 = await getSQLData.InspectPointList(listInspect4, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI5()
         {
+            if (listInspect5 == null || listInspect5.Count == 0)
+            {
+                await Task.Delay(0);
+                return;
+            }
             itemAOI5.Clear();
             itemAOI5 = await getSQLData.InspectPointList(listInspect5, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI6()
         {
+            if (listInspect6 == null || listInspect6.Count == 0)
+            {
+                await Task.Delay(0);
+                return;
+            }
             itemAOI6.Clear();
             itemAOI6 = await getSQLData.InspectPointList(listInspect6, ModelTable, FromTime, ToTime);
         }
@@ -470,10 +542,11 @@ namespace TrackingPQMData.View
         private void DrawChart(string name, List<string> list, BindingList<DataPointItem> dtlist)
         {
             //Exit if list empty
-            if (list.Count == 0)
+            if (list.Count == 0 || list == null)
             {
                 return;
             }
+
             //With each member in list
             foreach (string inspect in list)
             {
@@ -487,40 +560,41 @@ namespace TrackingPQMData.View
                 maxline.Interval = 0;
                 maxline.IntervalOffset = maxvalue;
                 maxline.BorderWidth = 1;
+                maxline.BorderColor = Color.Red;
                 maxline.Text = "USL";
                 maxline.TextLineAlignment = StringAlignment.Far;
-                maxline.BorderColor = Color.Red;
                 //Create LSL line
                 StripLine minline = new StripLine();
                 minline.Interval = 0;
                 minline.IntervalOffset = minvalue;
                 minline.BorderWidth = 1;
+                minline.BorderColor = Color.Red;
                 minline.Text = "LSL";
                 minline.TextLineAlignment = StringAlignment.Far;
-                minline.BorderColor = Color.Red;
                 //Create 80% USL line
                 StripLine max80line = new StripLine();
                 max80line.Interval = 0;
                 max80line.IntervalOffset = maxvalue - value20;
-                max80line.BorderDashStyle = ChartDashStyle.Dash;
                 max80line.BorderWidth = 1;
+                max80line.BorderColor = Color.Red;
+                max80line.BorderDashStyle = ChartDashStyle.Dash;
                 max80line.Text = "80% USL";
                 max80line.TextLineAlignment = StringAlignment.Far;
-                max80line.BorderColor = Color.Red;
                 //Create 80% LSL line
                 StripLine min80line = new StripLine();
                 min80line.Interval = 0;
                 min80line.IntervalOffset = minvalue + value20;
-                min80line.BorderDashStyle = ChartDashStyle.Dash;
                 min80line.BorderWidth = 1;
+                min80line.BorderColor = Color.Red;
+                min80line.BorderDashStyle = ChartDashStyle.Dash;
                 min80line.Text = "80% LSL";
                 min80line.TextLineAlignment = StringAlignment.Far;
-                min80line.BorderColor = Color.Red;
                 //Create a new chart area
                 ChartArea area = new ChartArea();
                 area.AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
                 area.AxisX.Interval = 1;
-                area.AxisX.IntervalType = DateTimeIntervalType.Auto;
+                area.AxisX.IntervalType = DateTimeIntervalType.Hours;
+                area.AxisX.IntervalType = DateTimeIntervalType.Hours;
                 area.AxisY.Minimum = minvalue - value20;
                 area.AxisY.Maximum = maxvalue + value20;
                 area.AxisY.StripLines.Add(maxline);
@@ -532,7 +606,7 @@ namespace TrackingPQMData.View
                 title.Text = name + "-" + inspect;
                 datachart.Name = name + inspect;
                 datachart.Titles.Add(title);
-                datachart.Size = new Size(1200, 200);
+                datachart.Size = new Size(wchart, hchart);
                 //Create a new series
                 Series s1 = new Series
                 {
@@ -550,10 +624,10 @@ namespace TrackingPQMData.View
                         s1.Points.AddXY(item.inspectdate.ToOADate(), item.inspectdata);
                     }
                 }
-
                 if (!grt_Main.TabPages["tab_Chart"].Controls["flp_Chart"].Controls.Contains(datachart))
                     grt_Main.TabPages["tab_Chart"].Controls["flp_Chart"].Controls.Add(datachart);
                 datachart.Series.Clear();
+                datachart.ChartAreas.Clear();
                 datachart.ChartAreas.Add(area);
                 datachart.Series.Add(s1);
             }
@@ -593,6 +667,47 @@ namespace TrackingPQMData.View
                     max = dtlist[i].inspectdata;
             }
             return max;
+        }
+
+        private void btnAutoScroll_Click(object sender, EventArgs e)
+        {
+            if (timerScroll.Enabled)
+            {
+                btnAutoScroll.Text = "Auto Scroll";
+                timerScroll.Enabled = false;
+                btnSpUp.Visible = false;
+                btnSpDown.Visible = false;
+            }
+            else
+            {
+                btnAutoScroll.Text = "Stop Srcoll";
+                //Scroll flow panel with timer
+                flp_Chart.VerticalScroll.Value = flp_Chart.VerticalScroll.Minimum;
+                timerScroll.Enabled = true;
+                btnSpUp.Visible = true;
+                btnSpDown.Visible = true;
+            }
+        }
+
+        private void btnSpUp_Click(object sender, EventArgs e)
+        {
+            if (timerScroll.Interval > 10)
+                timerScroll.Interval -= 10;
+            else
+                timerScroll.Interval = 5;
+        }
+
+        private void btnSpDown_Click(object sender, EventArgs e)
+        {
+            if (timerScroll.Interval < 10000)
+                timerScroll.Interval += 10;
+        }
+
+        private void timerScroll_Tick(object sender, EventArgs e)
+        {
+            flp_Chart.VerticalScroll.Value++;
+            if (flp_Chart.VerticalScroll.Value == flp_Chart.VerticalScroll.Maximum)
+                timerScroll.Enabled = false;
         }
         #endregion
     }
