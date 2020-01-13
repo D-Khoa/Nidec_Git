@@ -682,7 +682,7 @@ namespace TrackingPQMData.View
             {
                 btnAutoScroll.Text = "Stop Srcoll";
                 //Scroll flow panel with timer
-                flp_Chart.VerticalScroll.Value = flp_Chart.VerticalScroll.Minimum;
+                //flp_Chart.VerticalScroll.Value = flp_Chart.VerticalScroll.Minimum;
                 timerScroll.Enabled = true;
                 btnSpUp.Visible = true;
                 btnSpDown.Visible = true;
@@ -706,8 +706,12 @@ namespace TrackingPQMData.View
         private void timerScroll_Tick(object sender, EventArgs e)
         {
             flp_Chart.VerticalScroll.Value++;
-            if (flp_Chart.VerticalScroll.Value == flp_Chart.VerticalScroll.Maximum)
-                timerScroll.Enabled = false;
+            if (flp_Chart.VerticalScroll.Value >= flp_Chart.VerticalScroll.Maximum - 310)
+            {
+                Thread.Sleep(1000);
+                flp_Chart.VerticalScroll.Value = flp_Chart.VerticalScroll.Minimum;
+                //timerScroll.Enabled = false;
+            }
         }
         #endregion
     }

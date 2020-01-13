@@ -1,15 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using PC_QRCodeSystem.Model;
-using System.Printing;
 using System.Management;
 
 namespace PC_QRCodeSystem.View
@@ -17,27 +14,56 @@ namespace PC_QRCodeSystem.View
     public partial class StockInForm : FormCommon
     {
         #region VARIABLE
-        string premacpath, printername, settingpath = @"setting.ini";
+        #region ITEMS DATA OF TABLE
+        //Class GetData contain SQL query
         GetData getData = new GetData();
-        TfPrint tfprinter = new TfPrint();
+        //Struct of a premac item
         PremacIn preitem = new PremacIn();
+        //Struct of a unit item
         UnitItem unititem = new UnitItem();
+        //Struct of a stock item
         StockInItem stockitem = new StockInItem();
-        List<string> allsetting = new List<string>();
+        //List premac items
         List<PremacIn> preitems = new List<PremacIn>();
+        //List unit items
         BindingList<UnitItem> unititems = new BindingList<UnitItem>();
+        //List stock items
         BindingList<StockInItem> stockitems = new BindingList<StockInItem>();
+        //List items printed
         BindingList<StockInItem> printeditems = new BindingList<StockInItem>();
-        List<string> listprintername = System.Drawing.Printing.PrinterSettings.InstalledPrinters.Cast<string>().ToList();
+        #endregion
+
+        #region ABOUT SETTING
+        //Premac file URL
+        string premacpath;
+        //Setting file URL
+        string settingpath = @"setting.ini";
+        //List all setting
+        List<string> allsetting = new List<string>();
+        #endregion
+
+        #region ABOUT PRINTER
+        //Printer name
+        string printername;
+        //Class TfPrint is library of printer
+        TfPrint tfprinter = new TfPrint();
+        //List all printer name
+        List<string> listprintername =
+            System.Drawing.Printing.PrinterSettings.InstalledPrinters.Cast<string>().ToList();
+        #endregion
         #endregion
 
         public StockInForm()
         {
             InitializeComponent();
+            //Hide tab bar
             grt_StockIn.ItemSize = new Size(0, 1);
+            //Select Stock in tab
             grt_StockIn.SelectedTab = tab_StockIn;
+            //Get list printer name into combobox printer
             cmbPrinterName.DataSource = listprintername;
             cmbPrinterName.Text = null;
+            //Hide packing panel and pint panel
             pnlPacking.Visible = false;
             pnlPrinter.Visible = false;
         }
@@ -476,7 +502,7 @@ namespace PC_QRCodeSystem.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-       
+
 
         /// <summary>
         /// Show list of printed items

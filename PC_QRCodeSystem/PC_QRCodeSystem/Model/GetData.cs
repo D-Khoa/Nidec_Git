@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace PC_QRCodeSystem.Model
 {
+    /// <summary>
+    /// Class contain all SQL query of project
+    /// </summary>
     public class GetData
     {
         PSQL SQL = new PSQL();
