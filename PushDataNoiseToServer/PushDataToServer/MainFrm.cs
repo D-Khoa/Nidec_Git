@@ -46,6 +46,8 @@ namespace PushDataToServer
                     btnPush.Enabled = false;
                     btnStop.Enabled = true;
                     txtFrom.ReadOnly = true;
+                    btnBrowserFrom.Enabled = false;
+                    txtNo.Enabled = false;
                     backgroundWorker1.RunWorkerAsync();
                 }
             }
@@ -60,6 +62,8 @@ namespace PushDataToServer
             btnPush.Enabled = true;
             btnStop.Enabled = false;
             txtFrom.ReadOnly = false;
+            txtNo.Enabled = true;
+            btnBrowserFrom.Enabled = true;
             backgroundWorker1.CancelAsync();
         }
 
