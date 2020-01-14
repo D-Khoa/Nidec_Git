@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -122,6 +122,12 @@
     <Compile Include="View\SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\History.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\History.Designer.cs">
+      <DependentUpon>History.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\InspectCell.resx">
       <DependentUpon>InspectCell.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +145,9 @@
     </Compile>
     <EmbeddedResource Include="View\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\History.resx">
+      <DependentUpon>History.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
