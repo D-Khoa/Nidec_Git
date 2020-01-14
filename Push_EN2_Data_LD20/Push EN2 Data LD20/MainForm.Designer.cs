@@ -32,27 +32,30 @@
             this.btnBrowser = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlSetting = new System.Windows.Forms.Panel();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.dgvDataLog = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBrowserServer = new System.Windows.Forms.Button();
             this.txtServerFolder = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsCounter = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.numCounter = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.dgvDataLog = new System.Windows.Forms.DataGridView();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.error = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numCounter = new System.Windows.Forms.NumericUpDown();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsCounter = new System.Windows.Forms.ToolStripStatusLabel();
+            this.bwSendData = new System.ComponentModel.BackgroundWorker();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataLog)).BeginInit();
             this.panel1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtDataFolder
@@ -96,32 +99,6 @@
             this.pnlSetting.Size = new System.Drawing.Size(480, 70);
             this.pnlSetting.TabIndex = 3;
             // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(10, 80);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(80, 50);
-            this.btnStart.TabIndex = 3;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // dgvDataLog
-            // 
-            this.dgvDataLog.AllowUserToAddRows = false;
-            this.dgvDataLog.AllowUserToDeleteRows = false;
-            this.dgvDataLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDataLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.date,
-            this.status,
-            this.error});
-            this.dgvDataLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDataLog.Location = new System.Drawing.Point(0, 140);
-            this.dgvDataLog.Name = "dgvDataLog";
-            this.dgvDataLog.ReadOnly = true;
-            this.dgvDataLog.Size = new System.Drawing.Size(480, 182);
-            this.dgvDataLog.TabIndex = 4;
-            // 
             // label2
             // 
             this.label2.Location = new System.Drawing.Point(10, 40);
@@ -149,74 +126,31 @@
             this.txtServerFolder.Size = new System.Drawing.Size(300, 20);
             this.txtServerFolder.TabIndex = 4;
             // 
-            // panel1
+            // btnStart
             // 
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.numCounter);
-            this.panel1.Controls.Add(this.btnStop);
-            this.panel1.Controls.Add(this.pnlSetting);
-            this.panel1.Controls.Add(this.btnStart);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(480, 140);
-            this.panel1.TabIndex = 7;
+            this.btnStart.Location = new System.Drawing.Point(10, 80);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(80, 50);
+            this.btnStart.TabIndex = 3;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // btnStop
+            // dgvDataLog
             // 
-            this.btnStop.Location = new System.Drawing.Point(100, 80);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(80, 50);
-            this.btnStop.TabIndex = 4;
-            this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel2,
-            this.toolStripStatusLabel1,
-            this.tsCounter});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 322);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(480, 22);
-            this.statusStrip1.TabIndex = 8;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
-            this.toolStripStatusLabel1.Text = "Counter :";
-            // 
-            // tsCounter
-            // 
-            this.tsCounter.Name = "tsCounter";
-            this.tsCounter.Size = new System.Drawing.Size(36, 17);
-            this.tsCounter.Text = "None";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(373, 17);
-            this.toolStripStatusLabel2.Spring = true;
-            // 
-            // numCounter
-            // 
-            this.numCounter.Location = new System.Drawing.Point(193, 110);
-            this.numCounter.Name = "numCounter";
-            this.numCounter.Size = new System.Drawing.Size(77, 20);
-            this.numCounter.TabIndex = 5;
-            this.numCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(190, 80);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Counter";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dgvDataLog.AllowUserToAddRows = false;
+            this.dgvDataLog.AllowUserToDeleteRows = false;
+            this.dgvDataLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDataLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.date,
+            this.status,
+            this.error});
+            this.dgvDataLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDataLog.Location = new System.Drawing.Point(0, 140);
+            this.dgvDataLog.Name = "dgvDataLog";
+            this.dgvDataLog.ReadOnly = true;
+            this.dgvDataLog.Size = new System.Drawing.Size(480, 180);
+            this.dgvDataLog.TabIndex = 4;
             // 
             // date
             // 
@@ -241,6 +175,118 @@
             this.error.Name = "error";
             this.error.ReadOnly = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.numCounter);
+            this.panel1.Controls.Add(this.btnStop);
+            this.panel1.Controls.Add(this.pnlSetting);
+            this.panel1.Controls.Add(this.btnStart);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(480, 140);
+            this.panel1.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(190, 80);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Counter";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // numCounter
+            // 
+            this.numCounter.Location = new System.Drawing.Point(193, 110);
+            this.numCounter.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numCounter.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numCounter.Name = "numCounter";
+            this.numCounter.Size = new System.Drawing.Size(77, 20);
+            this.numCounter.TabIndex = 5;
+            this.numCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCounter.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // btnStop
+            // 
+            this.btnStop.Enabled = false;
+            this.btnStop.Location = new System.Drawing.Point(100, 80);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(80, 50);
+            this.btnStop.TabIndex = 4;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.tsSpeed,
+            this.tsStatus,
+            this.toolStripStatusLabel1,
+            this.tsCounter});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 320);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(480, 24);
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsStatus
+            // 
+            this.tsStatus.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.tsStatus.Name = "tsStatus";
+            this.tsStatus.Size = new System.Drawing.Size(249, 19);
+            this.tsStatus.Spring = true;
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 19);
+            this.toolStripStatusLabel1.Text = "Counter :";
+            // 
+            // tsCounter
+            // 
+            this.tsCounter.Name = "tsCounter";
+            this.tsCounter.Size = new System.Drawing.Size(36, 19);
+            this.tsCounter.Text = "None";
+            // 
+            // bwSendData
+            // 
+            this.bwSendData.WorkerReportsProgress = true;
+            this.bwSendData.WorkerSupportsCancellation = true;
+            this.bwSendData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwSendData_DoWork);
+            this.bwSendData.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwSendData_ProgressChanged);
+            this.bwSendData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwSendData_RunWorkerCompleted);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(49, 19);
+            this.toolStripStatusLabel2.Text = "Speed :";
+            // 
+            // tsSpeed
+            // 
+            this.tsSpeed.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsSpeed.Name = "tsSpeed";
+            this.tsSpeed.Size = new System.Drawing.Size(40, 19);
+            this.tsSpeed.Text = "None";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,13 +297,15 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "MainForm";
             this.Text = "Convert and push EN2 data";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.pnlSetting.ResumeLayout(false);
             this.pnlSetting.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataLog)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numCounter)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numCounter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,7 +325,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel tsStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tsCounter;
         private System.Windows.Forms.Label label3;
@@ -285,6 +333,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn error;
+        private System.ComponentModel.BackgroundWorker bwSendData;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel tsSpeed;
     }
 }
 

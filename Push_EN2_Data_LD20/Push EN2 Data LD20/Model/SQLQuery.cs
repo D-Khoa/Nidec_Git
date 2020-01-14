@@ -23,17 +23,32 @@ namespace Push_EN2_Data_LD20
 
         public int InsertInspectItem(string table, DataItem item)
         {
-            if (item.inspect == "RDC" && (item.RDC > 9.9 && item.RDC < 12.2))
-                item.jugde = "0";
-            if (item.inspect == "SDF0" && (item.SDF0 > 170 && item.SDF0 < 180))
-                item.jugde = "0";
-            if (item.inspect == "SDCURMAX" && (item.SDCURMAX < 230))
-                item.jugde = "0";
+            if (string.IsNullOrEmpty(item.jugde))
+                item.jugde = item.tjugde;
             Query = "INSERT INTO " + table + "data";
             Query += "(serno, lot, inspectdate, inspect, inspectdata, judge) ";
             Query += "VALUES('" + item.serno + "','" + item.lot + "','" + item.inspectdate + "','";
             Query += item.inspect + "','" + item.inspectdata + "','" + item.jugde + "')";
             return SQL.sqlExecuteNonQueryInt(Query);
         }
+
+        public int InsertInspectItem(string table, DataItem item, string name, double usl, double lsl)
+        {
+            if (item.inspect == name)
+            {
+                if (item.RDC > lsl && item.RDC < usl)
+                    item.jugde = "0";
+                else
+                    item.jugde = "1";
+            }
+            if (string.IsNullOrEmpty(item.jugde))
+                item.jugde = item.tjugde;
+            Query = "INSERT INTO " + table + "data";
+            Query += "(serno, lot, inspectdate, inspect, inspectdata, judge) ";
+            Query += "VALUES('" + item.serno + "','" + item.lot + "','" + item.inspectdate + "','";
+            Query += item.inspect + "','" + item.inspectdata + "','" + item.jugde + "')";
+            return SQL.sqlExecuteNonQueryInt(Query);
+        }
+
     }
 }
