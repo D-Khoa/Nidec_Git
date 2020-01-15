@@ -29,21 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.grt_Main = new System.Windows.Forms.TabControl();
             this.tab_Main = new System.Windows.Forms.TabPage();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlSetting = new System.Windows.Forms.Panel();
+            this.dtpDateEnd = new System.Windows.Forms.DateTimePicker();
             this.cmbModel = new System.Windows.Forms.ComboBox();
-            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateBegin = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
-            this.dtpBegin = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.numTimer = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.pnlButton = new System.Windows.Forms.Panel();
             this.btnAOI5 = new System.Windows.Forms.Button();
             this.btnAOI6 = new System.Windows.Forms.Button();
@@ -137,64 +136,60 @@
             // 
             // pnlSetting
             // 
+            this.pnlSetting.Controls.Add(this.dtpDateEnd);
             this.pnlSetting.Controls.Add(this.cmbModel);
-            this.pnlSetting.Controls.Add(this.dtpDate);
+            this.pnlSetting.Controls.Add(this.dtpDateBegin);
             this.pnlSetting.Controls.Add(this.label7);
-            this.pnlSetting.Controls.Add(this.dtpBegin);
             this.pnlSetting.Controls.Add(this.label6);
             this.pnlSetting.Controls.Add(this.label1);
             this.pnlSetting.Controls.Add(this.numTimer);
-            this.pnlSetting.Controls.Add(this.label2);
             this.pnlSetting.Controls.Add(this.label5);
             this.pnlSetting.Controls.Add(this.label3);
-            this.pnlSetting.Controls.Add(this.dtpEnd);
             this.pnlSetting.Location = new System.Drawing.Point(13, 6);
             this.pnlSetting.Name = "pnlSetting";
             this.pnlSetting.Size = new System.Drawing.Size(280, 168);
             this.pnlSetting.TabIndex = 14;
             // 
+            // dtpDateEnd
+            // 
+            this.dtpDateEnd.CustomFormat = "yyyy-MM-dd HH:mm";
+            this.dtpDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateEnd.Location = new System.Drawing.Point(120, 65);
+            this.dtpDateEnd.Name = "dtpDateEnd";
+            this.dtpDateEnd.Size = new System.Drawing.Size(130, 20);
+            this.dtpDateEnd.TabIndex = 13;
+            // 
             // cmbModel
             // 
             this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(121, 5);
+            this.cmbModel.Location = new System.Drawing.Point(120, 5);
             this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(120, 21);
+            this.cmbModel.Size = new System.Drawing.Size(130, 21);
             this.cmbModel.TabIndex = 0;
             this.cmbModel.TextChanged += new System.EventHandler(this.cmbModel_TextChanged);
             // 
-            // dtpDate
+            // dtpDateBegin
             // 
-            this.dtpDate.CustomFormat = "yyyy-MM-dd";
-            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDate.Location = new System.Drawing.Point(121, 35);
-            this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(120, 20);
-            this.dtpDate.TabIndex = 4;
+            this.dtpDateBegin.CustomFormat = "yyyy-MM-dd HH:mm";
+            this.dtpDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateBegin.Location = new System.Drawing.Point(120, 35);
+            this.dtpDateBegin.Name = "dtpDateBegin";
+            this.dtpDateBegin.Size = new System.Drawing.Size(130, 20);
+            this.dtpDateBegin.TabIndex = 4;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(191, 125);
+            this.label7.Location = new System.Drawing.Point(190, 95);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(86, 20);
             this.label7.TabIndex = 12;
             this.label7.Text = "(min)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dtpBegin
-            // 
-            this.dtpBegin.CustomFormat = "HH:mm";
-            this.dtpBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBegin.Location = new System.Drawing.Point(121, 65);
-            this.dtpBegin.Name = "dtpBegin";
-            this.dtpBegin.ShowUpDown = true;
-            this.dtpBegin.Size = new System.Drawing.Size(120, 20);
-            this.dtpBegin.TabIndex = 5;
-            this.dtpBegin.Value = new System.DateTime(2020, 1, 4, 0, 0, 0, 0);
-            // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(11, 125);
+            this.label6.Location = new System.Drawing.Point(10, 95);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 20);
             this.label6.TabIndex = 11;
@@ -203,7 +198,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(11, 5);
+            this.label1.Location = new System.Drawing.Point(10, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.TabIndex = 1;
@@ -212,7 +207,7 @@
             // 
             // numTimer
             // 
-            this.numTimer.Location = new System.Drawing.Point(121, 125);
+            this.numTimer.Location = new System.Drawing.Point(120, 95);
             this.numTimer.Maximum = new decimal(new int[] {
             60,
             0,
@@ -228,43 +223,23 @@
             0,
             0});
             // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(11, 95);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "End";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(11, 35);
+            this.label5.Location = new System.Drawing.Point(10, 35);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 20);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Date";
+            this.label5.Text = "Begin";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(11, 65);
+            this.label3.Location = new System.Drawing.Point(10, 65);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 20);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Begin";
+            this.label3.Text = "End";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dtpEnd
-            // 
-            this.dtpEnd.CustomFormat = "HH:mm";
-            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(121, 95);
-            this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.ShowUpDown = true;
-            this.dtpEnd.Size = new System.Drawing.Size(120, 20);
-            this.dtpEnd.TabIndex = 9;
-            this.dtpEnd.Value = new System.DateTime(2020, 1, 4, 23, 59, 0, 0);
             // 
             // pnlButton
             // 
@@ -645,12 +620,13 @@
             this.ClientSize = new System.Drawing.Size(829, 482);
             this.Controls.Add(this.grt_Main);
             this.Controls.Add(this.stt_Main);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.tittle = "FormCommon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.Controls.SetChildIndex(this.stt_Main, 0);
             this.Controls.SetChildIndex(this.grt_Main, 0);
             this.grt_Main.ResumeLayout(false);
@@ -683,15 +659,12 @@
         private System.Windows.Forms.ComboBox cmbModel;
         private System.Windows.Forms.Panel pnlButtonChart;
         private System.Windows.Forms.Panel pnlButtonMain;
-        private System.Windows.Forms.DateTimePicker dtpDate;
+        private System.Windows.Forms.DateTimePicker dtpDateBegin;
         private System.Windows.Forms.TreeView trvProcess;
-        private System.Windows.Forms.DateTimePicker dtpBegin;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.StatusStrip stt_Main;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tsTimerCounter;
@@ -727,5 +700,6 @@
         private System.Windows.Forms.Timer timerScroll;
         private System.Windows.Forms.Button btnSpDown;
         private System.Windows.Forms.Button btnSpUp;
+        private System.Windows.Forms.DateTimePicker dtpDateEnd;
     }
 }

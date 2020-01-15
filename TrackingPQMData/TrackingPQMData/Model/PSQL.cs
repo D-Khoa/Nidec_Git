@@ -377,6 +377,7 @@ namespace TrackingPQMData.Model
                 NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
                 adapter.SelectCommand = command;
                 adapter.Fill(dt);
+                adapter.Dispose();
                 return dt;
             });
         }

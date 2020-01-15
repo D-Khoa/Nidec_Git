@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TrackingPQMData.Model;
 
@@ -105,40 +106,23 @@ namespace TrackingPQMData.Controller
         /// <param name="begin">begin time</param>
         /// <param name="end">end time</param>
         /// <returns></returns>
-        public async Task<BindingList<DataPointItem>> InspectPointList(List<string> list, string table, string begin, string end)
+        public async Task<DataTable> InspectPointList(List<string> list, string table, string begin, string end)
         {
             try
             {
                 if (list.Count == 0)
                     return null;
-                string inspects = "";
-                DataTable dt = new DataTable();
-                BindingList<DataPointItem> dtlist = new BindingList<DataPointItem>();
+                string query = string.Empty;
+                string inspects = string.Empty;
                 foreach (string text in list)
                 {
                     inspects += "'" + text + "',";
                 }
                 inspects = inspects.Remove(inspects.Length - 1);
-
-                Query.Clear();
-                Query.Append("select * from ").Append(table).Append(" where inspectdate >= '").Append(begin);
-                Query.Append("' and inspectdate <= '").Append(end).Append("' and inspect in (").Append(inspects);
-                Query.Append(") order by inspect, inspectdate");
-                dt = await SQL.TaskAdapterFill(Query.ToString());
-                Query.Clear();
-                foreach (DataRow dr in dt.Rows)
-                {
-                    DataPointItem item = new DataPointItem
-                    {
-                        serno = dr["serno"].ToString(),
-                        inspectdate = (DateTime)dr["inspectdate"],
-                        inspect = dr["inspect"].ToString(),
-                        inspectdata = (double)dr["inspectdata"],
-                        judge = dr["judge"].ToString()
-                    };
-                    dtlist.Add(item);
-                }
-                return dtlist;
+                query = "select * from " + table + " where inspectdate >= '" + begin;
+                query += "' and inspectdate <= '" + end + "' and inspect in (" + inspects + ") order by inspect, inspectdate";
+                var dt = await Task.WhenAny(SQL.TaskAdapterFill(query));
+                return await dt;
             }
             catch (Exception ex)
             {

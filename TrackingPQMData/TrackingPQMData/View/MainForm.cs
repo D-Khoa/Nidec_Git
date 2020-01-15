@@ -46,6 +46,8 @@ namespace TrackingPQMData.View
         {
             InitializeComponent();
             grt_Main.ItemSize = new Size(0, 1);
+            dtpDateBegin.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
+            dtpDateEnd.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -65,11 +67,6 @@ namespace TrackingPQMData.View
                     if (line.Contains("Inspect")) listInspect.Add(line.Split('=')[1]);
                 }
             }
-        }
-
-        private void MainForm_Paint(object sender, PaintEventArgs e)
-        {
-            tsRes.Text = flp_Chart.Width + "x" + flp_Chart.Height;
         }
 
         #region UPDATE MODEL, PROCESS AND INSPECT
@@ -189,9 +186,9 @@ namespace TrackingPQMData.View
         /// </summary>
         private void GetTableName()
         {
-            ModelTable = SelectModel + dtpDate.Value.ToString("yyyyMM") + "data";
-            FromTime = dtpDate.Value.ToString("yyyy-MM-dd") + " " + dtpBegin.Value.ToString("HH:mm");
-            ToTime = dtpDate.Value.ToString("yyyy-MM-dd") + " " + dtpEnd.Value.ToString("HH:mm");
+            ModelTable = SelectModel + dtpDateBegin.Value.ToString("yyyyMM") + "data";
+            FromTime = dtpDateBegin.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            ToTime = dtpDateEnd.Value.ToString("yyyy-MM-dd HH:mm:ss");
         }
         #endregion
 
@@ -269,7 +266,7 @@ namespace TrackingPQMData.View
                 return;
             }
             //Set counter
-            counter = (int)numTimer.Value * 60;
+            counter = (int)numTimer.Value;
             //When couting, not allow edit setting
             if (!bwTimer.IsBusy)
             {
@@ -367,11 +364,6 @@ namespace TrackingPQMData.View
         private void bwTimer_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             tsTimerCounter.Text = e.ProgressPercentage.ToString();
-            //if(e.ProgressPercentage == (int)numAutoScroll.Value)
-            //{
-            //    flp_Chart.VerticalScroll.Value = flp_Chart.VerticalScroll.Minimum;
-            //    timerScroll.Enabled = true;
-            //}
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
@@ -476,65 +468,128 @@ namespace TrackingPQMData.View
 
         private async Task GetDataAOI1()
         {
+            DataTable dt = new DataTable();
             if (listInspect1 == null)
                 await Task.Delay(0);
             itemAOI1.Clear();
-            itemAOI1 = await getSQLData.InspectPointList(listInspect1, ModelTable, FromTime, ToTime);
+            dt = await getSQLData.InspectPointList(listInspect1, ModelTable, FromTime, ToTime);
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataPointItem item = new DataPointItem
+                {
+                    serno = dr["serno"].ToString(),
+                    inspectdate = (DateTime)dr["inspectdate"],
+                    inspect = dr["inspect"].ToString(),
+                    inspectdata = (double)dr["inspectdata"],
+                    judge = dr["judge"].ToString()
+                };
+                itemAOI1.Add(item);
+            }
         }
 
         private async Task GetDataAOI2()
         {
-            if (listInspect2 == null || listInspect2.Count == 0)
-            {
+            DataTable dt = new DataTable();
+            if (listInspect2 == null)
                 await Task.Delay(0);
-                return;
+            itemAOI1.Clear();
+            dt = await getSQLData.InspectPointList(listInspect2, ModelTable, FromTime, ToTime);
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataPointItem item = new DataPointItem
+                {
+                    serno = dr["serno"].ToString(),
+                    inspectdate = (DateTime)dr["inspectdate"],
+                    inspect = dr["inspect"].ToString(),
+                    inspectdata = (double)dr["inspectdata"],
+                    judge = dr["judge"].ToString()
+                };
+                itemAOI2.Add(item);
             }
-            itemAOI2.Clear();
-            itemAOI2 = await getSQLData.InspectPointList(listInspect2, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI3()
         {
-            if (listInspect3 == null || listInspect3.Count == 0)
-            {
+            DataTable dt = new DataTable();
+            if (listInspect3 == null)
                 await Task.Delay(0);
-                return;
+            itemAOI1.Clear();
+            dt = await getSQLData.InspectPointList(listInspect3, ModelTable, FromTime, ToTime);
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataPointItem item = new DataPointItem
+                {
+                    serno = dr["serno"].ToString(),
+                    inspectdate = (DateTime)dr["inspectdate"],
+                    inspect = dr["inspect"].ToString(),
+                    inspectdata = (double)dr["inspectdata"],
+                    judge = dr["judge"].ToString()
+                };
+                itemAOI3.Add(item);
             }
-            itemAOI3.Clear();
-            itemAOI3 = await getSQLData.InspectPointList(listInspect3, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI4()
         {
-            if (listInspect4 == null || listInspect4.Count == 0)
-            {
+            DataTable dt = new DataTable();
+            if (listInspect4 == null)
                 await Task.Delay(0);
-                return;
+            itemAOI1.Clear();
+            dt = await getSQLData.InspectPointList(listInspect4, ModelTable, FromTime, ToTime);
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataPointItem item = new DataPointItem
+                {
+                    serno = dr["serno"].ToString(),
+                    inspectdate = (DateTime)dr["inspectdate"],
+                    inspect = dr["inspect"].ToString(),
+                    inspectdata = (double)dr["inspectdata"],
+                    judge = dr["judge"].ToString()
+                };
+                itemAOI4.Add(item);
             }
-            itemAOI4.Clear();
-            itemAOI4 = await getSQLData.InspectPointList(listInspect4, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI5()
         {
-            if (listInspect5 == null || listInspect5.Count == 0)
-            {
+            DataTable dt = new DataTable();
+            if (listInspect5 == null)
                 await Task.Delay(0);
-                return;
+            itemAOI1.Clear();
+            dt = await getSQLData.InspectPointList(listInspect5, ModelTable, FromTime, ToTime);
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataPointItem item = new DataPointItem
+                {
+                    serno = dr["serno"].ToString(),
+                    inspectdate = (DateTime)dr["inspectdate"],
+                    inspect = dr["inspect"].ToString(),
+                    inspectdata = (double)dr["inspectdata"],
+                    judge = dr["judge"].ToString()
+                };
+                itemAOI5.Add(item);
             }
-            itemAOI5.Clear();
-            itemAOI5 = await getSQLData.InspectPointList(listInspect5, ModelTable, FromTime, ToTime);
         }
 
         private async Task GetDataAOI6()
         {
-            if (listInspect6 == null || listInspect6.Count == 0)
-            {
+            DataTable dt = new DataTable();
+            if (listInspect6 == null)
                 await Task.Delay(0);
-                return;
+            itemAOI1.Clear();
+            dt = await getSQLData.InspectPointList(listInspect6, ModelTable, FromTime, ToTime);
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataPointItem item = new DataPointItem
+                {
+                    serno = dr["serno"].ToString(),
+                    inspectdate = (DateTime)dr["inspectdate"],
+                    inspect = dr["inspect"].ToString(),
+                    inspectdata = (double)dr["inspectdata"],
+                    judge = dr["judge"].ToString()
+                };
+                itemAOI6.Add(item);
             }
-            itemAOI6.Clear();
-            itemAOI6 = await getSQLData.InspectPointList(listInspect6, ModelTable, FromTime, ToTime);
         }
         #endregion
 
@@ -594,9 +649,10 @@ namespace TrackingPQMData.View
                 area.AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
                 area.AxisX.Interval = 1;
                 area.AxisX.IntervalType = DateTimeIntervalType.Hours;
-                area.AxisX.IntervalType = DateTimeIntervalType.Hours;
-                area.AxisY.Minimum = minvalue - value20;
-                area.AxisY.Maximum = maxvalue + value20;
+                //area.AxisX.Minimum = dtpDateBegin.Value.ToOADate();
+                //area.AxisX.Maximum = dtpDateEnd.Value.ToOADate();
+                area.AxisY.Minimum = minvalue;
+                area.AxisY.Maximum = maxvalue;
                 area.AxisY.StripLines.Add(maxline);
                 area.AxisY.StripLines.Add(minline);
                 area.AxisY.StripLines.Add(max80line);
@@ -631,6 +687,19 @@ namespace TrackingPQMData.View
                 datachart.ChartAreas.Add(area);
                 datachart.Series.Add(s1);
             }
+        }
+
+        private void ResizeChart(int w, int h)
+        {
+            foreach (Control control in flp_Chart.Controls.OfType<Chart>())
+            {
+                control.Size = new Size(w - 20, h);
+            }
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            ResizeChart(flp_Chart.Width, flp_Chart.Height);
         }
 
         /// <summary>
