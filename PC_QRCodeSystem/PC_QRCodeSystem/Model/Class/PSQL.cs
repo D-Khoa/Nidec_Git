@@ -19,6 +19,30 @@ namespace PC_QRCodeSystem.Model
         }
 
         /// <summary>
+        /// Open SQL connection
+        /// </summary>
+        public void Open()
+        {
+            connection = new NpgsqlConnection(strConnection);
+            connection.Open();
+        }
+
+        /// <summary>
+        /// Close SQL connection
+        /// </summary>
+        public void Close()
+        {
+            connection.Dispose();
+            connection.Close();
+        }
+
+        public IDbCommand Command(string sql)
+        {
+            NpgsqlCommand command = new NpgsqlCommand(sql);
+            return command;
+        }
+
+        /// <summary>
         /// Get data into combobox
         /// </summary>
         /// <param name="sql"></param>

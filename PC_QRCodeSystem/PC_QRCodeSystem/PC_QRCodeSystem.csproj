@@ -98,6 +98,13 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Items\PCStockItem.cs" />
+    <Compile Include="Model\Items\pts_department.cs" />
+    <Compile Include="Model\Items\pts_issue_code.cs" />
+    <Compile Include="Model\Items\pts_item_unit.cs" />
+    <Compile Include="Model\Items\pts_request_log.cs" />
+    <Compile Include="Model\Items\pts_stock.cs" />
+    <Compile Include="Model\Items\pts_stockout_log.cs" />
+    <Compile Include="Model\Items\pts_supplier.cs" />
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,7 +231,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\Dao\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
