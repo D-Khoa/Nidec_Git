@@ -48,19 +48,19 @@
             this.tab_Menu = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnRequestLog = new System.Windows.Forms.Button();
             this.btnStockOutLog = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnSupplier = new System.Windows.Forms.Button();
             this.btnDepartment = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnUnitItem = new System.Windows.Forms.Button();
+            this.btnItem = new System.Windows.Forms.Button();
             this.btnItemType = new System.Windows.Forms.Button();
             this.btnIssueCode = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -133,7 +133,7 @@
             this.pnlRequest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRequest.Location = new System.Drawing.Point(3, 3);
             this.pnlRequest.Name = "pnlRequest";
-            this.pnlRequest.Size = new System.Drawing.Size(830, 469);
+            this.pnlRequest.Size = new System.Drawing.Size(685, 400);
             this.pnlRequest.TabIndex = 3;
             // 
             // dgvRequest
@@ -149,7 +149,7 @@
             this.dgvRequest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRequest.Location = new System.Drawing.Point(0, 38);
             this.dgvRequest.Name = "dgvRequest";
-            this.dgvRequest.Size = new System.Drawing.Size(830, 377);
+            this.dgvRequest.Size = new System.Drawing.Size(685, 308);
             this.dgvRequest.TabIndex = 4;
             // 
             // request_time
@@ -190,9 +190,9 @@
             this.panel4.Controls.Add(this.btnAccept);
             this.panel4.Controls.Add(this.btnDeny);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 415);
+            this.panel4.Location = new System.Drawing.Point(0, 346);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(830, 54);
+            this.panel4.Size = new System.Drawing.Size(685, 54);
             this.panel4.TabIndex = 5;
             // 
             // btnAccept
@@ -208,7 +208,7 @@
             // btnDeny
             // 
             this.btnDeny.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeny.Location = new System.Drawing.Point(675, 8);
+            this.btnDeny.Location = new System.Drawing.Point(530, 8);
             this.btnDeny.Name = "btnDeny";
             this.btnDeny.Size = new System.Drawing.Size(96, 43);
             this.btnDeny.TabIndex = 3;
@@ -222,7 +222,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(830, 38);
+            this.label1.Size = new System.Drawing.Size(685, 38);
             this.label1.TabIndex = 1;
             this.label1.Text = "Request";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -273,6 +273,18 @@
             this.panel8.Size = new System.Drawing.Size(445, 80);
             this.panel8.TabIndex = 9;
             // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(445, 20);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Data Log";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // btnRequestLog
             // 
             this.btnRequestLog.Location = new System.Drawing.Point(20, 25);
@@ -302,6 +314,18 @@
             this.panel7.Size = new System.Drawing.Size(445, 80);
             this.panel7.TabIndex = 8;
             // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(445, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Supplier And DepartMent";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // btnSupplier
             // 
             this.btnSupplier.Location = new System.Drawing.Point(20, 25);
@@ -323,7 +347,7 @@
             // panel6
             // 
             this.panel6.Controls.Add(this.label2);
-            this.panel6.Controls.Add(this.btnUnitItem);
+            this.panel6.Controls.Add(this.btnItem);
             this.panel6.Controls.Add(this.btnItemType);
             this.panel6.Controls.Add(this.btnIssueCode);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
@@ -344,14 +368,15 @@
             this.label2.Text = "Items And Issue";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btnUnitItem
+            // btnItem
             // 
-            this.btnUnitItem.Location = new System.Drawing.Point(20, 25);
-            this.btnUnitItem.Name = "btnUnitItem";
-            this.btnUnitItem.Size = new System.Drawing.Size(100, 50);
-            this.btnUnitItem.TabIndex = 0;
-            this.btnUnitItem.Text = "Unit Item";
-            this.btnUnitItem.UseVisualStyleBackColor = true;
+            this.btnItem.Location = new System.Drawing.Point(20, 25);
+            this.btnItem.Name = "btnItem";
+            this.btnItem.Size = new System.Drawing.Size(100, 50);
+            this.btnItem.TabIndex = 0;
+            this.btnItem.Text = "Item";
+            this.btnItem.UseVisualStyleBackColor = true;
+            this.btnItem.Click += new System.EventHandler(this.btnItem_Click);
             // 
             // btnItemType
             // 
@@ -377,34 +402,10 @@
             this.tab_Request.Location = new System.Drawing.Point(4, 25);
             this.tab_Request.Name = "tab_Request";
             this.tab_Request.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Request.Size = new System.Drawing.Size(836, 475);
+            this.tab_Request.Size = new System.Drawing.Size(691, 406);
             this.tab_Request.TabIndex = 1;
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(445, 20);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Supplier And DepartMent";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(445, 20);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Data Log";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PCForm
             // 
@@ -456,7 +457,7 @@
         private System.Windows.Forms.TabPage tab_Menu;
         private System.Windows.Forms.Button btnSupplier;
         private System.Windows.Forms.Button btnDepartment;
-        private System.Windows.Forms.Button btnUnitItem;
+        private System.Windows.Forms.Button btnItem;
         private System.Windows.Forms.Button btnItemType;
         private System.Windows.Forms.Button btnIssueCode;
         private System.Windows.Forms.Button btnStockOutLog;

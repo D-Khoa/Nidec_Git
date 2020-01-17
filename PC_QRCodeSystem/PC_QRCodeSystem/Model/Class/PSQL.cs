@@ -38,7 +38,7 @@ namespace PC_QRCodeSystem.Model
 
         public IDbCommand Command(string sql)
         {
-            NpgsqlCommand command = new NpgsqlCommand(sql);
+            NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             return command;
         }
 

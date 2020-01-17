@@ -15,6 +15,7 @@ namespace PC_QRCodeSystem.View
         public PCForm()
         {
             InitializeComponent();
+            grt_Main.ItemSize = new Size(0, 1);
         }
 
         /// <summary>
@@ -49,6 +50,12 @@ namespace PC_QRCodeSystem.View
             StockDetailForm dtlFrm = new StockDetailForm();
             dtlFrm.ShowDialog();
 
+        }
+
+        private void btnItem_Click(object sender, EventArgs e)
+        {
+            SubForm itemfrm = new SubForm("tab_Item");
+            itemfrm.Show();
         }
     }
 }

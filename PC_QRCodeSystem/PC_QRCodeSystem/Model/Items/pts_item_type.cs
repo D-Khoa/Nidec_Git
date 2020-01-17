@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace PC_QRCodeSystem.Model.Items
+namespace PC_QRCodeSystem.Model
 {
     /// <summary>
     /// TYPE OF ITEM IN PRODUCTION TRACEBILITY SYSTEM

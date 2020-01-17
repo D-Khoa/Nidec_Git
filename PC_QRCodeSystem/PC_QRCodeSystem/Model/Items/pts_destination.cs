@@ -7,7 +7,7 @@ namespace PC_QRCodeSystem.Model
     /// <summary>
     ///DESTINATION IN PRODUCTION TRACEBILITY SYSTEM
     /// </summary>
-    public class pts_destination
+    public class pts_destination : Object
     {
         #region FIELDS OF DEPARTMENT
         public string destination_cd { get; set; }
