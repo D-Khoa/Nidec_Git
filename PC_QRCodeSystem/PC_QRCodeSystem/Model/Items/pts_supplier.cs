@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -15,11 +16,7 @@ namespace PC_QRCodeSystem.Model
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public List<pts_supplier> listSupplier { get; set; }
-
-        internal void GetListSupplier()
-        {
-            throw new NotImplementedException();
-        }
+        StringBuilder query = new StringBuilder();
         #endregion
 
         /// <summary>
@@ -36,7 +33,7 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "select * from pts_supplier where 1=1 ";
-            if (string.IsNullOrEmpty(supplier_code))
+            if (!string.IsNullOrEmpty(supplier_code))
                 query += "and supplier_cd = '" + supplier_code + "' ";
             query += "order by supplier_cd";
             //Execute reader for read database
@@ -59,5 +56,22 @@ namespace PC_QRCodeSystem.Model
             //Close SQL connection
             SQL.Close();
         }
+        public int AddSupplier(pts_supplier addptssupplier)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_supplier(supplier_cd, supplier_name, registration_user_cd)";
+            query += "VALUES ('" + addptssupplier.supplier_cd + "','" + addptssupplier.supplier_name + "','";
+            query += addptssupplier.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+       
     }
 }

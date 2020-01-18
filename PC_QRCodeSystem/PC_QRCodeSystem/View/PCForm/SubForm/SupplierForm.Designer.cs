@@ -32,6 +32,9 @@
             this.cmbSupplierCode = new System.Windows.Forms.ComboBox();
             this.dgvDataSupllier = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.txtSupplierName = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -61,25 +64,62 @@
             this.cmbSupplierCode.Name = "cmbSupplierCode";
             this.cmbSupplierCode.Size = new System.Drawing.Size(154, 21);
             this.cmbSupplierCode.TabIndex = 14;
+            this.cmbSupplierCode.SelectedIndexChanged += new System.EventHandler(this.cmbSupplierCode_SelectedIndexChanged);
             // 
             // dgvDataSupllier
             // 
             this.dgvDataSupllier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDataSupllier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDataSupllier.Location = new System.Drawing.Point(145, 69);
+            this.dgvDataSupllier.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvDataSupllier.Location = new System.Drawing.Point(145, 233);
             this.dgvDataSupllier.Name = "dgvDataSupllier";
-            this.dgvDataSupllier.Size = new System.Drawing.Size(645, 385);
+            this.dgvDataSupllier.Size = new System.Drawing.Size(645, 221);
             this.dgvDataSupllier.TabIndex = 15;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnOK);
+            this.panel4.Controls.Add(this.btnCancel);
+            this.panel4.Controls.Add(this.txtSupplierName);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.cmbSupplierCode);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(145, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(645, 64);
+            this.panel4.Size = new System.Drawing.Size(645, 85);
             this.panel4.TabIndex = 16;
+            // 
+            // btnOK
+            // 
+            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOK.Location = new System.Drawing.Point(373, 51);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(80, 26);
+            this.btnOK.TabIndex = 20;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click_1);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(463, 51);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(80, 26);
+            this.btnCancel.TabIndex = 19;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // txtSupplierName
+            // 
+            this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSupplierName.Location = new System.Drawing.Point(319, 20);
+            this.txtSupplierName.Name = "txtSupplierName";
+            this.txtSupplierName.ReadOnly = true;
+            this.txtSupplierName.Size = new System.Drawing.Size(300, 21);
+            this.txtSupplierName.TabIndex = 15;
+            this.txtSupplierName.Text = "Supplier Name";
+            this.txtSupplierName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // panel5
             // 
@@ -90,7 +130,7 @@
             this.panel5.Controls.Add(this.btnAdd);
             this.panel5.Controls.Add(this.btnClear);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(145, 133);
+            this.panel5.Location = new System.Drawing.Point(145, 154);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(645, 79);
             this.panel5.TabIndex = 17;
@@ -166,9 +206,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 454);
+            this.Controls.Add(this.dgvDataSupllier);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.dgvDataSupllier);
             this.dept = "";
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
@@ -176,9 +216,9 @@
             this.Text = "SupplierForm";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.SupplierForm_Load);
-            this.Controls.SetChildIndex(this.dgvDataSupllier, 0);
             this.Controls.SetChildIndex(this.panel4, 0);
             this.Controls.SetChildIndex(this.panel5, 0);
+            this.Controls.SetChildIndex(this.dgvDataSupllier, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataSupllier)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -199,5 +239,8 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TextBox txtSupplierName;
+        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
