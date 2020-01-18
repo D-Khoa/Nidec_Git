@@ -58,7 +58,6 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.btnItem = new System.Windows.Forms.Button();
-            this.btnItemType = new System.Windows.Forms.Button();
             this.btnIssueCode = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
             this.pnlSetting.SuspendLayout();
@@ -348,7 +347,6 @@
             // 
             this.panel6.Controls.Add(this.label2);
             this.panel6.Controls.Add(this.btnItem);
-            this.panel6.Controls.Add(this.btnItemType);
             this.panel6.Controls.Add(this.btnIssueCode);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
@@ -378,18 +376,9 @@
             this.btnItem.UseVisualStyleBackColor = true;
             this.btnItem.Click += new System.EventHandler(this.btnItem_Click);
             // 
-            // btnItemType
-            // 
-            this.btnItemType.Location = new System.Drawing.Point(130, 25);
-            this.btnItemType.Name = "btnItemType";
-            this.btnItemType.Size = new System.Drawing.Size(100, 50);
-            this.btnItemType.TabIndex = 1;
-            this.btnItemType.Text = "Item Type";
-            this.btnItemType.UseVisualStyleBackColor = true;
-            // 
             // btnIssueCode
             // 
-            this.btnIssueCode.Location = new System.Drawing.Point(240, 25);
+            this.btnIssueCode.Location = new System.Drawing.Point(130, 26);
             this.btnIssueCode.Name = "btnIssueCode";
             this.btnIssueCode.Size = new System.Drawing.Size(100, 50);
             this.btnIssueCode.TabIndex = 3;
@@ -458,7 +447,6 @@
         private System.Windows.Forms.Button btnSupplier;
         private System.Windows.Forms.Button btnDepartment;
         private System.Windows.Forms.Button btnItem;
-        private System.Windows.Forms.Button btnItemType;
         private System.Windows.Forms.Button btnIssueCode;
         private System.Windows.Forms.Button btnStockOutLog;
         private System.Windows.Forms.Button btnRequestLog;

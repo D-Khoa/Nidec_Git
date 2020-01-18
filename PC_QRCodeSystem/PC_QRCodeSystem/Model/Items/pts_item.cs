@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 
 namespace PC_QRCodeSystem.Model
@@ -20,7 +21,7 @@ namespace PC_QRCodeSystem.Model
         public string item_location_no { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public List<pts_item> listItems { get; set; }
+        public BindingList<pts_item> listItems { get; set; }
         #endregion
 
         /// <summary>
@@ -109,15 +110,18 @@ namespace PC_QRCodeSystem.Model
         }
 
         /// <summary>
-        /// Get list item same type id
+        /// Get list item
         /// </summary>
-        /// <param name="typeID">type id</param>
-        public void GetListItems(int typeID)
+        /// <param name="item_code">string.empty if get list without item code</param>
+        /// <param name="unit_code">string.empty if get list without unit type</param>
+        /// <param name="location_code">string.empty if get list without location type</param>
+        /// <param name="typeID">item type id</param>
+        public void GetListItems(string item_code, string unit_code, string location_code, int typeID)
         {
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            listItems = new List<pts_item>();
+            listItems = new BindingList<pts_item>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
@@ -152,16 +156,17 @@ namespace PC_QRCodeSystem.Model
         }
 
         /// <summary>
-        /// Get list item with item code and unit type
+        /// Get list item
         /// </summary>
         /// <param name="item_code">string.empty if get list without item code</param>
         /// <param name="unit_code">string.empty if get list without unit type</param>
-        public void GetListItems(string item_code, string unit_code)
+        /// <param name="location_code">string.empty if get list without location type</param>
+        public void GetListItems(string item_code, string unit_code, string location_code)
         {
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            listItems = new List<pts_item>();
+            listItems = new BindingList<pts_item>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
@@ -170,6 +175,8 @@ namespace PC_QRCodeSystem.Model
                 query += "and item_cd = '" + item_code + "' ";
             if (string.IsNullOrEmpty(unit_code))
                 query += "and unit_cd = '" + unit_code + "' ";
+            if (string.IsNullOrEmpty(location_code))
+                query += "and item_location_no='" + location_code + "' ";
             query += "order by item_id";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
@@ -196,6 +203,69 @@ namespace PC_QRCodeSystem.Model
             reader.Close();
             //Close SQL connection
             SQL.Close();
+        }
+
+        /// <summary>
+        /// Get all unit code
+        /// </summary>
+        /// <returns></returns>
+        public BindingList<pts_item> GetListUnit()
+        {
+            try
+            {
+                //SQL library
+                PSQL SQL = new PSQL();
+                string query = string.Empty;
+                listItems = new BindingList<pts_item>();
+                //Open SQL connection
+                SQL.Open();
+                //SQL query string
+                query = "select distinct unit_cd from pts_item where 1=1 ";
+                query += "order by unit_cd";
+                //Execute reader for read database
+                IDataReader reader = SQL.Command(query).ExecuteReader();
+                query = string.Empty;
+                while (reader.Read())
+                {
+                    //Get an item
+                    pts_item outItem = new pts_item
+                    {
+                        unit_cd = reader["unit_cd"].ToString(),
+                    };
+                    listItems.Add(outItem);
+                }
+                reader.Close();
+                //Close SQL connection
+                SQL.Close();
+                return listItems;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Add an item into database
+        /// </summary>
+        /// <param name="inItem"></param>
+        /// <returns></returns>
+        public int AddItem(pts_item inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_item(type_id, item_cd, item_name, unit_cd, unit_qty, stock_qty, item_location_no, registration_user_cd)";
+            query += "VALUES ('" + inItem.type_id + "','" + inItem.item_cd + "','" + inItem.item_name + "','" + inItem.unit_cd + "','";
+            query += inItem.unit_qty + "','" + inItem.stock_qty + "','" + inItem.item_location_no + "','";
+            query += inItem.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
         }
     }
 }

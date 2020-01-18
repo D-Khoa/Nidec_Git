@@ -79,7 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Items\pts_item_loction.cs" />
+    <Compile Include="Model\Items\pts_item_location.cs" />
     <Compile Include="View\Common\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +131,12 @@
     </Compile>
     <Compile Include="View\PCForm\PCForm.Designer.cs">
       <DependentUpon>PCForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PCForm\SubForm\CapacityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PCForm\SubForm\CapacityForm.Designer.cs">
+      <DependentUpon>CapacityForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PCForm\SubForm\SubForm.cs">
       <SubType>Form</SubType>
@@ -186,6 +192,9 @@
     </Compile>
     <EmbeddedResource Include="View\PCForm\PCForm.resx">
       <DependentUpon>PCForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PCForm\SubForm\CapacityForm.resx">
+      <DependentUpon>CapacityForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\SubForm\SubForm.resx">
       <DependentUpon>SubForm.cs</DependentUpon>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 
 namespace PC_QRCodeSystem.Model
@@ -14,7 +15,7 @@ namespace PC_QRCodeSystem.Model
         public string type_name { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public List<pts_item_type> listItemType { get; set; }
+        public BindingList<pts_item_type> listItemType { get; set; }
         #endregion
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace PC_QRCodeSystem.Model
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            listItemType = new List<pts_item_type>();
+            listItemType = new BindingList<pts_item_type>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
@@ -83,6 +84,27 @@ namespace PC_QRCodeSystem.Model
             reader.Close();
             //Close SQL connection
             SQL.Close();
+        }
+
+        /// <summary>
+        /// Add an item type
+        /// </summary>
+        /// <param name="inItem">new item type</param>
+        /// <returns></returns>
+        public int AddItemType(pts_item_type inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_item_type(type_id, type_name, registration_user_cd)";
+            query += "VALUES ('" + inItem.type_id + "','" + inItem.type_name + "','" + inItem.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
         }
     }
 }
