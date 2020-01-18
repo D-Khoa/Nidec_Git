@@ -334,6 +334,7 @@
             this.btnSupplier.TabIndex = 2;
             this.btnSupplier.Text = "Supplier";
             this.btnSupplier.UseVisualStyleBackColor = true;
+            this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
             // 
             // btnDepartment
             // 

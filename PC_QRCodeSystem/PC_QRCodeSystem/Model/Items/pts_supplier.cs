@@ -15,6 +15,11 @@ namespace PC_QRCodeSystem.Model
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public List<pts_supplier> listSupplier { get; set; }
+
+        internal void GetListSupplier()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         /// <summary>

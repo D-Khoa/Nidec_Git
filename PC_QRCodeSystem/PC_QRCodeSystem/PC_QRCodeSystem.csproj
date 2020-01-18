@@ -138,6 +138,12 @@
     <Compile Include="View\PCForm\SubForm\SubForm.Designer.cs">
       <DependentUpon>SubForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PCForm\SubForm\SupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PCForm\SubForm\SupplierForm.Designer.cs">
+      <DependentUpon>SupplierForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\RequestForm\RequestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\SubForm\SubForm.resx">
       <DependentUpon>SubForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PCForm\SubForm\SupplierForm.resx">
+      <DependentUpon>SupplierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\RequestForm\RequestForm.resx">
       <DependentUpon>RequestForm.cs</DependentUpon>
