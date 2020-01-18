@@ -57,5 +57,11 @@ namespace PC_QRCodeSystem.View
             SubForm itemfrm = new SubForm();
             itemfrm.Show();
         }
+
+        private void btnSupplier_Click(object sender, EventArgs e)
+        {
+            SupplierForm spfrm = new SupplierForm();
+            spfrm.ShowDialog();
+        }
     }
 }
