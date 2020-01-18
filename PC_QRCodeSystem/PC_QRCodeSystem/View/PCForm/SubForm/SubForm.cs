@@ -17,16 +17,12 @@ namespace PC_QRCodeSystem.View
         pts_item_type ptsItemType { get; set; }
         pts_item_loction ptsItemLocation { get; set; }
 
-        /// <summary>
-        /// Form with tab default
-        /// </summary>
-        /// <param name="tabname">tab name of group tab control</param>
-        public SubForm(string tabname)
+        public SubForm()
         {
             InitializeComponent();
-            grt_SubForm.SelectedTab = grt_SubForm.TabPages[tabname];
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
+            rbtnItemCode.Checked = true;
             ptsItem = new pts_item();
             ptsItemType = new pts_item_type();
             ptsItemLocation = new pts_item_loction();
@@ -58,6 +54,8 @@ namespace PC_QRCodeSystem.View
             //Show name of item type
             if (!string.IsNullOrEmpty(cmbItemType.Text))
                 lbItemTypeName.Text = cmbItemType.SelectedValue.ToString();
+            else
+                lbItemTypeName.Text = "None";
         }
 
         private void cmbItemLocation_TextChanged(object sender, EventArgs e)
@@ -65,16 +63,8 @@ namespace PC_QRCodeSystem.View
             //Show name of item location
             if (!string.IsNullOrEmpty(cmbItemLocation.Text))
                 lbItemLocationName.Text = cmbItemLocation.SelectedValue.ToString();
-        }
-
-        private void btnAddType_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAddLocation_Click(object sender, EventArgs e)
-        {
-
+            else
+                lbItemLocationName.Text = "None";
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -105,6 +95,28 @@ namespace PC_QRCodeSystem.View
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void rbtnItemCode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnItemCode.Checked)
+            {
+                txtItem.Enabled = true;
+                cmbItemType.Enabled = true;
+                cmbItemLocation.Enabled = true;
+            }
+            if (rbtnItemType.Checked)
+            {
+                txtItem.Enabled = false;
+                cmbItemType.Enabled = true;
+                cmbItemLocation.Enabled = false;
+            }
+            if (rbtnItemLocation.Checked)
+            {
+                txtItem.Enabled = false;
+                cmbItemType.Enabled = false;
+                cmbItemLocation.Enabled = true;
+            }
         }
     }
 }

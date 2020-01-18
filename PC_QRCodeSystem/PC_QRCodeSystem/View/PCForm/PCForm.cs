@@ -54,7 +54,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnItem_Click(object sender, EventArgs e)
         {
-            SubForm itemfrm = new SubForm("tab_Item");
+            SubForm itemfrm = new SubForm();
             itemfrm.Show();
         }
     }
