@@ -105,6 +105,7 @@
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvData.Size = new System.Drawing.Size(600, 191);
             this.dgvData.TabIndex = 4;
+            this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
             // 
             // pnlButtons
             // 
@@ -367,6 +368,7 @@
             this.Name = "SubForm";
             this.Text = "SubForm";
             this.tittle = "FormCommon";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SubForm_FormClosing);
             this.Load += new System.EventHandler(this.SubForm_Load);
             this.Controls.SetChildIndex(this.statusStrip1, 0);
             this.Controls.SetChildIndex(this.panel4, 0);

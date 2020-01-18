@@ -18,6 +18,11 @@ namespace PC_QRCodeSystem.Model
         public BindingList<pts_item_type> listItemType { get; set; }
         #endregion
 
+        public pts_item_type()
+        {
+            listItemType = new BindingList<pts_item_type>();
+        }
+
         /// <summary>
         /// Get infomation of an item type
         /// </summary>

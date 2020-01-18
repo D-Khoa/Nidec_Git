@@ -24,6 +24,11 @@ namespace PC_QRCodeSystem.Model
         public BindingList<pts_item> listItems { get; set; }
         #endregion
 
+        public pts_item()
+        {
+            listItems = new BindingList<pts_item>();
+        }
+
         /// <summary>
         /// Get infomation of an item with item id
         /// </summary>
@@ -262,6 +267,29 @@ namespace PC_QRCodeSystem.Model
             query += "VALUES ('" + inItem.type_id + "','" + inItem.item_cd + "','" + inItem.item_name + "','" + inItem.unit_cd + "','";
             query += inItem.unit_qty + "','" + inItem.stock_qty + "','" + inItem.item_location_no + "','";
             query += inItem.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+
+        /// <summary>
+        /// Update an item
+        /// </summary>
+        /// <param name="inItem"></param>
+        /// <returns></returns>
+        public int Update(pts_item inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_item SET type_id='" + inItem.type_id + "', item_cd='" + inItem.item_cd + "', item_name='" + inItem.item_name;
+            query += "', unit_cd='" + inItem.unit_cd + "', unit_qty='" + inItem.unit_qty + "', stock_qty ='" + inItem.stock_qty;
+            query += "', item_location_no ='" + inItem.item_location_no + "', registration_user_cd ='" + inItem.registration_user_cd;
+            query += "', registration_date_time = now() where item_id ='" + inItem.item_id;
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;

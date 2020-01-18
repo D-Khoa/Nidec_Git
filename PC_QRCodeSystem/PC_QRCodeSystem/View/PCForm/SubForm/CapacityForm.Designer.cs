@@ -75,6 +75,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Capacity";
+            this.Load += new System.EventHandler(this.CapacityForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CapacityForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();

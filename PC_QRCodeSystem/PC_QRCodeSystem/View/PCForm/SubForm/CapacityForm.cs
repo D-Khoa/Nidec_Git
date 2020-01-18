@@ -16,10 +16,14 @@ namespace PC_QRCodeSystem.View
         /// Get capacity number
         /// </summary>
         public double capacityNumber { get; set; }
-
         public CapacityForm()
         {
             InitializeComponent();
+        }
+
+        private void CapacityForm_Load(object sender, EventArgs e)
+        {
+            txtCapacity.Text = capacityNumber.ToString();
         }
 
         private void btnOK_Click(object sender, EventArgs e)

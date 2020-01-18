@@ -21,6 +21,11 @@ namespace PC_QRCodeSystem.Model
         public BindingList<pts_item_location> listItemLocation { get; set; }
         #endregion
 
+        public pts_item_location()
+        {
+            listItemLocation = new BindingList<pts_item_location>();
+        }
+
         /// <summary>
         /// Get list item location
         /// </summary>
