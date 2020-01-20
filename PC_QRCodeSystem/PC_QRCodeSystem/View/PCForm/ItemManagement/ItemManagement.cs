@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
 namespace PC_QRCodeSystem.View
 {
-    public partial class SubForm : FormCommon
+    public partial class ItemManagement : FormCommon
     {
         #region VARIABLE
         bool editMode { get; set; }
@@ -23,7 +16,7 @@ namespace PC_QRCodeSystem.View
         pts_item_location ptsItemLocation { get; set; }
         #endregion
 
-        public SubForm()
+        public ItemManagement()
         {
             InitializeComponent();
             #region SETUP CONTROLS
@@ -110,7 +103,7 @@ namespace PC_QRCodeSystem.View
         #region MAIN BUTTON
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            UpdateGrid();
+            UpdateGrid(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -142,7 +135,7 @@ namespace PC_QRCodeSystem.View
             }
             ClearFields();
             GetCmbData();
-            UpdateGrid();
+            UpdateGrid(true);
             MessageBox.Show("Delete " + n + " Item", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -181,34 +174,60 @@ namespace PC_QRCodeSystem.View
         /// <summary>
         /// Search and update grid
         /// </summary>
-        private void UpdateGrid()
+        private void UpdateGrid(bool isSearch)
         {
             //Search and get items list
             if (rbtnItemCode.Checked)
             {
-                //Search with item type
-                if (!string.IsNullOrEmpty(cmbItemType.Text))
-                    ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbItemLocation.Text, int.Parse(cmbItemType.Text));
-                else
-                    //Search without item type
-                    ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbItemLocation.Text);
+                if (isSearch)
+                {
+                    //Search with item type
+                    if (!string.IsNullOrEmpty(cmbItemType.Text))
+                        ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbItemLocation.Text, int.Parse(cmbItemType.Text));
+                    else
+                        //Search without item type
+                        ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbItemLocation.Text);
+                }
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
+                dgvData.Columns["item_id"].HeaderText = "Item ID";
+                dgvData.Columns["item_cd"].HeaderText = "Item Number";
+                dgvData.Columns["item_name"].HeaderText = "Item Name";
+                dgvData.Columns["type_id"].HeaderText = "Type ID";
+                dgvData.Columns["unit_cd"].HeaderText = "Unit";
+                dgvData.Columns["unit_qty"].HeaderText = "Unit Qty";
+                dgvData.Columns["stock_qty"].HeaderText = "Stock Qty";
+                dgvData.Columns["item_location_no"].HeaderText = "Location Number";
+                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
             }
             //Search and get item type list
             if (rbtnItemType.Checked)
             {
-                ptsItemType.GetListItemType();
+                if (isSearch)
+                    ptsItemType.GetListItemType();
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItemType.listItemType;
+                dgvData.Columns["type_id"].HeaderText = "Type ID";
+                dgvData.Columns["type_name"].HeaderText = "Type Name";
+                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
             }
             //Search and get item locaion list
             if (rbtnItemLocation.Checked)
             {
-                ptsItemLocation.GetListItemLocation(string.Empty);
+                if (isSearch)
+                    ptsItemLocation.GetListItemLocation(string.Empty);
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItemLocation.listItemLocation;
+                dgvData.Columns["item_location_id"].HeaderText = "Location ID";
+                dgvData.Columns["item_location_no"].HeaderText = "Location Number";
+                dgvData.Columns["item_location_name"].HeaderText = "Location Name";
+                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
             }
+            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            isSearch = false;
         }
 
         /// <summary>
@@ -389,7 +408,7 @@ namespace PC_QRCodeSystem.View
 
                 ClearFields();
                 GetCmbData();
-                UpdateGrid();
+                UpdateGrid(true);
                 if (editMode) messstring = "Update ";
                 else messstring = "Add ";
                 MessageBox.Show(messstring + n + " item complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -420,6 +439,12 @@ namespace PC_QRCodeSystem.View
                 cmbUnitCode.Visible = true;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
+                txtItemName.BackColor = System.Drawing.Color.Yellow;
+                txtTypeName.BackColor = System.Drawing.Color.Gray;
+                txtLocationName.BackColor = System.Drawing.Color.Gray;
+                rbtnItemCode.BackColor = System.Drawing.Color.Yellow;
+                rbtnItemType.BackColor = System.Drawing.Color.Transparent;
+                rbtnItemLocation.BackColor = System.Drawing.Color.Transparent;
             }
             if (rbtnItemType.Checked)
             {
@@ -431,6 +456,12 @@ namespace PC_QRCodeSystem.View
                 cmbUnitCode.Visible = false;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItemType.listItemType;
+                txtItemName.BackColor = System.Drawing.Color.Gray;
+                txtTypeName.BackColor = System.Drawing.Color.Yellow;
+                txtLocationName.BackColor = System.Drawing.Color.Gray;
+                rbtnItemType.BackColor = System.Drawing.Color.Yellow;
+                rbtnItemCode.BackColor = System.Drawing.Color.Transparent;
+                rbtnItemLocation.BackColor = System.Drawing.Color.Transparent;
             }
             if (rbtnItemLocation.Checked)
             {
@@ -442,7 +473,14 @@ namespace PC_QRCodeSystem.View
                 cmbUnitCode.Visible = false;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItemLocation.listItemLocation;
+                txtItemName.BackColor = System.Drawing.Color.Gray;
+                txtTypeName.BackColor = System.Drawing.Color.Gray;
+                txtLocationName.BackColor = System.Drawing.Color.Yellow;
+                rbtnItemLocation.BackColor = System.Drawing.Color.Yellow;
+                rbtnItemCode.BackColor = System.Drawing.Color.Transparent;
+                rbtnItemType.BackColor = System.Drawing.Color.Transparent;
             }
+            UpdateGrid(false);
         }
 
         private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -478,7 +516,7 @@ namespace PC_QRCodeSystem.View
         {
             if (btnOK.Visible)
             {
-                if (MessageBox.Show("You are in processing! Are you sure exit?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                if (MessageBox.Show("You are in processing!" + Environment.NewLine + "Are you sure exit?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
                     e.Cancel = true;
                     return;

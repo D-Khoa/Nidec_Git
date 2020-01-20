@@ -1,6 +1,6 @@
 ﻿namespace PC_QRCodeSystem.View
 {
-    partial class SubForm
+    partial class ItemManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -379,7 +379,7 @@
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "SubForm";
-            this.Text = "SubForm";
+            this.Text = "Item Management";
             this.tittle = "FormCommon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SubForm_FormClosing);
             this.Load += new System.EventHandler(this.SubForm_Load);

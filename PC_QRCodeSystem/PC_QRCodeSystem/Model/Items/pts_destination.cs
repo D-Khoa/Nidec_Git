@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 
 namespace PC_QRCodeSystem.Model
@@ -10,12 +11,13 @@ namespace PC_QRCodeSystem.Model
     public class pts_destination : Object
     {
         #region FIELDS OF DEPARTMENT
+        public int destination_id { get; set; }
         public string destination_cd { get; set; }
         public string destination_name { get; set; }
         public string dept_cd { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public List<pts_destination> listDepartment { get; set; }
+        public BindingList<pts_destination> listDepartment { get; set; }
         #endregion
 
         /// <summary>
@@ -28,16 +30,17 @@ namespace PC_QRCodeSystem.Model
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            listDepartment = new List<pts_destination>();
+            listDepartment = new BindingList<pts_destination>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select * from pts_destination where 1=1 ";
+            query = "SELECT destination_id, destination_cd, destination_name, dept_cd, registration_user_cd, registration_date_time ";
+            query += "FROM pts_destination WHERE 1=1 ";
             if (string.IsNullOrEmpty(des_code))
                 query += "and destination_cd = '" + des_code + "' ";
             if (string.IsNullOrEmpty(dept_code))
                 query += "and dept_cd = '" + dept_code + "' ";
-            query += "order by destination_cd";
+            query += "order by destination_id";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
@@ -46,6 +49,7 @@ namespace PC_QRCodeSystem.Model
                 //Get an item
                 pts_destination outItem = new pts_destination
                 {
+                    destination_id = (int)reader["destination_id"],
                     destination_cd = reader["destination_cd"].ToString(),
                     destination_name = reader["destination_name"].ToString(),
                     dept_cd = reader["dept_cd"].ToString(),

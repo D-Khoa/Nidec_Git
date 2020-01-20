@@ -53,12 +53,12 @@
             this.btnStockOutLog = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnSupplier = new System.Windows.Forms.Button();
+            this.btnIssueCode = new System.Windows.Forms.Button();
             this.btnDepartment = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnSupplier = new System.Windows.Forms.Button();
             this.btnItem = new System.Windows.Forms.Button();
-            this.btnIssueCode = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
@@ -305,7 +305,7 @@
             // panel7
             // 
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Controls.Add(this.btnSupplier);
+            this.panel7.Controls.Add(this.btnIssueCode);
             this.panel7.Controls.Add(this.btnDepartment);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 80);
@@ -322,18 +322,18 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(445, 20);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Supplier And DepartMent";
+            this.label5.Text = "Stock Out Item";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btnSupplier
+            // btnIssueCode
             // 
-            this.btnSupplier.Location = new System.Drawing.Point(20, 25);
-            this.btnSupplier.Name = "btnSupplier";
-            this.btnSupplier.Size = new System.Drawing.Size(100, 50);
-            this.btnSupplier.TabIndex = 2;
-            this.btnSupplier.Text = "Supplier";
-            this.btnSupplier.UseVisualStyleBackColor = true;
-            this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
+            this.btnIssueCode.Location = new System.Drawing.Point(20, 25);
+            this.btnIssueCode.Name = "btnIssueCode";
+            this.btnIssueCode.Size = new System.Drawing.Size(100, 50);
+            this.btnIssueCode.TabIndex = 3;
+            this.btnIssueCode.Text = "Issue Code";
+            this.btnIssueCode.UseVisualStyleBackColor = true;
+            this.btnIssueCode.Click += new System.EventHandler(this.btnIssueCode_Click);
             // 
             // btnDepartment
             // 
@@ -343,12 +343,13 @@
             this.btnDepartment.TabIndex = 4;
             this.btnDepartment.Text = "Department";
             this.btnDepartment.UseVisualStyleBackColor = true;
+            this.btnDepartment.Click += new System.EventHandler(this.btnDepartment_Click);
             // 
             // panel6
             // 
             this.panel6.Controls.Add(this.label2);
+            this.panel6.Controls.Add(this.btnSupplier);
             this.panel6.Controls.Add(this.btnItem);
-            this.panel6.Controls.Add(this.btnIssueCode);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
@@ -364,8 +365,18 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(445, 20);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Items And Issue";
+            this.label2.Text = "Stock Item";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnSupplier
+            // 
+            this.btnSupplier.Location = new System.Drawing.Point(130, 25);
+            this.btnSupplier.Name = "btnSupplier";
+            this.btnSupplier.Size = new System.Drawing.Size(100, 50);
+            this.btnSupplier.TabIndex = 2;
+            this.btnSupplier.Text = "Supplier";
+            this.btnSupplier.UseVisualStyleBackColor = true;
+            this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
             // 
             // btnItem
             // 
@@ -373,18 +384,9 @@
             this.btnItem.Name = "btnItem";
             this.btnItem.Size = new System.Drawing.Size(100, 50);
             this.btnItem.TabIndex = 0;
-            this.btnItem.Text = "Item";
+            this.btnItem.Text = "Item Management";
             this.btnItem.UseVisualStyleBackColor = true;
             this.btnItem.Click += new System.EventHandler(this.btnItem_Click);
-            // 
-            // btnIssueCode
-            // 
-            this.btnIssueCode.Location = new System.Drawing.Point(130, 26);
-            this.btnIssueCode.Name = "btnIssueCode";
-            this.btnIssueCode.Size = new System.Drawing.Size(100, 50);
-            this.btnIssueCode.TabIndex = 3;
-            this.btnIssueCode.Text = "Issue Code";
-            this.btnIssueCode.UseVisualStyleBackColor = true;
             // 
             // tab_Request
             // 

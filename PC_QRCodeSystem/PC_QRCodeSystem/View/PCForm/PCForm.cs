@@ -54,7 +54,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnItem_Click(object sender, EventArgs e)
         {
-            SubForm itemfrm = new SubForm();
+            ItemManagement itemfrm = new ItemManagement();
             itemfrm.Show();
         }
 
@@ -62,6 +62,16 @@ namespace PC_QRCodeSystem.View
         {
             SupplierForm spfrm = new SupplierForm();
             spfrm.ShowDialog();
+        }
+
+        private void btnDepartment_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnIssueCode_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

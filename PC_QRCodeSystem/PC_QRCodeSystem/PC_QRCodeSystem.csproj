@@ -126,28 +126,34 @@
     <Compile Include="Model\Items\UserData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\PCForm\Destination\DestinationManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PCForm\Destination\DestinationManager.Designer.cs">
+      <DependentUpon>DestinationManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PCForm\PCForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\PCForm\PCForm.Designer.cs">
       <DependentUpon>PCForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\SubForm\CapacityForm.cs">
+    <Compile Include="View\PCForm\ItemManagement\CapacityForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PCForm\SubForm\CapacityForm.Designer.cs">
+    <Compile Include="View\PCForm\ItemManagement\CapacityForm.Designer.cs">
       <DependentUpon>CapacityForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\SubForm\SubForm.cs">
+    <Compile Include="View\PCForm\ItemManagement\ItemManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PCForm\SubForm\SubForm.Designer.cs">
-      <DependentUpon>SubForm.cs</DependentUpon>
+    <Compile Include="View\PCForm\ItemManagement\ItemManagement.Designer.cs">
+      <DependentUpon>ItemManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\SubForm\SupplierForm.cs">
+    <Compile Include="View\PCForm\ItemManagement\SupplierForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PCForm\SubForm\SupplierForm.Designer.cs">
+    <Compile Include="View\PCForm\ItemManagement\SupplierForm.Designer.cs">
       <DependentUpon>SupplierForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\RequestForm\RequestForm.cs">
@@ -196,16 +202,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\PCForm\Destination\DestinationManager.resx">
+      <DependentUpon>DestinationManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\PCForm.resx">
       <DependentUpon>PCForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\SubForm\CapacityForm.resx">
+    <EmbeddedResource Include="View\PCForm\ItemManagement\CapacityForm.resx">
       <DependentUpon>CapacityForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\SubForm\SubForm.resx">
-      <DependentUpon>SubForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\PCForm\ItemManagement\ItemManagement.resx">
+      <DependentUpon>ItemManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\SubForm\SupplierForm.resx">
+    <EmbeddedResource Include="View\PCForm\ItemManagement\SupplierForm.resx">
       <DependentUpon>SupplierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\RequestForm\RequestForm.resx">
