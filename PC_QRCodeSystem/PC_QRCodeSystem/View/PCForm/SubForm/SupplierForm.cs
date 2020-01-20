@@ -13,15 +13,24 @@ namespace PC_QRCodeSystem.View
 {
     public partial class SupplierForm : FormCommon
     {
+        #region VARIABLE
+        bool editMode { get; set; }
+        pts_supplier suppliercbm { get; set; }
         pts_supplier ptssupllier { get; set; }
+        #endregion
         public SupplierForm()
         {
             InitializeComponent();
+            suppliercbm = new pts_supplier();
             ptssupllier = new pts_supplier();
+            editMode = false;
             btnOK.Visible = false;
             btnCancel.Visible = false;
-        }
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
 
+        }
+        //Load Form
         private void SupplierForm_Load(object sender, EventArgs e)
         {
             ptssupllier.GetListSupplier(string.Empty);
@@ -31,16 +40,16 @@ namespace PC_QRCodeSystem.View
             cmbSupplierCode.Text = null;
 
         }
-        private void btnClose_Click(object sender, EventArgs e)
+        private void SupplierForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Close();
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            ptssupllier.GetListSupplier(string.Empty);
-            dgvDataSupllier.DataSource = null;
-            dgvDataSupllier.DataSource = ptssupllier.listSupplier;
+            if (btnOK.Visible)
+            {
+                if (MessageBox.Show("You are in processing! Are you sure exit?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
         }
         private void cmbSupplierCode_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -58,37 +67,83 @@ namespace PC_QRCodeSystem.View
             }
 
         }
+        #region MAIN BUTTON
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            Searcheven();
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            txtSupplierName.ReadOnly = false;
-            txtSupplierName.Text = string.Empty;
-            cmbSupplierCode.DropDownStyle = ComboBoxStyle.DropDown;
-            btnAdd.Enabled = false;
-            btnOK.Visible = true;
-            btnCancel.Visible = true;
+            UnlockFields(false);
+        }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            UnlockFields(true);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This action is not undo" + Environment.NewLine + "Are you sure delete this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                return;
+            int n = 0;
+            n = ptssupllier.Delete(ptssupllier.supplier_id);
+           // ClearOK();
+            Getcmbdata();
+            UpdateGrid();
+            MessageBox.Show("Delete " + n + " Item", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearOK();
+
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void btnOK_Click_1(object sender, EventArgs e)
         {
             try
             {
+                string messstring = string.Empty;
                 int n = 0;
-
-                //CALL FUNCTION ADD NEW ITEM TYPE
-                n = ptssupllier.AddSupplier(new pts_supplier
+                #region Add And Update Supplier
                 {
-                    supplier_cd = cmbSupplierCode.Text,
-                    supplier_name = txtSupplierName.Text,
-                    registration_user_cd = UserData.usercode
-                });
-                ptssupllier.GetListSupplier(string.Empty);
+                    if (editMode)
+                    {  //CALL FUNTION UPDATE SUPPLIER
 
+                        n = ptssupllier.UpdateSuplier(new pts_supplier
+                        {
+                            supplier_cd = cmbSupplierCode.Text,
+                            supplier_name = txtSupplierName.Text,
+                            registration_user_cd = UserData.usercode
+                        });
+                    }
+                    else
+                    {  //CALL FUNCTION ADD NEW SUPPLIER
 
-                MessageBox.Show("Add " + n + " item complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtSupplierName.Text = null;
+                        n = ptssupllier.AddSupplier(new pts_supplier
+                        {
+                            supplier_cd = cmbSupplierCode.Text,
+                            supplier_name = txtSupplierName.Text,
+                            registration_user_cd = UserData.usercode
+                        });
+                    }
+
+                    ptssupllier.GetListSupplier(string.Empty);
+                }
+                #endregion
+                ClearOK();
+                Getcmbdata();
+                UpdateGrid();
+                if (editMode) messstring = "Update ";
+                else messstring = "Add ";
+                MessageBox.Show(messstring + n + " item complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -96,23 +151,47 @@ namespace PC_QRCodeSystem.View
             LockAllNameTextbox();
 
         }
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
+            LockAllNameTextbox();
 
         }
+        #endregion
+        #region SUB PROGRAM
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void UpdateGrid()
         {
-
+            ptssupllier.GetListSupplier(string.Empty);
+            dgvDataSupllier.DataSource = null;
+            dgvDataSupllier.DataSource = ptssupllier.listSupplier;
         }
-
-        private void btnClear_Click(object sender, EventArgs e)
+        private void ClearOK()
         {
             if (dgvDataSupllier.DataSource != null)
                 dgvDataSupllier.DataSource = null;
             cmbSupplierCode.Text = null;
             txtSupplierName.Text = null;
+            ptssupllier.listSupplier.Clear();
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
         }
+        private void Getcmbdata()
+        {
+            suppliercbm.GetListSupplier(string.Empty);
+            cmbSupplierCode.DataSource = suppliercbm.listSupplier;
+            cmbSupplierCode.DisplayMember = "supplier_cd";
+            cmbSupplierCode.ValueMember = "supplier_name";
+            cmbSupplierCode.Text = null;
+        }
+        private void Searcheven()
+        {
+            ptssupllier.GetListSupplier(string.Empty);
+            dgvDataSupllier.DataSource = null;
+            dgvDataSupllier.DataSource = ptssupllier.listSupplier;
+        }
+        /// <summary>
+        /// Lock Textbox
+        /// </summary>
         private void LockAllNameTextbox()
         {
 
@@ -124,10 +203,30 @@ namespace PC_QRCodeSystem.View
 
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Unlock all fields of items
+        /// </summary>
+        /// <param name="edit"></param>
+        private void UnlockFields(bool edit)
         {
-            LockAllNameTextbox();
-
+            editMode = edit;
+            txtSupplierName.ReadOnly = false;
+            if (!edit) txtSupplierName.Text = string.Empty;
+            cmbSupplierCode.DropDownStyle = ComboBoxStyle.DropDown;
+            btnOK.Visible = true;
+            btnCancel.Visible = true;
+            pnlButtons.Enabled = true;
         }
+
+        #endregion
+        #region DATAGRID VIEW
+        private void dgvDataSupllier_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ptssupllier = dgvDataSupllier.Rows[e.RowIndex].DataBoundItem as pts_supplier;
+            cmbSupplierCode.Text = ptssupllier.supplier_cd.ToString();
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+        }
+        #endregion
     }
 }
