@@ -1,6 +1,6 @@
 ﻿namespace PC_QRCodeSystem.View
 {
-    partial class SupplierForm
+    partial class ItemIssueForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbSupplierCode = new System.Windows.Forms.ComboBox();
-            this.dgvDataSupllier = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.txtSupplierName = new System.Windows.Forms.TextBox();
+            this.txtIssueCode = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbIssueCode = new System.Windows.Forms.ComboBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -42,52 +41,24 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDataSupllier)).BeginInit();
+            this.dgvIssueCode = new System.Windows.Forms.DataGridView();
             this.panel4.SuspendLayout();
             this.pnlButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIssueCode)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 20);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Supplier Code";
-            // 
-            // cmbSupplierCode
-            // 
-            this.cmbSupplierCode.FormattingEnabled = true;
-            this.cmbSupplierCode.Location = new System.Drawing.Point(135, 20);
-            this.cmbSupplierCode.Name = "cmbSupplierCode";
-            this.cmbSupplierCode.Size = new System.Drawing.Size(154, 21);
-            this.cmbSupplierCode.TabIndex = 14;
-            this.cmbSupplierCode.SelectedIndexChanged += new System.EventHandler(this.cmbSupplierCode_SelectedIndexChanged);
-            // 
-            // dgvDataSupllier
-            // 
-            this.dgvDataSupllier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDataSupllier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDataSupllier.Location = new System.Drawing.Point(145, 233);
-            this.dgvDataSupllier.Name = "dgvDataSupllier";
-            this.dgvDataSupllier.Size = new System.Drawing.Size(645, 221);
-            this.dgvDataSupllier.TabIndex = 15;
-            this.dgvDataSupllier.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataSupllier_CellDoubleClick);
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.btnOK);
             this.panel4.Controls.Add(this.btnCancel);
-            this.panel4.Controls.Add(this.txtSupplierName);
+            this.panel4.Controls.Add(this.txtIssueCode);
             this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.cmbSupplierCode);
+            this.panel4.Controls.Add(this.cmbIssueCode);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(145, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(645, 85);
-            this.panel4.TabIndex = 16;
+            this.panel4.Size = new System.Drawing.Size(626, 85);
+            this.panel4.TabIndex = 17;
             // 
             // btnOK
             // 
@@ -98,7 +69,6 @@
             this.btnOK.TabIndex = 20;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click_1);
             // 
             // btnCancel
             // 
@@ -109,18 +79,36 @@
             this.btnCancel.TabIndex = 19;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // txtSupplierName
+            // txtIssueCode
             // 
-            this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSupplierName.Location = new System.Drawing.Point(319, 20);
-            this.txtSupplierName.Name = "txtSupplierName";
-            this.txtSupplierName.ReadOnly = true;
-            this.txtSupplierName.Size = new System.Drawing.Size(300, 21);
-            this.txtSupplierName.TabIndex = 15;
-            this.txtSupplierName.Text = "Supplier Name";
-            this.txtSupplierName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtIssueCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIssueCode.Location = new System.Drawing.Point(319, 20);
+            this.txtIssueCode.Name = "txtIssueCode";
+            this.txtIssueCode.ReadOnly = true;
+            this.txtIssueCode.Size = new System.Drawing.Size(300, 21);
+            this.txtIssueCode.TabIndex = 15;
+            this.txtIssueCode.Text = "Issue Code";
+            this.txtIssueCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 20);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Issue Code";
+            // 
+            // cmbIssueCode
+            // 
+            this.cmbIssueCode.FormattingEnabled = true;
+            this.cmbIssueCode.Location = new System.Drawing.Point(135, 20);
+            this.cmbIssueCode.Name = "cmbIssueCode";
+            this.cmbIssueCode.Size = new System.Drawing.Size(154, 21);
+            this.cmbIssueCode.TabIndex = 14;
+            this.cmbIssueCode.SelectedIndexChanged += new System.EventHandler(this.cmbIssueCode_SelectedIndexChanged);
             // 
             // pnlButtons
             // 
@@ -133,8 +121,8 @@
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlButtons.Location = new System.Drawing.Point(145, 154);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(645, 79);
-            this.pnlButtons.TabIndex = 17;
+            this.pnlButtons.Size = new System.Drawing.Size(626, 79);
+            this.pnlButtons.TabIndex = 18;
             // 
             // btnSearch
             // 
@@ -145,7 +133,6 @@
             this.btnSearch.TabIndex = 30;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnClose
             // 
@@ -156,7 +143,6 @@
             this.btnClose.TabIndex = 29;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnUpdate
             // 
@@ -167,7 +153,6 @@
             this.btnUpdate.TabIndex = 28;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
@@ -178,7 +163,6 @@
             this.btnDelete.TabIndex = 27;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -189,7 +173,6 @@
             this.btnAdd.TabIndex = 26;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnClear
             // 
@@ -200,40 +183,51 @@
             this.btnClear.TabIndex = 25;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // SupplierForm
+            // dgvIssueCode
+            // 
+            this.dgvIssueCode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIssueCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvIssueCode.Location = new System.Drawing.Point(145, 233);
+            this.dgvIssueCode.Name = "dgvIssueCode";
+            this.dgvIssueCode.Size = new System.Drawing.Size(626, 232);
+            this.dgvIssueCode.TabIndex = 19;
+            // 
+            // ItemIssueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 454);
-            this.Controls.Add(this.dgvDataSupllier);
+            this.ClientSize = new System.Drawing.Size(771, 465);
+            this.Controls.Add(this.dgvIssueCode);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.panel4);
             this.dept = "";
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
-            this.Name = "SupplierForm";
-            this.Text = "SupplierForm";
+            this.Name = "ItemIssueForm";
+            this.Text = "ItemIssueForm";
             this.tittle = "FormCommon";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SupplierForm_FormClosing);
-            this.Load += new System.EventHandler(this.SupplierForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ItemIssueForm_FormClosing);
+            this.Load += new System.EventHandler(this.ItemIssueForm_Load);
             this.Controls.SetChildIndex(this.panel4, 0);
             this.Controls.SetChildIndex(this.pnlButtons, 0);
-            this.Controls.SetChildIndex(this.dgvDataSupllier, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDataSupllier)).EndInit();
+            this.Controls.SetChildIndex(this.dgvIssueCode, 0);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIssueCode)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbSupplierCode;
-        private System.Windows.Forms.DataGridView dgvDataSupllier;
+
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtIssueCode;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbIssueCode;
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnClose;
@@ -241,8 +235,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.TextBox txtSupplierName;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DataGridView dgvIssueCode;
     }
 }

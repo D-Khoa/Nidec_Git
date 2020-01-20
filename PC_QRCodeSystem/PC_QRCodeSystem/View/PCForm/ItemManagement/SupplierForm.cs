@@ -31,6 +31,7 @@ namespace PC_QRCodeSystem.View
 
         }
         //Load Form
+        #region Load Form
         private void SupplierForm_Load(object sender, EventArgs e)
         {
             ptssupllier.GetListSupplier(string.Empty);
@@ -51,6 +52,7 @@ namespace PC_QRCodeSystem.View
                 }
             }
         }
+        #endregion
         private void cmbSupplierCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             try

@@ -132,6 +132,12 @@
     <Compile Include="View\PCForm\Destination\DestinationManager.Designer.cs">
       <DependentUpon>DestinationManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PCForm\ItemIssue\ItemIssueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PCForm\ItemIssue\ItemIssueForm.Designer.cs">
+      <DependentUpon>ItemIssueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PCForm\PCForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +210,9 @@
     </Compile>
     <EmbeddedResource Include="View\PCForm\Destination\DestinationManager.resx">
       <DependentUpon>DestinationManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PCForm\ItemIssue\ItemIssueForm.resx">
+      <DependentUpon>ItemIssueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\PCForm.resx">
       <DependentUpon>PCForm.cs</DependentUpon>
