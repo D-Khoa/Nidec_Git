@@ -131,6 +131,12 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "select * from pts_item where 1=1 ";
+            if (!string.IsNullOrEmpty(item_code))
+                query += "and item_cd = '" + item_code + "' ";
+            if (!string.IsNullOrEmpty(unit_code))
+                query += "and unit_cd = '" + unit_code + "' ";
+            if (!string.IsNullOrEmpty(location_code))
+                query += "and item_location_no='" + location_code + "' ";
             query += "and type_id = '" + typeID + "' ";
             query += "order by item_id";
             //Execute reader for read database
@@ -176,11 +182,11 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "select * from pts_item where 1=1 ";
-            if (string.IsNullOrEmpty(item_code))
+            if (!string.IsNullOrEmpty(item_code))
                 query += "and item_cd = '" + item_code + "' ";
-            if (string.IsNullOrEmpty(unit_code))
+            if (!string.IsNullOrEmpty(unit_code))
                 query += "and unit_cd = '" + unit_code + "' ";
-            if (string.IsNullOrEmpty(location_code))
+            if (!string.IsNullOrEmpty(location_code))
                 query += "and item_location_no='" + location_code + "' ";
             query += "order by item_id";
             //Execute reader for read database
@@ -289,11 +295,32 @@ namespace PC_QRCodeSystem.Model
             query = "UPDATE pts_item SET type_id='" + inItem.type_id + "', item_cd='" + inItem.item_cd + "', item_name='" + inItem.item_name;
             query += "', unit_cd='" + inItem.unit_cd + "', unit_qty='" + inItem.unit_qty + "', stock_qty ='" + inItem.stock_qty;
             query += "', item_location_no ='" + inItem.item_location_no + "', registration_user_cd ='" + inItem.registration_user_cd;
-            query += "', registration_date_time = now() where item_id ='" + inItem.item_id;
+            query += "', registration_date_time = now() where item_id ='" + inItem.item_id + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
             return result;
+        }
+
+        /// <summary>
+        /// Delete an item
+        /// </summary>
+        /// <param name="id">item id</param>
+        /// <returns></returns>
+        public int Delete(int id)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_item WHERE item_id ='" + id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+
         }
     }
 }

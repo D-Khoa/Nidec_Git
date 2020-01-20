@@ -111,5 +111,48 @@ namespace PC_QRCodeSystem.Model
             query = string.Empty;
             return result;
         }
+
+        /// <summary>
+        /// Update an item type
+        /// </summary>
+        /// <param name="inItem">input item type</param>
+        /// <returns></returns>
+        public int Update(pts_item_type inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_item_type SET type_id='" + inItem.type_id + "', type_name='" + inItem.type_name;
+            query += "', registration_user_cd ='" + inItem.registration_user_cd;
+            query += "', registration_date_time = now() where type_id ='" + inItem.type_id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+
+        /// <summary>
+        /// Delete an item type
+        /// </summary>
+        /// <param name="id">item type id</param>
+        /// <returns></returns>
+        public int Delete(int id)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_item_type WHERE type_id ='" + id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+
+        }
     }
 }

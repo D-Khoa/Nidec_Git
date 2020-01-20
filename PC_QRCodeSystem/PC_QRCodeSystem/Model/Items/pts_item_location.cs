@@ -14,6 +14,7 @@ namespace PC_QRCodeSystem.Model
     public class pts_item_location
     {
         #region FIELDS OF ITEM LOCATION
+        public int item_location_id { get; set; }
         public string item_location_no { get; set; }
         public string item_location_name { get; set; }
         public string registration_user_cd { get; set; }
@@ -39,10 +40,11 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select * from pts_item_location where 1=1 ";
+            query = "select item_location_id, item_location_no, item_location_name, registration_user_cd, registration_date_time ";
+            query += "from pts_item_location where 1=1 ";
             if (!string.IsNullOrEmpty(location_code))
                 query += "and item_location_no = '" + location_code + "' ";
-            query += "order by item_location_no";
+            query += "order by item_location_id";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
@@ -51,10 +53,11 @@ namespace PC_QRCodeSystem.Model
                 //Get an item
                 pts_item_location outItem = new pts_item_location
                 {
+                    item_location_id = (int)reader["item_location_id"],
                     item_location_no = reader["item_location_no"].ToString(),
                     item_location_name = reader["item_location_name"].ToString(),
-                    registration_date_time = (DateTime)reader["registration_date_time"],
-                    registration_user_cd = reader["registration_user_cd"].ToString()
+                    registration_user_cd = reader["registration_user_cd"].ToString(),
+                    registration_date_time = (DateTime)reader["registration_date_time"]
                 };
                 //Add item into list
                 listItemLocation.Add(outItem);
@@ -83,6 +86,50 @@ namespace PC_QRCodeSystem.Model
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
             return result;
+        }
+
+        /// <summary>
+        /// Update an item location
+        /// </summary>
+        /// <param name="inItem">input item location</param>
+        /// <returns></returns>
+        public int Update(pts_item_location inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_item_location SET item_location_no='" + inItem.item_location_no;
+            query += "', item_location_name='" + inItem.item_location_name;
+            query += "', registration_user_cd ='" + inItem.registration_user_cd;
+            query += "', registration_date_time = now() where item_location_id ='" + inItem.item_location_id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+
+        /// <summary>
+        /// Delete an item location
+        /// </summary>
+        /// <param name="id">item location id</param>
+        /// <returns></returns>
+        public int Delete(int id)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_item_location WHERE item_location_id ='" + id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+
         }
     }
 }

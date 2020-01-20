@@ -41,6 +41,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.txtCapacity = new System.Windows.Forms.TextBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtLocationName = new System.Windows.Forms.TextBox();
@@ -127,7 +128,7 @@
             this.btnSearch.Location = new System.Drawing.Point(30, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 40);
-            this.btnSearch.TabIndex = 24;
+            this.btnSearch.TabIndex = 14;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -138,7 +139,7 @@
             this.btnClose.Location = new System.Drawing.Point(490, 5);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(80, 40);
-            this.btnClose.TabIndex = 23;
+            this.btnClose.TabIndex = 19;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -149,7 +150,7 @@
             this.btnUpdate.Location = new System.Drawing.Point(214, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(80, 40);
-            this.btnUpdate.TabIndex = 22;
+            this.btnUpdate.TabIndex = 16;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -160,7 +161,7 @@
             this.btnDelete.Location = new System.Drawing.Point(306, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 40);
-            this.btnDelete.TabIndex = 21;
+            this.btnDelete.TabIndex = 17;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -171,7 +172,7 @@
             this.btnAdd.Location = new System.Drawing.Point(122, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(80, 40);
-            this.btnAdd.TabIndex = 20;
+            this.btnAdd.TabIndex = 15;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -182,13 +183,14 @@
             this.btnClear.Location = new System.Drawing.Point(398, 5);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(80, 40);
-            this.btnClear.TabIndex = 19;
+            this.btnClear.TabIndex = 18;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.txtCapacity);
             this.panel4.Controls.Add(this.btnOK);
             this.panel4.Controls.Add(this.btnCancel);
             this.panel4.Controls.Add(this.txtLocationName);
@@ -208,13 +210,24 @@
             this.panel4.Size = new System.Drawing.Size(600, 130);
             this.panel4.TabIndex = 21;
             // 
+            // txtCapacity
+            // 
+            this.txtCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCapacity.Location = new System.Drawing.Point(270, 100);
+            this.txtCapacity.Name = "txtCapacity";
+            this.txtCapacity.ReadOnly = true;
+            this.txtCapacity.Size = new System.Drawing.Size(120, 21);
+            this.txtCapacity.TabIndex = 11;
+            this.txtCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCapacity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCapacity_KeyPress);
+            // 
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Location = new System.Drawing.Point(400, 95);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 30);
-            this.btnOK.TabIndex = 18;
+            this.btnOK.TabIndex = 12;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -225,7 +238,7 @@
             this.btnCancel.Location = new System.Drawing.Point(490, 95);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 30);
-            this.btnCancel.TabIndex = 17;
+            this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -237,7 +250,7 @@
             this.txtLocationName.Name = "txtLocationName";
             this.txtLocationName.ReadOnly = true;
             this.txtLocationName.Size = new System.Drawing.Size(300, 21);
-            this.txtLocationName.TabIndex = 16;
+            this.txtLocationName.TabIndex = 10;
             this.txtLocationName.Text = "Item Location Name";
             this.txtLocationName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -248,7 +261,7 @@
             this.txtTypeName.Name = "txtTypeName";
             this.txtTypeName.ReadOnly = true;
             this.txtTypeName.Size = new System.Drawing.Size(300, 21);
-            this.txtTypeName.TabIndex = 15;
+            this.txtTypeName.TabIndex = 9;
             this.txtTypeName.Text = "Item Type Name";
             this.txtTypeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -259,7 +272,7 @@
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.ReadOnly = true;
             this.txtItemName.Size = new System.Drawing.Size(300, 21);
-            this.txtItemName.TabIndex = 14;
+            this.txtItemName.TabIndex = 8;
             this.txtItemName.Text = "Item Name";
             this.txtItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -270,7 +283,7 @@
             this.lbUnitCode.Name = "lbUnitCode";
             this.lbUnitCode.Size = new System.Drawing.Size(110, 21);
             this.lbUnitCode.TabIndex = 13;
-            this.lbUnitCode.Text = "Unit Code";
+            this.lbUnitCode.Text = "Capacity";
             this.lbUnitCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cmbUnitCode
@@ -281,7 +294,7 @@
             this.cmbUnitCode.Location = new System.Drawing.Point(140, 100);
             this.cmbUnitCode.Name = "cmbUnitCode";
             this.cmbUnitCode.Size = new System.Drawing.Size(120, 23);
-            this.cmbUnitCode.TabIndex = 12;
+            this.cmbUnitCode.TabIndex = 7;
             // 
             // rbtnItemLocation
             // 
@@ -290,7 +303,7 @@
             this.rbtnItemLocation.Location = new System.Drawing.Point(10, 70);
             this.rbtnItemLocation.Name = "rbtnItemLocation";
             this.rbtnItemLocation.Size = new System.Drawing.Size(110, 21);
-            this.rbtnItemLocation.TabIndex = 11;
+            this.rbtnItemLocation.TabIndex = 3;
             this.rbtnItemLocation.TabStop = true;
             this.rbtnItemLocation.Text = "Item Location";
             this.rbtnItemLocation.UseVisualStyleBackColor = true;
@@ -303,7 +316,7 @@
             this.rbtnItemType.Location = new System.Drawing.Point(10, 40);
             this.rbtnItemType.Name = "rbtnItemType";
             this.rbtnItemType.Size = new System.Drawing.Size(88, 21);
-            this.rbtnItemType.TabIndex = 10;
+            this.rbtnItemType.TabIndex = 2;
             this.rbtnItemType.TabStop = true;
             this.rbtnItemType.Text = "Item Type";
             this.rbtnItemType.UseVisualStyleBackColor = true;
@@ -316,7 +329,7 @@
             this.rbtnItemCode.Location = new System.Drawing.Point(10, 10);
             this.rbtnItemCode.Name = "rbtnItemCode";
             this.rbtnItemCode.Size = new System.Drawing.Size(89, 21);
-            this.rbtnItemCode.TabIndex = 9;
+            this.rbtnItemCode.TabIndex = 1;
             this.rbtnItemCode.TabStop = true;
             this.rbtnItemCode.Text = "Item Code";
             this.rbtnItemCode.UseVisualStyleBackColor = true;
@@ -330,7 +343,7 @@
             this.cmbItemType.Location = new System.Drawing.Point(140, 40);
             this.cmbItemType.Name = "cmbItemType";
             this.cmbItemType.Size = new System.Drawing.Size(120, 23);
-            this.cmbItemType.TabIndex = 2;
+            this.cmbItemType.TabIndex = 5;
             this.cmbItemType.SelectedIndexChanged += new System.EventHandler(this.cmbItemType_SelectedIndexChanged);
             // 
             // txtItem
@@ -339,7 +352,7 @@
             this.txtItem.Location = new System.Drawing.Point(140, 10);
             this.txtItem.Name = "txtItem";
             this.txtItem.Size = new System.Drawing.Size(120, 21);
-            this.txtItem.TabIndex = 0;
+            this.txtItem.TabIndex = 4;
             this.txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItem_KeyDown);
             // 
             // cmbItemLocation
@@ -350,7 +363,7 @@
             this.cmbItemLocation.Location = new System.Drawing.Point(140, 70);
             this.cmbItemLocation.Name = "cmbItemLocation";
             this.cmbItemLocation.Size = new System.Drawing.Size(120, 23);
-            this.cmbItemLocation.TabIndex = 1;
+            this.cmbItemLocation.TabIndex = 6;
             this.cmbItemLocation.SelectedIndexChanged += new System.EventHandler(this.cmbItemLocation_SelectedIndexChanged);
             // 
             // SubForm
@@ -412,5 +425,6 @@
         private System.Windows.Forms.TextBox txtItemName;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtCapacity;
     }
 }
