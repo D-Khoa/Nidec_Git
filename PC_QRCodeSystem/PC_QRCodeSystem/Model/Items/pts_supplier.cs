@@ -11,6 +11,7 @@ namespace PC_QRCodeSystem.Model
     public class pts_supplier
     {
         #region FIELDS OF SUPPLIER
+        public int supplier_id { get; set; }
         public string supplier_cd { get; set; }
         public string supplier_name { get; set; }
         public string registration_user_cd { get; set; }
@@ -44,6 +45,7 @@ namespace PC_QRCodeSystem.Model
                 //Get an item
                 pts_supplier outItem = new pts_supplier
                 {
+                    supplier_id = (int)reader["supplier_id"],
                     supplier_cd = reader["supplier_cd"].ToString(),
                     supplier_name = reader["supplier_name"].ToString(),
                     registration_date_time = (DateTime)reader["registration_date_time"],
@@ -72,6 +74,35 @@ namespace PC_QRCodeSystem.Model
             query = string.Empty;
             return result;
         }
-       
+        public int UpdateSuplier(pts_supplier UpSupplier)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_supplier SET supplier_cd='" + UpSupplier.supplier_cd + "', supplier_name='" + UpSupplier.supplier_name + "',registration_user_cd ='" + UpSupplier.registration_user_cd;
+            query += "', registration_date_time = now() where supplier_cd ='" + UpSupplier.supplier_cd + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+        public int Delete(int id)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_supplier WHERE supplier_id ='" + id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+
+        }
     }
 }
