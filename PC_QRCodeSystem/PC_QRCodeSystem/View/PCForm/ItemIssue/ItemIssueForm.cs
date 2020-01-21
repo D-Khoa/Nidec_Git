@@ -56,7 +56,18 @@ namespace PC_QRCodeSystem.View
 
         private void cmbIssueCode_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                if (!string.IsNullOrEmpty(cmbIssueCode.Text))
+                    txtIssueCode.Text = cmbIssueCode.SelectedValue.ToString();
+                else
+                    txtIssueCode.Text = "Issue Name";
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

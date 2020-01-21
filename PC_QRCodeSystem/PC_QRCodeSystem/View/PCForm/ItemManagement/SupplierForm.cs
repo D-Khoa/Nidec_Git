@@ -86,14 +86,14 @@ namespace PC_QRCodeSystem.View
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("This action is not undo" + Environment.NewLine + "Are you sure delete this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show("This action is not undo" + Environment.NewLine + "Are you sure delete this supplier?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             int n = 0;
             n = ptssupllier.Delete(ptssupllier.supplier_id);
            // ClearOK();
             Getcmbdata();
             UpdateGrid();
-            MessageBox.Show("Delete " + n + " Item", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Delete " + n + " Supplier", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
