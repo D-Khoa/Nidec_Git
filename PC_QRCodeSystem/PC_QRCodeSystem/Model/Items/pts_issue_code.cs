@@ -13,6 +13,7 @@ namespace PC_QRCodeSystem.Model
     public class pts_issue_code
     {
         #region FIELDS OF ISSUE CODE
+
         public int issue_cd { get; set; }
         public string issue_name { get; set; }
         public string registration_user_cd { get; set; }
@@ -85,6 +86,52 @@ namespace PC_QRCodeSystem.Model
             reader.Close();
             //Close SQL connection
             SQL.Close();
+        }
+        public int AddIssueCode(pts_issue_code addptsissuecd)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_issue_code(issue_cd, issue_name, registration_user_cd)";
+            query += "VALUES ('" + addptsissuecd.issue_cd + "','" + addptsissuecd.issue_name + "','";
+            query += addptsissuecd.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+        public int UpdateIssueCode(pts_issue_code UpdateIssueCd)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_issue_code SET issue_cd='" + UpdateIssueCd.issue_cd + "', issue_name='" + UpdateIssueCd.issue_name + "',registration_user_cd ='" + UpdateIssueCd.registration_user_cd;
+            query += "', registration_date_time = now() where issue_cd ='" + UpdateIssueCd.issue_cd + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+        public int Delete(int issue)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_issue_code WHERE issue_cd ='" + issue + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+
         }
     }
 }
