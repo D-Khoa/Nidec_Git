@@ -18,24 +18,24 @@ namespace PC_QRCodeSystem.Model
         public DateTime use_date { get; set; }
         public DateTime request_date { get; set; }
         public double request_qty { get; set; }
-        public string request_user_cd { get; set; }
+        public string request_usercd { get; set; }
         public bool m_confirm { get; set; }
         public bool gm_confirm { get; set; }
         public double available_qty { get; set; }
-        public string approve_user_cd { get; set; }
+        public string approve_usercd { get; set; }
         public bool pc_m_cofirm { get; set; }
-        public bool pc_pm_confirm { get; set; }
         public string comment { get; set; }
-        public string registration_user_cd { get; set; }
-        public DateTime registration_date_time { get; set; }
         public BindingList<pts_request_log> listRequestItem { get; set; }
         #endregion
 
         /// <summary>
-        /// Get list request log from database
+        /// Search list request
         /// </summary>
-        /// <param name="inItem">item code, model code, destination code, request user code, approve user code</param>
-        public void GetListRequestItem(pts_request_log inItem)
+        /// <param name="inItem">input search info</param>
+        /// <param name="confirm1">check m_confirm</param>
+        /// <param name="confirm2">check gm_confirm</param>
+        /// <param name="approved">check pc_approved</param>
+        public void Search(pts_request_log inItem, bool confirm1, bool confirm2, bool approved)
         {
             //SQL library
             PSQL SQL = new PSQL();
@@ -44,20 +44,20 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT request_id, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_user_cd, ";
-            query += "m_comfirm, gm_confirm, available_qty, approve_user_cd, pc_m_cofirm, pc_pm_confirm, comment, ";
-            query += "registration_user_cd, registration_date FROM pts_request_log WHERE 1=1 ";
-            if (string.IsNullOrEmpty(inItem.item_cd))
-                query += "and item_cd = '" + inItem.item_cd + "' ";
-            if (string.IsNullOrEmpty(inItem.model_cd))
-                query += "and model_cd = '" + inItem.model_cd + "' ";
-            if (string.IsNullOrEmpty(inItem.destination_cd))
-                query += "and destination_cd = '" + inItem.destination_cd + "' ";
-            if (string.IsNullOrEmpty(inItem.request_user_cd))
-                query += "and request_user_cd = '" + inItem.request_user_cd + "' ";
-            if (string.IsNullOrEmpty(inItem.approve_user_cd))
-                query += "and approve_user_cd = '" + inItem.approve_user_cd + "' ";
-            query += "order by request_id";
+            query = "SELECT request_id, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_usercd, ";
+            query += "m_comfirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment FROM pts_request_log WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.item_cd))
+                query += "and item_cd ='" + inItem.item_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.model_cd))
+                query += "and model_cd ='" + inItem.model_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.destination_cd))
+                query += "and destination_cd ='" + inItem.destination_cd + "' ";
+            if (confirm1)
+                query += "and m_confirm ='" + inItem.m_confirm + "' ";
+            if (confirm2)
+                query += "and gm_confirm ='" + inItem.gm_confirm + "' ";
+            if (approved)
+                query += "and pc_m_cofirm ='" + inItem.pc_m_cofirm + "' ";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
@@ -73,16 +73,13 @@ namespace PC_QRCodeSystem.Model
                     use_date = (DateTime)reader["use_date"],
                     request_date = (DateTime)reader["request_date"],
                     request_qty = (double)reader["request_qty"],
-                    request_user_cd = reader["request_user_cd"].ToString(),
+                    request_usercd = reader["request_usercd"].ToString(),
                     m_confirm = (bool)reader["m_confirm"],
                     gm_confirm = (bool)reader["gm_confirm"],
                     available_qty = (double)reader["available_qty"],
-                    approve_user_cd = reader["approve_user_cd"].ToString(),
+                    approve_usercd = reader["approve_usercd"].ToString(),
                     pc_m_cofirm = (bool)reader["pc_m_cofirm"],
-                    pc_pm_confirm = (bool)reader["pc_pm_confirm"],
                     comment = reader["comment"].ToString(),
-                    registration_user_cd = UserData.usercode,
-                    registration_date_time = (DateTime)reader["log_reg_date"]
                 };
                 //Add item into list
                 listRequestItem.Add(outItem);
@@ -90,6 +87,123 @@ namespace PC_QRCodeSystem.Model
             reader.Close();
             //Close SQL connection
             SQL.Close();
+        }
+
+        /// <summary>
+        /// Add new request
+        /// </summary>
+        /// <param name="inItem">input request info</param>
+        /// <returns></returns>
+        public int Add(pts_request_log inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_request_log(item_cd, model_cd, destination_cd, use_date, request_date, request_qty, ";
+            query += "request_usercd, m_comfirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment) ";
+            query += "VALUES('" + inItem.item_cd + "','" + inItem.model_cd + "','" + inItem.destination_cd + "','" + inItem.use_date;
+            query += "','" + inItem.request_date + "','" + inItem.request_qty + "','" + inItem.request_usercd + "','" + inItem.m_confirm;
+            query += "','" + inItem.gm_confirm + "','" + inItem.available_qty + "','" + inItem.approve_usercd + "','" + inItem.pc_m_cofirm;
+            query += "','" + inItem.comment + "')";
+            //Execute non query for insert database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            //Close SQL connection
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Update when manager confirm
+        /// </summary>
+        /// <param name="inItem">only use m_confirm and comment</param>
+        /// <returns></returns>
+        public int MConfirm(pts_request_log inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_request_log SET m_comfirm ='" + inItem.m_confirm + "', comment ='" + inItem.comment;
+            query += "' WHERE request_id ='" + inItem.request_id + "'";
+            //Execute non query for insert database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            //Close SQL connection
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Update when GM confirm
+        /// </summary>
+        /// <param name="inItem">only use gm_confirm and comment</param>
+        /// <returns></returns>
+        public int GMConfirm(pts_request_log inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_request_log SET gm_comfirm ='" + inItem.gm_confirm + "', comment ='" + inItem.comment;
+            query += "' WHERE request_id ='" + inItem.request_id + "'";
+            //Execute non query for insert database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            //Close SQL connection
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Update when PC manager approved
+        /// </summary>
+        /// <param name="inItem">only use pc_m_confirm and comment</param>
+        /// <returns></returns>
+        public int PC_MConfirm(pts_request_log inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_request_log SET pc_m_cofirm ='" + inItem.pc_m_cofirm + "', comment ='" + inItem.comment;
+            query += "' WHERE request_id ='" + inItem.request_id + "'";
+            //Execute non query for insert database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            //Close SQL connection
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Delete ON THIS REQUEST
+        /// </summary>
+        /// <returns></returns>
+        public int Delete()
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_request_log WHERE request_id ='" + request_id + "'";
+            //Execute non query for insert database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            //Close SQL connection
+            SQL.Close();
+            return result;
         }
     }
 }
