@@ -47,6 +47,9 @@
             this.grt_Main = new System.Windows.Forms.TabControl();
             this.tab_Menu = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnUserPosition = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.btnRequestLog = new System.Windows.Forms.Button();
@@ -67,6 +70,7 @@
             this.grt_Main.SuspendLayout();
             this.tab_Menu.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -253,6 +257,7 @@
             // panel5
             // 
             this.panel5.Controls.Add(this.panel8);
+            this.panel5.Controls.Add(this.panel9);
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -261,13 +266,45 @@
             this.panel5.Size = new System.Drawing.Size(445, 400);
             this.panel5.TabIndex = 9;
             // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.label8);
+            this.panel9.Controls.Add(this.btnUserPosition);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(0, 160);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(445, 80);
+            this.panel9.TabIndex = 10;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(445, 20);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "User Position";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnUserPosition
+            // 
+            this.btnUserPosition.Location = new System.Drawing.Point(20, 25);
+            this.btnUserPosition.Name = "btnUserPosition";
+            this.btnUserPosition.Size = new System.Drawing.Size(100, 50);
+            this.btnUserPosition.TabIndex = 6;
+            this.btnUserPosition.Text = "User Position";
+            this.btnUserPosition.UseVisualStyleBackColor = true;
+            this.btnUserPosition.Click += new System.EventHandler(this.btnUserPosition_Click);
+            // 
             // panel8
             // 
             this.panel8.Controls.Add(this.label7);
             this.panel8.Controls.Add(this.btnRequestLog);
             this.panel8.Controls.Add(this.btnStockOutLog);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel8.Location = new System.Drawing.Point(0, 160);
+            this.panel8.Location = new System.Drawing.Point(0, 240);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(445, 80);
             this.panel8.TabIndex = 9;
@@ -419,6 +456,7 @@
             this.grt_Main.ResumeLayout(false);
             this.tab_Menu.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
@@ -461,5 +499,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnUserPosition;
     }
 }

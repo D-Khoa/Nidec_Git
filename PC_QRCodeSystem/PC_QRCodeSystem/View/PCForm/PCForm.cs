@@ -74,5 +74,11 @@ namespace PC_QRCodeSystem.View
             ItemIssueForm issfrm = new ItemIssueForm();
             issfrm.Show();
         }
+
+        private void btnUserPosition_Click(object sender, EventArgs e)
+        {
+            UserPosition upfrm = new UserPosition();
+            upfrm.Show();
+        }
     }
 }
