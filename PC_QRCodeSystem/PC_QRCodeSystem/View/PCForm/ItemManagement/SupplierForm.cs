@@ -94,6 +94,8 @@ namespace PC_QRCodeSystem.View
             Getcmbdata();
             UpdateGrid();
             MessageBox.Show("Delete " + n + " Supplier", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -142,7 +144,7 @@ namespace PC_QRCodeSystem.View
                 UpdateGrid();
                 if (editMode) messstring = "Update ";
                 else messstring = "Add ";
-                MessageBox.Show(messstring + n + " item complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(messstring + n + " Supplier Complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
 
@@ -169,13 +171,21 @@ namespace PC_QRCodeSystem.View
         }
         private void ClearOK()
         {
-            if (dgvDataSupllier.DataSource != null)
-                dgvDataSupllier.DataSource = null;
-            cmbSupplierCode.Text = null;
-            txtSupplierName.Text = null;
-            ptssupllier.listSupplier.Clear();
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            try {
+                if (dgvDataSupllier.DataSource != null)
+                    dgvDataSupllier.DataSource = null;
+                cmbSupplierCode.Text = null;
+                txtSupplierName.Text = null;
+                ptssupllier.listSupplier.Clear();
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
+            }
+
         }
         private void Getcmbdata()
         {

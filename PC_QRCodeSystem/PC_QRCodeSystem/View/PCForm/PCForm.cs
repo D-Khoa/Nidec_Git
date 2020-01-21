@@ -72,7 +72,7 @@ namespace PC_QRCodeSystem.View
         private void btnIssueCode_Click(object sender, EventArgs e)
         {
             ItemIssueForm issfrm = new ItemIssueForm();
-            issfrm.ShowDialog();
+            issfrm.Show();
         }
     }
 }
