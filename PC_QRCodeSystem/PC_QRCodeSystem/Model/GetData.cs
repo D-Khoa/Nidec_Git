@@ -24,7 +24,7 @@ namespace PC_QRCodeSystem.Model
         {
             DataTable dt = new DataTable();
             EncryptDecrypt edcrypt = new EncryptDecrypt();
-            query.Append("select a.user_name, a.is_online from m_mes_user a left join m_login_password b ");
+            query.Append("select a.user_name, b.is_online from m_mes_user a left join m_login_password b ");
             query.Append("on a.user_cd = b.user_cd where b.user_cd = '").Append(usercode).Append("' ");
             password = edcrypt.Encrypt(password);
             query.Append("and b.password ='").Append(password).Append("'");
@@ -124,8 +124,8 @@ namespace PC_QRCodeSystem.Model
             //Get login time of user
             UserData.logintime = DateTime.Now;
             //Save login time and check user is online
-            query.Append("update m_mes_user set last_login_time='").Append(DateTime.Now);
-            query.Append("', is_online ='TRUE' ");
+            query.Append("update m_login_password set last_login_time='").Append(DateTime.Now);
+            query.Append("', is_online ='1' ");
             query.Append("where user_cd='").Append(usercode).Append("'");
             SQL.sqlExecuteNonQuery(query.ToString());
             query.Clear();
@@ -138,7 +138,7 @@ namespace PC_QRCodeSystem.Model
         public void LogOut()
         {
             //Set user is offline
-            query.Append("update m_mes_user set is_online ='FALSE' ");
+            query.Append("update m_login_password set is_online ='0' ");
             query.Append("where user_cd='").Append(UserData.usercode).Append("'");
             SQL.sqlExecuteNonQuery(query.ToString());
             query.Clear();
