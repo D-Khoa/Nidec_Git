@@ -8,17 +8,17 @@ namespace PC_QRCodeSystem.View
     {
         bool editMode { get; set; }
 
-        m_department deptcbm { get; set; }
+      //  m_department deptcbm { get; set; }
         m_department ptsdept { get; set; }
-        pts_destination destcbm { get; set; }
+      //  pts_destination destcbm { get; set; }
         pts_destination ptsdest { get; set; }
 
         public DestinationManager()
         {
             InitializeComponent();
-            deptcbm = new m_department();
+          //  deptcbm = new m_department();
             ptsdept = new m_department();
-            destcbm = new pts_destination();
+          //  destcbm = new pts_destination();
             ptsdest = new pts_destination();
             editMode = false;
             btnOK.Visible = false;
@@ -35,9 +35,13 @@ namespace PC_QRCodeSystem.View
             if (rbtnDepartMent.Checked)
             {
                 cmbDepartmentCode.Enabled = true;
-                cmbDestinationCode.Enabled = false;
                 txtDepartmantName.Enabled = true;
+                cmbDestinationCode.Enabled = false;
                 txtDestinationName.Enabled = false;
+                txtGMUserCode.Enabled = true;
+                txtGMUserName.Enabled = true;
+                txtMUserCode.Enabled = true;
+                txtMUserName.Enabled = true;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsdept.listDept;
                 //txtDepartmantName.BackColor = System.Drawing.Color.Yellow;
@@ -48,9 +52,13 @@ namespace PC_QRCodeSystem.View
             if (rbtnDestinationCode.Checked)
             {
                 cmbDepartmentCode.Enabled = false;
-                cmbDestinationCode.Enabled = true;
                 txtDepartmantName.Enabled = false;
+                cmbDestinationCode.Enabled = true;
                 txtDestinationName.Enabled = true;
+                txtGMUserCode.Enabled = true;
+                txtGMUserName.Enabled = true;
+                txtMUserCode.Enabled = true;
+                txtMUserName.Enabled = true;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsdest.listdestination;
             }
@@ -94,14 +102,13 @@ namespace PC_QRCodeSystem.View
         #region MAIN BUTTON
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            UpdateGrid(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
 
         }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
 
@@ -111,6 +118,9 @@ namespace PC_QRCodeSystem.View
         {
 
         }
+
+
+
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -138,14 +148,63 @@ namespace PC_QRCodeSystem.View
         #region METHOD
         private void UpdateGrid(bool isSearch)
         {
+            if (rbtnDepartMent.Checked)
+            {
+                if (isSearch)
+                    ptsdept.GetListDepartment(string.Empty, string.Empty);
+                dgvData.DataSource = null;
+                dgvData.DataSource = ptsdept.listDept;
+                dgvData.Columns["dept_cd"].HeaderText = "Dept CD";
+                dgvData.Columns["dept_name"].HeaderText = "Dept Name";
+                dgvData.Columns["m_user_cd"].HeaderText = "User CD";
+                dgvData.Columns["gm_user_cd"].HeaderText = "GM User CD";
+                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
 
+            }
+            if (rbtnDestinationCode.Checked)
+            {
+                if (isSearch)
+                    ptsdest.GetListDestination(string.Empty, string.Empty);
+                dgvData.DataSource = null;
+                dgvData.DataSource = ptsdest.listdestination;
+                dgvData.Columns["destination_id"].HeaderText = "Destination ID";
+                dgvData.Columns["destination_cd"].HeaderText = "Destination CD";
+                dgvData.Columns["destination_name"].HeaderText = "Destination Name";
+                dgvData.Columns["dept_cd"].HeaderText = "Dept CD";
+                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
+            }
+            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            isSearch = false;
         }
 
         private void GetCmbData()
         {
+            ptsdept.GetListDepartment(string.Empty, string.Empty);
+            cmbDepartmentCode.DataSource = ptsdept.listDept;
+            cmbDepartmentCode.DisplayMember = "Department Code";
+            cmbDepartmentCode.ValueMember = "Department Name";
+            cmbDepartmentCode.Text = null;
+            ptsdest.GetListDestination(string.Empty, string.Empty);
+            cmbDestinationCode.DataSource = ptsdest.listdestination;
+            cmbDestinationCode.DisplayMember = "Destination Code";
+            cmbDestinationCode.ValueMember = "Destination Name";
+            cmbDestinationCode.Text = null;
 
         }
         #endregion
 
+        private void DestinationManager_Load(object sender, EventArgs e)
+        {
+            GetCmbData();
+        }
+
+        private void DestinationManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+      
     }
 }

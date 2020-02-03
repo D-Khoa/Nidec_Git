@@ -38,7 +38,7 @@ namespace PC_QRCodeSystem.View
         private void getCmbData()
         {
             descmb.GetListDestination(string.Empty, UserData.dept);
-            cmbDestination.DataSource = descmb.listDepartment;
+            cmbDestination.DataSource = descmb.listdestination;
             cmbDestination.DisplayMember = "destination_cd";
             cmbDestination.ValueMember = "destination_name";
             cmbDestination.Text = null;
