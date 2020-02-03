@@ -36,9 +36,9 @@ namespace PC_QRCodeSystem.Model
             //SQL query string
             query = "SELECT destination_id, destination_cd, destination_name, dept_cd, registration_user_cd, registration_date_time ";
             query += "FROM pts_destination WHERE 1=1 ";
-            if (string.IsNullOrEmpty(des_code))
+            if (!string.IsNullOrEmpty(des_code))
                 query += "and destination_cd = '" + des_code + "' ";
-            if (string.IsNullOrEmpty(dept_code))
+            if (!string.IsNullOrEmpty(dept_code))
                 query += "and dept_cd = '" + dept_code + "' ";
             query += "order by destination_id";
             //Execute reader for read database
