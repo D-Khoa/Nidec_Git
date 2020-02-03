@@ -117,6 +117,7 @@
             this.Controls.Add(this.numPomodoro);
             this.Name = "Form1";
             this.Text = "Pomodoro Clock";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.numPomodoro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRest)).EndInit();
             this.ResumeLayout(false);

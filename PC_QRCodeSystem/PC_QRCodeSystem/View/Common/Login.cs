@@ -7,6 +7,8 @@ namespace PC_QRCodeSystem
     public partial class Login : Form
     {
         GetData getData = new GetData();
+        m_mes_user mesuser = new m_mes_user();
+        m_login_password loginpass = new m_login_password();
 
         public Login()
         {
@@ -28,10 +30,13 @@ namespace PC_QRCodeSystem
         private void txtUsername_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
                 txtpass.Focus();
-                AcceptButton = btnOK;
-            }
+        }
+
+        private void txtpass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LoginEvent();
         }
 
         /// <summary>
@@ -40,6 +45,21 @@ namespace PC_QRCodeSystem
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
+        {
+            LoginEvent();
+        }
+
+        /// <summary>
+        /// Click button Cancel for return
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void LoginEvent()
         {
             try
             {
@@ -80,14 +100,32 @@ namespace PC_QRCodeSystem
             }
         }
 
-        /// <summary>
-        /// Click button Cancel for return
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void LoginEvent2()
         {
-            Application.Exit();
+            try
+            {
+                if (!string.IsNullOrEmpty(txtUsername.Text))
+                    MessageBox.Show("Please fill user code!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                loginpass = loginpass.CheckLogIn(txtUsername.Text, txtpass.Text);
+                if (string.IsNullOrEmpty(loginpass.user_cd))
+                    MessageBox.Show("Wrong User or Password!", "Warring", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (loginpass.is_online == 1)
+                    if (MessageBox.Show("This user is online." + Environment.NewLine + "Are you want re-login?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        return;
+                loginpass.LogIO(txtUsername.Text, true);
+                //Show main form
+                MainForm main = new MainForm();
+                this.Hide();
+                txtpass.Clear();
+                main.ShowDialog();
+                loginpass.LogIO(txtUsername.Text, false);
+                this.Show();
+                this.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

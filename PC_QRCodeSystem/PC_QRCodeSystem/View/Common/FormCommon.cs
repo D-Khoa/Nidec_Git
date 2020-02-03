@@ -31,6 +31,11 @@ namespace PC_QRCodeSystem
             set { lbName.Text = value; }
         }
 
+        public string position
+        {
+            get { return lbPosition.Text; }
+            set { lbPosition.Text = value; }
+        }
         /// <summary>
         /// Get department
         /// </summary>
@@ -62,6 +67,7 @@ namespace PC_QRCodeSystem
         private void FormCommon_Load(object sender, EventArgs e)
         {
             name = UserData.username;
+            position = UserData.position;
             dept = UserData.dept;
             logintime = UserData.logintime;
             listper = UserData.role_permision;

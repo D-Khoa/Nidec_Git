@@ -66,7 +66,7 @@ namespace PomodoroClock
             timer--;
             int min = timer / 60;
             int sec = timer % 60;
-            lbTime.Text = min + " : " + sec;
+            lbTime.Text = min.ToString("00") + " : " + sec.ToString("00");
         }
     }
 }

@@ -104,6 +104,7 @@
             this.txtpass.Size = new System.Drawing.Size(163, 20);
             this.txtpass.TabIndex = 2;
             this.txtpass.UseSystemPasswordChar = true;
+            this.txtpass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtpass_KeyDown);
             // 
             // btnOK
             // 

@@ -45,7 +45,7 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "SELECT request_id, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_usercd, ";
-            query += "m_comfirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment FROM pts_request_log WHERE 1=1 ";
+            query += "m_confirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment FROM pts_request_log WHERE 1=1 ";
             if (!string.IsNullOrEmpty(inItem.item_cd))
                 query += "and item_cd ='" + inItem.item_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.model_cd))

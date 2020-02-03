@@ -38,7 +38,7 @@ namespace PC_QRCodeSystem.View
         private void getCmbData()
         {
             descmb.GetListDestination(string.Empty, UserData.dept);
-            cmbDestination.DataSource = descmb.listDepartment;
+            cmbDestination.DataSource = descmb.listdestination;
             cmbDestination.DisplayMember = "destination_cd";
             cmbDestination.ValueMember = "destination_name";
             cmbDestination.Text = null;
@@ -47,16 +47,16 @@ namespace PC_QRCodeSystem.View
         private void cmbDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(cmbDestination.Text))
-                txtDestinationName.Text = cmbDestination.ValueMember;
+                txtDestinationName.Text = cmbDestination.SelectedValue.ToString();
         }
 
-        private void txtItemCode_Leave(object sender, EventArgs e)
+        private void txtItemCode_Validated(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtItemCode.Text))
                 txtItemName.Text = itemdata.GetItem(txtItemCode.Text).item_name;
         }
 
-        private void txtModelCode_Leave(object sender, EventArgs e)
+        private void txtModelCode_Validated(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtModelCode.Text))
                 txtModelName.Text = itemdata.GetItem(txtModelCode.Text).item_name;
@@ -70,6 +70,11 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region BUTTON EVENT
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             UpdateGrid();
@@ -160,6 +165,7 @@ namespace PC_QRCodeSystem.View
         {
             btnDelete.Enabled = !isLock;
             btnUpdate.Enabled = !isLock;
+            btnConfirm.Enabled = !isLock;
         }
 
         private void dgvRequest_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -172,7 +178,15 @@ namespace PC_QRCodeSystem.View
             cmbDestination.Text = requestdata.destination_cd;
             LockFields(false);
         }
-        #endregion
 
+        private void dgvRequest_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvRequest.Columns[e.ColumnIndex].Name == "m_confirm" || dgvRequest.Columns[e.ColumnIndex].Name == "gm_confirm" || dgvRequest.Columns[e.ColumnIndex].Name == "pc_m_cofirm" || dgvRequest.Columns[e.ColumnIndex].Name == "approve_usercd")
+            {
+                if (e.Value != null && (bool)e.Value == false)
+                    e.CellStyle.BackColor = Color.Red;
+            }
+        }
+        #endregion
     }
 }
