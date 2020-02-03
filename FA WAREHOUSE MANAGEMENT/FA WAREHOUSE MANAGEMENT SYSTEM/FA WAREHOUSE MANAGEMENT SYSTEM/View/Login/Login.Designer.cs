@@ -83,7 +83,7 @@
             this.btnCancel.Location = new System.Drawing.Point(300, 204);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(101, 36);
-            this.btnCancel.TabIndex = 10;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -94,7 +94,7 @@
             this.btnOK.Name = "btnOK";
             this.btnOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnOK.Size = new System.Drawing.Size(101, 36);
-            this.btnOK.TabIndex = 8;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -124,7 +124,7 @@
             this.txtUsername.Location = new System.Drawing.Point(242, 108);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(163, 20);
-            this.txtUsername.TabIndex = 11;
+            this.txtUsername.TabIndex = 1;
             this.txtUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyDown);
             // 
             // txtpass
@@ -133,7 +133,7 @@
             this.txtpass.Name = "txtpass";
             this.txtpass.PasswordChar = '*';
             this.txtpass.Size = new System.Drawing.Size(163, 20);
-            this.txtpass.TabIndex = 12;
+            this.txtpass.TabIndex = 2;
             this.txtpass.UseSystemPasswordChar = true;
             // 
             // Login

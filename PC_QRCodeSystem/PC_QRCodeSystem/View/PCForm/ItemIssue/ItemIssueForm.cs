@@ -109,7 +109,7 @@ namespace PC_QRCodeSystem.View
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("This action is not undo" + Environment.NewLine + "Are you sure delete this supplier?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show("This action is not undo" + Environment.NewLine + "Are you sure delete this item issue?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             int n = 0;
             n = ptsissuecode.Delete(ptsissuecode.issue_cd);

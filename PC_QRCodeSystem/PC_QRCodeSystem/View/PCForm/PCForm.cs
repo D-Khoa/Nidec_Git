@@ -66,7 +66,8 @@ namespace PC_QRCodeSystem.View
 
         private void btnDepartment_Click(object sender, EventArgs e)
         {
-
+            DestinationManager desmg = new DestinationManager();
+            desmg.Show();
         }
 
         private void btnIssueCode_Click(object sender, EventArgs e)

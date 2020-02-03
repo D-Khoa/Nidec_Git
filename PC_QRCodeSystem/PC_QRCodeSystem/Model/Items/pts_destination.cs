@@ -17,7 +17,7 @@ namespace PC_QRCodeSystem.Model
         public string dept_cd { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public BindingList<pts_destination> listDepartment { get; set; }
+        public BindingList<pts_destination> listdestination { get; set; }
         #endregion
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace PC_QRCodeSystem.Model
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            listDepartment = new BindingList<pts_destination>();
+            listdestination = new BindingList<pts_destination>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
@@ -57,7 +57,7 @@ namespace PC_QRCodeSystem.Model
                     registration_user_cd = reader["registration_user_cd"].ToString()
                 };
                 //Add item into list
-                listDepartment.Add(outItem);
+                listdestination.Add(outItem);
             }
             reader.Close();
             //Close SQL connection
