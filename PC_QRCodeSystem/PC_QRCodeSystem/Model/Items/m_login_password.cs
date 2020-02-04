@@ -15,7 +15,7 @@ namespace PC_QRCodeSystem.Model
         public DateTime registration_date_time { get; set; }
         public string factory_cd { get; set; }
         public DateTime last_login_time { get; set; }
-        public int is_online { get; set; }
+        public bool is_online { get; set; }
 
         /// <summary>
         /// Check user and password
@@ -25,34 +25,41 @@ namespace PC_QRCodeSystem.Model
         /// <returns></returns>
         public m_login_password CheckLogIn(string usercd, string pass)
         {
-            EncryptDecrypt endecrypt = new EncryptDecrypt();
-            pass = endecrypt.Encrypt(pass);
-            //SQL library
-            PSQL SQL = new PSQL();
-            string query = string.Empty;
-            //Open SQL connection
-            SQL.Open();
-            //SQL query string
-            query = @"SELECT user_cd, registration_user_cd, registration_date_time, factory_cd, last_login_time, is_online 
-                      FROM m_login_password WHERE user_cd ='" + usercd + "' and password ='" + pass + "'";
-            //Execute reader for read database
-            IDataReader reader = SQL.Command(query).ExecuteReader();
-            query = string.Empty;
-            reader.Read();
-            //Get an item
-            m_login_password outItem = new m_login_password
+            try
             {
-                user_cd = reader["user_cd"].ToString(),
-                factory_cd = reader["factory_cd"].ToString(),
-                is_online = (int)reader["is_online"],
-                last_login_time = (DateTime)reader["last_login_time"],
-                registration_date_time = (DateTime)reader["registration_date_time"],
-                registration_user_cd = reader["registration_user_cd"].ToString(),
-            };
-            reader.Close();
-            //Close SQL connection
-            SQL.Close();
-            return outItem;
+                EncryptDecrypt endecrypt = new EncryptDecrypt();
+                pass = endecrypt.Encrypt(pass);
+                //SQL library
+                PSQL SQL = new PSQL();
+                string query = string.Empty;
+                //Open SQL connection
+                SQL.Open();
+                //SQL query string
+                query = @"SELECT user_cd, registration_user_cd, registration_date_time, factory_cd, last_login_time, is_online ";
+                query += "FROM m_login_password WHERE user_cd ='" + usercd + "' and password ='" + pass + "'";
+                //Execute reader for read database
+                IDataReader reader = SQL.Command(query).ExecuteReader();
+                query = string.Empty;
+                reader.Read();
+                //Get an item
+                m_login_password outItem = new m_login_password
+                {
+                    user_cd = reader["user_cd"].ToString(),
+                    factory_cd = reader["factory_cd"].ToString(),
+                    is_online = (bool)reader["is_online"],
+                    last_login_time = (DateTime)reader["last_login_time"],
+                    registration_date_time = (DateTime)reader["registration_date_time"],
+                    registration_user_cd = reader["registration_user_cd"].ToString(),
+                };
+                reader.Close();
+                //Close SQL connection
+                SQL.Close();
+                return outItem;
+            }
+            catch
+            {
+                throw new Exception("Wrong user or password!" + Environment.NewLine + "Please Log In again!");
+            }
         }
 
         /// <summary>

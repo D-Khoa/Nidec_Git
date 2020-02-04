@@ -13,6 +13,7 @@ namespace PomodoroClock
         public Form1()
         {
             InitializeComponent();
+            this.BackColor = Color.Gray;
         }
 
         private void btnStart_Click(object sender, EventArgs e)
