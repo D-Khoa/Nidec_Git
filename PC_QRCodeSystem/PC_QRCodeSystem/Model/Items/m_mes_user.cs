@@ -89,8 +89,8 @@ namespace PC_QRCodeSystem.Model
             m_mes_user outItem = new m_mes_user
             {
                 user_cd = reader["user_cd"].ToString(),
-                user_name = reader["dept_cd"].ToString(),
-                locale_id = (int)reader["dept_name"],
+                user_name = reader["user_name"].ToString(),
+                locale_id = (int)reader["locale_id"],
                 multi_login_flag = reader["multi_login_flag"].ToString(),
                 registration_date_time = (DateTime)reader["registration_date_time"],
                 registration_user_cd = reader["registration_user_cd"].ToString(),
@@ -132,8 +132,8 @@ namespace PC_QRCodeSystem.Model
                 m_mes_user outItem = new m_mes_user
                 {
                     user_cd = reader["user_cd"].ToString(),
-                    user_name = reader["dept_cd"].ToString(),
-                    locale_id = (int)reader["dept_name"],
+                    user_name = reader["user_name"].ToString(),
+                    locale_id = (int)reader["locale_id"],
                     multi_login_flag = reader["multi_login_flag"].ToString(),
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString(),

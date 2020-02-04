@@ -130,5 +130,6 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
             return result;
         }
+       
     }
 }

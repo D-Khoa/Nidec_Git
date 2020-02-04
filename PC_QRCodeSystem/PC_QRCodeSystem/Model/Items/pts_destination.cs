@@ -63,5 +63,51 @@ namespace PC_QRCodeSystem.Model
             //Close SQL connection
             SQL.Close();
         }
+        public int AddDestination(pts_destination adddest)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_destination(destination_cd, destination_name, dept_cd, registration_user_cd)";
+            query += "VALUES ('" + adddest.destination_cd + "','" + adddest.destination_name + "','" + adddest.dept_cd + "','" + adddest.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+        public int UpdateDest(pts_destination updest)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_destination SET destination_id='" + updest.destination_id + "', destination_cd='" + updest.destination_cd + "',destination_name = '" + updest.destination_name+ "',dept_cd = '" + updest.dept_cd;
+            query += "', registration_user_cd ='" + updest.registration_user_cd;
+            query += "', registration_date_time = now() where destination_id ='" + updest.destination_id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+        public int DeleteDest(int id)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_destination WHERE destination_id ='" + id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+
+        }
     }
 }
