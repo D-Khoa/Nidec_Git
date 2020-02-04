@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 
 namespace PC_QRCodeSystem.Model
@@ -15,9 +16,10 @@ namespace PC_QRCodeSystem.Model
         public string dept_name { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public List<m_department> listDept { get; set; }
+        public BindingList<m_department> listDept { get; set; }
         #endregion
 
+       
         /// <summary>
         /// Get all department
         /// </summary>
@@ -26,7 +28,7 @@ namespace PC_QRCodeSystem.Model
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            listDept = new List<m_department>();
+            listDept = new BindingList <m_department>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
@@ -52,6 +54,52 @@ namespace PC_QRCodeSystem.Model
             reader.Close();
             //Close SQL connection
             SQL.Close();
+        }
+        public int AddDepartment(m_department adddept)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO m_department(dept_id, dept_cd, dept_name, registration_user_cd)";
+            query += "VALUES ('" + adddept.dept_id + "','" + adddept.dept_cd + "','" + adddept.dept_name + "','" + adddept.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+        public int UpdateDept(m_department updept)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE m_department SET dept_id='" + updept.dept_id + "', dept_cd='" + updept.dept_cd+ "',dept_name = '" + updept.dept_name;
+            query += "', registration_user_cd ='" + updept.registration_user_cd;
+            query += "', registration_date_time = now() where dept_id ='" + updept.dept_id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
+        public int DeleteDept(int id)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM m_department WHERE dept_id ='" + id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+
         }
     }
 }

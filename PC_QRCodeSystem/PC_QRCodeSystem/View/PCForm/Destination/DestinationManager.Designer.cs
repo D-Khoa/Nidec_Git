@@ -34,7 +34,6 @@
             this.txtGMUserCode = new System.Windows.Forms.TextBox();
             this.txtMUserCode = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.rbtnDepartMent = new System.Windows.Forms.RadioButton();
@@ -43,6 +42,7 @@
             this.txtDepartmantName = new System.Windows.Forms.TextBox();
             this.cmbDestinationCode = new System.Windows.Forms.ComboBox();
             this.cmbDepartmentCode = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -52,6 +52,7 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
@@ -60,12 +61,12 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.txtGMUserName);
             this.panel4.Controls.Add(this.txtMUserName);
             this.panel4.Controls.Add(this.txtGMUserCode);
             this.panel4.Controls.Add(this.txtMUserCode);
             this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.btnOK);
             this.panel4.Controls.Add(this.btnCancel);
             this.panel4.Controls.Add(this.rbtnDepartMent);
@@ -120,23 +121,12 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(124, 113);
+            this.label2.Location = new System.Drawing.Point(35, 113);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 17);
+            this.label2.Size = new System.Drawing.Size(119, 17);
             this.label2.TabIndex = 19;
-            this.label2.Text = "GM";
+            this.label2.Text = "General Manager";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(90, 83);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 17);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Manager";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnOK
             // 
@@ -225,6 +215,17 @@
             this.cmbDepartmentCode.Size = new System.Drawing.Size(120, 24);
             this.cmbDepartmentCode.TabIndex = 0;
             this.cmbDepartmentCode.SelectedIndexChanged += new System.EventHandler(this.cmbDepartmentCode_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(90, 83);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 17);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Manager";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // pnlButtons
             // 
@@ -317,6 +318,7 @@
             this.dgvData.ReadOnly = true;
             this.dgvData.Size = new System.Drawing.Size(639, 205);
             this.dgvData.TabIndex = 4;
+            this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
             // 
             // panel5
             // 
@@ -328,6 +330,17 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(639, 205);
             this.panel5.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(90, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 17);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Manager";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // DestinationManager
             // 
@@ -341,6 +354,7 @@
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "DestinationManager";
+            this.position = "";
             this.Text = "Destination Manager";
             this.tittle = "FormCommon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DestinationManager_FormClosing);
@@ -383,5 +397,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label5;
     }
 }
