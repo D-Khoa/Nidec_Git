@@ -52,6 +52,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
+            this.btnConfirm = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -59,6 +60,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnConfirm);
             this.panel4.Controls.Add(this.txtComment);
             this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.txtQty);
@@ -188,7 +190,7 @@
             this.txtModelCode.Name = "txtModelCode";
             this.txtModelCode.Size = new System.Drawing.Size(120, 23);
             this.txtModelCode.TabIndex = 4;
-            this.txtModelCode.Leave += new System.EventHandler(this.txtModelCode_Leave);
+            this.txtModelCode.Validated += new System.EventHandler(this.txtModelCode_Validated);
             // 
             // txtItemCode
             // 
@@ -197,7 +199,7 @@
             this.txtItemCode.Name = "txtItemCode";
             this.txtItemCode.Size = new System.Drawing.Size(120, 23);
             this.txtItemCode.TabIndex = 3;
-            this.txtItemCode.Leave += new System.EventHandler(this.txtItemCode_Leave);
+            this.txtItemCode.Validated += new System.EventHandler(this.txtItemCode_Validated);
             // 
             // label5
             // 
@@ -305,14 +307,29 @@
             // 
             // dgvRequest
             // 
+            this.dgvRequest.AllowUserToAddRows = false;
+            this.dgvRequest.AllowUserToDeleteRows = false;
             this.dgvRequest.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRequest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRequest.Location = new System.Drawing.Point(145, 319);
             this.dgvRequest.Name = "dgvRequest";
+            this.dgvRequest.ReadOnly = true;
             this.dgvRequest.Size = new System.Drawing.Size(559, 183);
             this.dgvRequest.TabIndex = 4;
             this.dgvRequest.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequest_CellDoubleClick);
+            this.dgvRequest.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvRequest_CellFormatting);
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirm.Location = new System.Drawing.Point(456, 130);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(84, 50);
+            this.btnConfirm.TabIndex = 15;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // RequestForm
             // 
@@ -366,5 +383,6 @@
         private System.Windows.Forms.DataGridView dgvRequest;
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnConfirm;
     }
 }

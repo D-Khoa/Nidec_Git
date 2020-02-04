@@ -89,6 +89,7 @@ namespace PC_QRCodeSystem.Model
                 //Execute reader for read database
                 IDataReader reader = SQL.Command(query).ExecuteReader();
                 query = string.Empty;
+                reader.Read();
                 //Get an item
                 pts_item outItem = new pts_item
                 {

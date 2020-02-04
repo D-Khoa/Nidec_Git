@@ -36,6 +36,7 @@
             this.numRest = new System.Windows.Forms.NumericUpDown();
             this.lbTime = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
+            this.pnlLed = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.numPomodoro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRest)).BeginInit();
             this.SuspendLayout();
@@ -53,6 +54,11 @@
             this.numPomodoro.Size = new System.Drawing.Size(61, 23);
             this.numPomodoro.TabIndex = 0;
             this.numPomodoro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numPomodoro.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
@@ -82,6 +88,11 @@
             this.numRest.Size = new System.Drawing.Size(61, 23);
             this.numRest.TabIndex = 2;
             this.numRest.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numRest.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // lbTime
             // 
@@ -98,17 +109,26 @@
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.Location = new System.Drawing.Point(158, 20);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(114, 52);
+            this.btnStart.Size = new System.Drawing.Size(120, 52);
             this.btnStart.TabIndex = 5;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // pnlLed
+            // 
+            this.pnlLed.Location = new System.Drawing.Point(158, 94);
+            this.pnlLed.Name = "pnlLed";
+            this.pnlLed.Size = new System.Drawing.Size(120, 30);
+            this.pnlLed.TabIndex = 6;
+            this.pnlLed.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlLed_Paint);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 133);
+            this.Controls.Add(this.pnlLed);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lbTime);
             this.Controls.Add(this.label2);
@@ -117,6 +137,7 @@
             this.Controls.Add(this.numPomodoro);
             this.Name = "Form1";
             this.Text = "Pomodoro Clock";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.numPomodoro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRest)).EndInit();
             this.ResumeLayout(false);
@@ -133,6 +154,7 @@
         private System.Windows.Forms.NumericUpDown numRest;
         private System.Windows.Forms.Label lbTime;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Panel pnlLed;
     }
 }
 
