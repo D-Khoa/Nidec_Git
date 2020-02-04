@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Model\Items\m_login_password.cs" />
     <Compile Include="Model\Items\m_mes_user.cs" />
+    <Compile Include="Model\Items\m_mes_user_role.cs" />
     <Compile Include="Model\Items\m_user_position.cs" />
     <Compile Include="Model\Items\pts_item_location.cs" />
     <Compile Include="View\Common\ChangePasswordForm.cs">

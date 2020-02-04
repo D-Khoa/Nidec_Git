@@ -40,8 +40,8 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = @"SELECT user_cd, user_name, locale_id, multi_login_flag, registration_user_cd, registration_date_time,
-                      registrated_factory_cd, dept_cd, user_position_cd FROM m_mes_user WHERE user_cd ='" + user_code + "'";
+            query = "SELECT user_cd, user_name, locale_id, multi_login_flag, registration_user_cd, registration_date_time, ";
+             query += "registrated_factory_cd, dept_cd, user_position_cd FROM m_mes_user WHERE user_cd ='" + user_code + "'";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
@@ -50,8 +50,8 @@ namespace PC_QRCodeSystem.Model
             m_mes_user outItem = new m_mes_user
             {
                 user_cd = reader["user_cd"].ToString(),
-                user_name = reader["dept_cd"].ToString(),
-                locale_id = (int)reader["dept_name"],
+                user_name = reader["user_name"].ToString(),
+                locale_id = (int)reader["locale_id"],
                 multi_login_flag = reader["multi_login_flag"].ToString(),
                 registration_date_time = (DateTime)reader["registration_date_time"],
                 registration_user_cd = reader["registration_user_cd"].ToString(),
