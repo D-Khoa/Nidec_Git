@@ -39,20 +39,21 @@ namespace PomodoroClock
         {
             if (timer == 0)
             {
-                if (cycle == 0)
-                {
-                    cycle = 4;
-                    timer = (int)numRest.Value * 180;
-                    this.BackColor = Color.Red;
-                }
                 if (cycle == temp)
                 {
                     cycle--;
-                    timer = (int)numRest.Value * 60;
+                    if (cycle == 0)
+                    {
+                        timer = (int)numRest.Value * 180;
+                    }
+                    else
+                        timer = (int)numRest.Value * 60;
                     this.BackColor = Color.Red;
                 }
                 else
                 {
+                    if (cycle == 0)
+                        cycle = 4;
                     temp = cycle;
                     timer = (int)numPomodoro.Value * 60;
                     this.BackColor = Color.Green;

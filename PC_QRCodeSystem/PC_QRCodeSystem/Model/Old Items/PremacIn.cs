@@ -1,29 +1,19 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace PC_QRCodeSystem.Model
 {
     public class PremacIn
     {
-        //public int packing_id { get; set; }
-        //public string packing_cd { get; set; }
         public string Item_Number { get; set; }
         public string Item_Name { get; set; }
-        //public double unit_qty { get; set; }
-        //public int unit_cd { get; set; }
         public string Supplier_Name { get; set; }
         public string Supplier_Invoice { get; set; }
         public string PO_No { get; set; }
         public double Delivery_Qty { get; set; }
-        //public DateTime stock_out_date { get; set; }
         public DateTime Delivery_Date { get; set; }
-        //public double stock_qty { get; set; }
         public string Incharge { get; set; }
-        //public DateTime Registrator_Date { get; set; }
 
         /// <summary>
         /// Get infomations of item into list item from file Premac
