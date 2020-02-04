@@ -8,62 +8,43 @@ namespace PC_QRCodeSystem.View
     {
         bool editMode { get; set; }
 
-      //  m_department deptcbm { get; set; }
+        m_department deptcbm { get; set; }
         m_department ptsdept { get; set; }
-      //  pts_destination destcbm { get; set; }
+        pts_destination destcbm { get; set; }
         pts_destination ptsdest { get; set; }
 
         public DestinationManager()
         {
             InitializeComponent();
-          //  deptcbm = new m_department();
+            deptcbm = new m_department();
             ptsdept = new m_department();
-          //  destcbm = new pts_destination();
+            destcbm = new pts_destination();
             ptsdest = new pts_destination();
             editMode = false;
             btnOK.Visible = false;
             btnCancel.Visible = false;
-            btnUpdate.Visible = false;
-            btnDelete.Visible = false;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
 
 
         }
-
-        #region SUB EVENT
-        private void rbtnDepartMent_CheckedChanged(object sender, EventArgs e)
+        private void DestinationManager_Load(object sender, EventArgs e)
         {
-            if (rbtnDepartMent.Checked)
-            {
-                cmbDepartmentCode.Enabled = true;
-                txtDepartmantName.Enabled = true;
-                cmbDestinationCode.Enabled = false;
-                txtDestinationName.Enabled = false;
-                txtGMUserCode.Enabled = true;
-                txtGMUserName.Enabled = true;
-                txtMUserCode.Enabled = true;
-                txtMUserName.Enabled = true;
-                dgvData.DataSource = null;
-                dgvData.DataSource = ptsdept.listDept;
-                //txtDepartmantName.BackColor = System.Drawing.Color.Yellow;
-                //txtDestinationName.BackColor = System.Drawing.Color.Gray;
-                //rbtnDepartMent.BackColor = System.Drawing.Color.Yellow;
-                //rbtnDestinationCode.BackColor = System.Drawing.Color.Transparent;
-            }
-            if (rbtnDestinationCode.Checked)
-            {
-                cmbDepartmentCode.Enabled = false;
-                txtDepartmantName.Enabled = false;
-                cmbDestinationCode.Enabled = true;
-                txtDestinationName.Enabled = true;
-                txtGMUserCode.Enabled = true;
-                txtGMUserName.Enabled = true;
-                txtMUserCode.Enabled = true;
-                txtMUserName.Enabled = true;
-                dgvData.DataSource = null;
-                dgvData.DataSource = ptsdest.listdestination;
-            }
+            GetCmbData();
         }
 
+        private void DestinationManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (btnOK.Visible)
+            {
+                if (MessageBox.Show("You are in processing! Are you sure exit?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+        }
+        #region SUB EVENT
         private void cmbDepartmentCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -97,6 +78,8 @@ namespace PC_QRCodeSystem.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+       
+       
         #endregion
 
         #region MAIN BUTTON
@@ -144,14 +127,26 @@ namespace PC_QRCodeSystem.View
             this.Close();
         }
         #endregion
+        private void GetCmbData()
+        {
+            deptcbm.GetListDepartment();
+            cmbDepartmentCode.DataSource = deptcbm.listDept;
+            cmbDepartmentCode.DisplayMember = "Department Code";
+            cmbDepartmentCode.ValueMember = "Department Name";
+            cmbDepartmentCode.Text = null;
+            destcbm.GetListDestination(string.Empty, string.Empty);
+            cmbDestinationCode.DataSource = destcbm.listdestination;
+            cmbDestinationCode.DisplayMember = "Destination Code";
+            cmbDestinationCode.ValueMember = "Destination Name";
+            cmbDestinationCode.Text = null;
 
-        #region METHOD
+        }
         private void UpdateGrid(bool isSearch)
         {
             if (rbtnDepartMent.Checked)
             {
                 if (isSearch)
-                    ptsdept.GetListDepartment(string.Empty, string.Empty);
+                    ptsdept.GetListDepartment();
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsdept.listDept;
                 dgvData.Columns["dept_cd"].HeaderText = "Dept CD";
@@ -179,31 +174,48 @@ namespace PC_QRCodeSystem.View
             isSearch = false;
         }
 
-        private void GetCmbData()
+        private void rbtnDepartMent_CheckedChanged(object sender, EventArgs e)
         {
-            ptsdept.GetListDepartment(string.Empty, string.Empty);
-            cmbDepartmentCode.DataSource = ptsdept.listDept;
-            cmbDepartmentCode.DisplayMember = "Department Code";
-            cmbDepartmentCode.ValueMember = "Department Name";
-            cmbDepartmentCode.Text = null;
-            ptsdest.GetListDestination(string.Empty, string.Empty);
-            cmbDestinationCode.DataSource = ptsdest.listdestination;
-            cmbDestinationCode.DisplayMember = "Destination Code";
-            cmbDestinationCode.ValueMember = "Destination Name";
-            cmbDestinationCode.Text = null;
-
+            if (rbtnDepartMent.Checked)
+            {
+                cmbDepartmentCode.Enabled = true;
+                txtDepartmantName.Enabled = true;
+                cmbDestinationCode.Enabled = false;
+                txtDestinationName.Enabled = false;
+                txtGMUserCode.Enabled = true;
+                txtGMUserName.Enabled = true;
+                txtMUserCode.Enabled = true;
+                txtMUserName.Enabled = true;
+                dgvData.DataSource = null;
+                dgvData.DataSource = ptsdept.listDept;
+                //txtDepartmantName.BackColor = System.Drawing.Color.Yellow;
+                //txtDestinationName.BackColor = System.Drawing.Color.Gray;
+                //rbtnDepartMent.BackColor = System.Drawing.Color.Yellow;
+                //rbtnDestinationCode.BackColor = System.Drawing.Color.Transparent;
+            }
+            if (rbtnDestinationCode.Checked)
+            {
+                cmbDepartmentCode.Enabled = false;
+                txtDepartmantName.Enabled = false;
+                cmbDestinationCode.Enabled = true;
+                txtDestinationName.Enabled = true;
+                txtGMUserCode.Enabled = true;
+                txtGMUserName.Enabled = true;
+                txtMUserCode.Enabled = true;
+                txtMUserName.Enabled = true;
+                dgvData.DataSource = null;
+                dgvData.DataSource = ptsdest.listdestination;
+            }
         }
+
+        #region METHOD
+      
+     
         #endregion
 
-        private void DestinationManager_Load(object sender, EventArgs e)
-        {
-            GetCmbData();
-        }
+       
 
-        private void DestinationManager_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
+       
 
       
     }

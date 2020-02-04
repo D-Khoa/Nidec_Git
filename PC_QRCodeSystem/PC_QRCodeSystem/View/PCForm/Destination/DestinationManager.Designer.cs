@@ -43,7 +43,7 @@
             this.txtDepartmantName = new System.Windows.Forms.TextBox();
             this.cmbDestinationCode = new System.Windows.Forms.ComboBox();
             this.cmbDepartmentCode = new System.Windows.Forms.ComboBox();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -51,9 +51,11 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvData = new System.Windows.Forms.DataGridView();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel4
@@ -75,7 +77,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(145, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(639, 150);
+            this.panel4.Size = new System.Drawing.Size(639, 148);
             this.panel4.TabIndex = 2;
             // 
             // txtGMUserName
@@ -224,19 +226,19 @@
             this.cmbDepartmentCode.TabIndex = 0;
             this.cmbDepartmentCode.SelectedIndexChanged += new System.EventHandler(this.cmbDepartmentCode_SelectedIndexChanged);
             // 
-            // panel5
+            // pnlButtons
             // 
-            this.panel5.Controls.Add(this.btnUpdate);
-            this.panel5.Controls.Add(this.btnDelete);
-            this.panel5.Controls.Add(this.btnSearch);
-            this.panel5.Controls.Add(this.btnClose);
-            this.panel5.Controls.Add(this.btnAdd);
-            this.panel5.Controls.Add(this.btnClear);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(145, 219);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(639, 50);
-            this.panel5.TabIndex = 3;
+            this.pnlButtons.Controls.Add(this.btnUpdate);
+            this.pnlButtons.Controls.Add(this.btnDelete);
+            this.pnlButtons.Controls.Add(this.btnSearch);
+            this.pnlButtons.Controls.Add(this.btnClose);
+            this.pnlButtons.Controls.Add(this.btnAdd);
+            this.pnlButtons.Controls.Add(this.btnClear);
+            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlButtons.Location = new System.Drawing.Point(145, 217);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(639, 60);
+            this.pnlButtons.TabIndex = 3;
             // 
             // btnUpdate
             // 
@@ -306,12 +308,26 @@
             // 
             // dgvData
             // 
+            this.dgvData.AllowUserToAddRows = false;
+            this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(145, 69);
+            this.dgvData.Location = new System.Drawing.Point(0, 0);
             this.dgvData.Name = "dgvData";
-            this.dgvData.Size = new System.Drawing.Size(639, 413);
+            this.dgvData.ReadOnly = true;
+            this.dgvData.Size = new System.Drawing.Size(639, 205);
             this.dgvData.TabIndex = 4;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.dgvData);
+            this.panel5.Location = new System.Drawing.Point(145, 277);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(639, 205);
+            this.panel5.TabIndex = 5;
             // 
             // DestinationManager
             // 
@@ -319,8 +335,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 482);
             this.Controls.Add(this.panel5);
+            this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.dgvData);
             this.dept = "";
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
@@ -329,13 +345,14 @@
             this.tittle = "FormCommon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DestinationManager_FormClosing);
             this.Load += new System.EventHandler(this.DestinationManager_Load);
-            this.Controls.SetChildIndex(this.dgvData, 0);
             this.Controls.SetChildIndex(this.panel4, 0);
+            this.Controls.SetChildIndex(this.pnlButtons, 0);
             this.Controls.SetChildIndex(this.panel5, 0);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
+            this.pnlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -343,7 +360,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.ComboBox cmbDestinationCode;
         private System.Windows.Forms.ComboBox cmbDepartmentCode;
@@ -365,5 +382,6 @@
         private System.Windows.Forms.TextBox txtMUserName;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Panel panel5;
     }
 }
