@@ -32,6 +32,8 @@
             this.lbTittle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbPosition = new System.Windows.Forms.Label();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lbDept = new System.Windows.Forms.Label();
@@ -40,8 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbPosition = new System.Windows.Forms.Label();
+            this.btnCloseForm = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +82,7 @@
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btnCloseForm);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.lbPosition);
             this.panel3.Controls.Add(this.btnChangePassword);
@@ -96,16 +98,35 @@
             this.panel3.ForeColor = System.Drawing.Color.Black;
             this.panel3.Location = new System.Drawing.Point(0, 69);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(145, 293);
+            this.panel3.Size = new System.Drawing.Size(150, 369);
             this.panel3.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Position :";
+            // 
+            // lbPosition
+            // 
+            this.lbPosition.AutoSize = true;
+            this.lbPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lbPosition.Location = new System.Drawing.Point(10, 70);
+            this.lbPosition.Name = "lbPosition";
+            this.lbPosition.Size = new System.Drawing.Size(88, 13);
+            this.lbPosition.TabIndex = 7;
+            this.lbPosition.Text = "Position Name";
             // 
             // btnChangePassword
             // 
             this.btnChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangePassword.Location = new System.Drawing.Point(14, 180);
+            this.btnChangePassword.Location = new System.Drawing.Point(15, 180);
             this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(118, 47);
+            this.btnChangePassword.Size = new System.Drawing.Size(120, 50);
             this.btnChangePassword.TabIndex = 6;
             this.btnChangePassword.TabStop = false;
             this.btnChangePassword.Text = "Change Password";
@@ -116,9 +137,9 @@
             // 
             this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Location = new System.Drawing.Point(14, 233);
+            this.btnLogOut.Location = new System.Drawing.Point(15, 240);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(118, 47);
+            this.btnLogOut.Size = new System.Drawing.Size(120, 50);
             this.btnLogOut.TabIndex = 2;
             this.btnLogOut.TabStop = false;
             this.btnLogOut.Text = "Log Out";
@@ -182,30 +203,24 @@
             this.lbName.TabIndex = 0;
             this.lbName.Text = "Name";
             // 
-            // label1
+            // btnCloseForm
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Position :";
-            // 
-            // lbPosition
-            // 
-            this.lbPosition.AutoSize = true;
-            this.lbPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lbPosition.Location = new System.Drawing.Point(10, 70);
-            this.lbPosition.Name = "lbPosition";
-            this.lbPosition.Size = new System.Drawing.Size(88, 13);
-            this.lbPosition.TabIndex = 7;
-            this.lbPosition.Text = "Position Name";
+            this.btnCloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCloseForm.Location = new System.Drawing.Point(15, 300);
+            this.btnCloseForm.Name = "btnCloseForm";
+            this.btnCloseForm.Size = new System.Drawing.Size(120, 50);
+            this.btnCloseForm.TabIndex = 9;
+            this.btnCloseForm.TabStop = false;
+            this.btnCloseForm.Text = "Close";
+            this.btnCloseForm.UseVisualStyleBackColor = true;
+            this.btnCloseForm.Click += new System.EventHandler(this.btnCloseForm_Click);
             // 
             // FormCommon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 362);
+            this.ClientSize = new System.Drawing.Size(737, 438);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "FormCommon";
@@ -236,5 +251,6 @@
         private System.Windows.Forms.Button btnChangePassword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbPosition;
+        private System.Windows.Forms.Button btnCloseForm;
     }
 }

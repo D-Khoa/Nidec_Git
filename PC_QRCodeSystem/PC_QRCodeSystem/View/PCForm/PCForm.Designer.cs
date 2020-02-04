@@ -47,13 +47,13 @@
             this.grt_Main = new System.Windows.Forms.TabControl();
             this.tab_Menu = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btnUserPosition = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.btnRequestLog = new System.Windows.Forms.Button();
             this.btnStockOutLog = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnUserPosition = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.btnIssueCode = new System.Windows.Forms.Button();
@@ -70,8 +70,8 @@
             this.grt_Main.SuspendLayout();
             this.tab_Menu.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tab_Request.SuspendLayout();
@@ -132,12 +132,13 @@
             // 
             this.pnlRequest.Controls.Add(this.dgvRequest);
             this.pnlRequest.Controls.Add(this.panel4);
-            this.pnlRequest.Controls.Add(this.label1);
             this.pnlRequest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRequest.Location = new System.Drawing.Point(3, 3);
             this.pnlRequest.Name = "pnlRequest";
             this.pnlRequest.Size = new System.Drawing.Size(685, 400);
             this.pnlRequest.TabIndex = 3;
+            this.pnlRequest.Controls.SetChildIndex(this.panel4, 0);
+            this.pnlRequest.Controls.SetChildIndex(this.dgvRequest, 0);
             // 
             // dgvRequest
             // 
@@ -150,9 +151,9 @@
             this.qty,
             this.confirm});
             this.dgvRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRequest.Location = new System.Drawing.Point(0, 38);
+            this.dgvRequest.Location = new System.Drawing.Point(0, 0);
             this.dgvRequest.Name = "dgvRequest";
-            this.dgvRequest.Size = new System.Drawing.Size(685, 308);
+            this.dgvRequest.Size = new System.Drawing.Size(685, 346);
             this.dgvRequest.TabIndex = 4;
             // 
             // request_time
@@ -240,6 +241,7 @@
             this.grt_Main.Name = "grt_Main";
             this.grt_Main.SelectedIndex = 0;
             this.grt_Main.Size = new System.Drawing.Size(699, 435);
+            this.grt_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.grt_Main.TabIndex = 4;
             // 
             // tab_Menu
@@ -265,38 +267,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(445, 400);
             this.panel5.TabIndex = 9;
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.label8);
-            this.panel9.Controls.Add(this.btnUserPosition);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 160);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(445, 80);
-            this.panel9.TabIndex = 10;
-            // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(0, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(445, 20);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "User Position";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnUserPosition
-            // 
-            this.btnUserPosition.Location = new System.Drawing.Point(20, 25);
-            this.btnUserPosition.Name = "btnUserPosition";
-            this.btnUserPosition.Size = new System.Drawing.Size(100, 50);
-            this.btnUserPosition.TabIndex = 6;
-            this.btnUserPosition.Text = "User Position";
-            this.btnUserPosition.UseVisualStyleBackColor = true;
-            this.btnUserPosition.Click += new System.EventHandler(this.btnUserPosition_Click);
             // 
             // panel8
             // 
@@ -338,6 +308,38 @@
             this.btnStockOutLog.TabIndex = 5;
             this.btnStockOutLog.Text = "Stock Out Log";
             this.btnStockOutLog.UseVisualStyleBackColor = true;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.label8);
+            this.panel9.Controls.Add(this.btnUserPosition);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(0, 160);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(445, 80);
+            this.panel9.TabIndex = 10;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(445, 20);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "User Position";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnUserPosition
+            // 
+            this.btnUserPosition.Location = new System.Drawing.Point(20, 25);
+            this.btnUserPosition.Name = "btnUserPosition";
+            this.btnUserPosition.Size = new System.Drawing.Size(100, 50);
+            this.btnUserPosition.TabIndex = 6;
+            this.btnUserPosition.Text = "User Position";
+            this.btnUserPosition.UseVisualStyleBackColor = true;
+            this.btnUserPosition.Click += new System.EventHandler(this.btnUserPosition_Click);
             // 
             // panel7
             // 
@@ -446,18 +448,20 @@
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "PCForm";
+            this.position = "";
             this.Text = "PC Management";
             this.tittle = "FormCommon";
             this.Controls.SetChildIndex(this.grt_Main, 0);
             this.pnlSetting.ResumeLayout(false);
             this.pnlRequest.ResumeLayout(false);
+            this.pnlRequest.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).EndInit();
             this.panel4.ResumeLayout(false);
             this.grt_Main.ResumeLayout(false);
             this.tab_Menu.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.tab_Request.ResumeLayout(false);

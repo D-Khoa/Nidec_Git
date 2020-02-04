@@ -21,6 +21,28 @@ namespace PC_QRCodeSystem.Model
         #endregion
 
         /// <summary>
+        /// Get supplier name with supplier code
+        /// </summary>
+        /// <param name="supplier_code">Supplier code</param>
+        /// <returns></returns>
+        public string GetSupplierName(string supplier_code)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "select supplier_name from pts_supplier where supplier_cd ='" + supplier_code + "'";
+            //Execute reader for read database
+            string result = SQL.Command(query).ExecuteScalar().ToString();
+            query = string.Empty;
+            //Close SQL connection
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
         /// Get list supplier from database with supplier code
         /// </summary>
         /// <param name="supplier_code">string.empty if get all supplier in database</param>
@@ -58,6 +80,7 @@ namespace PC_QRCodeSystem.Model
             //Close SQL connection
             SQL.Close();
         }
+
         public int AddSupplier(pts_supplier addptssupplier)
         {
             //SQL library
@@ -74,6 +97,7 @@ namespace PC_QRCodeSystem.Model
             query = string.Empty;
             return result;
         }
+
         public int UpdateSuplier(pts_supplier UpSupplier)
         {
             //SQL library
@@ -89,6 +113,7 @@ namespace PC_QRCodeSystem.Model
             query = string.Empty;
             return result;
         }
+
         public int Delete(int id)
         {
             //SQL library

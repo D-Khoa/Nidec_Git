@@ -5,7 +5,8 @@
         public static string printerName = "LUKHAN Label Printer";
 
         // バーコードプリント機能
-        public static void printBarCode(string itemNo, string itemName, string supplier, string invoice, string date, string qty, string validity)
+        public static void printBarCode(string itemNo, string itemName, string supplier, string invoice, 
+                                        string date, string qty, string suppliercode)
         {
             //itemNo = "A32-164D-X";
             //itemName = "SHAFT";
@@ -21,7 +22,7 @@
 
             int xdots, model; // ydots;
             string TwoBAR_Command;
-            string QRCode_data = itemNo + ";" + itemName + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + validity;
+            string QRCode_data = itemNo + ";" + itemName + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + suppliercode;
 
             /* 1. LK_OpenPrinter() */
             if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)
@@ -106,16 +107,16 @@
             y = (6 + 9 * 2 + 11) * 8;
             LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, date);
 
-            if (validity != string.Empty)
-            {
-                x = (5 + 28) * 8;
-                y = (6 + 9 * 2 + 11) * 8;
-                LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, "V: ");
+            //if (validity != string.Empty)
+            //{
+            //    x = (5 + 28) * 8;
+            //    y = (6 + 9 * 2 + 11) * 8;
+            //    LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, "V: ");
 
-                x = (5 + 33) * 8;
-                y = (6 + 9 * 2 + 11) * 8;
-                LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, validity);
-            }
+            //    x = (5 + 33) * 8;
+            //    y = (6 + 9 * 2 + 11) * 8;
+            //    LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, validity);
+            //}
 
             x = 5 * 8;
             y = (6 + 9 * 4) * 8;

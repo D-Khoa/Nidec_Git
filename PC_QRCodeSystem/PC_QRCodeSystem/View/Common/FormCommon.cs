@@ -135,5 +135,10 @@ namespace PC_QRCodeSystem
             ChangePasswordForm cpfrm = new ChangePasswordForm();
             cpfrm.ShowDialog();
         }
+
+        private void btnCloseForm_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

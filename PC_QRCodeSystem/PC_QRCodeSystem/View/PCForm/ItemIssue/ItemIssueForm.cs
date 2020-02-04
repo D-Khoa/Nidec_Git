@@ -230,7 +230,7 @@ namespace PC_QRCodeSystem.View
                 btnUpdate.Enabled = false;
                 btnDelete.Enabled = false;
             }
-            catch (Exception ex)
+            catch
             {
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;
