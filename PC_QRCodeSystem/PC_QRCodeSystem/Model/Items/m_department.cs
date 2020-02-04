@@ -30,7 +30,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select dept_id, dept_cd, dept_name, registration_user_cd, registration_date_time from m_department";
+            query = "select dept_id, dept_cd, dept_name, registration_user_cd, registration_date_time from m_department ";
             query += "order by dept_cd";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
