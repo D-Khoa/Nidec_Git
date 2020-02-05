@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -13,13 +7,20 @@ namespace PC_QRCodeSystem.View
 {
     public partial class RequestForm : FormCommon
     {
+        #region VARIABLE
+        pts_item itemdata { get; set; }
         pts_destination descmb { get; set; }
         pts_request_log requestdata { get; set; }
-        pts_item itemdata { get; set; }
+        bool mconfirm, gmconfirm, mMode, gmMode;
+        #endregion
 
         public RequestForm()
         {
             InitializeComponent();
+            mMode = false;
+            gmMode = false;
+            mconfirm = false;
+            gmconfirm = false;
             LockFields(true);
             itemdata = new pts_item();
             descmb = new pts_destination();
@@ -30,6 +31,18 @@ namespace PC_QRCodeSystem.View
         private void RequestForm_Load(object sender, EventArgs e)
         {
             getCmbData();
+            if (UserData.position == "MGR")
+            {
+                mMode = true;
+                gmMode = false;
+                this.Text += "[Manager Mode]";
+            }
+            if (UserData.position == "GM")
+            {
+                mMode = false;
+                gmMode = true;
+                this.Text += "[GM Mode]";
+            }
         }
 
         /// <summary>
@@ -72,7 +85,39 @@ namespace PC_QRCodeSystem.View
         #region BUTTON EVENT
         private void btnConfirm_Click(object sender, EventArgs e)
         {
+            if (mMode)
+            {
+                foreach (DataGridViewCell cell in dgvRequest.SelectedCells)
+                {
+                    requestdata.MConfirm(new pts_request_log
+                    {
+                        request_id = (int)dgvRequest.Rows[cell.RowIndex].Cells["request_id"].Value,
+                        m_confirm = mconfirm,
+                        comment = dgvRequest.Rows[cell.RowIndex].Cells["comment"].Value.ToString()
+                    });
+                }
+            }
+            if (gmMode)
+            {
+                foreach (DataGridViewCell cell in dgvRequest.SelectedCells)
+                {
+                    requestdata.GMConfirm(new pts_request_log
+                    {
+                        request_id = (int)dgvRequest.Rows[cell.RowIndex].Cells["request_id"].Value,
+                        gm_confirm = gmconfirm,
+                        comment = dgvRequest.Rows[cell.RowIndex].Cells["comment"].Value.ToString()
+                    });
+                }
+            }
+            UpdateGrid();
+        }
 
+        private void btnConfirm_Paint(object sender, PaintEventArgs e)
+        {
+            if (mconfirm || gmconfirm)
+                btnConfirm.Text = "Confirm";
+            else
+                btnConfirm.Text = "Unconfirm";
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -159,13 +204,39 @@ namespace PC_QRCodeSystem.View
             dgvRequest.Columns["pc_m_cofirm"].HeaderText = "PC Confirm";
             dgvRequest.Columns["comment"].HeaderText = "Comment";
             dgvRequest.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            foreach (DataGridViewRow dr in dgvRequest.Rows)
+            {
+                if ((bool)dr.Cells["m_confirm"].Value && (bool)dr.Cells["gm_confirm"].Value && (bool)dr.Cells["pc_m_cofirm"].Value)
+                    dr.DefaultCellStyle.BackColor = Color.Lime;
+                else
+                    dr.DefaultCellStyle.BackColor = Color.White;
+            }
         }
 
         private void LockFields(bool isLock)
         {
             btnDelete.Enabled = !isLock;
             btnUpdate.Enabled = !isLock;
-            btnConfirm.Enabled = !isLock;
+            //btnConfirm.Enabled = !isLock;
+        }
+
+        private void dgvRequest_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (mMode)
+            {
+                if ((bool)dgvRequest.Rows[e.RowIndex].Cells["m_confirm"].Value)
+                    mconfirm = false;
+                else
+                    mconfirm = true;
+            }
+            if (gmMode)
+            {
+                if ((bool)dgvRequest.Rows[e.RowIndex].Cells["gm_confirm"].Value)
+                    gmconfirm = false;
+                else
+                    gmconfirm = true;
+            }
+            btnConfirm.Refresh();
         }
 
         private void dgvRequest_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -181,12 +252,20 @@ namespace PC_QRCodeSystem.View
 
         private void dgvRequest_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvRequest.Columns[e.ColumnIndex].Name == "m_confirm" || dgvRequest.Columns[e.ColumnIndex].Name == "gm_confirm" || dgvRequest.Columns[e.ColumnIndex].Name == "pc_m_cofirm" || dgvRequest.Columns[e.ColumnIndex].Name == "approve_usercd")
+            if (dgvRequest.Columns[e.ColumnIndex].Name == "m_confirm" || dgvRequest.Columns[e.ColumnIndex].Name == "gm_confirm" || dgvRequest.Columns[e.ColumnIndex].Name == "pc_m_cofirm")
             {
                 if (e.Value != null && (bool)e.Value == false)
                     e.CellStyle.BackColor = Color.Red;
             }
+            if (dgvRequest.Columns[e.ColumnIndex].Name == "approve_usercd")
+            {
+                if (string.IsNullOrEmpty(e.Value.ToString()))
+                    e.CellStyle.BackColor = Color.Red;
+                else
+                    e.CellStyle.BackColor = Color.Lime;
+            }
         }
         #endregion
+
     }
 }

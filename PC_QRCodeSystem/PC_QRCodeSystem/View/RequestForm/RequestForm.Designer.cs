@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnConfirm = new System.Windows.Forms.Button();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtQty = new System.Windows.Forms.TextBox();
@@ -52,7 +53,6 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
-            this.btnConfirm = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -75,12 +75,24 @@
             this.panel4.Controls.Add(this.txtItemCode);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.label1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(145, 69);
+            this.panel4.Location = new System.Drawing.Point(150, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(559, 200);
+            this.panel4.Size = new System.Drawing.Size(554, 200);
             this.panel4.TabIndex = 2;
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirm.Location = new System.Drawing.Point(456, 130);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(84, 50);
+            this.btnConfirm.TabIndex = 15;
+            this.btnConfirm.Tag = "";
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            this.btnConfirm.Paint += new System.Windows.Forms.PaintEventHandler(this.btnConfirm_Paint);
             // 
             // txtComment
             // 
@@ -240,9 +252,9 @@
             this.panel5.Controls.Add(this.btnAdd);
             this.panel5.Controls.Add(this.btnSearch);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(145, 269);
+            this.panel5.Location = new System.Drawing.Point(150, 269);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(559, 50);
+            this.panel5.Size = new System.Drawing.Size(554, 50);
             this.panel5.TabIndex = 3;
             // 
             // btnClose
@@ -312,24 +324,14 @@
             this.dgvRequest.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRequest.Location = new System.Drawing.Point(145, 319);
+            this.dgvRequest.Location = new System.Drawing.Point(150, 319);
             this.dgvRequest.Name = "dgvRequest";
             this.dgvRequest.ReadOnly = true;
-            this.dgvRequest.Size = new System.Drawing.Size(559, 183);
+            this.dgvRequest.Size = new System.Drawing.Size(554, 183);
             this.dgvRequest.TabIndex = 4;
+            this.dgvRequest.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequest_CellContentClick);
             this.dgvRequest.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequest_CellDoubleClick);
             this.dgvRequest.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvRequest_CellFormatting);
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirm.Location = new System.Drawing.Point(456, 130);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(84, 50);
-            this.btnConfirm.TabIndex = 15;
-            this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // RequestForm
             // 
@@ -343,6 +345,7 @@
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "RequestForm";
+            this.position = "";
             this.Text = "Production Request";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.RequestForm_Load);

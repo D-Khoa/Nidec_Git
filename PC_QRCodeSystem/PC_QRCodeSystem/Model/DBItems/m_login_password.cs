@@ -37,8 +37,9 @@ namespace PC_QRCodeSystem.Model
                 //SQL query string
                 query = @"SELECT user_cd, registration_user_cd, registration_date_time, factory_cd, last_login_time, is_online ";
                 query += "FROM m_login_password WHERE user_cd ='" + usercd + "' and password ='" + pass + "'";
+                IDataReader reader;
                 //Execute reader for read database
-                IDataReader reader = SQL.Command(query).ExecuteReader();
+                reader = SQL.Command(query).ExecuteReader();
                 query = string.Empty;
                 reader.Read();
                 //Get an item
@@ -51,41 +52,41 @@ namespace PC_QRCodeSystem.Model
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString(),
                 };
-                reader.Close();
-                //Close SQL connection
-                SQL.Close();
-                return outItem;
-            }
-            catch
-            {
-                throw new Exception("Wrong user or password!" + Environment.NewLine + "Please Log In again!");
-            }
-        }
-
-        /// <summary>
-        /// Log In and Log Out
-        /// </summary>
-        /// <param name="usercd">User code</param>
-        /// <param name="isLogin">true: log in, false: log out</param>
-        public int LogIO(string usercd, bool isLogin)
-        {
-            //SQL library
-            PSQL SQL = new PSQL();
-            string query = string.Empty;
-            //Open SQL connection
-            SQL.Open();
-            //SQL query string
-            query = @"UPDATE m_login_password SET ";
-            if (isLogin)
-                query += "last_login_time='" + DateTime.Now + "', is_online = '1' ";
-            else
-                query += "is_online ='0' ";
-            query += "WHERE user_cd ='" + usercd + "'";
-            //Execute query
-            int result = SQL.Command(query).ExecuteNonQuery();
+            reader.Close();
             //Close SQL connection
             SQL.Close();
-            return result;
+            return outItem;
         }
+            catch(InvalidOperationException)
+            {
+                throw new Exception("Wrong user or password!" + Environment.NewLine + "Please Log In again!");
+    }
+}
+
+/// <summary>
+/// Log In and Log Out
+/// </summary>
+/// <param name="usercd">User code</param>
+/// <param name="isLogin">true: log in, false: log out</param>
+public int LogIO(string usercd, bool isLogin)
+{
+    //SQL library
+    PSQL SQL = new PSQL();
+    string query = string.Empty;
+    //Open SQL connection
+    SQL.Open();
+    //SQL query string
+    query = @"UPDATE m_login_password SET ";
+    if (isLogin)
+        query += "last_login_time='" + DateTime.Now + "', is_online = '1' ";
+    else
+        query += "is_online ='0' ";
+    query += "WHERE user_cd ='" + usercd + "'";
+    //Execute query
+    int result = SQL.Command(query).ExecuteNonQuery();
+    //Close SQL connection
+    SQL.Close();
+    return result;
+}
     }
 }

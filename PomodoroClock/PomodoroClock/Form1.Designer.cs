@@ -37,6 +37,7 @@
             this.lbTime = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.pnlLed = new System.Windows.Forms.Panel();
+            this.btnExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numPomodoro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRest)).BeginInit();
             this.SuspendLayout();
@@ -123,11 +124,24 @@
             this.pnlLed.TabIndex = 6;
             this.pnlLed.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlLed_Paint);
             // 
+            // btnExit
+            // 
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(15, 130);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(263, 52);
+            this.btnExit.TabIndex = 7;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 133);
+            this.ClientSize = new System.Drawing.Size(284, 190);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.pnlLed);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lbTime);
@@ -135,7 +149,9 @@
             this.Controls.Add(this.numRest);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numPomodoro);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pomodoro Clock";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.numPomodoro)).EndInit();
@@ -155,6 +171,7 @@
         private System.Windows.Forms.Label lbTime;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Panel pnlLed;
+        private System.Windows.Forms.Button btnExit;
     }
 }
 

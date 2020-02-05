@@ -24,14 +24,17 @@ namespace PomodoroClock
                 temp = cycle;
                 timer = (int)numPomodoro.Value * 60;
                 this.BackColor = Color.Green;
+                this.TopMost = false;
                 btnStart.Text = "Stop";
                 timer1.Enabled = true;
+                btnExit.Enabled = false;
             }
             else
             {
                 btnStart.Text = "Start";
                 this.BackColor = Color.Gray;
                 timer1.Enabled = false;
+                btnExit.Enabled = true;
             }
         }
 
@@ -49,6 +52,7 @@ namespace PomodoroClock
                     else
                         timer = (int)numRest.Value * 60;
                     this.BackColor = Color.Red;
+                    this.TopMost = true;
                 }
                 else
                 {
@@ -57,6 +61,7 @@ namespace PomodoroClock
                     temp = cycle;
                     timer = (int)numPomodoro.Value * 60;
                     this.BackColor = Color.Green;
+                    this.TopMost = false;
                 }
             }
             timer--;
@@ -72,6 +77,11 @@ namespace PomodoroClock
                 e.Graphics.FillEllipse(new SolidBrush(Color.Yellow),
                   new Rectangle(i * (pnlLed.Width / 4), 0, pnlLed.Width / 4, pnlLed.Height));
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

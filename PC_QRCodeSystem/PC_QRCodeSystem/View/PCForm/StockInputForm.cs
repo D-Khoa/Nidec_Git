@@ -16,16 +16,17 @@ namespace PC_QRCodeSystem.View
     public partial class StockInputForm : FormCommon
     {
         #region INPUT
-        pts_item itemunit { get; set; }
-        pts_stock stockitem { get; set; }
-        PrintItem printItem { get; set; }
+        pts_item itemUnit { get; set; }
+        m_mes_user mesUser { get; set; }
         PremacIn premacItem { get; set; }
-        pts_supplier fieldSupplier { get; set; }
+        PrintItem printItem { get; set; }
+        pts_stock stockItem { get; set; }
+        List<PrintItem> listPrintItem { get; set; }
+        BindingList<pts_stock> listStockItem { get; set; }
         #endregion
 
         #region SETTING
-        string settingpath;
-        string premacPath, printername;
+        string settingpath, premacPath, printername;
         List<string> allsetting = new List<string>();
         #region PRINTER
         //Class TfPrint is library of printer
@@ -39,11 +40,13 @@ namespace PC_QRCodeSystem.View
         public StockInputForm()
         {
             InitializeComponent();
-            itemunit = new pts_item();
-            stockitem = new pts_stock();
+            itemUnit = new pts_item();
+            mesUser = new m_mes_user();
             printItem = new PrintItem();
             premacItem = new PremacIn();
-            fieldSupplier = new pts_supplier();
+            stockItem = new pts_stock();
+            listPrintItem = new List<PrintItem>();
+            listStockItem = new BindingList<pts_stock>();
             tc_Main.ItemSize = new Size(0, 1);
             tc_Main.SelectedTab = tab_Main;
             settingpath = @"setting.ini";
@@ -67,22 +70,7 @@ namespace PC_QRCodeSystem.View
             #endregion
         }
 
-        private void txtBarcode_Validated(object sender, EventArgs e)
-        {
-            string[] barcode = txtBarcode.Text.Split(';');
-        }
-
-        private void txtSupplierCode_Validated(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtBarcode.Text))
-            {
-                string name = fieldSupplier.GetSupplierName(txtSupplierCode.Text);
-                if (!string.IsNullOrEmpty(name))
-                    txtSupplierName.Text = name;
-            }
-        }
-
-        #region MAIN BUTTONS
+        #region MAIN TAB
         private void btnPremacImport_Click(object sender, EventArgs e)
         {
             try
@@ -111,23 +99,26 @@ namespace PC_QRCodeSystem.View
                 {
                     try
                     {
-                        itemunit = itemunit.GetItem(dr.Cells["Item_Number"].Value.ToString());
+                        itemUnit = itemUnit.GetItem(dr.Cells["Item_Number"].Value.ToString());
                     }
                     catch
                     {
                         continue;
                     }
-                    unit = itemunit.unit_qty;
+                    unit = itemUnit.unit_qty;
                     if (unit == 0) unit = (double)dr.Cells["Delivery_Qty"].Value;
                     qty = (int)((double)dr.Cells["Delivery_Qty"].Value / unit);
                     printItem.ListPrintItem.Add(new PrintItem
                     {
                         Item_Number = dr.Cells["Item_Number"].Value.ToString(),
                         Item_Name = dr.Cells["Item_Name"].Value.ToString(),
-                        Supplier = dr.Cells["Supplier_Name"].Value.ToString(),
+                        SupplierCD = dr.Cells["Supplier_Code"].Value.ToString(),
+                        SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
                         Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                         Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                         Delivery_Qty = unit,
+                        //PONo = dr.Cells["PO_No"].Value.ToString(),
+                        OrderNo = dr.Cells["Order_No"].Value.ToString(),
                         Label_Qty = qty
                     });
                     if (unit * qty < (double)dr.Cells["Delivery_Qty"].Value)
@@ -137,10 +128,13 @@ namespace PC_QRCodeSystem.View
                         {
                             Item_Number = dr.Cells["Item_Number"].Value.ToString(),
                             Item_Name = dr.Cells["Item_Name"].Value.ToString(),
-                            Supplier = dr.Cells["Supplier_Name"].Value.ToString(),
+                            SupplierCD = dr.Cells["Supplier_Code"].Value.ToString(),
+                            SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
                             Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                             Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                             Delivery_Qty = qtymod,
+                            //PONo = dr.Cells["PO_No"].Value.ToString(),
+                            OrderNo = dr.Cells["Order_No"].Value.ToString(),
                             Label_Qty = 1
                         });
                     }
@@ -149,7 +143,7 @@ namespace PC_QRCodeSystem.View
                 dgvPacking.DataSource = printItem.ListPrintItem;
                 tc_Main.SelectedTab = tab_Print;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -171,10 +165,13 @@ namespace PC_QRCodeSystem.View
                     {
                         Item_Number = dr.Cells["Item_Number"].Value.ToString(),
                         Item_Name = dr.Cells["Item_Name"].Value.ToString(),
-                        Supplier = dr.Cells["Supplier_Name"].Value.ToString(),
+                        SupplierCD = dr.Cells["Supplier_Code"].Value.ToString(),
+                        SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
                         Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                         Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                         Delivery_Qty = unit,
+                        //PONo = dr.Cells["PO_No"].Value.ToString(),
+                        OrderNo = dr.Cells["Order_No"].Value.ToString(),
                         Label_Qty = qty
                     });
                     if (unit * qty < (double)dr.Cells["Delivery_Qty"].Value)
@@ -184,10 +181,13 @@ namespace PC_QRCodeSystem.View
                         {
                             Item_Number = dr.Cells["Item_Number"].Value.ToString(),
                             Item_Name = dr.Cells["Item_Name"].Value.ToString(),
-                            Supplier = dr.Cells["Supplier_Name"].Value.ToString(),
+                            SupplierCD = dr.Cells["Supplier_Code"].Value.ToString(),
+                            SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
                             Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                             Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                             Delivery_Qty = qtymod,
+                            //PONo = dr.Cells["PO_No"].Value.ToString(),
+                            OrderNo = dr.Cells["Order_No"].Value.ToString(),
                             Label_Qty = 1
                         });
                     }
@@ -201,7 +201,8 @@ namespace PC_QRCodeSystem.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnPrint_Click(object sender, EventArgs e)
+
+        private void btnPrintList_Click(object sender, EventArgs e)
         {
             tc_Main.SelectedTab = tab_Print;
         }
@@ -217,7 +218,7 @@ namespace PC_QRCodeSystem.View
         }
         #endregion
 
-        #region SETTING BUTTONS
+        #region SETTING TAB
         private void cmbPrinter_SelectedIndexChanged(object sender, EventArgs e)
         {
             printername = cmbPrinter.Text;
@@ -231,21 +232,6 @@ namespace PC_QRCodeSystem.View
             {
                 txtPremacFolder.Text = of.FileName;
             }
-        }
-
-        private void btnApply_Click(object sender, EventArgs e)
-        {
-            premacPath = txtPremacFolder.Text;
-            printername = cmbPrinter.Text;
-            allsetting.Add("premac file =" + premacPath);
-            allsetting.Add("printer name =" + printername);
-            if (!File.Exists(settingpath))
-            {
-                FileStream myfile = File.Create(settingpath);
-                myfile.Close();
-            }
-            File.WriteAllLines(settingpath, allsetting);
-            tc_Main.SelectedTab = tab_Main;
         }
 
         private void btnPrinterCheck_Click(object sender, EventArgs e)
@@ -265,6 +251,21 @@ namespace PC_QRCodeSystem.View
             }
         }
 
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            premacPath = txtPremacFolder.Text;
+            printername = cmbPrinter.Text;
+            allsetting.Add("premac file =" + premacPath);
+            allsetting.Add("printer name =" + printername);
+            if (!File.Exists(settingpath))
+            {
+                FileStream myfile = File.Create(settingpath);
+                myfile.Close();
+            }
+            File.WriteAllLines(settingpath, allsetting);
+            tc_Main.SelectedTab = tab_Main;
+        }
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             tc_Main.SelectedTab = tab_Main;
@@ -272,6 +273,62 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region PRINT TAB
+        private void btnPrintSelected_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckPrinterIsOffline(cmbPrinter.Text))
+                {
+                    MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                listPrintItem.Clear();
+                if (dgvPacking.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please choose item first!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    return;
+                }
+                foreach (DataGridViewRow dr in dgvPacking.SelectedRows)
+                {
+                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                }
+                if (PrintItems(listPrintItem))
+                    MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnPrintAll_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckPrinterIsOffline(cmbPrinter.Text))
+                {
+                    MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                listPrintItem.Clear();
+                if (dgvPacking.Rows.Count == 0)
+                {
+                    MessageBox.Show("Don't have item to print!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                foreach (DataGridViewRow dr in dgvPacking.Rows)
+                {
+                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                }
+                if (PrintItems(listPrintItem))
+                    MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void btnPrintBack_Click(object sender, EventArgs e)
         {
             tc_Main.SelectedTab = tab_Main;
@@ -302,12 +359,93 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         /// <param name="Items"></param>
         /// <returns></returns>
-        public bool PrintItems(List<StockInItem> Items)
+        public bool PrintItems(List<PrintItem> Items)
         {
             TfPrint.printerName = printername;
             for (int i = 0; i < Items.Count; i++)
-                TfPrint.printBarCode(Items[i].Item_Number, Items[i].Item_Name, Items[i].Supplier_Name, Items[i].Supplier_Invoice, Items[i].StockIn_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), "");
+            {
+                for (int j = 0; j < Items[i].Label_Qty; j++)
+                {
+                    TfPrint.printBarCodeNew(Items[i].Item_Number, Items[i].Item_Name, Items[i].SupplierName, Items[i].Invoice,
+                        Items[i].Delivery_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), Items[i].SupplierCD,
+                        /*Items[i].PONo,*/ Items[i].OrderNo);
+                }
+            }
             return true;
+        }
+        #endregion
+
+        #region INSPECTION TAB
+        private void txtBarcode_Validated(object sender, EventArgs e)
+        {
+            int n = 1;
+            int temp = 0;
+            string[] barcode = txtBarcode.Text.Split(';');
+            foreach (pts_stock item in listStockItem)
+            {
+                if (item.po_no == barcode[7])
+                {
+                    temp = int.Parse(item.packing_cd.Split('-')[1]);
+                    if (temp > n)
+                        n = temp;
+                }
+            }
+            listStockItem.Add(new pts_stock
+            {
+                item_cd = barcode[0],
+                supplier_cd = barcode[2],
+                invoice = barcode[4],
+                stockin_date = DateTime.Parse(barcode[5]),
+                stockin_qty = double.Parse(barcode[6]),
+                stockin_user_cd = txtUserCode.Text,
+                po_no = barcode[7],
+                order_no = barcode[8],
+                packing_cd = barcode[7] + "-" + n.ToString("00"),
+                packing_qty = double.Parse(barcode[6]),
+                registration_user_cd = UserData.usercode,
+            });
+            dgvInspection.DataSource = listStockItem;
+            n = 1;
+        }
+
+        private void txtUserCode_Validated(object sender, EventArgs e)
+        {
+            mesUser = mesUser.GetUser(txtUserCode.Text);
+            txtUserName.Text = mesUser.user_name;
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (DataGridViewRow dr in dgvInspection.Rows)
+                {
+                    if (stockItem.AddItem(dr.DataBoundItem as pts_stock) > 0)
+                        listStockItem.Remove(dr.DataBoundItem as pts_stock);
+                }
+                dgvInspection.DataSource = listStockItem;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
+                {
+                    listStockItem.Remove(dr.DataBoundItem as pts_stock);
+                }
+                dgvInspection.DataSource = listStockItem;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
     }

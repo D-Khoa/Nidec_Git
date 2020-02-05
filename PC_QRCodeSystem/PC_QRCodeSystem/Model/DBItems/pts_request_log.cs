@@ -129,7 +129,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_request_log SET m_comfirm ='" + inItem.m_confirm + "', comment ='" + inItem.comment;
+            query = "UPDATE pts_request_log SET m_confirm ='" + inItem.m_confirm + "', comment ='" + inItem.comment;
             query += "' WHERE request_id ='" + inItem.request_id + "'";
             //Execute non query for insert database
             int result = SQL.Command(query).ExecuteNonQuery();
@@ -152,7 +152,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_request_log SET gm_comfirm ='" + inItem.gm_confirm + "', comment ='" + inItem.comment;
+            query = "UPDATE pts_request_log SET gm_confirm ='" + inItem.gm_confirm + "', comment ='" + inItem.comment;
             query += "' WHERE request_id ='" + inItem.request_id + "'";
             //Execute non query for insert database
             int result = SQL.Command(query).ExecuteNonQuery();
@@ -175,7 +175,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_request_log SET pc_m_cofirm ='" + inItem.pc_m_cofirm + "', comment ='" + inItem.comment;
+            query = "UPDATE pts_request_log SET pc_m_confirm ='" + inItem.pc_m_cofirm + "', comment ='" + inItem.comment;
             query += "' WHERE request_id ='" + inItem.request_id + "'";
             //Execute non query for insert database
             int result = SQL.Command(query).ExecuteNonQuery();
