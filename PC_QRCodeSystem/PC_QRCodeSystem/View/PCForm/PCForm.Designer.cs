@@ -34,6 +34,14 @@
             this.btnStockIn = new System.Windows.Forms.Button();
             this.pnlRequest = new System.Windows.Forms.Panel();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.rbtnWaitApprove = new System.Windows.Forms.RadioButton();
+            this.rbtnReject = new System.Windows.Forms.RadioButton();
+            this.rbtnApproved = new System.Windows.Forms.RadioButton();
+            this.rbtnAllRequest = new System.Windows.Forms.RadioButton();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnCheck = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnDeny = new System.Windows.Forms.Button();
@@ -57,17 +65,10 @@
             this.btnSupplier = new System.Windows.Forms.Button();
             this.btnItem = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.btnCheck = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.rbtnAllRequest = new System.Windows.Forms.RadioButton();
-            this.rbtnApproved = new System.Windows.Forms.RadioButton();
-            this.rbtnReject = new System.Windows.Forms.RadioButton();
-            this.rbtnWaitApprove = new System.Windows.Forms.RadioButton();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
+            this.panel10.SuspendLayout();
             this.panel4.SuspendLayout();
             this.grt_Main.SuspendLayout();
             this.tab_Menu.SuspendLayout();
@@ -77,7 +78,6 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tab_Request.SuspendLayout();
-            this.panel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlSetting
@@ -153,6 +153,96 @@
             this.dgvRequest.ReadOnly = true;
             this.dgvRequest.Size = new System.Drawing.Size(680, 296);
             this.dgvRequest.TabIndex = 4;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.rbtnWaitApprove);
+            this.panel10.Controls.Add(this.rbtnReject);
+            this.panel10.Controls.Add(this.rbtnApproved);
+            this.panel10.Controls.Add(this.rbtnAllRequest);
+            this.panel10.Controls.Add(this.btnSearch);
+            this.panel10.Controls.Add(this.btnBack);
+            this.panel10.Controls.Add(this.btnCheck);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(680, 50);
+            this.panel10.TabIndex = 6;
+            // 
+            // rbtnWaitApprove
+            // 
+            this.rbtnWaitApprove.AutoSize = true;
+            this.rbtnWaitApprove.Location = new System.Drawing.Point(154, 15);
+            this.rbtnWaitApprove.Name = "rbtnWaitApprove";
+            this.rbtnWaitApprove.Size = new System.Drawing.Size(111, 21);
+            this.rbtnWaitApprove.TabIndex = 6;
+            this.rbtnWaitApprove.TabStop = true;
+            this.rbtnWaitApprove.Text = "Wait Approve";
+            this.rbtnWaitApprove.UseVisualStyleBackColor = true;
+            // 
+            // rbtnReject
+            // 
+            this.rbtnReject.AutoSize = true;
+            this.rbtnReject.Location = new System.Drawing.Point(364, 15);
+            this.rbtnReject.Name = "rbtnReject";
+            this.rbtnReject.Size = new System.Drawing.Size(82, 21);
+            this.rbtnReject.TabIndex = 5;
+            this.rbtnReject.TabStop = true;
+            this.rbtnReject.Text = "Rejected";
+            this.rbtnReject.UseVisualStyleBackColor = true;
+            // 
+            // rbtnApproved
+            // 
+            this.rbtnApproved.AutoSize = true;
+            this.rbtnApproved.Location = new System.Drawing.Point(271, 15);
+            this.rbtnApproved.Name = "rbtnApproved";
+            this.rbtnApproved.Size = new System.Drawing.Size(87, 21);
+            this.rbtnApproved.TabIndex = 4;
+            this.rbtnApproved.TabStop = true;
+            this.rbtnApproved.Text = "Approved";
+            this.rbtnApproved.UseVisualStyleBackColor = true;
+            // 
+            // rbtnAllRequest
+            // 
+            this.rbtnAllRequest.AutoSize = true;
+            this.rbtnAllRequest.Location = new System.Drawing.Point(107, 15);
+            this.rbtnAllRequest.Name = "rbtnAllRequest";
+            this.rbtnAllRequest.Size = new System.Drawing.Size(41, 21);
+            this.rbtnAllRequest.TabIndex = 3;
+            this.rbtnAllRequest.TabStop = true;
+            this.rbtnAllRequest.Text = "All";
+            this.rbtnAllRequest.UseVisualStyleBackColor = true;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(20, 5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(80, 40);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(580, 5);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(80, 40);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Location = new System.Drawing.Point(480, 5);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(80, 40);
+            this.btnCheck.TabIndex = 0;
+            this.btnCheck.Text = "Check";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
             // 
             // panel4
             // 
@@ -267,6 +357,7 @@
             this.btnRequestLog.TabIndex = 6;
             this.btnRequestLog.Text = "Request Log";
             this.btnRequestLog.UseVisualStyleBackColor = true;
+            this.btnRequestLog.Click += new System.EventHandler(this.btnRequestLog_Click);
             // 
             // btnStockOutLog
             // 
@@ -406,96 +497,6 @@
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
             // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.rbtnWaitApprove);
-            this.panel10.Controls.Add(this.rbtnReject);
-            this.panel10.Controls.Add(this.rbtnApproved);
-            this.panel10.Controls.Add(this.rbtnAllRequest);
-            this.panel10.Controls.Add(this.btnSearch);
-            this.panel10.Controls.Add(this.btnBack);
-            this.panel10.Controls.Add(this.btnCheck);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel10.Location = new System.Drawing.Point(0, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(680, 50);
-            this.panel10.TabIndex = 6;
-            // 
-            // btnCheck
-            // 
-            this.btnCheck.Location = new System.Drawing.Point(480, 5);
-            this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(80, 40);
-            this.btnCheck.TabIndex = 0;
-            this.btnCheck.Text = "Check";
-            this.btnCheck.UseVisualStyleBackColor = true;
-            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.Location = new System.Drawing.Point(580, 5);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(80, 40);
-            this.btnBack.TabIndex = 1;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(20, 5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(80, 40);
-            this.btnSearch.TabIndex = 2;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // rbtnAllRequest
-            // 
-            this.rbtnAllRequest.AutoSize = true;
-            this.rbtnAllRequest.Location = new System.Drawing.Point(107, 15);
-            this.rbtnAllRequest.Name = "rbtnAllRequest";
-            this.rbtnAllRequest.Size = new System.Drawing.Size(41, 21);
-            this.rbtnAllRequest.TabIndex = 3;
-            this.rbtnAllRequest.TabStop = true;
-            this.rbtnAllRequest.Text = "All";
-            this.rbtnAllRequest.UseVisualStyleBackColor = true;
-            // 
-            // rbtnApproved
-            // 
-            this.rbtnApproved.AutoSize = true;
-            this.rbtnApproved.Location = new System.Drawing.Point(271, 15);
-            this.rbtnApproved.Name = "rbtnApproved";
-            this.rbtnApproved.Size = new System.Drawing.Size(87, 21);
-            this.rbtnApproved.TabIndex = 4;
-            this.rbtnApproved.TabStop = true;
-            this.rbtnApproved.Text = "Approved";
-            this.rbtnApproved.UseVisualStyleBackColor = true;
-            // 
-            // rbtnReject
-            // 
-            this.rbtnReject.AutoSize = true;
-            this.rbtnReject.Location = new System.Drawing.Point(364, 15);
-            this.rbtnReject.Name = "rbtnReject";
-            this.rbtnReject.Size = new System.Drawing.Size(82, 21);
-            this.rbtnReject.TabIndex = 5;
-            this.rbtnReject.TabStop = true;
-            this.rbtnReject.Text = "Rejected";
-            this.rbtnReject.UseVisualStyleBackColor = true;
-            // 
-            // rbtnWaitApprove
-            // 
-            this.rbtnWaitApprove.AutoSize = true;
-            this.rbtnWaitApprove.Location = new System.Drawing.Point(154, 15);
-            this.rbtnWaitApprove.Name = "rbtnWaitApprove";
-            this.rbtnWaitApprove.Size = new System.Drawing.Size(111, 21);
-            this.rbtnWaitApprove.TabIndex = 6;
-            this.rbtnWaitApprove.TabStop = true;
-            this.rbtnWaitApprove.Text = "Wait Approve";
-            this.rbtnWaitApprove.UseVisualStyleBackColor = true;
-            // 
             // PCForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -513,6 +514,8 @@
             this.pnlSetting.ResumeLayout(false);
             this.pnlRequest.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).EndInit();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.grt_Main.ResumeLayout(false);
             this.tab_Menu.ResumeLayout(false);
@@ -522,8 +525,6 @@
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.tab_Request.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             this.ResumeLayout(false);
 
         }

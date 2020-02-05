@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -13,7 +7,7 @@ namespace PC_QRCodeSystem.View
 {
     public partial class PCForm : FormCommon
     {
-        bool pcmMocde;
+        bool pcmMocde = false;
         pts_item itemData { get; set; }
         pts_request_log requestData { get; set; }
 
@@ -34,6 +28,7 @@ namespace PC_QRCodeSystem.View
                 pcmMocde = false;
                 btnAccept.Text = "Apccept";
             }
+            rbtnAllRequest.Checked = true;
         }
 
         #region MAIN TAB
@@ -101,19 +96,79 @@ namespace PC_QRCodeSystem.View
             UserPosition upfrm = new UserPosition();
             upfrm.Show();
         }
+
+        private void btnRequestLog_Click(object sender, EventArgs e)
+        {
+            grt_Main.SelectedTab = tab_Request;
+        }
         #endregion
 
         #region APPROVE REQUEST TAB
+        private void UpdateGrid()
+        {
+            if (rbtnAllRequest.Checked)
+            {
+                requestData.Search(new pts_request_log
+                {
+                    item_cd = string.Empty,
+                    model_cd = string.Empty,
+                    destination_cd = string.Empty,
+                    m_confirm = true,
+                    gm_confirm = true,
+                    remark = string.Empty,
+                }, true, true, false);
+            }
+            if (rbtnWaitApprove.Checked)
+            {
+                requestData.Search(new pts_request_log
+                {
+                    item_cd = string.Empty,
+                    model_cd = string.Empty,
+                    destination_cd = string.Empty,
+                    m_confirm = true,
+                    gm_confirm = true,
+                    remark = "N",
+                }, true, true, true);
+            }
+            if (rbtnApproved.Checked)
+            {
+                requestData.Search(new pts_request_log
+                {
+                    item_cd = string.Empty,
+                    model_cd = string.Empty,
+                    destination_cd = string.Empty,
+                    m_confirm = true,
+                    gm_confirm = true,
+                    remark = "A",
+                }, true, true, true);
+            }
+            if (rbtnReject.Checked)
+            {
+                requestData.Search(new pts_request_log
+                {
+                    item_cd = string.Empty,
+                    model_cd = string.Empty,
+                    destination_cd = string.Empty,
+                    m_confirm = true,
+                    gm_confirm = true,
+                    remark = "R",
+                }, true, true, true);
+            }
+            dgvRequest.DataSource = requestData.listRequestItem;
+            foreach (DataGridViewRow dr in dgvRequest.Rows)
+            {
+                if (dr.Cells["remark"].Value.ToString() == "R")
+                    dr.DefaultCellStyle.BackColor = Color.Red;
+                else if (dr.Cells["remark"].Value.ToString() == "A" && (bool)dr.Cells["pc_m_cofirm"].Value)
+                    dr.DefaultCellStyle.BackColor = Color.Lime;
+                else
+                    dr.DefaultCellStyle.BackColor = Color.White;
+            }
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            requestData.Search(new pts_request_log
-            {
-                item_cd = string.Empty,
-                model_cd = string.Empty,
-                destination_cd = string.Empty,
-                remark = string.Empty,
-            }, false, false, false);
-            dgvRequest.DataSource = requestData.listRequestItem;
+            UpdateGrid();
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -123,17 +178,51 @@ namespace PC_QRCodeSystem.View
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-
+            grt_Main.SelectedTab = tab_Menu;
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-
+            if (pcmMocde)
+            {
+                foreach (DataGridViewCell cell in dgvRequest.SelectedCells)
+                {
+                    requestData.PC_MConfirm(new pts_request_log
+                    {
+                        request_id = (int)dgvRequest.Rows[cell.RowIndex].Cells["request_id"].Value,
+                        comment = string.Empty,
+                    });
+                }
+            }
+            else
+            {
+                foreach (DataGridViewCell cell in dgvRequest.SelectedCells)
+                {
+                    requestData.PC_Approve(new pts_request_log
+                    {
+                        request_id = (int)dgvRequest.Rows[cell.RowIndex].Cells["request_id"].Value,
+                        approve_usercd = UserData.usercode,
+                        comment = string.Empty,
+                        remark = "A"
+                    });
+                }
+            }
+            UpdateGrid();
         }
 
         private void btnDeny_Click(object sender, EventArgs e)
         {
-
+            foreach (DataGridViewCell cell in dgvRequest.SelectedCells)
+            {
+                requestData.PC_Approve(new pts_request_log
+                {
+                    request_id = (int)dgvRequest.Rows[cell.RowIndex].Cells["request_id"].Value,
+                    approve_usercd = UserData.usercode,
+                    comment = string.Empty,
+                    remark = "R"
+                });
+            }
+            UpdateGrid();
         }
         #endregion
     }

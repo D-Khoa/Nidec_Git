@@ -223,6 +223,24 @@ namespace PC_QRCodeSystem.Model
             return result;
         }
 
+        public int PC_Approve(pts_request_log inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_request_log SET approve_usercd ='" + inItem.approve_usercd + "', comment ='" + inItem.comment;
+            query += "', remark ='" + inItem.remark + "' WHERE request_id ='" + inItem.request_id + "'";
+            //Execute non query for insert database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            //Close SQL connection
+            SQL.Close();
+            return result;
+        }
+
         /// <summary>
         /// Update when PC manager approved
         /// </summary>
