@@ -17,14 +17,16 @@ namespace PC_QRCodeSystem.View
         public RequestForm()
         {
             InitializeComponent();
+            itemdata = new pts_item();
+            descmb = new pts_destination();
+            requestdata = new pts_request_log();
+            LockFields(true);
             mMode = false;
             gmMode = false;
             mconfirm = false;
             gmconfirm = false;
-            LockFields(true);
-            itemdata = new pts_item();
-            descmb = new pts_destination();
-            requestdata = new pts_request_log();
+            btnConfirm.Visible = false;
+            rbtnAllRequest.Checked = true;
         }
 
         #region FIELD EVENT
@@ -35,12 +37,14 @@ namespace PC_QRCodeSystem.View
             {
                 mMode = true;
                 gmMode = false;
+                btnConfirm.Visible = true;
                 this.Text += "[Manager Mode]";
             }
             if (UserData.position == "GM")
             {
                 mMode = false;
                 gmMode = true;
+                btnConfirm.Visible = true;
                 this.Text += "[GM Mode]";
             }
         }
@@ -61,6 +65,8 @@ namespace PC_QRCodeSystem.View
         {
             if (!string.IsNullOrEmpty(cmbDestination.Text))
                 txtDestinationName.Text = cmbDestination.SelectedValue.ToString();
+            else
+                txtDestinationName.Text = "Destination Name";
         }
 
         private void txtItemCode_Validated(object sender, EventArgs e)
@@ -171,45 +177,82 @@ namespace PC_QRCodeSystem.View
             txtQty.Clear();
             LockFields(true);
         }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
         #endregion
 
         #region SUB EVENT
         private void UpdateGrid()
         {
-            requestdata.Search(new pts_request_log
+            try
             {
-                item_cd = txtItemCode.Text,
-                model_cd = txtModelCode.Text,
-                destination_cd = cmbDestination.Text,
-            }, false, false, false);
-            dgvRequest.DataSource = null;
-            dgvRequest.DataSource = requestdata.listRequestItem;
-            dgvRequest.Columns["request_id"].HeaderText = "Request ID";
-            dgvRequest.Columns["item_cd"].HeaderText = "Item Code";
-            dgvRequest.Columns["model_cd"].HeaderText = "Model";
-            dgvRequest.Columns["destination_cd"].HeaderText = "Destination Code";
-            dgvRequest.Columns["use_date"].HeaderText = "Use Date";
-            dgvRequest.Columns["request_date"].HeaderText = "Request Date";
-            dgvRequest.Columns["request_qty"].HeaderText = "Request Qty";
-            dgvRequest.Columns["request_usercd"].HeaderText = "Request User";
-            dgvRequest.Columns["m_confirm"].HeaderText = "Manager Confirm";
-            dgvRequest.Columns["gm_confirm"].HeaderText = "GM Confirm";
-            dgvRequest.Columns["available_qty"].HeaderText = "Available Qty";
-            dgvRequest.Columns["approve_usercd"].HeaderText = "Approve User";
-            dgvRequest.Columns["pc_m_cofirm"].HeaderText = "PC Confirm";
-            dgvRequest.Columns["comment"].HeaderText = "Comment";
-            dgvRequest.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            foreach (DataGridViewRow dr in dgvRequest.Rows)
+                if (rbtnAllRequest.Checked)
+                {
+                    requestdata.SearchWithDept(new pts_request_log
+                    {
+                        item_cd = txtItemCode.Text,
+                        model_cd = txtModelCode.Text,
+                        destination_cd = cmbDestination.Text,
+                    }, false, false, false, UserData.dept);
+                }
+                if (rbtnWaitConfirm.Checked)
+                {
+                    requestdata.SearchWithDept(new pts_request_log
+                    {
+                        item_cd = txtItemCode.Text,
+                        model_cd = txtModelCode.Text,
+                        destination_cd = cmbDestination.Text,
+                        gm_confirm = false,
+                    }, false, true, false, UserData.dept);
+                }
+                if (rbtnConfirmed.Checked)
+                {
+                    requestdata.SearchWithDept(new pts_request_log
+                    {
+                        item_cd = txtItemCode.Text,
+                        model_cd = txtModelCode.Text,
+                        destination_cd = cmbDestination.Text,
+                        m_confirm = true,
+                        gm_confirm = true,
+                        pc_m_cofirm = false,
+                    }, true, true, true, UserData.dept);
+                }
+                if (rbtnApproved.Checked)
+                {
+                    requestdata.SearchWithDept(new pts_request_log
+                    {
+                        item_cd = txtItemCode.Text,
+                        model_cd = txtModelCode.Text,
+                        destination_cd = cmbDestination.Text,
+                        pc_m_cofirm = true,
+                    }, false, false, true, UserData.dept);
+                }
+                dgvRequest.DataSource = null;
+                dgvRequest.DataSource = requestdata.listRequestItem;
+                dgvRequest.Columns["request_id"].HeaderText = "Request ID";
+                dgvRequest.Columns["item_cd"].HeaderText = "Item Code";
+                dgvRequest.Columns["model_cd"].HeaderText = "Model";
+                dgvRequest.Columns["destination_cd"].HeaderText = "Destination Code";
+                dgvRequest.Columns["use_date"].HeaderText = "Use Date";
+                dgvRequest.Columns["request_date"].HeaderText = "Request Date";
+                dgvRequest.Columns["request_qty"].HeaderText = "Request Qty";
+                dgvRequest.Columns["request_usercd"].HeaderText = "Request User";
+                dgvRequest.Columns["m_confirm"].HeaderText = "Manager Confirm";
+                dgvRequest.Columns["gm_confirm"].HeaderText = "GM Confirm";
+                dgvRequest.Columns["available_qty"].HeaderText = "Available Qty";
+                dgvRequest.Columns["approve_usercd"].HeaderText = "Approve User";
+                dgvRequest.Columns["pc_m_cofirm"].HeaderText = "PC Confirm";
+                dgvRequest.Columns["comment"].HeaderText = "Comment";
+                dgvRequest.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+                foreach (DataGridViewRow dr in dgvRequest.Rows)
+                {
+                    if ((bool)dr.Cells["m_confirm"].Value && (bool)dr.Cells["gm_confirm"].Value && (bool)dr.Cells["pc_m_cofirm"].Value)
+                        dr.DefaultCellStyle.BackColor = Color.Lime;
+                    else
+                        dr.DefaultCellStyle.BackColor = Color.White;
+                }
+            }
+            catch (Exception ex)
             {
-                if ((bool)dr.Cells["m_confirm"].Value && (bool)dr.Cells["gm_confirm"].Value && (bool)dr.Cells["pc_m_cofirm"].Value)
-                    dr.DefaultCellStyle.BackColor = Color.Lime;
-                else
-                    dr.DefaultCellStyle.BackColor = Color.White;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

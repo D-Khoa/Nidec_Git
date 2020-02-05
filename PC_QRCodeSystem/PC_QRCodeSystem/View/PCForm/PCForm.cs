@@ -7,17 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PC_QRCodeSystem.Model;
 
 namespace PC_QRCodeSystem.View
 {
     public partial class PCForm : FormCommon
     {
+        bool pcmMocde;
+        pts_item itemData { get; set; }
+        pts_request_log requestData { get; set; }
+
         public PCForm()
         {
             InitializeComponent();
+            itemData = new pts_item();
+            requestData = new pts_request_log();
             grt_Main.ItemSize = new Size(0, 1);
+            if (UserData.position == "MGR")
+            {
+                pcmMocde = true;
+                btnAccept.Text = "Confirm";
+                this.Text += "[PC Manager]";
+            }
+            else
+            {
+                pcmMocde = false;
+                btnAccept.Text = "Apccept";
+            }
         }
 
+        #region MAIN TAB
         /// <summary>
         /// Open Stock In Window
         /// </summary>
@@ -82,5 +101,40 @@ namespace PC_QRCodeSystem.View
             UserPosition upfrm = new UserPosition();
             upfrm.Show();
         }
+        #endregion
+
+        #region APPROVE REQUEST TAB
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            requestData.Search(new pts_request_log
+            {
+                item_cd = string.Empty,
+                model_cd = string.Empty,
+                destination_cd = string.Empty,
+                remark = string.Empty,
+            }, false, false, false);
+            dgvRequest.DataSource = requestData.listRequestItem;
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeny_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

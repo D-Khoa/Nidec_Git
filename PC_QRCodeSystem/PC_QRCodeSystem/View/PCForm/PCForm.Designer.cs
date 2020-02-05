@@ -34,12 +34,6 @@
             this.btnStockIn = new System.Windows.Forms.Button();
             this.pnlRequest = new System.Windows.Forms.Panel();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
-            this.request_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.user_dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.confirm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnDeny = new System.Windows.Forms.Button();
@@ -63,6 +57,14 @@
             this.btnSupplier = new System.Windows.Forms.Button();
             this.btnItem = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.rbtnAllRequest = new System.Windows.Forms.RadioButton();
+            this.rbtnApproved = new System.Windows.Forms.RadioButton();
+            this.rbtnReject = new System.Windows.Forms.RadioButton();
+            this.rbtnWaitApprove = new System.Windows.Forms.RadioButton();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -75,6 +77,7 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tab_Request.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlSetting
@@ -131,72 +134,35 @@
             // pnlRequest
             // 
             this.pnlRequest.Controls.Add(this.dgvRequest);
+            this.pnlRequest.Controls.Add(this.panel10);
             this.pnlRequest.Controls.Add(this.panel4);
             this.pnlRequest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRequest.Location = new System.Drawing.Point(3, 3);
             this.pnlRequest.Name = "pnlRequest";
-            this.pnlRequest.Size = new System.Drawing.Size(685, 400);
+            this.pnlRequest.Size = new System.Drawing.Size(680, 400);
             this.pnlRequest.TabIndex = 3;
-            this.pnlRequest.Controls.SetChildIndex(this.panel4, 0);
-            this.pnlRequest.Controls.SetChildIndex(this.dgvRequest, 0);
             // 
             // dgvRequest
             // 
+            this.dgvRequest.AllowUserToAddRows = false;
+            this.dgvRequest.AllowUserToDeleteRows = false;
             this.dgvRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRequest.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.request_time,
-            this.user_name,
-            this.user_dept,
-            this.item,
-            this.qty,
-            this.confirm});
             this.dgvRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRequest.Location = new System.Drawing.Point(0, 0);
+            this.dgvRequest.Location = new System.Drawing.Point(0, 50);
             this.dgvRequest.Name = "dgvRequest";
-            this.dgvRequest.Size = new System.Drawing.Size(685, 346);
+            this.dgvRequest.ReadOnly = true;
+            this.dgvRequest.Size = new System.Drawing.Size(680, 296);
             this.dgvRequest.TabIndex = 4;
-            // 
-            // request_time
-            // 
-            this.request_time.HeaderText = "Date Time";
-            this.request_time.Name = "request_time";
-            // 
-            // user_name
-            // 
-            this.user_name.HeaderText = "Name";
-            this.user_name.Name = "user_name";
-            this.user_name.ReadOnly = true;
-            // 
-            // user_dept
-            // 
-            this.user_dept.HeaderText = "Department";
-            this.user_dept.Name = "user_dept";
-            this.user_dept.ReadOnly = true;
-            // 
-            // item
-            // 
-            this.item.HeaderText = "Item";
-            this.item.Name = "item";
-            this.item.ReadOnly = true;
-            // 
-            // qty
-            // 
-            this.qty.HeaderText = "Qty";
-            this.qty.Name = "qty";
-            // 
-            // confirm
-            // 
-            this.confirm.HeaderText = "Confirm";
-            this.confirm.Name = "confirm";
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.btnAccept);
             this.panel4.Controls.Add(this.btnDeny);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel4.Location = new System.Drawing.Point(0, 346);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(685, 54);
+            this.panel4.Size = new System.Drawing.Size(680, 54);
             this.panel4.TabIndex = 5;
             // 
             // btnAccept
@@ -208,16 +174,18 @@
             this.btnAccept.TabIndex = 2;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // btnDeny
             // 
             this.btnDeny.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeny.Location = new System.Drawing.Point(530, 8);
+            this.btnDeny.Location = new System.Drawing.Point(525, 8);
             this.btnDeny.Name = "btnDeny";
             this.btnDeny.Size = new System.Drawing.Size(96, 43);
             this.btnDeny.TabIndex = 3;
             this.btnDeny.Text = "Deny";
             this.btnDeny.UseVisualStyleBackColor = true;
+            this.btnDeny.Click += new System.EventHandler(this.btnDeny_Click);
             // 
             // label1
             // 
@@ -237,10 +205,10 @@
             this.grt_Main.Controls.Add(this.tab_Menu);
             this.grt_Main.Controls.Add(this.tab_Request);
             this.grt_Main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grt_Main.Location = new System.Drawing.Point(145, 69);
+            this.grt_Main.Location = new System.Drawing.Point(150, 69);
             this.grt_Main.Name = "grt_Main";
             this.grt_Main.SelectedIndex = 0;
-            this.grt_Main.Size = new System.Drawing.Size(699, 435);
+            this.grt_Main.Size = new System.Drawing.Size(694, 435);
             this.grt_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.grt_Main.TabIndex = 4;
             // 
@@ -251,7 +219,7 @@
             this.tab_Menu.Location = new System.Drawing.Point(4, 25);
             this.tab_Menu.Name = "tab_Menu";
             this.tab_Menu.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Menu.Size = new System.Drawing.Size(691, 406);
+            this.tab_Menu.Size = new System.Drawing.Size(686, 406);
             this.tab_Menu.TabIndex = 0;
             this.tab_Menu.Text = "Menu";
             this.tab_Menu.UseVisualStyleBackColor = true;
@@ -265,7 +233,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(243, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(445, 400);
+            this.panel5.Size = new System.Drawing.Size(440, 400);
             this.panel5.TabIndex = 9;
             // 
             // panel8
@@ -276,7 +244,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 240);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(445, 80);
+            this.panel8.Size = new System.Drawing.Size(440, 80);
             this.panel8.TabIndex = 9;
             // 
             // label7
@@ -286,7 +254,7 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(445, 20);
+            this.label7.Size = new System.Drawing.Size(440, 20);
             this.label7.TabIndex = 12;
             this.label7.Text = "Data Log";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -316,7 +284,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 160);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(445, 80);
+            this.panel9.Size = new System.Drawing.Size(440, 80);
             this.panel9.TabIndex = 10;
             // 
             // label8
@@ -326,7 +294,7 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(0, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(445, 20);
+            this.label8.Size = new System.Drawing.Size(440, 20);
             this.label8.TabIndex = 12;
             this.label8.Text = "User Position";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -349,7 +317,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 80);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(445, 80);
+            this.panel7.Size = new System.Drawing.Size(440, 80);
             this.panel7.TabIndex = 8;
             // 
             // label5
@@ -359,7 +327,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(0, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(445, 20);
+            this.label5.Size = new System.Drawing.Size(440, 20);
             this.label5.TabIndex = 12;
             this.label5.Text = "Stock Out Item";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -392,7 +360,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(445, 80);
+            this.panel6.Size = new System.Drawing.Size(440, 80);
             this.panel6.TabIndex = 7;
             // 
             // label2
@@ -402,7 +370,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(445, 20);
+            this.label2.Size = new System.Drawing.Size(440, 20);
             this.label2.TabIndex = 11;
             this.label2.Text = "Stock Item";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -433,10 +401,100 @@
             this.tab_Request.Location = new System.Drawing.Point(4, 25);
             this.tab_Request.Name = "tab_Request";
             this.tab_Request.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Request.Size = new System.Drawing.Size(691, 406);
+            this.tab_Request.Size = new System.Drawing.Size(686, 406);
             this.tab_Request.TabIndex = 1;
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.rbtnWaitApprove);
+            this.panel10.Controls.Add(this.rbtnReject);
+            this.panel10.Controls.Add(this.rbtnApproved);
+            this.panel10.Controls.Add(this.rbtnAllRequest);
+            this.panel10.Controls.Add(this.btnSearch);
+            this.panel10.Controls.Add(this.btnBack);
+            this.panel10.Controls.Add(this.btnCheck);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(680, 50);
+            this.panel10.TabIndex = 6;
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Location = new System.Drawing.Point(480, 5);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(80, 40);
+            this.btnCheck.TabIndex = 0;
+            this.btnCheck.Text = "Check";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
+            // 
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(580, 5);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(80, 40);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(20, 5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(80, 40);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // rbtnAllRequest
+            // 
+            this.rbtnAllRequest.AutoSize = true;
+            this.rbtnAllRequest.Location = new System.Drawing.Point(107, 15);
+            this.rbtnAllRequest.Name = "rbtnAllRequest";
+            this.rbtnAllRequest.Size = new System.Drawing.Size(41, 21);
+            this.rbtnAllRequest.TabIndex = 3;
+            this.rbtnAllRequest.TabStop = true;
+            this.rbtnAllRequest.Text = "All";
+            this.rbtnAllRequest.UseVisualStyleBackColor = true;
+            // 
+            // rbtnApproved
+            // 
+            this.rbtnApproved.AutoSize = true;
+            this.rbtnApproved.Location = new System.Drawing.Point(271, 15);
+            this.rbtnApproved.Name = "rbtnApproved";
+            this.rbtnApproved.Size = new System.Drawing.Size(87, 21);
+            this.rbtnApproved.TabIndex = 4;
+            this.rbtnApproved.TabStop = true;
+            this.rbtnApproved.Text = "Approved";
+            this.rbtnApproved.UseVisualStyleBackColor = true;
+            // 
+            // rbtnReject
+            // 
+            this.rbtnReject.AutoSize = true;
+            this.rbtnReject.Location = new System.Drawing.Point(364, 15);
+            this.rbtnReject.Name = "rbtnReject";
+            this.rbtnReject.Size = new System.Drawing.Size(82, 21);
+            this.rbtnReject.TabIndex = 5;
+            this.rbtnReject.TabStop = true;
+            this.rbtnReject.Text = "Rejected";
+            this.rbtnReject.UseVisualStyleBackColor = true;
+            // 
+            // rbtnWaitApprove
+            // 
+            this.rbtnWaitApprove.AutoSize = true;
+            this.rbtnWaitApprove.Location = new System.Drawing.Point(154, 15);
+            this.rbtnWaitApprove.Name = "rbtnWaitApprove";
+            this.rbtnWaitApprove.Size = new System.Drawing.Size(111, 21);
+            this.rbtnWaitApprove.TabIndex = 6;
+            this.rbtnWaitApprove.TabStop = true;
+            this.rbtnWaitApprove.Text = "Wait Approve";
+            this.rbtnWaitApprove.UseVisualStyleBackColor = true;
             // 
             // PCForm
             // 
@@ -454,7 +512,6 @@
             this.Controls.SetChildIndex(this.grt_Main, 0);
             this.pnlSetting.ResumeLayout(false);
             this.pnlRequest.ResumeLayout(false);
-            this.pnlRequest.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).EndInit();
             this.panel4.ResumeLayout(false);
             this.grt_Main.ResumeLayout(false);
@@ -465,6 +522,8 @@
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.tab_Request.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -481,12 +540,6 @@
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.DataGridView dgvRequest;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn request_time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn user_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn user_dept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn item;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn confirm;
         private System.Windows.Forms.TabControl grt_Main;
         private System.Windows.Forms.TabPage tab_Menu;
         private System.Windows.Forms.Button btnSupplier;
@@ -506,5 +559,13 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnUserPosition;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnCheck;
+        private System.Windows.Forms.RadioButton rbtnWaitApprove;
+        private System.Windows.Forms.RadioButton rbtnReject;
+        private System.Windows.Forms.RadioButton rbtnApproved;
+        private System.Windows.Forms.RadioButton rbtnAllRequest;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

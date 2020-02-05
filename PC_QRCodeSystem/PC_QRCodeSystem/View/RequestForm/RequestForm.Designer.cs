@@ -46,20 +46,26 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbtnAllRequest = new System.Windows.Forms.RadioButton();
+            this.rbtnConfirmed = new System.Windows.Forms.RadioButton();
+            this.rbtnWaitConfirm = new System.Windows.Forms.RadioButton();
+            this.rbtnApproved = new System.Windows.Forms.RadioButton();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.groupBox1);
             this.panel4.Controls.Add(this.btnConfirm);
             this.panel4.Controls.Add(this.txtComment);
             this.panel4.Controls.Add(this.label9);
@@ -78,15 +84,15 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(150, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(554, 200);
+            this.panel4.Size = new System.Drawing.Size(602, 200);
             this.panel4.TabIndex = 2;
             // 
             // btnConfirm
             // 
             this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirm.Location = new System.Drawing.Point(456, 130);
+            this.btnConfirm.Location = new System.Drawing.Point(485, 130);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(84, 50);
+            this.btnConfirm.Size = new System.Drawing.Size(80, 50);
             this.btnConfirm.TabIndex = 15;
             this.btnConfirm.Tag = "";
             this.btnConfirm.Text = "Confirm";
@@ -245,7 +251,6 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.btnClose);
             this.panel5.Controls.Add(this.btnClear);
             this.panel5.Controls.Add(this.btnDelete);
             this.panel5.Controls.Add(this.btnUpdate);
@@ -254,22 +259,13 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(150, 269);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(554, 50);
+            this.panel5.Size = new System.Drawing.Size(602, 50);
             this.panel5.TabIndex = 3;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(460, 5);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(80, 40);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(370, 5);
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.Location = new System.Drawing.Point(500, 5);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(80, 40);
             this.btnClear.TabIndex = 4;
@@ -279,7 +275,8 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(280, 5);
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(380, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 40);
             this.btnDelete.TabIndex = 3;
@@ -289,7 +286,8 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(190, 5);
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.Location = new System.Drawing.Point(260, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(80, 40);
             this.btnUpdate.TabIndex = 2;
@@ -299,7 +297,8 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(100, 5);
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(140, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(80, 40);
             this.btnAdd.TabIndex = 1;
@@ -309,7 +308,8 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(10, 5);
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Location = new System.Drawing.Point(20, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 40);
             this.btnSearch.TabIndex = 0;
@@ -327,17 +327,75 @@
             this.dgvRequest.Location = new System.Drawing.Point(150, 319);
             this.dgvRequest.Name = "dgvRequest";
             this.dgvRequest.ReadOnly = true;
-            this.dgvRequest.Size = new System.Drawing.Size(554, 183);
+            this.dgvRequest.Size = new System.Drawing.Size(602, 183);
             this.dgvRequest.TabIndex = 4;
             this.dgvRequest.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequest_CellContentClick);
             this.dgvRequest.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequest_CellDoubleClick);
             this.dgvRequest.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvRequest_CellFormatting);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbtnApproved);
+            this.groupBox1.Controls.Add(this.rbtnWaitConfirm);
+            this.groupBox1.Controls.Add(this.rbtnConfirmed);
+            this.groupBox1.Controls.Add(this.rbtnAllRequest);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(460, 10);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(130, 110);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Option";
+            // 
+            // rbtnAllRequest
+            // 
+            this.rbtnAllRequest.AutoSize = true;
+            this.rbtnAllRequest.Location = new System.Drawing.Point(20, 20);
+            this.rbtnAllRequest.Name = "rbtnAllRequest";
+            this.rbtnAllRequest.Size = new System.Drawing.Size(41, 21);
+            this.rbtnAllRequest.TabIndex = 0;
+            this.rbtnAllRequest.TabStop = true;
+            this.rbtnAllRequest.Text = "All";
+            this.rbtnAllRequest.UseVisualStyleBackColor = true;
+            // 
+            // rbtnConfirmed
+            // 
+            this.rbtnConfirmed.AutoSize = true;
+            this.rbtnConfirmed.Location = new System.Drawing.Point(20, 60);
+            this.rbtnConfirmed.Name = "rbtnConfirmed";
+            this.rbtnConfirmed.Size = new System.Drawing.Size(90, 21);
+            this.rbtnConfirmed.TabIndex = 1;
+            this.rbtnConfirmed.TabStop = true;
+            this.rbtnConfirmed.Text = "Confirmed";
+            this.rbtnConfirmed.UseVisualStyleBackColor = true;
+            // 
+            // rbtnWaitConfirm
+            // 
+            this.rbtnWaitConfirm.AutoSize = true;
+            this.rbtnWaitConfirm.Location = new System.Drawing.Point(20, 40);
+            this.rbtnWaitConfirm.Name = "rbtnWaitConfirm";
+            this.rbtnWaitConfirm.Size = new System.Drawing.Size(106, 21);
+            this.rbtnWaitConfirm.TabIndex = 2;
+            this.rbtnWaitConfirm.TabStop = true;
+            this.rbtnWaitConfirm.Text = "Wait Confirm";
+            this.rbtnWaitConfirm.UseVisualStyleBackColor = true;
+            // 
+            // rbtnApproved
+            // 
+            this.rbtnApproved.AutoSize = true;
+            this.rbtnApproved.Location = new System.Drawing.Point(20, 80);
+            this.rbtnApproved.Name = "rbtnApproved";
+            this.rbtnApproved.Size = new System.Drawing.Size(87, 21);
+            this.rbtnApproved.TabIndex = 3;
+            this.rbtnApproved.TabStop = true;
+            this.rbtnApproved.Text = "Approved";
+            this.rbtnApproved.UseVisualStyleBackColor = true;
+            // 
             // RequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 502);
+            this.ClientSize = new System.Drawing.Size(752, 502);
             this.Controls.Add(this.dgvRequest);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
@@ -356,6 +414,8 @@
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -373,7 +433,6 @@
         private System.Windows.Forms.TextBox txtModelName;
         private System.Windows.Forms.TextBox txtItemName;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
@@ -387,5 +446,10 @@
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbtnApproved;
+        private System.Windows.Forms.RadioButton rbtnWaitConfirm;
+        private System.Windows.Forms.RadioButton rbtnConfirmed;
+        private System.Windows.Forms.RadioButton rbtnAllRequest;
     }
 }

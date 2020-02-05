@@ -138,7 +138,8 @@ namespace PC_QRCodeSystem
 
         private void btnCloseForm_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (MessageBox.Show("Are you want to exit?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                this.Close();
         }
     }
 }

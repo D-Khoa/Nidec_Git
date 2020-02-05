@@ -25,6 +25,7 @@ namespace PC_QRCodeSystem.Model
         public string approve_usercd { get; set; }
         public bool pc_m_cofirm { get; set; }
         public string comment { get; set; }
+        public string remark { get; set; }
         public BindingList<pts_request_log> listRequestItem { get; set; }
         #endregion
 
@@ -45,13 +46,72 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "SELECT request_id, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_usercd, ";
-            query += "m_confirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment FROM pts_request_log WHERE 1=1 ";
+            query += "m_confirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment, remark FROM pts_request_log WHERE 1=1 ";
             if (!string.IsNullOrEmpty(inItem.item_cd))
                 query += "and item_cd ='" + inItem.item_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.model_cd))
                 query += "and model_cd ='" + inItem.model_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.destination_cd))
                 query += "and destination_cd ='" + inItem.destination_cd + "' ";
+            if (confirm1)
+                query += "and m_confirm ='" + inItem.m_confirm + "' ";
+            if (confirm2)
+                query += "and gm_confirm ='" + inItem.gm_confirm + "' ";
+            if (approved)
+                query += "and pc_m_cofirm ='" + inItem.pc_m_cofirm + "' ";
+            if (!string.IsNullOrEmpty(inItem.remark))
+                query += "and remark ='" + inItem.remark + "' ";
+            //Execute reader for read database
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            query = string.Empty;
+            while (reader.Read())
+            {
+                //Get an item
+                pts_request_log outItem = new pts_request_log
+                {
+                    request_id = (int)reader["request_id"],
+                    item_cd = reader["item_cd"].ToString(),
+                    model_cd = reader["model_cd"].ToString(),
+                    destination_cd = reader["destination_cd"].ToString(),
+                    use_date = (DateTime)reader["use_date"],
+                    request_date = (DateTime)reader["request_date"],
+                    request_qty = (double)reader["request_qty"],
+                    request_usercd = reader["request_usercd"].ToString(),
+                    m_confirm = (bool)reader["m_confirm"],
+                    gm_confirm = (bool)reader["gm_confirm"],
+                    available_qty = (double)reader["available_qty"],
+                    approve_usercd = reader["approve_usercd"].ToString(),
+                    pc_m_cofirm = (bool)reader["pc_m_cofirm"],
+                    comment = reader["comment"].ToString(),
+                    remark = reader["remark"].ToString(),
+                };
+                //Add item into list
+                listRequestItem.Add(outItem);
+            }
+            reader.Close();
+            //Close SQL connection
+            SQL.Close();
+        }
+
+        public void SearchWithDept(pts_request_log inItem, bool confirm1, bool confirm2, bool approved, string deptcd)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            listRequestItem = new BindingList<pts_request_log>();
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT request_id, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_usercd, ";
+            query += "m_confirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment, remark FROM pts_request_log WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.item_cd))
+                query += "and item_cd ='" + inItem.item_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.model_cd))
+                query += "and model_cd ='" + inItem.model_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.destination_cd))
+                query += "and destination_cd ='" + inItem.destination_cd + "' ";
+            else
+                query += "and destination_cd in (SELECT destination_cd FROM pts_destination where dept_cd ='" + deptcd + "') ";
             if (confirm1)
                 query += "and m_confirm ='" + inItem.m_confirm + "' ";
             if (confirm2)
@@ -80,6 +140,7 @@ namespace PC_QRCodeSystem.Model
                     approve_usercd = reader["approve_usercd"].ToString(),
                     pc_m_cofirm = (bool)reader["pc_m_cofirm"],
                     comment = reader["comment"].ToString(),
+                    remark = reader["remark"].ToString(),
                 };
                 //Add item into list
                 listRequestItem.Add(outItem);
