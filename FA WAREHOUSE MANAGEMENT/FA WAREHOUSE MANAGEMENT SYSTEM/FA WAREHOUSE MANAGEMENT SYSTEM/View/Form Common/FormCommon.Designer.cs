@@ -99,7 +99,7 @@
             // 
             this.btnChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangePassword.Location = new System.Drawing.Point(14, 269);
+            this.btnChangePassword.Location = new System.Drawing.Point(13, 233);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(118, 47);
             this.btnChangePassword.TabIndex = 6;
@@ -112,7 +112,7 @@
             // 
             this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Location = new System.Drawing.Point(14, 322);
+            this.btnLogOut.Location = new System.Drawing.Point(13, 286);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(118, 47);
             this.btnLogOut.TabIndex = 2;

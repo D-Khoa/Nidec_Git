@@ -42,18 +42,27 @@ namespace PC_QRCodeSystem
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (txtConfirmPass.Text != txtNewPass.Text)
+            if (txtNewPass.Text == "")
+                MessageBox.Show("Password not null", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else if (txtNewPass.Text != null)
             {
-                MessageBox.Show("Confirm password is not correct!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtConfirmPass.Focus();
-            }
-            else
-            {
-                GetData gdata = new GetData();
-                if (gdata.ChangePassword(txtNewPass.Text))
-                    MessageBox.Show("Change password successful!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (txtConfirmPass.Text != txtNewPass.Text)
+                {
+                    MessageBox.Show("Confirm password is not correct!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtConfirmPass.Focus();
+                }
                 else
-                    MessageBox.Show("Change password not successful!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                {
+                    GetData gdata = new GetData();
+                    if (gdata.ChangePassword(txtNewPass.Text))
+                    {
+                        MessageBox.Show("Change password successful!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                        MessageBox.Show("Change password not successful!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             }
         }
 

@@ -16,5 +16,10 @@ namespace FA_WAREHOUSE_MANAGEMENT_SYSTEM.View
         {
             InitializeComponent();
         }
+
+        private void Warehouse_Equipment_Form_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
