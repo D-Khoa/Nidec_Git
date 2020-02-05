@@ -135,7 +135,12 @@ namespace PC_QRCodeSystem.View
             ClearFields();
             GetCmbData();
             UpdateGrid(true);
+            txtGMUserCode.Text = null;
+            txtGMUserName.Text = null;
+            txtMUserCode.Text = null;
+            txtMUserName.Text = null;
             MessageBox.Show("Delete " + n + " Item", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -217,6 +222,11 @@ namespace PC_QRCodeSystem.View
                 ClearFields();
                 GetCmbData();
                 UpdateGrid(true);
+                txtGMUserCode.Text = null;
+                txtGMUserName.Text = null;
+                txtMUserCode.Text = null;
+                txtMUserName.Text = null;
+
                 if (editMode) messstring = "Update ";
                 else messstring = "Add ";
                 MessageBox.Show(messstring + n + " item complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -225,13 +235,23 @@ namespace PC_QRCodeSystem.View
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (rbtnDepartMent.Checked)
+                    cmbDepartmentCode.Enabled = true;
+                if (rbtnDestinationCode.Checked)
+                    cmbDepartmentCode.Enabled = false;
             }
             LockAllNameTextbox();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            LockAllNameTextbox();
+            if (rbtnDepartMent.Checked)
+                LockAllNameTextbox();
+            if (rbtnDestinationCode.Checked)
+            {
+                cmbDepartmentCode.Enabled = false;
+                LockAllNameTextbox();
+            }
         }
         #endregion
         #region QUERY BUTTON
@@ -259,8 +279,6 @@ namespace PC_QRCodeSystem.View
                 dgvData.DataSource = ptsdept.listDept;
                 dgvData.Columns["dept_cd"].HeaderText = "Dept CD";
                 dgvData.Columns["dept_name"].HeaderText = "Dept Name";
-                //dgvData.Columns["m_user_cd"].HeaderText = "User CD";
-                //dgvData.Columns["gm_user_cd"].HeaderText = "GM User CD";
                 dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
                 dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
 

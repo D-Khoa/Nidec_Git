@@ -82,6 +82,7 @@
             this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOK
             // 
@@ -136,6 +137,7 @@
             this.txtNewPass.Size = new System.Drawing.Size(180, 20);
             this.txtNewPass.TabIndex = 7;
             this.txtNewPass.UseSystemPasswordChar = true;
+            this.txtNewPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNewPass_KeyDown);
             // 
             // txtConfirmPass
             // 
@@ -147,6 +149,7 @@
             // 
             // ChangePasswordForm
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(362, 235);
