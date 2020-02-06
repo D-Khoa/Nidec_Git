@@ -58,20 +58,20 @@
             this.tab_Inspection = new System.Windows.Forms.TabPage();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnInsBack = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtUserCode = new System.Windows.Forms.TextBox();
-            this.txtUserName = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.tab_Print = new System.Windows.Forms.TabPage();
             this.dgvPacking = new System.Windows.Forms.DataGridView();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.btnPrintBack = new System.Windows.Forms.Button();
-            this.btnPrintAll = new System.Windows.Forms.Button();
             this.btnPrintSelected = new System.Windows.Forms.Button();
-            this.btnRegister = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnInsBack = new System.Windows.Forms.Button();
+            this.btnPrintAll = new System.Windows.Forms.Button();
+            this.btnPrintBack = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtSupplierName = new System.Windows.Forms.TextBox();
+            this.txtSupplierCD = new System.Windows.Forms.TextBox();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -410,19 +410,52 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.txtSupplierName);
+            this.panel4.Controls.Add(this.txtSupplierCD);
+            this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.btnInsBack);
             this.panel4.Controls.Add(this.btnDelete);
             this.panel4.Controls.Add(this.btnRegister);
             this.panel4.Controls.Add(this.txtBarcode);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.txtUserCode);
-            this.panel4.Controls.Add(this.txtUserName);
-            this.panel4.Controls.Add(this.label7);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(740, 80);
             this.panel4.TabIndex = 0;
+            // 
+            // btnInsBack
+            // 
+            this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsBack.Location = new System.Drawing.Point(650, 15);
+            this.btnInsBack.Name = "btnInsBack";
+            this.btnInsBack.Size = new System.Drawing.Size(80, 40);
+            this.btnInsBack.TabIndex = 22;
+            this.btnInsBack.Text = "Back";
+            this.btnInsBack.UseVisualStyleBackColor = true;
+            this.btnInsBack.Click += new System.EventHandler(this.btnPrintBack_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(560, 15);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(80, 40);
+            this.btnDelete.TabIndex = 21;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegister.Location = new System.Drawing.Point(470, 15);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(80, 40);
+            this.btnRegister.TabIndex = 20;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // txtBarcode
             // 
@@ -431,6 +464,7 @@
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(340, 23);
             this.txtBarcode.TabIndex = 19;
+            this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
             // label5
             // 
@@ -441,37 +475,6 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Barcode";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtUserCode
-            // 
-            this.txtUserCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserCode.Location = new System.Drawing.Point(120, 40);
-            this.txtUserCode.Name = "txtUserCode";
-            this.txtUserCode.Size = new System.Drawing.Size(120, 23);
-            this.txtUserCode.TabIndex = 17;
-            this.txtUserCode.UseSystemPasswordChar = true;
-            this.txtUserCode.Validated += new System.EventHandler(this.txtUserCode_Validated);
-            // 
-            // txtUserName
-            // 
-            this.txtUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserName.Location = new System.Drawing.Point(250, 40);
-            this.txtUserName.Name = "txtUserName";
-            this.txtUserName.ReadOnly = true;
-            this.txtUserName.Size = new System.Drawing.Size(210, 23);
-            this.txtUserName.TabIndex = 16;
-            this.txtUserName.Text = "User name";
-            this.txtUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label7
-            // 
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(10, 40);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 23);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "User Code";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tab_Print
             // 
@@ -510,17 +513,16 @@
             this.panel7.Size = new System.Drawing.Size(740, 56);
             this.panel7.TabIndex = 1;
             // 
-            // btnPrintBack
+            // btnPrintSelected
             // 
-            this.btnPrintBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintBack.Location = new System.Drawing.Point(645, 10);
-            this.btnPrintBack.Name = "btnPrintBack";
-            this.btnPrintBack.Size = new System.Drawing.Size(80, 40);
-            this.btnPrintBack.TabIndex = 0;
-            this.btnPrintBack.Text = "Back";
-            this.btnPrintBack.UseVisualStyleBackColor = true;
-            this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
+            this.btnPrintSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintSelected.Location = new System.Drawing.Point(10, 10);
+            this.btnPrintSelected.Name = "btnPrintSelected";
+            this.btnPrintSelected.Size = new System.Drawing.Size(80, 40);
+            this.btnPrintSelected.TabIndex = 2;
+            this.btnPrintSelected.Text = "Print Selected";
+            this.btnPrintSelected.UseVisualStyleBackColor = true;
+            this.btnPrintSelected.Click += new System.EventHandler(this.btnPrintSelected_Click);
             // 
             // btnPrintAll
             // 
@@ -533,49 +535,44 @@
             this.btnPrintAll.UseVisualStyleBackColor = true;
             this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
             // 
-            // btnPrintSelected
+            // btnPrintBack
             // 
-            this.btnPrintSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintSelected.Location = new System.Drawing.Point(10, 10);
-            this.btnPrintSelected.Name = "btnPrintSelected";
-            this.btnPrintSelected.Size = new System.Drawing.Size(80, 40);
-            this.btnPrintSelected.TabIndex = 2;
-            this.btnPrintSelected.Text = "Print Selected";
-            this.btnPrintSelected.UseVisualStyleBackColor = true;
-            this.btnPrintSelected.Click += new System.EventHandler(this.btnPrintSelected_Click);
+            this.btnPrintBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrintBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintBack.Location = new System.Drawing.Point(645, 10);
+            this.btnPrintBack.Name = "btnPrintBack";
+            this.btnPrintBack.Size = new System.Drawing.Size(80, 40);
+            this.btnPrintBack.TabIndex = 0;
+            this.btnPrintBack.Text = "Back";
+            this.btnPrintBack.UseVisualStyleBackColor = true;
+            this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
             // 
-            // btnRegister
+            // label2
             // 
-            this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(470, 15);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(80, 40);
-            this.btnRegister.TabIndex = 20;
-            this.btnRegister.Text = "Register";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(10, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Supplier Code";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnDelete
+            // txtSupplierName
             // 
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(560, 15);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 40);
-            this.btnDelete.TabIndex = 21;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSupplierName.Location = new System.Drawing.Point(250, 40);
+            this.txtSupplierName.Name = "txtSupplierName";
+            this.txtSupplierName.Size = new System.Drawing.Size(210, 23);
+            this.txtSupplierName.TabIndex = 25;
+            this.txtSupplierName.Text = "Supplier Name";
             // 
-            // btnInsBack
+            // txtSupplierCD
             // 
-            this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsBack.Location = new System.Drawing.Point(650, 15);
-            this.btnInsBack.Name = "btnInsBack";
-            this.btnInsBack.Size = new System.Drawing.Size(80, 40);
-            this.btnInsBack.TabIndex = 22;
-            this.btnInsBack.Text = "Back";
-            this.btnInsBack.UseVisualStyleBackColor = true;
-            this.btnInsBack.Click += new System.EventHandler(this.btnPrintBack_Click);
+            this.txtSupplierCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSupplierCD.Location = new System.Drawing.Point(120, 40);
+            this.txtSupplierCD.Name = "txtSupplierCD";
+            this.txtSupplierCD.Size = new System.Drawing.Size(120, 23);
+            this.txtSupplierCD.TabIndex = 24;
             // 
             // StockInputForm
             // 
@@ -646,9 +643,6 @@
         private System.Windows.Forms.Button btnSetting;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtUserCode;
-        private System.Windows.Forms.TextBox txtUserName;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnPrinterCheck;
         private System.Windows.Forms.TabPage tab_Print;
@@ -661,5 +655,8 @@
         private System.Windows.Forms.Button btnInsBack;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.TextBox txtSupplierName;
+        private System.Windows.Forms.TextBox txtSupplierCD;
+        private System.Windows.Forms.Label label2;
     }
 }

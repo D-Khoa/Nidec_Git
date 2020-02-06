@@ -28,33 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvStockOut = new System.Windows.Forms.DataGridView();
+            this.grt_Main = new System.Windows.Forms.TabControl();
+            this.tab_MainMenu = new System.Windows.Forms.TabPage();
+            this.tab_Plan = new System.Windows.Forms.TabPage();
+            this.tab_Request = new System.Windows.Forms.TabPage();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.grt_Main = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).BeginInit();
-            this.pnlButtons.SuspendLayout();
+            this.dgvStockOut = new System.Windows.Forms.DataGridView();
+            this.tab_PrintList = new System.Windows.Forms.TabPage();
             this.grt_Main.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tab_Request.SuspendLayout();
+            this.pnlButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvStockOut
+            // grt_Main
             // 
-            this.dgvStockOut.AllowUserToAddRows = false;
-            this.dgvStockOut.AllowUserToDeleteRows = false;
-            this.dgvStockOut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStockOut.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStockOut.Location = new System.Drawing.Point(3, 53);
-            this.dgvStockOut.Name = "dgvStockOut";
-            this.dgvStockOut.ReadOnly = true;
-            this.dgvStockOut.Size = new System.Drawing.Size(600, 348);
-            this.dgvStockOut.TabIndex = 4;
+            this.grt_Main.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.grt_Main.Controls.Add(this.tab_MainMenu);
+            this.grt_Main.Controls.Add(this.tab_Plan);
+            this.grt_Main.Controls.Add(this.tab_Request);
+            this.grt_Main.Controls.Add(this.tab_PrintList);
+            this.grt_Main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grt_Main.Location = new System.Drawing.Point(150, 69);
+            this.grt_Main.Name = "grt_Main";
+            this.grt_Main.SelectedIndex = 0;
+            this.grt_Main.Size = new System.Drawing.Size(614, 433);
+            this.grt_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.grt_Main.TabIndex = 22;
+            // 
+            // tab_MainMenu
+            // 
+            this.tab_MainMenu.Location = new System.Drawing.Point(4, 25);
+            this.tab_MainMenu.Name = "tab_MainMenu";
+            this.tab_MainMenu.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_MainMenu.Size = new System.Drawing.Size(606, 404);
+            this.tab_MainMenu.TabIndex = 0;
+            this.tab_MainMenu.Text = "Menu";
+            this.tab_MainMenu.UseVisualStyleBackColor = true;
+            // 
+            // tab_Plan
+            // 
+            this.tab_Plan.Location = new System.Drawing.Point(4, 25);
+            this.tab_Plan.Name = "tab_Plan";
+            this.tab_Plan.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Plan.Size = new System.Drawing.Size(606, 404);
+            this.tab_Plan.TabIndex = 1;
+            this.tab_Plan.Text = "Plan";
+            this.tab_Plan.UseVisualStyleBackColor = true;
+            // 
+            // tab_Request
+            // 
+            this.tab_Request.Controls.Add(this.dgvStockOut);
+            this.tab_Request.Controls.Add(this.pnlButtons);
+            this.tab_Request.Location = new System.Drawing.Point(4, 25);
+            this.tab_Request.Name = "tab_Request";
+            this.tab_Request.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Request.Size = new System.Drawing.Size(606, 404);
+            this.tab_Request.TabIndex = 2;
+            this.tab_Request.Text = "Request";
+            this.tab_Request.UseVisualStyleBackColor = true;
             // 
             // pnlButtons
             // 
@@ -67,7 +104,7 @@
             this.pnlButtons.Location = new System.Drawing.Point(3, 3);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(600, 50);
-            this.pnlButtons.TabIndex = 21;
+            this.pnlButtons.TabIndex = 22;
             // 
             // btnSearch
             // 
@@ -119,40 +156,27 @@
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             // 
-            // grt_Main
+            // dgvStockOut
             // 
-            this.grt_Main.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.grt_Main.Controls.Add(this.tabPage1);
-            this.grt_Main.Controls.Add(this.tabPage2);
-            this.grt_Main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grt_Main.Location = new System.Drawing.Point(150, 69);
-            this.grt_Main.Name = "grt_Main";
-            this.grt_Main.SelectedIndex = 0;
-            this.grt_Main.Size = new System.Drawing.Size(614, 433);
-            this.grt_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.grt_Main.TabIndex = 22;
+            this.dgvStockOut.AllowUserToAddRows = false;
+            this.dgvStockOut.AllowUserToDeleteRows = false;
+            this.dgvStockOut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStockOut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvStockOut.Location = new System.Drawing.Point(3, 53);
+            this.dgvStockOut.Name = "dgvStockOut";
+            this.dgvStockOut.ReadOnly = true;
+            this.dgvStockOut.Size = new System.Drawing.Size(600, 348);
+            this.dgvStockOut.TabIndex = 23;
             // 
-            // tabPage1
+            // tab_PrintList
             // 
-            this.tabPage1.Controls.Add(this.dgvStockOut);
-            this.tabPage1.Controls.Add(this.pnlButtons);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(606, 404);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(592, 404);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tab_PrintList.Location = new System.Drawing.Point(4, 25);
+            this.tab_PrintList.Name = "tab_PrintList";
+            this.tab_PrintList.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_PrintList.Size = new System.Drawing.Size(606, 404);
+            this.tab_PrintList.TabIndex = 3;
+            this.tab_PrintList.Text = "Print List";
+            this.tab_PrintList.UseVisualStyleBackColor = true;
             // 
             // StockOutForm
             // 
@@ -168,15 +192,19 @@
             this.Text = "StockOutForm";
             this.tittle = "FormCommon";
             this.Controls.SetChildIndex(this.grt_Main, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).EndInit();
-            this.pnlButtons.ResumeLayout(false);
             this.grt_Main.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tab_Request.ResumeLayout(false);
+            this.pnlButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+        private System.Windows.Forms.TabControl grt_Main;
+        private System.Windows.Forms.TabPage tab_MainMenu;
+        private System.Windows.Forms.TabPage tab_Plan;
+        private System.Windows.Forms.TabPage tab_Request;
         private System.Windows.Forms.DataGridView dgvStockOut;
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnSearch;
@@ -184,8 +212,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.TabControl grt_Main;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tab_PrintList;
     }
 }

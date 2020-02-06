@@ -249,6 +249,9 @@
     <EmbeddedResource Include="View\PCForm\StockInputForm.resx">
       <DependentUpon>StockInputForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\PCForm\StockOutForm.resx">
+      <DependentUpon>StockOutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\RequestForm\RequestForm.resx">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </EmbeddedResource>
