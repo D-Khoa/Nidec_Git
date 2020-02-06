@@ -6,8 +6,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -15,17 +13,18 @@ namespace PC_QRCodeSystem.View
 {
     public partial class StockInputForm : FormCommon
     {
-        #region INPUT
+        #region ITEMS
         pts_item itemUnit { get; set; }
-        m_mes_user mesUser { get; set; }
         PremacIn premacItem { get; set; }
         PrintItem printItem { get; set; }
         pts_stock stockItem { get; set; }
+        pts_supplier supplierItem { get; set; }
         List<PrintItem> listPrintItem { get; set; }
         BindingList<pts_stock> listStockItem { get; set; }
         #endregion
 
         #region SETTING
+        int n = 1;
         string settingpath, premacPath, printername;
         List<string> allsetting = new List<string>();
         #region PRINTER
@@ -41,10 +40,10 @@ namespace PC_QRCodeSystem.View
         {
             InitializeComponent();
             itemUnit = new pts_item();
-            mesUser = new m_mes_user();
             printItem = new PrintItem();
             premacItem = new PremacIn();
             stockItem = new pts_stock();
+            supplierItem = new pts_supplier();
             listPrintItem = new List<PrintItem>();
             listStockItem = new BindingList<pts_stock>();
             tc_Main.ItemSize = new Size(0, 1);
@@ -117,7 +116,7 @@ namespace PC_QRCodeSystem.View
                         Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                         Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                         Delivery_Qty = unit,
-                        //PONo = dr.Cells["PO_No"].Value.ToString(),
+                        PONo = dr.Cells["PO_No"].Value.ToString(),
                         OrderNo = dr.Cells["Order_No"].Value.ToString(),
                         Label_Qty = qty
                     });
@@ -133,7 +132,7 @@ namespace PC_QRCodeSystem.View
                             Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                             Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                             Delivery_Qty = qtymod,
-                            //PONo = dr.Cells["PO_No"].Value.ToString(),
+                            PONo = dr.Cells["PO_No"].Value.ToString(),
                             OrderNo = dr.Cells["Order_No"].Value.ToString(),
                             Label_Qty = 1
                         });
@@ -170,7 +169,7 @@ namespace PC_QRCodeSystem.View
                         Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                         Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                         Delivery_Qty = unit,
-                        //PONo = dr.Cells["PO_No"].Value.ToString(),
+                        PONo = dr.Cells["PO_No"].Value.ToString(),
                         OrderNo = dr.Cells["Order_No"].Value.ToString(),
                         Label_Qty = qty
                     });
@@ -186,7 +185,7 @@ namespace PC_QRCodeSystem.View
                             Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                             Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                             Delivery_Qty = qtymod,
-                            //PONo = dr.Cells["PO_No"].Value.ToString(),
+                            PONo = dr.Cells["PO_No"].Value.ToString(),
                             OrderNo = dr.Cells["Order_No"].Value.ToString(),
                             Label_Qty = 1
                         });
@@ -368,7 +367,7 @@ namespace PC_QRCodeSystem.View
                 {
                     TfPrint.printBarCodeNew(Items[i].Item_Number, Items[i].Item_Name, Items[i].SupplierName, Items[i].Invoice,
                         Items[i].Delivery_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), Items[i].SupplierCD,
-                        /*Items[i].PONo,*/ Items[i].OrderNo);
+                        Items[i].PONo, Items[i].OrderNo);
                 }
             }
             return true;
@@ -376,54 +375,64 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region INSPECTION TAB
-        private void txtBarcode_Validated(object sender, EventArgs e)
+        private void UpdateInspectionGrid()
         {
-            int n = 1;
-            int temp = 0;
-            string[] barcode = txtBarcode.Text.Split(';');
-            foreach (pts_stock item in listStockItem)
-            {
-                if (item.po_no == barcode[7])
-                {
-                    temp = int.Parse(item.packing_cd.Split('-')[1]);
-                    if (temp > n)
-                        n = temp;
-                }
-            }
-            listStockItem.Add(new pts_stock
-            {
-                item_cd = barcode[0],
-                supplier_cd = barcode[2],
-                invoice = barcode[4],
-                stockin_date = DateTime.Parse(barcode[5]),
-                stockin_qty = double.Parse(barcode[6]),
-                stockin_user_cd = txtUserCode.Text,
-                po_no = barcode[7],
-                order_no = barcode[8],
-                packing_cd = barcode[7] + "-" + n.ToString("00"),
-                packing_qty = double.Parse(barcode[6]),
-                registration_user_cd = UserData.usercode,
-            });
             dgvInspection.DataSource = listStockItem;
-            n = 1;
+            dgvInspection.Columns["stock_id"].HeaderText = "Stock ID";
+            dgvInspection.Columns["packing_cd"].HeaderText = "Packing Code";
+            dgvInspection.Columns["item_cd"].HeaderText = "Item Code";
+            dgvInspection.Columns["supplier_cd"].HeaderText = "Supplier Code";
+            dgvInspection.Columns["order_no"].HeaderText = "Order Number";
+            dgvInspection.Columns["invoice"].HeaderText = "Invoice";
+            dgvInspection.Columns["po_no"].HeaderText = "PO";
+            dgvInspection.Columns["stockin_date"].HeaderText = "Stock In Date";
+            dgvInspection.Columns["stockin_user_cd"].HeaderText = "Incharge";
+            dgvInspection.Columns["stockin_qty"].HeaderText = "Stock In Qty";
+            dgvInspection.Columns["packing_qty"].HeaderText = "Packing Qty";
+            dgvInspection.Columns["registration_user_cd"].HeaderText = "Reg User";
+            dgvInspection.Columns["registration_date_time"].HeaderText = "Reg Date";
         }
 
-        private void txtUserCode_Validated(object sender, EventArgs e)
-        {
-            mesUser = mesUser.GetUser(txtUserCode.Text);
-            txtUserName.Text = mesUser.user_name;
-        }
-
-        private void btnRegister_Click(object sender, EventArgs e)
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
-                foreach (DataGridViewRow dr in dgvInspection.Rows)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    if (stockItem.AddItem(dr.DataBoundItem as pts_stock) > 0)
-                        listStockItem.Remove(dr.DataBoundItem as pts_stock);
+                    int temp = 0;
+                    string[] barcode = txtBarcode.Text.Split(';');
+                    txtSupplierCD.Text = barcode[2];
+                    txtSupplierName.Text = barcode[3];
+                    foreach (pts_stock item in listStockItem)
+                    {
+                        if (item.po_no == barcode[7])
+                        {
+                            temp = int.Parse(item.packing_cd.Split('-')[1]);
+                            if (temp == n)
+                                n++;
+                        }
+                    }
+                    listStockItem.Add(new pts_stock
+                    {
+                        item_cd = barcode[0],
+                        supplier_cd = barcode[2],
+                        invoice = barcode[4],
+                        stockin_date = DateTime.Parse(barcode[5]),
+                        stockin_qty = double.Parse(barcode[6]),
+                        stockin_user_cd = UserData.usercode,
+                        po_no = barcode[7],
+                        order_no = barcode[8],
+                        packing_cd = barcode[7] + "-" + n.ToString("00"),
+                        packing_qty = double.Parse(barcode[6]),
+                        registration_user_cd = UserData.usercode,
+                    });
+                    UpdateInspectionGrid();
+                    n = 1;
                 }
-                dgvInspection.DataSource = listStockItem;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Wrong format barcode!" + Environment.NewLine + "Please check barcode and try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -431,11 +440,54 @@ namespace PC_QRCodeSystem.View
             }
         }
 
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dgvInspection.Rows.Count; i++)
+            {
+                //Check supplier exist.
+                try
+                {
+                    supplierItem.GetSupplierName(dgvInspection.Rows[i].Cells["supplier_cd"].Value.ToString());
+                }
+                catch
+                {
+                    //If supplier not exist, add new supplier
+                    supplierItem.AddSupplier(new pts_supplier
+                    {
+                        supplier_cd = txtBarcode.Text.Split(';')[2],
+                        supplier_name = txtBarcode.Text.Split(';')[3],
+                        registration_user_cd = UserData.usercode,
+                    });
+                }
+                //Register item into stock
+                try
+                {
+                    if (stockItem.AddItem(dgvInspection.Rows[i].DataBoundItem as pts_stock) > 0)
+                    {
+                        listStockItem.Remove(dgvInspection.Rows[i].DataBoundItem as pts_stock);
+                        i--;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //If item already exists, skip it and set color it to red.
+                    string errorNo = ex.Message.Split(':')[0];
+                    if (errorNo == "23505")
+                        MessageBox.Show("This package already exists." + Environment.NewLine + "Please check and try again!",
+                            "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                    continue;
+                }
+            }
+            UpdateInspectionGrid();
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-
                 foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
                 {
                     listStockItem.Remove(dr.DataBoundItem as pts_stock);

@@ -90,7 +90,7 @@ namespace PC_QRCodeSystem.View
                 return;
             int n = 0;
             n = ptssupllier.Delete(ptssupllier.supplier_id);
-           // ClearOK();
+            // ClearOK();
             Getcmbdata();
             UpdateGrid();
             MessageBox.Show("Delete " + n + " Supplier", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -171,7 +171,8 @@ namespace PC_QRCodeSystem.View
         }
         private void ClearOK()
         {
-            try {
+            try
+            {
                 if (dgvDataSupllier.DataSource != null)
                     dgvDataSupllier.DataSource = null;
                 cmbSupplierCode.Text = null;
@@ -180,7 +181,7 @@ namespace PC_QRCodeSystem.View
                 btnUpdate.Enabled = false;
                 btnDelete.Enabled = false;
             }
-            catch (Exception ex)
+            catch
             {
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;

@@ -16,7 +16,7 @@ namespace PC_QRCodeSystem.Model
         public string Invoice { get; set; }
         public DateTime Delivery_Date { get; set; }
         public double Delivery_Qty { get; set; }
-        //public string PONo { get; set; }
+        public string PONo { get; set; }
         public string OrderNo { get; set; }
         public int Label_Qty { get; set; }
         public BindingList<PrintItem> ListPrintItem { get; set; }
