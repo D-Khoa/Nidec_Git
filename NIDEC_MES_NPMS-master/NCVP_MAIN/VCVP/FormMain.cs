@@ -16,6 +16,7 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.DetailPos
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Units;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.InventoryForm;
 
+
 namespace Com.Nidec.Mes.VCVP
 {
     public partial class FormMain : GlobalMasterMaintenance.FormCommonNCVP
@@ -488,6 +489,23 @@ namespace Com.Nidec.Mes.VCVP
         {
             PQMDataViewerForm dvf = new PQMDataViewerForm();
             dvf.ShowDialog();
+        }
+
+        private void btnWHEq_Click(object sender, EventArgs e)
+        {
+            Warehouse_Equipment_Form wheq = new Warehouse_Equipment_Form();
+            wheq.ShowDialog();
+            
+        }
+
+        private void btnInputEq_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOutputEq_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
