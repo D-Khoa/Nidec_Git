@@ -143,11 +143,6 @@ namespace PC_QRCodeSystem.View
         {
             ClearFields();
         }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
         #endregion
 
         #region QUERY BUTTON

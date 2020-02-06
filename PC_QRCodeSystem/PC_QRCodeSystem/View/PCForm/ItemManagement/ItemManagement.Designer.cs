@@ -35,7 +35,6 @@
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -67,7 +66,7 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.tsNumberTotal});
-            this.statusStrip1.Location = new System.Drawing.Point(145, 440);
+            this.statusStrip1.Location = new System.Drawing.Point(150, 440);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(600, 24);
             this.statusStrip1.TabIndex = 3;
@@ -100,7 +99,7 @@
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(145, 249);
+            this.dgvData.Location = new System.Drawing.Point(150, 249);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -111,13 +110,12 @@
             // pnlButtons
             // 
             this.pnlButtons.Controls.Add(this.btnSearch);
-            this.pnlButtons.Controls.Add(this.btnClose);
             this.pnlButtons.Controls.Add(this.btnUpdate);
             this.pnlButtons.Controls.Add(this.btnDelete);
             this.pnlButtons.Controls.Add(this.btnAdd);
             this.pnlButtons.Controls.Add(this.btnClear);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlButtons.Location = new System.Drawing.Point(145, 199);
+            this.pnlButtons.Location = new System.Drawing.Point(150, 199);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(600, 50);
             this.pnlButtons.TabIndex = 20;
@@ -125,7 +123,7 @@
             // btnSearch
             // 
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(30, 5);
+            this.btnSearch.Location = new System.Drawing.Point(40, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 40);
             this.btnSearch.TabIndex = 14;
@@ -133,21 +131,10 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnClose
-            // 
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(490, 5);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(80, 40);
-            this.btnClose.TabIndex = 19;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // btnUpdate
             // 
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(214, 5);
+            this.btnUpdate.Location = new System.Drawing.Point(260, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(80, 40);
             this.btnUpdate.TabIndex = 16;
@@ -158,7 +145,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(306, 5);
+            this.btnDelete.Location = new System.Drawing.Point(370, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 40);
             this.btnDelete.TabIndex = 17;
@@ -169,7 +156,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(122, 5);
+            this.btnAdd.Location = new System.Drawing.Point(150, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(80, 40);
             this.btnAdd.TabIndex = 15;
@@ -180,7 +167,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(398, 5);
+            this.btnClear.Location = new System.Drawing.Point(480, 5);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(80, 40);
             this.btnClear.TabIndex = 18;
@@ -205,7 +192,7 @@
             this.panel4.Controls.Add(this.txtItem);
             this.panel4.Controls.Add(this.cmbItemLocation);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(145, 69);
+            this.panel4.Location = new System.Drawing.Point(150, 69);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(600, 130);
             this.panel4.TabIndex = 21;
@@ -366,11 +353,11 @@
             this.cmbItemLocation.TabIndex = 6;
             this.cmbItemLocation.SelectedIndexChanged += new System.EventHandler(this.cmbItemLocation_SelectedIndexChanged);
             // 
-            // SubForm
+            // ItemManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 464);
+            this.ClientSize = new System.Drawing.Size(750, 464);
             this.Controls.Add(this.dgvData);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.panel4);
@@ -378,7 +365,8 @@
             this.dept = "";
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
-            this.Name = "SubForm";
+            this.Name = "ItemManagement";
+            this.position = "";
             this.Text = "Item Management";
             this.tittle = "FormCommon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SubForm_FormClosing);
@@ -405,7 +393,6 @@
         private System.Windows.Forms.ToolStripStatusLabel tsNumberTotal;
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.Panel pnlButtons;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;

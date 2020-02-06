@@ -58,7 +58,7 @@ namespace Com.Nidec.Mes.VCVP
         /// <param name="e"></param>
         private void NcvpMaster_btn_Click(object sender, EventArgs e)
         {
-            NcvpMaster_btn.Visible = true;
+            NcvpMaster_gpb.Visible = true;
             SystemMaster_gpb.Visible = false;
             NCVP_Function_gr.Visible = false;
         }

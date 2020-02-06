@@ -154,7 +154,7 @@
             this.NcvpMaster_gpb.Controls.Add(this.Master_tab);
             this.NcvpMaster_gpb.Controls.Add(this.labelCommon1);
             this.NcvpMaster_gpb.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.NcvpMaster_gpb.Location = new System.Drawing.Point(170, 106);
+            this.NcvpMaster_gpb.Location = new System.Drawing.Point(173, 118);
             this.NcvpMaster_gpb.Name = "NcvpMaster_gpb";
             this.NcvpMaster_gpb.Size = new System.Drawing.Size(697, 572);
             this.NcvpMaster_gpb.TabIndex = 52;
@@ -792,7 +792,7 @@
             this.SystemMaster_gpb.Controls.Add(this.language_bt);
             this.SystemMaster_gpb.Controls.Add(this.local_user_btn);
             this.SystemMaster_gpb.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.SystemMaster_gpb.Location = new System.Drawing.Point(169, 106);
+            this.SystemMaster_gpb.Location = new System.Drawing.Point(173, 112);
             this.SystemMaster_gpb.Name = "SystemMaster_gpb";
             this.SystemMaster_gpb.Size = new System.Drawing.Size(696, 572);
             this.SystemMaster_gpb.TabIndex = 50;
@@ -1336,7 +1336,7 @@
             this.NCVP_Function_gr.Controls.Add(this.labelCommon2);
             this.NCVP_Function_gr.Controls.Add(this.tabControlCommon1);
             this.NCVP_Function_gr.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.NCVP_Function_gr.Location = new System.Drawing.Point(170, 106);
+            this.NCVP_Function_gr.Location = new System.Drawing.Point(173, 127);
             this.NCVP_Function_gr.Name = "NCVP_Function_gr";
             this.NCVP_Function_gr.Size = new System.Drawing.Size(697, 572);
             this.NCVP_Function_gr.TabIndex = 51;
@@ -1449,18 +1449,18 @@
             this.ClientSize = new System.Drawing.Size(867, 679);
             this.ControlId = "frm001";
             this.Controls.Add(this.SystemMaster_gpb);
+            this.Controls.Add(this.NcvpMaster_gpb);
             this.Controls.Add(this.Menu_gpb);
             this.Controls.Add(this.NCVP_Function_gr);
-            this.Controls.Add(this.NcvpMaster_gpb);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "NCVP Master Maintance";
             this.TitleText = "NCVP Master Maintance";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Controls.SetChildIndex(this.NcvpMaster_gpb, 0);
             this.Controls.SetChildIndex(this.NCVP_Function_gr, 0);
             this.Controls.SetChildIndex(this.Menu_gpb, 0);
+            this.Controls.SetChildIndex(this.NcvpMaster_gpb, 0);
             this.Controls.SetChildIndex(this.SystemMaster_gpb, 0);
             this.NcvpMaster_gpb.ResumeLayout(false);
             this.Master_tab.ResumeLayout(false);
