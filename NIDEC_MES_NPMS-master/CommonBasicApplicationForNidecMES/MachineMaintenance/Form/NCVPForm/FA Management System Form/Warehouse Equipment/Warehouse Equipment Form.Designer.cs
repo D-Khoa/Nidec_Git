@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Asset Model");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Asset Type");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Invoice");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Label Status");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Account Code");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Rank");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Section");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Now Location");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Inventory Time");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Valid");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Expired");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Net Value", new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode11});
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Factory");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Unit");
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Asset Model");
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Asset Type");
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Invoice");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Label Status");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Account Code");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Rank");
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("Section");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Now Location");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Inventory Time");
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Valid");
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("Expired");
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Net Value", new System.Windows.Forms.TreeNode[] {
+            treeNode52,
+            treeNode53});
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("Factory");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("Unit");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grt_Option = new Com.Nidec.Mes.Framework.TabControlCommon();
             this.tab_Search = new System.Windows.Forms.TabPage();
             this.trvAsset = new Com.Nidec.Mes.Framework.TreeViewCommon();
@@ -90,6 +90,9 @@
             this.btnAdd = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.btnSearch = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.dgvAccountData = new Com.Nidec.Mes.Framework.DataGridViewCommon();
+            this.sttStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsRowCounter = new System.Windows.Forms.ToolStripStatusLabel();
             this.grt_Option.SuspendLayout();
             this.tab_Search.SuspendLayout();
             this.tab_depreciation.SuspendLayout();
@@ -99,6 +102,7 @@
             this.pnlButtons1.SuspendLayout();
             this.pnlButtons2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccountData)).BeginInit();
+            this.sttStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // grt_Option
@@ -139,21 +143,22 @@
             this.trvAsset.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trvAsset.Location = new System.Drawing.Point(356, 3);
             this.trvAsset.Name = "trvAsset";
-            treeNode1.Name = "asset_model";
-            treeNode1.Text = "Asset Model";
-            treeNode2.Name = "asset_type";
-            treeNode2.Text = "Asset Type";
-            treeNode3.Name = "asset_invoice";
-            treeNode3.Text = "Invoice";
-            treeNode4.Name = "label_status";
-            treeNode4.Text = "Label Status";
+            treeNode43.Name = "asset_model";
+            treeNode43.Text = "Asset Model";
+            treeNode44.Name = "asset_type";
+            treeNode44.Text = "Asset Type";
+            treeNode45.Name = "asset_invoice";
+            treeNode45.Text = "Invoice";
+            treeNode46.Name = "label_status";
+            treeNode46.Text = "Label Status";
             this.trvAsset.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4});
+            treeNode43,
+            treeNode44,
+            treeNode45,
+            treeNode46});
             this.trvAsset.Size = new System.Drawing.Size(294, 153);
             this.trvAsset.TabIndex = 3;
+            this.trvAsset.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvAsset_AfterCheck);
             // 
             // trvOther
             // 
@@ -163,37 +168,38 @@
             this.trvOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trvOther.Location = new System.Drawing.Point(650, 3);
             this.trvOther.Name = "trvOther";
-            treeNode5.Name = "account_cd";
-            treeNode5.Text = "Account Code";
-            treeNode6.Name = "rank_cd";
-            treeNode6.Text = "Rank";
-            treeNode7.Name = "account_location_cd";
-            treeNode7.Text = "Section";
-            treeNode8.Name = "location_cd";
-            treeNode8.Text = "Now Location";
-            treeNode9.Name = "invertory_time_cd";
-            treeNode9.Text = "Inventory Time";
-            treeNode10.Name = "valid";
-            treeNode10.Text = "Valid";
-            treeNode11.Name = "expired";
-            treeNode11.Text = "Expired";
-            treeNode12.Name = "net_value";
-            treeNode12.Text = "Net Value";
-            treeNode13.Name = "factory_cd";
-            treeNode13.Text = "Factory";
-            treeNode14.Name = "unit_cd";
-            treeNode14.Text = "Unit";
+            treeNode47.Name = "account_cd";
+            treeNode47.Text = "Account Code";
+            treeNode48.Name = "rank_cd";
+            treeNode48.Text = "Rank";
+            treeNode49.Name = "account_location_cd";
+            treeNode49.Text = "Section";
+            treeNode50.Name = "location_cd";
+            treeNode50.Text = "Now Location";
+            treeNode51.Name = "invertory_time_cd";
+            treeNode51.Text = "Inventory Time";
+            treeNode52.Name = "valid";
+            treeNode52.Text = "Valid";
+            treeNode53.Name = "expired";
+            treeNode53.Text = "Expired";
+            treeNode54.Name = "net_value";
+            treeNode54.Text = "Net Value";
+            treeNode55.Name = "factory_cd";
+            treeNode55.Text = "Factory";
+            treeNode56.Name = "unit_cd";
+            treeNode56.Text = "Unit";
             this.trvOther.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode12,
-            treeNode13,
-            treeNode14});
+            treeNode47,
+            treeNode48,
+            treeNode49,
+            treeNode50,
+            treeNode51,
+            treeNode54,
+            treeNode55,
+            treeNode56});
             this.trvOther.Size = new System.Drawing.Size(254, 153);
             this.trvOther.TabIndex = 4;
+            this.trvOther.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvOther_AfterCheck);
             // 
             // labelCommon2
             // 
@@ -236,6 +242,7 @@
             this.txtAssetCode.Name = "txtAssetCode";
             this.txtAssetCode.Size = new System.Drawing.Size(209, 21);
             this.txtAssetCode.TabIndex = 1;
+            this.txtAssetCode.TextChanged += new System.EventHandler(this.txtAssetCode_TextChanged);
             // 
             // tab_depreciation
             // 
@@ -252,28 +259,28 @@
             // 
             this.dgvDeprCalc.AllowUserToAddRows = false;
             this.dgvDeprCalc.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDeprCalc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
+            dataGridViewCellStyle46.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDeprCalc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle46;
             this.dgvDeprCalc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDeprCalc.ControlId = null;
             this.dgvDeprCalc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDeprCalc.Location = new System.Drawing.Point(3, 3);
             this.dgvDeprCalc.Name = "dgvDeprCalc";
             this.dgvDeprCalc.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDeprCalc.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
+            dataGridViewCellStyle47.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDeprCalc.RowHeadersDefaultCellStyle = dataGridViewCellStyle47;
             this.dgvDeprCalc.Size = new System.Drawing.Size(901, 153);
             this.dgvDeprCalc.TabIndex = 0;
             // 
@@ -292,16 +299,16 @@
             // 
             this.dgvAccCounter.AllowUserToAddRows = false;
             this.dgvAccCounter.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dgvAccCounter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAccCounter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dgvAccCounter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
+            dataGridViewCellStyle49.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAccCounter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle49;
             this.dgvAccCounter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccCounter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.aquisition_cost,
@@ -316,79 +323,79 @@
             this.dgvAccCounter.Location = new System.Drawing.Point(3, 3);
             this.dgvAccCounter.Name = "dgvAccCounter";
             this.dgvAccCounter.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAccCounter.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
+            dataGridViewCellStyle57.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle57.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle57.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle57.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle57.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAccCounter.RowHeadersDefaultCellStyle = dataGridViewCellStyle57;
             this.dgvAccCounter.Size = new System.Drawing.Size(901, 153);
             this.dgvAccCounter.TabIndex = 0;
             // 
             // aquisition_cost
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N3";
-            dataGridViewCellStyle5.NullValue = null;
-            this.aquisition_cost.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle50.Format = "N3";
+            dataGridViewCellStyle50.NullValue = null;
+            this.aquisition_cost.DefaultCellStyle = dataGridViewCellStyle50;
             this.aquisition_cost.HeaderText = "Aquisition Cost ($)";
             this.aquisition_cost.Name = "aquisition_cost";
             this.aquisition_cost.ReadOnly = true;
             // 
             // month_depr
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N3";
-            dataGridViewCellStyle6.NullValue = null;
-            this.month_depr.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle51.Format = "N3";
+            dataGridViewCellStyle51.NullValue = null;
+            this.month_depr.DefaultCellStyle = dataGridViewCellStyle51;
             this.month_depr.HeaderText = "Monthly Depreciation ($)";
             this.month_depr.Name = "month_depr";
             this.month_depr.ReadOnly = true;
             // 
             // curr_depr
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N3";
-            dataGridViewCellStyle7.NullValue = null;
-            this.curr_depr.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle52.Format = "N3";
+            dataGridViewCellStyle52.NullValue = null;
+            this.curr_depr.DefaultCellStyle = dataGridViewCellStyle52;
             this.curr_depr.HeaderText = "Current Depreciation ($)";
             this.curr_depr.Name = "curr_depr";
             this.curr_depr.ReadOnly = true;
             // 
             // accum_depr
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N3";
-            dataGridViewCellStyle8.NullValue = null;
-            this.accum_depr.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle53.Format = "N3";
+            dataGridViewCellStyle53.NullValue = null;
+            this.accum_depr.DefaultCellStyle = dataGridViewCellStyle53;
             this.accum_depr.HeaderText = "Accum Depreciation ($)";
             this.accum_depr.Name = "accum_depr";
             this.accum_depr.ReadOnly = true;
             // 
             // net_value
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N3";
-            dataGridViewCellStyle9.NullValue = null;
-            this.net_value.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle54.Format = "N3";
+            dataGridViewCellStyle54.NullValue = null;
+            this.net_value.DefaultCellStyle = dataGridViewCellStyle54;
             this.net_value.HeaderText = "Netbooks ($)";
             this.net_value.Name = "net_value";
             this.net_value.ReadOnly = true;
             // 
             // inventoried
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.inventoried.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.inventoried.DefaultCellStyle = dataGridViewCellStyle55;
             this.inventoried.HeaderText = "Inventoried(Qty)";
             this.inventoried.Name = "inventoried";
             this.inventoried.ReadOnly = true;
             // 
             // total_machine
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.total_machine.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.total_machine.DefaultCellStyle = dataGridViewCellStyle56;
             this.total_machine.HeaderText = "Total Machine(Qty)";
             this.total_machine.Name = "total_machine";
             this.total_machine.ReadOnly = true;
@@ -421,6 +428,7 @@
             this.btnClear.TabIndex = 9;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnClose
             // 
@@ -433,6 +441,7 @@
             this.btnClose.TabIndex = 26;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnExport
             // 
@@ -445,6 +454,7 @@
             this.btnExport.TabIndex = 8;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // pnlButtons2
             // 
@@ -469,6 +479,7 @@
             this.btnRankDepr.TabIndex = 11;
             this.btnRankDepr.Text = "Rank Depr";
             this.btnRankDepr.UseVisualStyleBackColor = false;
+            this.btnRankDepr.Click += new System.EventHandler(this.btnRankDepr_Click);
             // 
             // btnTransferAsset
             // 
@@ -481,6 +492,7 @@
             this.btnTransferAsset.TabIndex = 12;
             this.btnTransferAsset.Text = "Transfer Asset";
             this.btnTransferAsset.UseVisualStyleBackColor = false;
+            this.btnTransferAsset.Click += new System.EventHandler(this.btnTransferAsset_Click);
             // 
             // btnAccDepr
             // 
@@ -493,6 +505,7 @@
             this.btnAccDepr.TabIndex = 10;
             this.btnAccDepr.Text = "Account Depr";
             this.btnAccDepr.UseVisualStyleBackColor = false;
+            this.btnAccDepr.Click += new System.EventHandler(this.btnAccDepr_Click);
             // 
             // btnUpdate
             // 
@@ -506,6 +519,7 @@
             this.btnUpdate.TabIndex = 7;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnAdd
             // 
@@ -518,6 +532,7 @@
             this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnSearch
             // 
@@ -530,50 +545,77 @@
             this.btnSearch.TabIndex = 5;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // dgvAccountData
             // 
             this.dgvAccountData.AllowUserToAddRows = false;
-            this.dgvAccountData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dgvAccountData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAccountData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
+            dataGridViewCellStyle58.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle58.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAccountData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle58;
             this.dgvAccountData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccountData.ControlId = null;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAccountData.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle59.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle59.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle59.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle59.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle59.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAccountData.DefaultCellStyle = dataGridViewCellStyle59;
             this.dgvAccountData.Location = new System.Drawing.Point(0, 343);
             this.dgvAccountData.Name = "dgvAccountData";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAccountData.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle60.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
+            dataGridViewCellStyle60.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle60.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle60.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle60.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle60.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAccountData.RowHeadersDefaultCellStyle = dataGridViewCellStyle60;
             this.dgvAccountData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccountData.Size = new System.Drawing.Size(915, 153);
+            this.dgvAccountData.Size = new System.Drawing.Size(915, 124);
             this.dgvAccountData.TabIndex = 27;
+            this.dgvAccountData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccountData_CellClick);
+            this.dgvAccountData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccountData_CellDoubleClick);
+            // 
+            // sttStrip
+            // 
+            this.sttStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.tsRowCounter});
+            this.sttStrip.Location = new System.Drawing.Point(0, 478);
+            this.sttStrip.Name = "sttStrip";
+            this.sttStrip.Size = new System.Drawing.Size(915, 22);
+            this.sttStrip.TabIndex = 28;
+            this.sttStrip.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(864, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // tsRowCounter
+            // 
+            this.tsRowCounter.Name = "tsRowCounter";
+            this.tsRowCounter.Size = new System.Drawing.Size(36, 17);
+            this.tsRowCounter.Text = "None";
             // 
             // Warehouse_Equipment_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 500);
+            this.Controls.Add(this.sttStrip);
             this.Controls.Add(this.dgvAccountData);
             this.Controls.Add(this.pnlButtons1);
             this.Controls.Add(this.grt_Option);
@@ -584,6 +626,7 @@
             this.Controls.SetChildIndex(this.grt_Option, 0);
             this.Controls.SetChildIndex(this.pnlButtons1, 0);
             this.Controls.SetChildIndex(this.dgvAccountData, 0);
+            this.Controls.SetChildIndex(this.sttStrip, 0);
             this.grt_Option.ResumeLayout(false);
             this.tab_Search.ResumeLayout(false);
             this.tab_Search.PerformLayout();
@@ -594,7 +637,10 @@
             this.pnlButtons1.ResumeLayout(false);
             this.pnlButtons2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccountData)).EndInit();
+            this.sttStrip.ResumeLayout(false);
+            this.sttStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -631,5 +677,8 @@
         private Framework.ButtonCommon btnAccDepr;
         private Framework.ButtonCommon btnClose;
         private Framework.DataGridViewCommon dgvAccountData;
+        private System.Windows.Forms.StatusStrip sttStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel tsRowCounter;
     }
 }

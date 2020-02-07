@@ -72,6 +72,13 @@
             this.dgvDeprCalc = new Com.Nidec.Mes.Framework.DataGridViewCommon();
             this.tab_TotalCost = new System.Windows.Forms.TabPage();
             this.dgvAccCounter = new Com.Nidec.Mes.Framework.DataGridViewCommon();
+            this.aquisition_cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.month_depr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.curr_depr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.accum_depr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.net_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inventoried = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total_machine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlButtons1 = new Com.Nidec.Mes.Framework.PanelCommon();
             this.btnClear = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.btnExport = new Com.Nidec.Mes.Framework.ButtonCommon();
@@ -86,13 +93,6 @@
             this.sttStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRowCounter = new System.Windows.Forms.ToolStripStatusLabel();
-            this.aquisition_cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.month_depr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.curr_depr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.accum_depr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.net_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inventoried = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total_machine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccountData)).BeginInit();
             this.grt_Option.SuspendLayout();
             this.tab_Search.SuspendLayout();
@@ -376,6 +376,72 @@
             this.dgvAccCounter.Size = new System.Drawing.Size(825, 153);
             this.dgvAccCounter.TabIndex = 0;
             // 
+            // aquisition_cost
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N3";
+            dataGridViewCellStyle8.NullValue = null;
+            this.aquisition_cost.DefaultCellStyle = dataGridViewCellStyle8;
+            this.aquisition_cost.HeaderText = "Aquisition Cost ($)";
+            this.aquisition_cost.Name = "aquisition_cost";
+            this.aquisition_cost.ReadOnly = true;
+            // 
+            // month_depr
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N3";
+            dataGridViewCellStyle9.NullValue = null;
+            this.month_depr.DefaultCellStyle = dataGridViewCellStyle9;
+            this.month_depr.HeaderText = "Monthly Depreciation ($)";
+            this.month_depr.Name = "month_depr";
+            this.month_depr.ReadOnly = true;
+            // 
+            // curr_depr
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N3";
+            dataGridViewCellStyle10.NullValue = null;
+            this.curr_depr.DefaultCellStyle = dataGridViewCellStyle10;
+            this.curr_depr.HeaderText = "Current Depreciation ($)";
+            this.curr_depr.Name = "curr_depr";
+            this.curr_depr.ReadOnly = true;
+            // 
+            // accum_depr
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N3";
+            dataGridViewCellStyle11.NullValue = null;
+            this.accum_depr.DefaultCellStyle = dataGridViewCellStyle11;
+            this.accum_depr.HeaderText = "Accum Depreciation ($)";
+            this.accum_depr.Name = "accum_depr";
+            this.accum_depr.ReadOnly = true;
+            // 
+            // net_value
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N3";
+            dataGridViewCellStyle12.NullValue = null;
+            this.net_value.DefaultCellStyle = dataGridViewCellStyle12;
+            this.net_value.HeaderText = "Netbooks ($)";
+            this.net_value.Name = "net_value";
+            this.net_value.ReadOnly = true;
+            // 
+            // inventoried
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.inventoried.DefaultCellStyle = dataGridViewCellStyle13;
+            this.inventoried.HeaderText = "Inventoried(Qty)";
+            this.inventoried.Name = "inventoried";
+            this.inventoried.ReadOnly = true;
+            // 
+            // total_machine
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.total_machine.DefaultCellStyle = dataGridViewCellStyle14;
+            this.total_machine.HeaderText = "Total Machine(Qty)";
+            this.total_machine.Name = "total_machine";
+            this.total_machine.ReadOnly = true;
+            // 
             // pnlButtons1
             // 
             this.pnlButtons1.ControlId = null;
@@ -534,7 +600,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(788, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(757, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // tsRowCounter
@@ -542,72 +608,6 @@
             this.tsRowCounter.Name = "tsRowCounter";
             this.tsRowCounter.Size = new System.Drawing.Size(36, 17);
             this.tsRowCounter.Text = "None";
-            // 
-            // aquisition_cost
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N3";
-            dataGridViewCellStyle8.NullValue = null;
-            this.aquisition_cost.DefaultCellStyle = dataGridViewCellStyle8;
-            this.aquisition_cost.HeaderText = "Aquisition Cost ($)";
-            this.aquisition_cost.Name = "aquisition_cost";
-            this.aquisition_cost.ReadOnly = true;
-            // 
-            // month_depr
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N3";
-            dataGridViewCellStyle9.NullValue = null;
-            this.month_depr.DefaultCellStyle = dataGridViewCellStyle9;
-            this.month_depr.HeaderText = "Monthly Depreciation ($)";
-            this.month_depr.Name = "month_depr";
-            this.month_depr.ReadOnly = true;
-            // 
-            // curr_depr
-            // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N3";
-            dataGridViewCellStyle10.NullValue = null;
-            this.curr_depr.DefaultCellStyle = dataGridViewCellStyle10;
-            this.curr_depr.HeaderText = "Current Depreciation ($)";
-            this.curr_depr.Name = "curr_depr";
-            this.curr_depr.ReadOnly = true;
-            // 
-            // accum_depr
-            // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N3";
-            dataGridViewCellStyle11.NullValue = null;
-            this.accum_depr.DefaultCellStyle = dataGridViewCellStyle11;
-            this.accum_depr.HeaderText = "Accum Depreciation ($)";
-            this.accum_depr.Name = "accum_depr";
-            this.accum_depr.ReadOnly = true;
-            // 
-            // net_value
-            // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N3";
-            dataGridViewCellStyle12.NullValue = null;
-            this.net_value.DefaultCellStyle = dataGridViewCellStyle12;
-            this.net_value.HeaderText = "Netbooks ($)";
-            this.net_value.Name = "net_value";
-            this.net_value.ReadOnly = true;
-            // 
-            // inventoried
-            // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.inventoried.DefaultCellStyle = dataGridViewCellStyle13;
-            this.inventoried.HeaderText = "Inventoried(Qty)";
-            this.inventoried.Name = "inventoried";
-            this.inventoried.ReadOnly = true;
-            // 
-            // total_machine
-            // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.total_machine.DefaultCellStyle = dataGridViewCellStyle14;
-            this.total_machine.HeaderText = "Total Machine(Qty)";
-            this.total_machine.Name = "total_machine";
-            this.total_machine.ReadOnly = true;
             // 
             // AccountManager2019Form
             // 

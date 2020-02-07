@@ -159,11 +159,27 @@
     <Compile Include="Cbm\AccountWhCbm\WareHouseMainCbm\UpdateItemAccountMainCbm.cs" />
     <Compile Include="Cbm\AccountWhCbm\WareHouseMainCbm\UpdateWareHouseMainCbm.cs" />
     <Compile Include="Cbm\AccountWhCbm\WareHouseMainCbm\UpdateWareHouseMainDGVCbm.cs" />
-    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\GetAccDeprFAWHCbm.cs" />
-    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\GetAccountInfoFAWHCbm.cs" />
-    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\GetRankDeprFAWHCbm.cs" />
-    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\SearchAccountFAWHCbm.cs" />
-    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\UpdateAccountInfoFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AccountCodeFAWHCbm\GetAccountCodeFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AccountLocationFAWHCbm\GetAccountLocationFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AccountManagerFAWHCbm\GetAccDeprFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AccountManagerFAWHCbm\GetAccountInfoFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AccountManagerFAWHCbm\GetRankDeprFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AccountManagerFAWHCbm\SearchAccountFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AccountManagerFAWHCbm\UpdateAccountInfoFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AssetManagerFAWHCbm\AddAssetFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AssetManagerFAWHCbm\AssetMasterFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AssetManagerFAWHCbm\DeleteAssetFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AssetManagerFAWHCbm\GetAssetInfoFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AssetManagerFAWHCbm\GetAssetLifeFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AssetManagerFAWHCbm\GetAssetTypeFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\AssetManagerFAWHCbm\UpdateAssetFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\FactoryInfoFAWHCbm\GetFactoryInfoFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\InventoryInfoFAWHCbm\GetInventoryTimeFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\InventoryInfoFAWHCbm\GetInventoryTimeMaxFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\LocationInfoFAWHCbm\GetLocationInfoFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\RankInfoFAWHCbm\GetRankInfoFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\UnitInfoFAWHCbm\GetUnitInfoFAWHCbm.cs" />
+    <Compile Include="Cbm\FA Management System Cbm\Warehouse Equipment Cbm\UserLocationFAWHCbm\GetUserLocationFAWHCbm.cs" />
     <Compile Include="Cbm\GA1ModelCbm\NoiseShow\GetCountNoiseCbm.cs" />
     <Compile Include="Cbm\GA1ModelCbm\NoiseShow\GetCountThurstCbm.cs" />
     <Compile Include="Cbm\GA1ModelCbm\SearchUserNameNoiseCbm.cs" />
@@ -489,6 +505,10 @@
     <Compile Include="Dao\FA Management System Dao\Warehouse Equipment Dao\FactoryInfoFAWHDao\GetFactoryInfoFAWHDao.cs" />
     <Compile Include="Dao\FA Management System Dao\Warehouse Equipment Dao\InventoryInfoFAWHDao\GetInventoryTimeFAWHDao.cs" />
     <Compile Include="Dao\FA Management System Dao\Warehouse Equipment Dao\InventoryInfoFAWHDao\GetInventoryTimeMaxFAWHDao.cs" />
+    <Compile Include="Dao\FA Management System Dao\Warehouse Equipment Dao\LocationInfoFAWHDao\GetLocationInfoFAWHDao.cs" />
+    <Compile Include="Dao\FA Management System Dao\Warehouse Equipment Dao\RankInfoFAWHDao\GetRankInfoFAWHDao.cs" />
+    <Compile Include="Dao\FA Management System Dao\Warehouse Equipment Dao\UnitInfoFAWHDao\GetUnitInfoFAWH.cs" />
+    <Compile Include="Dao\FA Management System Dao\Warehouse Equipment Dao\UserLocationFAWHDao\GetUserLocationFAWHDao.cs" />
     <Compile Include="Dao\GA1ModelDao\CheckDuplicateDao.cs" />
     <Compile Include="Dao\GA1ModelDao\NoiseShow\GetCountNoiseDao.cs" />
     <Compile Include="Dao\GA1ModelDao\NoiseShow\GetCountThurstDao.cs" />
@@ -1541,10 +1561,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="Dao\FA Management System Dao\Warehouse Equipment Dao\LocationInfoFAWHDao\" />
-    <Folder Include="Dao\FA Management System Dao\Warehouse Equipment Dao\RankInfoFAWHDao\" />
-    <Folder Include="Dao\FA Management System Dao\Warehouse Equipment Dao\UnitInfoFAWHDao\" />
-    <Folder Include="Dao\FA Management System Dao\Warehouse Equipment Dao\UserLocationFAWHDao\" />
     <Folder Include="Form\NCVPForm\FA Management System Form\Input Equipment\" />
     <Folder Include="Form\NCVPForm\FA Management System Form\Output Equipment\" />
     <Folder Include="Form\NidecForm2019\LocalMasterForm\NewFolder1\" />
