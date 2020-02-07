@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.panel4 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbtnApproved = new System.Windows.Forms.RadioButton();
+            this.rbtnWaitConfirm = new System.Windows.Forms.RadioButton();
+            this.rbtnConfirmed = new System.Windows.Forms.RadioButton();
+            this.rbtnAllRequest = new System.Windows.Forms.RadioButton();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -44,7 +49,6 @@
             this.txtItemCode = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -52,19 +56,16 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvRequest = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbtnAllRequest = new System.Windows.Forms.RadioButton();
-            this.rbtnConfirmed = new System.Windows.Forms.RadioButton();
-            this.rbtnWaitConfirm = new System.Windows.Forms.RadioButton();
-            this.rbtnApproved = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.groupBox1);
             this.panel4.Controls.Add(this.btnConfirm);
             this.panel4.Controls.Add(this.txtComment);
@@ -86,6 +87,64 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(602, 200);
             this.panel4.TabIndex = 2;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbtnApproved);
+            this.groupBox1.Controls.Add(this.rbtnWaitConfirm);
+            this.groupBox1.Controls.Add(this.rbtnConfirmed);
+            this.groupBox1.Controls.Add(this.rbtnAllRequest);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(460, 10);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(130, 110);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Option";
+            // 
+            // rbtnApproved
+            // 
+            this.rbtnApproved.AutoSize = true;
+            this.rbtnApproved.Location = new System.Drawing.Point(20, 80);
+            this.rbtnApproved.Name = "rbtnApproved";
+            this.rbtnApproved.Size = new System.Drawing.Size(87, 21);
+            this.rbtnApproved.TabIndex = 3;
+            this.rbtnApproved.TabStop = true;
+            this.rbtnApproved.Text = "Approved";
+            this.rbtnApproved.UseVisualStyleBackColor = true;
+            // 
+            // rbtnWaitConfirm
+            // 
+            this.rbtnWaitConfirm.AutoSize = true;
+            this.rbtnWaitConfirm.Location = new System.Drawing.Point(20, 40);
+            this.rbtnWaitConfirm.Name = "rbtnWaitConfirm";
+            this.rbtnWaitConfirm.Size = new System.Drawing.Size(106, 21);
+            this.rbtnWaitConfirm.TabIndex = 2;
+            this.rbtnWaitConfirm.TabStop = true;
+            this.rbtnWaitConfirm.Text = "Wait Confirm";
+            this.rbtnWaitConfirm.UseVisualStyleBackColor = true;
+            // 
+            // rbtnConfirmed
+            // 
+            this.rbtnConfirmed.AutoSize = true;
+            this.rbtnConfirmed.Location = new System.Drawing.Point(20, 60);
+            this.rbtnConfirmed.Name = "rbtnConfirmed";
+            this.rbtnConfirmed.Size = new System.Drawing.Size(90, 21);
+            this.rbtnConfirmed.TabIndex = 1;
+            this.rbtnConfirmed.TabStop = true;
+            this.rbtnConfirmed.Text = "Confirmed";
+            this.rbtnConfirmed.UseVisualStyleBackColor = true;
+            // 
+            // rbtnAllRequest
+            // 
+            this.rbtnAllRequest.AutoSize = true;
+            this.rbtnAllRequest.Location = new System.Drawing.Point(20, 20);
+            this.rbtnAllRequest.Name = "rbtnAllRequest";
+            this.rbtnAllRequest.Size = new System.Drawing.Size(41, 21);
+            this.rbtnAllRequest.TabIndex = 0;
+            this.rbtnAllRequest.TabStop = true;
+            this.rbtnAllRequest.Text = "All";
+            this.rbtnAllRequest.UseVisualStyleBackColor = true;
             // 
             // btnConfirm
             // 
@@ -239,16 +298,6 @@
             this.label2.Text = "Model Code";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Item Code";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.btnClear);
@@ -333,63 +382,15 @@
             this.dgvRequest.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequest_CellDoubleClick);
             this.dgvRequest.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvRequest_CellFormatting);
             // 
-            // groupBox1
+            // label10
             // 
-            this.groupBox1.Controls.Add(this.rbtnApproved);
-            this.groupBox1.Controls.Add(this.rbtnWaitConfirm);
-            this.groupBox1.Controls.Add(this.rbtnConfirmed);
-            this.groupBox1.Controls.Add(this.rbtnAllRequest);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(460, 10);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(130, 110);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Option";
-            // 
-            // rbtnAllRequest
-            // 
-            this.rbtnAllRequest.AutoSize = true;
-            this.rbtnAllRequest.Location = new System.Drawing.Point(20, 20);
-            this.rbtnAllRequest.Name = "rbtnAllRequest";
-            this.rbtnAllRequest.Size = new System.Drawing.Size(41, 21);
-            this.rbtnAllRequest.TabIndex = 0;
-            this.rbtnAllRequest.TabStop = true;
-            this.rbtnAllRequest.Text = "All";
-            this.rbtnAllRequest.UseVisualStyleBackColor = true;
-            // 
-            // rbtnConfirmed
-            // 
-            this.rbtnConfirmed.AutoSize = true;
-            this.rbtnConfirmed.Location = new System.Drawing.Point(20, 60);
-            this.rbtnConfirmed.Name = "rbtnConfirmed";
-            this.rbtnConfirmed.Size = new System.Drawing.Size(90, 21);
-            this.rbtnConfirmed.TabIndex = 1;
-            this.rbtnConfirmed.TabStop = true;
-            this.rbtnConfirmed.Text = "Confirmed";
-            this.rbtnConfirmed.UseVisualStyleBackColor = true;
-            // 
-            // rbtnWaitConfirm
-            // 
-            this.rbtnWaitConfirm.AutoSize = true;
-            this.rbtnWaitConfirm.Location = new System.Drawing.Point(20, 40);
-            this.rbtnWaitConfirm.Name = "rbtnWaitConfirm";
-            this.rbtnWaitConfirm.Size = new System.Drawing.Size(106, 21);
-            this.rbtnWaitConfirm.TabIndex = 2;
-            this.rbtnWaitConfirm.TabStop = true;
-            this.rbtnWaitConfirm.Text = "Wait Confirm";
-            this.rbtnWaitConfirm.UseVisualStyleBackColor = true;
-            // 
-            // rbtnApproved
-            // 
-            this.rbtnApproved.AutoSize = true;
-            this.rbtnApproved.Location = new System.Drawing.Point(20, 80);
-            this.rbtnApproved.Name = "rbtnApproved";
-            this.rbtnApproved.Size = new System.Drawing.Size(87, 21);
-            this.rbtnApproved.TabIndex = 3;
-            this.rbtnApproved.TabStop = true;
-            this.rbtnApproved.Text = "Approved";
-            this.rbtnApproved.UseVisualStyleBackColor = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(10, 10);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(100, 20);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Item Code";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // RequestForm
             // 
@@ -412,10 +413,10 @@
             this.Controls.SetChildIndex(this.dgvRequest, 0);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -423,7 +424,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbDestination;
@@ -451,5 +451,6 @@
         private System.Windows.Forms.RadioButton rbtnWaitConfirm;
         private System.Windows.Forms.RadioButton rbtnConfirmed;
         private System.Windows.Forms.RadioButton rbtnAllRequest;
+        private System.Windows.Forms.Label label10;
     }
 }
