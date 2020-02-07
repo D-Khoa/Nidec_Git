@@ -59,9 +59,9 @@ namespace IPQC
             adapter.UpdateCommand = cmdbuilder.GetUpdateCommand();
             adapter.DeleteCommand = cmdbuilder.GetDeleteCommand();
             ds = new DataSet();
-            adapter.Fill(ds,"buff");
+            adapter.Fill(ds, "buff");
             dt = ds.Tables["buff"];
-            
+
             // ÉfÅ[É^ÉOÉäÉbÉgÉrÉÖÅ[Ç÷ÇcÇsÇ`Ç`ÇsÇ`ÇaÇkÇdÇäiî[
             dgvTester.DataSource = dt;
             dgvTester.ReadOnly = true;
@@ -91,7 +91,7 @@ namespace IPQC
                 dgvTester.Rows.RemoveAt(dgvTester.SelectedRows[0].Index);
                 adapter.Update(dt);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -108,7 +108,7 @@ namespace IPQC
             {
                 MessageBox.Show(ex.Message, "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            finally 
+            finally
             {
                 dgvTester.ReadOnly = true;
                 dgvTester.AllowUserToAddRows = false;
@@ -134,5 +134,16 @@ namespace IPQC
             this.RefreshEvent(this, new EventArgs());
             this.Close();
         }
+
+        private void btnAddModel_Click(object sender, EventArgs e)
+        {
+            LockForm lockfrm = new LockForm();
+            if (lockfrm.ShowDialog() == DialogResult.OK)
+            {
+                FormAddModel fomadd = new FormAddModel();
+                fomadd.ShowDialog();
+            }
+        }
+
     }
 }

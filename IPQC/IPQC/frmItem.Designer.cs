@@ -56,7 +56,7 @@ namespace IPQC
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(200, 31);
+            this.label3.Location = new System.Drawing.Point(281, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 6;
@@ -65,7 +65,7 @@ namespace IPQC
             // txtUser
             // 
             this.txtUser.Enabled = false;
-            this.txtUser.Location = new System.Drawing.Point(250, 28);
+            this.txtUser.Location = new System.Drawing.Point(331, 28);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(130, 20);
             this.txtUser.TabIndex = 1;
@@ -86,7 +86,7 @@ namespace IPQC
             this.cmbModel.FormattingEnabled = true;
             this.cmbModel.Location = new System.Drawing.Point(75, 28);
             this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(84, 21);
+            this.cmbModel.Size = new System.Drawing.Size(160, 21);
             this.cmbModel.TabIndex = 10;
             this.cmbModel.SelectedIndexChanged += new System.EventHandler(this.cmbModel_SelectedIndexChanged);
             // 

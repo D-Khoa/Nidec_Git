@@ -34,14 +34,15 @@ namespace IPQC
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnAddModel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTester)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(31, 22);
+            this.btnAdd.Location = new System.Drawing.Point(31, 24);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(120, 22);
+            this.btnAdd.Size = new System.Drawing.Size(120, 24);
             this.btnAdd.TabIndex = 11;
             this.btnAdd.Text = "Add / Edit";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -52,20 +53,20 @@ namespace IPQC
             this.dgvTester.AllowUserToAddRows = false;
             this.dgvTester.BackgroundColor = System.Drawing.Color.NavajoWhite;
             this.dgvTester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTester.Location = new System.Drawing.Point(12, 65);
+            this.dgvTester.Location = new System.Drawing.Point(12, 70);
             this.dgvTester.Name = "dgvTester";
             this.dgvTester.ReadOnly = true;
             this.dgvTester.RowTemplate.Height = 21;
             this.dgvTester.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvTester.Size = new System.Drawing.Size(1192, 586);
+            this.dgvTester.Size = new System.Drawing.Size(1192, 635);
             this.dgvTester.TabIndex = 12;
             // 
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(327, 22);
+            this.btnSave.Location = new System.Drawing.Point(333, 24);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(120, 22);
+            this.btnSave.Size = new System.Drawing.Size(120, 24);
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -73,9 +74,9 @@ namespace IPQC
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(176, 22);
+            this.btnDelete.Location = new System.Drawing.Point(182, 24);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(120, 22);
+            this.btnDelete.Size = new System.Drawing.Size(120, 24);
             this.btnDelete.TabIndex = 11;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -83,20 +84,31 @@ namespace IPQC
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(479, 22);
+            this.btnClose.Location = new System.Drawing.Point(635, 24);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(120, 22);
+            this.btnClose.Size = new System.Drawing.Size(120, 24);
             this.btnClose.TabIndex = 11;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // btnAddModel
+            // 
+            this.btnAddModel.Location = new System.Drawing.Point(484, 24);
+            this.btnAddModel.Name = "btnAddModel";
+            this.btnAddModel.Size = new System.Drawing.Size(120, 24);
+            this.btnAddModel.TabIndex = 13;
+            this.btnAddModel.Text = "Add New Model";
+            this.btnAddModel.UseVisualStyleBackColor = true;
+            this.btnAddModel.Click += new System.EventHandler(this.btnAddModel_Click);
+            // 
             // frmItemMaster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1216, 663);
+            this.ClientSize = new System.Drawing.Size(1216, 718);
+            this.Controls.Add(this.btnAddModel);
             this.Controls.Add(this.dgvTester);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnClose);
@@ -107,6 +119,7 @@ namespace IPQC
             this.Name = "frmItemMaster";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Measurement Item Edit";
+//            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmItemMaster_FormClosing);
             this.Load += new System.EventHandler(this.Form7_2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTester)).EndInit();
             this.ResumeLayout(false);
@@ -120,6 +133,7 @@ namespace IPQC
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnAddModel;
     }
 }
 
