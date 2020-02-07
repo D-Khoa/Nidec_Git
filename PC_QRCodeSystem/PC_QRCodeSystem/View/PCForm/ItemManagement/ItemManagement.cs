@@ -10,10 +10,9 @@ namespace PC_QRCodeSystem.View
         bool editMode { get; set; }
         pts_item unitCbm { get; set; }
         pts_item ptsItem { get; set; }
+        pts_item locationCbm { get; set; }
         pts_item_type typeCbm { get; set; }
         pts_item_type ptsItemType { get; set; }
-        pts_item_location locationCbm { get; set; }
-        pts_item_location ptsItemLocation { get; set; }
         #endregion
 
         public ItemManagement()
@@ -22,18 +21,14 @@ namespace PC_QRCodeSystem.View
             #region SETUP CONTROLS
             ptsItem = new pts_item();
             unitCbm = new pts_item();
+            locationCbm = new pts_item();
             typeCbm = new pts_item_type();
             ptsItemType = new pts_item_type();
-            locationCbm = new pts_item_location();
-            ptsItemLocation = new pts_item_location();
             editMode = false;
-            btnOK.Visible = false;
-            btnCancel.Visible = false;
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
-            lbUnitCode.Visible = true;
-            cmbUnitCode.Visible = true;
             rbtnItemCode.Checked = true;
+            pnlSubButton.Visible = false;
             #endregion
         }
 
@@ -78,23 +73,12 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void cmbItemLocation_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtCapacity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
-            {
-                //Show name of item location
-                if (!string.IsNullOrEmpty(cmbItemLocation.Text))
-                    txtLocationName.Text = cmbItemLocation.SelectedValue.ToString();
-                else
-                    txtLocationName.Text = "Item Location Name";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true;
         }
 
-        private void txtCapacity_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtStockOnHand_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true;
         }
@@ -129,10 +113,6 @@ namespace PC_QRCodeSystem.View
             {
                 n = ptsItemType.Delete(ptsItemType.type_id);
             }
-            if (rbtnItemLocation.Checked)
-            {
-                n = ptsItemLocation.Delete(ptsItemLocation.item_location_id);
-            }
             ClearFields();
             GetCmbData();
             UpdateGrid(true);
@@ -156,14 +136,14 @@ namespace PC_QRCodeSystem.View
             cmbItemType.DisplayMember = "type_id";
             cmbItemType.ValueMember = "type_name";
             cmbItemType.Text = null;
-            locationCbm.GetListItemLocation(string.Empty);
-            cmbItemLocation.DataSource = locationCbm.listItemLocation;
-            cmbItemLocation.DisplayMember = "item_location_no";
-            cmbItemLocation.ValueMember = "item_location_name";
-            cmbItemLocation.Text = null;
-            cmbUnitCode.DataSource = unitCbm.GetListUnit();
+            unitCbm.GetListUnit();
+            cmbUnitCode.DataSource = unitCbm.listItems;
             cmbUnitCode.DisplayMember = "unit_cd";
             cmbUnitCode.Text = null;
+            locationCbm.GetListLocation();
+            cmbLocation.DataSource = locationCbm.listItems;
+            cmbLocation.DisplayMember = "item_location";
+            cmbLocation.Text = null;
         }
 
         /// <summary>
@@ -178,10 +158,10 @@ namespace PC_QRCodeSystem.View
                 {
                     //Search with item type
                     if (!string.IsNullOrEmpty(cmbItemType.Text))
-                        ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbItemLocation.Text, int.Parse(cmbItemType.Text));
+                        ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbLocation.Text, int.Parse(cmbItemType.Text));
                     else
                         //Search without item type
-                        ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbItemLocation.Text);
+                        ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbLocation.Text);
                 }
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
@@ -192,7 +172,7 @@ namespace PC_QRCodeSystem.View
                 dgvData.Columns["unit_cd"].HeaderText = "Unit";
                 dgvData.Columns["unit_qty"].HeaderText = "Unit Qty";
                 dgvData.Columns["stock_qty"].HeaderText = "Stock Qty";
-                dgvData.Columns["item_location_no"].HeaderText = "Location Number";
+                dgvData.Columns["item_location"].HeaderText = "Item Location";
                 dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
                 dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
             }
@@ -208,19 +188,6 @@ namespace PC_QRCodeSystem.View
                 dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
                 dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
             }
-            //Search and get item locaion list
-            if (rbtnItemLocation.Checked)
-            {
-                if (isSearch)
-                    ptsItemLocation.GetListItemLocation(string.Empty);
-                dgvData.DataSource = null;
-                dgvData.DataSource = ptsItemLocation.listItemLocation;
-                dgvData.Columns["item_location_id"].HeaderText = "Location ID";
-                dgvData.Columns["item_location_no"].HeaderText = "Location Number";
-                dgvData.Columns["item_location_name"].HeaderText = "Location Name";
-                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
-                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
-            }
             dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             isSearch = false;
         }
@@ -230,15 +197,15 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         private void ClearFields()
         {
+            txtItem.Clear();
+            txtCapacity.Clear();
+            txtStockOnHand.Clear();
+            cmbLocation.Text = null;
             cmbUnitCode.Text = null;
             cmbItemType.Text = null;
-            cmbItemLocation.Text = null;
-            txtItem.Text = string.Empty;
             txtItemName.Text = "Item Name";
-            txtCapacity.Text = string.Empty;
             ptsItem.listItems.Clear();
             ptsItemType.listItemType.Clear();
-            ptsItemLocation.listItemLocation.Clear();
         }
 
         /// <summary>
@@ -253,46 +220,37 @@ namespace PC_QRCodeSystem.View
                 txtTypeName.ReadOnly = true;
                 txtItemName.ReadOnly = false;
                 txtCapacity.ReadOnly = false;
-                txtLocationName.ReadOnly = true;
-                if (!edit) txtItemName.Text = string.Empty;
+                txtStockOnHand.ReadOnly = false;
+                if (!edit) txtItemName.Clear();
+                //if (edit) txtStockOnHand.ReadOnly = true;
+                cmbLocation.DropDownStyle = ComboBoxStyle.DropDown;
                 cmbUnitCode.DropDownStyle = ComboBoxStyle.DropDown;
             }
             if (rbtnItemType.Checked)
             {
                 txtItemName.ReadOnly = true;
                 txtTypeName.ReadOnly = false;
-                txtLocationName.ReadOnly = true;
-                if (!edit) txtTypeName.Text = string.Empty;
+                if (!edit) txtTypeName.Clear();
                 cmbItemType.DropDownStyle = ComboBoxStyle.DropDown;
             }
-            if (rbtnItemLocation.Checked)
-            {
-                txtItemName.ReadOnly = true;
-                txtTypeName.ReadOnly = true;
-                txtLocationName.ReadOnly = false;
-                if (!edit) txtLocationName.Text = string.Empty;
-                cmbItemLocation.DropDownStyle = ComboBoxStyle.DropDown;
-            }
-            btnOK.Visible = true;
-            btnCancel.Visible = true;
-            pnlButtons.Enabled = false;
+            pnlButtons.Visible = false;
+            pnlSubButton.Visible = true;
         }
 
         /// <summary>
         /// Lock all name textbox
         /// </summary>
-        private void LockAllNameTextbox()
+        private void LockFields()
         {
-            btnOK.Visible = false;
-            btnCancel.Visible = false;
-            pnlButtons.Enabled = true;
+            pnlButtons.Visible = true;
+            pnlSubButton.Visible = false;
             txtItemName.ReadOnly = true;
             txtTypeName.ReadOnly = true;
             txtCapacity.ReadOnly = true;
-            txtLocationName.ReadOnly = true;
+            txtStockOnHand.ReadOnly = true;
+            cmbLocation.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbUnitCode.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbItemType.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbItemLocation.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -304,44 +262,37 @@ namespace PC_QRCodeSystem.View
                 #region ADD & UPDATE ITEM
                 if (rbtnItemCode.Checked)
                 {
-                    CapacityForm capfrm = new CapacityForm();
-                    capfrm.capacityNumber = ptsItem.stock_qty;
-                    capfrm.StartPosition = FormStartPosition.CenterScreen;
-                    if (capfrm.ShowDialog() == DialogResult.OK)
+                    //Edit mode for update item
+                    if (editMode)
                     {
-                        //Edit mode for update item
-                        if (editMode)
+                        n = ptsItem.Update(new pts_item
                         {
-                            n = ptsItem.Update(new pts_item
-                            {
-                                item_id = ptsItem.item_id,
-                                item_cd = txtItem.Text,
-                                item_name = txtItemName.Text,
-                                type_id = int.Parse(cmbItemType.Text),
-                                unit_cd = cmbUnitCode.Text,
-                                unit_qty = int.Parse(txtCapacity.Text),
-                                stock_qty = capfrm.capacityNumber,
-                                item_location_no = cmbItemLocation.Text,
-                                registration_user_cd = UserData.usercode
-                            });
-                        }
-                        else
-                        {
-                            //CALL FUNCTION ADD NEW ITEM
-                            n = ptsItem.AddItem(new pts_item
-                            {
-                                item_cd = txtItem.Text,
-                                item_name = txtItemName.Text,
-                                type_id = int.Parse(cmbItemType.Text),
-                                unit_cd = cmbUnitCode.Text,
-                                unit_qty = int.Parse(txtCapacity.Text),
-                                stock_qty = 0,
-                                item_location_no = cmbItemLocation.Text,
-                                registration_user_cd = UserData.usercode
-                            });
-                        }
+                            item_id = ptsItem.item_id,
+                            item_cd = txtItem.Text,
+                            item_name = txtItemName.Text,
+                            type_id = int.Parse(cmbItemType.Text),
+                            unit_cd = cmbUnitCode.Text,
+                            unit_qty = double.Parse(txtCapacity.Text),
+                            stock_qty = double.Parse(txtStockOnHand.Text),
+                            item_location = cmbLocation.Text,
+                            registration_user_cd = UserData.usercode
+                        });
                     }
-                    else return;
+                    else
+                    {
+                        //CALL FUNCTION ADD NEW ITEM
+                        n = ptsItem.AddItem(new pts_item
+                        {
+                            item_cd = txtItem.Text,
+                            item_name = txtItemName.Text,
+                            type_id = int.Parse(cmbItemType.Text),
+                            unit_cd = cmbUnitCode.Text,
+                            unit_qty = double.Parse(txtCapacity.Text),
+                            stock_qty = 0,
+                            item_location = cmbLocation.Text,
+                            registration_user_cd = UserData.usercode
+                        });
+                    }
                     unitCbm.GetListUnit();
                 }
                 #endregion
@@ -373,34 +324,6 @@ namespace PC_QRCodeSystem.View
                 }
                 #endregion
 
-                #region ADD & UPDATE ITEM LOCATION
-                if (rbtnItemLocation.Checked)
-                {
-                    //Edit mode for update item
-                    if (editMode)
-                    {
-                        n = ptsItemLocation.Update(new pts_item_location
-                        {
-                            item_location_id = ptsItemLocation.item_location_id,
-                            item_location_no = cmbItemLocation.Text,
-                            item_location_name = txtLocationName.Text,
-                            registration_user_cd = UserData.usercode
-                        });
-                    }
-                    else
-                    {
-                        //CALL FUNCTION ADD NEW ITEM LOCATION
-                        n = ptsItemLocation.AddItemLocation(new pts_item_location
-                        {
-                            item_location_no = cmbItemLocation.Text,
-                            item_location_name = txtLocationName.Text,
-                            registration_user_cd = UserData.usercode
-                        });
-                    }
-                    locationCbm.GetListItemLocation(string.Empty);
-                }
-                #endregion
-
                 ClearFields();
                 GetCmbData();
                 UpdateGrid(true);
@@ -412,12 +335,12 @@ namespace PC_QRCodeSystem.View
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            LockAllNameTextbox();
+            LockFields();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            LockAllNameTextbox();
+            LockFields();
         }
         #endregion
 
@@ -426,54 +349,43 @@ namespace PC_QRCodeSystem.View
         {
             if (rbtnItemCode.Checked)
             {
-                txtItem.Enabled = true;
-                cmbItemType.Enabled = true;
-                cmbItemLocation.Enabled = true;
                 lbUnitCode.Visible = true;
-                txtCapacity.Visible = true;
+                lbCapacity.Visible = true;
+                lbLocation.Visible = true;
+                lbStockInHand.Visible = true;
+
+                txtItem.Enabled = true;
                 cmbUnitCode.Visible = true;
+                cmbLocation.Visible = true;
+                txtCapacity.Visible = true;
+                txtStockOnHand.Visible = true;
+
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
                 txtItemName.BackColor = System.Drawing.Color.Yellow;
-                txtTypeName.BackColor = System.Drawing.Color.Gray;
-                txtLocationName.BackColor = System.Drawing.Color.Gray;
                 rbtnItemCode.BackColor = System.Drawing.Color.Yellow;
-                rbtnItemType.BackColor = System.Drawing.Color.Transparent;
-                rbtnItemLocation.BackColor = System.Drawing.Color.Transparent;
+                txtTypeName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
+                rbtnItemType.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
             }
             if (rbtnItemType.Checked)
             {
-                txtItem.Enabled = false;
-                cmbItemType.Enabled = true;
-                cmbItemLocation.Enabled = false;
                 lbUnitCode.Visible = false;
-                txtCapacity.Visible = false;
+                lbCapacity.Visible = false;
+                lbLocation.Visible = false;
+                lbStockInHand.Visible = false;
+
+                txtItem.Enabled = false;
                 cmbUnitCode.Visible = false;
+                cmbLocation.Visible = false;
+                txtCapacity.Visible = false;
+                txtStockOnHand.Visible = false;
+
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItemType.listItemType;
-                txtItemName.BackColor = System.Drawing.Color.Gray;
                 txtTypeName.BackColor = System.Drawing.Color.Yellow;
-                txtLocationName.BackColor = System.Drawing.Color.Gray;
                 rbtnItemType.BackColor = System.Drawing.Color.Yellow;
-                rbtnItemCode.BackColor = System.Drawing.Color.Transparent;
-                rbtnItemLocation.BackColor = System.Drawing.Color.Transparent;
-            }
-            if (rbtnItemLocation.Checked)
-            {
-                txtItem.Enabled = false;
-                cmbItemType.Enabled = false;
-                cmbItemLocation.Enabled = true;
-                lbUnitCode.Visible = false;
-                txtCapacity.Visible = false;
-                cmbUnitCode.Visible = false;
-                dgvData.DataSource = null;
-                dgvData.DataSource = ptsItemLocation.listItemLocation;
-                txtItemName.BackColor = System.Drawing.Color.Gray;
-                txtTypeName.BackColor = System.Drawing.Color.Gray;
-                txtLocationName.BackColor = System.Drawing.Color.Yellow;
-                rbtnItemLocation.BackColor = System.Drawing.Color.Yellow;
-                rbtnItemCode.BackColor = System.Drawing.Color.Transparent;
-                rbtnItemType.BackColor = System.Drawing.Color.Transparent;
+                txtItemName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
+                rbtnItemCode.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
             }
             UpdateGrid(false);
         }
@@ -485,23 +397,18 @@ namespace PC_QRCodeSystem.View
             {
                 ptsItem = dgvData.Rows[e.RowIndex].DataBoundItem as pts_item;
                 txtItem.Text = ptsItem.item_cd;
-                txtCapacity.Text = ptsItem.unit_qty.ToString();
                 txtItemName.Text = ptsItem.item_name;
+                cmbLocation.Text = ptsItem.item_location;
+                txtCapacity.Text = ptsItem.unit_qty.ToString();
+                txtStockOnHand.Text = ptsItem.stock_qty.ToString();
                 cmbUnitCode.Text = ptsItem.unit_cd;
                 cmbItemType.Text = ptsItem.type_id.ToString();
-                cmbItemLocation.Text = ptsItem.item_location_no;
             }
             //Get data from datagrid to pts item type
             if (rbtnItemType.Checked)
             {
                 ptsItemType = dgvData.Rows[e.RowIndex].DataBoundItem as pts_item_type;
                 cmbItemType.Text = ptsItemType.type_id.ToString();
-            }
-            //Get data from datagrid to pts item location
-            if (rbtnItemLocation.Checked)
-            {
-                ptsItemLocation = dgvData.Rows[e.RowIndex].DataBoundItem as pts_item_location;
-                cmbItemLocation.Text = ptsItemLocation.item_location_no;
             }
             btnUpdate.Enabled = true;
             btnDelete.Enabled = true;

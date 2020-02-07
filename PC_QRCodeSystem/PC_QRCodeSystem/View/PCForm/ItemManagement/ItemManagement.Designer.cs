@@ -40,24 +40,28 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.cmbLocation = new System.Windows.Forms.ComboBox();
+            this.lbLocation = new System.Windows.Forms.Label();
+            this.txtStockOnHand = new System.Windows.Forms.TextBox();
+            this.lbStockInHand = new System.Windows.Forms.Label();
             this.txtCapacity = new System.Windows.Forms.TextBox();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.txtLocationName = new System.Windows.Forms.TextBox();
+            this.lbUnitCode = new System.Windows.Forms.Label();
+            this.lbCapacity = new System.Windows.Forms.Label();
             this.txtTypeName = new System.Windows.Forms.TextBox();
             this.txtItemName = new System.Windows.Forms.TextBox();
-            this.lbUnitCode = new System.Windows.Forms.Label();
             this.cmbUnitCode = new System.Windows.Forms.ComboBox();
-            this.rbtnItemLocation = new System.Windows.Forms.RadioButton();
             this.rbtnItemType = new System.Windows.Forms.RadioButton();
             this.rbtnItemCode = new System.Windows.Forms.RadioButton();
             this.cmbItemType = new System.Windows.Forms.ComboBox();
             this.txtItem = new System.Windows.Forms.TextBox();
-            this.cmbItemLocation = new System.Windows.Forms.ComboBox();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.pnlSubButton = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.pnlSubButton.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -97,13 +101,14 @@
             // 
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
-            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvData.AllowUserToOrderColumns = true;
+            this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(150, 249);
+            this.dgvData.Location = new System.Drawing.Point(150, 299);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvData.Size = new System.Drawing.Size(600, 191);
+            this.dgvData.Size = new System.Drawing.Size(600, 141);
             this.dgvData.TabIndex = 4;
             this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
             // 
@@ -115,7 +120,7 @@
             this.pnlButtons.Controls.Add(this.btnAdd);
             this.pnlButtons.Controls.Add(this.btnClear);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlButtons.Location = new System.Drawing.Point(150, 199);
+            this.pnlButtons.Location = new System.Drawing.Point(150, 249);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(600, 50);
             this.pnlButtons.TabIndex = 20;
@@ -177,69 +182,98 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.cmbLocation);
+            this.panel4.Controls.Add(this.lbLocation);
+            this.panel4.Controls.Add(this.txtStockOnHand);
+            this.panel4.Controls.Add(this.lbStockInHand);
             this.panel4.Controls.Add(this.txtCapacity);
-            this.panel4.Controls.Add(this.btnOK);
-            this.panel4.Controls.Add(this.btnCancel);
-            this.panel4.Controls.Add(this.txtLocationName);
+            this.panel4.Controls.Add(this.lbUnitCode);
+            this.panel4.Controls.Add(this.lbCapacity);
             this.panel4.Controls.Add(this.txtTypeName);
             this.panel4.Controls.Add(this.txtItemName);
-            this.panel4.Controls.Add(this.lbUnitCode);
             this.panel4.Controls.Add(this.cmbUnitCode);
-            this.panel4.Controls.Add(this.rbtnItemLocation);
             this.panel4.Controls.Add(this.rbtnItemType);
             this.panel4.Controls.Add(this.rbtnItemCode);
             this.panel4.Controls.Add(this.cmbItemType);
             this.panel4.Controls.Add(this.txtItem);
-            this.panel4.Controls.Add(this.cmbItemLocation);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(150, 69);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(600, 130);
             this.panel4.TabIndex = 21;
             // 
+            // cmbLocation
+            // 
+            this.cmbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbLocation.FormattingEnabled = true;
+            this.cmbLocation.Location = new System.Drawing.Point(140, 70);
+            this.cmbLocation.Name = "cmbLocation";
+            this.cmbLocation.Size = new System.Drawing.Size(120, 23);
+            this.cmbLocation.TabIndex = 19;
+            // 
+            // lbLocation
+            // 
+            this.lbLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLocation.Location = new System.Drawing.Point(10, 70);
+            this.lbLocation.Name = "lbLocation";
+            this.lbLocation.Size = new System.Drawing.Size(110, 21);
+            this.lbLocation.TabIndex = 18;
+            this.lbLocation.Text = "Location";
+            this.lbLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtStockOnHand
+            // 
+            this.txtStockOnHand.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStockOnHand.Location = new System.Drawing.Point(400, 100);
+            this.txtStockOnHand.Name = "txtStockOnHand";
+            this.txtStockOnHand.ReadOnly = true;
+            this.txtStockOnHand.Size = new System.Drawing.Size(170, 21);
+            this.txtStockOnHand.TabIndex = 15;
+            this.txtStockOnHand.Tag = "stockqty_edit";
+            this.txtStockOnHand.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtStockOnHand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStockOnHand_KeyPress);
+            // 
+            // lbStockInHand
+            // 
+            this.lbStockInHand.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStockInHand.Location = new System.Drawing.Point(270, 100);
+            this.lbStockInHand.Name = "lbStockInHand";
+            this.lbStockInHand.Size = new System.Drawing.Size(110, 21);
+            this.lbStockInHand.TabIndex = 16;
+            this.lbStockInHand.Text = "Stock On Hand";
+            this.lbStockInHand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // txtCapacity
             // 
             this.txtCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCapacity.Location = new System.Drawing.Point(270, 100);
+            this.txtCapacity.Location = new System.Drawing.Point(400, 70);
             this.txtCapacity.Name = "txtCapacity";
             this.txtCapacity.ReadOnly = true;
-            this.txtCapacity.Size = new System.Drawing.Size(120, 21);
+            this.txtCapacity.Size = new System.Drawing.Size(170, 21);
             this.txtCapacity.TabIndex = 11;
             this.txtCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCapacity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCapacity_KeyPress);
             // 
-            // btnOK
+            // lbUnitCode
             // 
-            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(400, 95);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(80, 30);
-            this.btnOK.TabIndex = 12;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.lbUnitCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUnitCode.Location = new System.Drawing.Point(10, 100);
+            this.lbUnitCode.Name = "lbUnitCode";
+            this.lbUnitCode.Size = new System.Drawing.Size(110, 21);
+            this.lbUnitCode.TabIndex = 14;
+            this.lbUnitCode.Text = "Unit";
+            this.lbUnitCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnCancel
+            // lbCapacity
             // 
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(490, 95);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(80, 30);
-            this.btnCancel.TabIndex = 13;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // txtLocationName
-            // 
-            this.txtLocationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLocationName.Location = new System.Drawing.Point(270, 70);
-            this.txtLocationName.Name = "txtLocationName";
-            this.txtLocationName.ReadOnly = true;
-            this.txtLocationName.Size = new System.Drawing.Size(300, 21);
-            this.txtLocationName.TabIndex = 10;
-            this.txtLocationName.Text = "Item Location Name";
-            this.txtLocationName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lbCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCapacity.Location = new System.Drawing.Point(270, 70);
+            this.lbCapacity.Name = "lbCapacity";
+            this.lbCapacity.Size = new System.Drawing.Size(110, 21);
+            this.lbCapacity.TabIndex = 13;
+            this.lbCapacity.Text = "Capacity";
+            this.lbCapacity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtTypeName
             // 
@@ -263,16 +297,6 @@
             this.txtItemName.Text = "Item Name";
             this.txtItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // lbUnitCode
-            // 
-            this.lbUnitCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUnitCode.Location = new System.Drawing.Point(10, 100);
-            this.lbUnitCode.Name = "lbUnitCode";
-            this.lbUnitCode.Size = new System.Drawing.Size(110, 21);
-            this.lbUnitCode.TabIndex = 13;
-            this.lbUnitCode.Text = "Capacity";
-            this.lbUnitCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cmbUnitCode
             // 
             this.cmbUnitCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -282,19 +306,6 @@
             this.cmbUnitCode.Name = "cmbUnitCode";
             this.cmbUnitCode.Size = new System.Drawing.Size(120, 23);
             this.cmbUnitCode.TabIndex = 7;
-            // 
-            // rbtnItemLocation
-            // 
-            this.rbtnItemLocation.AutoSize = true;
-            this.rbtnItemLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnItemLocation.Location = new System.Drawing.Point(10, 70);
-            this.rbtnItemLocation.Name = "rbtnItemLocation";
-            this.rbtnItemLocation.Size = new System.Drawing.Size(110, 21);
-            this.rbtnItemLocation.TabIndex = 3;
-            this.rbtnItemLocation.TabStop = true;
-            this.rbtnItemLocation.Text = "Item Location";
-            this.rbtnItemLocation.UseVisualStyleBackColor = true;
-            this.rbtnItemLocation.CheckedChanged += new System.EventHandler(this.rbtnItemCode_CheckedChanged);
             // 
             // rbtnItemType
             // 
@@ -342,16 +353,37 @@
             this.txtItem.TabIndex = 4;
             this.txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItem_KeyDown);
             // 
-            // cmbItemLocation
+            // btnOK
             // 
-            this.cmbItemLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbItemLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbItemLocation.FormattingEnabled = true;
-            this.cmbItemLocation.Location = new System.Drawing.Point(140, 70);
-            this.cmbItemLocation.Name = "cmbItemLocation";
-            this.cmbItemLocation.Size = new System.Drawing.Size(120, 23);
-            this.cmbItemLocation.TabIndex = 6;
-            this.cmbItemLocation.SelectedIndexChanged += new System.EventHandler(this.cmbItemLocation_SelectedIndexChanged);
+            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOK.Location = new System.Drawing.Point(150, 10);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(80, 30);
+            this.btnOK.TabIndex = 12;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(370, 10);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(80, 30);
+            this.btnCancel.TabIndex = 13;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // pnlSubButton
+            // 
+            this.pnlSubButton.Controls.Add(this.btnOK);
+            this.pnlSubButton.Controls.Add(this.btnCancel);
+            this.pnlSubButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSubButton.Location = new System.Drawing.Point(150, 199);
+            this.pnlSubButton.Name = "pnlSubButton";
+            this.pnlSubButton.Size = new System.Drawing.Size(600, 50);
+            this.pnlSubButton.TabIndex = 22;
             // 
             // ItemManagement
             // 
@@ -360,6 +392,7 @@
             this.ClientSize = new System.Drawing.Size(750, 464);
             this.Controls.Add(this.dgvData);
             this.Controls.Add(this.pnlButtons);
+            this.Controls.Add(this.pnlSubButton);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.statusStrip1);
             this.dept = "";
@@ -373,6 +406,7 @@
             this.Load += new System.EventHandler(this.SubForm_Load);
             this.Controls.SetChildIndex(this.statusStrip1, 0);
             this.Controls.SetChildIndex(this.panel4, 0);
+            this.Controls.SetChildIndex(this.pnlSubButton, 0);
             this.Controls.SetChildIndex(this.pnlButtons, 0);
             this.Controls.SetChildIndex(this.dgvData, 0);
             this.statusStrip1.ResumeLayout(false);
@@ -381,6 +415,7 @@
             this.pnlButtons.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.pnlSubButton.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,18 +435,21 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RadioButton rbtnItemCode;
-        private System.Windows.Forms.RadioButton rbtnItemLocation;
         private System.Windows.Forms.RadioButton rbtnItemType;
         private System.Windows.Forms.ComboBox cmbItemType;
         private System.Windows.Forms.TextBox txtItem;
-        private System.Windows.Forms.ComboBox cmbItemLocation;
         private System.Windows.Forms.ComboBox cmbUnitCode;
-        private System.Windows.Forms.Label lbUnitCode;
-        private System.Windows.Forms.TextBox txtLocationName;
+        private System.Windows.Forms.Label lbCapacity;
         private System.Windows.Forms.TextBox txtTypeName;
         private System.Windows.Forms.TextBox txtItemName;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtCapacity;
+        private System.Windows.Forms.TextBox txtStockOnHand;
+        private System.Windows.Forms.Label lbStockInHand;
+        private System.Windows.Forms.Label lbUnitCode;
+        private System.Windows.Forms.Panel pnlSubButton;
+        private System.Windows.Forms.Label lbLocation;
+        private System.Windows.Forms.ComboBox cmbLocation;
     }
 }

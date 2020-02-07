@@ -61,6 +61,10 @@
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.cmbLine = new System.Windows.Forms.ComboBox();
+            this.txtLCL = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtUCL = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuffer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).BeginInit();
             this.SuspendLayout();
@@ -116,7 +120,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(562, 62);
+            this.label5.Location = new System.Drawing.Point(535, 64);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 17;
@@ -125,15 +129,16 @@
             // txtUsl
             // 
             this.txtUsl.Enabled = false;
-            this.txtUsl.Location = new System.Drawing.Point(608, 59);
+            this.txtUsl.Location = new System.Drawing.Point(573, 59);
             this.txtUsl.Name = "txtUsl";
             this.txtUsl.Size = new System.Drawing.Size(83, 20);
             this.txtUsl.TabIndex = 16;
+            this.txtUsl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(562, 26);
+            this.label6.Location = new System.Drawing.Point(535, 26);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 13);
             this.label6.TabIndex = 17;
@@ -142,10 +147,11 @@
             // txtLsl
             // 
             this.txtLsl.Enabled = false;
-            this.txtLsl.Location = new System.Drawing.Point(608, 23);
+            this.txtLsl.Location = new System.Drawing.Point(573, 23);
             this.txtLsl.Name = "txtLsl";
             this.txtLsl.Size = new System.Drawing.Size(83, 20);
             this.txtLsl.TabIndex = 16;
+            this.txtLsl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dtpLotTo
             // 
@@ -178,7 +184,7 @@
             // txtUser
             // 
             this.txtUser.Enabled = false;
-            this.txtUser.Location = new System.Drawing.Point(792, 23);
+            this.txtUser.Location = new System.Drawing.Point(829, 23);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(65, 20);
             this.txtUser.TabIndex = 27;
@@ -195,7 +201,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(721, 26);
+            this.label3.Location = new System.Drawing.Point(788, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 29;
@@ -366,12 +372,54 @@
             this.cmbLine.TabIndex = 48;
             this.cmbLine.SelectedIndexChanged += new System.EventHandler(this.cmbLine_SelectedIndexChanged);
             // 
+            // txtLCL
+            // 
+            this.txtLCL.Enabled = false;
+            this.txtLCL.Location = new System.Drawing.Point(700, 23);
+            this.txtLCL.Name = "txtLCL";
+            this.txtLCL.Size = new System.Drawing.Size(83, 20);
+            this.txtLCL.TabIndex = 49;
+            this.txtLCL.Text = "0";
+            this.txtLCL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(662, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 13);
+            this.label7.TabIndex = 51;
+            this.label7.Text = "LCL:";
+            // 
+            // txtUCL
+            // 
+            this.txtUCL.Enabled = false;
+            this.txtUCL.Location = new System.Drawing.Point(700, 60);
+            this.txtUCL.Name = "txtUCL";
+            this.txtUCL.Size = new System.Drawing.Size(83, 20);
+            this.txtUCL.TabIndex = 50;
+            this.txtUCL.Text = "0";
+            this.txtUCL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(662, 62);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(31, 13);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "UCL:";
+            // 
             // frmManual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(922, 743);
+            this.Controls.Add(this.txtLCL);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtUCL);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.cmbLine);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.label14);
@@ -451,6 +499,10 @@
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cmbLine;
+        private System.Windows.Forms.TextBox txtLCL;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtUCL;
+        private System.Windows.Forms.Label label15;
     }
 }
 

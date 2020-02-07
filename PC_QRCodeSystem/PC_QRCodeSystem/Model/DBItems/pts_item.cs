@@ -18,7 +18,7 @@ namespace PC_QRCodeSystem.Model
         public string unit_cd { get; set; }
         public double unit_qty { get; set; }
         public double stock_qty { get; set; }
-        public string item_location_no { get; set; }
+        public string item_location { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public BindingList<pts_item> listItems { get; set; }
@@ -58,7 +58,7 @@ namespace PC_QRCodeSystem.Model
                 unit_cd = reader["unit_cd"].ToString(),
                 unit_qty = (double)reader["unit_qty"],
                 stock_qty = (double)reader["stock_qty"],
-                item_location_no = reader["item_location_no"].ToString(),
+                item_location = reader["item_location"].ToString(),
                 registration_date_time = (DateTime)reader["registration_date_time"],
                 registration_user_cd = reader["registration_user_cd"].ToString()
             };
@@ -100,7 +100,7 @@ namespace PC_QRCodeSystem.Model
                     unit_cd = reader["unit_cd"].ToString(),
                     unit_qty = (double)reader["unit_qty"],
                     stock_qty = (double)reader["stock_qty"],
-                    item_location_no = reader["item_location_no"].ToString(),
+                    item_location = reader["item_location"].ToString(),
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString()
                 };
@@ -137,7 +137,7 @@ namespace PC_QRCodeSystem.Model
             if (!string.IsNullOrEmpty(unit_code))
                 query += "and unit_cd = '" + unit_code + "' ";
             if (!string.IsNullOrEmpty(location_code))
-                query += "and item_location_no='" + location_code + "' ";
+                query += "and item_location ='" + location_code + "' ";
             query += "and type_id = '" + typeID + "' ";
             query += "order by item_id";
             //Execute reader for read database
@@ -155,7 +155,7 @@ namespace PC_QRCodeSystem.Model
                     unit_cd = reader["unit_cd"].ToString(),
                     unit_qty = (double)reader["unit_qty"],
                     stock_qty = (double)reader["stock_qty"],
-                    item_location_no = reader["item_location_no"].ToString(),
+                    item_location = reader["item_location"].ToString(),
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString()
                 };
@@ -188,7 +188,7 @@ namespace PC_QRCodeSystem.Model
             if (!string.IsNullOrEmpty(unit_code))
                 query += "and unit_cd = '" + unit_code + "' ";
             if (!string.IsNullOrEmpty(location_code))
-                query += "and item_location_no='" + location_code + "' ";
+                query += "and item_location='" + location_code + "' ";
             query += "order by item_id";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
@@ -205,7 +205,7 @@ namespace PC_QRCodeSystem.Model
                     unit_cd = reader["unit_cd"].ToString(),
                     unit_qty = (double)reader["unit_qty"],
                     stock_qty = (double)reader["stock_qty"],
-                    item_location_no = reader["item_location_no"].ToString(),
+                    item_location = reader["item_location"].ToString(),
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString()
                 };
@@ -221,7 +221,7 @@ namespace PC_QRCodeSystem.Model
         /// Get all unit code
         /// </summary>
         /// <returns></returns>
-        public BindingList<pts_item> GetListUnit()
+        public void GetListUnit()
         {
             try
             {
@@ -232,8 +232,7 @@ namespace PC_QRCodeSystem.Model
                 //Open SQL connection
                 SQL.Open();
                 //SQL query string
-                query = "select distinct unit_cd from pts_item where 1=1 ";
-                query += "order by unit_cd";
+                query = "select distinct unit_cd from pts_item order by unit_cd";
                 //Execute reader for read database
                 IDataReader reader = SQL.Command(query).ExecuteReader();
                 query = string.Empty;
@@ -249,7 +248,43 @@ namespace PC_QRCodeSystem.Model
                 reader.Close();
                 //Close SQL connection
                 SQL.Close();
-                return listItems;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get all item location
+        /// </summary>
+        public void GetListLocation()
+        {
+            try
+            {
+                //SQL library
+                PSQL SQL = new PSQL();
+                string query = string.Empty;
+                listItems = new BindingList<pts_item>();
+                //Open SQL connection
+                SQL.Open();
+                //SQL query string
+                query = "select distinct item_location from pts_item order by item_location";
+                //Execute reader for read database
+                IDataReader reader = SQL.Command(query).ExecuteReader();
+                query = string.Empty;
+                while (reader.Read())
+                {
+                    //Get an item
+                    pts_item outItem = new pts_item
+                    {
+                        item_location = reader["item_location"].ToString(),
+                    };
+                    listItems.Add(outItem);
+                }
+                reader.Close();
+                //Close SQL connection
+                SQL.Close();
             }
             catch (Exception ex)
             {
@@ -270,9 +305,9 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "INSERT INTO pts_item(type_id, item_cd, item_name, unit_cd, unit_qty, stock_qty, item_location_no, registration_user_cd)";
+            query = "INSERT INTO pts_item(type_id, item_cd, item_name, unit_cd, unit_qty, stock_qty, item_location, registration_user_cd)";
             query += "VALUES ('" + inItem.type_id + "','" + inItem.item_cd + "','" + inItem.item_name + "','" + inItem.unit_cd + "','";
-            query += inItem.unit_qty + "','" + inItem.stock_qty + "','" + inItem.item_location_no + "','";
+            query += inItem.unit_qty + "','" + inItem.stock_qty + "','" + inItem.item_location + "','";
             query += inItem.registration_user_cd + "')";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
@@ -295,7 +330,7 @@ namespace PC_QRCodeSystem.Model
             //SQL query string
             query = "UPDATE pts_item SET type_id='" + inItem.type_id + "', item_cd='" + inItem.item_cd + "', item_name='" + inItem.item_name;
             query += "', unit_cd='" + inItem.unit_cd + "', unit_qty='" + inItem.unit_qty + "', stock_qty ='" + inItem.stock_qty;
-            query += "', item_location_no ='" + inItem.item_location_no + "', registration_user_cd ='" + inItem.registration_user_cd;
+            query += "', item_location ='" + inItem.item_location + "', registration_user_cd ='" + inItem.registration_user_cd;
             query += "', registration_date_time = now() where item_id ='" + inItem.item_id + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();

@@ -79,22 +79,22 @@ namespace IPQC
             // ＤＡＴＥＴＩＭＥＰＩＣＫＥＲの分以下を下げる
             dtpRounddownHour(dtpLotInput);
 
-            
+
 
             // 各種処理用のテーブルを生成してデータを読み込む
             dtBuffer = new DataTable();
             defineBufferAndHistoryTable(ref dtBuffer);
-            dtHistory = new DataTable(); 
+            dtHistory = new DataTable();
             defineBufferAndHistoryTable(ref dtHistory);
             readDtHistory(ref dtHistory);
             dtUpLowIns = new DataTable();
             setLimitSetAndCommand(ref dtUpLowIns);
 
-            
+
             // グリットビューの更新
             updateDataGripViews(dtBuffer, dtHistory, ref dgvBuffer, ref dgvHistory);
 
-            
+
 
             // グリットビュー右端にボタンを追加（初回のみ）
             addButtonsToDataGridView(dgvHistory);
@@ -237,6 +237,25 @@ namespace IPQC
             dgv2.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             DisableSortMode(dgvHistory);
 
+            //Calc UCL, LCL
+            if (dgv2.Rows.Count > 0)
+            {
+                double avg_x = 0;
+                double avg_r = 0;
+                double UCL = 0;
+                double LCL = 0;
+                for (int i = 0; i < dgv2.Rows.Count; i++)
+                {
+                    avg_x += (double)dgv2.Rows[i].Cells["x"].Value;
+                    avg_r += (double)dgv2.Rows[i].Cells["r"].Value;
+                }
+                avg_x = avg_x / dgv2.Rows.Count;
+                avg_r = avg_r / dgv2.Rows.Count;
+                UCL = avg_x + 0.577 * avg_r;
+                LCL = avg_x - 0.577 * avg_r;
+                txtUCL.Text = UCL.ToString("00.###");
+                txtLCL.Text = LCL.ToString("00.###");
+            }
 
             // スペック外のセルをマーキングする
             colorHistoryViewBySpec(dtHistory, ref dgvHistory);
@@ -247,7 +266,7 @@ namespace IPQC
         }
 
         // 検索ボタン押下時、データを読み込み、ＤＡＴＡＧＲＩＤＶＩＥＷを更新する
-       
+
 
         // サブサブプロシージャ：グリットビュー右端にボタンを追加
         private void addButtonsToDataGridView(DataGridView dgv)
@@ -441,7 +460,12 @@ namespace IPQC
                     double m = 0;
                     bool b = double.TryParse(dt.Rows[i][j].ToString(), out m);
                     if (m >= low && m <= upp)
-                        dgv[j, i].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
+                    {
+                        if (m > double.Parse(txtUCL.Text) || m < double.Parse(txtLCL.Text))
+                            dgv[j, i].Style.BackColor = Color.Yellow;
+                        else
+                            dgv[j, i].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
+                    }
                     else
                     {
                         if (dgv[j, i].Value.ToString() != "")
@@ -485,7 +509,12 @@ namespace IPQC
                     dgv[e.ColumnIndex, 4].Value = d5;
 
                     if (d5 >= low && d5 <= upp)
-                        dgv[e.ColumnIndex, 4].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
+                    {
+                        if (d5 > double.Parse(txtUCL.Text) || d5 < double.Parse(txtLCL.Text))
+                            dgv[e.ColumnIndex, 4].Style.BackColor = Color.Yellow;
+                        else
+                            dgv[e.ColumnIndex, 4].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
+                    }
                     else
                         dgv[e.ColumnIndex, 4].Style.BackColor = Color.Red;
                 }
@@ -503,7 +532,11 @@ namespace IPQC
                     dgv[e.ColumnIndex, 2].Value = d3;
 
                     if (d3 >= low && d3 <= upp)
+                    {
+                        if (d3 > double.Parse(txtUCL.Text) || d3 < double.Parse(txtLCL.Text))
+                            dgv[e.ColumnIndex, 2].Style.BackColor = Color.Yellow;
                         dgv[e.ColumnIndex, 2].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
+                    }
                     else
                         dgv[e.ColumnIndex, 2].Style.BackColor = Color.Red;
                 }
@@ -514,12 +547,17 @@ namespace IPQC
                 double.TryParse(dgv[e.ColumnIndex, e.RowIndex].Value.ToString(), out d);
 
                 if (d >= low && d <= upp)
-                    dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
+                {
+                    if (d > double.Parse(txtUCL.Text) || d < double.Parse(txtLCL.Text))
+                        dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Yellow;
+                    else
+                        dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
+                }
                 else
                     dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Red;
             }
         }
-            
+
 
         // 測定値の列のみ編集可能とする
         private void dgvBuffer_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -619,8 +657,8 @@ namespace IPQC
         //        string line = cmbLine.Text;
 
         //        TfSql
-                
-                
+
+
         //        Tfc = new TfSqlPqm();
         //        Tfc.sqlMultipleInsertMeasurementToPqmTable(model, process, inspect, lot, inspectdate, line, dt, upp, low);
         //    }); 
@@ -655,11 +693,11 @@ namespace IPQC
                 // バックグラウンドでＰＱＭテーブル内の削除
                 DataTable dtTemp = new DataTable();
                 dtTemp = dtBuffer.Copy();
-               // deleteFromPqmTable(dtTemp);
+                // deleteFromPqmTable(dtTemp);
 
                 // 新規登録用バッファーテーブル、バッファーグリットビューを初期化する
                 dtBuffer.Clear();
-                
+
                 // 削除後テーブルの再読み込み
                 readDtHistory(ref dtHistory);
 

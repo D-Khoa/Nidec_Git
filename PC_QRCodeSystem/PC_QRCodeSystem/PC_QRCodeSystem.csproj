@@ -83,7 +83,6 @@
     <Compile Include="Model\DBItems\m_mes_user.cs" />
     <Compile Include="Model\DBItems\m_mes_user_role.cs" />
     <Compile Include="Model\DBItems\m_user_position.cs" />
-    <Compile Include="Model\DBItems\pts_item_location.cs" />
     <Compile Include="Model\PrintItem.cs" />
     <Compile Include="View\Common\ChangePasswordForm.cs">
       <SubType>Form</SubType>
@@ -154,12 +153,6 @@
     </Compile>
     <Compile Include="View\PCForm\PCForm.Designer.cs">
       <DependentUpon>PCForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\PCForm\ItemManagement\CapacityForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PCForm\ItemManagement\CapacityForm.Designer.cs">
-      <DependentUpon>CapacityForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PCForm\ItemManagement\ItemManagement.cs">
       <SubType>Form</SubType>
@@ -236,9 +229,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\PCForm.resx">
       <DependentUpon>PCForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\ItemManagement\CapacityForm.resx">
-      <DependentUpon>CapacityForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\ItemManagement\ItemManagement.resx">
       <DependentUpon>ItemManagement.cs</DependentUpon>
