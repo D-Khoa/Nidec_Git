@@ -15,6 +15,7 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareHouse
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.DetailPositionForm;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Units;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.InventoryForm;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_System;
 
 
 namespace Com.Nidec.Mes.VCVP
