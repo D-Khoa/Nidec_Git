@@ -9,6 +9,7 @@ using System.Data.OleDb;
 using System.Security.Permissions;
 using Npgsql;
 using System.Net;
+using System.IO;
 
 namespace IPQC
 {
@@ -63,6 +64,19 @@ namespace IPQC
                 DialogResult res = MessageBox.Show("User is logged in " + _ip + "," + System.Environment.NewLine +
                                     "Do you want to log out and log in again ?", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 if (res == DialogResult.OK) Application.Exit();
+            }
+            //New option
+            try
+            {
+                if (!Directory.Exists(@"D:\Database IPQC\"))
+                    Directory.CreateDirectory(@"D:\Database IPQC\");
+                if (File.Exists(@"D:\Database IPQC\Template.xlsx"))
+                    File.Delete(@"D:\Database IPQC\Template.xlsx");
+                File.Copy(@"\\192.168.145.7\checksheet\Template.xlsx", @"D:\Database IPQC\Template.xlsx");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public string _ip;
@@ -128,8 +142,8 @@ namespace IPQC
             dgv.Columns["inspect"].Width = 100;
             dgv.Columns["description"].Width = 400;
             dgv.Columns["instrument"].Width = 80;
-         }
-        
+        }
+
         // サブサブプロシージャ：グリットビュー右端にボタンを追加
         //private void addButtonsToDataGridView(DataGridView dgv)
         //{
@@ -282,7 +296,7 @@ namespace IPQC
                 MessageBox.Show("Model or line is empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
         }
         //Form1を閉じる際、非表示になっている親フォームForm5を閉じる
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)

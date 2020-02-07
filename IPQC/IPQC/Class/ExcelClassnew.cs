@@ -104,7 +104,6 @@ namespace IPQC
                 #region Sheet 1
                 //Add data in Sheet 1
                 xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1); //add data sheet1
-
                 xlWorkSheet.Cells[7, 18] = line; //Line
                 xlWorkSheet.Cells[4, 3] = model; //Model
                 xlWorkSheet.Cells[7, 21] = user; //User
@@ -140,7 +139,7 @@ namespace IPQC
 
                     //repair
                     DataGridViewCell cell2 = dgv[4, i];
-                    xlWorkSheet.Cells[62, i + 3] = cell2.Value;
+                    xlWorkSheet.Cells[58, i + 3] = cell2.Value;
                 }
 
                 #endregion
