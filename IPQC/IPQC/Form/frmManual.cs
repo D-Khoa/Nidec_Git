@@ -26,11 +26,13 @@ namespace IPQC
         int rowSet = 1;
         string instrument;
         string _ip;
+        bool checkCL;
 
         // コンストラクタ
         public frmManual()
         {
             InitializeComponent();
+            checkCL = false;
         }
 
         // ロード時の処理
@@ -461,7 +463,7 @@ namespace IPQC
                     bool b = double.TryParse(dt.Rows[i][j].ToString(), out m);
                     if (m >= low && m <= upp)
                     {
-                        if (m > double.Parse(txtUCL.Text) || m < double.Parse(txtLCL.Text))
+                        if ((m > double.Parse(txtUCL.Text) || m < double.Parse(txtLCL.Text)) && checkCL)
                             dgv[j, i].Style.BackColor = Color.Yellow;
                         else
                             dgv[j, i].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
@@ -510,7 +512,7 @@ namespace IPQC
 
                     if (d5 >= low && d5 <= upp)
                     {
-                        if (d5 > double.Parse(txtUCL.Text) || d5 < double.Parse(txtLCL.Text))
+                        if ((d5 > double.Parse(txtUCL.Text) || d5 < double.Parse(txtLCL.Text)) && checkCL)
                             dgv[e.ColumnIndex, 4].Style.BackColor = Color.Yellow;
                         else
                             dgv[e.ColumnIndex, 4].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
@@ -533,7 +535,7 @@ namespace IPQC
 
                     if (d3 >= low && d3 <= upp)
                     {
-                        if (d3 > double.Parse(txtUCL.Text) || d3 < double.Parse(txtLCL.Text))
+                        if ((d3 > double.Parse(txtUCL.Text) || d3 < double.Parse(txtLCL.Text) && checkCL) && checkCL)
                             dgv[e.ColumnIndex, 2].Style.BackColor = Color.Yellow;
                         dgv[e.ColumnIndex, 2].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
                     }
@@ -548,7 +550,7 @@ namespace IPQC
 
                 if (d >= low && d <= upp)
                 {
-                    if (d > double.Parse(txtUCL.Text) || d < double.Parse(txtLCL.Text))
+                    if ((d > double.Parse(txtUCL.Text) || d < double.Parse(txtLCL.Text)) && checkCL)
                         dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Yellow;
                     else
                         dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromKnownColor(KnownColor.Window);
@@ -807,6 +809,12 @@ namespace IPQC
                 btnMeasure.Enabled = false;
             }
             else btnMeasure.Enabled = true;
+        }
+
+        private void cbCheckCL_CheckedChanged(object sender, EventArgs e)
+        {
+            checkCL = cbCheckCL.Checked;
+            updateDataGripViews(dtBuffer, dtHistory, ref dgvBuffer, ref dgvHistory);
         }
     }
 }
