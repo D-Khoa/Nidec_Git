@@ -164,7 +164,7 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "INSERT INTO pts_request_log(item_cd, model_cd, destination_cd, use_date, request_date, request_qty, ";
-            query += "request_usercd, m_comfirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment) ";
+            query += "request_usercd, m_confirm, gm_confirm, available_qty, approve_usercd, pc_m_confirm, comment) ";
             query += "VALUES('" + inItem.item_cd + "','" + inItem.model_cd + "','" + inItem.destination_cd + "','" + inItem.use_date;
             query += "','" + inItem.request_date + "','" + inItem.request_qty + "','" + inItem.request_usercd + "','" + inItem.m_confirm;
             query += "','" + inItem.gm_confirm + "','" + inItem.available_qty + "','" + inItem.approve_usercd + "','" + inItem.pc_m_cofirm;
