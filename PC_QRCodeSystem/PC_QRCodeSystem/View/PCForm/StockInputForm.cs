@@ -104,7 +104,7 @@ namespace PC_QRCodeSystem.View
                     {
                         continue;
                     }
-                    unit = itemUnit.unit_qty;
+                    unit = itemUnit.lot_size;
                     if (unit == 0) unit = (double)dr.Cells["Delivery_Qty"].Value;
                     qty = (int)((double)dr.Cells["Delivery_Qty"].Value / unit);
                     printItem.ListPrintItem.Add(new PrintItem
@@ -215,6 +215,12 @@ namespace PC_QRCodeSystem.View
         {
             tc_Main.SelectedTab = tab_Setting;
         }
+
+        private void btnMainClear_Click(object sender, EventArgs e)
+        {
+            txtCapaciy.Clear();
+            dgvPreInput.DataSource = null;
+        }
         #endregion
 
         #region SETTING TAB
@@ -291,7 +297,7 @@ namespace PC_QRCodeSystem.View
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                 }
-                if (PrintItems(listPrintItem))
+                if (PrintItems(listPrintItem, false))
                     MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -319,7 +325,35 @@ namespace PC_QRCodeSystem.View
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                 }
-                if (PrintItems(listPrintItem))
+                if (PrintItems(listPrintItem, false))
+                    MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnManualPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckPrinterIsOffline(cmbPrinter.Text))
+                {
+                    MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                listPrintItem.Clear();
+                if (dgvPacking.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please choose item first!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    return;
+                }
+                foreach (DataGridViewRow dr in dgvPacking.SelectedRows)
+                {
+                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                }
+                if (PrintItems(listPrintItem, true))
                     MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -357,17 +391,27 @@ namespace PC_QRCodeSystem.View
         /// Print pc stock items
         /// </summary>
         /// <param name="Items"></param>
+        /// <param name="printOneCoppy">true: print 1 label</param>
         /// <returns></returns>
-        public bool PrintItems(List<PrintItem> Items)
+        public bool PrintItems(List<PrintItem> Items, bool printOneCoppy)
         {
             TfPrint.printerName = printername;
             for (int i = 0; i < Items.Count; i++)
             {
-                for (int j = 0; j < Items[i].Label_Qty; j++)
+                if (printOneCoppy)
                 {
                     TfPrint.printBarCodeNew(Items[i].Item_Number, Items[i].Item_Name, Items[i].SupplierName, Items[i].Invoice,
-                        Items[i].Delivery_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), Items[i].SupplierCD,
-                        Items[i].PONo, Items[i].OrderNo);
+                         Items[i].Delivery_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), Items[i].SupplierCD,
+                         Items[i].PONo, Items[i].OrderNo);
+                }
+                else
+                {
+                    for (int j = 0; j < Items[i].Label_Qty; j++)
+                    {
+                        TfPrint.printBarCodeNew(Items[i].Item_Number, Items[i].Item_Name, Items[i].SupplierName, Items[i].Invoice,
+                            Items[i].Delivery_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), Items[i].SupplierCD,
+                            Items[i].PONo, Items[i].OrderNo);
+                    }
                 }
             }
             return true;
@@ -391,6 +435,7 @@ namespace PC_QRCodeSystem.View
             dgvInspection.Columns["packing_qty"].HeaderText = "Packing Qty";
             dgvInspection.Columns["registration_user_cd"].HeaderText = "Reg User";
             dgvInspection.Columns["registration_date_time"].HeaderText = "Reg Date";
+            tsLabelNumber.Text = dgvInspection.Rows.Count.ToString();
         }
 
         private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
@@ -401,8 +446,8 @@ namespace PC_QRCodeSystem.View
                 {
                     int temp = 0;
                     string[] barcode = txtBarcode.Text.Split(';');
-                    txtSupplierCD.Text = barcode[2];
-                    txtSupplierName.Text = barcode[3];
+                    txtSupplierCD.Text = barcode[6];
+                    txtSupplierName.Text = barcode[2];
                     foreach (pts_stock item in listStockItem)
                     {
                         if (item.po_no == barcode[7])
@@ -415,15 +460,15 @@ namespace PC_QRCodeSystem.View
                     listStockItem.Add(new pts_stock
                     {
                         item_cd = barcode[0],
-                        supplier_cd = barcode[2],
-                        invoice = barcode[4],
-                        stockin_date = DateTime.Parse(barcode[5]),
-                        stockin_qty = double.Parse(barcode[6]),
+                        supplier_cd = barcode[6],
+                        invoice = barcode[3],
+                        stockin_date = DateTime.Parse(barcode[4]),
+                        stockin_qty = double.Parse(barcode[5]),
                         stockin_user_cd = UserData.usercode,
                         po_no = barcode[7],
                         order_no = barcode[8],
                         packing_cd = barcode[7] + "-" + n.ToString("00"),
-                        packing_qty = double.Parse(barcode[6]),
+                        packing_qty = double.Parse(barcode[5]),
                         registration_user_cd = UserData.usercode,
                     });
                     UpdateInspectionGrid();
@@ -472,11 +517,20 @@ namespace PC_QRCodeSystem.View
                 {
                     //If item already exists, skip it and set color it to red.
                     string errorNo = ex.Message.Split(':')[0];
-                    if (errorNo == "23505")
-                        MessageBox.Show("This package already exists." + Environment.NewLine + "Please check and try again!",
-                            "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    switch (errorNo)
+                    {
+                        case "23505":
+                            MessageBox.Show("This package already exists." + Environment.NewLine + "Please check and try again!",
+                                "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        case "23503":
+                            MessageBox.Show("This Item Number is not exist in database!" + Environment.NewLine
+                                + "Please check and try again!", "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        default:
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                    }
                     dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                     continue;
                 }
@@ -498,6 +552,14 @@ namespace PC_QRCodeSystem.View
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnInspectionClear_Click(object sender, EventArgs e)
+        {
+            txtBarcode.Clear();
+            txtSupplierCD.Clear();
+            txtSupplierName.Clear();
+            dgvInspection.DataSource = null;
         }
         #endregion
     }

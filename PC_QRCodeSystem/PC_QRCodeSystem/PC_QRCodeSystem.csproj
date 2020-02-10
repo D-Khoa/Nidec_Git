@@ -83,7 +83,7 @@
     <Compile Include="Model\DBItems\m_mes_user.cs" />
     <Compile Include="Model\DBItems\m_mes_user_role.cs" />
     <Compile Include="Model\DBItems\m_user_position.cs" />
-    <Compile Include="Model\PrintItem.cs" />
+    <Compile Include="Model\Temp Items\PrintItem.cs" />
     <Compile Include="View\Common\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,7 +103,7 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\DBItems\m_department.cs" />
-    <Compile Include="Model\Old Items\PCStockItem.cs" />
+    <Compile Include="Model\Temp Items\PCStockItem.cs" />
     <Compile Include="Model\DBItems\pts_destination.cs" />
     <Compile Include="Model\DBItems\pts_issue_code.cs" />
     <Compile Include="Model\DBItems\pts_item.cs" />
@@ -123,11 +123,11 @@
     <Compile Include="Model\Class\GetData.cs" />
     <Compile Include="Model\Class\LKBPRINT.cs" />
     <Compile Include="Model\Class\PSQL.cs" />
-    <Compile Include="Model\Old Items\PremacIn.cs" />
-    <Compile Include="Model\Old Items\StockInItem.cs" />
+    <Compile Include="Model\Temp Items\PremacIn.cs" />
+    <Compile Include="Model\Temp Items\StockInItem.cs" />
     <Compile Include="Model\Class\TfPrint.cs" />
-    <Compile Include="Model\Old Items\UnitItem.cs" />
-    <Compile Include="Model\Old Items\UserData.cs" />
+    <Compile Include="Model\Temp Items\UnitItem.cs" />
+    <Compile Include="Model\Temp Items\UserData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Common\UserPosition.cs">

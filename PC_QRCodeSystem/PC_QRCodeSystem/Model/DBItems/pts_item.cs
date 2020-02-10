@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 
@@ -10,24 +9,25 @@ namespace PC_QRCodeSystem.Model
     /// </summary>
     public class pts_item
     {
-        #region FIELDS OF ITEM
+        #region ALL FIELDS
         public int item_id { get; set; }
         public int type_id { get; set; }
         public string item_cd { get; set; }
         public string item_name { get; set; }
-        public string unit_cd { get; set; }
-        public double unit_qty { get; set; }
-        public double stock_qty { get; set; }
         public string item_location { get; set; }
+        public string item_unit { get; set; }
+        public double lot_size { get; set; }
+        public double wh_qty { get; set; }
+        public double wip_qty { get; set; }
+        public double repair_qty { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public BindingList<pts_item> listItems { get; set; }
-        #endregion
-
         public pts_item()
         {
             listItems = new BindingList<pts_item>();
         }
+        #endregion
 
         /// <summary>
         /// Get infomation of an item with item id
@@ -42,23 +42,27 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select * from pts_item where 1=1 ";
+            query = "SELECT item_id, type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, ";
+            query += "repair_qty, registration_user_cd, registration_date_time FROM pts_item WHERE 1=1 ";
             query += "and item_id = '" + itemID + "' ";
             query += "order by item_id";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
             //Get an item
+            reader.Read();
             pts_item outItem = new pts_item
             {
                 item_id = (int)reader["item_id"],
                 type_id = (int)reader["type_id"],
                 item_cd = reader["item_cd"].ToString(),
                 item_name = reader["item_name"].ToString(),
-                unit_cd = reader["unit_cd"].ToString(),
-                unit_qty = (double)reader["unit_qty"],
-                stock_qty = (double)reader["stock_qty"],
                 item_location = reader["item_location"].ToString(),
+                item_unit = reader["item_unit"].ToString(),
+                lot_size = (double)reader["lot_size"],
+                wh_qty = (double)reader["wh_qty"],
+                wip_qty = (double)reader["wip_qty"],
+                repair_qty = (double)reader["repair_qty"],
                 registration_date_time = (DateTime)reader["registration_date_time"],
                 registration_user_cd = reader["registration_user_cd"].ToString()
             };
@@ -83,7 +87,8 @@ namespace PC_QRCodeSystem.Model
                 //Open SQL connection
                 SQL.Open();
                 //SQL query string
-                query = "select * from pts_item where 1=1 ";
+                query = "SELECT item_id, type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, ";
+                query += "repair_qty, registration_user_cd, registration_date_time FROM pts_item WHERE 1=1 ";
                 query += "and item_cd = '" + itemCD + "' ";
                 query += "order by item_id";
                 //Execute reader for read database
@@ -97,10 +102,12 @@ namespace PC_QRCodeSystem.Model
                     type_id = (int)reader["type_id"],
                     item_cd = reader["item_cd"].ToString(),
                     item_name = reader["item_name"].ToString(),
-                    unit_cd = reader["unit_cd"].ToString(),
-                    unit_qty = (double)reader["unit_qty"],
-                    stock_qty = (double)reader["stock_qty"],
                     item_location = reader["item_location"].ToString(),
+                    item_unit = reader["item_unit"].ToString(),
+                    lot_size = (double)reader["lot_size"],
+                    wh_qty = (double)reader["wh_qty"],
+                    wip_qty = (double)reader["wip_qty"],
+                    repair_qty = (double)reader["repair_qty"],
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString()
                 };
@@ -131,11 +138,12 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select * from pts_item where 1=1 ";
+            query = "SELECT item_id, type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, ";
+            query += "repair_qty, registration_user_cd, registration_date_time FROM pts_item WHERE 1=1 ";
             if (!string.IsNullOrEmpty(item_code))
                 query += "and item_cd = '" + item_code + "' ";
             if (!string.IsNullOrEmpty(unit_code))
-                query += "and unit_cd = '" + unit_code + "' ";
+                query += "and item_unit = '" + unit_code + "' ";
             if (!string.IsNullOrEmpty(location_code))
                 query += "and item_location ='" + location_code + "' ";
             query += "and type_id = '" + typeID + "' ";
@@ -152,10 +160,12 @@ namespace PC_QRCodeSystem.Model
                     type_id = (int)reader["type_id"],
                     item_cd = reader["item_cd"].ToString(),
                     item_name = reader["item_name"].ToString(),
-                    unit_cd = reader["unit_cd"].ToString(),
-                    unit_qty = (double)reader["unit_qty"],
-                    stock_qty = (double)reader["stock_qty"],
                     item_location = reader["item_location"].ToString(),
+                    item_unit = reader["item_unit"].ToString(),
+                    lot_size = (double)reader["lot_size"],
+                    wh_qty = (double)reader["wh_qty"],
+                    wip_qty = (double)reader["wip_qty"],
+                    repair_qty = (double)reader["repair_qty"],
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString()
                 };
@@ -182,11 +192,12 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select * from pts_item where 1=1 ";
+            query = "SELECT item_id, type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, ";
+            query += "repair_qty, registration_user_cd, registration_date_time FROM pts_item WHERE 1=1 ";
             if (!string.IsNullOrEmpty(item_code))
                 query += "and item_cd = '" + item_code + "' ";
             if (!string.IsNullOrEmpty(unit_code))
-                query += "and unit_cd = '" + unit_code + "' ";
+                query += "and item_unit = '" + unit_code + "' ";
             if (!string.IsNullOrEmpty(location_code))
                 query += "and item_location='" + location_code + "' ";
             query += "order by item_id";
@@ -202,10 +213,12 @@ namespace PC_QRCodeSystem.Model
                     type_id = (int)reader["type_id"],
                     item_cd = reader["item_cd"].ToString(),
                     item_name = reader["item_name"].ToString(),
-                    unit_cd = reader["unit_cd"].ToString(),
-                    unit_qty = (double)reader["unit_qty"],
-                    stock_qty = (double)reader["stock_qty"],
                     item_location = reader["item_location"].ToString(),
+                    item_unit = reader["item_unit"].ToString(),
+                    lot_size = (double)reader["lot_size"],
+                    wh_qty = (double)reader["wh_qty"],
+                    wip_qty = (double)reader["wip_qty"],
+                    repair_qty = (double)reader["repair_qty"],
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString()
                 };
@@ -232,7 +245,7 @@ namespace PC_QRCodeSystem.Model
                 //Open SQL connection
                 SQL.Open();
                 //SQL query string
-                query = "select distinct unit_cd from pts_item order by unit_cd";
+                query = "select distinct item_unit from pts_item order by item_unit";
                 //Execute reader for read database
                 IDataReader reader = SQL.Command(query).ExecuteReader();
                 query = string.Empty;
@@ -241,7 +254,7 @@ namespace PC_QRCodeSystem.Model
                     //Get an item
                     pts_item outItem = new pts_item
                     {
-                        unit_cd = reader["unit_cd"].ToString(),
+                        item_unit = reader["item_unit"].ToString(),
                     };
                     listItems.Add(outItem);
                 }
@@ -305,9 +318,9 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "INSERT INTO pts_item(type_id, item_cd, item_name, unit_cd, unit_qty, stock_qty, item_location, registration_user_cd)";
-            query += "VALUES ('" + inItem.type_id + "','" + inItem.item_cd + "','" + inItem.item_name + "','" + inItem.unit_cd + "','";
-            query += inItem.unit_qty + "','" + inItem.stock_qty + "','" + inItem.item_location + "','";
+            query = "INSERT INTO pts_item(type_id, item_cd, item_name, item_location, item_unit, lot_size, registration_user_cd) ";
+            query += "VALUES ('" + inItem.type_id + "','" + inItem.item_cd + "','" + inItem.item_name + "','";
+            query += inItem.item_location + "','" + inItem.item_unit + "','" + inItem.lot_size + "','";
             query += inItem.registration_user_cd + "')";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
@@ -328,9 +341,10 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_item SET type_id='" + inItem.type_id + "', item_cd='" + inItem.item_cd + "', item_name='" + inItem.item_name;
-            query += "', unit_cd='" + inItem.unit_cd + "', unit_qty='" + inItem.unit_qty + "', stock_qty ='" + inItem.stock_qty;
-            query += "', item_location ='" + inItem.item_location + "', registration_user_cd ='" + inItem.registration_user_cd;
+            query = "UPDATE pts_item SET type_id='" + inItem.type_id + "', item_cd='" + inItem.item_cd + "', item_name='";
+            query += inItem.item_name + "', item_location='" + inItem.item_location + "', item_unit='" + inItem.item_unit;
+            query += "', lot_size ='" + inItem.lot_size + "', wh_qty ='" + inItem.wh_qty + "', wip_qty ='" + inItem.wip_qty;
+            query += "', repair_qty ='" + inItem.repair_qty + "', registration_user_cd ='" + inItem.registration_user_cd;
             query += "', registration_date_time = now() where item_id ='" + inItem.item_id + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
