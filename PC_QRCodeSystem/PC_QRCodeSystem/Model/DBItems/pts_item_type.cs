@@ -43,6 +43,7 @@ namespace PC_QRCodeSystem.Model
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
             //Get an item
+            reader.Read();
             pts_item_type outItem = new pts_item_type
             {
                 type_id = (int)reader["type_id"],

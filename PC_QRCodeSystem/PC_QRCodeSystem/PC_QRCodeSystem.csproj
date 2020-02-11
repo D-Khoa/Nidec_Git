@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Class\PrintClass.cs" />
     <Compile Include="Model\DBItems\m_login_password.cs" />
     <Compile Include="Model\DBItems\m_mes_user.cs" />
     <Compile Include="Model\DBItems\m_mes_user_role.cs" />

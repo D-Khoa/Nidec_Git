@@ -33,10 +33,14 @@
             this.dgvStockDetail = new System.Windows.Forms.DataGridView();
             this.dgvItemInfo = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnPrintPreview = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lbItemTypeName = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.txtSupplierCD = new System.Windows.Forms.TextBox();
             this.txtOrderNo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -126,6 +130,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnPrintPreview);
+            this.panel5.Controls.Add(this.btnPrint);
             this.panel5.Controls.Add(this.btnClear);
             this.panel5.Controls.Add(this.btnSearch);
             this.panel5.Controls.Add(this.btnExport);
@@ -136,10 +142,34 @@
             this.panel5.Size = new System.Drawing.Size(818, 60);
             this.panel5.TabIndex = 2;
             // 
+            // btnPrintPreview
+            // 
+            this.btnPrintPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintPreview.Location = new System.Drawing.Point(340, 5);
+            this.btnPrintPreview.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintPreview.Name = "btnPrintPreview";
+            this.btnPrintPreview.Size = new System.Drawing.Size(100, 50);
+            this.btnPrintPreview.TabIndex = 22;
+            this.btnPrintPreview.Text = "Print Preview";
+            this.btnPrintPreview.UseVisualStyleBackColor = true;
+            this.btnPrintPreview.Click += new System.EventHandler(this.btnPrintPreview_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Location = new System.Drawing.Point(230, 5);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(100, 50);
+            this.btnPrint.TabIndex = 21;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(230, 5);
+            this.btnClear.Location = new System.Drawing.Point(700, 5);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(100, 50);
@@ -174,6 +204,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.lbItemTypeName);
+            this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.txtSupplierCD);
             this.panel4.Controls.Add(this.txtOrderNo);
             this.panel4.Controls.Add(this.label8);
@@ -200,6 +232,29 @@
             this.panel4.Size = new System.Drawing.Size(818, 160);
             this.panel4.TabIndex = 0;
             // 
+            // lbItemTypeName
+            // 
+            this.lbItemTypeName.BackColor = System.Drawing.SystemColors.Control;
+            this.lbItemTypeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbItemTypeName.Location = new System.Drawing.Point(600, 130);
+            this.lbItemTypeName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbItemTypeName.Name = "lbItemTypeName";
+            this.lbItemTypeName.Size = new System.Drawing.Size(150, 25);
+            this.lbItemTypeName.TabIndex = 39;
+            this.lbItemTypeName.Text = "Item Type Name";
+            this.lbItemTypeName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(510, 130);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(80, 25);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Item Type";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // txtSupplierCD
             // 
             this.txtSupplierCD.Location = new System.Drawing.Point(120, 40);
@@ -207,7 +262,7 @@
             this.txtSupplierCD.Name = "txtSupplierCD";
             this.txtSupplierCD.Size = new System.Drawing.Size(150, 22);
             this.txtSupplierCD.TabIndex = 37;
-            this.txtSupplierCD.Validated += new System.EventHandler(this.txtSupplierCD_Validated);
+            this.txtSupplierCD.TextChanged += new System.EventHandler(this.txtSupplierCD_TextChanged);
             // 
             // txtOrderNo
             // 
@@ -240,7 +295,7 @@
             // 
             // lbSupplierName
             // 
-            this.lbSupplierName.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbSupplierName.BackColor = System.Drawing.SystemColors.Control;
             this.lbSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbSupplierName.Location = new System.Drawing.Point(300, 40);
             this.lbSupplierName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -293,7 +348,7 @@
             // 
             // lbInchagre
             // 
-            this.lbInchagre.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbInchagre.BackColor = System.Drawing.SystemColors.Control;
             this.lbInchagre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbInchagre.Location = new System.Drawing.Point(300, 70);
             this.lbInchagre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -318,7 +373,7 @@
             this.txtInCharge.Name = "txtInCharge";
             this.txtInCharge.Size = new System.Drawing.Size(150, 22);
             this.txtInCharge.TabIndex = 28;
-            this.txtInCharge.Validated += new System.EventHandler(this.txtInCharge_Validated);
+            this.txtInCharge.TextChanged += new System.EventHandler(this.txtInCharge_TextChanged);
             // 
             // txtItemCD
             // 
@@ -327,8 +382,8 @@
             this.txtItemCD.Name = "txtItemCD";
             this.txtItemCD.Size = new System.Drawing.Size(150, 22);
             this.txtItemCD.TabIndex = 22;
+            this.txtItemCD.TextChanged += new System.EventHandler(this.txtItemCD_TextChanged);
             this.txtItemCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItemCD_KeyDown);
-            this.txtItemCD.Validated += new System.EventHandler(this.txtItemCD_Validated);
             // 
             // dtpToDate
             // 
@@ -374,7 +429,7 @@
             // 
             // lbItemName
             // 
-            this.lbItemName.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbItemName.BackColor = System.Drawing.SystemColors.Control;
             this.lbItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbItemName.Location = new System.Drawing.Point(300, 10);
             this.lbItemName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -476,5 +531,9 @@
         private System.Windows.Forms.TextBox txtSupplierCD;
         private System.Windows.Forms.DataGridView dgvItemInfo;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnPrintPreview;
+        private System.Windows.Forms.Label lbItemTypeName;
+        private System.Windows.Forms.Label label11;
     }
 }
