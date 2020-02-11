@@ -138,7 +138,7 @@ namespace PC_QRCodeSystem.View
             cmbItemType.Text = null;
             unitCbm.GetListUnit();
             cmbUnitCode.DataSource = unitCbm.listItems;
-            cmbUnitCode.DisplayMember = "unit_cd";
+            cmbUnitCode.DisplayMember = "item_unit";
             cmbUnitCode.Text = null;
             locationCbm.GetListLocation();
             cmbLocation.DataSource = locationCbm.listItems;
@@ -166,15 +166,18 @@ namespace PC_QRCodeSystem.View
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
                 dgvData.Columns["item_id"].HeaderText = "Item ID";
+                dgvData.Columns["type_id"].HeaderText = "Type ID";
                 dgvData.Columns["item_cd"].HeaderText = "Item Number";
                 dgvData.Columns["item_name"].HeaderText = "Item Name";
-                dgvData.Columns["type_id"].HeaderText = "Type ID";
-                dgvData.Columns["unit_cd"].HeaderText = "Unit";
-                dgvData.Columns["unit_qty"].HeaderText = "Unit Qty";
-                dgvData.Columns["stock_qty"].HeaderText = "Stock Qty";
                 dgvData.Columns["item_location"].HeaderText = "Item Location";
+                dgvData.Columns["item_unit"].HeaderText = "Unit";
+                dgvData.Columns["lot_size"].HeaderText = "Lot Size";
+                dgvData.Columns["wh_qty"].HeaderText = "WH Qty";
+                dgvData.Columns["wip_qty"].HeaderText = "W.I.P Qty";
+                dgvData.Columns["repair_qty"].HeaderText = "Repair Qty";
                 dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
                 dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
+                UpdateGrid();
             }
             //Search and get item type list
             if (rbtnItemType.Checked)
@@ -192,18 +195,28 @@ namespace PC_QRCodeSystem.View
             isSearch = false;
         }
 
+        private void UpdateGrid()
+        {
+            if (dgvData.SelectedRows.Count > 0)
+            {
+                dgvItemQty.Rows[0].Cells["lot_size"].Value = dgvData.SelectedRows[0].Cells["lot_size"].Value;
+                dgvItemQty.Rows[0].Cells["wh_qty"].Value = dgvData.SelectedRows[0].Cells["wh_qty"].Value;
+                dgvItemQty.Rows[0].Cells["wip_qty"].Value = dgvData.SelectedRows[0].Cells["wip_qty"].Value;
+                dgvItemQty.Rows[0].Cells["repair_qty"].Value = dgvData.SelectedRows[0].Cells["repair_qty"].Value;
+            }
+        }
         /// <summary>
         /// Clear all fields
         /// </summary>
         private void ClearFields()
         {
             txtItem.Clear();
-            txtCapacity.Clear();
-            txtStockOnHand.Clear();
             cmbLocation.Text = null;
             cmbUnitCode.Text = null;
             cmbItemType.Text = null;
             txtItemName.Text = "Item Name";
+            dgvItemQty.Rows.Clear();
+            dgvData.DataSource = null;
             ptsItem.listItems.Clear();
             ptsItemType.listItemType.Clear();
         }
@@ -219,10 +232,8 @@ namespace PC_QRCodeSystem.View
             {
                 txtTypeName.ReadOnly = true;
                 txtItemName.ReadOnly = false;
-                txtCapacity.ReadOnly = false;
-                txtStockOnHand.ReadOnly = false;
+                dgvItemQty.ReadOnly = false;
                 if (!edit) txtItemName.Clear();
-                //if (edit) txtStockOnHand.ReadOnly = true;
                 cmbLocation.DropDownStyle = ComboBoxStyle.DropDown;
                 cmbUnitCode.DropDownStyle = ComboBoxStyle.DropDown;
             }
@@ -242,12 +253,13 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         private void LockFields()
         {
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
             pnlButtons.Visible = true;
             pnlSubButton.Visible = false;
             txtItemName.ReadOnly = true;
             txtTypeName.ReadOnly = true;
-            txtCapacity.ReadOnly = true;
-            txtStockOnHand.ReadOnly = true;
+            dgvItemQty.ReadOnly = true;
             cmbLocation.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbUnitCode.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbItemType.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -271,9 +283,11 @@ namespace PC_QRCodeSystem.View
                             item_cd = txtItem.Text,
                             item_name = txtItemName.Text,
                             type_id = int.Parse(cmbItemType.Text),
-                            unit_cd = cmbUnitCode.Text,
-                            unit_qty = double.Parse(txtCapacity.Text),
-                            stock_qty = double.Parse(txtStockOnHand.Text),
+                            item_unit = cmbUnitCode.Text,
+                            lot_size = double.Parse(dgvItemQty.Rows[0].Cells["lot_size"].Value.ToString()),
+                            wh_qty = double.Parse(dgvItemQty.Rows[0].Cells["wh_qty"].Value.ToString()),
+                            wip_qty = double.Parse(dgvItemQty.Rows[0].Cells["wip_qty"].Value.ToString()),
+                            repair_qty = double.Parse(dgvItemQty.Rows[0].Cells["repair_qty"].Value.ToString()),
                             item_location = cmbLocation.Text,
                             registration_user_cd = UserData.usercode
                         });
@@ -286,10 +300,9 @@ namespace PC_QRCodeSystem.View
                             item_cd = txtItem.Text,
                             item_name = txtItemName.Text,
                             type_id = int.Parse(cmbItemType.Text),
-                            unit_cd = cmbUnitCode.Text,
-                            unit_qty = double.Parse(txtCapacity.Text),
-                            stock_qty = 0,
                             item_location = cmbLocation.Text,
+                            item_unit = cmbUnitCode.Text,
+                            lot_size = double.Parse(dgvItemQty.Rows[0].Cells["lot_size"].Value.ToString()),
                             registration_user_cd = UserData.usercode
                         });
                     }
@@ -349,17 +362,12 @@ namespace PC_QRCodeSystem.View
         {
             if (rbtnItemCode.Checked)
             {
-                lbUnitCode.Visible = true;
-                lbCapacity.Visible = true;
-                lbLocation.Visible = true;
-                lbStockInHand.Visible = true;
-
                 txtItem.Enabled = true;
+                lbUnitCode.Visible = true;
+                lbLocation.Visible = true;
                 cmbUnitCode.Visible = true;
                 cmbLocation.Visible = true;
-                txtCapacity.Visible = true;
-                txtStockOnHand.Visible = true;
-
+                dgvItemQty.Visible = true;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
                 txtItemName.BackColor = System.Drawing.Color.Yellow;
@@ -370,16 +378,11 @@ namespace PC_QRCodeSystem.View
             if (rbtnItemType.Checked)
             {
                 lbUnitCode.Visible = false;
-                lbCapacity.Visible = false;
                 lbLocation.Visible = false;
-                lbStockInHand.Visible = false;
-
                 txtItem.Enabled = false;
                 cmbUnitCode.Visible = false;
                 cmbLocation.Visible = false;
-                txtCapacity.Visible = false;
-                txtStockOnHand.Visible = false;
-
+                dgvItemQty.Visible = false;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItemType.listItemType;
                 txtTypeName.BackColor = System.Drawing.Color.Yellow;
@@ -399,10 +402,9 @@ namespace PC_QRCodeSystem.View
                 txtItem.Text = ptsItem.item_cd;
                 txtItemName.Text = ptsItem.item_name;
                 cmbLocation.Text = ptsItem.item_location;
-                txtCapacity.Text = ptsItem.unit_qty.ToString();
-                txtStockOnHand.Text = ptsItem.stock_qty.ToString();
-                cmbUnitCode.Text = ptsItem.unit_cd;
+                cmbUnitCode.Text = ptsItem.item_unit;
                 cmbItemType.Text = ptsItem.type_id.ToString();
+                UpdateGrid();
             }
             //Get data from datagrid to pts item type
             if (rbtnItemType.Checked)
@@ -412,6 +414,11 @@ namespace PC_QRCodeSystem.View
             }
             btnUpdate.Enabled = true;
             btnDelete.Enabled = true;
+        }
+
+        private void dgvData_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateGrid();
         }
 
         private void SubForm_FormClosing(object sender, FormClosingEventArgs e)

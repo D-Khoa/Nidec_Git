@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -40,13 +44,14 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dgvItemQty = new System.Windows.Forms.DataGridView();
+            this.lot_size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wh_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wip_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.repair_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbLocation = new System.Windows.Forms.ComboBox();
             this.lbLocation = new System.Windows.Forms.Label();
-            this.txtStockOnHand = new System.Windows.Forms.TextBox();
-            this.lbStockInHand = new System.Windows.Forms.Label();
-            this.txtCapacity = new System.Windows.Forms.TextBox();
             this.lbUnitCode = new System.Windows.Forms.Label();
-            this.lbCapacity = new System.Windows.Forms.Label();
             this.txtTypeName = new System.Windows.Forms.TextBox();
             this.txtItemName = new System.Windows.Forms.TextBox();
             this.cmbUnitCode = new System.Windows.Forms.ComboBox();
@@ -61,6 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItemQty)).BeginInit();
             this.pnlSubButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,7 +78,7 @@
             this.tsNumberTotal});
             this.statusStrip1.Location = new System.Drawing.Point(150, 440);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(600, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(641, 24);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -80,7 +86,7 @@
             // 
             this.toolStripStatusLabel1.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(501, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(542, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -104,13 +110,14 @@
             this.dgvData.AllowUserToOrderColumns = true;
             this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(150, 299);
+            this.dgvData.Location = new System.Drawing.Point(150, 309);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
-            this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvData.Size = new System.Drawing.Size(600, 141);
+            this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvData.Size = new System.Drawing.Size(641, 131);
             this.dgvData.TabIndex = 4;
             this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
+            this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
             // 
             // pnlButtons
             // 
@@ -120,9 +127,9 @@
             this.pnlButtons.Controls.Add(this.btnAdd);
             this.pnlButtons.Controls.Add(this.btnClear);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlButtons.Location = new System.Drawing.Point(150, 249);
+            this.pnlButtons.Location = new System.Drawing.Point(150, 259);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(600, 50);
+            this.pnlButtons.Size = new System.Drawing.Size(641, 50);
             this.pnlButtons.TabIndex = 20;
             // 
             // btnSearch
@@ -182,13 +189,10 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.dgvItemQty);
             this.panel4.Controls.Add(this.cmbLocation);
             this.panel4.Controls.Add(this.lbLocation);
-            this.panel4.Controls.Add(this.txtStockOnHand);
-            this.panel4.Controls.Add(this.lbStockInHand);
-            this.panel4.Controls.Add(this.txtCapacity);
             this.panel4.Controls.Add(this.lbUnitCode);
-            this.panel4.Controls.Add(this.lbCapacity);
             this.panel4.Controls.Add(this.txtTypeName);
             this.panel4.Controls.Add(this.txtItemName);
             this.panel4.Controls.Add(this.cmbUnitCode);
@@ -199,8 +203,61 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(150, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(600, 130);
+            this.panel4.Size = new System.Drawing.Size(641, 140);
             this.panel4.TabIndex = 21;
+            // 
+            // dgvItemQty
+            // 
+            this.dgvItemQty.AllowUserToDeleteRows = false;
+            this.dgvItemQty.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvItemQty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItemQty.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.lot_size,
+            this.wh_qty,
+            this.wip_qty,
+            this.repair_qty});
+            this.dgvItemQty.Location = new System.Drawing.Point(270, 70);
+            this.dgvItemQty.Name = "dgvItemQty";
+            this.dgvItemQty.Size = new System.Drawing.Size(350, 70);
+            this.dgvItemQty.TabIndex = 20;
+            // 
+            // lot_size
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.lot_size.DefaultCellStyle = dataGridViewCellStyle1;
+            this.lot_size.HeaderText = "Lot Size";
+            this.lot_size.Name = "lot_size";
+            this.lot_size.Width = 70;
+            // 
+            // wh_qty
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.wh_qty.DefaultCellStyle = dataGridViewCellStyle2;
+            this.wh_qty.HeaderText = "WH Qty";
+            this.wh_qty.Name = "wh_qty";
+            this.wh_qty.Width = 70;
+            // 
+            // wip_qty
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.wip_qty.DefaultCellStyle = dataGridViewCellStyle3;
+            this.wip_qty.HeaderText = "W.I.P Qty";
+            this.wip_qty.Name = "wip_qty";
+            this.wip_qty.Width = 78;
+            // 
+            // repair_qty
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.repair_qty.DefaultCellStyle = dataGridViewCellStyle4;
+            this.repair_qty.HeaderText = "Repair Qty";
+            this.repair_qty.Name = "repair_qty";
+            this.repair_qty.Width = 82;
             // 
             // cmbLocation
             // 
@@ -222,39 +279,6 @@
             this.lbLocation.Text = "Location";
             this.lbLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txtStockOnHand
-            // 
-            this.txtStockOnHand.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStockOnHand.Location = new System.Drawing.Point(400, 100);
-            this.txtStockOnHand.Name = "txtStockOnHand";
-            this.txtStockOnHand.ReadOnly = true;
-            this.txtStockOnHand.Size = new System.Drawing.Size(170, 21);
-            this.txtStockOnHand.TabIndex = 15;
-            this.txtStockOnHand.Tag = "stockqty_edit";
-            this.txtStockOnHand.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtStockOnHand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStockOnHand_KeyPress);
-            // 
-            // lbStockInHand
-            // 
-            this.lbStockInHand.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStockInHand.Location = new System.Drawing.Point(270, 100);
-            this.lbStockInHand.Name = "lbStockInHand";
-            this.lbStockInHand.Size = new System.Drawing.Size(110, 21);
-            this.lbStockInHand.TabIndex = 16;
-            this.lbStockInHand.Text = "Stock On Hand";
-            this.lbStockInHand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtCapacity
-            // 
-            this.txtCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCapacity.Location = new System.Drawing.Point(400, 70);
-            this.txtCapacity.Name = "txtCapacity";
-            this.txtCapacity.ReadOnly = true;
-            this.txtCapacity.Size = new System.Drawing.Size(170, 21);
-            this.txtCapacity.TabIndex = 11;
-            this.txtCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCapacity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCapacity_KeyPress);
-            // 
             // lbUnitCode
             // 
             this.lbUnitCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -265,23 +289,13 @@
             this.lbUnitCode.Text = "Unit";
             this.lbUnitCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbCapacity
-            // 
-            this.lbCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCapacity.Location = new System.Drawing.Point(270, 70);
-            this.lbCapacity.Name = "lbCapacity";
-            this.lbCapacity.Size = new System.Drawing.Size(110, 21);
-            this.lbCapacity.TabIndex = 13;
-            this.lbCapacity.Text = "Capacity";
-            this.lbCapacity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // txtTypeName
             // 
             this.txtTypeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTypeName.Location = new System.Drawing.Point(270, 40);
             this.txtTypeName.Name = "txtTypeName";
             this.txtTypeName.ReadOnly = true;
-            this.txtTypeName.Size = new System.Drawing.Size(300, 21);
+            this.txtTypeName.Size = new System.Drawing.Size(350, 21);
             this.txtTypeName.TabIndex = 9;
             this.txtTypeName.Text = "Item Type Name";
             this.txtTypeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -292,7 +306,7 @@
             this.txtItemName.Location = new System.Drawing.Point(270, 10);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.ReadOnly = true;
-            this.txtItemName.Size = new System.Drawing.Size(300, 21);
+            this.txtItemName.Size = new System.Drawing.Size(350, 21);
             this.txtItemName.TabIndex = 8;
             this.txtItemName.Text = "Item Name";
             this.txtItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -380,16 +394,16 @@
             this.pnlSubButton.Controls.Add(this.btnOK);
             this.pnlSubButton.Controls.Add(this.btnCancel);
             this.pnlSubButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSubButton.Location = new System.Drawing.Point(150, 199);
+            this.pnlSubButton.Location = new System.Drawing.Point(150, 209);
             this.pnlSubButton.Name = "pnlSubButton";
-            this.pnlSubButton.Size = new System.Drawing.Size(600, 50);
+            this.pnlSubButton.Size = new System.Drawing.Size(641, 50);
             this.pnlSubButton.TabIndex = 22;
             // 
             // ItemManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 464);
+            this.ClientSize = new System.Drawing.Size(791, 464);
             this.Controls.Add(this.dgvData);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.pnlSubButton);
@@ -415,6 +429,7 @@
             this.pnlButtons.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItemQty)).EndInit();
             this.pnlSubButton.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -439,17 +454,18 @@
         private System.Windows.Forms.ComboBox cmbItemType;
         private System.Windows.Forms.TextBox txtItem;
         private System.Windows.Forms.ComboBox cmbUnitCode;
-        private System.Windows.Forms.Label lbCapacity;
         private System.Windows.Forms.TextBox txtTypeName;
         private System.Windows.Forms.TextBox txtItemName;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.TextBox txtCapacity;
-        private System.Windows.Forms.TextBox txtStockOnHand;
-        private System.Windows.Forms.Label lbStockInHand;
         private System.Windows.Forms.Label lbUnitCode;
         private System.Windows.Forms.Panel pnlSubButton;
         private System.Windows.Forms.Label lbLocation;
         private System.Windows.Forms.ComboBox cmbLocation;
+        private System.Windows.Forms.DataGridView dgvItemQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lot_size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wh_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wip_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn repair_qty;
     }
 }

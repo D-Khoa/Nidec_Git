@@ -41,7 +41,7 @@ namespace PC_QRCodeSystem.View
         {
             //StockInForm inFrm = new StockInForm();
             StockInputForm inFrm = new StockInputForm();
-            inFrm.ShowDialog();
+            inFrm.Show();
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace PC_QRCodeSystem.View
         private void btnStockOut_Click(object sender, EventArgs e)
         {
             StockOutForm outFrm = new StockOutForm();
-            outFrm.ShowDialog();
+            outFrm.Show();
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace PC_QRCodeSystem.View
         private void btnStockDetail_Click(object sender, EventArgs e)
         {
             StockDetailForm dtlFrm = new StockDetailForm();
-            dtlFrm.ShowDialog();
+            dtlFrm.Show();
 
         }
 
@@ -76,7 +76,7 @@ namespace PC_QRCodeSystem.View
         private void btnSupplier_Click(object sender, EventArgs e)
         {
             SupplierForm spfrm = new SupplierForm();
-            spfrm.ShowDialog();
+            spfrm.Show();
         }
 
         private void btnDepartment_Click(object sender, EventArgs e)

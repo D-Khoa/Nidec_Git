@@ -223,7 +223,7 @@
 
             int xdots, model; // ydots;
             string TwoBAR_Command;
-            string QRCode_data = itemNo + ";" + itemName + ";" + supplierCode + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + poNo + ";" + orderNo;
+            string QRCode_data = itemNo + ";" + itemName + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + supplierCode + ";" + poNo + ";" + orderNo;
 
             /* 1. LK_OpenPrinter() */
             if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)

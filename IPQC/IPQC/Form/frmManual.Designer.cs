@@ -65,6 +65,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtUCL = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.cbCheckCL = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuffer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).BeginInit();
             this.SuspendLayout();
@@ -410,12 +411,24 @@
             this.label15.TabIndex = 52;
             this.label15.Text = "UCL:";
             // 
+            // cbCheckCL
+            // 
+            this.cbCheckCL.AutoSize = true;
+            this.cbCheckCL.Location = new System.Drawing.Point(791, 61);
+            this.cbCheckCL.Name = "cbCheckCL";
+            this.cbCheckCL.Size = new System.Drawing.Size(105, 17);
+            this.cbCheckCL.TabIndex = 53;
+            this.cbCheckCL.Text = "Check UCL/LCL";
+            this.cbCheckCL.UseVisualStyleBackColor = true;
+            this.cbCheckCL.CheckedChanged += new System.EventHandler(this.cbCheckCL_CheckedChanged);
+            // 
             // frmManual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(922, 743);
+            this.Controls.Add(this.cbCheckCL);
             this.Controls.Add(this.txtLCL);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtUCL);
@@ -503,6 +516,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtUCL;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.CheckBox cbCheckCL;
     }
 }
 
