@@ -499,8 +499,8 @@ namespace PC_QRCodeSystem.View
                     //If supplier not exist, add new supplier
                     supplierItem.AddSupplier(new pts_supplier
                     {
-                        supplier_cd = txtBarcode.Text.Split(';')[2],
-                        supplier_name = txtBarcode.Text.Split(';')[3],
+                        supplier_cd = txtBarcode.Text.Split(';')[6],
+                        supplier_name = txtBarcode.Text.Split(';')[2],
                         registration_user_cd = UserData.usercode,
                     });
                 }
@@ -528,7 +528,7 @@ namespace PC_QRCodeSystem.View
                                 + "Please check and try again!", "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         default:
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(ex.Message, "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
                     dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
@@ -542,9 +542,9 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
+                foreach (DataGridViewCell dc in dgvInspection.SelectedCells)
                 {
-                    listStockItem.Remove(dr.DataBoundItem as pts_stock);
+                    listStockItem.Remove(dgvInspection.Rows[dc.RowIndex].DataBoundItem as pts_stock);
                 }
                 dgvInspection.DataSource = listStockItem;
             }

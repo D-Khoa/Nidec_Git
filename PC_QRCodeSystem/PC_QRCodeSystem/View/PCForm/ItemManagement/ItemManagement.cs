@@ -35,6 +35,7 @@ namespace PC_QRCodeSystem.View
         private void SubForm_Load(object sender, EventArgs e)
         {
             GetCmbData();
+            txtItem.Focus();
         }
 
         #region EVENT CHANGE TEXT ON FIELDS
@@ -233,7 +234,11 @@ namespace PC_QRCodeSystem.View
                 txtTypeName.ReadOnly = true;
                 txtItemName.ReadOnly = false;
                 dgvItemQty.ReadOnly = false;
-                if (!edit) txtItemName.Clear();
+                if (!edit)
+                {
+                    txtTypeName.Clear();
+                    txtItemName.Clear();
+                }
                 cmbLocation.DropDownStyle = ComboBoxStyle.DropDown;
                 cmbUnitCode.DropDownStyle = ComboBoxStyle.DropDown;
             }
@@ -271,6 +276,11 @@ namespace PC_QRCodeSystem.View
             {
                 int n = 0;
                 string messstring = string.Empty;
+                if (string.IsNullOrEmpty(txtItemName.Text) || string.IsNullOrEmpty(txtTypeName.Text))
+                {
+                    MessageBox.Show("Item Name and Item Type is empty." + Environment.NewLine + "Please check and try again!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 #region ADD & UPDATE ITEM
                 if (rbtnItemCode.Checked)
                 {
@@ -419,6 +429,7 @@ namespace PC_QRCodeSystem.View
         private void dgvData_SelectionChanged(object sender, EventArgs e)
         {
             UpdateGrid();
+            LockFields();
         }
 
         private void SubForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -108,14 +108,14 @@
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToOrderColumns = true;
-            this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(150, 309);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvData.Size = new System.Drawing.Size(641, 131);
-            this.dgvData.TabIndex = 4;
+            this.dgvData.TabIndex = 17;
             this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
             this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
             // 
@@ -130,7 +130,7 @@
             this.pnlButtons.Location = new System.Drawing.Point(150, 259);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(641, 50);
-            this.pnlButtons.TabIndex = 20;
+            this.pnlButtons.TabIndex = 21;
             // 
             // btnSearch
             // 
@@ -138,7 +138,7 @@
             this.btnSearch.Location = new System.Drawing.Point(40, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 40);
-            this.btnSearch.TabIndex = 14;
+            this.btnSearch.TabIndex = 12;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -149,7 +149,7 @@
             this.btnUpdate.Location = new System.Drawing.Point(260, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(80, 40);
-            this.btnUpdate.TabIndex = 16;
+            this.btnUpdate.TabIndex = 14;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -160,7 +160,7 @@
             this.btnDelete.Location = new System.Drawing.Point(370, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 40);
-            this.btnDelete.TabIndex = 17;
+            this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -171,7 +171,7 @@
             this.btnAdd.Location = new System.Drawing.Point(150, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(80, 40);
-            this.btnAdd.TabIndex = 15;
+            this.btnAdd.TabIndex = 13;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -182,7 +182,7 @@
             this.btnClear.Location = new System.Drawing.Point(480, 5);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(80, 40);
-            this.btnClear.TabIndex = 18;
+            this.btnClear.TabIndex = 16;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -204,12 +204,12 @@
             this.panel4.Location = new System.Drawing.Point(150, 69);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(641, 140);
-            this.panel4.TabIndex = 21;
+            this.panel4.TabIndex = 20;
             // 
             // dgvItemQty
             // 
             this.dgvItemQty.AllowUserToDeleteRows = false;
-            this.dgvItemQty.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvItemQty.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvItemQty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItemQty.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.lot_size,
@@ -219,7 +219,7 @@
             this.dgvItemQty.Location = new System.Drawing.Point(270, 70);
             this.dgvItemQty.Name = "dgvItemQty";
             this.dgvItemQty.Size = new System.Drawing.Size(350, 70);
-            this.dgvItemQty.TabIndex = 20;
+            this.dgvItemQty.TabIndex = 9;
             // 
             // lot_size
             // 
@@ -267,7 +267,7 @@
             this.cmbLocation.Location = new System.Drawing.Point(140, 70);
             this.cmbLocation.Name = "cmbLocation";
             this.cmbLocation.Size = new System.Drawing.Size(120, 23);
-            this.cmbLocation.TabIndex = 19;
+            this.cmbLocation.TabIndex = 5;
             // 
             // lbLocation
             // 
@@ -296,7 +296,7 @@
             this.txtTypeName.Name = "txtTypeName";
             this.txtTypeName.ReadOnly = true;
             this.txtTypeName.Size = new System.Drawing.Size(350, 21);
-            this.txtTypeName.TabIndex = 9;
+            this.txtTypeName.TabIndex = 8;
             this.txtTypeName.Text = "Item Type Name";
             this.txtTypeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -307,7 +307,7 @@
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.ReadOnly = true;
             this.txtItemName.Size = new System.Drawing.Size(350, 21);
-            this.txtItemName.TabIndex = 8;
+            this.txtItemName.TabIndex = 7;
             this.txtItemName.Text = "Item Name";
             this.txtItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -319,7 +319,7 @@
             this.cmbUnitCode.Location = new System.Drawing.Point(140, 100);
             this.cmbUnitCode.Name = "cmbUnitCode";
             this.cmbUnitCode.Size = new System.Drawing.Size(120, 23);
-            this.cmbUnitCode.TabIndex = 7;
+            this.cmbUnitCode.TabIndex = 6;
             // 
             // rbtnItemType
             // 
@@ -328,7 +328,7 @@
             this.rbtnItemType.Location = new System.Drawing.Point(10, 40);
             this.rbtnItemType.Name = "rbtnItemType";
             this.rbtnItemType.Size = new System.Drawing.Size(88, 21);
-            this.rbtnItemType.TabIndex = 2;
+            this.rbtnItemType.TabIndex = 3;
             this.rbtnItemType.TabStop = true;
             this.rbtnItemType.Text = "Item Type";
             this.rbtnItemType.UseVisualStyleBackColor = true;
@@ -341,7 +341,7 @@
             this.rbtnItemCode.Location = new System.Drawing.Point(10, 10);
             this.rbtnItemCode.Name = "rbtnItemCode";
             this.rbtnItemCode.Size = new System.Drawing.Size(89, 21);
-            this.rbtnItemCode.TabIndex = 1;
+            this.rbtnItemCode.TabIndex = 2;
             this.rbtnItemCode.TabStop = true;
             this.rbtnItemCode.Text = "Item Code";
             this.rbtnItemCode.UseVisualStyleBackColor = true;
@@ -355,7 +355,7 @@
             this.cmbItemType.Location = new System.Drawing.Point(140, 40);
             this.cmbItemType.Name = "cmbItemType";
             this.cmbItemType.Size = new System.Drawing.Size(120, 23);
-            this.cmbItemType.TabIndex = 5;
+            this.cmbItemType.TabIndex = 4;
             this.cmbItemType.SelectedIndexChanged += new System.EventHandler(this.cmbItemType_SelectedIndexChanged);
             // 
             // txtItem
@@ -364,7 +364,7 @@
             this.txtItem.Location = new System.Drawing.Point(140, 10);
             this.txtItem.Name = "txtItem";
             this.txtItem.Size = new System.Drawing.Size(120, 21);
-            this.txtItem.TabIndex = 4;
+            this.txtItem.TabIndex = 1;
             this.txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItem_KeyDown);
             // 
             // btnOK
@@ -373,7 +373,7 @@
             this.btnOK.Location = new System.Drawing.Point(150, 10);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 30);
-            this.btnOK.TabIndex = 12;
+            this.btnOK.TabIndex = 10;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -384,7 +384,7 @@
             this.btnCancel.Location = new System.Drawing.Point(370, 10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 30);
-            this.btnCancel.TabIndex = 13;
+            this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);

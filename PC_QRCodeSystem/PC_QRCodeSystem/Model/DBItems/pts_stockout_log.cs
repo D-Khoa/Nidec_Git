@@ -8,8 +8,8 @@ namespace PC_QRCodeSystem.Model
     {
         #region ALL FIELDS
         public int stockout_id { get; set; }
+        public string packing_cd { get; set; }
         public int process_id { get; set; }
-        public int stock_id { get; set; }
         public int issue_cd { get; set; }
         public DateTime stockout_date { get; set; }
         public string stockout_user_cd { get; set; }
@@ -38,12 +38,12 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT stockout_id, process_id, stock_id, issue_cd, stockout_date, stockout_user_cd, stockout_qty, real_qty, ";
-            query += "received_user_cd, comment, remark FROM pts_stockout_log WHERE 1=1 ";
+            query = "SELECT stockout_id, packing_cd, process_id, issue_cd, stockout_date, stockout_user_cd, stockout_qty, ";
+            query += "real_qty, received_user_cd, comment, remark FROM pts_stockout_log WHERE 1=1 ";
             if (inItem.process_id > 0)
                 query += "AND process_id ='" + inItem.process_id + "' ";
-            if (inItem.stock_id > 0)
-                query += "AND stock_id ='" + inItem.stock_id + "' ";
+            if (!string.IsNullOrEmpty(inItem.packing_cd))
+                query += "AND packing_cd ='" + inItem.packing_cd + "' ";
             if (inItem.issue_cd > 0)
                 query += "AND issue_cd ='" + inItem.issue_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.stockout_user_cd))
@@ -63,8 +63,8 @@ namespace PC_QRCodeSystem.Model
                 pts_stockout_log outItem = new pts_stockout_log
                 {
                     stockout_id = (int)reader["stockout_id"],
+                    packing_cd = reader["packing_cd"].ToString(),
                     process_id = (int)reader["process_id"],
-                    stock_id = (int)reader["stock_id"],
                     issue_cd = (int)reader["issue_cd"],
                     stockout_date = (DateTime)reader["stockout_date"],
                     stockout_user_cd = reader["stockout_user_cd"].ToString(),
@@ -94,8 +94,8 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT stockout_id, process_id, stock_id, issue_cd, stockout_date, stockout_user_cd, stockout_qty, real_qty, ";
-            query += "received_user_cd, comment, remark FROM pts_stockout_log WHERE 1=1 ";
+            query = "SELECT stockout_id, packing_cd, process_id, issue_cd, stockout_date, stockout_user_cd, stockout_qty, ";
+            query += "real_qty, received_user_cd, comment, remark FROM pts_stockout_log WHERE 1=1 ";
             query += "AND stockout_date >='" + fromDate.ToString("yyyy-MM-dd") + "' ";
             query += "AND stockout_date <='" + toDate.ToString("yyyy-MM-dd") + "' ";
             query += "ORDER BY stockout_id";
@@ -109,8 +109,8 @@ namespace PC_QRCodeSystem.Model
                 pts_stockout_log outItem = new pts_stockout_log
                 {
                     stockout_id = (int)reader["stockout_id"],
+                    packing_cd = reader["packing_cd"].ToString(),
                     process_id = (int)reader["process_id"],
-                    stock_id = (int)reader["stock_id"],
                     issue_cd = (int)reader["issue_cd"],
                     stockout_date = (DateTime)reader["stockout_date"],
                     stockout_user_cd = reader["stockout_user_cd"].ToString(),
@@ -140,11 +140,11 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "INSERT INTO pts_stockout_log(process_id, stock_id, issue_cd, stockout_date, stockout_user_cd, ";
+            query = "INSERT INTO pts_stockout_log(packing_cd, process_id, issue_cd, stockout_date, stockout_user_cd, ";
             query += "stockout_qty, real_qty, received_user_cd, comment, remark) VALUES ";
-            query += "('" + inItem.process_id + "','" + inItem.stock_id + "','" + inItem.issue_cd + "','" + inItem.stockout_date + "','";
-            query += inItem.stockout_user_cd + "','" + inItem.stockout_qty + "','" + inItem.real_qty + "','" + inItem.received_user_cd;
-            query += "','" + inItem.comment + "','" + inItem.remark + "')";
+            query += "('" + inItem.packing_cd + "','" + inItem.process_id + "','" + inItem.issue_cd + "','" + inItem.stockout_date;
+            query += "','" + inItem.stockout_user_cd + "','" + inItem.stockout_qty + "','" + inItem.real_qty + "','";
+            query += inItem.received_user_cd + "','" + inItem.comment + "','" + inItem.remark + "')";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +13,8 @@ namespace PC_QRCodeSystem.Model
     /// </summary>
     public class pts_stock
     {
-        #region FIELDS OF STOCK ITEM
-        public string stock_id { get; set; }
+        #region ALL FIELDS
+        public int stock_id { get; set; }
         public string packing_cd { get; set; }
         public string item_cd { get; set; }
         public string supplier_cd { get; set; }
@@ -25,13 +27,74 @@ namespace PC_QRCodeSystem.Model
         public double packing_qty { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public List<pts_stock> listStockItems { get; set; }
-        #endregion
-
+        public BindingList<pts_stock> listStockItems { get; set; }
         public pts_stock()
         {
-            listStockItems = new List<pts_stock>();
+            listStockItems = new BindingList<pts_stock>();
         }
+        #endregion
+
+        #region QUERY
+
+        public void SearchItem(pts_stock inItem, DateTime fromDate, DateTime toDate, bool checkDate)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            listStockItems = new BindingList<pts_stock>();
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT stock_id, packing_cd, item_cd, supplier_cd, order_no, invoice,po_no, stockin_date, stockin_user_cd, ";
+            query += "stockin_qty, packing_qty, registration_user_cd, registration_date_time FROM pts_stock WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.packing_cd))
+                query += "AND packing_cd ='" + inItem.packing_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.item_cd))
+                query += "AND item_cd ='" + inItem.item_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.supplier_cd))
+                query += "AND supplier_cd ='" + inItem.supplier_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.order_no))
+                query += "AND order_no ='" + inItem.order_no + "' ";
+            if (!string.IsNullOrEmpty(inItem.invoice))
+                query += "AND invoice ='" + inItem.invoice + "' ";
+            if (!string.IsNullOrEmpty(inItem.po_no))
+                query += "AND po_no ='" + inItem.po_no + "' ";
+            if (checkDate)
+            {
+                query += "AND stockin_date >= '" + fromDate.ToString("yyyy-MM-dd") + "' ";
+                query += "AND stockin_date <= '" + toDate.ToString("yyyy-MM-dd") + "' ";
+            }
+            if (!string.IsNullOrEmpty(inItem.stockin_user_cd))
+                query += "AND stockin_user_cd ='" + inItem.stockin_user_cd + "' ";
+            query += "ORDER BY stock_id";
+            //Execute reader for read database
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            while (reader.Read())
+            {
+                pts_stock outItem = new pts_stock
+                {
+                    stock_id = (int)reader["stock_id"],
+                    packing_cd = reader["packing_cd"].ToString(),
+                    item_cd = reader["item_cd"].ToString(),
+                    supplier_cd = reader["supplier_cd"].ToString(),
+                    order_no = reader["order_no"].ToString(),
+                    invoice = reader["invoice"].ToString(),
+                    po_no = reader["po_no"].ToString(),
+                    stockin_date = (DateTime)reader["stockin_date"],
+                    stockin_user_cd = reader["stockin_user_cd"].ToString(),
+                    stockin_qty = (double)reader["stockin_qty"],
+                    packing_qty = (double)reader["packing_qty"],
+                    registration_user_cd = reader["registration_user_cd"].ToString(),
+                    registration_date_time = (DateTime)reader["registration_date_time"],
+                };
+                listStockItems.Add(outItem);
+            }
+            reader.Close();
+            query = string.Empty;
+            //Close connection
+            SQL.Close();
+        }
+
         public int AddItem(pts_stock inItem)
         {
             //SQL library
@@ -42,15 +105,15 @@ namespace PC_QRCodeSystem.Model
             //SQL query string
             query = "INSERT INTO pts_stock(packing_cd, item_cd, supplier_cd, order_no, invoice, po_no, stockin_date,";
             query += "stockin_user_cd, stockin_qty, packing_qty, registration_user_cd) VALUES ";
-            query += "('" + inItem.packing_cd + "','" + inItem.item_cd + "','" + inItem.supplier_cd + "','" + inItem.order_no + "','";
-            query += inItem.invoice + "','" + inItem.po_no + "','" + inItem.stockin_date + "','" + inItem.stockin_user_cd + "','";
-            query += inItem.stockin_qty + "','" + inItem.packing_qty + "','" + inItem.registration_user_cd + "')";
+            query += "('" + inItem.packing_cd + "','" + inItem.item_cd + "','" + inItem.supplier_cd + "','" + inItem.order_no;
+            query += "','" + inItem.invoice + "','" + inItem.po_no + "','" + inItem.stockin_date + "','" + inItem.stockin_user_cd;
+            query += "','" + inItem.stockin_qty + "','" + inItem.packing_qty + "','" + inItem.registration_user_cd + "')";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
             SQL.Close();
             return result;
         }
-
+        #endregion
     }
 }

@@ -63,6 +63,7 @@
             this.tsLabelNumber = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnInspectionClear = new System.Windows.Forms.Button();
             this.txtSupplierName = new System.Windows.Forms.TextBox();
             this.txtSupplierCD = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -78,7 +79,6 @@
             this.btnPrintSelected = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
             this.btnPrintBack = new System.Windows.Forms.Button();
-            this.btnInspectionClear = new System.Windows.Forms.Button();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -261,7 +261,7 @@
             // 
             this.dgvPreInput.AllowUserToAddRows = false;
             this.dgvPreInput.AllowUserToDeleteRows = false;
-            this.dgvPreInput.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvPreInput.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPreInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPreInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPreInput.Location = new System.Drawing.Point(4, 64);
@@ -483,14 +483,14 @@
             // 
             this.dgvInspection.AllowUserToAddRows = false;
             this.dgvInspection.AllowUserToDeleteRows = false;
-            this.dgvInspection.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvInspection.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvInspection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInspection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInspection.Location = new System.Drawing.Point(4, 84);
             this.dgvInspection.Margin = new System.Windows.Forms.Padding(4);
             this.dgvInspection.Name = "dgvInspection";
             this.dgvInspection.ReadOnly = true;
-            this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvInspection.Size = new System.Drawing.Size(1000, 380);
             this.dgvInspection.TabIndex = 1;
             // 
@@ -511,6 +511,18 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1000, 80);
             this.panel4.TabIndex = 0;
+            // 
+            // btnInspectionClear
+            // 
+            this.btnInspectionClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInspectionClear.Location = new System.Drawing.Point(760, 15);
+            this.btnInspectionClear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInspectionClear.Name = "btnInspectionClear";
+            this.btnInspectionClear.Size = new System.Drawing.Size(100, 50);
+            this.btnInspectionClear.TabIndex = 26;
+            this.btnInspectionClear.Text = "Clear";
+            this.btnInspectionClear.UseVisualStyleBackColor = true;
+            this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
             // 
             // txtSupplierName
             // 
@@ -617,7 +629,7 @@
             // 
             this.dgvPacking.AllowUserToAddRows = false;
             this.dgvPacking.AllowUserToDeleteRows = false;
-            this.dgvPacking.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvPacking.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPacking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPacking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPacking.Location = new System.Drawing.Point(4, 64);
@@ -689,18 +701,6 @@
             this.btnPrintBack.Text = "Back";
             this.btnPrintBack.UseVisualStyleBackColor = true;
             this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
-            // 
-            // btnInspectionClear
-            // 
-            this.btnInspectionClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInspectionClear.Location = new System.Drawing.Point(760, 15);
-            this.btnInspectionClear.Margin = new System.Windows.Forms.Padding(4);
-            this.btnInspectionClear.Name = "btnInspectionClear";
-            this.btnInspectionClear.Size = new System.Drawing.Size(100, 50);
-            this.btnInspectionClear.TabIndex = 26;
-            this.btnInspectionClear.Text = "Clear";
-            this.btnInspectionClear.UseVisualStyleBackColor = true;
-            this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
             // 
             // StockInputForm
             // 
