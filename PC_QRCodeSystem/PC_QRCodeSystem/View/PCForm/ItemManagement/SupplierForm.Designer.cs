@@ -70,9 +70,9 @@
             // 
             this.dgvDataSupllier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDataSupllier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDataSupllier.Location = new System.Drawing.Point(145, 233);
+            this.dgvDataSupllier.Location = new System.Drawing.Point(150, 233);
             this.dgvDataSupllier.Name = "dgvDataSupllier";
-            this.dgvDataSupllier.Size = new System.Drawing.Size(645, 221);
+            this.dgvDataSupllier.Size = new System.Drawing.Size(640, 221);
             this.dgvDataSupllier.TabIndex = 15;
             this.dgvDataSupllier.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataSupllier_CellDoubleClick);
             // 
@@ -84,9 +84,9 @@
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.cmbSupplierCode);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(145, 69);
+            this.panel4.Location = new System.Drawing.Point(150, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(645, 85);
+            this.panel4.Size = new System.Drawing.Size(640, 85);
             this.panel4.TabIndex = 16;
             // 
             // btnOK
@@ -131,9 +131,9 @@
             this.pnlButtons.Controls.Add(this.btnAdd);
             this.pnlButtons.Controls.Add(this.btnClear);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlButtons.Location = new System.Drawing.Point(145, 154);
+            this.pnlButtons.Location = new System.Drawing.Point(150, 154);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(645, 79);
+            this.pnlButtons.Size = new System.Drawing.Size(640, 79);
             this.pnlButtons.TabIndex = 17;
             // 
             // btnSearch
@@ -204,6 +204,7 @@
             // 
             // SupplierForm
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 454);
@@ -214,6 +215,7 @@
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "SupplierForm";
+            this.position = "";
             this.Text = "SupplierForm";
             this.tittle = "FormCommon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SupplierForm_FormClosing);
