@@ -16,7 +16,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao.FA_Management_System
             //CREATE SQL ADAPTER AND PARAMETER LIST
             DbCommandAdaptor sqlCommandAdapter = base.GetDbCommandAdaptor(trxContext, sql.ToString());
             DbParameterList sqlParameter = sqlCommandAdapter.CreateParameterList();
-            sql.Append("select distinct location_id, location_cd, location_name from m_location where 1=1 ");
+            sql.Append("select distinct location_id, location_cd, location_name from m_location where 1=1");
             if (!string.IsNullOrEmpty(inVo.location_cd))
                 sql.Append("and location_cd='").Append(inVo.location_cd).Append("' ");
             if (!string.IsNullOrEmpty(inVo.location_name))

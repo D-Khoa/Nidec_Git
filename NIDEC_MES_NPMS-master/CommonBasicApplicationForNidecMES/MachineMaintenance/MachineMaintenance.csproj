@@ -866,6 +866,12 @@
     <Compile Include="Form\FormCommonNCVP.Designer.cs">
       <DependentUpon>FormCommonNCVP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\NCVPForm\FA Management System Form\Warehouse Equipment\Update Account Info FAWH Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\NCVPForm\FA Management System Form\Warehouse Equipment\Update Account Info FAWH Form.Designer.cs">
+      <DependentUpon>Update Account Info FAWH Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\NCVPForm\FA Management System Form\Warehouse Equipment\Warehouse Equipment Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1290,6 +1296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\MasterForm\AccountWhForm\WareHouse\WarehouseMainForm.resx">
       <DependentUpon>WarehouseMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\NCVPForm\FA Management System Form\Warehouse Equipment\Update Account Info FAWH Form.resx">
+      <DependentUpon>Update Account Info FAWH Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\NCVPForm\FA Management System Form\Warehouse Equipment\Warehouse Equipment Form.resx">
       <DependentUpon>Warehouse Equipment Form.cs</DependentUpon>

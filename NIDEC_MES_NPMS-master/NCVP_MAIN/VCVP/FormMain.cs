@@ -501,7 +501,7 @@ namespace Com.Nidec.Mes.VCVP
 
         private void btnInputEq_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnOutputEq_Click(object sender, EventArgs e)
