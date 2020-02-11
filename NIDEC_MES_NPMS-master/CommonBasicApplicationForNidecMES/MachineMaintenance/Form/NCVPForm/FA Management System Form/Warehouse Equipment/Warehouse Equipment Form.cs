@@ -10,6 +10,7 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo.FA_Management_System_Vo.Warehouse_Equipment_Vo;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao.FA_Management_System_Dao.Warehouse_Equipment_Dao;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.FA_Management_System_Cbm.Warehouse_Equipment_Cbm;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.NCVPForm.FA_Management_System_Form;
 
 namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_System
 {
@@ -124,7 +125,8 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-
+            UpdateAccountInfoFAWHForm upFrm = new UpdateAccountInfoFAWHForm(Vo.account_main_id);
+            upFrm.ShowDialog();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -171,6 +173,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
             this.Close();
         }
         #endregion
+        #region SUB EVENT
         private void UpdateGrid()
         {
             dgvAccountData.DataSource = Vo.table;
@@ -271,7 +274,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
                 txtAssetCode.Text.Remove(10);
             }
         }
-
+        #endregion
         #region TREEVIEW CHECKBOX
         private void trvAsset_AfterCheck(object sender, TreeViewEventArgs e)
         {
@@ -321,7 +324,8 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
                 if (root.Name == "account_location_cd")
                     Vo.list_account_location = CheckList(root, name);
                 if (root.Name == "location_cd")
-                    Vo.list_location = CheckList(root, name);
+                //Vo.list_location = CheckList(root, name);
+                    Vo.list_location = "('15'),('16'),('17'),('31')";      
                 if (root.Name == "invertory_time_cd")
                     Vo.list_invertory_times = CheckList(root, name);
                 if (root.Name == "rank_cd")
@@ -337,7 +341,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
             }
         }
         #endregion
-
+        #region DGVDATA
         private void dgvAccountData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             btnUpdate.Enabled = true;
@@ -349,5 +353,6 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
         {
 
         }
+        #endregion
     }
 }

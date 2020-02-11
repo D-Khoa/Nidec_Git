@@ -158,6 +158,8 @@ namespace PC_QRCodeSystem.View
         private void btnCancel_Click(object sender, EventArgs e)
         {
             LockAllNameTextbox();
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
 
         }
         #endregion

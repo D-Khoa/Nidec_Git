@@ -203,6 +203,8 @@ namespace PC_QRCodeSystem.View
         {
             LockAllNameTextbox();
             cmbIssueCode.Enabled = true;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
         }
         #endregion
         #region SUB PROGRAM
