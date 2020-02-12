@@ -164,11 +164,31 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "INSERT INTO pts_request_log(item_cd, model_cd, destination_cd, use_date, request_date, request_qty, ";
-            query += "request_usercd, m_confirm, gm_confirm, available_qty, approve_usercd, pc_m_confirm, comment) ";
-            query += "VALUES('" + inItem.item_cd + "','" + inItem.model_cd + "','" + inItem.destination_cd + "','" + inItem.use_date;
-            query += "','" + inItem.request_date + "','" + inItem.request_qty + "','" + inItem.request_usercd + "','" + inItem.m_confirm;
-            query += "','" + inItem.gm_confirm + "','" + inItem.available_qty + "','" + inItem.approve_usercd + "','" + inItem.pc_m_cofirm;
-            query += "','" + inItem.comment + "')";
+            query += "request_usercd, comment, remark) ";
+            query += "VALUES('" + inItem.item_cd + "','" + inItem.model_cd + "','" + inItem.destination_cd + "','";
+            query += inItem.use_date + "','" + inItem.request_date + "','" + inItem.request_qty + "','";
+            query += inItem.request_usercd + "','" + inItem.comment + "','" + inItem.remark + "')";
+            //Execute non query for insert database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            //Close SQL connection
+            SQL.Close();
+            return result;
+        }
+
+        public int Update(pts_request_log inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_request_log SET item_cd ='" + inItem.item_cd + "', model_cd ='" + inItem.model_cd;
+            query += "', destination_cd ='" + inItem.destination_cd + "', use_date ='" + inItem.use_date + "', request_date ='";
+            query += inItem.request_date + "', request_qty ='" + inItem.request_qty + "', request_usercd ='";
+            query += inItem.request_usercd + "', comment ='" + inItem.comment;
+            query += "' WHERE request_id ='" + inItem.request_id + "'";
             //Execute non query for insert database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
@@ -223,6 +243,11 @@ namespace PC_QRCodeSystem.Model
             return result;
         }
 
+        /// <summary>
+        /// PC user approve a request
+        /// </summary>
+        /// <param name="inItem"></param>
+        /// <returns></returns>
         public int PC_Approve(pts_request_log inItem)
         {
             //SQL library
