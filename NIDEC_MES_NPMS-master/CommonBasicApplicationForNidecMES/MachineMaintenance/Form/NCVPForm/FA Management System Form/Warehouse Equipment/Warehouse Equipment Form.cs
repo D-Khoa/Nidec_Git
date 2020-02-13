@@ -114,6 +114,8 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
         {
             CheckTreeView(trvAsset, false);
             CheckTreeView(trvOther, true);
+            Vo.asset_cd = txtAssetCode.Text;
+            Vo.asset_name = txtAssetName.Text;
             Vo = (AccountManagerFAWHVo)DefaultCbmInvoker.Invoke(new SearchAccountFAWHCbm(), Vo);
             UpdateGrid();
         }
@@ -324,8 +326,8 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
                 if (root.Name == "account_location_cd")
                     Vo.list_account_location = CheckList(root, name);
                 if (root.Name == "location_cd")
-                //Vo.list_location = CheckList(root, name);
-                    Vo.list_location = "('15'),('16'),('17'),('31')";      
+                    //Vo.list_location = CheckList(root, name);
+                    Vo.list_location = "('15'),('16'),('17'),('31')";
                 if (root.Name == "invertory_time_cd")
                     Vo.list_invertory_times = CheckList(root, name);
                 if (root.Name == "rank_cd")
