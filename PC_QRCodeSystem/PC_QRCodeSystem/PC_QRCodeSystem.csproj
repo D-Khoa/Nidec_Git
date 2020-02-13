@@ -131,10 +131,10 @@
     <Compile Include="Model\Temp Items\UserData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\Common\UserPosition.cs">
+    <Compile Include="View\AdminForm\UserPosition.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Common\UserPosition.Designer.cs">
+    <Compile Include="View\AdminForm\UserPosition.Designer.cs">
       <DependentUpon>UserPosition.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PCForm\Destination\DestinationManager.cs">
@@ -167,34 +167,40 @@
     <Compile Include="View\PCForm\ItemManagement\SupplierForm.Designer.cs">
       <DependentUpon>SupplierForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\StockInputForm.cs">
+    <Compile Include="View\PCForm\MainStock\StockInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PCForm\StockInputForm.Designer.cs">
+    <Compile Include="View\PCForm\MainStock\StockInputForm.Designer.cs">
       <DependentUpon>StockInputForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\RequestForm\RequestForm.cs">
+    <Compile Include="View\PRODForm\PRODForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\RequestForm\RequestForm.Designer.cs">
+    <Compile Include="View\PRODForm\PRODForm.Designer.cs">
+      <DependentUpon>PRODForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PRODForm\RequestForm\RequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PRODForm\RequestForm\RequestForm.Designer.cs">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\StockDetailForm.cs">
+    <Compile Include="View\PCForm\MainStock\StockDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PCForm\StockDetailForm.Designer.cs">
+    <Compile Include="View\PCForm\MainStock\StockDetailForm.Designer.cs">
       <DependentUpon>StockDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\StockInForm.cs">
+    <Compile Include="View\PCForm\MainStock\StockInForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PCForm\StockInForm.Designer.cs">
+    <Compile Include="View\PCForm\MainStock\StockInForm.Designer.cs">
       <DependentUpon>StockInForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\StockOutForm.cs">
+    <Compile Include="View\PCForm\MainStock\StockOutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PCForm\StockOutForm.Designer.cs">
+    <Compile Include="View\PCForm\MainStock\StockOutForm.Designer.cs">
       <DependentUpon>StockOutForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="View\Common\ChangePasswordForm.resx">
@@ -219,7 +225,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\Common\UserPosition.resx">
+    <EmbeddedResource Include="View\AdminForm\UserPosition.resx">
       <DependentUpon>UserPosition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\Destination\DestinationManager.resx">
@@ -237,19 +243,22 @@
     <EmbeddedResource Include="View\PCForm\ItemManagement\SupplierForm.resx">
       <DependentUpon>SupplierForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\StockInputForm.resx">
+    <EmbeddedResource Include="View\PCForm\MainStock\StockInputForm.resx">
       <DependentUpon>StockInputForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\StockOutForm.resx">
+    <EmbeddedResource Include="View\PCForm\MainStock\StockOutForm.resx">
       <DependentUpon>StockOutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\RequestForm\RequestForm.resx">
+    <EmbeddedResource Include="View\PRODForm\PRODForm.resx">
+      <DependentUpon>PRODForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PRODForm\RequestForm\RequestForm.resx">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\StockDetailForm.resx">
+    <EmbeddedResource Include="View\PCForm\MainStock\StockDetailForm.resx">
       <DependentUpon>StockDetailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\StockInForm.resx">
+    <EmbeddedResource Include="View\PCForm\MainStock\StockInForm.resx">
       <DependentUpon>StockInForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\app.manifest" />

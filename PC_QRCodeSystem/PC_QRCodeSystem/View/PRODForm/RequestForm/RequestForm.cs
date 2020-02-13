@@ -12,6 +12,7 @@ namespace PC_QRCodeSystem.View
         pts_destination descmb { get; set; }
         pts_request_log requestdata { get; set; }
         bool mconfirm, gmconfirm, mMode, gmMode;
+        ErrorProvider errorProvider = new ErrorProvider();
         #endregion
 
         public RequestForm()
@@ -69,16 +70,44 @@ namespace PC_QRCodeSystem.View
                 txtDestinationName.Text = "Destination Name";
         }
 
-        private void txtItemCode_Validated(object sender, EventArgs e)
+        private void txtItemCode_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtItemCode.Text))
-                txtItemName.Text = itemdata.GetItem(txtItemCode.Text).item_name;
+            try
+            {
+                txtItemName.BackColor = Color.FromKnownColor(KnownColor.Control);
+                txtItemName.Text = "Item Name";
+                errorProvider.SetError(txtItemCode, null);
+                if (!string.IsNullOrEmpty(txtItemCode.Text))
+                {
+                    txtItemName.Text = itemdata.GetItem(txtItemCode.Text).item_name;
+                    txtItemName.BackColor = Color.Lime;
+                }
+            }
+            catch
+            {
+                errorProvider.SetError(txtItemCode, "Item Code isn't exist!");
+                txtItemName.Text = "Item Name";
+            }
         }
 
-        private void txtModelCode_Validated(object sender, EventArgs e)
+        private void txtModelCode_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtModelCode.Text))
-                txtModelName.Text = itemdata.GetItem(txtModelCode.Text).item_name;
+            try
+            {
+                txtModelName.BackColor = Color.FromKnownColor(KnownColor.Control);
+                txtModelName.Text = "Model Name";
+                errorProvider.SetError(txtModelCode, null);
+                if (!string.IsNullOrEmpty(txtModelCode.Text))
+                {
+                    txtModelName.Text = itemdata.GetItem(txtModelCode.Text).item_name;
+                    txtModelName.BackColor = Color.Lime;
+                }
+            }
+            catch
+            {
+                errorProvider.SetError(txtModelCode, "Model Code isn't exist!");
+                txtModelName.Text = "Model Name";
+            }
         }
 
         private void txtQty_KeyPress(object sender, KeyPressEventArgs e)
@@ -99,7 +128,7 @@ namespace PC_QRCodeSystem.View
                     {
                         request_id = (int)dgvRequest.Rows[cell.RowIndex].Cells["request_id"].Value,
                         m_confirm = mconfirm,
-                        comment = dgvRequest.Rows[cell.RowIndex].Cells["comment"].Value.ToString()
+                        comment = dgvRequest.Rows[cell.RowIndex].Cells["comment"].Value.ToString() + Environment.NewLine + "Manager confirmed",
                     });
                 }
             }
@@ -111,7 +140,7 @@ namespace PC_QRCodeSystem.View
                     {
                         request_id = (int)dgvRequest.Rows[cell.RowIndex].Cells["request_id"].Value,
                         gm_confirm = gmconfirm,
-                        comment = dgvRequest.Rows[cell.RowIndex].Cells["comment"].Value.ToString()
+                        comment = dgvRequest.Rows[cell.RowIndex].Cells["comment"].Value.ToString() + Environment.NewLine + "GM Confirmed",
                     });
                 }
             }
@@ -120,6 +149,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnConfirm_Paint(object sender, PaintEventArgs e)
         {
+            if (dgvRequest.SelectedCells.Count == 0) btnConfirm.Enabled = false;
             if (mconfirm || gmconfirm)
                 btnConfirm.Text = "Confirm";
             else
@@ -145,6 +175,7 @@ namespace PC_QRCodeSystem.View
                     request_qty = double.Parse(txtQty.Text),
                     request_usercd = UserData.usercode,
                     comment = txtComment.Text,
+                    remark = "N",
                 });
                 MessageBox.Show("Add request completed!!!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 UpdateGrid();
@@ -157,12 +188,55 @@ namespace PC_QRCodeSystem.View
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if ((!gmMode && requestdata.gm_confirm) || (!mMode && !gmMode && requestdata.m_confirm))
+                {
+                    MessageBox.Show("This request is confirmed!" + Environment.NewLine + "Please contact Manager or GM for change this request!", "Warring!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    goto finUpdate;
+                }
+                requestdata.Update(new pts_request_log
+                {
+                    item_cd = txtItemCode.Text,
+                    model_cd = txtModelCode.Text,
+                    destination_cd = cmbDestination.Text,
+                    use_date = dtpUseDate.Value,
+                    request_date = DateTime.Now,
+                    request_qty = double.Parse(txtQty.Text),
+                    request_usercd = UserData.usercode,
+                    comment = txtComment.Text,
+                    remark = "N",
+                });
+                MessageBox.Show("Update request completed!!!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finUpdate:
             LockFields(true);
             UpdateGrid();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if ((!gmMode && requestdata.gm_confirm) || (!mMode && !gmMode && requestdata.m_confirm))
+                {
+                    MessageBox.Show("This request is confirmed!" + Environment.NewLine + "Please contact Manager or GM for delete this request!", "Warring!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    goto finDelete;
+                }
+                if (MessageBox.Show("Are you sure delete this request?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    goto finDelete;
+                requestdata.Delete();
+                MessageBox.Show("Deleted request!!!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finDelete:
             LockFields(true);
             UpdateGrid();
         }
@@ -260,25 +334,14 @@ namespace PC_QRCodeSystem.View
         {
             btnDelete.Enabled = !isLock;
             btnUpdate.Enabled = !isLock;
-            //btnConfirm.Enabled = !isLock;
         }
 
         private void dgvRequest_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (mMode)
-            {
-                if ((bool)dgvRequest.Rows[e.RowIndex].Cells["m_confirm"].Value)
-                    mconfirm = false;
-                else
-                    mconfirm = true;
-            }
+                mconfirm = !(bool)dgvRequest.Rows[e.RowIndex].Cells["m_confirm"].Value;
             if (gmMode)
-            {
-                if ((bool)dgvRequest.Rows[e.RowIndex].Cells["gm_confirm"].Value)
-                    gmconfirm = false;
-                else
-                    gmconfirm = true;
-            }
+                gmconfirm = !(bool)dgvRequest.Rows[e.RowIndex].Cells["gm_confirm"].Value;
             btnConfirm.Refresh();
         }
 
@@ -302,7 +365,7 @@ namespace PC_QRCodeSystem.View
             }
             if (dgvRequest.Columns[e.ColumnIndex].Name == "approve_usercd")
             {
-                if (string.IsNullOrEmpty(e.Value.ToString()))
+                if (string.IsNullOrEmpty(e.Value.ToString()) || e.Value.ToString() == "None")
                     e.CellStyle.BackColor = Color.Red;
                 else
                     e.CellStyle.BackColor = Color.Lime;
