@@ -73,6 +73,9 @@ namespace IPQC
                 if (File.Exists(@"D:\Database IPQC\Template.xlsx"))
                     File.Delete(@"D:\Database IPQC\Template.xlsx");
                 File.Copy(@"\\192.168.145.7\checksheet\Template.xlsx", @"D:\Database IPQC\Template.xlsx");
+                if (File.Exists(@"D:\Database IPQC\Template-CheckUCL.xlsx"))
+                    File.Delete(@"D:\Database IPQC\Template-CheckUCL.xlsx");
+                File.Copy(@"\\192.168.145.7\checksheet\Template-CheckUCL.xlsx", @"D:\Database IPQC\Template-CheckUCL.xlsx");
             }
             catch (Exception ex)
             {

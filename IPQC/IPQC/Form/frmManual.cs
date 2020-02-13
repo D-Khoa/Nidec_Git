@@ -780,7 +780,10 @@ namespace IPQC
             string dtpFrom = dtpLotFrom.Value.ToString("yyyy/MM/dd");
             string dtpTo = dtpLotTo.Value.ToString("yyyy/MM/dd");
 
-            xl.exportExcel(txtModel.Text, cmbLine.Text, txtUser.Text, txtUsl.Text, txtLsl.Text, txtProcess.Text, txtInspect.Text, sample, descrip, dgvHistory, dtpFrom, dtpTo);
+            if (cbCheckCL.Checked)
+                xl.exportExcelCheckCL(txtModel.Text, cmbLine.Text, txtUser.Text, txtUsl.Text, txtLsl.Text, txtProcess.Text, txtInspect.Text, sample, descrip, dgvHistory, dtpFrom, dtpTo);
+            else
+                xl.exportExcel(txtModel.Text, cmbLine.Text, txtUser.Text, txtUsl.Text, txtLsl.Text, txtProcess.Text, txtInspect.Text, sample, descrip, dgvHistory, dtpFrom, dtpTo);
         }
 
         // サブサブプロシージャ：ＸＲ管理図用データテーブルの生成      

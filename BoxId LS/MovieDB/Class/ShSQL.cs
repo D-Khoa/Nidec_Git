@@ -452,9 +452,22 @@ namespace BoxIdDb
 
         }
 
+        public bool CheckTableExist(string tableName)
+        {
+            try
+            {
+                NpgsqlConnection connection = new NpgsqlConnection(conStringBoxidDb);
+                string cmd = "select 1 from " + tableName + " where 1=2";
+                NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
+                connection.Open();
+                string result = command.ExecuteScalar().ToString();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
-
-
-
-
 }

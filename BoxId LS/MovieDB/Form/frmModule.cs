@@ -406,7 +406,7 @@ namespace BoxIdDb
                 //switch (m_short)
                 //{
                 //    case "3L":
-                        serShort = serLong;
+                serShort = serLong;
                 //}
                 string filterkey = decideReferenceTable(serShort);
                 if (serLong != String.Empty)
@@ -581,7 +581,7 @@ namespace BoxIdDb
                     tablekey = "ls12_004a"; filterkey = "LS4A";
                     break;
                 case "4D":
-                    tablekey = "ls12_004a"; filterkey = "LS4A";
+                    tablekey = "ls12_004d"; filterkey = "LS4D";
                     break;
                 case "3D":
                     tablekey = "ls12_003d"; filterkey = "LS3D";
@@ -625,9 +625,11 @@ namespace BoxIdDb
             //{ tablekey = "laa10_003"; filterkey = "LA10"; }
 
             testerTableThisMonth = tablekey + DateTime.Today.ToString("yyyyMM");
+            ShSQL sql = new ShSQL();
             testerTableLastMonth = tablekey + ((VBStrings.Right(DateTime.Today.ToString("yyyyMM"), 2) != "01") ?
                 (long.Parse(DateTime.Today.ToString("yyyyMM")) - 1).ToString() : (long.Parse(DateTime.Today.ToString("yyyy")) - 1).ToString() + "12");
-
+            if (!sql.CheckTableExist(testerTableLastMonth))
+                testerTableLastMonth = testerTableThisMonth;
             return filterkey;
         }
 
