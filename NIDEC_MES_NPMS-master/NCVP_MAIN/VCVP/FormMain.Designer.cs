@@ -112,6 +112,7 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.btnDataViewer = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.tabFAMG = new System.Windows.Forms.TabPage();
+            this.btnWHEq = new System.Windows.Forms.Button();
             this.labelCommon2 = new Com.Nidec.Mes.Framework.LabelCommon();
             this.NCVP_Function_gr = new Com.Nidec.Mes.Framework.GroupBoxCommon();
             this.ChangePass_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
@@ -121,9 +122,6 @@
             this.NcvpMaster_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.SystemMaster_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.Menu_gpb = new Com.Nidec.Mes.Framework.GroupBoxCommon();
-            this.btnWHEq = new System.Windows.Forms.Button();
-            this.btnInputEq = new System.Windows.Forms.Button();
-            this.btnOutputEq = new System.Windows.Forms.Button();
             this.NcvpMaster_gpb.SuspendLayout();
             this.Master_tab.SuspendLayout();
             this.Master.SuspendLayout();
@@ -159,7 +157,7 @@
             this.NcvpMaster_gpb.Controls.Add(this.Master_tab);
             this.NcvpMaster_gpb.Controls.Add(this.labelCommon1);
             this.NcvpMaster_gpb.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.NcvpMaster_gpb.Location = new System.Drawing.Point(167, 112);
+            this.NcvpMaster_gpb.Location = new System.Drawing.Point(170, 107);
             this.NcvpMaster_gpb.Name = "NcvpMaster_gpb";
             this.NcvpMaster_gpb.Size = new System.Drawing.Size(697, 572);
             this.NcvpMaster_gpb.TabIndex = 52;
@@ -1323,8 +1321,6 @@
             // 
             // tabFAMG
             // 
-            this.tabFAMG.Controls.Add(this.btnOutputEq);
-            this.tabFAMG.Controls.Add(this.btnInputEq);
             this.tabFAMG.Controls.Add(this.btnWHEq);
             this.tabFAMG.Location = new System.Drawing.Point(4, 24);
             this.tabFAMG.Name = "tabFAMG";
@@ -1333,6 +1329,16 @@
             this.tabFAMG.TabIndex = 5;
             this.tabFAMG.Text = "FA Management System";
             this.tabFAMG.UseVisualStyleBackColor = true;
+            // 
+            // btnWHEq
+            // 
+            this.btnWHEq.Location = new System.Drawing.Point(19, 20);
+            this.btnWHEq.Name = "btnWHEq";
+            this.btnWHEq.Size = new System.Drawing.Size(197, 69);
+            this.btnWHEq.TabIndex = 0;
+            this.btnWHEq.Text = "Warehouse Equipment";
+            this.btnWHEq.UseVisualStyleBackColor = true;
+            this.btnWHEq.Click += new System.EventHandler(this.btnWHEq_Click);
             // 
             // labelCommon2
             // 
@@ -1460,36 +1466,6 @@
             this.Menu_gpb.TabIndex = 49;
             this.Menu_gpb.TabStop = false;
             this.Menu_gpb.Text = "Menu";
-            // 
-            // btnWHEq
-            // 
-            this.btnWHEq.Location = new System.Drawing.Point(19, 20);
-            this.btnWHEq.Name = "btnWHEq";
-            this.btnWHEq.Size = new System.Drawing.Size(197, 69);
-            this.btnWHEq.TabIndex = 0;
-            this.btnWHEq.Text = "Warehouse Equipment";
-            this.btnWHEq.UseVisualStyleBackColor = true;
-            this.btnWHEq.Click += new System.EventHandler(this.btnWHEq_Click);
-            // 
-            // btnInputEq
-            // 
-            this.btnInputEq.Location = new System.Drawing.Point(253, 20);
-            this.btnInputEq.Name = "btnInputEq";
-            this.btnInputEq.Size = new System.Drawing.Size(197, 69);
-            this.btnInputEq.TabIndex = 1;
-            this.btnInputEq.Text = "Input Equipment";
-            this.btnInputEq.UseVisualStyleBackColor = true;
-            this.btnInputEq.Click += new System.EventHandler(this.btnInputEq_Click);
-            // 
-            // btnOutputEq
-            // 
-            this.btnOutputEq.Location = new System.Drawing.Point(19, 125);
-            this.btnOutputEq.Name = "btnOutputEq";
-            this.btnOutputEq.Size = new System.Drawing.Size(197, 69);
-            this.btnOutputEq.TabIndex = 2;
-            this.btnOutputEq.Text = "Output Equipment";
-            this.btnOutputEq.UseVisualStyleBackColor = true;
-            this.btnOutputEq.Click += new System.EventHandler(this.btnOutputEq_Click);
             // 
             // FormMain
             // 
@@ -1635,8 +1611,6 @@
         private System.Windows.Forms.TabPage tabPage6;
         private Framework.ButtonCommon btnDataViewer;
         private System.Windows.Forms.TabPage tabFAMG;
-        private System.Windows.Forms.Button btnOutputEq;
-        private System.Windows.Forms.Button btnInputEq;
         private System.Windows.Forms.Button btnWHEq;
     }
 }

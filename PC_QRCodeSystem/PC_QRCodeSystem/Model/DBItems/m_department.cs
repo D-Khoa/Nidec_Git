@@ -63,8 +63,8 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "INSERT INTO m_department(dept_id, dept_cd, dept_name, registration_user_cd)";
-            query += "VALUES ('" + adddept.dept_id + "','" + adddept.dept_cd + "','" + adddept.dept_name + "','" + adddept.registration_user_cd + "')";
+            query = "INSERT INTO m_department(dept_cd, dept_name, registration_user_cd)";
+            query += "VALUES ('" + adddept.dept_cd + "','" + adddept.dept_name + "','" + adddept.registration_user_cd + "')";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
@@ -78,7 +78,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE m_department SET dept_id='" + updept.dept_id + "', dept_cd='" + updept.dept_cd+ "',dept_name = '" + updept.dept_name;
+            query = "UPDATE m_department SET dept_cd='" + updept.dept_cd+ "',dept_name = '" + updept.dept_name;
             query += "', registration_user_cd ='" + updept.registration_user_cd;
             query += "', registration_date_time = now() where dept_id ='" + updept.dept_id + "'";
             //Execute non query for read database

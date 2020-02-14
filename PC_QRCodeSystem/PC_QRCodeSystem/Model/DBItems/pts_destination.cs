@@ -86,7 +86,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_destination SET destination_id='" + updest.destination_id + "', destination_cd='" + updest.destination_cd + "',destination_name = '" + updest.destination_name+ "',dept_cd = '" + updest.dept_cd;
+            query = "UPDATE pts_destination SET destination_cd='" + updest.destination_cd + "',destination_name = '" + updest.destination_name+ "',dept_cd = '" + updest.dept_cd;
             query += "', registration_user_cd ='" + updest.registration_user_cd;
             query += "', registration_date_time = now() where destination_id ='" + updest.destination_id + "'";
             //Execute non query for read database
