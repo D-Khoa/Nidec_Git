@@ -562,6 +562,7 @@ namespace PC_QRCodeSystem.View
             if (e.KeyCode == Keys.Enter)
             {
                 AddNewItem();
+                txtBarcode.Clear();
             }
         }
 
