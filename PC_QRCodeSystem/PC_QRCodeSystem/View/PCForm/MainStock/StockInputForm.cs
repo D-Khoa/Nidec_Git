@@ -14,6 +14,7 @@ namespace PC_QRCodeSystem.View
     public partial class StockInputForm : FormCommon
     {
         #region ITEMS
+        ErrorProvider errorProvider { get; set; }
         pts_item itemUnit { get; set; }
         PremacIn premacItem { get; set; }
         PrintItem printItem { get; set; }
@@ -24,7 +25,6 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region SETTING
-        int n = 1;
         string settingpath, premacPath, printername;
         List<string> allsetting = new List<string>();
         #region PRINTER
@@ -39,6 +39,7 @@ namespace PC_QRCodeSystem.View
         public StockInputForm()
         {
             InitializeComponent();
+            errorProvider = new ErrorProvider();
             itemUnit = new pts_item();
             printItem = new PrintItem();
             premacItem = new PremacIn();
@@ -419,6 +420,9 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region INSPECTION TAB
+        /// <summary>
+        /// Update datagridview
+        /// </summary>
         private void UpdateInspectionGrid()
         {
             dgvInspection.DataSource = listStockItem;
@@ -436,44 +440,111 @@ namespace PC_QRCodeSystem.View
             dgvInspection.Columns["registration_user_cd"].HeaderText = "Reg User";
             dgvInspection.Columns["registration_date_time"].HeaderText = "Reg Date";
             tsLabelNumber.Text = dgvInspection.Rows.Count.ToString();
+            double total = listStockItem.Sum(x => x.stockin_qty);
+            tsQty.Text = total.ToString();
         }
 
-        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
+        /// <summary>
+        /// Add new stock item into temp list
+        /// </summary>
+        private void AddNewItem()
         {
             try
             {
-                if (e.KeyCode == Keys.Enter)
+                int n = 1;
+                int temp = 0;
+                txtSupplierCD.Clear();
+                txtSupplierName.Clear();
+                string[] barcode = txtBarcode.Text.Split(';');
+                string pono = "None";
+                string orderno = "None";
+                if (!string.IsNullOrEmpty(barcode[7])) pono = barcode[7];
+                if (!string.IsNullOrEmpty(barcode[8])) orderno = barcode[8];
+
+                #region CHECK SUPPLIER & NOTICE FOR USER
+                errorProvider.SetError(txtSupplierCD, null);
+                txtSupplierName.Text = barcode[2];
+                try
                 {
-                    int temp = 0;
-                    string[] barcode = txtBarcode.Text.Split(';');
-                    txtSupplierCD.Text = barcode[6];
-                    txtSupplierName.Text = barcode[2];
-                    foreach (pts_stock item in listStockItem)
+                    if (string.IsNullOrEmpty(barcode[6]))
                     {
-                        if (item.po_no == barcode[7])
+                        supplierItem = supplierItem.GetSupplier(new pts_supplier
                         {
-                            temp = int.Parse(item.packing_cd.Split('-')[1]);
-                            if (temp == n)
-                                n++;
-                        }
+                            supplier_id = 0,
+                            supplier_name = txtSupplierName.Text
+                        });
+                        txtSupplierCD.Text = supplierItem.supplier_cd;
                     }
-                    listStockItem.Add(new pts_stock
+                    else
                     {
-                        item_cd = barcode[0],
-                        supplier_cd = barcode[6],
-                        invoice = barcode[3],
-                        stockin_date = DateTime.Parse(barcode[4]),
-                        stockin_qty = double.Parse(barcode[5]),
-                        stockin_user_cd = UserData.usercode,
-                        po_no = barcode[7],
-                        order_no = barcode[8],
-                        packing_cd = barcode[7] + "-" + n.ToString("00"),
-                        packing_qty = double.Parse(barcode[5]),
-                        registration_user_cd = UserData.usercode,
-                    });
-                    UpdateInspectionGrid();
-                    n = 1;
+                        txtSupplierCD.Text = barcode[6];
+                        supplierItem = supplierItem.GetSupplier(new pts_supplier
+                        {
+                            supplier_id = 0,
+                            supplier_cd = txtSupplierCD.Text
+                        });
+                    }
                 }
+                catch (Exception ex)
+                {
+                    errorProvider.SetError(txtSupplierCD, "This supplier is not exist!" + Environment.NewLine + "Please fill supplier code and press F2 for add new supplier (" + ex.Message + ")");
+                    return;
+                }
+                #endregion
+
+                #region CHECK PO AND CREATE PACKING CODE
+                try
+                {
+                    if (stockItem.SearchItem(new pts_stock { po_no = barcode[7] }, DateTime.Now, DateTime.Now, false))
+                    {
+                        if (MessageBox.Show("This PO is exist! Are you sure add new packing with this PO?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                            return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.Print(ex.Message);
+                }
+                //Get max number packing of this PO in database
+                foreach (pts_stock item in stockItem.listStockItems)
+                {
+                    if (item.po_no == barcode[7])
+                    {
+                        temp = int.Parse(item.packing_cd.Split('-')[1]);
+                        if (temp == n)
+                            n++;
+                    }
+                }
+                //Create new number of packing with PO number
+                foreach (pts_stock item in listStockItem)
+                {
+                    if (item.po_no == barcode[7])
+                    {
+                        temp = int.Parse(item.packing_cd.Split('-')[1]);
+                        if (temp == n)
+                            n++;
+                    }
+                }
+                string packingcd = pono + "-" + n.ToString("00");
+                #endregion
+
+                //Add new barcode item into list stock item
+                listStockItem.Add(new pts_stock
+                {
+                    item_cd = barcode[0],
+                    supplier_cd = txtSupplierCD.Text,
+                    invoice = barcode[3],
+                    stockin_date = DateTime.Parse(barcode[4]),
+                    stockin_qty = double.Parse(barcode[5]),
+                    stockin_user_cd = UserData.usercode,
+                    po_no = pono,
+                    order_no = orderno,
+                    packing_cd = packingcd,
+                    packing_qty = double.Parse(barcode[5]),
+                    registration_user_cd = UserData.usercode,
+                });
+                UpdateInspectionGrid();
+
             }
             catch (IndexOutOfRangeException)
             {
@@ -483,27 +554,49 @@ namespace PC_QRCodeSystem.View
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                AddNewItem();
+            }
+        }
+
+        private void txtSupplierCD_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                //Press F2 for add new supplier
+                if (e.KeyCode == Keys.F2)
+                {
+                    supplierItem.AddSupplier(new pts_supplier
+                    {
+                        supplier_cd = txtSupplierCD.Text,
+                        supplier_name = txtSupplierName.Text,
+                        registration_user_cd = UserData.usercode,
+                    });
+                    MessageBox.Show("New supplier has been added with supplier code : " + txtSupplierCD.Text, "Noitice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    errorProvider.SetError(txtSupplierCD, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            AddNewItem();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < dgvInspection.Rows.Count; i++)
             {
-                //Check supplier exist.
-                try
-                {
-                    supplierItem.GetSupplierName(dgvInspection.Rows[i].Cells["supplier_cd"].Value.ToString());
-                }
-                catch
-                {
-                    //If supplier not exist, add new supplier
-                    supplierItem.AddSupplier(new pts_supplier
-                    {
-                        supplier_cd = txtBarcode.Text.Split(';')[6],
-                        supplier_name = txtBarcode.Text.Split(';')[2],
-                        registration_user_cd = UserData.usercode,
-                    });
-                }
                 //Register item into stock
                 try
                 {
@@ -558,8 +651,9 @@ namespace PC_QRCodeSystem.View
         {
             txtBarcode.Clear();
             txtSupplierCD.Clear();
-            txtSupplierName.Clear();
             dgvInspection.DataSource = null;
+            txtSupplierName.Text = "Supplier Name";
+            errorProvider.SetError(txtSupplierCD, null);
         }
         #endregion
     }

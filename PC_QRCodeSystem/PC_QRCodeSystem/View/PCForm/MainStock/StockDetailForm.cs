@@ -87,7 +87,11 @@ namespace PC_QRCodeSystem.View
                 return;
             try
             {
-                lbSupplierName.Text = supplierData.GetSupplierName(txtSupplierCD.Text);
+                lbSupplierName.Text = supplierData.GetSupplier(new pts_supplier
+                {
+                    supplier_id = 0,
+                    supplier_cd = txtSupplierCD.Text
+                }).supplier_name;
                 lbSupplierName.BackColor = Color.Lime;
             }
             catch
@@ -260,7 +264,7 @@ namespace PC_QRCodeSystem.View
         {
             int temp = 10;
             Bitmap page = new Bitmap(dgvStockDetail.Width, dgvStockDetail.Height);
-            for(int c = 0; c < dgvStockDetail.Columns.Count; c++)
+            for (int c = 0; c < dgvStockDetail.Columns.Count; c++)
             {
                 e.Graphics.DrawRectangle(new Pen(Color.Black), new Rectangle(temp, 50, dgvStockDetail.Columns[c].Width, 100));
                 e.Graphics.DrawString(dgvStockDetail.Columns[c].HeaderText, dgvStockDetail.Columns[c].InheritedStyle.Font, new SolidBrush(Color.Black), temp + 5, 90);

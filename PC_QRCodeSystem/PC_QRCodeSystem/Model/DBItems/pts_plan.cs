@@ -9,6 +9,7 @@ namespace PC_QRCodeSystem.Model
         #region ALL FIELDS
         public int plan_id { get; set; }
         public string destination_cd { get; set; }
+        public string model_cd { get; set; }
         public string set_number { get; set; }
         public DateTime plan_date { get; set; }
         public double plan_qty { get; set; }
@@ -39,12 +40,14 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT plan_id, destination_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment ";
+            query = "SELECT plan_id, destination_cd, model_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment ";
             query += "FROM pts_plan WHERE 1=1 ";
             if (inItem.plan_id > 0)
                 query += "AND plan_id ='" + inItem.plan_id + "' ";
             if (!string.IsNullOrEmpty(inItem.destination_cd))
                 query += "AND destination_cd ='" + inItem.destination_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.model_cd))
+                query += "AND model_cd ='" + inItem.model_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.set_number))
                 query += "AND set_number like '" + inItem.set_number.Remove(inItem.set_number.Length - 1) + "%' ";
             if (!string.IsNullOrEmpty(inItem.plan_usercd))
@@ -71,6 +74,7 @@ namespace PC_QRCodeSystem.Model
                 {
                     plan_id = (int)reader["plan_id"],
                     destination_cd = reader["destination_cd"].ToString(),
+                    model_cd = reader["model_cd"].ToString(),
                     set_number = reader["set_number"].ToString(),
                     plan_date = (DateTime)reader["plan_date"],
                     plan_usercd = reader["plan_usercd"].ToString(),
@@ -97,10 +101,10 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "INSERT INTO pts_plan(destination_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment) ";
-            query += "VALUES('" + inItem.destination_cd + "','" + inItem.set_number + "','" + inItem.plan_date.ToString("yyyy-MM-dd");
-            query += "','" + inItem.plan_usercd + "','" + inItem.plan_qty + "','" + inItem.delivery_date.ToString("yyyy-MM-dd");
-            query += "','" + inItem.comment + "')";
+            query = "INSERT INTO pts_plan(destination_cd, model_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment) ";
+            query += "VALUES('" + inItem.destination_cd + "','" + inItem.model_cd + "','" + inItem.set_number;
+            query += "','" + inItem.plan_date.ToString("yyyy-MM-dd") + "','" + inItem.plan_usercd + "','" + inItem.plan_qty;
+            query += "','" + inItem.delivery_date.ToString("yyyy-MM-dd") + "','" + inItem.comment + "')";
             //Execute non query SQL
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
@@ -121,10 +125,10 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_plan SET destination_cd ='" + inItem.destination_cd + "', set_number ='" + inItem.set_number;
-            query += "', plan_date ='" + inItem.plan_date.ToString("yyyy-MM-dd") + "', plan_usercd ='" + inItem.plan_usercd;
-            query += "', plan_qty='" + inItem.plan_qty + "', delivery_date ='" + inItem.delivery_date.ToString("yyyy-MM-dd");
-            query += "', comment ='" + inItem.comment + "' ";
+            query = "UPDATE pts_plan SET destination_cd ='" + inItem.destination_cd + "', model_cd ='" + inItem.model_cd;
+            query += "', set_number ='" + inItem.set_number + "', plan_date ='" + inItem.plan_date.ToString("yyyy-MM-dd");
+            query += "', plan_usercd ='" + inItem.plan_usercd + "', plan_qty='" + inItem.plan_qty;
+            query += "', delivery_date ='" + inItem.delivery_date.ToString("yyyy-MM-dd") + "', comment ='" + inItem.comment + "' ";
             //Execute non query SQL
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;

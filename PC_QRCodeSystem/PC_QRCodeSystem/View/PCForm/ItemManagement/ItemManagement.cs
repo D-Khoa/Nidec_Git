@@ -152,71 +152,78 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         private void UpdateGrid(bool isSearch)
         {
-            //Search and get items list
-            if (rbtnItemCode.Checked)
+            try
             {
-                if (isSearch)
+                //Search and get items list
+                if (rbtnItemCode.Checked)
                 {
-                    //Search with item type
-                    if (!string.IsNullOrEmpty(cmbItemType.Text))
-                        ptsItem.SearchItem(new pts_item
-                        {
-                            item_cd = txtItem.Text,
-                            item_unit = cmbUnitCode.Text,
-                            item_location = cmbLocation.Text,
-                            type_id = int.Parse(cmbItemType.Text)
-                        }, true);
-                    else
-                        //Search without item type
-                        ptsItem.SearchItem(new pts_item
-                        {
-                            item_cd = txtItem.Text,
-                            item_unit = cmbUnitCode.Text,
-                            item_location = cmbLocation.Text,
-                        }, false);
+                    if (isSearch)
+                    {
+                        //Search with item type
+                        if (!string.IsNullOrEmpty(cmbItemType.Text))
+                            ptsItem.SearchItem(new pts_item
+                            {
+                                item_cd = txtItem.Text,
+                                item_unit = cmbUnitCode.Text,
+                                item_location = cmbLocation.Text,
+                                type_id = int.Parse(cmbItemType.Text)
+                            }, true);
+                        else
+                            //Search without item type
+                            ptsItem.SearchItem(new pts_item
+                            {
+                                item_cd = txtItem.Text,
+                                item_unit = cmbUnitCode.Text,
+                                item_location = cmbLocation.Text,
+                            }, false);
+                    }
+                    dgvData.DataSource = null;
+                    dgvData.DataSource = ptsItem.listItems;
+                    dgvData.Columns["item_id"].HeaderText = "Item ID";
+                    dgvData.Columns["type_id"].HeaderText = "Type ID";
+                    dgvData.Columns["item_cd"].HeaderText = "Item Number";
+                    dgvData.Columns["item_name"].HeaderText = "Item Name";
+                    dgvData.Columns["item_location"].HeaderText = "Item Location";
+                    dgvData.Columns["item_unit"].HeaderText = "Unit";
+                    dgvData.Columns["lot_size"].HeaderText = "Lot Size";
+                    dgvData.Columns["wh_qty"].HeaderText = "WH Qty";
+                    dgvData.Columns["wip_qty"].HeaderText = "W.I.P Qty";
+                    dgvData.Columns["repair_qty"].HeaderText = "Repair Qty";
+                    dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                    dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
+                    UpdateGrid(0);
                 }
-                dgvData.DataSource = null;
-                dgvData.DataSource = ptsItem.listItems;
-                dgvData.Columns["item_id"].HeaderText = "Item ID";
-                dgvData.Columns["type_id"].HeaderText = "Type ID";
-                dgvData.Columns["item_cd"].HeaderText = "Item Number";
-                dgvData.Columns["item_name"].HeaderText = "Item Name";
-                dgvData.Columns["item_location"].HeaderText = "Item Location";
-                dgvData.Columns["item_unit"].HeaderText = "Unit";
-                dgvData.Columns["lot_size"].HeaderText = "Lot Size";
-                dgvData.Columns["wh_qty"].HeaderText = "WH Qty";
-                dgvData.Columns["wip_qty"].HeaderText = "W.I.P Qty";
-                dgvData.Columns["repair_qty"].HeaderText = "Repair Qty";
-                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
-                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
-                UpdateGrid();
+                //Search and get item type list
+                if (rbtnItemType.Checked)
+                {
+                    if (isSearch)
+                        ptsItemType.GetListItemType();
+                    dgvData.DataSource = null;
+                    dgvData.DataSource = ptsItemType.listItemType;
+                    dgvData.Columns["type_id"].HeaderText = "Type ID";
+                    dgvData.Columns["type_name"].HeaderText = "Type Name";
+                    dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                    dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
+                }
+                isSearch = false;
             }
-            //Search and get item type list
-            if (rbtnItemType.Checked)
+            catch (Exception ex)
             {
-                if (isSearch)
-                    ptsItemType.GetListItemType();
-                dgvData.DataSource = null;
-                dgvData.DataSource = ptsItemType.listItemType;
-                dgvData.Columns["type_id"].HeaderText = "Type ID";
-                dgvData.Columns["type_name"].HeaderText = "Type Name";
-                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
-                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            isSearch = false;
         }
 
-        private void UpdateGrid()
+        private void UpdateGrid(int rowIndex)
         {
-            if (dgvData.SelectedRows.Count > 0)
+            if (dgvData.SelectedCells.Count > 0)
             {
-                dgvItemQty.Rows[0].Cells["lot_size"].Value = dgvData.SelectedRows[0].Cells["lot_size"].Value;
-                dgvItemQty.Rows[0].Cells["wh_qty"].Value = dgvData.SelectedRows[0].Cells["wh_qty"].Value;
-                dgvItemQty.Rows[0].Cells["wip_qty"].Value = dgvData.SelectedRows[0].Cells["wip_qty"].Value;
-                dgvItemQty.Rows[0].Cells["repair_qty"].Value = dgvData.SelectedRows[0].Cells["repair_qty"].Value;
+                dgvItemQty.Rows[0].Cells["lot_size"].Value = dgvData.Rows[rowIndex].Cells["lot_size"].Value;
+                dgvItemQty.Rows[0].Cells["wh_qty"].Value = dgvData.Rows[rowIndex].Cells["wh_qty"].Value;
+                dgvItemQty.Rows[0].Cells["wip_qty"].Value = dgvData.Rows[rowIndex].Cells["wip_qty"].Value;
+                dgvItemQty.Rows[0].Cells["repair_qty"].Value = dgvData.Rows[rowIndex].Cells["repair_qty"].Value;
             }
         }
+
         /// <summary>
         /// Clear all fields
         /// </summary>
@@ -327,7 +334,7 @@ namespace PC_QRCodeSystem.View
                             registration_user_cd = UserData.usercode
                         });
                     }
-                    unitCbm.GetListUnit();
+                    //unitCbm.GetListUnit();
                 }
                 #endregion
 
@@ -416,30 +423,37 @@ namespace PC_QRCodeSystem.View
 
         private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Get data from datagrid to pts item
-            if (rbtnItemCode.Checked)
+            if (e.RowIndex >= 0)
             {
-                ptsItem = dgvData.Rows[e.RowIndex].DataBoundItem as pts_item;
-                txtItem.Text = ptsItem.item_cd;
-                txtItemName.Text = ptsItem.item_name;
-                cmbLocation.Text = ptsItem.item_location;
-                cmbUnitCode.Text = ptsItem.item_unit;
-                cmbItemType.Text = ptsItem.type_id.ToString();
-                UpdateGrid();
+                //Get data from datagrid to pts item
+                if (rbtnItemCode.Checked)
+                {
+                    ptsItem = dgvData.Rows[e.RowIndex].DataBoundItem as pts_item;
+                    txtItem.Text = ptsItem.item_cd;
+                    txtItemName.Text = ptsItem.item_name;
+                    cmbLocation.Text = ptsItem.item_location;
+                    cmbUnitCode.Text = ptsItem.item_unit;
+                    cmbItemType.Text = ptsItem.type_id.ToString();
+                    UpdateGrid(e.RowIndex);
+                }
+                //Get data from datagrid to pts item type
+                if (rbtnItemType.Checked)
+                {
+                    ptsItemType = dgvData.Rows[e.RowIndex].DataBoundItem as pts_item_type;
+                    cmbItemType.Text = ptsItemType.type_id.ToString();
+                }
+                btnUpdate.Enabled = true;
+                btnDelete.Enabled = true;
             }
-            //Get data from datagrid to pts item type
-            if (rbtnItemType.Checked)
-            {
-                ptsItemType = dgvData.Rows[e.RowIndex].DataBoundItem as pts_item_type;
-                cmbItemType.Text = ptsItemType.type_id.ToString();
-            }
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
         }
 
         private void dgvData_SelectionChanged(object sender, EventArgs e)
         {
-            UpdateGrid();
+            try
+            {
+                if (rbtnItemCode.Checked) UpdateGrid(dgvData.SelectedCells[0].RowIndex);
+            }
+            catch { }
             LockFields();
         }
 

@@ -21,11 +21,11 @@ namespace PC_QRCodeSystem.Model
         #endregion
 
         /// <summary>
-        /// Get supplier name with supplier code
+        /// Get a supplier
         /// </summary>
-        /// <param name="supplier_code">Supplier code</param>
+        /// <param name="inItem">input info supplier to search</param>
         /// <returns></returns>
-        public string GetSupplierName(string supplier_code)
+        public pts_supplier GetSupplier(pts_supplier inItem)
         {
             //SQL library
             PSQL SQL = new PSQL();
@@ -33,13 +33,30 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select supplier_name from pts_supplier where supplier_cd ='" + supplier_code + "'";
+            query = "select supplier_id, supplier_cd, supplier_name, registration_date_time,registration_user_cd ";
+            query += "from pts_supplier where 1=1 ";
+            if (inItem.supplier_id > 0)
+                query += "and supplier_id ='" + inItem.supplier_id + "' ";
+            if (!string.IsNullOrEmpty(inItem.supplier_cd))
+                query += "and supplier_cd ='" + inItem.supplier_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.supplier_name))
+                query += "and supplier_name ='" + inItem.supplier_name + "' ";
             //Execute reader for read database
-            string result = SQL.Command(query).ExecuteScalar().ToString();
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            reader.Read();
+            pts_supplier outItem = new pts_supplier
+            {
+                supplier_id = (int)reader["supplier_id"],
+                supplier_cd = reader["supplier_cd"].ToString(),
+                supplier_name = reader["supplier_name"].ToString(),
+                registration_date_time = (DateTime)reader["registration_date_time"],
+                registration_user_cd = reader["registration_user_cd"].ToString()
+            };
+            reader.Close();
             query = string.Empty;
             //Close SQL connection
             SQL.Close();
-            return result;
+            return outItem;
         }
 
         /// <summary>
@@ -81,6 +98,11 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
         }
 
+        /// <summary>
+        /// Add supplier item
+        /// </summary>
+        /// <param name="addptssupplier"></param>
+        /// <returns></returns>
         public int AddSupplier(pts_supplier addptssupplier)
         {
             //SQL library
@@ -98,6 +120,11 @@ namespace PC_QRCodeSystem.Model
             return result;
         }
 
+        /// <summary>
+        /// Update supplier
+        /// </summary>
+        /// <param name="UpSupplier"></param>
+        /// <returns></returns>
         public int UpdateSuplier(pts_supplier UpSupplier)
         {
             //SQL library
@@ -114,7 +141,12 @@ namespace PC_QRCodeSystem.Model
             return result;
         }
 
-        public int Delete(int id)
+        /// <summary>
+        /// Delete current supplier
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int Delete()
         {
             //SQL library
             PSQL SQL = new PSQL();
@@ -122,7 +154,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "DELETE FROM pts_supplier WHERE supplier_id ='" + id + "'";
+            query = "DELETE FROM pts_supplier WHERE supplier_id ='" + supplier_id + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;

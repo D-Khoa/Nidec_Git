@@ -89,7 +89,7 @@ namespace PC_QRCodeSystem.View
             if (MessageBox.Show("This action is not undo" + Environment.NewLine + "Are you sure delete this supplier?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             int n = 0;
-            n = ptssupllier.Delete(ptssupllier.supplier_id);
+            n = ptssupllier.Delete();
             // ClearOK();
             Getcmbdata();
             UpdateGrid();

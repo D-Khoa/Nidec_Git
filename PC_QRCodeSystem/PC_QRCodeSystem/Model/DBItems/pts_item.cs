@@ -358,18 +358,27 @@ namespace PC_QRCodeSystem.Model
         /// <returns></returns>
         public int Delete(int id)
         {
-            //SQL library
-            PSQL SQL = new PSQL();
-            string query = string.Empty;
-            //Open SQL connection
-            SQL.Open();
-            //SQL query string
-            query = "DELETE FROM pts_item WHERE item_id ='" + id + "'";
-            //Execute non query for read database
-            int result = SQL.Command(query).ExecuteNonQuery();
-            query = string.Empty;
-            return result;
-
+            try
+            {
+                //SQL library
+                PSQL SQL = new PSQL();
+                string query = string.Empty;
+                //Open SQL connection
+                SQL.Open();
+                //SQL query string
+                query = "DELETE FROM pts_item WHERE item_id ='" + id + "'";
+                //Execute non query for read database
+                int result = SQL.Command(query).ExecuteNonQuery();
+                query = string.Empty;
+                return result;
+            }
+            catch(Exception ex)
+            {
+                if (ex.Message.Split(':')[0] == "23503")
+                    throw new Exception("This item is used on another table. Please check and try again!");
+                else
+                    throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -61,6 +61,8 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsLabelNumber = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsQty = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnInspectionClear = new System.Windows.Forms.Button();
@@ -79,6 +81,7 @@
             this.btnPrintSelected = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
             this.btnPrintBack = new System.Windows.Forms.Button();
+            this.btnAddItem = new System.Windows.Forms.Button();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -453,31 +456,47 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
-            this.tsLabelNumber});
-            this.statusStrip1.Location = new System.Drawing.Point(4, 442);
+            this.tsLabelNumber,
+            this.toolStripStatusLabel3,
+            this.tsQty});
+            this.statusStrip1.Location = new System.Drawing.Point(4, 440);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1000, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1000, 24);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(858, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(761, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(86, 19);
             this.toolStripStatusLabel2.Text = "Label number :";
             // 
             // tsLabelNumber
             // 
+            this.tsLabelNumber.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.tsLabelNumber.Name = "tsLabelNumber";
-            this.tsLabelNumber.Size = new System.Drawing.Size(36, 17);
+            this.tsLabelNumber.Size = new System.Drawing.Size(40, 19);
             this.tsLabelNumber.Text = "None";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(57, 19);
+            this.toolStripStatusLabel3.Text = "Quantity";
+            // 
+            // tsQty
+            // 
+            this.tsQty.Name = "tsQty";
+            this.tsQty.Size = new System.Drawing.Size(36, 19);
+            this.tsQty.Text = "None";
             // 
             // dgvInspection
             // 
@@ -490,12 +509,12 @@
             this.dgvInspection.Margin = new System.Windows.Forms.Padding(4);
             this.dgvInspection.Name = "dgvInspection";
             this.dgvInspection.ReadOnly = true;
-            this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvInspection.Size = new System.Drawing.Size(1000, 380);
             this.dgvInspection.TabIndex = 1;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnAddItem);
             this.panel4.Controls.Add(this.btnInspectionClear);
             this.panel4.Controls.Add(this.txtSupplierName);
             this.panel4.Controls.Add(this.txtSupplierCD);
@@ -515,24 +534,25 @@
             // btnInspectionClear
             // 
             this.btnInspectionClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInspectionClear.Location = new System.Drawing.Point(760, 15);
+            this.btnInspectionClear.Location = new System.Drawing.Point(800, 10);
             this.btnInspectionClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspectionClear.Name = "btnInspectionClear";
-            this.btnInspectionClear.Size = new System.Drawing.Size(100, 50);
-            this.btnInspectionClear.TabIndex = 26;
+            this.btnInspectionClear.Size = new System.Drawing.Size(80, 60);
+            this.btnInspectionClear.TabIndex = 7;
             this.btnInspectionClear.Text = "Clear";
             this.btnInspectionClear.UseVisualStyleBackColor = true;
             this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
             // 
             // txtSupplierName
             // 
-            this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSupplierName.Location = new System.Drawing.Point(280, 40);
             this.txtSupplierName.Margin = new System.Windows.Forms.Padding(4);
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.Size = new System.Drawing.Size(240, 23);
-            this.txtSupplierName.TabIndex = 25;
+            this.txtSupplierName.TabIndex = 3;
             this.txtSupplierName.Text = "Supplier Name";
+            this.txtSupplierName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtSupplierCD
             // 
@@ -540,8 +560,9 @@
             this.txtSupplierCD.Location = new System.Drawing.Point(120, 40);
             this.txtSupplierCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtSupplierCD.Name = "txtSupplierCD";
-            this.txtSupplierCD.Size = new System.Drawing.Size(150, 23);
-            this.txtSupplierCD.TabIndex = 24;
+            this.txtSupplierCD.Size = new System.Drawing.Size(120, 23);
+            this.txtSupplierCD.TabIndex = 2;
+            this.txtSupplierCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSupplierCD_KeyDown);
             // 
             // label2
             // 
@@ -558,11 +579,11 @@
             // 
             this.btnInsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsBack.Location = new System.Drawing.Point(890, 15);
+            this.btnInsBack.Location = new System.Drawing.Point(890, 10);
             this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsBack.Name = "btnInsBack";
-            this.btnInsBack.Size = new System.Drawing.Size(100, 50);
-            this.btnInsBack.TabIndex = 22;
+            this.btnInsBack.Size = new System.Drawing.Size(80, 60);
+            this.btnInsBack.TabIndex = 8;
             this.btnInsBack.Text = "Back";
             this.btnInsBack.UseVisualStyleBackColor = true;
             this.btnInsBack.Click += new System.EventHandler(this.btnPrintBack_Click);
@@ -570,11 +591,11 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(650, 15);
+            this.btnDelete.Location = new System.Drawing.Point(710, 10);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(100, 50);
-            this.btnDelete.TabIndex = 21;
+            this.btnDelete.Size = new System.Drawing.Size(80, 60);
+            this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -582,11 +603,11 @@
             // btnRegister
             // 
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(540, 15);
+            this.btnRegister.Location = new System.Drawing.Point(620, 10);
             this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(100, 50);
-            this.btnRegister.TabIndex = 20;
+            this.btnRegister.Size = new System.Drawing.Size(80, 60);
+            this.btnRegister.TabIndex = 5;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
@@ -598,7 +619,7 @@
             this.txtBarcode.Margin = new System.Windows.Forms.Padding(4);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(400, 23);
-            this.txtBarcode.TabIndex = 19;
+            this.txtBarcode.TabIndex = 1;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
             // label5
@@ -702,6 +723,18 @@
             this.btnPrintBack.UseVisualStyleBackColor = true;
             this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
             // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddItem.Location = new System.Drawing.Point(530, 10);
+            this.btnAddItem.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(80, 60);
+            this.btnAddItem.TabIndex = 4;
+            this.btnAddItem.Text = "Add Item";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
             // StockInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -798,5 +831,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tsLabelNumber;
         private System.Windows.Forms.Button btnInspectionClear;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel tsQty;
+        private System.Windows.Forms.Button btnAddItem;
     }
 }

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtComment = new System.Windows.Forms.TextBox();
+            this.rbtnNoCheckDate = new System.Windows.Forms.RadioButton();
             this.txtModelCD = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.dtpDeliveryToDate = new System.Windows.Forms.DateTimePicker();
@@ -71,9 +74,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.rbtnNoCheckDate = new System.Windows.Forms.RadioButton();
-            this.txtComment = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanData)).BeginInit();
             this.panel5.SuspendLayout();
@@ -115,6 +115,34 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(680, 230);
             this.panel4.TabIndex = 2;
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(470, 10);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(100, 20);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Comment";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtComment
+            // 
+            this.txtComment.Location = new System.Drawing.Point(470, 40);
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.Size = new System.Drawing.Size(200, 170);
+            this.txtComment.TabIndex = 23;
+            // 
+            // rbtnNoCheckDate
+            // 
+            this.rbtnNoCheckDate.AutoSize = true;
+            this.rbtnNoCheckDate.Location = new System.Drawing.Point(10, 130);
+            this.rbtnNoCheckDate.Name = "rbtnNoCheckDate";
+            this.rbtnNoCheckDate.Size = new System.Drawing.Size(117, 20);
+            this.rbtnNoCheckDate.TabIndex = 22;
+            this.rbtnNoCheckDate.TabStop = true;
+            this.rbtnNoCheckDate.Text = "No Check Date";
+            this.rbtnNoCheckDate.UseVisualStyleBackColor = true;
             // 
             // txtModelCD
             // 
@@ -319,7 +347,7 @@
             this.dgvPlanData.ReadOnly = true;
             this.dgvPlanData.Size = new System.Drawing.Size(680, 85);
             this.dgvPlanData.TabIndex = 3;
-            this.dgvPlanData.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlanData_CellContentDoubleClick);
+            this.dgvPlanData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlanData_CellDoubleClick);
             // 
             // panel5
             // 
@@ -439,7 +467,7 @@
             this.tab_PlanItem.Location = new System.Drawing.Point(4, 28);
             this.tab_PlanItem.Name = "tab_PlanItem";
             this.tab_PlanItem.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_PlanItem.Size = new System.Drawing.Size(646, 381);
+            this.tab_PlanItem.Size = new System.Drawing.Size(686, 381);
             this.tab_PlanItem.TabIndex = 1;
             this.tab_PlanItem.Text = "Item";
             this.tab_PlanItem.UseVisualStyleBackColor = true;
@@ -450,7 +478,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 63);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(640, 315);
+            this.dataGridView1.Size = new System.Drawing.Size(680, 315);
             this.dataGridView1.TabIndex = 6;
             // 
             // panel6
@@ -465,7 +493,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(640, 60);
+            this.panel6.Size = new System.Drawing.Size(680, 60);
             this.panel6.TabIndex = 5;
             // 
             // button1
@@ -530,34 +558,6 @@
             this.button7.TabIndex = 0;
             this.button7.Text = "Search";
             this.button7.UseVisualStyleBackColor = true;
-            // 
-            // rbtnNoCheckDate
-            // 
-            this.rbtnNoCheckDate.AutoSize = true;
-            this.rbtnNoCheckDate.Location = new System.Drawing.Point(10, 130);
-            this.rbtnNoCheckDate.Name = "rbtnNoCheckDate";
-            this.rbtnNoCheckDate.Size = new System.Drawing.Size(117, 20);
-            this.rbtnNoCheckDate.TabIndex = 22;
-            this.rbtnNoCheckDate.TabStop = true;
-            this.rbtnNoCheckDate.Text = "No Check Date";
-            this.rbtnNoCheckDate.UseVisualStyleBackColor = true;
-            // 
-            // txtComment
-            // 
-            this.txtComment.Location = new System.Drawing.Point(470, 40);
-            this.txtComment.Multiline = true;
-            this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(200, 170);
-            this.txtComment.TabIndex = 23;
-            // 
-            // label12
-            // 
-            this.label12.Location = new System.Drawing.Point(470, 10);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 20);
-            this.label12.TabIndex = 24;
-            this.label12.Text = "Comment";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PlanningForm
             // 

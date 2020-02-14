@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -21,6 +15,7 @@ namespace PC_QRCodeSystem.View
         private pts_destination desData { get; set; }
         private ErrorProvider errorProvider { get; set; }
         #endregion
+
         public PlanningForm()
         {
             InitializeComponent();
@@ -39,7 +34,7 @@ namespace PC_QRCodeSystem.View
             GetCmb();
             ClearFields();
             LockButtons(true);
-            rbtnPlanDate.Checked = true;
+            rbtnNoCheckDate.Checked = true;
         }
 
         #region BUTTONS EVENT
@@ -50,27 +45,64 @@ namespace PC_QRCodeSystem.View
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            planData.Add(new pts_plan
+            try
             {
-                plan_usercd = txtUserCD.Text,
-                set_number = txtSetNumber.Text,
-                destination_cd = cmbDestinationCD.Text,
-                plan_qty = double.Parse(txtPlanQty.Text),
-                plan_date = dtpPlanDate.Value,
-                delivery_date = dtpDeliveryDate.Value,
-                comment = txtComment.Text,
-            });
+                planData.Add(new pts_plan
+                {
+                    plan_usercd = txtUserCD.Text,
+                    model_cd = txtModelCD.Text,
+                    set_number = txtSetNumber.Text,
+                    destination_cd = cmbDestinationCD.Text,
+                    plan_qty = double.Parse(txtPlanQty.Text),
+                    plan_date = dtpPlanDate.Value,
+                    delivery_date = dtpDeliveryDate.Value,
+                    comment = txtComment.Text,
+                });
+                MessageBox.Show("Add new plan successed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             UpdateGrid(false);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                planData.Update(new pts_plan
+                {
+                    model_cd = txtModelCD.Text,
+                    plan_usercd = txtUserCD.Text,
+                    set_number = txtSetNumber.Text,
+                    destination_cd = cmbDestinationCD.Text,
+                    plan_qty = double.Parse(txtPlanQty.Text),
+                    plan_date = dtpPlanDate.Value,
+                    delivery_date = dtpDeliveryDate.Value,
+                    comment = txtComment.Text,
+                });
+                MessageBox.Show("Update plan successed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            UpdateGrid(false);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                planData.Delete();
+                MessageBox.Show("Delet plan successed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            UpdateGrid(false);
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -87,6 +119,7 @@ namespace PC_QRCodeSystem.View
         {
             ClearFields();
             LockButtons(true);
+            UpdateGrid(false);
         }
         #endregion
 
@@ -153,9 +186,21 @@ namespace PC_QRCodeSystem.View
                 e.Handled = true;
         }
 
-        private void dgvPlanData_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvPlanData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (e.RowIndex >= 0)
+            {
+                planData = dgvPlanData.Rows[e.RowIndex].DataBoundItem as pts_plan;
+                txtComment.Text = planData.comment;
+                txtModelCD.Text = planData.model_cd;
+                txtUserCD.Text = planData.plan_usercd;
+                txtSetNumber.Text = planData.set_number;
+                txtPlanQty.Text = planData.plan_qty.ToString();
+                cmbDestinationCD.Text = planData.destination_cd;
+                dtpPlanDate.Value = planData.plan_date;
+                dtpDeliveryDate.Value = planData.delivery_date;
+            }
+            LockButtons(false);
         }
         #endregion
 
@@ -171,41 +216,51 @@ namespace PC_QRCodeSystem.View
 
         private void UpdateGrid(bool iSSearch)
         {
-            #region SEARCH
-            if (iSSearch)
+            try
             {
-                if (rbtnNoCheckDate.Checked)
+                #region SEARCH
+                if (iSSearch)
                 {
-                    planData.Search(new pts_plan
+                    if (rbtnNoCheckDate.Checked)
                     {
-                        destination_cd = cmbDestinationCD.Text,
-                        set_number = txtSetNumber.Text,
-                        plan_usercd = txtUserCD.Text,
-                    }, dtpPlanDate.Value, dtpPlanToDate.Value, 0);
-                }
-                if (rbtnPlanDate.Checked)
-                {
-                    planData.Search(new pts_plan
+                        planData.Search(new pts_plan
+                        {
+                            destination_cd = cmbDestinationCD.Text,
+                            model_cd = txtModelCD.Text,
+                            set_number = txtSetNumber.Text,
+                            plan_usercd = txtUserCD.Text,
+                        }, dtpPlanDate.Value, dtpPlanToDate.Value, 0);
+                    }
+                    if (rbtnPlanDate.Checked)
                     {
-                        destination_cd = cmbDestinationCD.Text,
-                        set_number = txtSetNumber.Text,
-                        plan_usercd = txtUserCD.Text,
-                    }, dtpPlanDate.Value, dtpPlanToDate.Value, 1);
-                }
-                if (rbtnDeliveryDate.Checked)
-                {
-                    planData.Search(new pts_plan
+                        planData.Search(new pts_plan
+                        {
+                            destination_cd = cmbDestinationCD.Text,
+                            model_cd = txtModelCD.Text,
+                            set_number = txtSetNumber.Text,
+                            plan_usercd = txtUserCD.Text,
+                        }, dtpPlanDate.Value, dtpPlanToDate.Value, 1);
+                    }
+                    if (rbtnDeliveryDate.Checked)
                     {
-                        destination_cd = cmbDestinationCD.Text,
-                        set_number = txtSetNumber.Text,
-                        plan_usercd = txtUserCD.Text,
-                    }, dtpDeliveryDate.Value, dtpDeliveryToDate.Value, 2);
+                        planData.Search(new pts_plan
+                        {
+                            destination_cd = cmbDestinationCD.Text,
+                            model_cd = txtModelCD.Text,
+                            set_number = txtSetNumber.Text,
+                            plan_usercd = txtUserCD.Text,
+                        }, dtpDeliveryDate.Value, dtpDeliveryToDate.Value, 2);
+                    }
                 }
-            }
-            #endregion
+                #endregion
 
-            dgvPlanData.DataSource = planData.listPlan;
-            LockButtons(true);
+                dgvPlanData.DataSource = planData.listPlan;
+                LockButtons(true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LockButtons(bool islock)
@@ -222,6 +277,7 @@ namespace PC_QRCodeSystem.View
             txtPlanQty.Clear();
             txtSetNumber.Clear();
             cmbDestinationCD.Text = null;
+            dgvPlanData.DataSource = null;
             lbUserName.Text = "User Name";
             lbModelName.Text = "Model Name";
             lbDestinationName.Text = "Destination Name";
