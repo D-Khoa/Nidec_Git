@@ -225,5 +225,11 @@ namespace PC_QRCodeSystem.View
             UpdateGrid();
         }
         #endregion
+
+        private void btnPlanning_Click(object sender, EventArgs e)
+        {
+            PlanningForm planFrm = new PlanningForm();
+            planFrm.Show();
+        }
     }
 }

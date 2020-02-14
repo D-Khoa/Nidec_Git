@@ -65,6 +65,7 @@
             this.btnSupplier = new System.Windows.Forms.Button();
             this.btnItem = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
+            this.btnPlanning = new System.Windows.Forms.Button();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -328,6 +329,7 @@
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.btnPlanning);
             this.panel8.Controls.Add(this.label7);
             this.panel8.Controls.Add(this.btnRequestLog);
             this.panel8.Controls.Add(this.btnStockOutLog);
@@ -497,6 +499,16 @@
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
             // 
+            // btnPlanning
+            // 
+            this.btnPlanning.Location = new System.Drawing.Point(240, 25);
+            this.btnPlanning.Name = "btnPlanning";
+            this.btnPlanning.Size = new System.Drawing.Size(100, 50);
+            this.btnPlanning.TabIndex = 13;
+            this.btnPlanning.Text = "Planning";
+            this.btnPlanning.UseVisualStyleBackColor = true;
+            this.btnPlanning.Click += new System.EventHandler(this.btnPlanning_Click);
+            // 
             // PCForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -568,5 +580,6 @@
         private System.Windows.Forms.RadioButton rbtnApproved;
         private System.Windows.Forms.RadioButton rbtnAllRequest;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnPlanning;
     }
 }

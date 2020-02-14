@@ -84,6 +84,7 @@
     <Compile Include="Model\DBItems\m_mes_user.cs" />
     <Compile Include="Model\DBItems\m_mes_user_role.cs" />
     <Compile Include="Model\DBItems\m_user_position.cs" />
+    <Compile Include="Model\DBItems\pts_plan.cs" />
     <Compile Include="Model\Temp Items\PrintItem.cs" />
     <Compile Include="View\Common\ChangePasswordForm.cs">
       <SubType>Form</SubType>
@@ -173,6 +174,12 @@
     <Compile Include="View\PCForm\MainStock\StockInputForm.Designer.cs">
       <DependentUpon>StockInputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PCForm\PlanningForm\PlanningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PCForm\PlanningForm\PlanningForm.Designer.cs">
+      <DependentUpon>PlanningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PRODForm\PRODForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\MainStock\StockOutForm.resx">
       <DependentUpon>StockOutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PCForm\PlanningForm\PlanningForm.resx">
+      <DependentUpon>PlanningForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PRODForm\PRODForm.resx">
       <DependentUpon>PRODForm.cs</DependentUpon>

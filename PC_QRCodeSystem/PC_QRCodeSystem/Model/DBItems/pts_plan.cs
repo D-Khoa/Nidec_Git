@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -39,6 +35,7 @@ namespace PC_QRCodeSystem.Model
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
+            listPlan = new BindingList<pts_plan>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
@@ -68,7 +65,7 @@ namespace PC_QRCodeSystem.Model
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
             //Get an item
-            while(reader.Read())
+            while (reader.Read())
             {
                 pts_plan outItem = new pts_plan
                 {
@@ -87,7 +84,73 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
         }
 
+        /// <summary>
+        /// Add new plan
+        /// </summary>
+        /// <param name="inItem">input plan info</param>
+        /// <returns></returns>
         public int Add(pts_plan inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_plan(destination_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment) ";
+            query += "VALUES('" + inItem.destination_cd + "','" + inItem.set_number + "','" + inItem.plan_date.ToString("yyyy-MM-dd");
+            query += "','" + inItem.plan_usercd + "','" + inItem.plan_qty + "','" + inItem.delivery_date.ToString("yyyy-MM-dd");
+            query += "','" + inItem.comment + "')";
+            //Execute non query SQL
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Update a plan
+        /// </summary>
+        /// <param name="inItem">input plan info update</param>
+        /// <returns></returns>
+        public int Update(pts_plan inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_plan SET destination_cd ='" + inItem.destination_cd + "', set_number ='" + inItem.set_number;
+            query += "', plan_date ='" + inItem.plan_date.ToString("yyyy-MM-dd") + "', plan_usercd ='" + inItem.plan_usercd;
+            query += "', plan_qty='" + inItem.plan_qty + "', delivery_date ='" + inItem.delivery_date.ToString("yyyy-MM-dd");
+            query += "', comment ='" + inItem.comment + "' ";
+            //Execute non query SQL
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Delete this plan
+        /// </summary>
+        /// <returns></returns>
+        public int Delete()
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_plan WHERE plan_id ='" + plan_id + "'";
+            //Execute non query SQL
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
         #endregion
     }
 }

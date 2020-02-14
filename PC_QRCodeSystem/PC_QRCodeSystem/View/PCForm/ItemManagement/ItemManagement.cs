@@ -159,10 +159,21 @@ namespace PC_QRCodeSystem.View
                 {
                     //Search with item type
                     if (!string.IsNullOrEmpty(cmbItemType.Text))
-                        ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbLocation.Text, int.Parse(cmbItemType.Text));
+                        ptsItem.SearchItem(new pts_item
+                        {
+                            item_cd = txtItem.Text,
+                            item_unit = cmbUnitCode.Text,
+                            item_location = cmbLocation.Text,
+                            type_id = int.Parse(cmbItemType.Text)
+                        }, true);
                     else
                         //Search without item type
-                        ptsItem.GetListItems(txtItem.Text, cmbUnitCode.Text, cmbLocation.Text);
+                        ptsItem.SearchItem(new pts_item
+                        {
+                            item_cd = txtItem.Text,
+                            item_unit = cmbUnitCode.Text,
+                            item_location = cmbLocation.Text,
+                        }, false);
                 }
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;

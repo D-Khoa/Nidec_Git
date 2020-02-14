@@ -123,13 +123,11 @@ namespace PC_QRCodeSystem.Model
         }
 
         /// <summary>
-        /// Get list item
+        /// Search list item
         /// </summary>
-        /// <param name="item_code">string.empty if get list without item code</param>
-        /// <param name="unit_code">string.empty if get list without unit type</param>
-        /// <param name="location_code">string.empty if get list without location type</param>
-        /// <param name="typeID">item type id</param>
-        public void GetListItems(string item_code, string unit_code, string location_code, int typeID)
+        /// <param name="inItem">input item info search</param>
+        /// <param name="checkType">check item type</param>
+        public void SearchItem(pts_item inItem, bool checkType)
         {
             //SQL library
             PSQL SQL = new PSQL();
@@ -140,13 +138,14 @@ namespace PC_QRCodeSystem.Model
             //SQL query string
             query = "SELECT item_id, type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, ";
             query += "repair_qty, registration_user_cd, registration_date_time FROM pts_item WHERE 1=1 ";
-            if (!string.IsNullOrEmpty(item_code))
-                query += "and item_cd = '" + item_code + "' ";
-            if (!string.IsNullOrEmpty(unit_code))
-                query += "and item_unit = '" + unit_code + "' ";
-            if (!string.IsNullOrEmpty(location_code))
-                query += "and item_location ='" + location_code + "' ";
-            query += "and type_id = '" + typeID + "' ";
+            if (!string.IsNullOrEmpty(inItem.item_cd))
+                query += "and item_cd = '" + inItem.item_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.item_unit))
+                query += "and item_unit = '" + inItem.item_unit + "' ";
+            if (!string.IsNullOrEmpty(inItem.item_location))
+                query += "and item_location ='" + inItem.item_location + "' ";
+            if (checkType)
+                query += "and type_id = '" + inItem.type_id + "' ";
             query += "order by item_id";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
@@ -183,52 +182,52 @@ namespace PC_QRCodeSystem.Model
         /// <param name="item_code">string.empty if get list without item code</param>
         /// <param name="unit_code">string.empty if get list without unit type</param>
         /// <param name="location_code">string.empty if get list without location type</param>
-        public void GetListItems(string item_code, string unit_code, string location_code)
-        {
-            //SQL library
-            PSQL SQL = new PSQL();
-            string query = string.Empty;
-            listItems = new BindingList<pts_item>();
-            //Open SQL connection
-            SQL.Open();
-            //SQL query string
-            query = "SELECT item_id, type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, ";
-            query += "repair_qty, registration_user_cd, registration_date_time FROM pts_item WHERE 1=1 ";
-            if (!string.IsNullOrEmpty(item_code))
-                query += "and item_cd = '" + item_code + "' ";
-            if (!string.IsNullOrEmpty(unit_code))
-                query += "and item_unit = '" + unit_code + "' ";
-            if (!string.IsNullOrEmpty(location_code))
-                query += "and item_location='" + location_code + "' ";
-            query += "order by item_id";
-            //Execute reader for read database
-            IDataReader reader = SQL.Command(query).ExecuteReader();
-            query = string.Empty;
-            while (reader.Read())
-            {
-                //Get an item
-                pts_item outItem = new pts_item
-                {
-                    item_id = (int)reader["item_id"],
-                    type_id = (int)reader["type_id"],
-                    item_cd = reader["item_cd"].ToString(),
-                    item_name = reader["item_name"].ToString(),
-                    item_location = reader["item_location"].ToString(),
-                    item_unit = reader["item_unit"].ToString(),
-                    lot_size = (double)reader["lot_size"],
-                    wh_qty = (double)reader["wh_qty"],
-                    wip_qty = (double)reader["wip_qty"],
-                    repair_qty = (double)reader["repair_qty"],
-                    registration_date_time = (DateTime)reader["registration_date_time"],
-                    registration_user_cd = reader["registration_user_cd"].ToString()
-                };
-                //Add item into list
-                listItems.Add(outItem);
-            }
-            reader.Close();
-            //Close SQL connection
-            SQL.Close();
-        }
+        //public void GetListItems(string item_code, string unit_code, string location_code)
+        //{
+        //    //SQL library
+        //    PSQL SQL = new PSQL();
+        //    string query = string.Empty;
+        //    listItems = new BindingList<pts_item>();
+        //    //Open SQL connection
+        //    SQL.Open();
+        //    //SQL query string
+        //    query = "SELECT item_id, type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, ";
+        //    query += "repair_qty, registration_user_cd, registration_date_time FROM pts_item WHERE 1=1 ";
+        //    if (!string.IsNullOrEmpty(item_code))
+        //        query += "and item_cd = '" + item_code + "' ";
+        //    if (!string.IsNullOrEmpty(unit_code))
+        //        query += "and item_unit = '" + unit_code + "' ";
+        //    if (!string.IsNullOrEmpty(location_code))
+        //        query += "and item_location='" + location_code + "' ";
+        //    query += "order by item_id";
+        //    //Execute reader for read database
+        //    IDataReader reader = SQL.Command(query).ExecuteReader();
+        //    query = string.Empty;
+        //    while (reader.Read())
+        //    {
+        //        //Get an item
+        //        pts_item outItem = new pts_item
+        //        {
+        //            item_id = (int)reader["item_id"],
+        //            type_id = (int)reader["type_id"],
+        //            item_cd = reader["item_cd"].ToString(),
+        //            item_name = reader["item_name"].ToString(),
+        //            item_location = reader["item_location"].ToString(),
+        //            item_unit = reader["item_unit"].ToString(),
+        //            lot_size = (double)reader["lot_size"],
+        //            wh_qty = (double)reader["wh_qty"],
+        //            wip_qty = (double)reader["wip_qty"],
+        //            repair_qty = (double)reader["repair_qty"],
+        //            registration_date_time = (DateTime)reader["registration_date_time"],
+        //            registration_user_cd = reader["registration_user_cd"].ToString()
+        //        };
+        //        //Add item into list
+        //        listItems.Add(outItem);
+        //    }
+        //    reader.Close();
+        //    //Close SQL connection
+        //    SQL.Close();
+        //}
 
         /// <summary>
         /// Get all unit code
