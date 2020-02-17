@@ -122,13 +122,10 @@
     </Compile>
     <Compile Include="Model\Class\CSVUtility.cs" />
     <Compile Include="Model\Class\EncryptDecrypt.cs" />
-    <Compile Include="Model\Class\GetData.cs" />
     <Compile Include="Model\Class\LKBPRINT.cs" />
     <Compile Include="Model\Class\PSQL.cs" />
     <Compile Include="Model\Temp Items\PremacIn.cs" />
-    <Compile Include="Model\Temp Items\StockInItem.cs" />
     <Compile Include="Model\Class\TfPrint.cs" />
-    <Compile Include="Model\Temp Items\UnitItem.cs" />
     <Compile Include="Model\Temp Items\UserData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -198,12 +195,6 @@
     <Compile Include="View\PCForm\MainStock\StockDetailForm.Designer.cs">
       <DependentUpon>StockDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\MainStock\StockInForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PCForm\MainStock\StockInForm.Designer.cs">
-      <DependentUpon>StockInForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\PCForm\MainStock\StockOutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,9 +258,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\MainStock\StockDetailForm.resx">
       <DependentUpon>StockDetailForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\MainStock\StockInForm.resx">
-      <DependentUpon>StockInForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

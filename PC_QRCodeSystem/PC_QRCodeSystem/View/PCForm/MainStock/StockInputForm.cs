@@ -24,6 +24,7 @@ namespace PC_QRCodeSystem.View
         BindingList<pts_stock> listStockItem { get; set; }
         #endregion
 
+        #region SETTING FORM
         #region SETTING
         string settingpath, premacPath, printername;
         List<string> allsetting = new List<string>();
@@ -69,6 +70,7 @@ namespace PC_QRCodeSystem.View
             cmbPrinter.Text = printername;
             #endregion
         }
+        #endregion
 
         #region MAIN TAB
         private void btnPremacImport_Click(object sender, EventArgs e)
@@ -138,7 +140,7 @@ namespace PC_QRCodeSystem.View
                             Label_Qty = 1
                         });
                     }
-                    dr.DefaultCellStyle.BackColor = Color.Blue;
+                    dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
                 }
                 dgvPacking.DataSource = printItem.ListPrintItem;
                 tc_Main.SelectedTab = tab_Print;
@@ -297,6 +299,7 @@ namespace PC_QRCodeSystem.View
                 foreach (DataGridViewRow dr in dgvPacking.SelectedRows)
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                    dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
                 if (PrintItems(listPrintItem, false))
                     MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -325,6 +328,7 @@ namespace PC_QRCodeSystem.View
                 foreach (DataGridViewRow dr in dgvPacking.Rows)
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                    dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
                 if (PrintItems(listPrintItem, false))
                     MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -353,6 +357,7 @@ namespace PC_QRCodeSystem.View
                 foreach (DataGridViewRow dr in dgvPacking.SelectedRows)
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                    dr.DefaultCellStyle.BackColor = Color.Yellow;
                 }
                 if (PrintItems(listPrintItem, true))
                     MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -361,6 +366,12 @@ namespace PC_QRCodeSystem.View
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnPrintClear_Click(object sender, EventArgs e)
+        {
+            listPrintItem.Clear();
+            dgvPacking.DataSource = null;
         }
 
         private void btnPrintBack_Click(object sender, EventArgs e)

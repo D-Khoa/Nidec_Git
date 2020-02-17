@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbTittle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnCloseForm = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbPosition = new System.Windows.Forms.Label();
             this.btnChangePassword = new System.Windows.Forms.Button();
@@ -42,7 +44,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
-            this.btnCloseForm = new System.Windows.Forms.Button();
+            this.lbOnlineTime = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.timerFormLoad = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -55,16 +59,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(737, 69);
+            this.panel1.Size = new System.Drawing.Size(750, 70);
             this.panel1.TabIndex = 0;
             // 
             // lbTittle
             // 
             this.lbTittle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbTittle.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTittle.Location = new System.Drawing.Point(145, 0);
+            this.lbTittle.Location = new System.Drawing.Point(150, 0);
             this.lbTittle.Name = "lbTittle";
-            this.lbTittle.Size = new System.Drawing.Size(592, 69);
+            this.lbTittle.Size = new System.Drawing.Size(600, 70);
             this.lbTittle.TabIndex = 1;
             this.lbTittle.Text = "Tittle";
             this.lbTittle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -75,13 +79,15 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(145, 69);
+            this.panel2.Size = new System.Drawing.Size(150, 70);
             this.panel2.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.lbOnlineTime);
+            this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.btnCloseForm);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.lbPosition);
@@ -96,10 +102,23 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel3.ForeColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(0, 69);
+            this.panel3.Location = new System.Drawing.Point(0, 70);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(150, 369);
+            this.panel3.Size = new System.Drawing.Size(150, 402);
             this.panel3.TabIndex = 1;
+            // 
+            // btnCloseForm
+            // 
+            this.btnCloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCloseForm.Location = new System.Drawing.Point(15, 333);
+            this.btnCloseForm.Name = "btnCloseForm";
+            this.btnCloseForm.Size = new System.Drawing.Size(120, 50);
+            this.btnCloseForm.TabIndex = 9;
+            this.btnCloseForm.TabStop = false;
+            this.btnCloseForm.Text = "Close";
+            this.btnCloseForm.UseVisualStyleBackColor = true;
+            this.btnCloseForm.Click += new System.EventHandler(this.btnCloseForm_Click);
             // 
             // label1
             // 
@@ -113,7 +132,7 @@
             // lbPosition
             // 
             this.lbPosition.AutoSize = true;
-            this.lbPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lbPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.lbPosition.Location = new System.Drawing.Point(10, 70);
             this.lbPosition.Name = "lbPosition";
             this.lbPosition.Size = new System.Drawing.Size(88, 13);
@@ -124,7 +143,7 @@
             // 
             this.btnChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangePassword.Location = new System.Drawing.Point(15, 180);
+            this.btnChangePassword.Location = new System.Drawing.Point(15, 213);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(120, 50);
             this.btnChangePassword.TabIndex = 6;
@@ -137,7 +156,7 @@
             // 
             this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Location = new System.Drawing.Point(15, 240);
+            this.btnLogOut.Location = new System.Drawing.Point(15, 273);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(120, 50);
             this.btnLogOut.TabIndex = 2;
@@ -149,7 +168,7 @@
             // lbDept
             // 
             this.lbDept.AutoSize = true;
-            this.lbDept.BackColor = System.Drawing.Color.Yellow;
+            this.lbDept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.lbDept.Location = new System.Drawing.Point(10, 110);
             this.lbDept.Name = "lbDept";
             this.lbDept.Size = new System.Drawing.Size(34, 13);
@@ -168,8 +187,8 @@
             // lbLoginTime
             // 
             this.lbLoginTime.AutoSize = true;
-            this.lbLoginTime.BackColor = System.Drawing.Color.Aqua;
-            this.lbLoginTime.Location = new System.Drawing.Point(11, 150);
+            this.lbLoginTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.lbLoginTime.Location = new System.Drawing.Point(10, 150);
             this.lbLoginTime.Name = "lbLoginTime";
             this.lbLoginTime.Size = new System.Drawing.Size(133, 13);
             this.lbLoginTime.TabIndex = 3;
@@ -196,31 +215,42 @@
             // lbName
             // 
             this.lbName.AutoSize = true;
-            this.lbName.BackColor = System.Drawing.Color.Lime;
+            this.lbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.lbName.Location = new System.Drawing.Point(10, 30);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(39, 13);
             this.lbName.TabIndex = 0;
             this.lbName.Text = "Name";
             // 
-            // btnCloseForm
+            // lbOnlineTime
             // 
-            this.btnCloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCloseForm.Location = new System.Drawing.Point(15, 300);
-            this.btnCloseForm.Name = "btnCloseForm";
-            this.btnCloseForm.Size = new System.Drawing.Size(120, 50);
-            this.btnCloseForm.TabIndex = 9;
-            this.btnCloseForm.TabStop = false;
-            this.btnCloseForm.Text = "Close";
-            this.btnCloseForm.UseVisualStyleBackColor = true;
-            this.btnCloseForm.Click += new System.EventHandler(this.btnCloseForm_Click);
+            this.lbOnlineTime.AutoSize = true;
+            this.lbOnlineTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.lbOnlineTime.Location = new System.Drawing.Point(10, 190);
+            this.lbOnlineTime.Name = "lbOnlineTime";
+            this.lbOnlineTime.Size = new System.Drawing.Size(63, 13);
+            this.lbOnlineTime.TabIndex = 11;
+            this.lbOnlineTime.Text = "HH:mm:ss";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 170);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Online Time :";
+            // 
+            // timerFormLoad
+            // 
+            this.timerFormLoad.Interval = 1000;
+            this.timerFormLoad.Tick += new System.EventHandler(this.timerFormLoad_Tick);
             // 
             // FormCommon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 438);
+            this.ClientSize = new System.Drawing.Size(750, 472);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "FormCommon";
@@ -252,5 +282,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbPosition;
         private System.Windows.Forms.Button btnCloseForm;
+        private System.Windows.Forms.Label lbOnlineTime;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Timer timerFormLoad;
     }
 }

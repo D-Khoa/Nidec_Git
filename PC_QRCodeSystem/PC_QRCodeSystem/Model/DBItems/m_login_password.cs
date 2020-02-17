@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PC_QRCodeSystem.Model
 {
     public class m_login_password
     {
+        #region ALL FIELDS
         public string user_cd { get; set; }
         public string password { get; set; }
         public string registration_user_cd { get; set; }
@@ -16,7 +13,9 @@ namespace PC_QRCodeSystem.Model
         public string factory_cd { get; set; }
         public DateTime last_login_time { get; set; }
         public bool is_online { get; set; }
+        #endregion
 
+        #region QUERY
         /// <summary>
         /// Check user and password
         /// </summary>
@@ -52,41 +51,67 @@ namespace PC_QRCodeSystem.Model
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString(),
                 };
-            reader.Close();
-            //Close SQL connection
-            SQL.Close();
-            return outItem;
-        }
-            catch(InvalidOperationException)
+                reader.Close();
+                //Close SQL connection
+                SQL.Close();
+                return outItem;
+            }
+            catch (InvalidOperationException)
             {
                 throw new Exception("Wrong user or password!" + Environment.NewLine + "Please Log In again!");
-    }
-}
+            }
+        }
 
-/// <summary>
-/// Log In and Log Out
-/// </summary>
-/// <param name="usercd">User code</param>
-/// <param name="isLogin">true: log in, false: log out</param>
-public int LogIO(string usercd, bool isLogin)
-{
-    //SQL library
-    PSQL SQL = new PSQL();
-    string query = string.Empty;
-    //Open SQL connection
-    SQL.Open();
-    //SQL query string
-    query = @"UPDATE m_login_password SET ";
-    if (isLogin)
-        query += "last_login_time='" + DateTime.Now + "', is_online = '1' ";
-    else
-        query += "is_online ='0' ";
-    query += "WHERE user_cd ='" + usercd + "'";
-    //Execute query
-    int result = SQL.Command(query).ExecuteNonQuery();
-    //Close SQL connection
-    SQL.Close();
-    return result;
-}
+        /// <summary>
+        /// Log In and Log Out
+        /// </summary>
+        /// <param name="usercd">User code</param>
+        /// <param name="isLogin">true: log in, false: log out</param>
+        public int LogIO(string usercd, bool isLogin)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = @"UPDATE m_login_password SET ";
+            if (isLogin)
+                query += "last_login_time='" + DateTime.Now + "', is_online = '1' ";
+            else
+                query += "is_online ='0' ";
+            query += "WHERE user_cd ='" + usercd + "'";
+            //Execute query
+            int result = SQL.Command(query).ExecuteNonQuery();
+            //Close SQL connection
+            SQL.Close();
+            UserData.isOnline = isLogin;
+            return result;
+        }
+
+        /// <summary>
+        /// Change password of user
+        /// </summary>
+        /// <param name="inItem">input new info of user</param>
+        /// <returns></returns>
+        public bool ChangePassword(m_login_password inItem)
+        {
+            EncryptDecrypt endecrypt = new EncryptDecrypt();
+            string pass = endecrypt.Encrypt(inItem.password);
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE m_login_password SET password ='" + pass + "' WHERE user_cd ='" + inItem.user_cd + "' ";
+            //Execute non query
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            if (result > 0) return true;
+            else return false;
+        }
+        #endregion
     }
 }

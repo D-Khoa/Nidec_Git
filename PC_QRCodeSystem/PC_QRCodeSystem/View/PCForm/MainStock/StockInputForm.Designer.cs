@@ -65,6 +65,7 @@
             this.tsQty = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnAddItem = new System.Windows.Forms.Button();
             this.btnInspectionClear = new System.Windows.Forms.Button();
             this.txtSupplierName = new System.Windows.Forms.TextBox();
             this.txtSupplierCD = new System.Windows.Forms.TextBox();
@@ -81,7 +82,7 @@
             this.btnPrintSelected = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
             this.btnPrintBack = new System.Windows.Forms.Button();
-            this.btnAddItem = new System.Windows.Forms.Button();
+            this.btnPrintClear = new System.Windows.Forms.Button();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -116,7 +117,6 @@
             // 
             // btnMainClear
             // 
-            this.btnMainClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMainClear.Location = new System.Drawing.Point(890, 5);
             this.btnMainClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnMainClear.Name = "btnMainClear";
@@ -196,7 +196,6 @@
             // 
             // btnInspection
             // 
-            this.btnInspection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInspection.Location = new System.Drawing.Point(670, 5);
             this.btnInspection.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspection.Name = "btnInspection";
@@ -208,7 +207,6 @@
             // 
             // btnSetting
             // 
-            this.btnSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSetting.Location = new System.Drawing.Point(780, 5);
             this.btnSetting.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetting.Name = "btnSetting";
@@ -531,6 +529,18 @@
             this.panel4.Size = new System.Drawing.Size(1000, 80);
             this.panel4.TabIndex = 0;
             // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddItem.Location = new System.Drawing.Point(530, 10);
+            this.btnAddItem.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(80, 60);
+            this.btnAddItem.TabIndex = 4;
+            this.btnAddItem.Text = "Add Item";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
             // btnInspectionClear
             // 
             this.btnInspectionClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -663,6 +673,7 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.btnPrintClear);
             this.panel7.Controls.Add(this.btnManualPrint);
             this.panel7.Controls.Add(this.btnPrintSelected);
             this.panel7.Controls.Add(this.btnPrintAll);
@@ -723,17 +734,17 @@
             this.btnPrintBack.UseVisualStyleBackColor = true;
             this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
             // 
-            // btnAddItem
+            // btnPrintClear
             // 
-            this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.Location = new System.Drawing.Point(530, 10);
-            this.btnAddItem.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(80, 60);
-            this.btnAddItem.TabIndex = 4;
-            this.btnAddItem.Text = "Add Item";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            this.btnPrintClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintClear.Location = new System.Drawing.Point(780, 5);
+            this.btnPrintClear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintClear.Name = "btnPrintClear";
+            this.btnPrintClear.Size = new System.Drawing.Size(100, 50);
+            this.btnPrintClear.TabIndex = 4;
+            this.btnPrintClear.Text = "Clear";
+            this.btnPrintClear.UseVisualStyleBackColor = true;
+            this.btnPrintClear.Click += new System.EventHandler(this.btnPrintClear_Click);
             // 
             // StockInputForm
             // 
@@ -834,5 +845,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel tsQty;
         private System.Windows.Forms.Button btnAddItem;
+        private System.Windows.Forms.Button btnPrintClear;
     }
 }

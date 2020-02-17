@@ -6,7 +6,6 @@ namespace PC_QRCodeSystem
 {
     public partial class Login : Form
     {
-        GetData getData = new GetData();
         m_mes_user mesuser = new m_mes_user();
         m_mes_user_role userrole = new m_mes_user_role();
         m_login_password loginpass = new m_login_password();
@@ -37,7 +36,7 @@ namespace PC_QRCodeSystem
         private void txtpass_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                LoginEvent2();
+                LoginEvent();
         }
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace PC_QRCodeSystem
         /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
         {
-            LoginEvent2();
+            LoginEvent();
         }
 
         /// <summary>
@@ -60,51 +59,10 @@ namespace PC_QRCodeSystem
             Application.Exit();
         }
 
-        //private void LoginEvent()
-        //{
-        //    try
-        //    {
-        //        //Check empty username
-        //        if (!string.IsNullOrEmpty(txtUsername.Text))
-        //        {
-        //            //Check login status
-        //            //If user is now online, then choose re-login or return
-        //            if (getData.CheckLogin(txtUsername.Text, txtpass.Text))
-        //            {
-        //                if (MessageBox.Show("The user is now online." + Environment.NewLine + "Are you want to re-login?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-        //                {
-        //                    txtpass.Clear();
-        //                    return;
-        //                }
-        //            }
-        //            //Login and check password
-        //            getData.Login(txtUsername.Text, txtpass.Text);
-        //            //Show main form
-        //            MainForm main = new MainForm();
-        //            this.Hide();
-        //            txtpass.Clear();
-        //            main.ShowDialog();
-        //            getData.LogOut();
-        //            this.Show();
-        //            this.Focus();
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Please fill username.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //            txtUsername.Focus();
-        //            this.AcceptButton = null;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
         /// <summary>
         /// Login Event
         /// </summary>
-        private void LoginEvent2()
+        private void LoginEvent()
         {
             try
             {
@@ -114,8 +72,11 @@ namespace PC_QRCodeSystem
                     if (loginpass.is_online)
                         if (MessageBox.Show("This user is online." + Environment.NewLine + "Are you want re-login?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                             return;
+                    loginpass.LogIO(txtUsername.Text, false);
                     loginpass.LogIO(txtUsername.Text, true);
                     mesuser = mesuser.GetUser(loginpass.user_cd);
+                    UserData.onTime = 0;
+                    timerOnTimeSet.Enabled = true;
                     UserData.dept = mesuser.dept_cd;
                     UserData.usercode = mesuser.user_cd;
                     UserData.username = mesuser.user_name;
@@ -141,6 +102,16 @@ namespace PC_QRCodeSystem
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void timerOnTimeSet_Tick(object sender, EventArgs e)
+        {
+            UserData.onTime++;
+        }
+
+        private void Login_Shown(object sender, EventArgs e)
+        {
+            timerOnTimeSet.Enabled = false;
         }
     }
 }
