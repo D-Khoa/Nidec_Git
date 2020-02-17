@@ -454,17 +454,19 @@ namespace BoxIdDb
 
         public bool CheckTableExist(string tableName)
         {
+            NpgsqlConnection connection = new NpgsqlConnection(conStringBoxidDb);
+            string cmd = "select 1 from " + tableName + " where 1=2";
+            NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
+            connection.Open();
             try
             {
-                NpgsqlConnection connection = new NpgsqlConnection(conStringBoxidDb);
-                string cmd = "select 1 from " + tableName + " where 1=2";
-                NpgsqlCommand command = new NpgsqlCommand(cmd, connection);
-                connection.Open();
                 string result = command.ExecuteScalar().ToString();
+                connection.Close();
                 return true;
             }
             catch
             {
+                connection.Close();
                 return false;
             }
         }

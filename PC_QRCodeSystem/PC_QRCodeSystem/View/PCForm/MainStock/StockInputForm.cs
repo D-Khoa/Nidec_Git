@@ -596,6 +596,8 @@ namespace PC_QRCodeSystem.View
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure register this list?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
             for (int i = 0; i < dgvInspection.Rows.Count; i++)
             {
                 //Register item into stock
@@ -646,6 +648,7 @@ namespace PC_QRCodeSystem.View
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            UpdateInspectionGrid();
         }
 
         private void btnInspectionClear_Click(object sender, EventArgs e)

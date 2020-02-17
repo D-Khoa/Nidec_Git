@@ -167,6 +167,11 @@ namespace PC_QRCodeSystem.Model
             }
         }
 
+        /// <summary>
+        /// Add new stock item
+        /// </summary>
+        /// <param name="inItem">input stock item</param>
+        /// <returns></returns>
         public int AddItem(pts_stock inItem)
         {
             //SQL library
@@ -182,6 +187,23 @@ namespace PC_QRCodeSystem.Model
             query += "','" + inItem.stockin_qty + "','" + inItem.packing_qty + "','" + inItem.registration_user_cd + "')";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        public double SumStockinQty(pts_stock inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT SUM(stockin_qty) FROM pts_stock WHERE 1=1 ";
+
+            //Execute non query for read database
+            double result = (double)SQL.Command(query).ExecuteScalar();
             query = string.Empty;
             SQL.Close();
             return result;
