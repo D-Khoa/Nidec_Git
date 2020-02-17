@@ -73,20 +73,20 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\NidecMES-FW\Dll\Framework.dll</HintPath>
+    <Reference Include="Framework">
+      <HintPath>..\..\..\FW\NidecMES\Dll\Framework.dll</HintPath>
     </Reference>
-    <Reference Include="GlobalMasterMaintenance, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\NidecMES-FW\Dll\GlobalMasterMaintenance.dll</HintPath>
+    <Reference Include="GlobalMasterMaintenance">
+      <HintPath>..\..\..\FW\NidecMES\Dll\GlobalMasterMaintenance.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>..\..\..\FW\NidecMES\Dll\Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\FW\NidecMES\Dll\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MachineMaintenance, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonBasicApplicationForNidecMES\MachineMaintenance\obj\Debug\MachineMaintenance.dll</HintPath>
+    <Reference Include="MachineMaintenance">
+      <HintPath>..\..\..\FW\NidecMES\Dll\MachineMaintenance.dll</HintPath>
     </Reference>
     <Reference Include="npgsql">
       <HintPath>..\..\..\FW\NidecMES\Dll\npgsql.dll</HintPath>

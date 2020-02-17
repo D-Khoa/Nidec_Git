@@ -15,6 +15,8 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareHouse
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.DetailPositionForm;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Units;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.InventoryForm;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_System;
+
 
 namespace Com.Nidec.Mes.VCVP
 {
@@ -58,7 +60,7 @@ namespace Com.Nidec.Mes.VCVP
         /// <param name="e"></param>
         private void NcvpMaster_btn_Click(object sender, EventArgs e)
         {
-            NcvpMaster_btn.Visible = true;
+            NcvpMaster_gpb.Visible = true;
             SystemMaster_gpb.Visible = false;
             NCVP_Function_gr.Visible = false;
         }
@@ -488,6 +490,13 @@ namespace Com.Nidec.Mes.VCVP
         {
             PQMDataViewerForm dvf = new PQMDataViewerForm();
             dvf.ShowDialog();
+        }
+
+        private void btnWHEq_Click(object sender, EventArgs e)
+        {
+            Warehouse_Equipment_Form wheq = new Warehouse_Equipment_Form();
+            wheq.ShowDialog();
+            
         }
     }
 }

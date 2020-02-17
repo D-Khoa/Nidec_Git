@@ -157,8 +157,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlInfo;
         private System.Windows.Forms.Label lbInspectName;
         private System.Windows.Forms.Label lbOutput;
         private System.Windows.Forms.Label lbInput;
@@ -167,5 +165,6 @@
         private System.Windows.Forms.Label lb1;
         private System.Windows.Forms.Label lbmodel;
         public System.Windows.Forms.Label lbYeild;
+        public System.Windows.Forms.Panel pnlInfo;
     }
 }

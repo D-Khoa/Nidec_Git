@@ -111,6 +111,8 @@
             this.btn_noisecheck = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.btnDataViewer = new Com.Nidec.Mes.Framework.ButtonCommon();
+            this.tabFAMG = new System.Windows.Forms.TabPage();
+            this.btnWHEq = new System.Windows.Forms.Button();
             this.labelCommon2 = new Com.Nidec.Mes.Framework.LabelCommon();
             this.NCVP_Function_gr = new Com.Nidec.Mes.Framework.GroupBoxCommon();
             this.ChangePass_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
@@ -142,6 +144,7 @@
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabFAMG.SuspendLayout();
             this.NCVP_Function_gr.SuspendLayout();
             this.groupBoxCommon7.SuspendLayout();
             this.groupBoxCommon1.SuspendLayout();
@@ -154,7 +157,7 @@
             this.NcvpMaster_gpb.Controls.Add(this.Master_tab);
             this.NcvpMaster_gpb.Controls.Add(this.labelCommon1);
             this.NcvpMaster_gpb.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.NcvpMaster_gpb.Location = new System.Drawing.Point(170, 106);
+            this.NcvpMaster_gpb.Location = new System.Drawing.Point(170, 107);
             this.NcvpMaster_gpb.Name = "NcvpMaster_gpb";
             this.NcvpMaster_gpb.Size = new System.Drawing.Size(697, 572);
             this.NcvpMaster_gpb.TabIndex = 52;
@@ -792,7 +795,7 @@
             this.SystemMaster_gpb.Controls.Add(this.language_bt);
             this.SystemMaster_gpb.Controls.Add(this.local_user_btn);
             this.SystemMaster_gpb.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.SystemMaster_gpb.Location = new System.Drawing.Point(169, 106);
+            this.SystemMaster_gpb.Location = new System.Drawing.Point(168, 112);
             this.SystemMaster_gpb.Name = "SystemMaster_gpb";
             this.SystemMaster_gpb.Size = new System.Drawing.Size(696, 572);
             this.SystemMaster_gpb.TabIndex = 50;
@@ -995,6 +998,7 @@
             this.tabControlCommon1.Controls.Add(this.tabPage3);
             this.tabControlCommon1.Controls.Add(this.tabPage4);
             this.tabControlCommon1.Controls.Add(this.tabPage6);
+            this.tabControlCommon1.Controls.Add(this.tabFAMG);
             this.tabControlCommon1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControlCommon1.Location = new System.Drawing.Point(6, 49);
             this.tabControlCommon1.Name = "tabControlCommon1";
@@ -1315,6 +1319,27 @@
             this.btnDataViewer.UseVisualStyleBackColor = false;
             this.btnDataViewer.Click += new System.EventHandler(this.btnDataViewer_Click);
             // 
+            // tabFAMG
+            // 
+            this.tabFAMG.Controls.Add(this.btnWHEq);
+            this.tabFAMG.Location = new System.Drawing.Point(4, 24);
+            this.tabFAMG.Name = "tabFAMG";
+            this.tabFAMG.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFAMG.Size = new System.Drawing.Size(679, 490);
+            this.tabFAMG.TabIndex = 5;
+            this.tabFAMG.Text = "FA Management System";
+            this.tabFAMG.UseVisualStyleBackColor = true;
+            // 
+            // btnWHEq
+            // 
+            this.btnWHEq.Location = new System.Drawing.Point(19, 20);
+            this.btnWHEq.Name = "btnWHEq";
+            this.btnWHEq.Size = new System.Drawing.Size(197, 69);
+            this.btnWHEq.TabIndex = 0;
+            this.btnWHEq.Text = "Warehouse Equipment";
+            this.btnWHEq.UseVisualStyleBackColor = true;
+            this.btnWHEq.Click += new System.EventHandler(this.btnWHEq_Click);
+            // 
             // labelCommon2
             // 
             this.labelCommon2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1336,7 +1361,7 @@
             this.NCVP_Function_gr.Controls.Add(this.labelCommon2);
             this.NCVP_Function_gr.Controls.Add(this.tabControlCommon1);
             this.NCVP_Function_gr.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.NCVP_Function_gr.Location = new System.Drawing.Point(170, 106);
+            this.NCVP_Function_gr.Location = new System.Drawing.Point(170, 112);
             this.NCVP_Function_gr.Name = "NCVP_Function_gr";
             this.NCVP_Function_gr.Size = new System.Drawing.Size(697, 572);
             this.NCVP_Function_gr.TabIndex = 51;
@@ -1448,20 +1473,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 679);
             this.ControlId = "frm001";
-            this.Controls.Add(this.SystemMaster_gpb);
             this.Controls.Add(this.Menu_gpb);
-            this.Controls.Add(this.NCVP_Function_gr);
             this.Controls.Add(this.NcvpMaster_gpb);
+            this.Controls.Add(this.SystemMaster_gpb);
+            this.Controls.Add(this.NCVP_Function_gr);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "NCVP Master Maintance";
             this.TitleText = "NCVP Master Maintance";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Controls.SetChildIndex(this.NcvpMaster_gpb, 0);
             this.Controls.SetChildIndex(this.NCVP_Function_gr, 0);
-            this.Controls.SetChildIndex(this.Menu_gpb, 0);
             this.Controls.SetChildIndex(this.SystemMaster_gpb, 0);
+            this.Controls.SetChildIndex(this.NcvpMaster_gpb, 0);
+            this.Controls.SetChildIndex(this.Menu_gpb, 0);
             this.NcvpMaster_gpb.ResumeLayout(false);
             this.Master_tab.ResumeLayout(false);
             this.Master.ResumeLayout(false);
@@ -1484,6 +1509,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
+            this.tabFAMG.ResumeLayout(false);
             this.NCVP_Function_gr.ResumeLayout(false);
             this.groupBoxCommon7.ResumeLayout(false);
             this.groupBoxCommon1.ResumeLayout(false);
@@ -1584,5 +1610,7 @@
         private Framework.ButtonCommon btn_shippingcheck;
         private System.Windows.Forms.TabPage tabPage6;
         private Framework.ButtonCommon btnDataViewer;
+        private System.Windows.Forms.TabPage tabFAMG;
+        private System.Windows.Forms.Button btnWHEq;
     }
 }

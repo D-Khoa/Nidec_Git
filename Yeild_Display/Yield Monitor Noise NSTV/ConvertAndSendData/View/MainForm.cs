@@ -15,7 +15,7 @@ namespace ConvertAndSendData.View
     public partial class MainForm : Form
     {
         int counter;
-        string setfile = @"D:\setting.ini";
+        string setfile = "setting.ini";
         List<string> setlist = new List<string>();
         List<string> listTemp = new List<string>();
         List<string> listProcess = new List<string>();
@@ -26,12 +26,15 @@ namespace ConvertAndSendData.View
             InitializeComponent();
             dtpDateTo.Value = dtpDateTo.Value.AddDays(1);
             datechange = dtpDateFrom.Value;
+            dtpToH.Value = dtpToH.Value.AddDays(7);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             cmbModel.GetModelNSTV();
             cmbModel.Text = null;
+            cmbModelH.GetModelNSTV();
+            cmbModelH.Text = null;
             if (File.Exists(setfile))
             {
                 foreach (string line in File.ReadLines(setfile))
@@ -74,14 +77,21 @@ namespace ConvertAndSendData.View
                 listProcess.Clear();
             }
         }
-
+        private void cmbModelH_TextChanged(object sender, EventArgs e)
+        {
+            foreach (InspectCell cell in flpnlYeildShowH.Controls.OfType<InspectCell>())
+            {
+                flpnlYeildShowH.Controls.Clear();
+                listTemp.Clear();
+                listProcess.Clear();
+            }
+        }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!btnRun.Enabled)
-                e.Cancel = true;
+            if (btnRun.Enabled)
+                return;
             else
             {
-                e.Cancel = false;
                 setlist.Add("Model =" + cmbModel.Text);
                 setlist.Add("From =" + dtpDateFrom.Value.ToString());
                 setlist.Add("To =" + dtpDateTo.Value.ToString());
@@ -135,6 +145,7 @@ namespace ConvertAndSendData.View
                 btnStop.Enabled = true;
                 btnRun.Enabled = false;
                 btnSetting.Enabled = false;
+                btnExport.Enabled = false;
                 counter = (int)numCounter.Value;
                 bwSend.RunWorkerAsync();
             }
@@ -147,6 +158,7 @@ namespace ConvertAndSendData.View
                 btnStop.Enabled = false;
                 btnRun.Enabled = true;
                 btnSetting.Enabled = true;
+                btnExport.Enabled = true;
                 bwSend.CancelAsync();
             }
         }
@@ -211,12 +223,12 @@ namespace ConvertAndSendData.View
                         return;
                     for (int j = dtpDateFrom.Value.Month; j <= dtpDateTo.Value.Month; j++)
                     {
-                        string monthpath = yearpath + j + "\\";
+                        string monthpath = yearpath + j.ToString("00") + "\\";
                         if (!Directory.Exists(monthpath))
                             return;
                         for (int k = dtpDateFrom.Value.Day; k <= dtpDateTo.Value.Day; k++)
                         {
-                            string date = i + "-" + j + "-" + k;
+                            string date = i + "-" + j.ToString("00") + "-" + k.ToString("00");
                             string[] files = Directory.GetFiles(monthpath);
                             foreach (string f in files)
                             {
@@ -227,7 +239,7 @@ namespace ConvertAndSendData.View
                                     cell.input += dt.Rows.Count;
                                     foreach (DataRow dr in dt.Rows)
                                     {
-                                        if (dr["\"\"Judge\"\""].ToString().Contains("OK"))
+                                        if (dr["Judge"].ToString().Contains("OK"))
                                             cell.output++;
                                     }
                                     dt.Clear();
@@ -250,13 +262,12 @@ namespace ConvertAndSendData.View
                     cell.color = Color.Silver;
                 cell.lbYeild.Text = (cell.yeild * 100).ToString("0.##") + "%";
             }
-
-
         }
 
         private void AddCells(string name)
         {
             InspectCell icell = new InspectCell();
+            icell.pnlInfo.Click += new EventHandler(Icell_Click);
             icell.Name = name;
             icell.model = cmbModel.Text;
             icell.input = 0;
@@ -266,11 +277,185 @@ namespace ConvertAndSendData.View
             icell.Height = 200;
             flpnlYeildShow.Controls.Add(icell);
         }
+        private void AddCellsH(string name)
+        {
+            History icellH = new History();
+            icellH.Name = name;
+            icellH.model = cmbModelH.Text;
+            icellH.Width = 400;
+            icellH.Height = 250;
+            flpnlYeildShowH.Controls.Add(icellH);
+        }
+
+        private void Icell_Click(object sender, EventArgs e)
+        {
+            var s = (Panel)sender;
+            MessageBox.Show(s.Parent.Name);
+            noname = s.Parent.Name;
+        }
         #endregion
 
         private void cmbModel_SelectedIndexChanged(object sender, EventArgs e)
         {
+            GetDataNSTV.GetNoNSTV(listTemp, cmbModel.Text);
+        }
+        private void cmbModelH_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetDataNSTV.GetNoNSTV(listTemp, cmbModelH.Text);
+        }
 
+        string noname;
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(noname))
+            {
+                MessageBox.Show("Please select the machine number!!!", "Information", MessageBoxButtons.OK);
+                return;
+
+            }
+            try
+            {
+                string path = @"\\192.168.145.7\nstvnoise$\FCT_NOISE\" + cmbModel.Text + "\\";
+                SaveFileDialog sf = new SaveFileDialog();
+                List<string[]> fr = new List<string[]>();
+                sf.Filter = "Excel Files (*.xlsx)|*.xlsx|All File (*.*)|*.*";
+                //sf.FileName = "Select Folder";
+                if (sf.ShowDialog() == DialogResult.OK)
+                {
+                    //cell.input = 0;
+                    //cell.output = 0;
+                    string nopath = path + noname + "\\";
+                    for (int i = dtpDateFrom.Value.Year; i <= dtpDateTo.Value.Year; i++)
+                    {
+                        string yearpath = nopath + i + "\\";
+                        if (!Directory.Exists(yearpath))
+                            return;
+                        for (int j = dtpDateFrom.Value.Month; j <= dtpDateTo.Value.Month; j++)
+                        {
+                            string monthpath = yearpath + j.ToString("00") + "\\";
+                            if (!Directory.Exists(monthpath))
+                                return;
+                            for (int k = dtpDateFrom.Value.Day; k <= dtpDateTo.Value.Day; k++)
+                            {
+                                string date = i + "-" + j.ToString("00") + "-" + k.ToString("00");
+                                string[] files = Directory.GetFiles(monthpath);
+                                foreach (string f in files)
+                                {
+                                    if (f.Contains(date))
+                                    // File.Copy(f, Path.GetDirectoryName(sf.FileName) + "\\" + Path.GetFileName(f));
+                                    {
+                                        ExcelClass2019.OpenExcelWorkBook(@"\\192.168.145.7\nstvnoise$\Excel Form\Histogram FCT.xlsx", 2);
+                                        Cursor.Current = Cursors.WaitCursor;
+                                        CSVUtility.ConvertCSVtoDataTable(f).DatasetToExcel();
+                                        if (MessageBox.Show("Export Successfully." + Environment.NewLine + "Do you want open this?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                                            sf.FileName.SaveAndExit(true);
+                                        else
+                                            sf.FileName.SaveAndExit(false);
+                                        Cursor.Current = Cursors.Default;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnSettingH_Click(object sender, EventArgs e)
+        {
+            if (listTemp.Count() == 0 && listProcess.Count() == 0)
+                GetDataNSTV.GetNoNSTV(listTemp, cmbModelH.Text);
+            SettingForm stForm = new SettingForm();
+            stForm.Model = cmbModelH.Text;
+            stForm.listTemp = listTemp;
+            stForm.listprocess = listProcess;
+            if (stForm.ShowDialog() == DialogResult.OK)
+            {
+                flpnlYeildShowH.Controls.Clear();
+                listProcess = stForm.listprocess;
+                listTemp = stForm.listTemp;
+                foreach (string name in stForm.listprocess)
+                {
+                    AddCellsH(name);
+                }
+            }
+        }
+
+        private void btnSearchH_Click(object sender, EventArgs e)
+        {
+            SearchEventH();
+        }
+        private void SearchEventH()
+        {
+            string path = @"\\192.168.145.7\nstvnoise$\FCT_NOISE\" + cmbModelH.Text + "\\";
+            foreach (History cell in flpnlYeildShowH.Controls.OfType<History>())
+            {
+                //cell.input = 0;
+                //cell.output = 0;
+                cell.dataH = new DataTable();
+                cell.dataH.Columns.Add("Date");
+                cell.dataH.Columns.Add("Input");
+                cell.dataH.Columns.Add("Output");
+                cell.dataH.Columns.Add("Yield");
+                double inputH = 0, outputH = 0;
+                string yieldH = string.Empty;
+                string nopath = path + cell.Name + "\\";
+                for (int i = dtpFromH.Value.Year; i <= dtpToH.Value.Year; i++)
+                {
+                    string yearpath = nopath + i + "\\";
+                    if (!Directory.Exists(yearpath))
+                        return;
+                    for (int j = dtpFromH.Value.Month; j <= dtpToH.Value.Month; j++)
+                    {
+                        string monthpath = yearpath + j.ToString("00") + "\\";
+                        if (!Directory.Exists(monthpath))
+                            return;
+                        for (int k = dtpFromH.Value.Day; k <= dtpToH.Value.Day; k++)
+                        {
+                            string date = i + "-" + j.ToString("00") + "-" + k.ToString("00");
+                            string[] files = Directory.GetFiles(monthpath);
+                            foreach (string f in files)
+                            {
+                                if (f.Contains(date))
+                                {
+                                    DataTable dt = new DataTable();
+                                    dt = CSVUtility.ConvertCSVtoDataTable(f);
+                                    inputH = dt.Rows.Count;
+                                    foreach (DataRow dr in dt.Rows)
+                                    {
+                                        if (dr["Judge"].ToString().Contains("OK"))
+                                            outputH++;
+                                    }
+                                    yieldH = ((outputH / inputH)*100).ToString("00.00") + "%";
+                                    cell.dataH.Rows.Add(date, inputH, outputH, yieldH);
+                                    cell.Refresh();
+                                    dt.Clear();
+                                    inputH = 0;
+                                    outputH = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                //if (cell.input > 0 && cell.output > 0)
+                //    cell.yeild = cell.output / cell.input;
+                //else
+                //    cell.yeild = 0;
+                //if (cell.yeild >= 0.85)
+                //    cell.color = Color.LimeGreen;
+                //else if (cell.yeild >= 0.5 && cell.yeild < 0.85)
+                //    cell.color = Color.Yellow;
+                //else if (cell.yeild < 0.5 && cell.input > 0)
+                //    cell.color = Color.Red;
+                //else
+                //    cell.color = Color.Silver;
+                //cell.lbYeild.Text = (cell.yeild * 100).ToString("0.##") + "%";
+
+            }
         }
     }
 }
