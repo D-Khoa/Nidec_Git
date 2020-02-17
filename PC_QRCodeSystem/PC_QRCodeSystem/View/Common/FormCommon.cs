@@ -127,7 +127,7 @@ namespace PC_QRCodeSystem
 
         private void timerFormLoad_Tick(object sender, EventArgs e)
         {
-            if (!UserData.isOnline) this.Close();
+            if (!UserData.isOnline && !string.IsNullOrEmpty(UserData.usercode)) this.Close();
             lbOnlineTime.Text = TimeSpan.FromSeconds(UserData.onTime).ToString();
         }
         #endregion

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -72,22 +74,30 @@ namespace PC_QRCodeSystem.View
         }
         #endregion
 
+        Stopwatch stopWatch = new Stopwatch();
+
         #region MAIN TAB
         private void btnPremacImport_Click(object sender, EventArgs e)
         {
             try
             {
+                this.Cursor = Cursors.WaitCursor;
+                stopWatch.Start();
                 string temp = Path.GetDirectoryName(premacPath) + @"\Temp\";
                 if (!Directory.Exists(temp))
                     Directory.CreateDirectory(temp);
-                premacItem.GetListPremacItem(premacPath);
+                premacItem.listPremacItem = premacItem.GetListPremacItem(premacPath);
                 dgvPreInput.DataSource = premacItem.listPremacItem;
-                File.Move(premacPath, temp + Path.GetFileName(premacPath));
+                tsPreInputRow.Text = dgvPreInput.Rows.Count.ToString();
+                File.Move(premacPath, temp + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + Path.GetFileName(premacPath));
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            stopWatch.Stop();
+            tsTime.Text = stopWatch.ElapsedMilliseconds.ToString();
+            this.Cursor = Cursors.Default;
         }
 
         private void btnAutoPacking_Click(object sender, EventArgs e)
@@ -161,6 +171,11 @@ namespace PC_QRCodeSystem.View
                 foreach (DataGridViewRow dr in dgvPreInput.SelectedRows)
                 {
                     unit = double.Parse(txtCapaciy.Text);
+                    if (unit > (double)dr.Cells["Delivery_Qty"].Value)
+                    {
+                        MessageBox.Show("Lot size you set is over stock-in qty! Please check and try again!", "Warring", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     if (unit == 0) unit = (double)dr.Cells["Delivery_Qty"].Value;
                     qty = (int)((double)dr.Cells["Delivery_Qty"].Value / unit);
                     printItem.ListPrintItem.Add(new PrintItem
@@ -222,7 +237,48 @@ namespace PC_QRCodeSystem.View
         private void btnMainClear_Click(object sender, EventArgs e)
         {
             txtCapaciy.Clear();
+            tsPreInputRow.Text = "None";
             dgvPreInput.DataSource = null;
+        }
+
+        private void btnSearchPreInput_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSearchCode.Text))
+            {
+                dgvPreInput.DataSource = premacItem.listPremacItem;
+                return;
+            }
+            if (rbtnItemNumber.Checked)
+            {
+                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                          where item.Item_Number == txtSearchCode.Text
+                                          select item).ToList();
+            }
+            if (rbtnSupplierCD.Checked)
+            {
+                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                          where item.Supplier_Code == txtSearchCode.Text
+                                          select item).ToList();
+            }
+            if (rbtnOrderNo.Checked)
+            {
+                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                          where item.Order_No == txtSearchCode.Text
+                                          select item).ToList();
+            }
+            if (rbtnInvoice.Checked)
+            {
+                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                          where item.Supplier_Invoice == txtSearchCode.Text
+                                          select item).ToList();
+            }
+            if (rbtnPO.Checked)
+            {
+                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                          where item.PO_No == txtSearchCode.Text
+                                          select item).ToList();
+            }
+            tsPreInputRow.Text = dgvPreInput.Rows.Count.ToString();
         }
         #endregion
 

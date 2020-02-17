@@ -42,6 +42,18 @@
             this.tc_Main = new System.Windows.Forms.TabControl();
             this.tab_Main = new System.Windows.Forms.TabPage();
             this.dgvPreInput = new System.Windows.Forms.DataGridView();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.rbtnPO = new System.Windows.Forms.RadioButton();
+            this.rbtnInvoice = new System.Windows.Forms.RadioButton();
+            this.rbtnOrderNo = new System.Windows.Forms.RadioButton();
+            this.rbtnSupplierCD = new System.Windows.Forms.RadioButton();
+            this.rbtnItemNumber = new System.Windows.Forms.RadioButton();
+            this.txtSearchCode = new System.Windows.Forms.TextBox();
+            this.btnSearchPreInput = new System.Windows.Forms.Button();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsPreInputRow = new System.Windows.Forms.ToolStripStatusLabel();
             this.tab_Setting = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnApply = new System.Windows.Forms.Button();
@@ -74,20 +86,22 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtBarcode = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.tab_Print = new System.Windows.Forms.TabPage();
             this.dgvPacking = new System.Windows.Forms.DataGridView();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btnPrintClear = new System.Windows.Forms.Button();
             this.btnManualPrint = new System.Windows.Forms.Button();
             this.btnPrintSelected = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
             this.btnPrintBack = new System.Windows.Forms.Button();
-            this.btnPrintClear = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
             this.tab_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreInput)).BeginInit();
+            this.panel8.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.tab_Setting.SuspendLayout();
             this.panel5.SuspendLayout();
             this.grPrinter.SuspendLayout();
@@ -237,23 +251,25 @@
             this.tc_Main.Controls.Add(this.tab_Print);
             this.tc_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc_Main.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tc_Main.Location = new System.Drawing.Point(150, 69);
+            this.tc_Main.Location = new System.Drawing.Point(150, 70);
             this.tc_Main.Margin = new System.Windows.Forms.Padding(4);
             this.tc_Main.Name = "tc_Main";
             this.tc_Main.SelectedIndex = 0;
-            this.tc_Main.Size = new System.Drawing.Size(1016, 500);
+            this.tc_Main.Size = new System.Drawing.Size(1016, 499);
             this.tc_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tc_Main.TabIndex = 3;
             // 
             // tab_Main
             // 
             this.tab_Main.Controls.Add(this.dgvPreInput);
+            this.tab_Main.Controls.Add(this.panel8);
+            this.tab_Main.Controls.Add(this.statusStrip2);
             this.tab_Main.Controls.Add(this.pnlOption);
             this.tab_Main.Location = new System.Drawing.Point(4, 28);
             this.tab_Main.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Main.Name = "tab_Main";
             this.tab_Main.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Main.Size = new System.Drawing.Size(1008, 468);
+            this.tab_Main.Size = new System.Drawing.Size(1008, 467);
             this.tab_Main.TabIndex = 0;
             this.tab_Main.Text = "Main";
             this.tab_Main.UseVisualStyleBackColor = true;
@@ -265,13 +281,131 @@
             this.dgvPreInput.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPreInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPreInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPreInput.Location = new System.Drawing.Point(4, 64);
+            this.dgvPreInput.Location = new System.Drawing.Point(184, 64);
             this.dgvPreInput.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPreInput.Name = "dgvPreInput";
             this.dgvPreInput.ReadOnly = true;
             this.dgvPreInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPreInput.Size = new System.Drawing.Size(1000, 400);
+            this.dgvPreInput.Size = new System.Drawing.Size(820, 377);
             this.dgvPreInput.TabIndex = 3;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.rbtnPO);
+            this.panel8.Controls.Add(this.rbtnInvoice);
+            this.panel8.Controls.Add(this.rbtnOrderNo);
+            this.panel8.Controls.Add(this.rbtnSupplierCD);
+            this.panel8.Controls.Add(this.rbtnItemNumber);
+            this.panel8.Controls.Add(this.txtSearchCode);
+            this.panel8.Controls.Add(this.btnSearchPreInput);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel8.Location = new System.Drawing.Point(4, 64);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(180, 377);
+            this.panel8.TabIndex = 28;
+            // 
+            // rbtnPO
+            // 
+            this.rbtnPO.AutoSize = true;
+            this.rbtnPO.Location = new System.Drawing.Point(10, 160);
+            this.rbtnPO.Name = "rbtnPO";
+            this.rbtnPO.Size = new System.Drawing.Size(46, 21);
+            this.rbtnPO.TabIndex = 6;
+            this.rbtnPO.TabStop = true;
+            this.rbtnPO.Text = "PO";
+            this.rbtnPO.UseVisualStyleBackColor = true;
+            // 
+            // rbtnInvoice
+            // 
+            this.rbtnInvoice.AutoSize = true;
+            this.rbtnInvoice.Location = new System.Drawing.Point(10, 130);
+            this.rbtnInvoice.Name = "rbtnInvoice";
+            this.rbtnInvoice.Size = new System.Drawing.Size(70, 21);
+            this.rbtnInvoice.TabIndex = 5;
+            this.rbtnInvoice.TabStop = true;
+            this.rbtnInvoice.Text = "Invoice";
+            this.rbtnInvoice.UseVisualStyleBackColor = true;
+            // 
+            // rbtnOrderNo
+            // 
+            this.rbtnOrderNo.AutoSize = true;
+            this.rbtnOrderNo.Location = new System.Drawing.Point(10, 100);
+            this.rbtnOrderNo.Name = "rbtnOrderNo";
+            this.rbtnOrderNo.Size = new System.Drawing.Size(115, 21);
+            this.rbtnOrderNo.TabIndex = 4;
+            this.rbtnOrderNo.TabStop = true;
+            this.rbtnOrderNo.Text = "Order number";
+            this.rbtnOrderNo.UseVisualStyleBackColor = true;
+            // 
+            // rbtnSupplierCD
+            // 
+            this.rbtnSupplierCD.AutoSize = true;
+            this.rbtnSupplierCD.Location = new System.Drawing.Point(10, 70);
+            this.rbtnSupplierCD.Name = "rbtnSupplierCD";
+            this.rbtnSupplierCD.Size = new System.Drawing.Size(113, 21);
+            this.rbtnSupplierCD.TabIndex = 3;
+            this.rbtnSupplierCD.TabStop = true;
+            this.rbtnSupplierCD.Text = "Supplier code";
+            this.rbtnSupplierCD.UseVisualStyleBackColor = true;
+            // 
+            // rbtnItemNumber
+            // 
+            this.rbtnItemNumber.AutoSize = true;
+            this.rbtnItemNumber.Location = new System.Drawing.Point(10, 40);
+            this.rbtnItemNumber.Name = "rbtnItemNumber";
+            this.rbtnItemNumber.Size = new System.Drawing.Size(104, 21);
+            this.rbtnItemNumber.TabIndex = 2;
+            this.rbtnItemNumber.TabStop = true;
+            this.rbtnItemNumber.Text = "Item number";
+            this.rbtnItemNumber.UseVisualStyleBackColor = true;
+            // 
+            // txtSearchCode
+            // 
+            this.txtSearchCode.Location = new System.Drawing.Point(10, 10);
+            this.txtSearchCode.Name = "txtSearchCode";
+            this.txtSearchCode.Size = new System.Drawing.Size(160, 23);
+            this.txtSearchCode.TabIndex = 1;
+            // 
+            // btnSearchPreInput
+            // 
+            this.btnSearchPreInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSearchPreInput.Location = new System.Drawing.Point(40, 312);
+            this.btnSearchPreInput.Name = "btnSearchPreInput";
+            this.btnSearchPreInput.Size = new System.Drawing.Size(100, 50);
+            this.btnSearchPreInput.TabIndex = 0;
+            this.btnSearchPreInput.Text = "Search";
+            this.btnSearchPreInput.UseVisualStyleBackColor = true;
+            this.btnSearchPreInput.Click += new System.EventHandler(this.btnSearchPreInput_Click);
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsTime,
+            this.toolStripStatusLabel4,
+            this.tsPreInputRow});
+            this.statusStrip2.Location = new System.Drawing.Point(4, 441);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(1000, 22);
+            this.statusStrip2.TabIndex = 26;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // tsTime
+            // 
+            this.tsTime.Name = "tsTime";
+            this.tsTime.Size = new System.Drawing.Size(882, 17);
+            this.tsTime.Spring = true;
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(36, 17);
+            this.toolStripStatusLabel4.Text = "Row :";
+            // 
+            // tsPreInputRow
+            // 
+            this.tsPreInputRow.Name = "tsPreInputRow";
+            this.tsPreInputRow.Size = new System.Drawing.Size(36, 17);
+            this.tsPreInputRow.Text = "None";
             // 
             // tab_Setting
             // 
@@ -282,7 +416,7 @@
             this.tab_Setting.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Setting.Name = "tab_Setting";
             this.tab_Setting.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Setting.Size = new System.Drawing.Size(1008, 468);
+            this.tab_Setting.Size = new System.Drawing.Size(1008, 467);
             this.tab_Setting.TabIndex = 1;
             this.tab_Setting.Text = "Setting";
             this.tab_Setting.UseVisualStyleBackColor = true;
@@ -292,7 +426,7 @@
             this.panel5.Controls.Add(this.btnApply);
             this.panel5.Controls.Add(this.btnBack);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(4, 404);
+            this.panel5.Location = new System.Drawing.Point(4, 403);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1000, 60);
@@ -444,7 +578,7 @@
             this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Inspection.Name = "tab_Inspection";
             this.tab_Inspection.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Inspection.Size = new System.Drawing.Size(1008, 468);
+            this.tab_Inspection.Size = new System.Drawing.Size(1008, 467);
             this.tab_Inspection.TabIndex = 2;
             this.tab_Inspection.Text = "Inspection";
             this.tab_Inspection.UseVisualStyleBackColor = true;
@@ -457,7 +591,7 @@
             this.tsLabelNumber,
             this.toolStripStatusLabel3,
             this.tsQty});
-            this.statusStrip1.Location = new System.Drawing.Point(4, 440);
+            this.statusStrip1.Location = new System.Drawing.Point(4, 439);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip1.Size = new System.Drawing.Size(1000, 24);
@@ -507,7 +641,7 @@
             this.dgvInspection.Margin = new System.Windows.Forms.Padding(4);
             this.dgvInspection.Name = "dgvInspection";
             this.dgvInspection.ReadOnly = true;
-            this.dgvInspection.Size = new System.Drawing.Size(1000, 380);
+            this.dgvInspection.Size = new System.Drawing.Size(1000, 379);
             this.dgvInspection.TabIndex = 1;
             // 
             // panel4
@@ -521,7 +655,6 @@
             this.panel4.Controls.Add(this.btnDelete);
             this.panel4.Controls.Add(this.btnRegister);
             this.panel4.Controls.Add(this.txtBarcode);
-            this.panel4.Controls.Add(this.label5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(4, 4);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
@@ -632,17 +765,6 @@
             this.txtBarcode.TabIndex = 1;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(10, 10);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 30);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Barcode";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // tab_Print
             // 
             this.tab_Print.Controls.Add(this.dgvPacking);
@@ -651,7 +773,7 @@
             this.tab_Print.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Print.Name = "tab_Print";
             this.tab_Print.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Print.Size = new System.Drawing.Size(1008, 468);
+            this.tab_Print.Size = new System.Drawing.Size(1008, 467);
             this.tab_Print.TabIndex = 3;
             this.tab_Print.Text = "Print";
             this.tab_Print.UseVisualStyleBackColor = true;
@@ -668,7 +790,7 @@
             this.dgvPacking.Name = "dgvPacking";
             this.dgvPacking.ReadOnly = true;
             this.dgvPacking.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPacking.Size = new System.Drawing.Size(1000, 400);
+            this.dgvPacking.Size = new System.Drawing.Size(1000, 399);
             this.dgvPacking.TabIndex = 0;
             // 
             // panel7
@@ -684,6 +806,18 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1000, 60);
             this.panel7.TabIndex = 1;
+            // 
+            // btnPrintClear
+            // 
+            this.btnPrintClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintClear.Location = new System.Drawing.Point(780, 5);
+            this.btnPrintClear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintClear.Name = "btnPrintClear";
+            this.btnPrintClear.Size = new System.Drawing.Size(100, 50);
+            this.btnPrintClear.TabIndex = 4;
+            this.btnPrintClear.Text = "Clear";
+            this.btnPrintClear.UseVisualStyleBackColor = true;
+            this.btnPrintClear.Click += new System.EventHandler(this.btnPrintClear_Click);
             // 
             // btnManualPrint
             // 
@@ -734,17 +868,16 @@
             this.btnPrintBack.UseVisualStyleBackColor = true;
             this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
             // 
-            // btnPrintClear
+            // label5
             // 
-            this.btnPrintClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintClear.Location = new System.Drawing.Point(780, 5);
-            this.btnPrintClear.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrintClear.Name = "btnPrintClear";
-            this.btnPrintClear.Size = new System.Drawing.Size(100, 50);
-            this.btnPrintClear.TabIndex = 4;
-            this.btnPrintClear.Text = "Clear";
-            this.btnPrintClear.UseVisualStyleBackColor = true;
-            this.btnPrintClear.Click += new System.EventHandler(this.btnPrintClear_Click);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(10, 10);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 30);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Barcode";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // StockInputForm
             // 
@@ -754,6 +887,7 @@
             this.Controls.Add(this.tc_Main);
             this.dept = "";
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.name = "";
@@ -768,7 +902,12 @@
             this.panel6.PerformLayout();
             this.tc_Main.ResumeLayout(false);
             this.tab_Main.ResumeLayout(false);
+            this.tab_Main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreInput)).EndInit();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.tab_Setting.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.grPrinter.ResumeLayout(false);
@@ -846,5 +985,17 @@
         private System.Windows.Forms.ToolStripStatusLabel tsQty;
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.Button btnPrintClear;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel tsPreInputRow;
+        private System.Windows.Forms.ToolStripStatusLabel tsTime;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.RadioButton rbtnOrderNo;
+        private System.Windows.Forms.RadioButton rbtnSupplierCD;
+        private System.Windows.Forms.RadioButton rbtnItemNumber;
+        private System.Windows.Forms.TextBox txtSearchCode;
+        private System.Windows.Forms.Button btnSearchPreInput;
+        private System.Windows.Forms.RadioButton rbtnPO;
+        private System.Windows.Forms.RadioButton rbtnInvoice;
     }
 }
