@@ -243,7 +243,7 @@
             // 
             // timerFormLoad
             // 
-            this.timerFormLoad.Interval = 1000;
+            this.timerFormLoad.Interval = 500;
             this.timerFormLoad.Tick += new System.EventHandler(this.timerFormLoad_Tick);
             // 
             // FormCommon

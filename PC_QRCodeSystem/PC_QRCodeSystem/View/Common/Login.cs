@@ -73,11 +73,7 @@ namespace PC_QRCodeSystem
                     if (loginpass.is_online)
                         if (MessageBox.Show("This user is online." + Environment.NewLine + "Are you want re-login?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                             return;
-                    loginpass.LogIO(txtUsername.Text, false);
-                    UserData.isOnline = loginpass.CheckOnline(txtUsername.Text);
-                    Thread.Sleep(1000);
-                    loginpass.LogIO(txtUsername.Text, true);
-                    UserData.isOnline = loginpass.CheckOnline(txtUsername.Text);
+                    UserData.isOnline = loginpass.LogIO(txtUsername.Text, true);
                     mesuser = mesuser.GetUser(loginpass.user_cd);
                     UserData.onTime = 0;
                     timerOnTimeSet.Enabled = true;

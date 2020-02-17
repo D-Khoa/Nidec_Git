@@ -63,6 +63,7 @@ namespace PC_QRCodeSystem
         {
             InitializeComponent();
             listper = new List<string>();
+            timerFormLoad.Enabled = true;
         }
 
         private void FormCommon_Load(object sender, EventArgs e)
@@ -74,11 +75,9 @@ namespace PC_QRCodeSystem
             logintime = UserData.logintime;
             listper = UserData.role_permision;
             this.Text = tittle + "-QRCode System";
-            timerFormLoad.Enabled = true;
+            lbOnlineTime.Text = TimeSpan.FromSeconds(UserData.onTime).ToString();
         }
         #endregion
-
-        private TimeSpan timefromSec = new TimeSpan();
 
         #region BUTTONS EVENT
         public void CheckPermision(Control.ControlCollection controls)
@@ -106,14 +105,7 @@ namespace PC_QRCodeSystem
             if (MessageBox.Show("Are you sure to exit?", "Noice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 m_login_password mlog = new m_login_password();
-                mlog.LogIO(UserData.usercode, false);
-                foreach (Form frm in Application.OpenForms)
-                {
-                    if (frm.GetType().BaseType == typeof(FormCommon))
-                    {
-                        frm.Close();
-                    }
-                }
+                UserData.isOnline = mlog.LogIO(UserData.usercode, false);
             }
         }
 
@@ -136,8 +128,7 @@ namespace PC_QRCodeSystem
         private void timerFormLoad_Tick(object sender, EventArgs e)
         {
             if (!UserData.isOnline) this.Close();
-            timefromSec = TimeSpan.FromSeconds(UserData.onTime);
-            lbOnlineTime.Text = timefromSec.ToString();
+            lbOnlineTime.Text = TimeSpan.FromSeconds(UserData.onTime).ToString();
         }
         #endregion
     }

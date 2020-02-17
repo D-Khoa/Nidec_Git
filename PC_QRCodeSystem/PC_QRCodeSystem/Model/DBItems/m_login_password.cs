@@ -67,7 +67,7 @@ namespace PC_QRCodeSystem.Model
         /// </summary>
         /// <param name="usercd">User code</param>
         /// <param name="isLogin">true: log in, false: log out</param>
-        public int LogIO(string usercd, bool isLogin)
+        public bool LogIO(string usercd, bool isLogin)
         {
             //SQL library
             PSQL SQL = new PSQL();
@@ -85,7 +85,8 @@ namespace PC_QRCodeSystem.Model
             int result = SQL.Command(query).ExecuteNonQuery();
             //Close SQL connection
             SQL.Close();
-            return result;
+            if (result > 0) return isLogin;
+            else return !isLogin;
         }
 
         public bool CheckOnline(string usercd)
