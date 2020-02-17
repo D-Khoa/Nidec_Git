@@ -497,7 +497,11 @@ namespace PC_QRCodeSystem.View
                 {
                     if (stockItem.SearchItem(new pts_stock { po_no = barcode[7] }, DateTime.Now, DateTime.Now, false))
                     {
-                        if (MessageBox.Show("This PO is exist! Are you sure add new packing with this PO?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        double total = stockItem.SumStockQty(new pts_stock
+                        {
+                            po_no = barcode[7]
+                        }, DateTime.Now, DateTime.Now, false, true);
+                        if (MessageBox.Show("This PO is exist! Stock-In qty in database: " + total + Environment.NewLine + "Are you sure add new packing with this PO?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                             return;
                     }
                 }
@@ -554,7 +558,6 @@ namespace PC_QRCodeSystem.View
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void txtBarcode_KeyDown(object sender, KeyEventArgs e)

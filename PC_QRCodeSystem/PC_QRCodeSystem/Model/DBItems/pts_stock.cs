@@ -192,7 +192,16 @@ namespace PC_QRCodeSystem.Model
             return result;
         }
 
-        public double SumStockinQty(pts_stock inItem)
+        /// <summary>
+        /// Sum stock qty
+        /// </summary>
+        /// <param name="inItem">input info stock for search</param>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <param name="checkDate">check date stockin for search</param>
+        /// <param name="isStockIn">true: stock in qty, false: packing qty</param>
+        /// <returns></returns>
+        public double SumStockQty(pts_stock inItem, DateTime fromDate, DateTime toDate, bool checkDate, bool isStockIn)
         {
             //SQL library
             PSQL SQL = new PSQL();
@@ -200,8 +209,29 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT SUM(stockin_qty) FROM pts_stock WHERE 1=1 ";
-
+            if (isStockIn)
+                query = "SELECT SUM(stockin_qty) FROM pts_stock WHERE 1=1 ";
+            else
+                query = "SELECT SUM(packing_qty) FROM pts_stock WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.packing_cd))
+                query += "AND packing_cd ='" + inItem.packing_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.item_cd))
+                query += "AND item_cd ='" + inItem.item_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.supplier_cd))
+                query += "AND supplier_cd ='" + inItem.supplier_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.order_no))
+                query += "AND order_no ='" + inItem.order_no + "' ";
+            if (!string.IsNullOrEmpty(inItem.invoice))
+                query += "AND invoice ='" + inItem.invoice + "' ";
+            if (!string.IsNullOrEmpty(inItem.po_no))
+                query += "AND po_no ='" + inItem.po_no + "' ";
+            if (checkDate)
+            {
+                query += "AND stockin_date >= '" + fromDate.ToString("yyyy-MM-dd") + "' ";
+                query += "AND stockin_date <= '" + toDate.ToString("yyyy-MM-dd") + "' ";
+            }
+            if (!string.IsNullOrEmpty(inItem.stockin_user_cd))
+                query += "AND stockin_user_cd ='" + inItem.stockin_user_cd + "' ";
             //Execute non query for read database
             double result = (double)SQL.Command(query).ExecuteScalar();
             query = string.Empty;
