@@ -85,7 +85,21 @@ namespace PC_QRCodeSystem.Model
             int result = SQL.Command(query).ExecuteNonQuery();
             //Close SQL connection
             SQL.Close();
-            UserData.isOnline = isLogin;
+            return result;
+        }
+
+        public bool CheckOnline(string usercd)
+        {
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT is_online FROM m_login_password WHERE user_cd ='" + usercd + "'";
+            //Exectute scalar
+            bool result = (bool)SQL.Command(query).ExecuteScalar();
+            query = string.Empty;
+            SQL.Close();
             return result;
         }
 
