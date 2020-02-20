@@ -48,7 +48,6 @@
             this.lbSupplierName = new System.Windows.Forms.Label();
             this.txtPONo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.lbInchagre = new System.Windows.Forms.Label();
             this.txtInvoice = new System.Windows.Forms.TextBox();
@@ -61,7 +60,11 @@
             this.lbItemName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.grt_StockDetail.SuspendLayout();
             this.tab_StockDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockDetail)).BeginInit();
@@ -76,17 +79,18 @@
             this.grt_StockDetail.Controls.Add(this.tab_StockDetail);
             this.grt_StockDetail.Controls.Add(this.tabPage2);
             this.grt_StockDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grt_StockDetail.Location = new System.Drawing.Point(150, 69);
+            this.grt_StockDetail.Location = new System.Drawing.Point(150, 70);
             this.grt_StockDetail.Margin = new System.Windows.Forms.Padding(4);
             this.grt_StockDetail.Name = "grt_StockDetail";
             this.grt_StockDetail.SelectedIndex = 0;
-            this.grt_StockDetail.Size = new System.Drawing.Size(834, 493);
+            this.grt_StockDetail.Size = new System.Drawing.Size(814, 492);
             this.grt_StockDetail.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.grt_StockDetail.TabIndex = 2;
             // 
             // tab_StockDetail
             // 
             this.tab_StockDetail.Controls.Add(this.dgvStockDetail);
+            this.tab_StockDetail.Controls.Add(this.statusStrip1);
             this.tab_StockDetail.Controls.Add(this.dgvItemInfo);
             this.tab_StockDetail.Controls.Add(this.panel5);
             this.tab_StockDetail.Controls.Add(this.panel4);
@@ -94,7 +98,7 @@
             this.tab_StockDetail.Margin = new System.Windows.Forms.Padding(4);
             this.tab_StockDetail.Name = "tab_StockDetail";
             this.tab_StockDetail.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_StockDetail.Size = new System.Drawing.Size(826, 461);
+            this.tab_StockDetail.Size = new System.Drawing.Size(806, 460);
             this.tab_StockDetail.TabIndex = 0;
             this.tab_StockDetail.Text = "Stock Detail";
             this.tab_StockDetail.UseVisualStyleBackColor = true;
@@ -111,7 +115,7 @@
             this.dgvStockDetail.MultiSelect = false;
             this.dgvStockDetail.Name = "dgvStockDetail";
             this.dgvStockDetail.ReadOnly = true;
-            this.dgvStockDetail.Size = new System.Drawing.Size(818, 153);
+            this.dgvStockDetail.Size = new System.Drawing.Size(798, 130);
             this.dgvStockDetail.TabIndex = 1;
             this.dgvStockDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockDetail_CellClick);
             // 
@@ -125,11 +129,13 @@
             this.dgvItemInfo.Location = new System.Drawing.Point(4, 224);
             this.dgvItemInfo.Name = "dgvItemInfo";
             this.dgvItemInfo.ReadOnly = true;
-            this.dgvItemInfo.Size = new System.Drawing.Size(818, 80);
+            this.dgvItemInfo.Size = new System.Drawing.Size(798, 80);
             this.dgvItemInfo.TabIndex = 3;
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnUpdate);
+            this.panel5.Controls.Add(this.btnDelete);
             this.panel5.Controls.Add(this.btnPrintPreview);
             this.panel5.Controls.Add(this.btnPrint);
             this.panel5.Controls.Add(this.btnClear);
@@ -139,13 +145,13 @@
             this.panel5.Location = new System.Drawing.Point(4, 164);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(818, 60);
+            this.panel5.Size = new System.Drawing.Size(798, 60);
             this.panel5.TabIndex = 2;
             // 
             // btnPrintPreview
             // 
             this.btnPrintPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintPreview.Location = new System.Drawing.Point(340, 5);
+            this.btnPrintPreview.Location = new System.Drawing.Point(570, 5);
             this.btnPrintPreview.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintPreview.Name = "btnPrintPreview";
             this.btnPrintPreview.Size = new System.Drawing.Size(100, 50);
@@ -157,7 +163,7 @@
             // btnPrint
             // 
             this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(230, 5);
+            this.btnPrint.Location = new System.Drawing.Point(460, 5);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(100, 50);
@@ -169,7 +175,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(700, 5);
+            this.btnClear.Location = new System.Drawing.Point(680, 5);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(100, 50);
@@ -181,7 +187,7 @@
             // btnSearch
             // 
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(10, 5);
+            this.btnSearch.Location = new System.Drawing.Point(20, 5);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 50);
@@ -193,7 +199,7 @@
             // btnExport
             // 
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.Location = new System.Drawing.Point(120, 5);
+            this.btnExport.Location = new System.Drawing.Point(350, 5);
             this.btnExport.Margin = new System.Windows.Forms.Padding(4);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(100, 50);
@@ -213,7 +219,6 @@
             this.panel4.Controls.Add(this.lbSupplierName);
             this.panel4.Controls.Add(this.txtPONo);
             this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.lbInchagre);
             this.panel4.Controls.Add(this.txtInvoice);
@@ -229,8 +234,28 @@
             this.panel4.Location = new System.Drawing.Point(4, 4);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(818, 160);
+            this.panel4.Size = new System.Drawing.Size(798, 160);
             this.panel4.TabIndex = 0;
+            this.panel4.Controls.SetChildIndex(this.label2, 0);
+            this.panel4.Controls.SetChildIndex(this.lbItemName, 0);
+            this.panel4.Controls.SetChildIndex(this.label9, 0);
+            this.panel4.Controls.SetChildIndex(this.dtpFromDate, 0);
+            this.panel4.Controls.SetChildIndex(this.label10, 0);
+            this.panel4.Controls.SetChildIndex(this.dtpToDate, 0);
+            this.panel4.Controls.SetChildIndex(this.txtItemCD, 0);
+            this.panel4.Controls.SetChildIndex(this.txtInCharge, 0);
+            this.panel4.Controls.SetChildIndex(this.txtInvoice, 0);
+            this.panel4.Controls.SetChildIndex(this.lbInchagre, 0);
+            this.panel4.Controls.SetChildIndex(this.label12, 0);
+            this.panel4.Controls.SetChildIndex(this.label7, 0);
+            this.panel4.Controls.SetChildIndex(this.txtPONo, 0);
+            this.panel4.Controls.SetChildIndex(this.lbSupplierName, 0);
+            this.panel4.Controls.SetChildIndex(this.cbSearchDate, 0);
+            this.panel4.Controls.SetChildIndex(this.label8, 0);
+            this.panel4.Controls.SetChildIndex(this.txtOrderNo, 0);
+            this.panel4.Controls.SetChildIndex(this.txtSupplierCD, 0);
+            this.panel4.Controls.SetChildIndex(this.label11, 0);
+            this.panel4.Controls.SetChildIndex(this.lbItemTypeName, 0);
             // 
             // lbItemTypeName
             // 
@@ -323,17 +348,6 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Invoice";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(10, 70);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 25);
-            this.label5.TabIndex = 30;
-            this.label5.Text = "User Code";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label12
             // 
@@ -461,6 +475,17 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(10, 70);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 25);
+            this.label5.TabIndex = 30;
+            this.label5.Text = "User Code";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -471,14 +496,47 @@
             this.label1.Text = "In Charge";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(240, 5);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 50);
+            this.btnDelete.TabIndex = 23;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.Location = new System.Drawing.Point(130, 5);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(100, 50);
+            this.btnUpdate.TabIndex = 24;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(4, 434);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(798, 22);
+            this.statusStrip1.TabIndex = 41;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
             // StockDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 562);
+            this.ClientSize = new System.Drawing.Size(964, 562);
             this.Controls.Add(this.grt_StockDetail);
             this.dept = "";
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.name = "";
@@ -490,6 +548,7 @@
             this.Controls.SetChildIndex(this.grt_StockDetail, 0);
             this.grt_StockDetail.ResumeLayout(false);
             this.tab_StockDetail.ResumeLayout(false);
+            this.tab_StockDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemInfo)).EndInit();
             this.panel5.ResumeLayout(false);
@@ -535,5 +594,8 @@
         private System.Windows.Forms.Button btnPrintPreview;
         private System.Windows.Forms.Label lbItemTypeName;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }

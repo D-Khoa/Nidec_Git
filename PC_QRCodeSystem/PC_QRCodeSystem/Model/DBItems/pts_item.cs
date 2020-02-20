@@ -380,5 +380,22 @@ namespace PC_QRCodeSystem.Model
                     throw new Exception(ex.Message);
             }
         }
+
+        public int UpdateStockValue()
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "update pts_item a set wh_qty = (select sum(c.packing_qty) from pts_stock c where a.item_cd = c.item_cd)";
+            query += "from pts_stock b where a.item_cd = b.item_cd";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
     }
 }

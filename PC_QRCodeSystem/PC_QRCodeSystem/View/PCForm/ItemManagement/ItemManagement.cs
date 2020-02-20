@@ -159,6 +159,7 @@ namespace PC_QRCodeSystem.View
                 {
                     if (isSearch)
                     {
+                        ptsItem.UpdateStockValue();
                         //Search with item type
                         if (!string.IsNullOrEmpty(cmbItemType.Text))
                             ptsItem.SearchItem(new pts_item

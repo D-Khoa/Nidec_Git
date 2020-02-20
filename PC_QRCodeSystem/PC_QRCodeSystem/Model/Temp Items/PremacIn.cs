@@ -1,9 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.IO;
 using System.Linq;
-using System.ComponentModel;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -15,10 +13,10 @@ namespace PC_QRCodeSystem.Model
         public string Supplier_Code { get; set; }
         public string Supplier_Name { get; set; }
         public string Supplier_Invoice { get; set; }
-        public string Order_No { get; set; }
         public string PO_No { get; set; }
         public double Delivery_Qty { get; set; }
         public DateTime Delivery_Date { get; set; }
+        public string Order_No { get; set; }
         public string Incharge { get; set; }
         public List<PremacIn> listPremacItem { get; set; }
         public PremacIn()

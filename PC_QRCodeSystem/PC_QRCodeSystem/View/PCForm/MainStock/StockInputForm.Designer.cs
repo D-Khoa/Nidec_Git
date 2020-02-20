@@ -95,6 +95,8 @@
             this.btnPrintAll = new System.Windows.Forms.Button();
             this.btnPrintBack = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsTotalPreInQty = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -286,7 +288,7 @@
             this.dgvPreInput.Name = "dgvPreInput";
             this.dgvPreInput.ReadOnly = true;
             this.dgvPreInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPreInput.Size = new System.Drawing.Size(820, 377);
+            this.dgvPreInput.Size = new System.Drawing.Size(820, 375);
             this.dgvPreInput.TabIndex = 3;
             // 
             // panel8
@@ -301,7 +303,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(4, 64);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(180, 377);
+            this.panel8.Size = new System.Drawing.Size(180, 375);
             this.panel8.TabIndex = 28;
             // 
             // rbtnPO
@@ -369,7 +371,7 @@
             // btnSearchPreInput
             // 
             this.btnSearchPreInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSearchPreInput.Location = new System.Drawing.Point(40, 312);
+            this.btnSearchPreInput.Location = new System.Drawing.Point(40, 310);
             this.btnSearchPreInput.Name = "btnSearchPreInput";
             this.btnSearchPreInput.Size = new System.Drawing.Size(100, 50);
             this.btnSearchPreInput.TabIndex = 0;
@@ -382,29 +384,33 @@
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsTime,
             this.toolStripStatusLabel4,
-            this.tsPreInputRow});
-            this.statusStrip2.Location = new System.Drawing.Point(4, 441);
+            this.tsPreInputRow,
+            this.toolStripStatusLabel5,
+            this.tsTotalPreInQty});
+            this.statusStrip2.Location = new System.Drawing.Point(4, 439);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1000, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(1000, 24);
             this.statusStrip2.TabIndex = 26;
             this.statusStrip2.Text = "statusStrip2";
             // 
             // tsTime
             // 
             this.tsTime.Name = "tsTime";
-            this.tsTime.Size = new System.Drawing.Size(882, 17);
+            this.tsTime.Size = new System.Drawing.Size(769, 19);
             this.tsTime.Spring = true;
             // 
             // toolStripStatusLabel4
             // 
+            this.toolStripStatusLabel4.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(36, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(40, 19);
             this.toolStripStatusLabel4.Text = "Row :";
             // 
             // tsPreInputRow
             // 
+            this.tsPreInputRow.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.tsPreInputRow.Name = "tsPreInputRow";
-            this.tsPreInputRow.Size = new System.Drawing.Size(36, 17);
+            this.tsPreInputRow.Size = new System.Drawing.Size(40, 19);
             this.tsPreInputRow.Text = "None";
             // 
             // tab_Setting
@@ -879,6 +885,19 @@
             this.label5.Text = "Barcode";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(69, 19);
+            this.toolStripStatusLabel5.Text = "Total Q\'ty :";
+            // 
+            // tsTotalPreInQty
+            // 
+            this.tsTotalPreInQty.Name = "tsTotalPreInQty";
+            this.tsTotalPreInQty.Size = new System.Drawing.Size(36, 19);
+            this.tsTotalPreInQty.Text = "None";
+            // 
             // StockInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -997,5 +1016,7 @@
         private System.Windows.Forms.Button btnSearchPreInput;
         private System.Windows.Forms.RadioButton rbtnPO;
         private System.Windows.Forms.RadioButton rbtnInvoice;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel tsTotalPreInQty;
     }
 }

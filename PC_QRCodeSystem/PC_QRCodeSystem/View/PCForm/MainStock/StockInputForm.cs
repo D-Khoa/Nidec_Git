@@ -7,7 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -16,6 +15,7 @@ namespace PC_QRCodeSystem.View
     public partial class StockInputForm : FormCommon
     {
         #region ITEMS
+        Stopwatch stopWatch = new Stopwatch();
         ErrorProvider errorProvider { get; set; }
         pts_item itemUnit { get; set; }
         PremacIn premacItem { get; set; }
@@ -74,8 +74,6 @@ namespace PC_QRCodeSystem.View
         }
         #endregion
 
-        Stopwatch stopWatch = new Stopwatch();
-
         #region MAIN TAB
         private void btnPremacImport_Click(object sender, EventArgs e)
         {
@@ -83,20 +81,24 @@ namespace PC_QRCodeSystem.View
             {
                 this.Cursor = Cursors.WaitCursor;
                 stopWatch.Start();
-                string temp = Path.GetDirectoryName(premacPath) + @"\Temp\";
-                if (!Directory.Exists(temp))
-                    Directory.CreateDirectory(temp);
+                //string temp = Path.GetDirectoryName(premacPath) + @"\Temp\";
+                //if (!Directory.Exists(temp))
+                //    Directory.CreateDirectory(temp);
                 premacItem.listPremacItem = premacItem.GetListPremacItem(premacPath);
                 dgvPreInput.DataSource = premacItem.listPremacItem;
                 tsPreInputRow.Text = dgvPreInput.Rows.Count.ToString();
-                File.Move(premacPath, temp + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + Path.GetFileName(premacPath));
+                //File.Move(premacPath, temp + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + Path.GetFileName(premacPath));
+                File.Move(premacPath,
+                    Path.GetFullPath(premacPath).Replace(".TXT", "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt"));
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             stopWatch.Stop();
-            tsTime.Text = stopWatch.ElapsedMilliseconds.ToString();
+            double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
+            tsTotalPreInQty.Text = total.ToString();
+            tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
             this.Cursor = Cursors.Default;
         }
 
@@ -243,42 +245,51 @@ namespace PC_QRCodeSystem.View
 
         private void btnSearchPreInput_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+            stopWatch.Start();
             if (string.IsNullOrEmpty(txtSearchCode.Text))
             {
                 dgvPreInput.DataSource = premacItem.listPremacItem;
-                return;
             }
-            if (rbtnItemNumber.Checked)
+            else
             {
-                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                          where item.Item_Number == txtSearchCode.Text
-                                          select item).ToList();
+                if (rbtnItemNumber.Checked)
+                {
+                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                              where item.Item_Number == txtSearchCode.Text
+                                              select item).ToList();
+                }
+                if (rbtnSupplierCD.Checked)
+                {
+                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                              where item.Supplier_Code == txtSearchCode.Text
+                                              select item).ToList();
+                }
+                if (rbtnOrderNo.Checked)
+                {
+                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                              where item.Order_No == txtSearchCode.Text
+                                              select item).ToList();
+                }
+                if (rbtnInvoice.Checked)
+                {
+                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                              where item.Supplier_Invoice == txtSearchCode.Text
+                                              select item).ToList();
+                }
+                if (rbtnPO.Checked)
+                {
+                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
+                                              where item.PO_No == txtSearchCode.Text
+                                              select item).ToList();
+                }
             }
-            if (rbtnSupplierCD.Checked)
-            {
-                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                          where item.Supplier_Code == txtSearchCode.Text
-                                          select item).ToList();
-            }
-            if (rbtnOrderNo.Checked)
-            {
-                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                          where item.Order_No == txtSearchCode.Text
-                                          select item).ToList();
-            }
-            if (rbtnInvoice.Checked)
-            {
-                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                          where item.Supplier_Invoice == txtSearchCode.Text
-                                          select item).ToList();
-            }
-            if (rbtnPO.Checked)
-            {
-                dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                          where item.PO_No == txtSearchCode.Text
-                                          select item).ToList();
-            }
+            stopWatch.Stop();
+            double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
+            tsTotalPreInQty.Text = total.ToString();
             tsPreInputRow.Text = dgvPreInput.Rows.Count.ToString();
+            tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
+            this.Cursor = Cursors.Default;
         }
         #endregion
 
@@ -701,6 +712,7 @@ namespace PC_QRCodeSystem.View
                     continue;
                 }
             }
+            itemUnit.UpdateStockValue();
             UpdateInspectionGrid();
         }
 

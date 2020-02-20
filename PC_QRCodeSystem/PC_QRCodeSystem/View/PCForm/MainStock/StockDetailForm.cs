@@ -129,6 +129,16 @@ namespace PC_QRCodeSystem.View
             UpdateGrid(true);
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnExport_Click(object sender, EventArgs e)
         {
 
