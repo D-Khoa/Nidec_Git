@@ -87,6 +87,7 @@ namespace PC_QRCodeSystem.Model
             //Close SQL connection
             SQL.Close();
         }
+
         public int AddIssueCode(pts_issue_code addptsissuecd)
         {
             //SQL library
@@ -103,6 +104,7 @@ namespace PC_QRCodeSystem.Model
             query = string.Empty;
             return result;
         }
+
         public int UpdateIssueCode(pts_issue_code UpdateIssueCd)
         {
             //SQL library
@@ -118,6 +120,7 @@ namespace PC_QRCodeSystem.Model
             query = string.Empty;
             return result;
         }
+
         public int Delete(int issue)
         {
             //SQL library

@@ -536,15 +536,19 @@ namespace PC_QRCodeSystem.View
                 string[] barcode = txtBarcode.Text.Split(';');
                 string pono = "None";
                 string orderno = "None";
-                if (!string.IsNullOrEmpty(barcode[7])) pono = barcode[7];
-                if (!string.IsNullOrEmpty(barcode[8])) orderno = barcode[8];
-
+                string suppliercd = string.Empty;
+                if (barcode.Length > 6)
+                {
+                    if (!string.IsNullOrEmpty(barcode[7])) pono = barcode[7];
+                    if (!string.IsNullOrEmpty(barcode[8])) orderno = barcode[8];
+                    if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
+                }
                 #region CHECK SUPPLIER & NOTICE FOR USER
                 errorProvider.SetError(txtSupplierCD, null);
                 txtSupplierName.Text = barcode[2];
                 try
                 {
-                    if (string.IsNullOrEmpty(barcode[6]))
+                    if (string.IsNullOrEmpty(suppliercd))
                     {
                         supplierItem = supplierItem.GetSupplier(new pts_supplier
                         {
@@ -555,7 +559,7 @@ namespace PC_QRCodeSystem.View
                     }
                     else
                     {
-                        txtSupplierCD.Text = barcode[6];
+                        txtSupplierCD.Text = suppliercd;
                         supplierItem = supplierItem.GetSupplier(new pts_supplier
                         {
                             supplier_id = 0,
@@ -573,12 +577,9 @@ namespace PC_QRCodeSystem.View
                 #region CHECK PO AND CREATE PACKING CODE
                 try
                 {
-                    if (stockItem.SearchItem(new pts_stock { po_no = barcode[7] }, DateTime.Now, DateTime.Now, false))
+                    if (stockItem.SearchItem(new pts_stock { po_no = pono }, DateTime.Now, DateTime.Now, false))
                     {
-                        double total = stockItem.SumStockQty(new pts_stock
-                        {
-                            po_no = barcode[7]
-                        }, DateTime.Now, DateTime.Now, false, true);
+                        double total = stockItem.SumStockQty(new pts_stock { po_no = pono }, DateTime.Now, DateTime.Now, false, true);
                         if (MessageBox.Show("This PO is exist! Stock-In qty in database: " + total + Environment.NewLine + "Are you sure add new packing with this PO?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                             return;
                     }
@@ -590,21 +591,19 @@ namespace PC_QRCodeSystem.View
                 //Get max number packing of this PO in database
                 foreach (pts_stock item in stockItem.listStockItems)
                 {
-                    if (item.po_no == barcode[7])
+                    if (item.po_no == pono)
                     {
                         temp = int.Parse(item.packing_cd.Split('-')[1]);
-                        if (temp == n)
-                            n++;
+                        if (temp == n) n++;
                     }
                 }
                 //Create new number of packing with PO number
                 foreach (pts_stock item in listStockItem)
                 {
-                    if (item.po_no == barcode[7])
+                    if (item.po_no == pono)
                     {
                         temp = int.Parse(item.packing_cd.Split('-')[1]);
-                        if (temp == n)
-                            n++;
+                        if (temp == n) n++;
                     }
                 }
                 string packingcd = pono + "-" + n.ToString("00");

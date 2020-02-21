@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.grt_StockDetail = new System.Windows.Forms.TabControl();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockDetailForm));
+            this.tc_MainStockDetail = new System.Windows.Forms.TabControl();
             this.tab_StockDetail = new System.Windows.Forms.TabPage();
             this.dgvStockDetail = new System.Windows.Forms.DataGridView();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.dgvItemInfo = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -70,35 +70,45 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lbItemName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tab_LogDetail = new System.Windows.Forms.TabPage();
+            this.dgvLogDetail = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.grt_StockDetail.SuspendLayout();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsMenuStrip = new System.Windows.Forms.ToolStripSplitButton();
+            this.smenuLogDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.smenuStockDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsStockDetailRows = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tc_MainStockDetail.SuspendLayout();
             this.tab_StockDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemInfo)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.tab_LogDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogDetail)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // grt_StockDetail
+            // tc_MainStockDetail
             // 
-            this.grt_StockDetail.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.grt_StockDetail.Controls.Add(this.tab_StockDetail);
-            this.grt_StockDetail.Controls.Add(this.tabPage2);
-            this.grt_StockDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grt_StockDetail.Location = new System.Drawing.Point(150, 70);
-            this.grt_StockDetail.Margin = new System.Windows.Forms.Padding(4);
-            this.grt_StockDetail.Name = "grt_StockDetail";
-            this.grt_StockDetail.SelectedIndex = 0;
-            this.grt_StockDetail.Size = new System.Drawing.Size(834, 492);
-            this.grt_StockDetail.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.grt_StockDetail.TabIndex = 2;
+            this.tc_MainStockDetail.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tc_MainStockDetail.Controls.Add(this.tab_StockDetail);
+            this.tc_MainStockDetail.Controls.Add(this.tab_LogDetail);
+            this.tc_MainStockDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tc_MainStockDetail.Location = new System.Drawing.Point(150, 70);
+            this.tc_MainStockDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.tc_MainStockDetail.Name = "tc_MainStockDetail";
+            this.tc_MainStockDetail.SelectedIndex = 0;
+            this.tc_MainStockDetail.Size = new System.Drawing.Size(834, 468);
+            this.tc_MainStockDetail.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tc_MainStockDetail.TabIndex = 2;
             // 
             // tab_StockDetail
             // 
             this.tab_StockDetail.Controls.Add(this.dgvStockDetail);
-            this.tab_StockDetail.Controls.Add(this.statusStrip1);
             this.tab_StockDetail.Controls.Add(this.dgvItemInfo);
             this.tab_StockDetail.Controls.Add(this.panel5);
             this.tab_StockDetail.Controls.Add(this.panel4);
@@ -106,7 +116,7 @@
             this.tab_StockDetail.Margin = new System.Windows.Forms.Padding(4);
             this.tab_StockDetail.Name = "tab_StockDetail";
             this.tab_StockDetail.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_StockDetail.Size = new System.Drawing.Size(826, 460);
+            this.tab_StockDetail.Size = new System.Drawing.Size(826, 436);
             this.tab_StockDetail.TabIndex = 0;
             this.tab_StockDetail.Text = "Stock Detail";
             this.tab_StockDetail.UseVisualStyleBackColor = true;
@@ -135,18 +145,10 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvStockDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvStockDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvStockDetail.Size = new System.Drawing.Size(818, 100);
+            this.dgvStockDetail.Size = new System.Drawing.Size(818, 98);
             this.dgvStockDetail.TabIndex = 1;
             this.dgvStockDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockDetail_CellClick);
             this.dgvStockDetail.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvStockDetail_DataBindingComplete);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(4, 434);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(818, 22);
-            this.statusStrip1.TabIndex = 41;
-            this.statusStrip1.Text = "statusStrip1";
             // 
             // dgvItemInfo
             // 
@@ -573,16 +575,30 @@
             this.label2.Text = "Item Code";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // tabPage2
+            // tab_LogDetail
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 28);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(826, 460);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tab_LogDetail.Controls.Add(this.dgvLogDetail);
+            this.tab_LogDetail.Location = new System.Drawing.Point(4, 28);
+            this.tab_LogDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.tab_LogDetail.Name = "tab_LogDetail";
+            this.tab_LogDetail.Padding = new System.Windows.Forms.Padding(4);
+            this.tab_LogDetail.Size = new System.Drawing.Size(826, 436);
+            this.tab_LogDetail.TabIndex = 1;
+            this.tab_LogDetail.Text = "Logs Detail";
+            this.tab_LogDetail.UseVisualStyleBackColor = true;
+            // 
+            // dgvLogDetail
+            // 
+            this.dgvLogDetail.AllowUserToAddRows = false;
+            this.dgvLogDetail.AllowUserToDeleteRows = false;
+            this.dgvLogDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLogDetail.Location = new System.Drawing.Point(4, 4);
+            this.dgvLogDetail.Name = "dgvLogDetail";
+            this.dgvLogDetail.ReadOnly = true;
+            this.dgvLogDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvLogDetail.Size = new System.Drawing.Size(818, 428);
+            this.dgvLogDetail.TabIndex = 0;
             // 
             // label5
             // 
@@ -605,12 +621,71 @@
             this.label1.Text = "In Charge";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsMenuStrip,
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.tsStockDetailRows});
+            this.statusStrip1.Location = new System.Drawing.Point(150, 538);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(834, 24);
+            this.statusStrip1.TabIndex = 42;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsMenuStrip
+            // 
+            this.tsMenuStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smenuLogDetail,
+            this.smenuStockDetail});
+            this.tsMenuStrip.Image = ((System.Drawing.Image)(resources.GetObject("tsMenuStrip.Image")));
+            this.tsMenuStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsMenuStrip.Name = "tsMenuStrip";
+            this.tsMenuStrip.Size = new System.Drawing.Size(32, 22);
+            this.tsMenuStrip.Text = "toolStripSplitButton1";
+            // 
+            // smenuLogDetail
+            // 
+            this.smenuLogDetail.Name = "smenuLogDetail";
+            this.smenuLogDetail.Size = new System.Drawing.Size(136, 22);
+            this.smenuLogDetail.Text = "Logs Detail";
+            this.smenuLogDetail.Click += new System.EventHandler(this.smenuLogDetail_Click);
+            // 
+            // smenuStockDetail
+            // 
+            this.smenuStockDetail.Name = "smenuStockDetail";
+            this.smenuStockDetail.Size = new System.Drawing.Size(136, 22);
+            this.smenuStockDetail.Text = "Stock Detail";
+            this.smenuStockDetail.Click += new System.EventHandler(this.smenuStockDetail_Click);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(706, 19);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(45, 19);
+            this.toolStripStatusLabel2.Text = "Rows :";
+            // 
+            // tsStockDetailRows
+            // 
+            this.tsStockDetailRows.Name = "tsStockDetailRows";
+            this.tsStockDetailRows.Size = new System.Drawing.Size(36, 19);
+            this.tsStockDetailRows.Text = "None";
+            // 
             // StockDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 562);
-            this.Controls.Add(this.grt_StockDetail);
+            this.Controls.Add(this.tc_MainStockDetail);
+            this.Controls.Add(this.statusStrip1);
             this.dept = "";
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listper = null;
@@ -622,24 +697,29 @@
             this.Text = "StockDetailForm";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.StockDetailForm_Load);
-            this.Controls.SetChildIndex(this.grt_StockDetail, 0);
-            this.grt_StockDetail.ResumeLayout(false);
+            this.Controls.SetChildIndex(this.statusStrip1, 0);
+            this.Controls.SetChildIndex(this.tc_MainStockDetail, 0);
+            this.tc_MainStockDetail.ResumeLayout(false);
             this.tab_StockDetail.ResumeLayout(false);
-            this.tab_StockDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemInfo)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.tab_LogDetail.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogDetail)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl grt_StockDetail;
+        private System.Windows.Forms.TabControl tc_MainStockDetail;
         private System.Windows.Forms.TabPage tab_StockDetail;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tab_LogDetail;
         private System.Windows.Forms.DataGridView dgvStockDetail;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnSearch;
@@ -673,7 +753,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtPackingCD;
         private System.Windows.Forms.Label label14;
@@ -681,5 +760,13 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtStockInQty;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripSplitButton tsMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem smenuLogDetail;
+        private System.Windows.Forms.ToolStripMenuItem smenuStockDetail;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel tsStockDetailRows;
+        private System.Windows.Forms.DataGridView dgvLogDetail;
     }
 }

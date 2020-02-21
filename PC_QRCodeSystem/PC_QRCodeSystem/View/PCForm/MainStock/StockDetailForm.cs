@@ -37,7 +37,7 @@ namespace PC_QRCodeSystem.View
             typeData = new pts_item_type();
             supplierData = new pts_supplier();
             listStockLog = new List<pts_stock_log>();
-            grt_StockDetail.ItemSize = new Size(0, 1);
+            tc_MainStockDetail.ItemSize = new Size(0, 1);
         }
 
         private void StockDetailForm_Load(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace PC_QRCodeSystem.View
             isEditData = false;
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
-            grt_StockDetail.SelectedTab = tab_StockDetail;
+            tc_MainStockDetail.SelectedTab = tab_StockDetail;
         }
         #endregion
 
@@ -146,16 +146,24 @@ namespace PC_QRCodeSystem.View
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Do you want update this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                return;
             UpdateStock();
             ClearFields();
             UpdateGrid(false);
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Do you want delete this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                return;
             DeleteStock();
             ClearFields();
             UpdateGrid(false);
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -202,6 +210,7 @@ namespace PC_QRCodeSystem.View
             dgvStockDetail.Columns["packing_qty"].HeaderText = "Packing Qty";
             dgvStockDetail.Columns["registration_user_cd"].HeaderText = "Reg User";
             dgvStockDetail.Columns["registration_date_time"].HeaderText = "Reg Date";
+            tsStockDetailRows.Text = dgvStockDetail.Rows.Count.ToString();
         }
 
         /// <summary>
@@ -478,6 +487,28 @@ namespace PC_QRCodeSystem.View
         {
             for (int i = 0; i < dgvStockDetail.Rows.Count; i++)
                 dgvStockDetail.Rows[i].HeaderCell.Value = (i + 1).ToString();
+        }
+
+        private void smenuStockDetail_Click(object sender, EventArgs e)
+        {
+            tc_MainStockDetail.SelectedTab = tab_StockDetail;
+        }
+
+        private void smenuLogDetail_Click(object sender, EventArgs e)
+        {
+            tc_MainStockDetail.SelectedTab = tab_LogDetail;
+            stockLog.Search(new pts_stock_log
+            {
+                log_action = string.Empty,
+                log_user_cd = string.Empty,
+                stock_field = string.Empty,
+            }, DateTime.Now, DateTime.Now, false);
+            dgvLogDetail.DataSource = stockLog.listStockLog;
+            for (int i = 0; i < dgvLogDetail.Rows.Count; i++)
+            {
+                dgvLogDetail.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
+            tsStockDetailRows.Text = dgvLogDetail.Rows.Count.ToString();
         }
         #endregion
 
