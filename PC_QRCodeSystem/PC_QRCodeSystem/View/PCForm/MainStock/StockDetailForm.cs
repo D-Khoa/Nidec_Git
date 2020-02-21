@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
@@ -10,22 +11,32 @@ namespace PC_QRCodeSystem.View
     {
         #region VARIABLE
         private pts_item itemData { get; set; }
+        private pts_item olditemData { get; set; }
         private pts_stock stockData { get; set; }
+        private pts_stock oldStockData { get; set; }
         private m_mes_user userData { get; set; }
+        private pts_stock_log stockLog { get; set; }
         private pts_item_type typeData { get; set; }
         private pts_supplier supplierData { get; set; }
+        private List<pts_stock_log> listStockLog { get; set; }
         private ErrorProvider errprovider = new ErrorProvider();
         private string[] barcode;
+        private bool isEditData;
         #endregion
 
+        #region FORM EVENT
         public StockDetailForm()
         {
             InitializeComponent();
             itemData = new pts_item();
+            olditemData = new pts_item();
             stockData = new pts_stock();
+            oldStockData = new pts_stock();
             userData = new m_mes_user();
+            stockLog = new pts_stock_log();
             typeData = new pts_item_type();
             supplierData = new pts_supplier();
+            listStockLog = new List<pts_stock_log>();
             grt_StockDetail.ItemSize = new Size(0, 1);
         }
 
@@ -33,8 +44,12 @@ namespace PC_QRCodeSystem.View
         {
             ClearFields();
             txtItemCD.Focus();
+            isEditData = false;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
             grt_StockDetail.SelectedTab = tab_StockDetail;
         }
+        #endregion
 
         #region FIELDS EVENT
         //GET BARCODE DATA INTO FIELDS IN FORM
@@ -131,12 +146,16 @@ namespace PC_QRCodeSystem.View
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-
+            UpdateStock();
+            ClearFields();
+            UpdateGrid(false);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            DeleteStock();
+            ClearFields();
+            UpdateGrid(false);
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -151,6 +170,10 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region SUB EVENTS
+        /// <summary>
+        /// Update Stock Detail Grid
+        /// </summary>
+        /// <param name="isSearch">true if search items</param>
         private void UpdateGrid(bool isSearch)
         {
             if (isSearch)
@@ -181,8 +204,12 @@ namespace PC_QRCodeSystem.View
             dgvStockDetail.Columns["registration_date_time"].HeaderText = "Reg Date";
         }
 
+        /// <summary>
+        /// Update Item Info Grid
+        /// </summary>
         private void UpdateGrid()
         {
+            dgvItemInfo.DataSource = itemData.listItems;
             dgvItemInfo.Columns["item_id"].HeaderText = "Item ID";
             dgvItemInfo.Columns["type_id"].HeaderText = "Type";
             dgvItemInfo.Columns["item_cd"].HeaderText = "Item Code";
@@ -198,12 +225,15 @@ namespace PC_QRCodeSystem.View
             if (dgvItemInfo.Rows.Count > 0)
             {
                 int t = (int)dgvItemInfo.Rows[0].Cells["type_id"].Value;
-                typeData = typeData.GetItemType(4);
+                typeData = typeData.GetItemType(t);
                 lbItemTypeName.Text = typeData.type_name;
                 lbItemTypeName.BackColor = Color.Lime;
             }
         }
 
+        /// <summary>
+        /// Clear all fields
+        /// </summary>
         private void ClearFields()
         {
             txtPONo.Clear();
@@ -211,6 +241,9 @@ namespace PC_QRCodeSystem.View
             txtInvoice.Clear();
             txtOrderNo.Clear();
             txtInCharge.Clear();
+            txtPackingCD.Clear();
+            txtPackingQty.Clear();
+            txtStockInQty.Clear();
             txtSupplierCD.Clear();
             itemData.listItems.Clear();
             stockData.listStockItems.Clear();
@@ -224,22 +257,227 @@ namespace PC_QRCodeSystem.View
             lbSupplierName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
         }
 
+        /// <summary>
+        /// Update stock item
+        /// </summary>
+        private void UpdateStock()
+        {
+            try
+            {
+                listStockLog.Clear();
+                if (txtItemCD.Text != oldStockData.item_cd)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.item_cd),
+                        before_value = oldStockData.item_cd,
+                        after_value = txtItemCD.Text
+                    });
+                }
+                if (txtSupplierCD.Text != oldStockData.supplier_cd)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.supplier_cd),
+                        before_value = oldStockData.item_cd,
+                        after_value = txtSupplierCD.Text
+                    });
+                }
+                if (txtInCharge.Text != oldStockData.stockin_user_cd)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.stockin_user_cd),
+                        before_value = oldStockData.stockin_user_cd,
+                        after_value = txtInCharge.Text
+                    });
+                }
+                if (txtInvoice.Text != oldStockData.invoice)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.invoice),
+                        before_value = oldStockData.invoice,
+                        after_value = txtInvoice.Text
+                    });
+                }
+                if (txtPONo.Text != oldStockData.po_no)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.po_no),
+                        before_value = oldStockData.po_no,
+                        after_value = txtPONo.Text
+                    });
+                }
+                if (txtOrderNo.Text != oldStockData.order_no)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.order_no),
+                        before_value = oldStockData.order_no,
+                        after_value = txtOrderNo.Text
+                    });
+                }
+                if (txtPackingCD.Text != oldStockData.packing_cd)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.packing_cd),
+                        before_value = oldStockData.packing_cd,
+                        after_value = txtPackingCD.Text
+                    });
+                }
+                if (double.Parse(txtStockInQty.Text) != oldStockData.stockin_qty)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.stockin_qty),
+                        before_value = oldStockData.stockin_qty.ToString(),
+                        after_value = txtStockInQty.Text
+                    });
+                }
+                if (double.Parse(txtPackingQty.Text) != oldStockData.packing_qty)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.packing_qty),
+                        before_value = oldStockData.packing_qty.ToString(),
+                        after_value = txtPackingQty.Text
+                    });
+                }
+                if (dtpFromDate.Value != oldStockData.stockin_date)
+                {
+                    listStockLog.Add(new pts_stock_log
+                    {
+                        log_action = "Update",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = nameof(oldStockData.stockin_date),
+                        before_value = oldStockData.stockin_date.ToString(),
+                        after_value = dtpFromDate.Value.ToString()
+                    });
+                }
+                int id = oldStockData.stock_id;
+                int n = stockLog.AddMultiLog(listStockLog);
+                stockData.UpdateItem(new pts_stock
+                {
+                    stock_id = oldStockData.stock_id,
+                    item_cd = txtItemCD.Text,
+                    supplier_cd = txtSupplierCD.Text,
+                    stockin_user_cd = txtInCharge.Text,
+                    invoice = txtInvoice.Text,
+                    po_no = txtPONo.Text,
+                    order_no = txtOrderNo.Text,
+                    packing_cd = txtPackingCD.Text,
+                    stockin_qty = double.Parse(txtStockInQty.Text),
+                    packing_qty = double.Parse(txtPackingQty.Text),
+                    stockin_date = dtpFromDate.Value,
+                    registration_user_cd = UserData.usercode,
+                    registration_date_time = DateTime.Now
+                });
+                MessageBox.Show("Update " + id + " Items Successful!" + Environment.NewLine + "Update " + n + " Logs!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Delete stock item
+        /// </summary>
+        private void DeleteStock()
+        {
+            try
+            {
+                listStockLog.Clear();
+                for (int i = 0; i < oldStockData.GetType().GetProperties().Length; i++)
+                {
+                    stockLog = new pts_stock_log
+                    {
+                        log_action = "Delete",
+                        log_user_cd = UserData.usercode,
+                        stock_id = oldStockData.stock_id.ToString(),
+                        stock_field = oldStockData.GetType().GetProperties()[i].Name,
+                        before_value = oldStockData.GetType().GetProperties()[i].GetValue(oldStockData).ToString(),
+                        after_value = "Deleted"
+                    };
+                    listStockLog.Add(stockLog);
+                }
+                int id = oldStockData.stock_id;
+                int n = stockLog.AddMultiLog(listStockLog);
+                oldStockData.DeleteItem();
+                MessageBox.Show("Deleted item : " + id + " Successful!" + Environment.NewLine + "Update " + n + " logs!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void dgvStockDetail_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;
+            if (isEditData)
+            {
+                if (MessageBox.Show("This item is edited but not update. Do you want cancel it?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    return;
+                isEditData = false;
+            }
             itemData.listItems.Clear();
-            itemData.listItems.Add(itemData.GetItem(dgvStockDetail.Rows[e.RowIndex].Cells["item_cd"].Value.ToString()));
-            dgvItemInfo.DataSource = itemData.listItems;
+            itemData.UpdateStockValue();
+            olditemData = itemData.GetItem(dgvStockDetail.Rows[e.RowIndex].Cells["item_cd"].Value.ToString());
             txtPONo.Text = dgvStockDetail.Rows[e.RowIndex].Cells["po_no"].Value.ToString();
             txtItemCD.Text = dgvStockDetail.Rows[e.RowIndex].Cells["item_cd"].Value.ToString();
             txtInvoice.Text = dgvStockDetail.Rows[e.RowIndex].Cells["invoice"].Value.ToString();
             txtOrderNo.Text = dgvStockDetail.Rows[e.RowIndex].Cells["order_no"].Value.ToString();
+            txtPackingCD.Text = dgvStockDetail.Rows[e.RowIndex].Cells["packing_cd"].Value.ToString();
+            txtPackingQty.Text = dgvStockDetail.Rows[e.RowIndex].Cells["packing_qty"].Value.ToString();
+            txtStockInQty.Text = dgvStockDetail.Rows[e.RowIndex].Cells["stockin_qty"].Value.ToString();
             txtSupplierCD.Text = dgvStockDetail.Rows[e.RowIndex].Cells["supplier_cd"].Value.ToString();
             txtInCharge.Text = dgvStockDetail.Rows[e.RowIndex].Cells["stockin_user_cd"].Value.ToString();
             dtpFromDate.Value = (DateTime)dgvStockDetail.Rows[e.RowIndex].Cells["stockin_date"].Value;
             dtpToDate.Value = (DateTime)dgvStockDetail.Rows[e.RowIndex].Cells["stockin_date"].Value;
+            oldStockData = dgvStockDetail.Rows[e.RowIndex].DataBoundItem as pts_stock;
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+            itemData.listItems.Add(olditemData);
             UpdateGrid();
+        }
+
+        private void dgvStockDetail_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            for (int i = 0; i < dgvStockDetail.Rows.Count; i++)
+                dgvStockDetail.Rows[i].HeaderCell.Value = (i + 1).ToString();
         }
         #endregion
 

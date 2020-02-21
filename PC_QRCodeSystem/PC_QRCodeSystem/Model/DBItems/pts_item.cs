@@ -381,6 +381,10 @@ namespace PC_QRCodeSystem.Model
             }
         }
 
+        /// <summary>
+        /// Update stock qty value
+        /// </summary>
+        /// <returns></returns>
         public int UpdateStockValue()
         {
             //SQL library

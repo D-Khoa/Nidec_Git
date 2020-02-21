@@ -25,6 +25,13 @@ namespace PC_QRCodeSystem.Model
         }
         #endregion
 
+        /// <summary>
+        /// Search list log
+        /// </summary>
+        /// <param name="inItem">input info</param>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <param name="checkDate">check date for search or no</param>
         public void Search(pts_stock_log inItem, DateTime fromDate, DateTime toDate, bool checkDate)
         {
             //SQL library
@@ -66,6 +73,56 @@ namespace PC_QRCodeSystem.Model
             }
             query = string.Empty;
             SQL.Close();
+        }
+
+        /// <summary>
+        /// Add new log
+        /// </summary>
+        /// <param name="inItem">add new log_action, usercode, stockid, stockfield, before_value, after_value</param>
+        /// <returns></returns>
+        public int AddLog(pts_stock_log inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_stock_log(log_action, log_user_cd, stock_id, stock_field, before_value, after_value) ";
+            query += "VALUES('" + inItem.log_action + "','" + inItem.log_user_cd + "','" + inItem.stock_id + "','" + inItem.stock_field;
+            query += "','" + inItem.before_value + "','" + inItem.after_value + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        public int AddMultiLog(List<pts_stock_log> inList)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_stock_log(log_action, log_user_cd, stock_id, stock_field, before_value, after_value) VALUES ";
+            foreach (pts_stock_log inItem in inList)
+            {
+                query += "('" + inItem.log_action + "','" + inItem.log_user_cd + "','" + inItem.stock_id + "','" + inItem.stock_field;
+                query += "','" + inItem.before_value + "','" + inItem.after_value + "'),";
+            }
+            query = query.Remove(query.Length - 1);
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        public void SetValue(string name, object value)
+        {
+            this.GetType().GetProperty(name).SetValue(this, value);
         }
     }
 }

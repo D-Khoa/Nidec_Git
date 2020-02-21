@@ -23,7 +23,7 @@ namespace PC_QRCodeSystem.Model
         public double packing_qty { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public BindingList<pts_stock> listStockItems { get; set; }
+        public BindingList<pts_stock> listStockItems;
         public pts_stock()
         {
             listStockItems = new BindingList<pts_stock>();
@@ -185,6 +185,51 @@ namespace PC_QRCodeSystem.Model
             query += "('" + inItem.packing_cd + "','" + inItem.item_cd + "','" + inItem.supplier_cd + "','" + inItem.order_no;
             query += "','" + inItem.invoice + "','" + inItem.po_no + "','" + inItem.stockin_date + "','" + inItem.stockin_user_cd;
             query += "','" + inItem.stockin_qty + "','" + inItem.packing_qty + "','" + inItem.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Update stock item
+        /// </summary>
+        /// <param name="inItem">stock item after change</param>
+        /// <returns></returns>
+        public int UpdateItem(pts_stock inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "UPDATE pts_stock SET packing_cd ='" + inItem.packing_cd + "', item_cd ='" + inItem.item_cd + "', supplier_cd ='";
+            query += inItem.supplier_cd + "', order_no ='" + inItem.order_no + "', invoice ='" + inItem.invoice + "', po_no ='";
+            query += inItem.po_no + "', stockin_date ='" + inItem.stockin_date + "', stockin_user_cd ='" + inItem.stockin_user_cd;
+            query += "', stockin_qty ='" + inItem.stockin_qty + "', packing_qty ='" + inItem.packing_qty + "', registration_user_cd ='";
+            query += inItem.registration_user_cd + "' WHERE stock_id ='" + inItem.stock_id + "'";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Delete current stock item
+        /// </summary>
+        /// <returns></returns>
+        public int DeleteItem()
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "DELETE FROM pts_stock WHERE stock_id ='" + stock_id + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
