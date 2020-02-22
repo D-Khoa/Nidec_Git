@@ -70,9 +70,9 @@
             // 
             this.dgvDataSupllier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDataSupllier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDataSupllier.Location = new System.Drawing.Point(150, 233);
+            this.dgvDataSupllier.Location = new System.Drawing.Point(150, 234);
             this.dgvDataSupllier.Name = "dgvDataSupllier";
-            this.dgvDataSupllier.Size = new System.Drawing.Size(640, 221);
+            this.dgvDataSupllier.Size = new System.Drawing.Size(640, 244);
             this.dgvDataSupllier.TabIndex = 15;
             this.dgvDataSupllier.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataSupllier_CellDoubleClick);
             // 
@@ -84,7 +84,7 @@
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.cmbSupplierCode);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(150, 69);
+            this.panel4.Location = new System.Drawing.Point(150, 70);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(640, 85);
             this.panel4.TabIndex = 16;
@@ -131,7 +131,7 @@
             this.pnlButtons.Controls.Add(this.btnAdd);
             this.pnlButtons.Controls.Add(this.btnClear);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlButtons.Location = new System.Drawing.Point(150, 154);
+            this.pnlButtons.Location = new System.Drawing.Point(150, 155);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(640, 79);
             this.pnlButtons.TabIndex = 17;
@@ -207,11 +207,12 @@
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 454);
+            this.ClientSize = new System.Drawing.Size(790, 478);
             this.Controls.Add(this.dgvDataSupllier);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.panel4);
             this.dept = "";
+            this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "SupplierForm";

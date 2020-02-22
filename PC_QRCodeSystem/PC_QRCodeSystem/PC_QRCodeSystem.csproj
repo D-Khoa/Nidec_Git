@@ -84,6 +84,7 @@
     <Compile Include="Model\DBItems\m_mes_user.cs" />
     <Compile Include="Model\DBItems\m_mes_user_role.cs" />
     <Compile Include="Model\DBItems\m_user_position.cs" />
+    <Compile Include="Model\DBItems\pts_noplan.cs" />
     <Compile Include="Model\DBItems\pts_plan.cs" />
     <Compile Include="Model\DBItems\pts_stock_history.cs" />
     <Compile Include="Model\DBItems\pts_stock_log.cs" />

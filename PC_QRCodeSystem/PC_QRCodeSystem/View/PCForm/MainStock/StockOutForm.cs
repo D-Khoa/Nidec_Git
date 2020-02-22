@@ -41,10 +41,10 @@ namespace PC_QRCodeSystem.View
         private void StockOutForm_Load(object sender, EventArgs e)
         {
             GetCmb();
-            rbtnNonPlan.Checked = true;
         }
         #endregion
 
+        #region STOCK-OUT NO PLANNED
         #region BUTTONS EVENT
 
         #endregion
@@ -55,15 +55,15 @@ namespace PC_QRCodeSystem.View
             try
             {
                 issueCode.GetListIssueCode();
-                cmbIssueStockOut.DataSource = issueCode.listIssueCode;
-                cmbIssueStockOut.DisplayMember = "issue_cd";
-                cmbIssueStockOut.ValueMember = "issue_name";
-                cmbIssueStockOut.Text = null;
+                cmbNoPlanIssueCD.DataSource = issueCode.listIssueCode;
+                cmbNoPlanIssueCD.DisplayMember = "issue_cd";
+                cmbNoPlanIssueCD.ValueMember = "issue_name";
+                cmbNoPlanIssueCD.Text = null;
                 destinationData.GetListDestination(string.Empty, string.Empty);
-                cmbDestinationStockOut.DataSource = destinationData.listdestination;
-                cmbDestinationStockOut.DisplayMember = "destination_cd";
-                cmbDestinationStockOut.ValueMember = "destination_name";
-                cmbDestinationStockOut.Text = null;
+                cmbNoPlanDestinationCD.DataSource = destinationData.listdestination;
+                cmbNoPlanDestinationCD.DisplayMember = "destination_cd";
+                cmbNoPlanDestinationCD.ValueMember = "destination_name";
+                cmbNoPlanDestinationCD.Text = null;
             }
             catch (Exception ex)
             {
@@ -73,47 +73,47 @@ namespace PC_QRCodeSystem.View
 
         private void cmbIssueStockOut_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbIssueStockOut.Text))
+            if (!string.IsNullOrEmpty(cmbNoPlanIssueCD.Text))
             {
-                lbIssueStockOut.Text = cmbIssueStockOut.SelectedValue.ToString();
-                lbIssueStockOut.BackColor = Color.Lime;
+                lbNoPlanIssue.Text = cmbNoPlanIssueCD.SelectedValue.ToString();
+                lbNoPlanIssue.BackColor = Color.Lime;
             }
             else
             {
-                lbIssueStockOut.Text = "Issue Name";
-                lbIssueStockOut.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                lbNoPlanIssue.Text = "Issue Name";
+                lbNoPlanIssue.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
         }
 
         private void cmbDestinationStockOut_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbDestinationStockOut.Text))
+            if (!string.IsNullOrEmpty(cmbNoPlanDestinationCD.Text))
             {
-                lbDestinationStockOut.Text = cmbDestinationStockOut.SelectedValue.ToString();
-                lbDestinationStockOut.BackColor = Color.Lime;
+                lbNoPlanDestination.Text = cmbNoPlanDestinationCD.SelectedValue.ToString();
+                lbNoPlanDestination.BackColor = Color.Lime;
             }
             else
             {
-                lbDestinationStockOut.Text = "Destination Name";
-                lbDestinationStockOut.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                lbNoPlanDestination.Text = "Destination Name";
+                lbNoPlanDestination.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
         }
 
         private void txtItemCDStockOut_TextChanged(object sender, EventArgs e)
         {
-            errorProvider.SetError(txtItemCDStockOut, null);
-            lbItemStockOut.Text = "Item Name";
-            lbItemStockOut.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            if (!string.IsNullOrEmpty(txtItemCDStockOut.Text))
+            errorProvider.SetError(txtNoPlanItemCD, null);
+            lbNoPlanItem.Text = "Item Name";
+            lbNoPlanItem.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+            if (!string.IsNullOrEmpty(txtNoPlanItemCD.Text))
             {
                 try
                 {
-                    lbItemStockOut.Text = itemData.GetItem(txtItemCDStockOut.Text).item_name;
-                    lbItemStockOut.BackColor = Color.Lime;
+                    lbNoPlanItem.Text = itemData.GetItem(txtNoPlanItemCD.Text).item_name;
+                    lbNoPlanItem.BackColor = Color.Lime;
                 }
                 catch (Exception ex)
                 {
-                    errorProvider.SetError(txtItemCDStockOut, "Wrong Item Code" +
+                    errorProvider.SetError(txtNoPlanItemCD, "Wrong Item Code" +
                                            Environment.NewLine + ex.Message);
                 }
             }
@@ -121,48 +121,89 @@ namespace PC_QRCodeSystem.View
 
         private void txtStockOutUser_TextChanged(object sender, EventArgs e)
         {
-            errorProvider.SetError(txtStockOutUser, null);
-            lbStockOutUser.Text = "User Name";
-            lbStockOutUser.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            if (!string.IsNullOrEmpty(txtStockOutUser.Text))
+            errorProvider.SetError(txtNoPlanUserCD, null);
+            lbNoPlanUser.Text = "User Name";
+            lbNoPlanUser.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+            if (!string.IsNullOrEmpty(txtNoPlanUserCD.Text))
             {
                 try
                 {
-                    lbStockOutUser.Text = mUserData.GetUser(txtStockOutUser.Text).user_name;
-                    lbStockOutUser.BackColor = Color.Lime;
+                    lbNoPlanUser.Text = mUserData.GetUser(txtNoPlanUserCD.Text).user_name;
+                    lbNoPlanUser.BackColor = Color.Lime;
                 }
                 catch (Exception ex)
                 {
-                    errorProvider.SetError(txtStockOutUser, "Wrong Item Code" +
+                    errorProvider.SetError(txtNoPlanUserCD, "Wrong Item Code" +
                                            Environment.NewLine + ex.Message);
                 }
             }
         }
 
-        private void rbtnNonPlan_CheckedChanged(object sender, EventArgs e)
+        private void txtNoPlanStockOutQty_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (rbtnNonPlan.Checked)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
-                planMode = false;
-                noPlanMode = true;
-                requestMode = false;
-                cmbDestinationStockOut.Enabled = true;
-            }
-            if (rbtnPlanned.Checked)
-            {
-                planMode = true;
-                noPlanMode = false;
-                requestMode = false;
-                cmbDestinationStockOut.Enabled = false;
-            }
-            if (rbtnRequest.Checked)
-            {
-                planMode = false;
-                noPlanMode = false;
-                requestMode = true;
-                cmbDestinationStockOut.Enabled = false;
+                string[] barcode = txtBarcode.Text.Split(';');
+                txtNoPlanItemCD.Text = barcode[0];
+                txtNoPlanInvoice.Text = barcode[3];
+                txtBarcode.Clear();
+                UpdateGrid(true);
             }
         }
+
+        private void dgvNoPlan_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+            stockData = dgvNoPlan.Rows[e.RowIndex].DataBoundItem as pts_stock;
+            txtNoPlanStockOutQty.ReadOnly = false;
+            txtNoPlanPackingCD.Text = stockData.packing_cd;
+        }
+
+        private void tab_NoPlan_Paint(object sender, PaintEventArgs e)
+        {
+            txtBarcode.Focus();
+        }
         #endregion
+
+        #region SUB EVENT
+        private void UpdateGrid(bool isSearch)
+        {
+            if (isSearch)
+            {
+                if (!stockData.SearchItem(new pts_stock
+                {
+                    item_cd = txtNoPlanItemCD.Text,
+                    invoice = txtNoPlanInvoice.Text
+                }, DateTime.Now, DateTime.Now, false))
+                {
+                    MessageBox.Show("This item is not exist! Please check and try again!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+            dgvNoPlan.DataSource = stockData.listStockItems;
+            dgvNoPlan.Columns["stock_id"].HeaderText = "Stock ID";
+            dgvNoPlan.Columns["packing_cd"].HeaderText = "Packing Code";
+            dgvNoPlan.Columns["item_cd"].HeaderText = "Item Code";
+            dgvNoPlan.Columns["supplier_cd"].HeaderText = "Supplier Code";
+            dgvNoPlan.Columns["order_no"].HeaderText = "Order Number";
+            dgvNoPlan.Columns["invoice"].HeaderText = "Invoice";
+            dgvNoPlan.Columns["po_no"].HeaderText = "PO";
+            dgvNoPlan.Columns["stockin_date"].HeaderText = "Stock In Date";
+            dgvNoPlan.Columns["stockin_user_cd"].HeaderText = "Incharge";
+            dgvNoPlan.Columns["stockin_qty"].HeaderText = "Stock In Qty";
+            dgvNoPlan.Columns["packing_qty"].HeaderText = "Packing Qty";
+            dgvNoPlan.Columns["registration_user_cd"].HeaderText = "Reg User";
+            dgvNoPlan.Columns["registration_date_time"].HeaderText = "Reg Date";
+        }
+        #endregion
+        #endregion
+
     }
 }
