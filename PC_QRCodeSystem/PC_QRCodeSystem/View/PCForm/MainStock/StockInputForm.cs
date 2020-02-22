@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Management;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -80,7 +79,7 @@ namespace PC_QRCodeSystem.View
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-                stopWatch.Start();
+                stopWatch.Restart();
                 //string temp = Path.GetDirectoryName(premacPath) + @"\Temp\";
                 //if (!Directory.Exists(temp))
                 //    Directory.CreateDirectory(temp);
@@ -246,7 +245,7 @@ namespace PC_QRCodeSystem.View
         private void btnSearchPreInput_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            stopWatch.Start();
+            stopWatch.Restart();
             if (string.IsNullOrEmpty(txtSearchCode.Text))
             {
                 dgvPreInput.DataSource = premacItem.listPremacItem;
@@ -313,7 +312,7 @@ namespace PC_QRCodeSystem.View
         {
             if (!string.IsNullOrEmpty(printername))
             {
-                if (!CheckPrinterIsOffline(printername))
+                if (!printItem.CheckPrinterIsOffline(printername))
                 {
                     lbPrinterStatus.Text = "Online";
                     lbPrinterStatus.BackColor = Color.Green;
@@ -328,6 +327,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnApply_Click(object sender, EventArgs e)
         {
+            TfPrint.printerName = printername;
             premacPath = txtPremacFolder.Text;
             printername = cmbPrinter.Text;
             allsetting.Add("premac file =" + premacPath);
@@ -352,7 +352,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (CheckPrinterIsOffline(cmbPrinter.Text))
+                if (printItem.CheckPrinterIsOffline(cmbPrinter.Text))
                 {
                     MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -368,7 +368,7 @@ namespace PC_QRCodeSystem.View
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
-                if (PrintItems(listPrintItem, false))
+                if (printItem.PrintItems(listPrintItem, false))
                     MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -381,7 +381,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (CheckPrinterIsOffline(cmbPrinter.Text))
+                if (printItem.CheckPrinterIsOffline(cmbPrinter.Text))
                 {
                     MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -397,7 +397,7 @@ namespace PC_QRCodeSystem.View
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
-                if (PrintItems(listPrintItem, false))
+                if (printItem.PrintItems(listPrintItem, false))
                     MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -410,7 +410,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (CheckPrinterIsOffline(cmbPrinter.Text))
+                if (printItem.CheckPrinterIsOffline(cmbPrinter.Text))
                 {
                     MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -426,7 +426,7 @@ namespace PC_QRCodeSystem.View
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Yellow;
                 }
-                if (PrintItems(listPrintItem, true))
+                if (printItem.PrintItems(listPrintItem, true))
                     MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -444,56 +444,6 @@ namespace PC_QRCodeSystem.View
         private void btnPrintBack_Click(object sender, EventArgs e)
         {
             tc_Main.SelectedTab = tab_Main;
-        }
-        #endregion
-
-        #region PRINTER
-        /// <summary>
-        /// Check status of printer
-        /// </summary>
-        /// <param name="printer">Printer name</param>
-        /// <returns>TRUE: OFFLINE, FALSE: ONLINE</returns>
-        private bool CheckPrinterIsOffline(string printer)
-        {
-            ManagementObjectSearcher printerSearch = new ManagementObjectSearcher("Select Name, WorkOffline from Win32_Printer");
-            foreach (ManagementBaseObject searchprint in printerSearch.Get())
-            {
-                if (searchprint["Name"].ToString() == printer)
-                {
-                    return (Boolean)searchprint["WorkOffline"];
-                }
-            }
-            throw new Exception("Printer is not install");
-        }
-
-        /// <summary>
-        /// Print pc stock items
-        /// </summary>
-        /// <param name="Items"></param>
-        /// <param name="printOneCoppy">true: print 1 label</param>
-        /// <returns></returns>
-        public bool PrintItems(List<PrintItem> Items, bool printOneCoppy)
-        {
-            TfPrint.printerName = printername;
-            for (int i = 0; i < Items.Count; i++)
-            {
-                if (printOneCoppy)
-                {
-                    TfPrint.printBarCodeNew(Items[i].Item_Number, Items[i].Item_Name, Items[i].SupplierName, Items[i].Invoice,
-                         Items[i].Delivery_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), Items[i].SupplierCD,
-                         Items[i].PONo, Items[i].OrderNo);
-                }
-                else
-                {
-                    for (int j = 0; j < Items[i].Label_Qty; j++)
-                    {
-                        TfPrint.printBarCodeNew(Items[i].Item_Number, Items[i].Item_Name, Items[i].SupplierName, Items[i].Invoice,
-                            Items[i].Delivery_Date.ToString("yyyy/MM/dd"), Items[i].Delivery_Qty.ToString(), Items[i].SupplierCD,
-                            Items[i].PONo, Items[i].OrderNo);
-                    }
-                }
-            }
-            return true;
         }
         #endregion
 
