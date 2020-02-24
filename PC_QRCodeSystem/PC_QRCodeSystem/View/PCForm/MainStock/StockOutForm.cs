@@ -141,7 +141,8 @@ namespace PC_QRCodeSystem.View
 
         private void btnNoPlanSetting_Click(object sender, EventArgs e)
         {
-            tc_Main.SelectedTab = tab_Setting;
+            SettingForm settingFrm = new SettingForm();
+            settingFrm.Show();
         }
 
         private void btnNoplanClear_Click(object sender, EventArgs e)

@@ -14,35 +14,22 @@ namespace PC_QRCodeSystem.View
     public partial class StockInputForm : FormCommon
     {
         #region ITEMS
-        Stopwatch stopWatch = new Stopwatch();
-        ErrorProvider errorProvider { get; set; }
-        pts_item itemUnit { get; set; }
+        pts_item itemData { get; set; }
+        pts_stock stockItem { get; set; }
         PremacIn premacItem { get; set; }
         PrintItem printItem { get; set; }
-        pts_stock stockItem { get; set; }
         pts_supplier supplierItem { get; set; }
         List<PrintItem> listPrintItem { get; set; }
         BindingList<pts_stock> listStockItem { get; set; }
-        #endregion
 
-        #region SETTING FORM
-        #region SETTING
-        string settingpath, premacPath, printername;
-        List<string> allsetting = new List<string>();
-        #region PRINTER
-        //Class TfPrint is library of printer
         TfPrint tfprinter = new TfPrint();
-        //List all printer name
-        List<string> listprintername =
-            System.Drawing.Printing.PrinterSettings.InstalledPrinters.Cast<string>().ToList();
-        #endregion
-        #endregion
+        Stopwatch stopWatch = new Stopwatch();
+        ErrorProvider errorProvider = new ErrorProvider();
 
         public StockInputForm()
         {
             InitializeComponent();
-            errorProvider = new ErrorProvider();
-            itemUnit = new pts_item();
+            itemData = new pts_item();
             printItem = new PrintItem();
             premacItem = new PremacIn();
             stockItem = new pts_stock();
@@ -50,26 +37,13 @@ namespace PC_QRCodeSystem.View
             listPrintItem = new List<PrintItem>();
             listStockItem = new BindingList<pts_stock>();
             tc_Main.ItemSize = new Size(0, 1);
-            tc_Main.SelectedTab = tab_Main;
-            settingpath = @"setting.ini";
-            //Get list printer name into combobox printer
-            cmbPrinter.DataSource = listprintername;
-            cmbPrinter.Text = null;
         }
 
         private void StockInputForm_Load(object sender, EventArgs e)
         {
-            #region LOAD SETTING.INI
-            foreach (string line in File.ReadLines(settingpath))
-            {
-                if (line.Contains("premac file ="))
-                    premacPath = line.Split('=')[1];
-                if (line.Contains("printer name ="))
-                    printername = line.Split('=')[1];
-            }
-            txtPremacFolder.Text = premacPath;
-            cmbPrinter.Text = printername;
-            #endregion
+            rbtnEven.Checked = true;
+            rbtnItemNumber.Checked = true;
+            tc_Main.SelectedTab = tab_Main;
         }
         #endregion
 
@@ -78,26 +52,29 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Set wait cursor when search data
                 this.Cursor = Cursors.WaitCursor;
+                //Start stopwatch for catch searching time
                 stopWatch.Restart();
-                //string temp = Path.GetDirectoryName(premacPath) + @"\Temp\";
-                //if (!Directory.Exists(temp))
-                //    Directory.CreateDirectory(temp);
-                premacItem.listPremacItem = premacItem.GetListPremacItem(premacPath);
+                //Get list data from premac 6-4-9 file
+                premacItem.GetListPremacItem(SettingItem.premacFile);
                 dgvPreInput.DataSource = premacItem.listPremacItem;
-                tsPreInputRow.Text = dgvPreInput.Rows.Count.ToString();
-                //File.Move(premacPath, temp + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + Path.GetFileName(premacPath));
-                File.Move(premacPath,
-                    Path.GetFullPath(premacPath).Replace(".TXT", "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt"));
+                tsRow.Text = dgvPreInput.Rows.Count.ToString();
+                //Rename file after get data
+                File.Move(SettingItem.premacFile, Path.ChangeExtension(SettingItem.premacFile, DateTime.Now.ToString("yyyyMMddHHmmss")));
+
+                //Stop stopwatch and show time
+                stopWatch.Stop();
+                double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
+                tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
+                tsRow.Text = dgvPreInput.Rows.Count.ToString();
+                tsTotalQty.Text = total.ToString();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tsTime.Text = "None";
             }
-            stopWatch.Stop();
-            double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
-            tsTotalPreInQty.Text = total.ToString();
-            tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
             this.Cursor = Cursors.Default;
         }
 
@@ -105,22 +82,24 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                int qty = 1;
-                double unit = 1;
+                this.Cursor = Cursors.WaitCursor;
+                int numberOfLot = 1;
+                double sizePerLot = 1;
                 double qtymod = 0;
+                //Each row in datagridview
                 foreach (DataGridViewRow dr in dgvPreInput.Rows)
                 {
-                    try
-                    {
-                        itemUnit = itemUnit.GetItem(dr.Cells["Item_Number"].Value.ToString());
-                    }
-                    catch
-                    {
-                        continue;
-                    }
-                    unit = itemUnit.lot_size;
-                    if (unit == 0) unit = (double)dr.Cells["Delivery_Qty"].Value;
-                    qty = (int)((double)dr.Cells["Delivery_Qty"].Value / unit);
+                    qtymod = 0;
+                    //If item number is not exist in item database then skip it
+                    try { itemData = itemData.GetItem(dr.Cells["Item_Number"].Value.ToString()); }
+                    catch { continue; }
+                    //Get lot size in database
+                    sizePerLot = itemData.lot_size;
+                    //If lot size = 0 then no cut lot
+                    if (sizePerLot == 0) sizePerLot = (double)dr.Cells["Delivery_Qty"].Value;
+                    //Calculator number of lot
+                    numberOfLot = (int)((double)dr.Cells["Delivery_Qty"].Value / sizePerLot);
+                    //Add new label item into print list
                     printItem.ListPrintItem.Add(new PrintItem
                     {
                         Item_Number = dr.Cells["Item_Number"].Value.ToString(),
@@ -129,14 +108,14 @@ namespace PC_QRCodeSystem.View
                         SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
                         Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                         Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
-                        Delivery_Qty = unit,
-                        PONo = dr.Cells["PO_No"].Value.ToString(),
+                        Delivery_Qty = sizePerLot,
                         OrderNo = dr.Cells["Order_No"].Value.ToString(),
-                        Label_Qty = qty
+                        Label_Qty = numberOfLot
                     });
-                    if (unit * qty < (double)dr.Cells["Delivery_Qty"].Value)
+                    //If the last lot is not enough, create an odd label for it
+                    if (sizePerLot * numberOfLot < (double)dr.Cells["Delivery_Qty"].Value)
                     {
-                        qtymod = (double)dr.Cells["Delivery_Qty"].Value - (unit * qty);
+                        qtymod = (double)dr.Cells["Delivery_Qty"].Value - (sizePerLot * numberOfLot);
                         printItem.ListPrintItem.Add(new PrintItem
                         {
                             Item_Number = dr.Cells["Item_Number"].Value.ToString(),
@@ -146,55 +125,52 @@ namespace PC_QRCodeSystem.View
                             Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                             Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
                             Delivery_Qty = qtymod,
-                            PONo = dr.Cells["PO_No"].Value.ToString(),
                             OrderNo = dr.Cells["Order_No"].Value.ToString(),
                             Label_Qty = 1
                         });
                     }
+                    premacItem.listPremacItem[dr.Index].Delivery_Qty -= (sizePerLot * numberOfLot + qtymod);
+                    dgvPreInput.DataSource = premacItem.listPremacItem;
+                    //Change color of row when add print item completed
                     dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
                 }
-                dgvPacking.DataSource = printItem.ListPrintItem;
+                //Update print list datagridview
+                dgvPrintList.DataSource = printItem.ListPrintItem;
                 tc_Main.SelectedTab = tab_Print;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void btnManualPacking_Click(object sender, EventArgs e)
         {
             try
             {
-                int qty = 1;
-                double unit = 1;
+                this.Cursor = Cursors.WaitCursor;
                 double qtymod = 0;
-                foreach (DataGridViewRow dr in dgvPreInput.SelectedRows)
+                int numberOfLot = 1;
+                double sizePerLot = 1;
+                if (dgvPreInput.SelectedRows.Count <= 0)
                 {
-                    unit = double.Parse(txtCapaciy.Text);
-                    if (unit > (double)dr.Cells["Delivery_Qty"].Value)
+                    MessageBox.Show("Please select a row before packing!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (rbtnEven.Checked)
+                {
+                    foreach (DataGridViewRow dr in dgvPreInput.SelectedRows)
                     {
-                        MessageBox.Show("Lot size you set is over stock-in qty! Please check and try again!", "Warring", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    if (unit == 0) unit = (double)dr.Cells["Delivery_Qty"].Value;
-                    qty = (int)((double)dr.Cells["Delivery_Qty"].Value / unit);
-                    printItem.ListPrintItem.Add(new PrintItem
-                    {
-                        Item_Number = dr.Cells["Item_Number"].Value.ToString(),
-                        Item_Name = dr.Cells["Item_Name"].Value.ToString(),
-                        SupplierCD = dr.Cells["Supplier_Code"].Value.ToString(),
-                        SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
-                        Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
-                        Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
-                        Delivery_Qty = unit,
-                        PONo = dr.Cells["PO_No"].Value.ToString(),
-                        OrderNo = dr.Cells["Order_No"].Value.ToString(),
-                        Label_Qty = qty
-                    });
-                    if (unit * qty < (double)dr.Cells["Delivery_Qty"].Value)
-                    {
-                        qtymod = (double)dr.Cells["Delivery_Qty"].Value - (unit * qty);
+                        qtymod = 0;
+                        sizePerLot = double.Parse(txtCapaciy.Text);
+                        if (sizePerLot > (double)dr.Cells["Delivery_Qty"].Value)
+                        {
+                            MessageBox.Show("Lot size you set is over stock-in qty! Please check and try again!", "Warring", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        if (sizePerLot == 0) sizePerLot = (double)dr.Cells["Delivery_Qty"].Value;
+                        numberOfLot = (int)((double)dr.Cells["Delivery_Qty"].Value / sizePerLot);
                         printItem.ListPrintItem.Add(new PrintItem
                         {
                             Item_Number = dr.Cells["Item_Number"].Value.ToString(),
@@ -203,21 +179,59 @@ namespace PC_QRCodeSystem.View
                             SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
                             Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
                             Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
-                            Delivery_Qty = qtymod,
-                            PONo = dr.Cells["PO_No"].Value.ToString(),
+                            Delivery_Qty = sizePerLot,
                             OrderNo = dr.Cells["Order_No"].Value.ToString(),
-                            Label_Qty = 1
+                            Label_Qty = numberOfLot
                         });
+                        if (sizePerLot * numberOfLot < (double)dr.Cells["Delivery_Qty"].Value)
+                        {
+                            qtymod = (double)dr.Cells["Delivery_Qty"].Value - (sizePerLot * numberOfLot);
+                            printItem.ListPrintItem.Add(new PrintItem
+                            {
+                                Item_Number = dr.Cells["Item_Number"].Value.ToString(),
+                                Item_Name = dr.Cells["Item_Name"].Value.ToString(),
+                                SupplierCD = dr.Cells["Supplier_Code"].Value.ToString(),
+                                SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
+                                Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
+                                Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
+                                Delivery_Qty = qtymod,
+                                OrderNo = dr.Cells["Order_No"].Value.ToString(),
+                                Label_Qty = 1
+                            });
+                        }
+                        premacItem.listPremacItem[dr.Index].Delivery_Qty -= (sizePerLot * numberOfLot + qtymod);
+                        dr.DefaultCellStyle.BackColor = Color.Lime;
                     }
-                    dr.DefaultCellStyle.BackColor = Color.Blue;
                 }
-                dgvPacking.DataSource = printItem.ListPrintItem;
+                if (rbtnOdd.Checked)
+                {
+                    qtymod = 0;
+                    sizePerLot = double.Parse(txtCapaciy.Text);
+                    DataGridViewRow dr = dgvPreInput.SelectedRows[0];
+                    printItem.ListPrintItem.Add(new PrintItem
+                    {
+                        Item_Number = dr.Cells["Item_Number"].Value.ToString(),
+                        Item_Name = dr.Cells["Item_Name"].Value.ToString(),
+                        SupplierCD = dr.Cells["Supplier_Code"].Value.ToString(),
+                        SupplierName = dr.Cells["Supplier_Name"].Value.ToString(),
+                        Invoice = dr.Cells["Supplier_Invoice"].Value.ToString(),
+                        Delivery_Date = (DateTime)dr.Cells["Delivery_Date"].Value,
+                        Delivery_Qty = sizePerLot,
+                        OrderNo = dr.Cells["Order_No"].Value.ToString(),
+                        Label_Qty = 1
+                    });
+                    dr.DefaultCellStyle.BackColor = Color.Yellow;
+                    premacItem.listPremacItem[dr.Index].Delivery_Qty -= sizePerLot;
+                }
+                dgvPreInput.DataSource = premacItem.listPremacItem;
+                dgvPrintList.DataSource = printItem.ListPrintItem;
                 tc_Main.SelectedTab = tab_Print;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void btnPrintList_Click(object sender, EventArgs e)
@@ -232,13 +246,16 @@ namespace PC_QRCodeSystem.View
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
-            tc_Main.SelectedTab = tab_Setting;
+            SettingForm settingFrm = new SettingForm();
+            settingFrm.ShowDialog();
         }
 
         private void btnMainClear_Click(object sender, EventArgs e)
         {
             txtCapaciy.Clear();
-            tsPreInputRow.Text = "None";
+            tsRow.Text = "None";
+            tsTime.Text = "None";
+            tsTotalQty.Text = "None";
             dgvPreInput.DataSource = null;
         }
 
@@ -246,104 +263,54 @@ namespace PC_QRCodeSystem.View
         {
             this.Cursor = Cursors.WaitCursor;
             stopWatch.Restart();
+            //If search box is empty then show all data
             if (string.IsNullOrEmpty(txtSearchCode.Text))
             {
                 dgvPreInput.DataSource = premacItem.listPremacItem;
             }
             else
             {
+                //Search with item number
                 if (rbtnItemNumber.Checked)
                 {
                     dgvPreInput.DataSource = (from item in premacItem.listPremacItem
                                               where item.Item_Number == txtSearchCode.Text
                                               select item).ToList();
                 }
+                //Search with supplier code
                 if (rbtnSupplierCD.Checked)
                 {
                     dgvPreInput.DataSource = (from item in premacItem.listPremacItem
                                               where item.Supplier_Code == txtSearchCode.Text
                                               select item).ToList();
                 }
+                //Search with order number
                 if (rbtnOrderNo.Checked)
                 {
                     dgvPreInput.DataSource = (from item in premacItem.listPremacItem
                                               where item.Order_No == txtSearchCode.Text
                                               select item).ToList();
                 }
+                //Search with invoice
                 if (rbtnInvoice.Checked)
                 {
                     dgvPreInput.DataSource = (from item in premacItem.listPremacItem
                                               where item.Supplier_Invoice == txtSearchCode.Text
                                               select item).ToList();
                 }
-                if (rbtnPO.Checked)
-                {
-                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                              where item.PO_No == txtSearchCode.Text
-                                              select item).ToList();
-                }
             }
             stopWatch.Stop();
             double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
-            tsTotalPreInQty.Text = total.ToString();
-            tsPreInputRow.Text = dgvPreInput.Rows.Count.ToString();
             tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
+            tsRow.Text = dgvPreInput.Rows.Count.ToString();
+            tsTotalQty.Text = total.ToString();
             this.Cursor = Cursors.Default;
         }
-        #endregion
 
-        #region SETTING TAB
-        private void cmbPrinter_SelectedIndexChanged(object sender, EventArgs e)
+        private void rbtnEven_CheckedChanged(object sender, EventArgs e)
         {
-            printername = cmbPrinter.Text;
-        }
-
-        private void btnBrowserPremac_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog of = new OpenFileDialog();
-            of.Filter = "Premac file text (*.txt)|*.txt";
-            if (of.ShowDialog() == DialogResult.OK)
-            {
-                txtPremacFolder.Text = of.FileName;
-            }
-        }
-
-        private void btnPrinterCheck_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(printername))
-            {
-                if (!printItem.CheckPrinterIsOffline(printername))
-                {
-                    lbPrinterStatus.Text = "Online";
-                    lbPrinterStatus.BackColor = Color.Green;
-                }
-                else
-                {
-                    lbPrinterStatus.Text = "Offline";
-                    lbPrinterStatus.BackColor = Color.Red;
-                }
-            }
-        }
-
-        private void btnApply_Click(object sender, EventArgs e)
-        {
-            TfPrint.printerName = printername;
-            premacPath = txtPremacFolder.Text;
-            printername = cmbPrinter.Text;
-            allsetting.Add("premac file =" + premacPath);
-            allsetting.Add("printer name =" + printername);
-            if (!File.Exists(settingpath))
-            {
-                FileStream myfile = File.Create(settingpath);
-                myfile.Close();
-            }
-            File.WriteAllLines(settingpath, allsetting);
-            tc_Main.SelectedTab = tab_Main;
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            tc_Main.SelectedTab = tab_Main;
+            if (rbtnEven.Checked) dgvPreInput.MultiSelect = true;
+            if (rbtnOdd.Checked) dgvPreInput.MultiSelect = false;
         }
         #endregion
 
@@ -352,18 +319,18 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (printItem.CheckPrinterIsOffline(cmbPrinter.Text))
+                if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
                     MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 listPrintItem.Clear();
-                if (dgvPacking.SelectedRows.Count == 0)
+                if (dgvPrintList.SelectedRows.Count <= 0)
                 {
                     MessageBox.Show("Please choose item first!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
-                foreach (DataGridViewRow dr in dgvPacking.SelectedRows)
+                foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Lime;
@@ -381,18 +348,18 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (printItem.CheckPrinterIsOffline(cmbPrinter.Text))
+                if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
                     MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 listPrintItem.Clear();
-                if (dgvPacking.Rows.Count == 0)
+                if (dgvPrintList.Rows.Count == 0)
                 {
                     MessageBox.Show("Don't have item to print!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                foreach (DataGridViewRow dr in dgvPacking.Rows)
+                foreach (DataGridViewRow dr in dgvPrintList.Rows)
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Lime;
@@ -410,18 +377,18 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (printItem.CheckPrinterIsOffline(cmbPrinter.Text))
+                if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
                     MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 listPrintItem.Clear();
-                if (dgvPacking.SelectedRows.Count == 0)
+                if (dgvPrintList.SelectedRows.Count == 0)
                 {
                     MessageBox.Show("Please choose item first!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
-                foreach (DataGridViewRow dr in dgvPacking.SelectedRows)
+                foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Yellow;
@@ -438,7 +405,8 @@ namespace PC_QRCodeSystem.View
         private void btnPrintClear_Click(object sender, EventArgs e)
         {
             listPrintItem.Clear();
-            dgvPacking.DataSource = null;
+            printItem.ListPrintItem.Clear();
+            dgvPrintList.DataSource = null;
         }
 
         private void btnPrintBack_Click(object sender, EventArgs e)
@@ -448,180 +416,12 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region INSPECTION TAB
-        /// <summary>
-        /// Update datagridview
-        /// </summary>
-        private void UpdateInspectionGrid()
-        {
-            dgvInspection.DataSource = listStockItem;
-            dgvInspection.Columns["stock_id"].HeaderText = "Stock ID";
-            dgvInspection.Columns["packing_cd"].HeaderText = "Packing Code";
-            dgvInspection.Columns["item_cd"].HeaderText = "Item Code";
-            dgvInspection.Columns["supplier_cd"].HeaderText = "Supplier Code";
-            dgvInspection.Columns["order_no"].HeaderText = "Order Number";
-            dgvInspection.Columns["invoice"].HeaderText = "Invoice";
-            dgvInspection.Columns["po_no"].HeaderText = "PO";
-            dgvInspection.Columns["stockin_date"].HeaderText = "Stock In Date";
-            dgvInspection.Columns["stockin_user_cd"].HeaderText = "Incharge";
-            dgvInspection.Columns["stockin_qty"].HeaderText = "Stock In Qty";
-            dgvInspection.Columns["packing_qty"].HeaderText = "Packing Qty";
-            dgvInspection.Columns["registration_user_cd"].HeaderText = "Reg User";
-            dgvInspection.Columns["registration_date_time"].HeaderText = "Reg Date";
-            tsLabelNumber.Text = dgvInspection.Rows.Count.ToString();
-            double total = listStockItem.Sum(x => x.stockin_qty);
-            tsQty.Text = total.ToString();
-        }
-
-        /// <summary>
-        /// Add new stock item into temp list
-        /// </summary>
-        private void AddNewItem()
-        {
-            try
-            {
-                int n = 1;
-                int temp = 0;
-                txtSupplierCD.Clear();
-                txtSupplierName.Clear();
-                string[] barcode = txtBarcode.Text.Split(';');
-                string pono = "None";
-                string orderno = "None";
-                string suppliercd = string.Empty;
-                if (barcode.Length > 6)
-                {
-                    if (!string.IsNullOrEmpty(barcode[7])) pono = barcode[7];
-                    if (!string.IsNullOrEmpty(barcode[8])) orderno = barcode[8];
-                    if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
-                }
-                #region CHECK SUPPLIER & NOTICE FOR USER
-                errorProvider.SetError(txtSupplierCD, null);
-                txtSupplierName.Text = barcode[2];
-                try
-                {
-                    if (string.IsNullOrEmpty(suppliercd))
-                    {
-                        supplierItem = supplierItem.GetSupplier(new pts_supplier
-                        {
-                            supplier_id = 0,
-                            supplier_name = txtSupplierName.Text
-                        });
-                        txtSupplierCD.Text = supplierItem.supplier_cd;
-                    }
-                    else
-                    {
-                        txtSupplierCD.Text = suppliercd;
-                        supplierItem = supplierItem.GetSupplier(new pts_supplier
-                        {
-                            supplier_id = 0,
-                            supplier_cd = txtSupplierCD.Text
-                        });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    errorProvider.SetError(txtSupplierCD, "This supplier is not exist!" + Environment.NewLine + "Please fill supplier code and press F2 for add new supplier (" + ex.Message + ")");
-                    return;
-                }
-                #endregion
-
-                #region CHECK PO AND CREATE PACKING CODE
-                try
-                {
-                    if (stockItem.SearchItem(new pts_stock { po_no = pono }, DateTime.Now, DateTime.Now, false))
-                    {
-                        double total = stockItem.SumStockQty(new pts_stock { po_no = pono }, DateTime.Now, DateTime.Now, false, true);
-                        if (MessageBox.Show("This PO is exist! Stock-In qty in database: " + total + Environment.NewLine + "Are you sure add new packing with this PO?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                            return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                }
-                //Get max number packing of this PO in database
-                foreach (pts_stock item in stockItem.listStockItems)
-                {
-                    if (item.po_no == pono)
-                    {
-                        temp = int.Parse(item.packing_cd.Split('-')[1]);
-                        if (temp == n) n++;
-                    }
-                }
-                //Create new number of packing with PO number
-                foreach (pts_stock item in listStockItem)
-                {
-                    if (item.po_no == pono)
-                    {
-                        temp = int.Parse(item.packing_cd.Split('-')[1]);
-                        if (temp == n) n++;
-                    }
-                }
-                string packingcd = pono + "-" + n.ToString("00");
-                #endregion
-
-                //Add new barcode item into list stock item
-                listStockItem.Add(new pts_stock
-                {
-                    item_cd = barcode[0],
-                    supplier_cd = txtSupplierCD.Text,
-                    invoice = barcode[3],
-                    stockin_date = DateTime.Parse(barcode[4]),
-                    stockin_qty = double.Parse(barcode[5]),
-                    stockin_user_cd = UserData.usercode,
-                    po_no = pono,
-                    order_no = orderno,
-                    packing_cd = packingcd,
-                    packing_qty = double.Parse(barcode[5]),
-                    registration_user_cd = UserData.usercode,
-                });
-                UpdateInspectionGrid();
-
-            }
-            catch (IndexOutOfRangeException)
-            {
-                MessageBox.Show("Wrong format barcode!" + Environment.NewLine + "Please check barcode and try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                AddNewItem();
-                txtBarcode.Clear();
-            }
-        }
-
-        private void txtSupplierCD_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                //Press F2 for add new supplier
-                if (e.KeyCode == Keys.F2)
-                {
-                    supplierItem.AddSupplier(new pts_supplier
-                    {
-                        supplier_cd = txtSupplierCD.Text,
-                        supplier_name = txtSupplierName.Text,
-                        registration_user_cd = UserData.usercode,
-                    });
-                    MessageBox.Show("New supplier has been added with supplier code : " + txtSupplierCD.Text, "Noitice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    errorProvider.SetError(txtSupplierCD, null);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+        #region BUTTONS EVENT
         private void btnAddItem_Click(object sender, EventArgs e)
         {
             AddNewItem();
+            txtBarcode.Clear();
+            txtBarcode.Focus();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -661,7 +461,7 @@ namespace PC_QRCodeSystem.View
                     continue;
                 }
             }
-            itemUnit.UpdateStockValue();
+            itemData.UpdateStockValue();
             UpdateInspectionGrid();
         }
 
@@ -671,7 +471,8 @@ namespace PC_QRCodeSystem.View
             {
                 foreach (DataGridViewCell dc in dgvInspection.SelectedCells)
                 {
-                    listStockItem.Remove(dgvInspection.Rows[dc.RowIndex].DataBoundItem as pts_stock);
+                    if (MessageBox.Show("Are you sure delete this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        listStockItem.Remove(dgvInspection.Rows[dc.RowIndex].DataBoundItem as pts_stock);
                 }
                 dgvInspection.DataSource = listStockItem;
             }
@@ -680,16 +481,200 @@ namespace PC_QRCodeSystem.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             UpdateInspectionGrid();
+            txtBarcode.Focus();
         }
 
         private void btnInspectionClear_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("This list is not register. Are you sure to clear all?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                return;
             txtBarcode.Clear();
             txtSupplierCD.Clear();
+            listStockItem.Clear();
             dgvInspection.DataSource = null;
             txtSupplierName.Text = "Supplier Name";
             errorProvider.SetError(txtSupplierCD, null);
+            txtBarcode.Focus();
         }
+        #endregion
+
+        #region FIELDS EVENT
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                AddNewItem();
+                txtBarcode.Clear();
+                txtBarcode.Focus();
+            }
+        }
+
+        private void txtSupplierCD_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                //Press F2 for add new supplier
+                if (e.KeyCode == Keys.F2)
+                {
+                    supplierItem.AddSupplier(new pts_supplier
+                    {
+                        supplier_cd = txtSupplierCD.Text,
+                        supplier_name = txtSupplierName.Text,
+                        registration_user_cd = UserData.usercode,
+                    });
+                    MessageBox.Show("New supplier has been added with supplier code : " + txtSupplierCD.Text, "Noitice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    errorProvider.SetError(txtSupplierCD, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void tab_Inspection_Paint(object sender, PaintEventArgs e)
+        {
+            txtBarcode.Focus();
+        }
+        #endregion
+
+        #region SUB EVENT
+        /// <summary>
+        /// Update datagridview
+        /// </summary>
+        private void UpdateInspectionGrid()
+        {
+            dgvInspection.DataSource = listStockItem;
+            dgvInspection.Columns["stock_id"].HeaderText = "Stock ID";
+            dgvInspection.Columns["packing_cd"].HeaderText = "Packing Code";
+            dgvInspection.Columns["item_cd"].HeaderText = "Item Code";
+            dgvInspection.Columns["supplier_cd"].HeaderText = "Supplier Code";
+            dgvInspection.Columns["order_no"].HeaderText = "Order Number";
+            dgvInspection.Columns["invoice"].HeaderText = "Invoice";
+            dgvInspection.Columns["po_no"].HeaderText = "PO";
+            dgvInspection.Columns["stockin_date"].HeaderText = "Stock In Date";
+            dgvInspection.Columns["stockin_user_cd"].HeaderText = "Incharge";
+            dgvInspection.Columns["stockin_qty"].HeaderText = "Stock In Qty";
+            dgvInspection.Columns["packing_qty"].HeaderText = "Packing Qty";
+            dgvInspection.Columns["registration_user_cd"].HeaderText = "Reg User";
+            dgvInspection.Columns["registration_date_time"].HeaderText = "Reg Date";
+            double total = listStockItem.Sum(x => x.stockin_qty);
+            tsRow.Text = dgvInspection.Rows.Count.ToString();
+            tsTotalQty.Text = total.ToString();
+        }
+
+        /// <summary>
+        /// Add new stock item into temp list
+        /// </summary>
+        private void AddNewItem()
+        {
+            try
+            {
+                int n = 1;
+                int temp = 0;
+                txtSupplierCD.Clear();
+                txtSupplierName.Clear();
+                string[] barcode = txtBarcode.Text.Split(';');
+                string orderno = "None";
+                string suppliercd = string.Empty;
+                if (barcode.Length > 6)
+                {
+                    if (!string.IsNullOrEmpty(barcode[8])) orderno = barcode[7];
+                    if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
+                }
+                #region CHECK SUPPLIER & NOTICE FOR USER
+                errorProvider.SetError(txtSupplierCD, null);
+                txtSupplierName.Text = barcode[2];
+                try
+                {
+                    if (string.IsNullOrEmpty(suppliercd))
+                    {
+                        supplierItem = supplierItem.GetSupplier(new pts_supplier
+                        {
+                            supplier_id = 0,
+                            supplier_name = txtSupplierName.Text
+                        });
+                        txtSupplierCD.Text = supplierItem.supplier_cd;
+                    }
+                    else
+                    {
+                        txtSupplierCD.Text = suppliercd;
+                        supplierItem = supplierItem.GetSupplier(new pts_supplier
+                        {
+                            supplier_id = 0,
+                            supplier_cd = txtSupplierCD.Text
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errorProvider.SetError(txtSupplierCD, "This supplier is not exist!" + Environment.NewLine + "Please fill supplier code and press F2 for add new supplier (" + ex.Message + ")");
+                    return;
+                }
+                #endregion
+
+                #region CHECK INVOICE AND CREATE PACKING CODE
+                try
+                {
+                    if (stockItem.SearchItem(new pts_stock { invoice = barcode[3], item_cd = barcode[0] }, DateTime.Now, DateTime.Now, false))
+                    {
+                        double total = stockItem.SumStockQty(new pts_stock { invoice = barcode[3] }, DateTime.Now, DateTime.Now, false, true);
+                        if (MessageBox.Show("This Invoice of " + barcode[0] + " is exist! Stock-In numberOfLot in database: " + total + Environment.NewLine + "Are you sure add new packing with this Invoice?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                            return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                }
+                //Get max number packing of this Invoice in database
+                foreach (pts_stock item in stockItem.listStockItems)
+                {
+                    if (item.invoice == barcode[3])
+                    {
+                        temp = int.Parse(item.packing_cd.Split('-')[1]);
+                        if (temp == n) n++;
+                    }
+                }
+                //Create new number of packing with Invoice number
+                foreach (pts_stock item in listStockItem)
+                {
+                    if (item.invoice == barcode[3])
+                    {
+                        temp = int.Parse(item.packing_cd.Split('-')[1]);
+                        if (temp == n) n++;
+                    }
+                }
+                string packingcd = barcode[3] + "-" + n.ToString("00");
+                #endregion
+
+                //Add new barcode item into list stock item
+                listStockItem.Add(new pts_stock
+                {
+                    item_cd = barcode[0],
+                    supplier_cd = txtSupplierCD.Text,
+                    invoice = barcode[3],
+                    stockin_date = DateTime.Parse(barcode[4]),
+                    stockin_qty = double.Parse(barcode[5]),
+                    stockin_user_cd = UserData.usercode,
+                    order_no = orderno,
+                    packing_cd = packingcd,
+                    packing_qty = double.Parse(barcode[5]),
+                    registration_user_cd = UserData.usercode,
+                });
+                UpdateInspectionGrid();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Wrong format barcode!" + Environment.NewLine + "Please check barcode and try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
         #endregion
     }
 }

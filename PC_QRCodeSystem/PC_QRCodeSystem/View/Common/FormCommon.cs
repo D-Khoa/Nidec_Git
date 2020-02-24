@@ -69,13 +69,15 @@ namespace PC_QRCodeSystem
         private void FormCommon_Load(object sender, EventArgs e)
         {
             tittle = this.Text;
+            dept = UserData.dept;
             name = UserData.username;
             position = UserData.position;
-            dept = UserData.dept;
             logintime = UserData.logintime;
             listper = UserData.role_permision;
             this.Text = tittle + "-QRCode System";
             lbOnlineTime.Text = TimeSpan.FromSeconds(UserData.onTime).ToString();
+            SettingItem settingItem = new SettingItem();
+            settingItem.LoadSetting();
         }
         #endregion
 
@@ -102,7 +104,7 @@ namespace PC_QRCodeSystem
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure to exit?", "Noice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure to log-out?", "Noice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 m_login_password mlog = new m_login_password();
                 UserData.isOnline = mlog.LogIO(UserData.usercode, false);
@@ -111,10 +113,7 @@ namespace PC_QRCodeSystem
 
         private void btnCloseForm_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you want to exit?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.Close();
-            }
+            this.Close();
         }
         #endregion
 
@@ -129,6 +128,15 @@ namespace PC_QRCodeSystem
         {
             if (!UserData.isOnline && !string.IsNullOrEmpty(UserData.usercode)) this.Close();
             lbOnlineTime.Text = TimeSpan.FromSeconds(UserData.onTime).ToString();
+        }
+
+        private void FormCommon_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (UserData.isOnline)
+            {
+                if (MessageBox.Show("Are you want to close?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    e.Cancel = true;
+            }
         }
         #endregion
     }
