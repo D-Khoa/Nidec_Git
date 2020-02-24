@@ -256,6 +256,7 @@
             this.Name = "FormCommon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormCommon";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCommon_FormClosing);
             this.Load += new System.EventHandler(this.FormCommon_Load);
             this.Shown += new System.EventHandler(this.FormCommon_Shown);
             this.pnlTitle.ResumeLayout(false);

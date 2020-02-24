@@ -89,6 +89,7 @@
     <Compile Include="Model\DBItems\pts_stock_history.cs" />
     <Compile Include="Model\DBItems\pts_stock_log.cs" />
     <Compile Include="Model\Temp Items\PrintItem.cs" />
+    <Compile Include="Model\Temp Items\SettingItem.cs" />
     <Compile Include="View\Common\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,7 +109,6 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\DBItems\m_department.cs" />
-    <Compile Include="Model\Temp Items\PCStockItem.cs" />
     <Compile Include="Model\DBItems\pts_destination.cs" />
     <Compile Include="Model\DBItems\pts_issue_code.cs" />
     <Compile Include="Model\DBItems\pts_item.cs" />
@@ -137,6 +137,12 @@
     </Compile>
     <Compile Include="View\AdminForm\UserPosition.Designer.cs">
       <DependentUpon>UserPosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PCForm\Destination\DestinationManager.cs">
       <SubType>Form</SubType>
@@ -228,6 +234,9 @@
     </Compile>
     <EmbeddedResource Include="View\AdminForm\UserPosition.resx">
       <DependentUpon>UserPosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\Destination\DestinationManager.resx">
       <DependentUpon>DestinationManager.cs</DependentUpon>

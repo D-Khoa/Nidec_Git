@@ -334,6 +334,7 @@ namespace PC_QRCodeSystem.View
         {
             btnDelete.Enabled = !isLock;
             btnUpdate.Enabled = !isLock;
+            btnConfirm.Enabled = !isLock;
         }
 
         private void dgvRequest_CellContentClick(object sender, DataGridViewCellEventArgs e)

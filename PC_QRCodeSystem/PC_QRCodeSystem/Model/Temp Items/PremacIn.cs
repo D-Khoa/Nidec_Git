@@ -18,7 +18,7 @@ namespace PC_QRCodeSystem.Model
         public DateTime Delivery_Date { get; set; }
         public string Order_No { get; set; }
         public string Incharge { get; set; }
-        public List<PremacIn> listPremacItem { get; set; }
+        public List<PremacIn> listPremacItem;
         public PremacIn()
         {
             listPremacItem = new List<PremacIn>();
@@ -26,86 +26,31 @@ namespace PC_QRCodeSystem.Model
         #endregion
 
         /// <summary>
-        /// Get infomations of item into list item from file Premac
+        /// Get list PREMAC 6-4-9 from txt file
         /// </summary>
-        /// <param name="premacfile"></param>
+        /// <param name="premacfile">path of PREMAC file</param>
         /// <returns></returns>
-        public List<PremacIn> GetItemFromPremacFile(string premacfile)
+        public void GetListPremacItem(string premacfile)
         {
-            List<PremacIn> listitem = new List<PremacIn>();
-            foreach (string line in File.ReadLines(premacfile))
-            {
-                if (line.Contains("(CPFXE049)") || line.Contains("SupplierCD"))
-                    continue;
-                string[] columns = line.Split('?');
-                listitem.Add(new PremacIn
-                {
-                    Item_Number = columns[2].Trim(),
-                    Item_Name = columns[3].Trim(),
-                    PO_No = columns[4].Trim(),
-                    Order_No = columns[5].Trim(),
-                    Supplier_Code = columns[0].Trim(),
-                    Supplier_Name = columns[1].Trim(),
-                    Supplier_Invoice = columns[29].Trim(),
-                    Delivery_Date = DateTime.Parse(columns[9].Trim()),
-                    Delivery_Qty = double.Parse(columns[10].Trim()),
-                    Incharge = columns[15].Trim(),
-                });
-            }
-            listitem.Sort((a, b) => a.Item_Number.CompareTo(b.Item_Number));
-            return listitem;
-        }
-
-        public List<PremacIn> GetListPremacItem(string premacfile)
-        {
-            //listPremacItem = new BindingList<PremacIn>();
-            //foreach (string line in File.ReadLines(premacfile))
-            //{
-            //    try
-            //    {
-            //        if (line.Contains("(CPFXE049)") || line.Contains("SupplierCD"))
-            //            continue;
-            //        string[] columns = line.Split('?');
-            //        if (string.IsNullOrEmpty(columns[10].Trim())) columns[10] = "0";
-            //        listPremacItem.Add(new PremacIn
-            //        {
-            //            Item_Number = columns[2].Trim(),
-            //            Item_Name = columns[3].Trim(),
-            //            PO_No = columns[4].Trim(),
-            //            Order_No = columns[5].Trim(),
-            //            Supplier_Code = columns[0].Trim(),
-            //            Supplier_Name = columns[1].Trim(),
-            //            Supplier_Invoice = columns[29].Trim(),
-            //            Delivery_Date = DateTime.Parse(columns[9].Trim()),
-            //            Delivery_Qty = double.Parse(columns[10].Trim()),
-            //            Incharge = columns[15].Trim(),
-            //        });
-            //    }
-            //    catch
-            //    {
-            //        throw new Exception("Line : " + (listPremacItem.Count + 1).ToString());
-            //    }
-            //}
             string[] csvlines = File.ReadAllLines(premacfile);
             IEnumerable<PremacIn> query = from csvline in csvlines
-                        where (!csvline.Contains("(CPFXE049)") && !csvline.Contains("SupplierCD"))
-                        let columns = csvline.Split('?')
-                        select new PremacIn
-                        {
-                            Item_Number = columns[2].Trim(),
-                            Item_Name = columns[3].Trim(),
-                            PO_No = columns[4].Trim(),
-                            Order_No = columns[5].Trim(),
-                            Supplier_Code = columns[0].Trim(),
-                            Supplier_Name = columns[1].Trim(),
-                            Supplier_Invoice = columns[29].Trim(),
-                            Delivery_Date = DateTime.Parse(columns[9].Trim()),
-                            Delivery_Qty = !string.IsNullOrEmpty(columns[10].Trim()) ? double.Parse(columns[10].Trim()) : 0,
-                            Incharge = columns[15].Trim(),
-                        };
-            return query.ToList();
-            //listPremacItem.Sort((a, b) => a.Item_Number.CompareTo(b.Item_Number));
-            //return listPremacItem;
+                                          where (!csvline.Contains("(CPFXE049)") && !csvline.Contains("SupplierCD"))
+                                          let columns = csvline.Split('?')
+                                          select new PremacIn
+                                          {
+                                              Item_Number = columns[2].Trim(),
+                                              Item_Name = columns[3].Trim(),
+                                              PO_No = columns[4].Trim(),
+                                              Order_No = columns[5].Trim(),
+                                              Supplier_Code = columns[0].Trim(),
+                                              Supplier_Name = columns[1].Trim(),
+                                              Supplier_Invoice = columns[29].Trim(),
+                                              Delivery_Date = DateTime.Parse(columns[9].Trim()),
+                                              Delivery_Qty = !string.IsNullOrEmpty(columns[10].Trim()) ? double.Parse(columns[10].Trim()) : 0,
+                                              Incharge = columns[15].Trim(),
+                                          };
+            listPremacItem = query.ToList();
+            listPremacItem.Sort((a, b) => a.Item_Number.CompareTo(b.Item_Number));
         }
     }
 }
