@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockDetailForm));
             this.tc_MainStockDetail = new System.Windows.Forms.TabControl();
             this.tab_StockDetail = new System.Windows.Forms.TabPage();
@@ -57,9 +57,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.cbSearchDate = new System.Windows.Forms.CheckBox();
             this.lbSupplierName = new System.Windows.Forms.Label();
-            this.txtPONo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.lbInchagre = new System.Windows.Forms.Label();
             this.txtInvoice = new System.Windows.Forms.TextBox();
             this.txtInCharge = new System.Windows.Forms.TextBox();
@@ -134,16 +132,16 @@
             this.dgvStockDetail.MultiSelect = false;
             this.dgvStockDetail.Name = "dgvStockDetail";
             this.dgvStockDetail.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvStockDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStockDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvStockDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvStockDetail.Size = new System.Drawing.Size(818, 98);
             this.dgvStockDetail.TabIndex = 1;
@@ -280,9 +278,7 @@
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.cbSearchDate);
             this.panel4.Controls.Add(this.lbSupplierName);
-            this.panel4.Controls.Add(this.txtPONo);
             this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.lbInchagre);
             this.panel4.Controls.Add(this.txtInvoice);
             this.panel4.Controls.Add(this.txtInCharge);
@@ -372,7 +368,7 @@
             // 
             this.lbItemTypeName.BackColor = System.Drawing.SystemColors.Control;
             this.lbItemTypeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbItemTypeName.Location = new System.Drawing.Point(650, 100);
+            this.lbItemTypeName.Location = new System.Drawing.Point(370, 100);
             this.lbItemTypeName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbItemTypeName.Name = "lbItemTypeName";
             this.lbItemTypeName.Size = new System.Drawing.Size(150, 25);
@@ -383,10 +379,10 @@
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(530, 100);
+            this.label11.Location = new System.Drawing.Point(280, 100);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(110, 25);
+            this.label11.Size = new System.Drawing.Size(80, 25);
             this.label11.TabIndex = 38;
             this.label11.Text = "Item Type";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -402,7 +398,7 @@
             // 
             // txtOrderNo
             // 
-            this.txtOrderNo.Location = new System.Drawing.Point(370, 100);
+            this.txtOrderNo.Location = new System.Drawing.Point(120, 130);
             this.txtOrderNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderNo.Name = "txtOrderNo";
             this.txtOrderNo.Size = new System.Drawing.Size(150, 22);
@@ -411,10 +407,10 @@
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(280, 100);
+            this.label8.Location = new System.Drawing.Point(10, 130);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 25);
+            this.label8.Size = new System.Drawing.Size(100, 25);
             this.label8.TabIndex = 35;
             this.label8.Text = "Order No";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -436,18 +432,10 @@
             this.lbSupplierName.Location = new System.Drawing.Point(300, 40);
             this.lbSupplierName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSupplierName.Name = "lbSupplierName";
-            this.lbSupplierName.Size = new System.Drawing.Size(500, 25);
+            this.lbSupplierName.Size = new System.Drawing.Size(470, 25);
             this.lbSupplierName.TabIndex = 33;
             this.lbSupplierName.Text = "Supplier Name";
             this.lbSupplierName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtPONo
-            // 
-            this.txtPONo.Location = new System.Drawing.Point(120, 130);
-            this.txtPONo.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPONo.Name = "txtPONo";
-            this.txtPONo.Size = new System.Drawing.Size(150, 22);
-            this.txtPONo.TabIndex = 26;
             // 
             // label7
             // 
@@ -460,17 +448,6 @@
             this.label7.Text = "Invoice";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(10, 130);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 25);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "PO No";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // lbInchagre
             // 
             this.lbInchagre.BackColor = System.Drawing.SystemColors.Control;
@@ -478,7 +455,7 @@
             this.lbInchagre.Location = new System.Drawing.Point(300, 70);
             this.lbInchagre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbInchagre.Name = "lbInchagre";
-            this.lbInchagre.Size = new System.Drawing.Size(500, 25);
+            this.lbInchagre.Size = new System.Drawing.Size(470, 25);
             this.lbInchagre.TabIndex = 29;
             this.lbInchagre.Text = "User In Charge";
             this.lbInchagre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -559,7 +536,7 @@
             this.lbItemName.Location = new System.Drawing.Point(300, 10);
             this.lbItemName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbItemName.Name = "lbItemName";
-            this.lbItemName.Size = new System.Drawing.Size(500, 25);
+            this.lbItemName.Size = new System.Drawing.Size(470, 25);
             this.lbItemName.TabIndex = 5;
             this.lbItemName.Text = "Item Name";
             this.lbItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -728,11 +705,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbInchagre;
         private System.Windows.Forms.TextBox txtInCharge;
-        private System.Windows.Forms.TextBox txtPONo;
         private System.Windows.Forms.TextBox txtInvoice;
         private System.Windows.Forms.TextBox txtItemCD;
         private System.Windows.Forms.DateTimePicker dtpToDate;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dtpFromDate;
         private System.Windows.Forms.Label label7;

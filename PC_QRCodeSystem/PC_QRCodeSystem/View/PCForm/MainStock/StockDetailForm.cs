@@ -67,10 +67,8 @@ namespace PC_QRCodeSystem.View
                 //GET DATE
                 dtpFromDate.Value = DateTime.Parse(barcode[4]);
                 dtpToDate.Value = DateTime.Parse(barcode[4]);
-                //GET PO NUMBER
-                txtPONo.Text = barcode[7];
                 //GET ORDER NO
-                txtOrderNo.Text = barcode[8];
+                txtOrderNo.Text = barcode[7];
             }
         }
 
@@ -192,7 +190,6 @@ namespace PC_QRCodeSystem.View
                     supplier_cd = txtSupplierCD.Text,
                     order_no = txtOrderNo.Text,
                     invoice = txtInvoice.Text,
-                    po_no = txtPONo.Text,
                     stockin_user_cd = txtInCharge.Text,
                 }, dtpFromDate.Value, dtpToDate.Value, cbSearchDate.Checked);
             }
@@ -203,7 +200,6 @@ namespace PC_QRCodeSystem.View
             dgvStockDetail.Columns["supplier_cd"].HeaderText = "Supplier Code";
             dgvStockDetail.Columns["order_no"].HeaderText = "Order No";
             dgvStockDetail.Columns["invoice"].HeaderText = "Invoice";
-            dgvStockDetail.Columns["po_no"].HeaderText = "PO No";
             dgvStockDetail.Columns["stockin_date"].HeaderText = "Stock-In Date";
             dgvStockDetail.Columns["stockin_user_cd"].HeaderText = "Stock-In User";
             dgvStockDetail.Columns["stockin_qty"].HeaderText = "Stock-In Qty";
@@ -245,7 +241,6 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         private void ClearFields()
         {
-            txtPONo.Clear();
             txtItemCD.Clear();
             txtInvoice.Clear();
             txtOrderNo.Clear();
@@ -322,18 +317,6 @@ namespace PC_QRCodeSystem.View
                         after_value = txtInvoice.Text
                     });
                 }
-                if (txtPONo.Text != oldStockData.po_no)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.po_no),
-                        before_value = oldStockData.po_no,
-                        after_value = txtPONo.Text
-                    });
-                }
                 if (txtOrderNo.Text != oldStockData.order_no)
                 {
                     listStockLog.Add(new pts_stock_log
@@ -403,7 +386,6 @@ namespace PC_QRCodeSystem.View
                     supplier_cd = txtSupplierCD.Text,
                     stockin_user_cd = txtInCharge.Text,
                     invoice = txtInvoice.Text,
-                    po_no = txtPONo.Text,
                     order_no = txtOrderNo.Text,
                     packing_cd = txtPackingCD.Text,
                     stockin_qty = double.Parse(txtStockInQty.Text),
@@ -465,7 +447,6 @@ namespace PC_QRCodeSystem.View
             itemData.listItems.Clear();
             itemData.UpdateStockValue();
             olditemData = itemData.GetItem(dgvStockDetail.Rows[e.RowIndex].Cells["item_cd"].Value.ToString());
-            txtPONo.Text = dgvStockDetail.Rows[e.RowIndex].Cells["po_no"].Value.ToString();
             txtItemCD.Text = dgvStockDetail.Rows[e.RowIndex].Cells["item_cd"].Value.ToString();
             txtInvoice.Text = dgvStockDetail.Rows[e.RowIndex].Cells["invoice"].Value.ToString();
             txtOrderNo.Text = dgvStockDetail.Rows[e.RowIndex].Cells["order_no"].Value.ToString();
