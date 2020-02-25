@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -69,65 +66,112 @@ namespace PC_QRCodeSystem.View
                 double temp;
                 double stockOutQty = double.Parse(txtNoPlanStockOutQty.Text);
                 string noplancd = "no-" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                //When issue code is 30 then required fill comment
                 if ((int)cmbNoPlanIssueCD.SelectedValue == 30 && string.IsNullOrEmpty(txtNoPlanComment.Text))
                 {
-                    MessageBox.Show("Please fill comment when Scrap Item!", "Warring", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    CustomMessageBox.Notice("Please fill comment when Scrap Item!");
                     return;
                 }
                 //If stock out qty > packing qty then alert
                 if (stockOutQty > double.Parse(txtNoPlanWHQty.Text))
                 {
-                    if (MessageBox.Show("Stock-out qty is over than stock-in-hand qty!" + Environment.NewLine + "Are you sure to continue?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
+                    if (CustomMessageBox.Warring("Stock-out qty is over than stock-in-hand qty!" + Environment.NewLine + "Are you sure to continue?") == DialogResult.No)
+                        return;
                 }
+                if (CustomMessageBox.Question("Are you sure add this stock-out item?") == DialogResult.No) return;
+
+                #region ADD NEW NO-PLAN
                 //Add noplan item into list
                 listNoPlan.Add(new pts_noplan
                 {
                     noplan_cd = noplancd,
-                    destination_cd = cmbNoPlanDestinationCD.Text,
+                    destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
                     item_cd = txtNoPlanItemCD.Text,
                     noplan_qty = stockOutQty,
                     noplan_usercd = txtNoPlanUserCD.Text,
                     noplan_date = dtpNoPlanStockOutDate.Value,
                 });
+                #endregion
+
                 //Check all packing in dgv
                 foreach (DataGridViewRow dr in dgvNoPlan.Rows)
                 {
                     //Get packing stockOutQty & packing code
                     stockData = dr.DataBoundItem as pts_stock;
+                    //Get supplier
+                    supplierData = supplierData.GetSupplier(new pts_supplier { supplier_cd = stockData.supplier_cd });
+                    //If packing is empty then skip it
                     if (stockData.packing_qty <= 0) continue;
+
+                    #region ADD STOCK-OUT ITEM
+                    //If stock-out qty > packing qty then stock-out next pack
                     if (stockOutQty > stockData.packing_qty)
                     {
                         temp = stockData.packing_qty;
                         stockOutQty = stockOutQty - stockData.packing_qty;
                     }
-                    else
+                    else //When stock-out qty < pack qty then get a number = stock-out qty
                     {
                         temp = stockOutQty;
                         stockOutQty = 0;
                     }
+                    //Add stock-out item into a list
                     listStockOut.Add(new pts_stockout_log
                     {
                         packing_cd = stockData.packing_cd,
                         process_cd = noplancd,
-                        issue_cd = int.Parse(cmbNoPlanIssueCD.Text),
+                        issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
                         stockout_date = dtpNoPlanStockOutDate.Value,
                         stockout_user_cd = txtNoPlanUserCD.Text,
                         stockout_qty = temp,
                         comment = txtNoPlanComment.Text,
                         remark = "N",
                     });
+                    //Add new label stock-out
+                    printData.ListPrintItem.Add(new PrintItem
+                    {
+                        Item_Number = txtNoPlanItemCD.Text,
+                        Item_Name = lbItemName.Text,
+                        SupplierName = supplierData.supplier_name,
+                        Invoice = txtNoPlanInvoice.Text,
+                        Delivery_Date = dtpNoPlanStockOutDate.Value,
+                        Delivery_Qty = temp,
+                        SupplierCD = supplierData.supplier_cd,
+                        OrderNo = stockData.order_no,
+                        Label_Qty = 1
+                    });
+                    #endregion
+
+                    //Calculator pack qty in stock
                     stockData.packing_qty = stockData.packing_qty - temp;
                     listStock.Add(stockData);
+                    //Add new label stock-in when it not empty
+                    if (stockData.packing_qty > 0)
+                    {
+                        printData.ListPrintItem.Add(new PrintItem
+                        {
+                            Item_Number = txtNoPlanItemCD.Text,
+                            Item_Name = lbItemName.Text,
+                            SupplierName = supplierData.supplier_name,
+                            Invoice = txtNoPlanInvoice.Text,
+                            Delivery_Date = stockData.stockin_date,
+                            Delivery_Qty = stockData.packing_qty,
+                            SupplierCD = supplierData.supplier_cd,
+                            OrderNo = stockData.order_no,
+                            Label_Qty = 1
+                        });
+                    }
+                    //If get enough stock-out qty then break
                     if (stockOutQty == 0) break;
                 }
+                //Update grid in inspection tab
                 UpdateProcessGrid(0);
-                UpdateStockOutGrid();
-                if (MessageBox.Show("Register new stock-out item." + Environment.NewLine + "Do you want go to Inspection Tab to see it?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (CustomMessageBox.Question("Successful!. Do you want go to Inspection Tab to see it?") == DialogResult.Yes)
                     tc_Main.SelectedTab = tab_Inspection;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -157,27 +201,6 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region FIELDS EVENT
-        private void GetCmb()
-        {
-            try
-            {
-                issueCode.GetListIssueCode();
-                cmbNoPlanIssueCD.DataSource = issueCode.listIssueCode;
-                cmbNoPlanIssueCD.DisplayMember = "issue_name";
-                cmbNoPlanIssueCD.ValueMember = "issue_cd";
-                cmbNoPlanIssueCD.Text = null;
-                destinationData.GetListDestination(string.Empty, string.Empty);
-                cmbNoPlanDestinationCD.DataSource = destinationData.listdestination;
-                cmbNoPlanDestinationCD.DisplayMember = "destination_name";
-                cmbNoPlanDestinationCD.ValueMember = "destination_cd";
-                cmbNoPlanDestinationCD.Text = null;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void cmbNoPlanIssueCD_Format(object sender, ListControlConvertEventArgs e)
         {
             string code = ((pts_issue_code)e.ListItem).issue_cd.ToString();
@@ -252,12 +275,6 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void dgvNoPlan_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-                stockData = dgvNoPlan.Rows[e.RowIndex].DataBoundItem as pts_stock;
-        }
-
         private void tab_NoPlan_Paint(object sender, PaintEventArgs e)
         {
             txtBarcode.Focus();
@@ -265,13 +282,34 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region SUB EVENT
+        private void GetCmb()
+        {
+            try
+            {
+                issueCode.GetListIssueCode();
+                cmbNoPlanIssueCD.DataSource = issueCode.listIssueCode;
+                cmbNoPlanIssueCD.DisplayMember = "issue_name";
+                cmbNoPlanIssueCD.ValueMember = "issue_cd";
+                cmbNoPlanIssueCD.Text = null;
+                destinationData.GetListDestination(string.Empty, string.Empty);
+                cmbNoPlanDestinationCD.DataSource = destinationData.listdestination;
+                cmbNoPlanDestinationCD.DisplayMember = "destination_name";
+                cmbNoPlanDestinationCD.ValueMember = "destination_cd";
+                cmbNoPlanDestinationCD.Text = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void UpdateNoPlanGrid(bool isSearch)
         {
             if (isSearch)
             {
                 if (!stockData.SearchItem(new pts_stock { item_cd = txtNoPlanItemCD.Text, invoice = txtNoPlanInvoice.Text }))
                 {
-                    MessageBox.Show("This item is not exist! Please check and try again!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Error("This item is not exist! Please check and try again!");
                     return;
                 }
             }
@@ -282,7 +320,6 @@ namespace PC_QRCodeSystem.View
             dgvNoPlan.Columns["supplier_cd"].HeaderText = "Supplier Code";
             dgvNoPlan.Columns["order_no"].HeaderText = "Order Number";
             dgvNoPlan.Columns["invoice"].HeaderText = "Invoice";
-            dgvNoPlan.Columns["po_no"].HeaderText = "PO";
             dgvNoPlan.Columns["stockin_date"].HeaderText = "Stock In Date";
             dgvNoPlan.Columns["stockin_user_cd"].HeaderText = "Incharge";
             dgvNoPlan.Columns["stockin_qty"].HeaderText = "Stock In Qty";
@@ -296,35 +333,34 @@ namespace PC_QRCodeSystem.View
 
         #region INSPECTION STOCK-OUT
         #region BUTTONS EVENT
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            UpdateNoPlanGrid(false);
-            UpdateStockOutGrid();
-        }
-
         private void btnStockOutReg_Click(object sender, EventArgs e)
         {
             try
             {
+                int n = 0;
+                //Add no-plan item into DB
                 if (listNoPlan.Count > 0)
                 {
-                    int n = noplanData.AddMultiItem(listNoPlan);
-                    MessageBox.Show("Add " + n + " no planned item!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    n = noplanData.AddMultiItem(listNoPlan);
+                    CustomMessageBox.Notice("Add " + n + " No-Planned item successed!");
                 }
+                //Add stock-out logs into DB
                 if (listStockOut.Count > 0)
                 {
-                    int n = stockOutData.AddMultiItem(listStockOut);
-                    MessageBox.Show("Add " + n + " stock out logs!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    n = stockOutData.AddMultiItem(listStockOut);
+                    CustomMessageBox.Notice("Add " + n + " Stock-Out logs!");
                 }
+                //Update packing qty of stock item in DB
                 foreach (pts_stock item in listStock)
                 {
                     item.UpdateItem(item);
                 }
+                //Update stock qty
                 itemData.UpdateStockValue();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -332,47 +368,64 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (printData.CheckPrinterIsOffline(TfPrint.printerName))
-                {
-                    MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 listPrintItems.Clear();
-                if (dgvStockAfter.Rows.Count == 0)
+                if (dgvPrintList.Rows.Count == 0)
                 {
-                    MessageBox.Show("Don't have item to print!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomMessageBox.Notice("Don't have item to print!");
                     return;
                 }
-                foreach (DataGridViewRow dr in dgvStockAfter.Rows)
+                if (printData.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
-                    stockData = dr.DataBoundItem as pts_stock;
-                    DataGridViewRow stockoutrow = dgvStockOutLog.Rows.Cast<DataGridViewRow>().FirstOrDefault(x => x.Cells["packing_cd"].Value.ToString() == stockData.packing_cd);
-                    listPrintItems.Add(new PrintItem
-                    {
-                        Item_Number = stockData.item_cd,
-                        Item_Name = itemData.GetItem(stockData.item_cd).item_name,
-                        SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = stockData.supplier_cd }).supplier_name,
-                        Invoice = stockData.invoice,
-                        Delivery_Date = (DateTime)stockoutrow.Cells["stockout_date"].Value,
-                        Delivery_Qty = (double)stockoutrow.Cells["stockout_qty"].Value
-                    });
-                    dr.DefaultCellStyle.BackColor = Color.Lime;
+                    CustomMessageBox.Notice("Printer is offline");
+                    return;
                 }
-                dgvPrintList.DataSource = listPrintItems;
+                foreach (DataGridViewRow dr in dgvPrintList.Rows)
+                {
+                    listPrintItems.Add(dr.DataBoundItem as PrintItem);
+                    dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                }
                 if (printData.PrintItems(listPrintItems, false))
-                    MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Print items are completed!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
+            }
+        }
+
+        private void btnPrintManual_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                listPrintItems.Clear();
+                if (dgvPrintList.Rows.Count == 0)
+                {
+                    CustomMessageBox.Notice("Don't have item to print!");
+                    return;
+                }
+                if (printData.CheckPrinterIsOffline(SettingItem.printerSName))
+                {
+                    CustomMessageBox.Notice("Printer is offline");
+                    return;
+                }
+                foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
+                {
+                    listPrintItems.Add(dr.DataBoundItem as PrintItem);
+                    dr.DefaultCellStyle.BackColor = Color.Yellow;
+                }
+                if (printData.PrintItems(listPrintItems, true))
+                    CustomMessageBox.Notice("Print items are completed!");
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
         private void btnInspectionClear_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Data is not register. Are you sure to clear it?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                return;
-            ClearInspection();
+            if (CustomMessageBox.Warring("Data is not register." + Environment.NewLine + "Are you sure to clear it?") == DialogResult.Yes)
+                ClearInspection();
         }
 
         private void btnInspectionBack_Click(object sender, EventArgs e)
@@ -382,12 +435,10 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region SUB EVENT
-        private void UpdateStockOutGrid()
-        {
-            dgvStockOutLog.DataSource = listStockOut;
-            dgvStockAfter.DataSource = listStock;
-        }
-
+        /// <summary>
+        /// Update datagridview to show process data
+        /// </summary>
+        /// <param name="state">0: No planned. 1: Planning. 2: Request</param>
         private void UpdateProcessGrid(int state)
         {
             switch (state)
@@ -400,15 +451,17 @@ namespace PC_QRCodeSystem.View
                 case 2:
                     break;
             }
+            dgvPrintList.DataSource = printData.ListPrintItem;
         }
 
         private void ClearInspection()
         {
-            listNoPlan.Clear();
             listStock.Clear();
+            listNoPlan.Clear();
             listStockOut.Clear();
+            printData.ListPrintItem.Clear();
             dgvProcess.DataSource = null;
-            dgvStockOutLog.DataSource = null;
+            dgvPrintList.DataSource = null;
         }
         #endregion
 

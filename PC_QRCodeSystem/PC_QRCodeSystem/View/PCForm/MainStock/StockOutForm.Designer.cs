@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tc_Main = new System.Windows.Forms.TabControl();
             this.tab_NoPlan = new System.Windows.Forms.TabPage();
             this.dgvNoPlan = new System.Windows.Forms.DataGridView();
@@ -91,25 +91,14 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.tab_Inspection = new System.Windows.Forms.TabPage();
-            this.dgvStockAfter = new System.Windows.Forms.DataGridView();
-            this.dgvStockOutLog = new System.Windows.Forms.DataGridView();
+            this.dgvPrintList = new System.Windows.Forms.DataGridView();
             this.dgvProcess = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnInspectionBack = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnPrintManual = new System.Windows.Forms.Button();
             this.btnInspectionClear = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnStockOutReg = new System.Windows.Forms.Button();
-            this.tab_Print = new System.Windows.Forms.TabPage();
-            this.dgvPrintList = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -125,13 +114,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.tab_Inspection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockAfter)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockOutLog)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcess)).BeginInit();
             this.panel1.SuspendLayout();
-            this.tab_Print.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).BeginInit();
-            this.panel3.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,7 +127,6 @@
             this.tc_Main.Controls.Add(this.tab_Plan);
             this.tc_Main.Controls.Add(this.tab_Request);
             this.tc_Main.Controls.Add(this.tab_Inspection);
-            this.tc_Main.Controls.Add(this.tab_Print);
             this.tc_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc_Main.Location = new System.Drawing.Point(150, 70);
             this.tc_Main.Margin = new System.Windows.Forms.Padding(4);
@@ -180,20 +164,19 @@
             this.dgvNoPlan.MultiSelect = false;
             this.dgvNoPlan.Name = "dgvNoPlan";
             this.dgvNoPlan.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvNoPlan.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvNoPlan.Size = new System.Drawing.Size(700, 206);
             this.dgvNoPlan.TabIndex = 6;
-            this.dgvNoPlan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNoPlan_CellClick);
             // 
             // panel5
             // 
@@ -243,7 +226,7 @@
             this.btnNoPlanRegister.Name = "btnNoPlanRegister";
             this.btnNoPlanRegister.Size = new System.Drawing.Size(80, 50);
             this.btnNoPlanRegister.TabIndex = 0;
-            this.btnNoPlanRegister.Text = "No Plan Register";
+            this.btnNoPlanRegister.Text = "Add new Stock-Out";
             this.btnNoPlanRegister.UseVisualStyleBackColor = true;
             this.btnNoPlanRegister.Click += new System.EventHandler(this.btnNoPlanRegister_Click);
             // 
@@ -408,7 +391,8 @@
             // 
             // dtpNoPlanStockOutDate
             // 
-            this.dtpNoPlanStockOutDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpNoPlanStockOutDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpNoPlanStockOutDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNoPlanStockOutDate.Location = new System.Drawing.Point(120, 160);
             this.dtpNoPlanStockOutDate.Name = "dtpNoPlanStockOutDate";
             this.dtpNoPlanStockOutDate.Size = new System.Drawing.Size(120, 22);
@@ -799,8 +783,7 @@
             // 
             // tab_Inspection
             // 
-            this.tab_Inspection.Controls.Add(this.dgvStockAfter);
-            this.tab_Inspection.Controls.Add(this.dgvStockOutLog);
+            this.tab_Inspection.Controls.Add(this.dgvPrintList);
             this.tab_Inspection.Controls.Add(this.dgvProcess);
             this.tab_Inspection.Controls.Add(this.panel1);
             this.tab_Inspection.Location = new System.Drawing.Point(4, 28);
@@ -812,48 +795,40 @@
             this.tab_Inspection.Text = "Inspection";
             this.tab_Inspection.UseVisualStyleBackColor = true;
             // 
-            // dgvStockAfter
+            // dgvPrintList
             // 
-            this.dgvStockAfter.AllowUserToAddRows = false;
-            this.dgvStockAfter.AllowUserToDeleteRows = false;
-            this.dgvStockAfter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStockAfter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStockAfter.Location = new System.Drawing.Point(4, 264);
-            this.dgvStockAfter.Name = "dgvStockAfter";
-            this.dgvStockAfter.ReadOnly = true;
-            this.dgvStockAfter.Size = new System.Drawing.Size(700, 226);
-            this.dgvStockAfter.TabIndex = 12;
-            // 
-            // dgvStockOutLog
-            // 
-            this.dgvStockOutLog.AllowUserToAddRows = false;
-            this.dgvStockOutLog.AllowUserToDeleteRows = false;
-            this.dgvStockOutLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStockOutLog.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgvStockOutLog.Location = new System.Drawing.Point(4, 144);
-            this.dgvStockOutLog.Name = "dgvStockOutLog";
-            this.dgvStockOutLog.ReadOnly = true;
-            this.dgvStockOutLog.Size = new System.Drawing.Size(700, 120);
-            this.dgvStockOutLog.TabIndex = 11;
+            this.dgvPrintList.AllowUserToAddRows = false;
+            this.dgvPrintList.AllowUserToDeleteRows = false;
+            this.dgvPrintList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvPrintList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPrintList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPrintList.Location = new System.Drawing.Point(4, 144);
+            this.dgvPrintList.Name = "dgvPrintList";
+            this.dgvPrintList.ReadOnly = true;
+            this.dgvPrintList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvPrintList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPrintList.Size = new System.Drawing.Size(700, 346);
+            this.dgvPrintList.TabIndex = 12;
             // 
             // dgvProcess
             // 
             this.dgvProcess.AllowUserToAddRows = false;
             this.dgvProcess.AllowUserToDeleteRows = false;
+            this.dgvProcess.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvProcess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProcess.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvProcess.Location = new System.Drawing.Point(4, 64);
             this.dgvProcess.Name = "dgvProcess";
             this.dgvProcess.ReadOnly = true;
+            this.dgvProcess.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvProcess.Size = new System.Drawing.Size(700, 80);
             this.dgvProcess.TabIndex = 10;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnInspectionBack);
-            this.panel1.Controls.Add(this.btnRefresh);
+            this.panel1.Controls.Add(this.btnPrintManual);
             this.panel1.Controls.Add(this.btnInspectionClear);
-            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.btnPrint);
             this.panel1.Controls.Add(this.btnStockOutReg);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -872,19 +847,19 @@
             this.btnInspectionBack.UseVisualStyleBackColor = true;
             this.btnInspectionBack.Click += new System.EventHandler(this.btnInspectionBack_Click);
             // 
-            // btnRefresh
+            // btnPrintManual
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(258, 5);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(80, 50);
-            this.btnRefresh.TabIndex = 6;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnPrintManual.Location = new System.Drawing.Point(310, 5);
+            this.btnPrintManual.Name = "btnPrintManual";
+            this.btnPrintManual.Size = new System.Drawing.Size(80, 50);
+            this.btnPrintManual.TabIndex = 6;
+            this.btnPrintManual.Text = "Print Manual";
+            this.btnPrintManual.UseVisualStyleBackColor = true;
+            this.btnPrintManual.Click += new System.EventHandler(this.btnPrintManual_Click);
             // 
             // btnInspectionClear
             // 
-            this.btnInspectionClear.Location = new System.Drawing.Point(362, 5);
+            this.btnInspectionClear.Location = new System.Drawing.Point(440, 5);
             this.btnInspectionClear.Name = "btnInspectionClear";
             this.btnInspectionClear.Size = new System.Drawing.Size(80, 50);
             this.btnInspectionClear.TabIndex = 5;
@@ -892,22 +867,13 @@
             this.btnInspectionClear.UseVisualStyleBackColor = true;
             this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(466, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(80, 50);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Setting";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(154, 5);
+            this.btnPrint.Location = new System.Drawing.Point(180, 5);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(80, 50);
             this.btnPrint.TabIndex = 3;
-            this.btnPrint.Text = "Print";
+            this.btnPrint.Text = "Print All";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
@@ -920,98 +886,6 @@
             this.btnStockOutReg.Text = "Stock-Out Registe";
             this.btnStockOutReg.UseVisualStyleBackColor = true;
             this.btnStockOutReg.Click += new System.EventHandler(this.btnStockOutReg_Click);
-            // 
-            // tab_Print
-            // 
-            this.tab_Print.Controls.Add(this.dgvPrintList);
-            this.tab_Print.Controls.Add(this.panel3);
-            this.tab_Print.Location = new System.Drawing.Point(4, 28);
-            this.tab_Print.Name = "tab_Print";
-            this.tab_Print.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Print.Size = new System.Drawing.Size(708, 494);
-            this.tab_Print.TabIndex = 5;
-            this.tab_Print.Text = "Print List";
-            this.tab_Print.UseVisualStyleBackColor = true;
-            // 
-            // dgvPrintList
-            // 
-            this.dgvPrintList.AllowUserToAddRows = false;
-            this.dgvPrintList.AllowUserToDeleteRows = false;
-            this.dgvPrintList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPrintList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPrintList.Location = new System.Drawing.Point(3, 63);
-            this.dgvPrintList.Name = "dgvPrintList";
-            this.dgvPrintList.ReadOnly = true;
-            this.dgvPrintList.Size = new System.Drawing.Size(702, 428);
-            this.dgvPrintList.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.button3);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.button5);
-            this.panel3.Controls.Add(this.button6);
-            this.panel3.Controls.Add(this.button7);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(702, 60);
-            this.panel3.TabIndex = 10;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(570, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 50);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Back";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(258, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 50);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Refresh";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(362, 5);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(80, 50);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Clear";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(466, 5);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(80, 50);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Setting";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(154, 5);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(80, 50);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "Print";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(50, 5);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(80, 50);
-            this.button7.TabIndex = 0;
-            this.button7.Text = "Stock-Out Registe";
-            this.button7.UseVisualStyleBackColor = true;
             // 
             // statusStrip1
             // 
@@ -1076,13 +950,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).EndInit();
             this.pnlButtons.ResumeLayout(false);
             this.tab_Inspection.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockAfter)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockOutLog)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcess)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.tab_Print.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).EndInit();
-            this.panel3.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1160,21 +1030,10 @@
         private System.Windows.Forms.DataGridView dgvProcess;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnInspectionClear;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnStockOutReg;
-        private System.Windows.Forms.DataGridView dgvStockOutLog;
-        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnPrintManual;
         private System.Windows.Forms.Button btnInspectionBack;
-        private System.Windows.Forms.DataGridView dgvStockAfter;
-        private System.Windows.Forms.TabPage tab_Print;
         private System.Windows.Forms.DataGridView dgvPrintList;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
     }
 }
