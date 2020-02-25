@@ -10,62 +10,54 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Convert_Supplier
+
+namespace ConvertPremacFile
 {
-    public partial class ConvertSupplier : Form
+    public partial class Menu_Form : Form
     {
         OpenFileDialog chooseFolder;
         List<string> setString;
-        string[] filePath;
         string settingfile;
-        string file;
         int c;
-        #region LOAD FILE
-        public ConvertSupplier()
+        public Menu_Form()
         {
             InitializeComponent();
             setString = new List<string>();
-            settingfile = @"C:\ConvertSupplier\ini.txt";
+            settingfile = @"C:\Convert Premac File\ini.txt";
         }
-
-        private void ConvertSupplier_Load(object sender, EventArgs e)
+        #region FORM LOAD
+        private void Menu_Form_Load(object sender, EventArgs e)
         {
             if (File.Exists(settingfile))
             {
                 setString = File.ReadLines(settingfile).ToList();
             }
-            txtFrom.Text = setString[0].Trim().Split('=')[1];
-            txtTo.Text = setString[1].Trim().Split('=')[1];
-
-        }
-        #endregion
-        #region CHOOSE FOLDER DATA
-
-        private void btnFromFolder_Click(object sender, EventArgs e)
-        {
-            txtFrom.Text = ChooseFolder();
+            txtSupplier.Text = setString[0].Trim().Split('=')[1];
+            txtItem.Text = setString[1].Trim().Split('=')[1];
         }
 
-        private void btnToFolder_Click(object sender, EventArgs e)
+        private void Menu_Form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            txtTo.Text = ChooseFolder();
-        }
-        private string ChooseFolder()
-        {
-            chooseFolder = new OpenFileDialog();
-            chooseFolder.CheckFileExists = false;
-            chooseFolder.CheckPathExists = false;
-            chooseFolder.ShowReadOnly = true;
-            chooseFolder.FileName = "Select Folder";
-            if (chooseFolder.ShowDialog() == DialogResult.OK)
+            try
             {
-                return Path.GetDirectoryName(chooseFolder.FileName) + @"\";
+                if (btnStop.Enabled)
+                    e.Cancel = true;
+                setString.Clear();
+                setString.Add("SUPPLIER FOLDER =" + txtSupplier.Text);
+                setString.Add("ITEM FOLDER =" + txtItem.Text);
+                if (!Directory.Exists(Path.GetDirectoryName(settingfile)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(settingfile));
+                File.WriteAllLines(settingfile, setString);
             }
-            else
-                return "";
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
-        #region BACKGROUNDWORKER SETUP
+
+
+        #region BACKGROUNDWORKER  
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             c = (int)numTimer.Value;
@@ -90,7 +82,6 @@ namespace Convert_Supplier
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
             if (e.Cancelled)
             {
                 tsStatus.Text = "Stop Convert Data!!!!";
@@ -103,7 +94,7 @@ namespace Convert_Supplier
             {
                 try
                 {
-                    tsStatus.Text = "Convert Data...";
+                    tsStatus.Text = "Sending Data...";
                     EditAndSendFile();
                     backgroundWorker1.RunWorkerAsync();
                 }
@@ -114,18 +105,13 @@ namespace Convert_Supplier
             }
         }
         #endregion
-        #region CONVERT FILE
-
+        #region EDIT & SEND FILE
         private void EditAndSendFile()
         {
-            try
-            {
-                filePath = Directory.GetFiles(txtFrom.Text, "*.txt");
-            }
-            catch { }
+
         }
         #endregion
-        #region BUTTON
+        #region BUTTON CONVERT    
         private void btnConvert_Click(object sender, EventArgs e)
         {
             try
@@ -134,9 +120,10 @@ namespace Convert_Supplier
                 {
                     btnConvert.Enabled = false;
                     btnStop.Enabled = true;
-                    txtFrom.ReadOnly = true;
-                    btnFromFolder.Enabled = false;
-                    txtTo.Enabled = false;
+                    txtSupplier.Enabled = false;
+                    txtItem.Enabled = false;
+                    btnBrowserSupplier.Enabled = false;     
+                    btnBrowserItem.Enabled = false;
                     backgroundWorker1.RunWorkerAsync();
                 }
             }
@@ -144,36 +131,44 @@ namespace Convert_Supplier
             {
                 MessageBox.Show(ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-
+            btnConvert.Enabled = true;
+            btnStop.Enabled = false;
+            txtSupplier.Enabled = true;
+            txtItem.Enabled = true;
+            btnBrowserItem.Enabled = true;
+            btnBrowserSupplier.Enabled = true;
+            backgroundWorker1.CancelAsync();
         }
         #endregion
-        #region FORM CLOSING
-        private void ConvertSupplier_FormClosing(object sender, FormClosingEventArgs e)
+
+        #region CHOOSE FOLDER DATA
+        private void btnBrowserSupplier_Click(object sender, EventArgs e)
         {
-            try
+            txtSupplier.Text = ChooseFolder();
+        }
+
+        private void btnBrowserItem_Click(object sender, EventArgs e)
+        {
+            txtItem.Text = ChooseFolder();
+        }
+        private string ChooseFolder()
+        {
+            chooseFolder = new OpenFileDialog();
+            chooseFolder.CheckFileExists = false;
+            chooseFolder.CheckPathExists = false;
+            chooseFolder.ShowReadOnly = true;
+            chooseFolder.FileName = "Select Folder";
+            if (chooseFolder.ShowDialog() == DialogResult.OK)
             {
-                if (btnStop.Enabled)
-                    e.Cancel = true;
-                setString.Clear();
-                setString.Add("From Folder =" + txtFrom.Text);
-                setString.Add("To Folder =" + txtTo.Text);
-                if (!Directory.Exists(Path.GetDirectoryName(settingfile)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(settingfile));
-                File.WriteAllLines(settingfile, setString);
+                return Path.GetDirectoryName(chooseFolder.FileName) + @"\";
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            else
+                return "";
         }
         #endregion
-
-     
     }
-
 }

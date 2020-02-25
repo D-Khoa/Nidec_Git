@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace ConvertPremacFile
 {
     static class Program
@@ -16,7 +18,7 @@ namespace ConvertPremacFile
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ConvertPremacForm());
+            Application.Run(new Menu_Form());
         }
     }
 }
