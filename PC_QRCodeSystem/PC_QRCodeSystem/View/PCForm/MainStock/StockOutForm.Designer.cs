@@ -43,7 +43,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtNoPlanInvoice = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtNoPlanComment = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbNoPlanItem = new System.Windows.Forms.Label();
             this.txtNoPlanItemCD = new System.Windows.Forms.TextBox();
@@ -57,12 +56,11 @@
             this.lbNoPlanUser = new System.Windows.Forms.Label();
             this.txtNoPlanUserCD = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.lbNoPlanIssue = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.lbNoPlanDestination = new System.Windows.Forms.Label();
             this.cmbNoPlanDestinationCD = new System.Windows.Forms.ComboBox();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.txtNoPlanComment = new System.Windows.Forms.TextBox();
             this.tab_Plan = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
@@ -103,16 +101,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnStockOutReg = new System.Windows.Forms.Button();
-            this.tab_Setting = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnApply = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.grPrinter = new System.Windows.Forms.GroupBox();
-            this.btnPrinterCheck = new System.Windows.Forms.Button();
-            this.lbPrinterStatus = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.cmbPrinter = new System.Windows.Forms.ComboBox();
             this.tab_Print = new System.Windows.Forms.TabPage();
             this.dgvPrintList = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -141,9 +129,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockOutLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcess)).BeginInit();
             this.panel1.SuspendLayout();
-            this.tab_Setting.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.grPrinter.SuspendLayout();
             this.tab_Print.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).BeginInit();
             this.panel3.SuspendLayout();
@@ -157,7 +142,6 @@
             this.tc_Main.Controls.Add(this.tab_Plan);
             this.tc_Main.Controls.Add(this.tab_Request);
             this.tc_Main.Controls.Add(this.tab_Inspection);
-            this.tc_Main.Controls.Add(this.tab_Setting);
             this.tc_Main.Controls.Add(this.tab_Print);
             this.tc_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc_Main.Location = new System.Drawing.Point(150, 70);
@@ -270,7 +254,6 @@
             this.panel6.Controls.Add(this.label4);
             this.panel6.Controls.Add(this.txtNoPlanInvoice);
             this.panel6.Controls.Add(this.label3);
-            this.panel6.Controls.Add(this.txtNoPlanComment);
             this.panel6.Controls.Add(this.label1);
             this.panel6.Controls.Add(this.lbNoPlanItem);
             this.panel6.Controls.Add(this.txtNoPlanItemCD);
@@ -284,12 +267,11 @@
             this.panel6.Controls.Add(this.lbNoPlanUser);
             this.panel6.Controls.Add(this.txtNoPlanUserCD);
             this.panel6.Controls.Add(this.label18);
-            this.panel6.Controls.Add(this.lbNoPlanIssue);
             this.panel6.Controls.Add(this.label20);
-            this.panel6.Controls.Add(this.lbNoPlanDestination);
             this.panel6.Controls.Add(this.cmbNoPlanDestinationCD);
             this.panel6.Controls.Add(this.txtBarcode);
             this.panel6.Controls.Add(this.label22);
+            this.panel6.Controls.Add(this.txtNoPlanComment);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(4, 4);
             this.panel6.Name = "panel6";
@@ -339,14 +321,6 @@
             this.label3.Text = "Comment";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtNoPlanComment
-            // 
-            this.txtNoPlanComment.Location = new System.Drawing.Point(480, 70);
-            this.txtNoPlanComment.Multiline = true;
-            this.txtNoPlanComment.Name = "txtNoPlanComment";
-            this.txtNoPlanComment.Size = new System.Drawing.Size(200, 140);
-            this.txtNoPlanComment.TabIndex = 33;
-            // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(10, 40);
@@ -380,12 +354,13 @@
             // cmbNoPlanIssueCD
             // 
             this.cmbNoPlanIssueCD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbNoPlanIssueCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbNoPlanIssueCD.FormattingEnabled = true;
             this.cmbNoPlanIssueCD.Location = new System.Drawing.Point(120, 70);
             this.cmbNoPlanIssueCD.Name = "cmbNoPlanIssueCD";
-            this.cmbNoPlanIssueCD.Size = new System.Drawing.Size(221, 24);
+            this.cmbNoPlanIssueCD.Size = new System.Drawing.Size(350, 24);
             this.cmbNoPlanIssueCD.TabIndex = 28;
-            this.cmbNoPlanIssueCD.SelectedIndexChanged += new System.EventHandler(this.cmbIssueStockOut_SelectedIndexChanged);
+            this.cmbNoPlanIssueCD.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbNoPlanIssueCD_Format);
             // 
             // label13
             // 
@@ -468,18 +443,6 @@
             this.label18.Text = "Stock-Out Q\'ty";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lbNoPlanIssue
-            // 
-            this.lbNoPlanIssue.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lbNoPlanIssue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbNoPlanIssue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNoPlanIssue.Location = new System.Drawing.Point(364, 70);
-            this.lbNoPlanIssue.Name = "lbNoPlanIssue";
-            this.lbNoPlanIssue.Size = new System.Drawing.Size(106, 20);
-            this.lbNoPlanIssue.TabIndex = 7;
-            this.lbNoPlanIssue.Text = "Issue Name";
-            this.lbNoPlanIssue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label20
             // 
             this.label20.Location = new System.Drawing.Point(10, 70);
@@ -489,27 +452,16 @@
             this.label20.Text = "Issue Code";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lbNoPlanDestination
-            // 
-            this.lbNoPlanDestination.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lbNoPlanDestination.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbNoPlanDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNoPlanDestination.Location = new System.Drawing.Point(270, 100);
-            this.lbNoPlanDestination.Name = "lbNoPlanDestination";
-            this.lbNoPlanDestination.Size = new System.Drawing.Size(200, 20);
-            this.lbNoPlanDestination.TabIndex = 4;
-            this.lbNoPlanDestination.Text = "Destination Name";
-            this.lbNoPlanDestination.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cmbNoPlanDestinationCD
             // 
             this.cmbNoPlanDestinationCD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbNoPlanDestinationCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbNoPlanDestinationCD.FormattingEnabled = true;
             this.cmbNoPlanDestinationCD.Location = new System.Drawing.Point(120, 100);
             this.cmbNoPlanDestinationCD.Name = "cmbNoPlanDestinationCD";
-            this.cmbNoPlanDestinationCD.Size = new System.Drawing.Size(120, 24);
+            this.cmbNoPlanDestinationCD.Size = new System.Drawing.Size(350, 24);
             this.cmbNoPlanDestinationCD.TabIndex = 2;
-            this.cmbNoPlanDestinationCD.SelectedIndexChanged += new System.EventHandler(this.cmbDestinationStockOut_SelectedIndexChanged);
+            this.cmbNoPlanDestinationCD.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbNoPlanDestinationCD_Format);
             // 
             // txtBarcode
             // 
@@ -527,6 +479,14 @@
             this.label22.TabIndex = 0;
             this.label22.Text = "Destination";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtNoPlanComment
+            // 
+            this.txtNoPlanComment.Location = new System.Drawing.Point(480, 70);
+            this.txtNoPlanComment.Multiline = true;
+            this.txtNoPlanComment.Name = "txtNoPlanComment";
+            this.txtNoPlanComment.Size = new System.Drawing.Size(200, 140);
+            this.txtNoPlanComment.TabIndex = 33;
             // 
             // tab_Plan
             // 
@@ -961,117 +921,6 @@
             this.btnStockOutReg.UseVisualStyleBackColor = true;
             this.btnStockOutReg.Click += new System.EventHandler(this.btnStockOutReg_Click);
             // 
-            // tab_Setting
-            // 
-            this.tab_Setting.Controls.Add(this.panel2);
-            this.tab_Setting.Controls.Add(this.grPrinter);
-            this.tab_Setting.Location = new System.Drawing.Point(4, 28);
-            this.tab_Setting.Name = "tab_Setting";
-            this.tab_Setting.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Setting.Size = new System.Drawing.Size(708, 494);
-            this.tab_Setting.TabIndex = 4;
-            this.tab_Setting.Text = "Setting";
-            this.tab_Setting.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btnApply);
-            this.panel2.Controls.Add(this.btnBack);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(3, 431);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(702, 60);
-            this.panel2.TabIndex = 7;
-            // 
-            // btnApply
-            // 
-            this.btnApply.Location = new System.Drawing.Point(30, 5);
-            this.btnApply.Margin = new System.Windows.Forms.Padding(4);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(100, 50);
-            this.btnApply.TabIndex = 3;
-            this.btnApply.Text = "Apply";
-            this.btnApply.UseVisualStyleBackColor = true;
-            // 
-            // btnBack
-            // 
-            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBack.Location = new System.Drawing.Point(572, 5);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(100, 50);
-            this.btnBack.TabIndex = 2;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
-            // 
-            // grPrinter
-            // 
-            this.grPrinter.Controls.Add(this.btnPrinterCheck);
-            this.grPrinter.Controls.Add(this.lbPrinterStatus);
-            this.grPrinter.Controls.Add(this.label6);
-            this.grPrinter.Controls.Add(this.label17);
-            this.grPrinter.Controls.Add(this.cmbPrinter);
-            this.grPrinter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grPrinter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grPrinter.Location = new System.Drawing.Point(3, 3);
-            this.grPrinter.Margin = new System.Windows.Forms.Padding(4);
-            this.grPrinter.Name = "grPrinter";
-            this.grPrinter.Padding = new System.Windows.Forms.Padding(4);
-            this.grPrinter.Size = new System.Drawing.Size(702, 123);
-            this.grPrinter.TabIndex = 5;
-            this.grPrinter.TabStop = false;
-            this.grPrinter.Text = "Printer";
-            // 
-            // btnPrinterCheck
-            // 
-            this.btnPrinterCheck.Location = new System.Drawing.Point(355, 33);
-            this.btnPrinterCheck.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrinterCheck.Name = "btnPrinterCheck";
-            this.btnPrinterCheck.Size = new System.Drawing.Size(100, 28);
-            this.btnPrinterCheck.TabIndex = 4;
-            this.btnPrinterCheck.Text = "Check";
-            this.btnPrinterCheck.UseVisualStyleBackColor = true;
-            // 
-            // lbPrinterStatus
-            // 
-            this.lbPrinterStatus.AutoSize = true;
-            this.lbPrinterStatus.Location = new System.Drawing.Point(187, 74);
-            this.lbPrinterStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbPrinterStatus.Name = "lbPrinterStatus";
-            this.lbPrinterStatus.Size = new System.Drawing.Size(42, 17);
-            this.lbPrinterStatus.TabIndex = 3;
-            this.lbPrinterStatus.Text = "None";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(40, 74);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 17);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Status";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(40, 37);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(50, 17);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Printer";
-            // 
-            // cmbPrinter
-            // 
-            this.cmbPrinter.FormattingEnabled = true;
-            this.cmbPrinter.Location = new System.Drawing.Point(187, 33);
-            this.cmbPrinter.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbPrinter.Name = "cmbPrinter";
-            this.cmbPrinter.Size = new System.Drawing.Size(159, 24);
-            this.cmbPrinter.TabIndex = 0;
-            // 
             // tab_Print
             // 
             this.tab_Print.Controls.Add(this.dgvPrintList);
@@ -1231,10 +1080,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockOutLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcess)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.tab_Setting.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.grPrinter.ResumeLayout(false);
-            this.grPrinter.PerformLayout();
             this.tab_Print.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -1277,9 +1122,7 @@
         private System.Windows.Forms.Label lbNoPlanUser;
         private System.Windows.Forms.TextBox txtNoPlanUserCD;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label lbNoPlanIssue;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label lbNoPlanDestination;
         private System.Windows.Forms.ComboBox cmbNoPlanDestinationCD;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label label22;
@@ -1314,7 +1157,6 @@
         private System.Windows.Forms.TextBox txtNoPlanWHQty;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tsRows;
-        private System.Windows.Forms.TabPage tab_Setting;
         private System.Windows.Forms.DataGridView dgvProcess;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnInspectionClear;
@@ -1323,15 +1165,6 @@
         private System.Windows.Forms.Button btnStockOutReg;
         private System.Windows.Forms.DataGridView dgvStockOutLog;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnApply;
-        private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.GroupBox grPrinter;
-        private System.Windows.Forms.Button btnPrinterCheck;
-        private System.Windows.Forms.Label lbPrinterStatus;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox cmbPrinter;
         private System.Windows.Forms.Button btnInspectionBack;
         private System.Windows.Forms.DataGridView dgvStockAfter;
         private System.Windows.Forms.TabPage tab_Print;

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -13,6 +6,7 @@ namespace PC_QRCodeSystem.View
 {
     public partial class UserPosition : FormCommon
     {
+        #region VARIABLE
         bool isUpdate = false;
         m_user_position userPositionCmb { get; set; }
         m_user_position userPositionData { get; set; }
@@ -26,6 +20,7 @@ namespace PC_QRCodeSystem.View
             userPositionCmb = new m_user_position();
             userPositionData = new m_user_position();
         }
+        #endregion
 
         #region MAIN BUTTONS
         private void btnSearch_Click(object sender, EventArgs e)
@@ -50,14 +45,13 @@ namespace PC_QRCodeSystem.View
             try
             {
                 int n = 0;
-                if (MessageBox.Show("Are you sure delete this user position?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                    return;
+                if (CustomMessageBox.Warring("Are you sure delete this user position?") == DialogResult.No) return;
                 n = userPositionData.Delete(userPositionData);
-                MessageBox.Show("Deleted " + n + " item!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CustomMessageBox.Notice("Deleted " + n + " item!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
             ClearAll();
             GetCmb();
@@ -90,7 +84,7 @@ namespace PC_QRCodeSystem.View
                         user_position_name = txtUserPositionName.Text,
                         registration_user_cd = UserData.usercode
                     });
-                    messtring = "Update ";
+                    messtring = "Update " + n + "completed";
                 }
                 else
                 {
@@ -100,17 +94,17 @@ namespace PC_QRCodeSystem.View
                         user_position_name = txtUserPositionName.Text,
                         registration_user_cd = UserData.usercode
                     });
-                    messtring = "Add ";
+                    messtring = "Add " + n + "completed";
                 }
                 ClearAll();
                 GetCmb();
                 UpdateGrid(true);
                 FieldsOption(true);
-                MessageBox.Show(messtring + n + " completed", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CustomMessageBox.Notice(messtring);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -141,7 +135,7 @@ namespace PC_QRCodeSystem.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 

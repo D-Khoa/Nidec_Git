@@ -19,13 +19,12 @@ namespace PC_QRCodeSystem.Model
         public string registrated_factory_cd { get; set; }
         public string dept_cd { get; set; }
         public string user_position_cd { get; set; }
-        public List<m_mes_user> listMesUser { get; set; }
-        #endregion
-
+        public List<m_mes_user> listMesUser;
         public m_mes_user()
         {
             listMesUser = new List<m_mes_user>();
         }
+        #endregion
 
         /// <summary>
         /// Get an user infomation
@@ -41,7 +40,11 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "SELECT user_cd, user_name, locale_id, multi_login_flag, registration_user_cd, registration_date_time, ";
-             query += "registrated_factory_cd, dept_cd, user_position_cd FROM m_mes_user WHERE user_cd ='" + user_code + "'";
+            query += "registrated_factory_cd, dept_cd, user_position_cd FROM m_mes_user WHERE 1=1 ";
+            if (user_code.Length >= 6)
+                query += "AND user_cd like '%" + user_code + "'";
+            else
+                query += "AND user_cd ='" + user_code + "'";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;

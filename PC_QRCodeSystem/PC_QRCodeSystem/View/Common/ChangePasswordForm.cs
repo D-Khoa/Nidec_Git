@@ -24,7 +24,7 @@ namespace PC_QRCodeSystem
             {
                 if (txtNewPass.Text.Length < 6)
                 {
-                    MessageBox.Show("Password contains at least 6 character!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Password contains at least 6 character!");
                     txtNewPass.Focus();
                 }
                 else
@@ -48,26 +48,28 @@ namespace PC_QRCodeSystem
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            string mess = string.Empty;
             if (string.IsNullOrEmpty(txtNewPass.Text) || string.IsNullOrEmpty(txtConfirmPass.Text))
-                MessageBox.Show("Please fill password and confirm password", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                mess = "Please fill password and confirm password";
             else
             {
                 if (txtConfirmPass.Text != txtNewPass.Text)
                 {
-                    MessageBox.Show("Confirm password does not match!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    mess = "Confirm password does not match!";
                     txtConfirmPass.Focus();
                 }
                 else
                 {
                     if (mLoginUser.ChangePassword(new m_login_password { user_cd = UserData.usercode, password = txtNewPass.Text }))
                     {
-                        MessageBox.Show("Password change successfully!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        mess = "Password change successfully!";
                         this.Close();
                     }
                     else
-                        MessageBox.Show("Password did not change successfully!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        mess = "Password did not change successfully!";
                 }
             }
+            CustomMessageBox.Notice(mess);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

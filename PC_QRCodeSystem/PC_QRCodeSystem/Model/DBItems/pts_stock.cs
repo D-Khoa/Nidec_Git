@@ -96,6 +96,74 @@ namespace PC_QRCodeSystem.Model
         /// Search list stock
         /// </summary>
         /// <param name="inItem">input info stock search</param>
+        /// <returns></returns>
+        public bool SearchItem(pts_stock inItem)
+        {
+            try
+            {
+                //SQL library
+                PSQL SQL = new PSQL();
+                string query = string.Empty;
+                listStockItems = new BindingList<pts_stock>();
+                //Open SQL connection
+                SQL.Open();
+                //SQL query string
+                query = "SELECT stock_id, packing_cd, item_cd, supplier_cd, order_no, invoice,po_no, stockin_date, stockin_user_cd, ";
+                query += "stockin_qty, packing_qty, registration_user_cd, registration_date_time FROM pts_stock WHERE 1=1 ";
+                if (!string.IsNullOrEmpty(inItem.packing_cd))
+                    query += "AND packing_cd ='" + inItem.packing_cd + "' ";
+                if (!string.IsNullOrEmpty(inItem.item_cd))
+                    query += "AND item_cd ='" + inItem.item_cd + "' ";
+                if (!string.IsNullOrEmpty(inItem.supplier_cd))
+                    query += "AND supplier_cd ='" + inItem.supplier_cd + "' ";
+                if (!string.IsNullOrEmpty(inItem.order_no))
+                    query += "AND order_no ='" + inItem.order_no + "' ";
+                if (!string.IsNullOrEmpty(inItem.invoice))
+                    query += "AND invoice ='" + inItem.invoice + "' ";
+                if (!string.IsNullOrEmpty(inItem.po_no))
+                    query += "AND po_no ='" + inItem.po_no + "' ";
+                if (!string.IsNullOrEmpty(inItem.stockin_user_cd))
+                    query += "AND stockin_user_cd ='" + inItem.stockin_user_cd + "' ";
+                query += "ORDER BY stock_id";
+                //Execute reader for read database
+                IDataReader reader = SQL.Command(query).ExecuteReader();
+                while (reader.Read())
+                {
+                    pts_stock outItem = new pts_stock
+                    {
+                        stock_id = (int)reader["stock_id"],
+                        packing_cd = reader["packing_cd"].ToString(),
+                        item_cd = reader["item_cd"].ToString(),
+                        supplier_cd = reader["supplier_cd"].ToString(),
+                        order_no = reader["order_no"].ToString(),
+                        invoice = reader["invoice"].ToString(),
+                        po_no = reader["po_no"].ToString(),
+                        stockin_date = (DateTime)reader["stockin_date"],
+                        stockin_user_cd = reader["stockin_user_cd"].ToString(),
+                        stockin_qty = (double)reader["stockin_qty"],
+                        packing_qty = (double)reader["packing_qty"],
+                        registration_user_cd = reader["registration_user_cd"].ToString(),
+                        registration_date_time = (DateTime)reader["registration_date_time"],
+                    };
+                    listStockItems.Add(outItem);
+                }
+                reader.Close();
+                query = string.Empty;
+                //Close connection
+                SQL.Close();
+                if (listStockItems.Count > 0) return true;
+                else return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Search list stock
+        /// </summary>
+        /// <param name="inItem">input info stock search</param>
         /// <param name="fromDate"></param>
         /// <param name="toDate"></param>
         /// <param name="checkDate">check stock in date</param>
@@ -232,53 +300,6 @@ namespace PC_QRCodeSystem.Model
             query = "DELETE FROM pts_stock WHERE stock_id ='" + stock_id + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
-            query = string.Empty;
-            SQL.Close();
-            return result;
-        }
-
-        /// <summary>
-        /// Sum stock qty
-        /// </summary>
-        /// <param name="inItem">input info stock for search</param>
-        /// <param name="fromDate"></param>
-        /// <param name="toDate"></param>
-        /// <param name="checkDate">check date stockin for search</param>
-        /// <param name="isStockIn">true: stock in qty, false: packing qty</param>
-        /// <returns></returns>
-        public double SumStockQty(pts_stock inItem, DateTime fromDate, DateTime toDate, bool checkDate, bool isStockIn)
-        {
-            //SQL library
-            PSQL SQL = new PSQL();
-            string query = string.Empty;
-            //Open SQL connection
-            SQL.Open();
-            //SQL query string
-            if (isStockIn)
-                query = "SELECT SUM(stockin_qty) FROM pts_stock WHERE 1=1 ";
-            else
-                query = "SELECT SUM(packing_qty) FROM pts_stock WHERE 1=1 ";
-            if (!string.IsNullOrEmpty(inItem.packing_cd))
-                query += "AND packing_cd ='" + inItem.packing_cd + "' ";
-            if (!string.IsNullOrEmpty(inItem.item_cd))
-                query += "AND item_cd ='" + inItem.item_cd + "' ";
-            if (!string.IsNullOrEmpty(inItem.supplier_cd))
-                query += "AND supplier_cd ='" + inItem.supplier_cd + "' ";
-            if (!string.IsNullOrEmpty(inItem.order_no))
-                query += "AND order_no ='" + inItem.order_no + "' ";
-            if (!string.IsNullOrEmpty(inItem.invoice))
-                query += "AND invoice ='" + inItem.invoice + "' ";
-            if (!string.IsNullOrEmpty(inItem.po_no))
-                query += "AND po_no ='" + inItem.po_no + "' ";
-            if (checkDate)
-            {
-                query += "AND stockin_date >= '" + fromDate.ToString("yyyy-MM-dd") + "' ";
-                query += "AND stockin_date <= '" + toDate.ToString("yyyy-MM-dd") + "' ";
-            }
-            if (!string.IsNullOrEmpty(inItem.stockin_user_cd))
-                query += "AND stockin_user_cd ='" + inItem.stockin_user_cd + "' ";
-            //Execute non query for read database
-            double result = (double)SQL.Command(query).ExecuteScalar();
             query = string.Empty;
             SQL.Close();
             return result;
