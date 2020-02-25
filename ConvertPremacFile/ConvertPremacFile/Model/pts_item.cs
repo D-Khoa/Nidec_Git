@@ -47,7 +47,23 @@ namespace ConvertPremacFile.Model
             listItems = query.ToList();
             listItems.Sort((a, b) => a.type_id.CompareTo(b.type_id));
         }
-
+        public int AddItem(pts_item inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_item(type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, repair_qty, registration_user_cd) ";
+            query += "VALUES ('" + inItem.type_id + "','" + inItem.item_cd + "','" + inItem.item_name + "','";
+            query += inItem.item_location + "','" + inItem.item_unit + "','" + inItem.lot_size + "','"+inItem.wh_qty+ "', '" + inItem.wip_qty + "','" +inItem.repair_qty + "','";
+            query += inItem.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            return result;
+        }
     }
 
 }
