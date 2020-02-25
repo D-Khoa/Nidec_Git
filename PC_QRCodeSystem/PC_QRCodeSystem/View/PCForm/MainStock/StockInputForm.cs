@@ -463,6 +463,7 @@ namespace PC_QRCodeSystem.View
             }
             itemData.UpdateStockValue();
             UpdateInspectionGrid();
+            txtBarcode.Focus();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -616,11 +617,14 @@ namespace PC_QRCodeSystem.View
                 #region CHECK INVOICE AND CREATE PACKING CODE
                 try
                 {
-                    if (stockItem.SearchItem(new pts_stock { invoice = barcode[3], item_cd = barcode[0] }, DateTime.Now, DateTime.Now, false))
+                    if (stockItem.SearchItem(new pts_stock { invoice = barcode[3] }))
                     {
-                        double total = stockItem.SumStockQty(new pts_stock { invoice = barcode[3] }, DateTime.Now, DateTime.Now, false, true);
-                        if (MessageBox.Show("This Invoice of " + barcode[0] + " is exist! Stock-In numberOfLot in database: " + total + Environment.NewLine + "Are you sure add new packing with this Invoice?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                            return;
+                        double totalStockIn = (from x in stockItem.listStockItems where x.item_cd == barcode[0] select x.stockin_qty).Sum();
+                        double totalPacking = (from x in stockItem.listStockItems where x.item_cd == barcode[0] select x.packing_qty).Sum();
+                        string mess = "Item code: " + barcode[0] + " and Invoice: " + barcode[3] + "is exist!" + Environment.NewLine;
+                        mess += "Total stock-in: " + totalStockIn + Environment.NewLine + "Total packing: " + totalPacking + Environment.NewLine;
+                        mess += "Are you sure add new packing with this Invoice?";
+                        if (MessageBox.Show(mess, "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                     }
                 }
                 catch (Exception ex)
@@ -633,7 +637,7 @@ namespace PC_QRCodeSystem.View
                     if (item.invoice == barcode[3])
                     {
                         temp = int.Parse(item.packing_cd.Split('-')[1]);
-                        if (temp == n) n++;
+                        if (temp > n) n = temp;
                     }
                 }
                 //Create new number of packing with Invoice number
@@ -642,9 +646,10 @@ namespace PC_QRCodeSystem.View
                     if (item.invoice == barcode[3])
                     {
                         temp = int.Parse(item.packing_cd.Split('-')[1]);
-                        if (temp == n) n++;
+                        if (temp > n) n = temp;
                     }
                 }
+                n++;
                 string packingcd = barcode[3] + "-" + n.ToString("00");
                 #endregion
 

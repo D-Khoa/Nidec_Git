@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -71,8 +70,7 @@ namespace PC_QRCodeSystem
                 {
                     loginpass = loginpass.CheckLogIn(txtUsername.Text, txtpass.Text);
                     if (loginpass.is_online)
-                        if (MessageBox.Show("This user is online." + Environment.NewLine + "Are you want re-login?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                            return;
+                        if (CustomMessageBox.Question("This user is online." + Environment.NewLine + "Are you want re-login?") == DialogResult.No) return;
                     UserData.isOnline = loginpass.LogIO(txtUsername.Text, true);
                     mesuser = mesuser.GetUser(loginpass.user_cd);
                     UserData.onTime = 0;
@@ -94,13 +92,13 @@ namespace PC_QRCodeSystem
                 }
                 else
                 {
-                    MessageBox.Show("Please fill user code!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    CustomMessageBox.Notice("Please fill user code!");
                     txtUsername.Focus();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 

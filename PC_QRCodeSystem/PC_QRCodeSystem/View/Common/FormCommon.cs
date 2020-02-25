@@ -104,7 +104,7 @@ namespace PC_QRCodeSystem
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure to log-out?", "Noice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (CustomMessageBox.Question("Are you sure to log-out?") == DialogResult.Yes)
             {
                 m_login_password mlog = new m_login_password();
                 UserData.isOnline = mlog.LogIO(UserData.usercode, false);
@@ -134,7 +134,7 @@ namespace PC_QRCodeSystem
         {
             if (UserData.isOnline)
             {
-                if (MessageBox.Show("Are you want to close?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                if (CustomMessageBox.Question("Are you want to close?") == DialogResult.No)
                     e.Cancel = true;
             }
         }

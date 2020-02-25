@@ -15,21 +15,22 @@ namespace PC_QRCodeSystem.View
     {
         #region VARIABLE
         private PrintItem printData { get; set; }
-        private pts_plan planData { get; set; }
+        private List<PrintItem> listPrintItems { get; set; }
+
+        private pts_stock stockData { get; set; }
+        private List<pts_stock> listStock { get; set; }
+
+        private pts_noplan noplanData { get; set; }
+        private List<pts_noplan> listNoPlan { get; set; }
+
+        private pts_stockout_log stockOutData { get; set; }
+        private List<pts_stockout_log> listStockOut { get; set; }
+
         private pts_item itemData { get; set; }
         private pts_supplier supplierData { get; set; }
-        private pts_stock stockData { get; set; }
         private m_mes_user mUserData { get; set; }
-        private pts_noplan noplanData { get; set; }
         private pts_issue_code issueCode { get; set; }
-        private pts_stock_log stockDataLog { get; set; }
-        private pts_request_log requestData { get; set; }
-        private pts_stockout_log stockOutData { get; set; }
         private pts_destination destinationData { get; set; }
-        private List<PrintItem> listPrintItems { get; set; }
-        private List<pts_stock> listStock { get; set; }
-        private List<pts_noplan> listNoPlan { get; set; }
-        private List<pts_stockout_log> listStockOut { get; set; }
         private ErrorProvider errorProvider = new ErrorProvider();
         #endregion
 
@@ -40,14 +41,11 @@ namespace PC_QRCodeSystem.View
             //tc_Main.ItemSize = new Size(0, 1);
             supplierData = new pts_supplier();
             printData = new PrintItem();
-            planData = new pts_plan();
             itemData = new pts_item();
             stockData = new pts_stock();
             mUserData = new m_mes_user();
             noplanData = new pts_noplan();
             issueCode = new pts_issue_code();
-            stockDataLog = new pts_stock_log();
-            requestData = new pts_request_log();
             stockOutData = new pts_stockout_log();
             destinationData = new pts_destination();
             listPrintItems = new List<PrintItem>();
@@ -68,19 +66,18 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if(cmbNoPlanIssueCD.Text == "30" && string.IsNullOrEmpty(txtNoPlanComment.Text))
+                double temp;
+                double stockOutQty = double.Parse(txtNoPlanStockOutQty.Text);
+                string noplancd = "no-" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                if ((int)cmbNoPlanIssueCD.SelectedValue == 30 && string.IsNullOrEmpty(txtNoPlanComment.Text))
                 {
                     MessageBox.Show("Please fill comment when Scrap Item!", "Warring", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                string noplancd = "no" + DateTime.Now.ToString("yyyyMMddHHmmss");
-                double qty = double.Parse(txtNoPlanStockOutQty.Text);
-                double total = double.Parse(txtNoPlanWHQty.Text);
-                double temp;
                 //If stock out qty > packing qty then alert
-                if (qty > total)
+                if (stockOutQty > double.Parse(txtNoPlanWHQty.Text))
                 {
-                    if (MessageBox.Show("Stock-out qty is over than stock-in-hand qty! Are you sure to continue?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
+                    if (MessageBox.Show("Stock-out qty is over than stock-in-hand qty!" + Environment.NewLine + "Are you sure to continue?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
                 }
                 //Add noplan item into list
                 listNoPlan.Add(new pts_noplan
@@ -88,25 +85,25 @@ namespace PC_QRCodeSystem.View
                     noplan_cd = noplancd,
                     destination_cd = cmbNoPlanDestinationCD.Text,
                     item_cd = txtNoPlanItemCD.Text,
-                    noplan_qty = qty,
+                    noplan_qty = stockOutQty,
                     noplan_usercd = txtNoPlanUserCD.Text,
                     noplan_date = dtpNoPlanStockOutDate.Value,
                 });
                 //Check all packing in dgv
                 foreach (DataGridViewRow dr in dgvNoPlan.Rows)
                 {
-                    //Get packing qty & packing code
+                    //Get packing stockOutQty & packing code
                     stockData = dr.DataBoundItem as pts_stock;
                     if (stockData.packing_qty <= 0) continue;
-                    if (qty > stockData.packing_qty)
+                    if (stockOutQty > stockData.packing_qty)
                     {
                         temp = stockData.packing_qty;
-                        qty = qty - stockData.packing_qty;
+                        stockOutQty = stockOutQty - stockData.packing_qty;
                     }
                     else
                     {
-                        temp = qty;
-                        qty = 0;
+                        temp = stockOutQty;
+                        stockOutQty = 0;
                     }
                     listStockOut.Add(new pts_stockout_log
                     {
@@ -121,7 +118,7 @@ namespace PC_QRCodeSystem.View
                     });
                     stockData.packing_qty = stockData.packing_qty - temp;
                     listStock.Add(stockData);
-                    if (qty == 0) break;
+                    if (stockOutQty == 0) break;
                 }
                 UpdateProcessGrid(0);
                 UpdateStockOutGrid();
@@ -166,13 +163,13 @@ namespace PC_QRCodeSystem.View
             {
                 issueCode.GetListIssueCode();
                 cmbNoPlanIssueCD.DataSource = issueCode.listIssueCode;
-                cmbNoPlanIssueCD.DisplayMember = "issue_cd"+":"+ "issue_name";
-                cmbNoPlanIssueCD.ValueMember = "issue_name";
+                cmbNoPlanIssueCD.DisplayMember = "issue_name";
+                cmbNoPlanIssueCD.ValueMember = "issue_cd";
                 cmbNoPlanIssueCD.Text = null;
                 destinationData.GetListDestination(string.Empty, string.Empty);
                 cmbNoPlanDestinationCD.DataSource = destinationData.listdestination;
-                cmbNoPlanDestinationCD.DisplayMember = "destination_cd";
-                cmbNoPlanDestinationCD.ValueMember = "destination_name";
+                cmbNoPlanDestinationCD.DisplayMember = "destination_name";
+                cmbNoPlanDestinationCD.ValueMember = "destination_cd";
                 cmbNoPlanDestinationCD.Text = null;
             }
             catch (Exception ex)
@@ -181,32 +178,18 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void cmbIssueStockOut_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbNoPlanIssueCD_Format(object sender, ListControlConvertEventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbNoPlanIssueCD.Text))
-            {
-                lbNoPlanIssue.Text = cmbNoPlanIssueCD.SelectedValue.ToString();
-                lbNoPlanIssue.BackColor = Color.Lime;
-            }
-            else
-            {
-                lbNoPlanIssue.Text = "Issue Name";
-                lbNoPlanIssue.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            }
+            string code = ((pts_issue_code)e.ListItem).issue_cd.ToString();
+            string iname = ((pts_issue_code)e.ListItem).issue_name;
+            e.Value = code + ": " + iname;
         }
 
-        private void cmbDestinationStockOut_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbNoPlanDestinationCD_Format(object sender, ListControlConvertEventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbNoPlanDestinationCD.Text))
-            {
-                lbNoPlanDestination.Text = cmbNoPlanDestinationCD.SelectedValue.ToString();
-                lbNoPlanDestination.BackColor = Color.Lime;
-            }
-            else
-            {
-                lbNoPlanDestination.Text = "Destination Name";
-                lbNoPlanDestination.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            }
+            string code = ((pts_destination)e.ListItem).destination_cd;
+            string iname = ((pts_destination)e.ListItem).destination_name;
+            e.Value = code + ": " + iname;
         }
 
         private void txtItemCDStockOut_TextChanged(object sender, EventArgs e)
@@ -265,15 +248,14 @@ namespace PC_QRCodeSystem.View
                 txtBarcode.Clear();
                 UpdateNoPlanGrid(true);
                 txtNoPlanWHQty.Text = dgvNoPlan.Rows.Cast<DataGridViewRow>()
-                     .Sum(x => Convert.ToDouble(x.Cells["packing_qty"].Value)).ToString();
+                    .Sum(x => Convert.ToDouble(x.Cells["packing_qty"].Value)).ToString();
             }
         }
 
         private void dgvNoPlan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
-                return;
-            stockData = dgvNoPlan.Rows[e.RowIndex].DataBoundItem as pts_stock;
+            if (e.RowIndex >= 0)
+                stockData = dgvNoPlan.Rows[e.RowIndex].DataBoundItem as pts_stock;
         }
 
         private void tab_NoPlan_Paint(object sender, PaintEventArgs e)
@@ -287,7 +269,7 @@ namespace PC_QRCodeSystem.View
         {
             if (isSearch)
             {
-                if (!stockData.SearchItem(new pts_stock { item_cd = txtNoPlanItemCD.Text, invoice = txtNoPlanInvoice.Text }, DateTime.Now, DateTime.Now, false))
+                if (!stockData.SearchItem(new pts_stock { item_cd = txtNoPlanItemCD.Text, invoice = txtNoPlanInvoice.Text }))
                 {
                     MessageBox.Show("This item is not exist! Please check and try again!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
