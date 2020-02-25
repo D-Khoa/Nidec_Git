@@ -52,6 +52,8 @@
     <Compile Include="Form\Menu Form\ConvertPremacFile.Designer.cs">
       <DependentUpon>ConvertPremacFile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\pts_item.cs" />
+    <Compile Include="Model\pts_supplier.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\Menu Form\ConvertPremacFile.resx">
@@ -81,7 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Class\" />
-    <Folder Include="Model\" />
     <Folder Include="Resource\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
