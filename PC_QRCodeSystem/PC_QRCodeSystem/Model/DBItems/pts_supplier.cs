@@ -10,16 +10,20 @@ namespace PC_QRCodeSystem.Model
     /// </summary>
     public class pts_supplier
     {
-        #region FIELDS OF SUPPLIER
+        #region ALL FIELDS
         public int supplier_id { get; set; }
         public string supplier_cd { get; set; }
         public string supplier_name { get; set; }
+        public string supplier_tel { get; set; }
+        public string supplier_fax { get; set; }
+        public string supplier_address { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public List<pts_supplier> listSupplier { get; set; }
         StringBuilder query = new StringBuilder();
         #endregion
 
+        #region QUERY
         /// <summary>
         /// Get a supplier
         /// </summary>
@@ -33,7 +37,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select supplier_id, supplier_cd, supplier_name, registration_date_time,registration_user_cd ";
+            query = "select supplier_id, supplier_cd, supplier_name, supplier_tel, supplier_fax, supplier_address, registration_date_time,registration_user_cd ";
             query += "from pts_supplier where 1=1 ";
             if (inItem.supplier_id > 0)
                 query += "and supplier_id ='" + inItem.supplier_id + "' ";
@@ -49,6 +53,9 @@ namespace PC_QRCodeSystem.Model
                 supplier_id = (int)reader["supplier_id"],
                 supplier_cd = reader["supplier_cd"].ToString(),
                 supplier_name = reader["supplier_name"].ToString(),
+                supplier_tel = reader["supplier_tel"].ToString(),
+                supplier_fax = reader["supplier_fax"].ToString(),
+                supplier_address = reader["supplier_address"].ToString(),
                 registration_date_time = (DateTime)reader["registration_date_time"],
                 registration_user_cd = reader["registration_user_cd"].ToString()
             };
@@ -72,7 +79,8 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select * from pts_supplier where 1=1 ";
+            query = "select supplier_id, supplier_cd, supplier_name, supplier_tel, supplier_fax, supplier_address, registration_date_time,registration_user_cd ";
+            query += "from pts_supplier where 1=1 ";
             if (!string.IsNullOrEmpty(supplier_code))
                 query += "and supplier_cd = '" + supplier_code + "' ";
             query += "order by supplier_cd";
@@ -87,6 +95,9 @@ namespace PC_QRCodeSystem.Model
                     supplier_id = (int)reader["supplier_id"],
                     supplier_cd = reader["supplier_cd"].ToString(),
                     supplier_name = reader["supplier_name"].ToString(),
+                    supplier_tel = reader["supplier_tel"].ToString(),
+                    supplier_fax = reader["supplier_fax"].ToString(),
+                    supplier_address = reader["supplier_address"].ToString(),
                     registration_date_time = (DateTime)reader["registration_date_time"],
                     registration_user_cd = reader["registration_user_cd"].ToString()
                 };
@@ -111,8 +122,9 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "INSERT INTO pts_supplier(supplier_cd, supplier_name, registration_user_cd)";
+            query = "INSERT INTO pts_supplier(supplier_cd, supplier_name, supplier_tel, supplier_fax, supplier_address, registration_user_cd)";
             query += "VALUES ('" + addptssupplier.supplier_cd + "','" + addptssupplier.supplier_name + "','";
+            query += addptssupplier.supplier_tel + "','" + addptssupplier.supplier_fax + "','" + addptssupplier.supplier_address + "','";
             query += addptssupplier.registration_user_cd + "')";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
@@ -133,7 +145,9 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_supplier SET supplier_cd='" + UpSupplier.supplier_cd + "', supplier_name='" + UpSupplier.supplier_name + "',registration_user_cd ='" + UpSupplier.registration_user_cd;
+            query = "UPDATE pts_supplier SET supplier_cd='" + UpSupplier.supplier_cd + "', supplier_name='" + UpSupplier.supplier_name;
+            query += "', supplier_tel ='" + UpSupplier.supplier_tel + "', supplier_fax ='" + UpSupplier.supplier_fax;
+            query += "', supplier_address ='" + UpSupplier.supplier_address + "',registration_user_cd ='" + UpSupplier.registration_user_cd;
             query += "', registration_date_time = now() where supplier_cd ='" + UpSupplier.supplier_cd + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
@@ -161,5 +175,6 @@ namespace PC_QRCodeSystem.Model
             return result;
 
         }
+        #endregion
     }
 }
