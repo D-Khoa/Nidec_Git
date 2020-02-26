@@ -17,12 +17,15 @@ namespace PC_QRCodeSystem.View
         bool editMode { get; set; }
         pts_supplier suppliercbm { get; set; }
         pts_supplier ptssupllier { get; set; }
+        private pts_supplier supplierData { get; set; }
+       
         #endregion
         public SupplierForm()
         {
             InitializeComponent();
             suppliercbm = new pts_supplier();
             ptssupllier = new pts_supplier();
+            supplierData = new pts_supplier();
             editMode = false;
             btnOK.Visible = false;
             btnCancel.Visible = false;
@@ -243,5 +246,27 @@ namespace PC_QRCodeSystem.View
             btnDelete.Enabled = true;
         }
         #endregion
+
+        private void cmbSupplierCode_TextChanged(object sender, EventArgs e)
+        {
+            txtSupplierName.BackColor = Color.White;
+            if (string.IsNullOrEmpty(cmbSupplierCode.Text))
+                return;
+            try
+            {
+                txtSupplierName.Text = supplierData.GetSupplier(new pts_supplier
+                {
+                    supplier_id = 0,
+                    supplier_cd = cmbSupplierCode.Text
+                }).supplier_name;
+                txtSupplierName.BackColor = Color.Lime;
+            }
+            catch
+            {
+               // cmbSupplierCode.BackColor = Color.Yellow;
+                txtSupplierName.Text = "Supplier Name";
+                txtSupplierName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+            }
+        }
     }
 }

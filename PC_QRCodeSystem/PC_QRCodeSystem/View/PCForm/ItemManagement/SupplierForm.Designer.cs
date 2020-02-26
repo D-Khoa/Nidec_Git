@@ -65,6 +65,7 @@
             this.cmbSupplierCode.Size = new System.Drawing.Size(154, 21);
             this.cmbSupplierCode.TabIndex = 14;
             this.cmbSupplierCode.SelectedIndexChanged += new System.EventHandler(this.cmbSupplierCode_SelectedIndexChanged);
+            this.cmbSupplierCode.TextChanged += new System.EventHandler(this.cmbSupplierCode_TextChanged);
             // 
             // dgvDataSupllier
             // 
