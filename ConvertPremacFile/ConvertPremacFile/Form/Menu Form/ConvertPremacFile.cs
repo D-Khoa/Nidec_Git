@@ -9,12 +9,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ConvertPremacFile.Model;
+
 
 
 namespace ConvertPremacFile
 {
     public partial class Menu_Form : Form
     {
+        pts_item premacfile = new pts_item();
         OpenFileDialog chooseFolder;
         List<string> setString;
         string settingfile;
@@ -40,8 +43,6 @@ namespace ConvertPremacFile
         {
             try
             {
-                if (btnStop.Enabled)
-                    e.Cancel = true;
                 setString.Clear();
                 setString.Add("SUPPLIER FOLDER =" + txtSupplier.Text);
                 setString.Add("ITEM FOLDER =" + txtItem.Text);
@@ -57,91 +58,38 @@ namespace ConvertPremacFile
         #endregion
 
 
-        #region BACKGROUNDWORKER  
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            c = (int)numTimer.Value;
-            for (int i = c; i >= 0; i--)
-            {
-                if (backgroundWorker1.CancellationPending)
-                {
-                    e.Cancel = true;
-                    backgroundWorker1.ReportProgress(c);
-                    return;
-                }
-                backgroundWorker1.ReportProgress(i);
-                Thread.Sleep(1000);
-            }
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            tsStatus.Text = "Waiting...";
-            tsTimer.Text = e.ProgressPercentage.ToString() + " S";
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-            {
-                tsStatus.Text = "Stop Convert Data!!!!";
-            }
-            else if (e.Error != null)
-            {
-                MessageBox.Show(e.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                try
-                {
-                    tsStatus.Text = "Sending Data...";
-                    EditAndSendFile();
-                    backgroundWorker1.RunWorkerAsync();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
-        #endregion
-        #region EDIT & SEND FILE
-        private void EditAndSendFile()
-        {
-
-        }
-        #endregion
         #region BUTTON CONVERT    
         private void btnConvert_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!backgroundWorker1.IsBusy)
+                foreach (string file in Directory.GetFiles(txtItem.Text, "*CPBE0012*"))
                 {
-                    btnConvert.Enabled = false;
-                    btnStop.Enabled = true;
-                    txtSupplier.Enabled = false;
-                    txtItem.Enabled = false;
-                    btnBrowserSupplier.Enabled = false;     
-                    btnBrowserItem.Enabled = false;
-                    backgroundWorker1.RunWorkerAsync();
+                    premacfile.GetListItems(file);
+                    premacfile.WriteToDB(premacfile.listItems);
                 }
+                //MessageBox.Show("Complete");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //MessageBox.Show(ex.Message);
             }
         }
-
-        private void btnStop_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            btnConvert.Enabled = true;
-            btnStop.Enabled = false;
-            txtSupplier.Enabled = true;
-            txtItem.Enabled = true;
-            btnBrowserItem.Enabled = true;
-            btnBrowserSupplier.Enabled = true;
-            backgroundWorker1.CancelAsync();
+            if (DateTime.Now == dateTimePicker1.Value)
+                try
+                {
+                    {
+                        premacfile.GetListItems(txtItem.Text);
+                        premacfile.WriteToDB(premacfile.listItems);
+                        MessageBox.Show("Complete");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
         }
         #endregion
 
@@ -155,6 +103,7 @@ namespace ConvertPremacFile
         {
             txtItem.Text = ChooseFolder();
         }
+
         private string ChooseFolder()
         {
             chooseFolder = new OpenFileDialog();
@@ -170,5 +119,8 @@ namespace ConvertPremacFile
                 return "";
         }
         #endregion
+
+
     }
 }
+

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using Npgsql;
+using PostgreSQLCopyHelper;
 
 namespace ConvertPremacFile.Model
 {
@@ -34,35 +35,42 @@ namespace ConvertPremacFile.Model
                                           let columns = csvline.Split('?')
                                           select new pts_item
                                           {
-                                              type_id =int.Parse( columns[2].Trim()),
-                                              item_cd = columns[0].Trim(),
-                                              item_name = columns[3].Trim(),
-                                              item_location = columns[40].Trim(),
-                                              item_unit = columns[14].Trim(),
-                                              lot_size = double.Parse(columns[17].Trim()),
-                                              wh_qty = double.Parse(columns[35].Trim()),
-                                              wip_qty = double.Parse(columns[36].Trim()),
-                                              repair_qty= double.Parse(columns[37].Trim()),                               
+                                              type_id = int.Parse(Regex.Replace(columns[2], " {2,}", " ").Trim()),
+                                              item_cd = Regex.Replace(columns[0], " {2,}", " ").Trim(),
+                                              item_name = Regex.Replace(columns[1], " {2,}", " ").Trim(),
+                                              item_location = Regex.Replace(columns[40], " {2,}", " ").Trim(),
+                                              item_unit = Regex.Replace(columns[14], " {2,}", " ").Trim(),
+                                              lot_size = double.Parse(Regex.Replace(columns[17], " {2,}", " ").Trim()),
+                                              wh_qty = double.Parse(Regex.Replace(columns[35], " {2,}", " ").Trim()),
+                                              wip_qty = double.Parse(Regex.Replace(columns[36], " {2,}", " ").Trim()),
+                                              repair_qty = double.Parse(Regex.Replace(columns[37], " {2,}", " ").Trim()),
+                                              registration_user_cd = "admin"
                                           };
             listItems = query.ToList();
             listItems.Sort((a, b) => a.type_id.CompareTo(b.type_id));
         }
-        public int AddItem(pts_item inItem)
+        public void WriteToDB(IEnumerable<pts_item> listPremacitem)
         {
-            //SQL library
-            PSQL SQL = new PSQL();
-            string query = string.Empty;
-            //Open SQL connection
-            SQL.Open();
-            //SQL query string
-            query = "INSERT INTO pts_item(type_id, item_cd, item_name, item_location, item_unit, lot_size, wh_qty, wip_qty, repair_qty, registration_user_cd) ";
-            query += "VALUES ('" + inItem.type_id + "','" + inItem.item_cd + "','" + inItem.item_name + "','";
-            query += inItem.item_location + "','" + inItem.item_unit + "','" + inItem.lot_size + "','"+inItem.wh_qty+ "', '" + inItem.wip_qty + "','" +inItem.repair_qty + "','";
-            query += inItem.registration_user_cd + "')";
-            //Execute non query for read database
-            int result = SQL.Command(query).ExecuteNonQuery();
-            query = string.Empty;
-            return result;
+            PostgreSQLCopyHelper<pts_item> coppyHelper = new PostgreSQLCopyHelper<pts_item>("pts_item")
+                                                              .MapInteger("type_id", x => x.type_id)
+                                                              .MapVarchar("item_cd", x => x.item_cd)
+                                                              .MapText("item_name", x => x.item_name)
+                                                              .MapVarchar("item_location", x => x.item_location)
+                                                              .MapVarchar("item_unit", x => x.item_unit)
+                                                              .MapDouble("lot_size", x => x.lot_size)
+                                                              .MapDouble("wh_qty", x => x.wh_qty)
+                                                              .MapDouble("wip_qty", x => x.wip_qty)
+                                                              .MapDouble("repair_qty", x => x.repair_qty)
+                                                              .MapVarchar("registration_user_cd", x => x.registration_user_cd);
+
+                                                              //.MapVarchar("oder_number", x => x.oder_number)
+                                                              //.MapVarchar("incharge", x => x.incharge);
+            using (NpgsqlConnection connection = new NpgsqlConnection(Properties.Settings.Default.CONNECTSTRING_MES))
+            {
+                connection.Open();
+                coppyHelper.SaveAll(connection, listPremacitem);
+                connection.Close();
+            }
         }
     }
 

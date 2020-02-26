@@ -18,7 +18,7 @@ namespace ConvertPremacFile
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AddPremac649ToDB());
+            Application.Run(new Menu_Form());
         }
     }
 }
