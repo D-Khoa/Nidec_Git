@@ -59,6 +59,20 @@ namespace PC_QRCodeSystem.View
             }
         }
 
+        private void btnPrintTest_Click(object sender, EventArgs e)
+        {
+            printItem.PrintAnItem(new PrintItem
+            {
+                Item_Number = "XXXXXXXXXX",
+                Item_Name = "YYYYYYYYYY",
+                SupplierName = "SSSSSSSSSS",
+                Invoice = "ZZZZZZZZZZ",
+                Delivery_Date = DateTime.Parse("2020-02-20"),
+                Delivery_Qty = 1000000,
+                Label_Qty = 1
+            }, false);
+        }
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             //Reset to default setting

@@ -71,6 +71,26 @@ namespace PC_QRCodeSystem.Model
             }
             return true;
         }
+
+        public bool PrintAnItem(PrintItem inItem, bool printOneCoppy)
+        {
+            if (printOneCoppy)
+            {
+                TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice,
+                     inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD,
+                     inItem.OrderNo);
+            }
+            else
+            {
+                for (int j = 0; j < inItem.Label_Qty; j++)
+                {
+                    TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice,
+                    inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD,
+                    inItem.OrderNo);
+                }
+            }
+            return true;
+        }
         #endregion
     }
 }

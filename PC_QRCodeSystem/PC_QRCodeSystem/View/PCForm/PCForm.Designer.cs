@@ -50,6 +50,7 @@
             this.tab_Menu = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.btnPlanning = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.btnRequestLog = new System.Windows.Forms.Button();
             this.btnStockOutLog = new System.Windows.Forms.Button();
@@ -65,7 +66,7 @@
             this.btnSupplier = new System.Windows.Forms.Button();
             this.btnItem = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
-            this.btnPlanning = new System.Windows.Forms.Button();
+            this.btnSetting = new System.Windows.Forms.Button();
             this.pnlSetting.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -90,7 +91,7 @@
             this.pnlSetting.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSetting.Location = new System.Drawing.Point(3, 3);
             this.pnlSetting.Name = "pnlSetting";
-            this.pnlSetting.Size = new System.Drawing.Size(240, 400);
+            this.pnlSetting.Size = new System.Drawing.Size(240, 399);
             this.pnlSetting.TabIndex = 2;
             // 
             // btnStockDetail
@@ -296,10 +297,10 @@
             this.grt_Main.Controls.Add(this.tab_Menu);
             this.grt_Main.Controls.Add(this.tab_Request);
             this.grt_Main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grt_Main.Location = new System.Drawing.Point(150, 69);
+            this.grt_Main.Location = new System.Drawing.Point(150, 70);
             this.grt_Main.Name = "grt_Main";
             this.grt_Main.SelectedIndex = 0;
-            this.grt_Main.Size = new System.Drawing.Size(694, 435);
+            this.grt_Main.Size = new System.Drawing.Size(694, 434);
             this.grt_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.grt_Main.TabIndex = 4;
             // 
@@ -310,13 +311,14 @@
             this.tab_Menu.Location = new System.Drawing.Point(4, 25);
             this.tab_Menu.Name = "tab_Menu";
             this.tab_Menu.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Menu.Size = new System.Drawing.Size(686, 406);
+            this.tab_Menu.Size = new System.Drawing.Size(686, 405);
             this.tab_Menu.TabIndex = 0;
             this.tab_Menu.Text = "Menu";
             this.tab_Menu.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnSetting);
             this.panel5.Controls.Add(this.panel8);
             this.panel5.Controls.Add(this.panel9);
             this.panel5.Controls.Add(this.panel7);
@@ -324,7 +326,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(243, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(440, 400);
+            this.panel5.Size = new System.Drawing.Size(440, 399);
             this.panel5.TabIndex = 9;
             // 
             // panel8
@@ -338,6 +340,16 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(440, 80);
             this.panel8.TabIndex = 9;
+            // 
+            // btnPlanning
+            // 
+            this.btnPlanning.Location = new System.Drawing.Point(240, 25);
+            this.btnPlanning.Name = "btnPlanning";
+            this.btnPlanning.Size = new System.Drawing.Size(100, 50);
+            this.btnPlanning.TabIndex = 13;
+            this.btnPlanning.Text = "Planning";
+            this.btnPlanning.UseVisualStyleBackColor = true;
+            this.btnPlanning.Click += new System.EventHandler(this.btnPlanning_Click);
             // 
             // label7
             // 
@@ -499,15 +511,15 @@
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
             // 
-            // btnPlanning
+            // btnSetting
             // 
-            this.btnPlanning.Location = new System.Drawing.Point(240, 25);
-            this.btnPlanning.Name = "btnPlanning";
-            this.btnPlanning.Size = new System.Drawing.Size(100, 50);
-            this.btnPlanning.TabIndex = 13;
-            this.btnPlanning.Text = "Planning";
-            this.btnPlanning.UseVisualStyleBackColor = true;
-            this.btnPlanning.Click += new System.EventHandler(this.btnPlanning_Click);
+            this.btnSetting.Location = new System.Drawing.Point(20, 338);
+            this.btnSetting.Name = "btnSetting";
+            this.btnSetting.Size = new System.Drawing.Size(100, 50);
+            this.btnSetting.TabIndex = 13;
+            this.btnSetting.Text = "Setting";
+            this.btnSetting.UseVisualStyleBackColor = true;
+            this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
             // PCForm
             // 
@@ -516,6 +528,7 @@
             this.ClientSize = new System.Drawing.Size(844, 504);
             this.Controls.Add(this.grt_Main);
             this.dept = "";
+            this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "PCForm";
@@ -581,5 +594,6 @@
         private System.Windows.Forms.RadioButton rbtnAllRequest;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnPlanning;
+        private System.Windows.Forms.Button btnSetting;
     }
 }

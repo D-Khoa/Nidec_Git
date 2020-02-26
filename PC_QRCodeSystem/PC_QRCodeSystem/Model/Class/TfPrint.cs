@@ -219,6 +219,7 @@
 
             long rtn;
             int x, y;
+            int cell = 6;
             //string printerName = "SEWOO Label Printer";
 
             int xdots, model; // ydots;
@@ -230,8 +231,8 @@
                 throw new System.Exception("Can't open printer!");
 
             /* 2. LK_SetupPrinter() */
-            rtn = LKBPRINT.LK_SetupPrinter("102",   // 10~104 (Unit is mm)
-                            "54",       // 5~350 (Unit is mm)
+            rtn = LKBPRINT.LK_SetupPrinter("70",   // 10~104 (Unit is mm)
+                            "30",       // 5~350 (Unit is mm)
                             0,              // 0=Label with Gap, 1=Label with Black Mark, 2=Label with Continuous.
                             "3",            // if(MediaType==0) <GapHeight> else <BlackMarkHeight>. (Unit is mm)
                             "0",            // if(MediaType==0) <not used> else <distance from BlackMark to perforation>. (Unit is mm)
@@ -256,18 +257,18 @@
             // y = y position
             // z = Cell Size. (2 ~ 16)
             // L = ECC Level(L or M or Q or H)
-            x = 80 * 8;
-            y = 32 * 8;
-            xdots = 4; //3
+            x = 60 * cell; //80
+            y = 18 * cell; //32
+            xdots = 3; //3
             model = 1;
             TwoBAR_Command = string.Format("b{0},{1},Q,{2},{3},L,\"{4}\"\r\n", x, y, model, xdots, QRCode_data);
             LKBPRINT.LK_DirectCommand(TwoBAR_Command);
 
             // 文字列のプリントアウト
 
-            x = 5 * 8;
-            y = (6 + 9 * 0 - 1) * 8;
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, itemName);
+            x = 5 * cell;
+            y = (6 + 8 * 0 - 1) * cell;
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, itemName);
 
             string temp1 = string.Empty;
             string temp2 = string.Empty;
@@ -280,48 +281,37 @@
             {
                 temp1 = itemNo;
             }
-            x = 5 * 8;
-            y = (6 + 9 * 0 + 4) * 8;
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 5, 1, 1, 0, temp1);
+            x = 5 * cell;
+            y = (6 + 8 * 0 + 4) * cell;
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, temp1);
 
             // 品目番号が２１～３０桁が存在する場合に印字
             if (string.IsNullOrEmpty(temp2))
             {
-                x = 70 * 8;
-                y = (6 + 9 * 0 - 1) * 8;
+                x = 70 * cell;
+                y = (6 + 8 * 0 - 1) * cell;
                 LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, temp2);
             }
 
-            x = 5 * 8;
-            y = (6 + 9 * 1 + 5) * 8;
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, supplier);
+            x = 5 * cell;
+            y = (6 + 8 * 1 + 6) * cell;
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, supplier);
 
-            x = 5 * 8;
-            y = (6 + 9 * 2 + 1) * 8;
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 5, 1, 1, 0, invoice);
+            x = 5 * cell;
+            y = (6 + 8 * 2 + 1) * cell;
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, invoice);
 
-            x = 5 * 8;
-            y = (6 + 9 * 2 + 11) * 8;
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, "R: ");
+            x = 5 * 5;
+            y = (6 + 8 * 2 + 11) * cell;
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, "R: ");
 
-            x = (5 + 5) * 8;
-            y = (6 + 9 * 2 + 11) * 8;
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, date);
+            x = (5 + 5) * cell;
+            y = (6 + 8 * 2 + 11) * cell;
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, date);
 
-            //if (validity != string.Empty)
-            //{
-            //    x = (5 + 28) * 8;
-            //    y = (6 + 9 * 2 + 11) * 8;
-            //    LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, "V: ");
-
-            //    x = (5 + 33) * 8;
-            //    y = (6 + 9 * 2 + 11) * 8;
-            //    LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, validity);
-            //}
-
-            x = 5 * 8;
-            y = (6 + 9 * 4) * 8;
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 5, 1, 1, 0, qty);
+            x = 5 * cell;
+            y = (6 + 8 * 4) * cell;
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, qty);
 
 
             LKBPRINT.LK_EndPage();

@@ -231,5 +231,11 @@ namespace PC_QRCodeSystem.View
             PlanningForm planFrm = new PlanningForm();
             planFrm.Show();
         }
+
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            SettingForm settingFrm = new SettingForm();
+            settingFrm.Show();
+        }
     }
 }

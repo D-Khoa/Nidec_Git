@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlMain = new System.Windows.Forms.Panel();
+            this.txtPlanCD = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.rbtnNoCheckDate = new System.Windows.Forms.RadioButton();
@@ -48,24 +50,24 @@
             this.label10 = new System.Windows.Forms.Label();
             this.lbModelName = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.lbDestinationName = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbDestinationCD = new System.Windows.Forms.ComboBox();
             this.txtSetNumber = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvPlanData = new System.Windows.Forms.DataGridView();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.pnlMainButtons = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnOpenPlan = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tc_PlanManagement = new System.Windows.Forms.TabControl();
             this.tab_Main = new System.Windows.Forms.TabPage();
+            this.pnlMainTop = new System.Windows.Forms.Panel();
             this.tab_PlanItem = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvPlanItem = new System.Windows.Forms.DataGridView();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -74,47 +76,64 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.panel4.SuspendLayout();
+            this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanData)).BeginInit();
-            this.panel5.SuspendLayout();
+            this.pnlMainButtons.SuspendLayout();
             this.tc_PlanManagement.SuspendLayout();
             this.tab_Main.SuspendLayout();
+            this.pnlMainTop.SuspendLayout();
             this.tab_PlanItem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanItem)).BeginInit();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel4
+            // pnlMain
             // 
-            this.panel4.Controls.Add(this.label12);
-            this.panel4.Controls.Add(this.txtComment);
-            this.panel4.Controls.Add(this.rbtnNoCheckDate);
-            this.panel4.Controls.Add(this.txtModelCD);
-            this.panel4.Controls.Add(this.label11);
-            this.panel4.Controls.Add(this.dtpDeliveryToDate);
-            this.panel4.Controls.Add(this.label8);
-            this.panel4.Controls.Add(this.dtpPlanToDate);
-            this.panel4.Controls.Add(this.dtpDeliveryDate);
-            this.panel4.Controls.Add(this.dtpPlanDate);
-            this.panel4.Controls.Add(this.rbtnDeliveryDate);
-            this.panel4.Controls.Add(this.rbtnPlanDate);
-            this.panel4.Controls.Add(this.txtPlanQty);
-            this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.lbUserName);
-            this.panel4.Controls.Add(this.txtUserCD);
-            this.panel4.Controls.Add(this.label10);
-            this.panel4.Controls.Add(this.lbModelName);
-            this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.lbDestinationName);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.cmbDestinationCD);
-            this.panel4.Controls.Add(this.txtSetNumber);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(3, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(680, 230);
-            this.panel4.TabIndex = 2;
+            this.pnlMain.Controls.Add(this.txtPlanCD);
+            this.pnlMain.Controls.Add(this.label1);
+            this.pnlMain.Controls.Add(this.label12);
+            this.pnlMain.Controls.Add(this.txtComment);
+            this.pnlMain.Controls.Add(this.rbtnNoCheckDate);
+            this.pnlMain.Controls.Add(this.txtModelCD);
+            this.pnlMain.Controls.Add(this.label11);
+            this.pnlMain.Controls.Add(this.dtpDeliveryToDate);
+            this.pnlMain.Controls.Add(this.label8);
+            this.pnlMain.Controls.Add(this.dtpPlanToDate);
+            this.pnlMain.Controls.Add(this.dtpDeliveryDate);
+            this.pnlMain.Controls.Add(this.dtpPlanDate);
+            this.pnlMain.Controls.Add(this.rbtnDeliveryDate);
+            this.pnlMain.Controls.Add(this.rbtnPlanDate);
+            this.pnlMain.Controls.Add(this.txtPlanQty);
+            this.pnlMain.Controls.Add(this.label7);
+            this.pnlMain.Controls.Add(this.lbUserName);
+            this.pnlMain.Controls.Add(this.txtUserCD);
+            this.pnlMain.Controls.Add(this.label10);
+            this.pnlMain.Controls.Add(this.lbModelName);
+            this.pnlMain.Controls.Add(this.label9);
+            this.pnlMain.Controls.Add(this.label5);
+            this.pnlMain.Controls.Add(this.cmbDestinationCD);
+            this.pnlMain.Controls.Add(this.txtSetNumber);
+            this.pnlMain.Controls.Add(this.label2);
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(680, 230);
+            this.pnlMain.TabIndex = 2;
+            // 
+            // txtPlanCD
+            // 
+            this.txtPlanCD.Location = new System.Drawing.Point(320, 130);
+            this.txtPlanCD.Name = "txtPlanCD";
+            this.txtPlanCD.Size = new System.Drawing.Size(140, 22);
+            this.txtPlanCD.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(220, 130);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 20);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Plan Code";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label12
             // 
@@ -289,17 +308,6 @@
             this.label9.Text = "Model";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lbDestinationName
-            // 
-            this.lbDestinationName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbDestinationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDestinationName.Location = new System.Drawing.Point(260, 70);
-            this.lbDestinationName.Name = "lbDestinationName";
-            this.lbDestinationName.Size = new System.Drawing.Size(200, 20);
-            this.lbDestinationName.TabIndex = 4;
-            this.lbDestinationName.Text = "Destination Name";
-            this.lbDestinationName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label5
             // 
             this.label5.Location = new System.Drawing.Point(10, 70);
@@ -315,9 +323,10 @@
             this.cmbDestinationCD.FormattingEnabled = true;
             this.cmbDestinationCD.Location = new System.Drawing.Point(120, 70);
             this.cmbDestinationCD.Name = "cmbDestinationCD";
-            this.cmbDestinationCD.Size = new System.Drawing.Size(120, 24);
+            this.cmbDestinationCD.Size = new System.Drawing.Size(340, 24);
             this.cmbDestinationCD.TabIndex = 2;
             this.cmbDestinationCD.SelectedIndexChanged += new System.EventHandler(this.cmbDestinationCD_SelectedIndexChanged);
+            this.cmbDestinationCD.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbDestinationCD_Format);
             // 
             // txtSetNumber
             // 
@@ -345,28 +354,28 @@
             this.dgvPlanData.Location = new System.Drawing.Point(3, 293);
             this.dgvPlanData.Name = "dgvPlanData";
             this.dgvPlanData.ReadOnly = true;
-            this.dgvPlanData.Size = new System.Drawing.Size(680, 85);
+            this.dgvPlanData.Size = new System.Drawing.Size(680, 110);
             this.dgvPlanData.TabIndex = 3;
+            this.dgvPlanData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlanData_CellClick);
             this.dgvPlanData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlanData_CellDoubleClick);
             // 
-            // panel5
+            // pnlMainButtons
             // 
-            this.panel5.Controls.Add(this.btnExport);
-            this.panel5.Controls.Add(this.btnClear);
-            this.panel5.Controls.Add(this.btnPrint);
-            this.panel5.Controls.Add(this.btnDelete);
-            this.panel5.Controls.Add(this.btnUpdate);
-            this.panel5.Controls.Add(this.btnAdd);
-            this.panel5.Controls.Add(this.btnSearch);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(3, 233);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(680, 60);
-            this.panel5.TabIndex = 4;
+            this.pnlMainButtons.Controls.Add(this.btnExport);
+            this.pnlMainButtons.Controls.Add(this.btnClear);
+            this.pnlMainButtons.Controls.Add(this.btnOpenPlan);
+            this.pnlMainButtons.Controls.Add(this.btnDelete);
+            this.pnlMainButtons.Controls.Add(this.btnUpdate);
+            this.pnlMainButtons.Controls.Add(this.btnAdd);
+            this.pnlMainButtons.Controls.Add(this.btnSearch);
+            this.pnlMainButtons.Location = new System.Drawing.Point(0, 230);
+            this.pnlMainButtons.Name = "pnlMainButtons";
+            this.pnlMainButtons.Size = new System.Drawing.Size(680, 60);
+            this.pnlMainButtons.TabIndex = 4;
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(392, 5);
+            this.btnExport.Location = new System.Drawing.Point(485, 5);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(80, 50);
             this.btnExport.TabIndex = 6;
@@ -384,19 +393,19 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnPrint
+            // btnOpenPlan
             // 
-            this.btnPrint.Location = new System.Drawing.Point(485, 5);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(80, 50);
-            this.btnPrint.TabIndex = 4;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnOpenPlan.Location = new System.Drawing.Point(20, 5);
+            this.btnOpenPlan.Name = "btnOpenPlan";
+            this.btnOpenPlan.Size = new System.Drawing.Size(80, 50);
+            this.btnOpenPlan.TabIndex = 4;
+            this.btnOpenPlan.Text = "Open Plan";
+            this.btnOpenPlan.UseVisualStyleBackColor = true;
+            this.btnOpenPlan.Click += new System.EventHandler(this.btnOpenPlan_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(299, 5);
+            this.btnDelete.Location = new System.Drawing.Point(392, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 50);
             this.btnDelete.TabIndex = 3;
@@ -406,7 +415,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(206, 5);
+            this.btnUpdate.Location = new System.Drawing.Point(299, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(80, 50);
             this.btnUpdate.TabIndex = 2;
@@ -416,7 +425,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(113, 5);
+            this.btnAdd.Location = new System.Drawing.Point(206, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(80, 50);
             this.btnAdd.TabIndex = 1;
@@ -426,7 +435,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(20, 5);
+            this.btnSearch.Location = new System.Drawing.Point(113, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 50);
             this.btnSearch.TabIndex = 0;
@@ -440,46 +449,56 @@
             this.tc_PlanManagement.Controls.Add(this.tab_Main);
             this.tc_PlanManagement.Controls.Add(this.tab_PlanItem);
             this.tc_PlanManagement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tc_PlanManagement.Location = new System.Drawing.Point(150, 69);
+            this.tc_PlanManagement.Location = new System.Drawing.Point(150, 70);
             this.tc_PlanManagement.Name = "tc_PlanManagement";
             this.tc_PlanManagement.SelectedIndex = 0;
-            this.tc_PlanManagement.Size = new System.Drawing.Size(694, 413);
+            this.tc_PlanManagement.Size = new System.Drawing.Size(694, 438);
             this.tc_PlanManagement.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tc_PlanManagement.TabIndex = 5;
             // 
             // tab_Main
             // 
             this.tab_Main.Controls.Add(this.dgvPlanData);
-            this.tab_Main.Controls.Add(this.panel5);
-            this.tab_Main.Controls.Add(this.panel4);
+            this.tab_Main.Controls.Add(this.pnlMainTop);
             this.tab_Main.Location = new System.Drawing.Point(4, 28);
             this.tab_Main.Name = "tab_Main";
             this.tab_Main.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Main.Size = new System.Drawing.Size(686, 381);
+            this.tab_Main.Size = new System.Drawing.Size(686, 406);
             this.tab_Main.TabIndex = 0;
             this.tab_Main.Text = "Main";
             this.tab_Main.UseVisualStyleBackColor = true;
             // 
+            // pnlMainTop
+            // 
+            this.pnlMainTop.Controls.Add(this.pnlMainButtons);
+            this.pnlMainTop.Controls.Add(this.pnlMain);
+            this.pnlMainTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMainTop.Location = new System.Drawing.Point(3, 3);
+            this.pnlMainTop.Name = "pnlMainTop";
+            this.pnlMainTop.Size = new System.Drawing.Size(680, 290);
+            this.pnlMainTop.TabIndex = 5;
+            this.pnlMainTop.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainTop_Paint);
+            // 
             // tab_PlanItem
             // 
-            this.tab_PlanItem.Controls.Add(this.dataGridView1);
+            this.tab_PlanItem.Controls.Add(this.dgvPlanItem);
             this.tab_PlanItem.Controls.Add(this.panel6);
             this.tab_PlanItem.Location = new System.Drawing.Point(4, 28);
             this.tab_PlanItem.Name = "tab_PlanItem";
             this.tab_PlanItem.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_PlanItem.Size = new System.Drawing.Size(686, 381);
+            this.tab_PlanItem.Size = new System.Drawing.Size(686, 406);
             this.tab_PlanItem.TabIndex = 1;
             this.tab_PlanItem.Text = "Item";
             this.tab_PlanItem.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvPlanItem
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 63);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(680, 315);
-            this.dataGridView1.TabIndex = 6;
+            this.dgvPlanItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlanItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPlanItem.Location = new System.Drawing.Point(3, 63);
+            this.dgvPlanItem.Name = "dgvPlanItem";
+            this.dgvPlanItem.Size = new System.Drawing.Size(680, 340);
+            this.dgvPlanItem.TabIndex = 6;
             // 
             // panel6
             // 
@@ -563,10 +582,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 482);
+            this.ClientSize = new System.Drawing.Size(844, 508);
             this.Controls.Add(this.tc_PlanManagement);
             this.dept = "";
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "PlanningForm";
@@ -575,14 +595,15 @@
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.PlanningForm_Load);
             this.Controls.SetChildIndex(this.tc_PlanManagement, 0);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.pnlMain.ResumeLayout(false);
+            this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanData)).EndInit();
-            this.panel5.ResumeLayout(false);
+            this.pnlMainButtons.ResumeLayout(false);
             this.tc_PlanManagement.ResumeLayout(false);
             this.tab_Main.ResumeLayout(false);
+            this.pnlMainTop.ResumeLayout(false);
             this.tab_PlanItem.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanItem)).EndInit();
             this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -590,14 +611,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.DataGridView dgvPlanData;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel pnlMainButtons;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbDestinationCD;
         private System.Windows.Forms.TextBox txtSetNumber;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbDestinationName;
         private System.Windows.Forms.Label lbModelName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lbUserName;
@@ -615,7 +635,7 @@
         private System.Windows.Forms.DateTimePicker dtpPlanToDate;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnOpenPlan;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnAdd;
@@ -623,7 +643,7 @@
         private System.Windows.Forms.TabControl tc_PlanManagement;
         private System.Windows.Forms.TabPage tab_Main;
         private System.Windows.Forms.TabPage tab_PlanItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvPlanItem;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -636,5 +656,8 @@
         private System.Windows.Forms.RadioButton rbtnNoCheckDate;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtComment;
+        private System.Windows.Forms.Panel pnlMainTop;
+        private System.Windows.Forms.TextBox txtPlanCD;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -98,6 +98,8 @@ namespace PC_QRCodeSystem.View
                 {
                     //Get packing stockOutQty & packing code
                     stockData = dr.DataBoundItem as pts_stock;
+                    //Get item info
+                    itemData = itemData.GetItem(stockData.item_cd);
                     //Get supplier
                     supplierData = supplierData.GetSupplier(new pts_supplier { supplier_cd = stockData.supplier_cd });
                     //If packing is empty then skip it
@@ -131,7 +133,7 @@ namespace PC_QRCodeSystem.View
                     printData.ListPrintItem.Add(new PrintItem
                     {
                         Item_Number = txtNoPlanItemCD.Text,
-                        Item_Name = lbItemName.Text,
+                        Item_Name = itemData.item_name,
                         SupplierName = supplierData.supplier_name,
                         Invoice = txtNoPlanInvoice.Text,
                         Delivery_Date = dtpNoPlanStockOutDate.Value,
@@ -151,7 +153,7 @@ namespace PC_QRCodeSystem.View
                         printData.ListPrintItem.Add(new PrintItem
                         {
                             Item_Number = txtNoPlanItemCD.Text,
-                            Item_Name = lbItemName.Text,
+                            Item_Name = itemData.item_name,
                             SupplierName = supplierData.supplier_name,
                             Invoice = txtNoPlanInvoice.Text,
                             Delivery_Date = stockData.stockin_date,

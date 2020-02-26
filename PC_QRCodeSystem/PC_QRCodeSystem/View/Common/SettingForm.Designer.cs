@@ -42,6 +42,7 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnPrintTest = new System.Windows.Forms.Button();
             this.grPrinter.SuspendLayout();
             this.grPremacFolder.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // grPrinter
             // 
+            this.grPrinter.Controls.Add(this.btnPrintTest);
             this.grPrinter.Controls.Add(this.btnPrinterCheck);
             this.grPrinter.Controls.Add(this.lbPrinterStatus);
             this.grPrinter.Controls.Add(this.label13);
@@ -78,7 +80,7 @@
             // 
             // btnPrinterCheck
             // 
-            this.btnPrinterCheck.Location = new System.Drawing.Point(470, 26);
+            this.btnPrinterCheck.Location = new System.Drawing.Point(250, 63);
             this.btnPrinterCheck.Margin = new System.Windows.Forms.Padding(5);
             this.btnPrinterCheck.Name = "btnPrinterCheck";
             this.btnPrinterCheck.Size = new System.Drawing.Size(100, 30);
@@ -207,6 +209,17 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnPrintTest
+            // 
+            this.btnPrintTest.Location = new System.Drawing.Point(470, 30);
+            this.btnPrintTest.Margin = new System.Windows.Forms.Padding(5);
+            this.btnPrintTest.Name = "btnPrintTest";
+            this.btnPrintTest.Size = new System.Drawing.Size(100, 30);
+            this.btnPrintTest.TabIndex = 8;
+            this.btnPrintTest.Text = "Print Test";
+            this.btnPrintTest.UseVisualStyleBackColor = true;
+            this.btnPrintTest.Click += new System.EventHandler(this.btnPrintTest_Click);
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -248,5 +261,6 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnPrintTest;
     }
 }

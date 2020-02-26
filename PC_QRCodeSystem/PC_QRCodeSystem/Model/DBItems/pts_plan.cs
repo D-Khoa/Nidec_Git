@@ -8,6 +8,7 @@ namespace PC_QRCodeSystem.Model
     {
         #region ALL FIELDS
         public int plan_id { get; set; }
+        public string plan_cd { get; set; }
         public string destination_cd { get; set; }
         public string model_cd { get; set; }
         public string set_number { get; set; }
@@ -16,7 +17,7 @@ namespace PC_QRCodeSystem.Model
         public string plan_usercd { get; set; }
         public DateTime delivery_date { get; set; }
         public string comment { get; set; }
-        public BindingList<pts_plan> listPlan { get; set; }
+        public BindingList<pts_plan> listPlan;
         public pts_plan()
         {
             listPlan = new BindingList<pts_plan>();
@@ -40,10 +41,12 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT plan_id, destination_cd, model_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment ";
+            query = "SELECT plan_id, plan_cd, destination_cd, model_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment ";
             query += "FROM pts_plan WHERE 1=1 ";
             if (inItem.plan_id > 0)
                 query += "AND plan_id ='" + inItem.plan_id + "' ";
+            if (!string.IsNullOrEmpty(inItem.plan_cd))
+                query += "AND plan_cd ='" + inItem.plan_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.destination_cd))
                 query += "AND destination_cd ='" + inItem.destination_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.model_cd))
@@ -73,6 +76,7 @@ namespace PC_QRCodeSystem.Model
                 pts_plan outItem = new pts_plan
                 {
                     plan_id = (int)reader["plan_id"],
+                    plan_cd = reader["plan_cd"].ToString(),
                     destination_cd = reader["destination_cd"].ToString(),
                     model_cd = reader["model_cd"].ToString(),
                     set_number = reader["set_number"].ToString(),
@@ -101,8 +105,8 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "INSERT INTO pts_plan(destination_cd, model_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment) ";
-            query += "VALUES('" + inItem.destination_cd + "','" + inItem.model_cd + "','" + inItem.set_number;
+            query = "INSERT INTO pts_plan(plan_cd, destination_cd, model_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment) ";
+            query += "VALUES('" + inItem.plan_cd + "','" + inItem.destination_cd + "','" + inItem.model_cd + "','" + inItem.set_number;
             query += "','" + inItem.plan_date.ToString("yyyy-MM-dd") + "','" + inItem.plan_usercd + "','" + inItem.plan_qty;
             query += "','" + inItem.delivery_date.ToString("yyyy-MM-dd") + "','" + inItem.comment + "')";
             //Execute non query SQL
@@ -125,7 +129,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_plan SET destination_cd ='" + inItem.destination_cd + "', model_cd ='" + inItem.model_cd;
+            query = "UPDATE pts_plan SET plan_cd ='" + inItem.plan_cd + "', destination_cd ='" + inItem.destination_cd + "', model_cd ='" + inItem.model_cd;
             query += "', set_number ='" + inItem.set_number + "', plan_date ='" + inItem.plan_date.ToString("yyyy-MM-dd");
             query += "', plan_usercd ='" + inItem.plan_usercd + "', plan_qty='" + inItem.plan_qty;
             query += "', delivery_date ='" + inItem.delivery_date.ToString("yyyy-MM-dd") + "', comment ='" + inItem.comment + "' ";
