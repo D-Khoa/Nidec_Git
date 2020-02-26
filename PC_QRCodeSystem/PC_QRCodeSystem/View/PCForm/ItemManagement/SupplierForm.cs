@@ -18,7 +18,7 @@ namespace PC_QRCodeSystem.View
         pts_supplier suppliercbm { get; set; }
         pts_supplier ptssupllier { get; set; }
         private pts_supplier supplierData { get; set; }
-       
+
         #endregion
         public SupplierForm()
         {
@@ -63,14 +63,40 @@ namespace PC_QRCodeSystem.View
                 if (!string.IsNullOrEmpty(cmbSupplierCode.Text))
                     txtSupplierName.Text = cmbSupplierCode.SelectedValue.ToString();
                 else
+                {
                     txtSupplierName.Text = "Supplier Name";
+                    txtSupplierTelephone.Text = "Supplier Telephone";
+                    txtFaxNumber.Text = "Fax Number";
+                    txtSupplierAddress.Text = "Supplier Address";
 
-            }
+                }
+                }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+        private void cmbSupplierCode_TextChanged(object sender, EventArgs e)
+        {
+            txtSupplierName.BackColor = Color.White;
+            if (string.IsNullOrEmpty(cmbSupplierCode.Text))
+                return;
+            try
+            {
+                txtSupplierName.Text = supplierData.GetSupplier(new pts_supplier
+                {
+                    supplier_id = 0,
+                    supplier_cd = cmbSupplierCode.Text
+                }).supplier_name;
+                txtSupplierName.BackColor = Color.Lime;
+            }
+            catch
+            {
+                // cmbSupplierCode.BackColor = Color.Yellow;
+                txtSupplierName.Text = "";
+                txtSupplierName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+            }
         }
         #region MAIN BUTTON
         private void btnSearch_Click(object sender, EventArgs e)
@@ -125,6 +151,9 @@ namespace PC_QRCodeSystem.View
                         {
                             supplier_cd = cmbSupplierCode.Text,
                             supplier_name = txtSupplierName.Text,
+                            supplier_tel = txtSupplierTelephone.Text,
+                            supplier_fax = txtFaxNumber.Text,
+                            supplier_address = txtSupplierAddress.Text,
                             registration_user_cd = UserData.usercode
                         });
                     }
@@ -135,6 +164,9 @@ namespace PC_QRCodeSystem.View
                         {
                             supplier_cd = cmbSupplierCode.Text,
                             supplier_name = txtSupplierName.Text,
+                            supplier_tel = txtSupplierTelephone.Text,
+                            supplier_fax = txtFaxNumber.Text,
+                            supplier_address = txtSupplierAddress.Text,
                             registration_user_cd = UserData.usercode
                         });
                     }
@@ -148,6 +180,11 @@ namespace PC_QRCodeSystem.View
                 if (editMode) messstring = "Update ";
                 else messstring = "Add ";
                 MessageBox.Show(messstring + n + " Supplier Complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cmbSupplierCode.Text = null;
+                txtSupplierName.Text = "Supplier Name";
+                txtSupplierTelephone.Text = "Telephone";
+                txtFaxNumber.Text = "Fax Number";
+                txtSupplierAddress.Text = "Supplier Address";
 
             }
 
@@ -163,6 +200,11 @@ namespace PC_QRCodeSystem.View
             LockAllNameTextbox();
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
+            cmbSupplierCode.Text = null;
+            txtSupplierName.Text = "Supplier Name";
+            txtSupplierTelephone.Text = "Telephone";
+            txtFaxNumber.Text = "Fax Number";
+            txtSupplierAddress.Text = "Supplier Address";
 
         }
         #endregion
@@ -181,7 +223,10 @@ namespace PC_QRCodeSystem.View
                 if (dgvDataSupllier.DataSource != null)
                     dgvDataSupllier.DataSource = null;
                 cmbSupplierCode.Text = null;
-                txtSupplierName.Text = null;
+                txtSupplierName.Text = "Supplier Name";
+                txtSupplierTelephone.Text = "Telephone";
+                txtFaxNumber.Text = "Fax Number";
+                txtSupplierAddress.Text = "Supplier Address";
                 ptssupllier.listSupplier.Clear();
                 btnUpdate.Enabled = false;
                 btnDelete.Enabled = false;
@@ -214,6 +259,9 @@ namespace PC_QRCodeSystem.View
         {
 
             txtSupplierName.ReadOnly = true;
+            txtSupplierTelephone.ReadOnly = true;
+            txtFaxNumber.ReadOnly = true;
+            txtSupplierAddress.ReadOnly = true;
             btnAdd.Enabled = true;
             btnOK.Visible = false;
             btnCancel.Visible = false;
@@ -229,7 +277,13 @@ namespace PC_QRCodeSystem.View
         {
             editMode = edit;
             txtSupplierName.ReadOnly = false;
+            txtSupplierTelephone.ReadOnly = false;
+            txtFaxNumber.ReadOnly = false;
+            txtSupplierAddress.ReadOnly = false;
             if (!edit) txtSupplierName.Text = string.Empty;
+            if (!edit) txtSupplierTelephone.Text = string.Empty;
+            if (!edit) txtFaxNumber.Text = string.Empty;
+            if (!edit) txtSupplierAddress.Text = string.Empty;
             cmbSupplierCode.DropDownStyle = ComboBoxStyle.DropDown;
             btnOK.Visible = true;
             btnCancel.Visible = true;
@@ -242,31 +296,15 @@ namespace PC_QRCodeSystem.View
         {
             ptssupllier = dgvDataSupllier.Rows[e.RowIndex].DataBoundItem as pts_supplier;
             cmbSupplierCode.Text = ptssupllier.supplier_cd.ToString();
+            txtSupplierName.Text = ptssupllier.supplier_name.ToString();
+            txtSupplierTelephone.Text = ptssupllier.supplier_tel.ToString();
+            txtFaxNumber.Text = ptssupllier.supplier_fax.ToString();
+            txtSupplierAddress.Text = ptssupllier.supplier_address.ToString();
             btnUpdate.Enabled = true;
             btnDelete.Enabled = true;
         }
         #endregion
 
-        private void cmbSupplierCode_TextChanged(object sender, EventArgs e)
-        {
-            txtSupplierName.BackColor = Color.White;
-            if (string.IsNullOrEmpty(cmbSupplierCode.Text))
-                return;
-            try
-            {
-                txtSupplierName.Text = supplierData.GetSupplier(new pts_supplier
-                {
-                    supplier_id = 0,
-                    supplier_cd = cmbSupplierCode.Text
-                }).supplier_name;
-                txtSupplierName.BackColor = Color.Lime;
-            }
-            catch
-            {
-               // cmbSupplierCode.BackColor = Color.Yellow;
-                txtSupplierName.Text = "Supplier Name";
-                txtSupplierName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            }
-        }
+       
     }
 }
