@@ -82,16 +82,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\PSQL.cs" />
+    <Compile Include="Form\Menu Form\AddPremac649ToDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Menu Form\AddPremac649ToDB.Designer.cs">
+      <DependentUpon>AddPremac649ToDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\Menu Form\ConvertPremacFile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Menu Form\ConvertPremacFile.Designer.cs">
       <DependentUpon>ConvertPremacFile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\pts_premac649.cs" />
     <Compile Include="Model\pts_item.cs" />
     <Compile Include="Model\pts_supplier.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form\Menu Form\AddPremac649ToDB.resx">
+      <DependentUpon>AddPremac649ToDB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Menu Form\ConvertPremacFile.resx">
       <DependentUpon>ConvertPremacFile.cs</DependentUpon>
     </EmbeddedResource>
