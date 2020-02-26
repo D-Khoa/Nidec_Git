@@ -552,7 +552,6 @@ namespace PC_QRCodeSystem.View
             dgvInspection.Columns["supplier_cd"].HeaderText = "Supplier Code";
             dgvInspection.Columns["order_no"].HeaderText = "Order Number";
             dgvInspection.Columns["invoice"].HeaderText = "Invoice";
-            dgvInspection.Columns["po_no"].HeaderText = "PO";
             dgvInspection.Columns["stockin_date"].HeaderText = "Stock In Date";
             dgvInspection.Columns["stockin_user_cd"].HeaderText = "Incharge";
             dgvInspection.Columns["stockin_qty"].HeaderText = "Stock In Qty";
@@ -580,7 +579,7 @@ namespace PC_QRCodeSystem.View
                 string suppliercd = string.Empty;
                 if (barcode.Length > 6)
                 {
-                    if (!string.IsNullOrEmpty(barcode[8])) orderno = barcode[7];
+                    if (!string.IsNullOrEmpty(barcode[7])) orderno = barcode[7];
                     if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
                 }
                 #region CHECK SUPPLIER & NOTICE FOR USER

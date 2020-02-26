@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -38,16 +39,16 @@ namespace PC_QRCodeSystem.Model
                                           let columns = csvline.Split('?')
                                           select new PremacIn
                                           {
-                                              Item_Number = columns[2].Trim(),
-                                              Item_Name = columns[3].Trim(),
-                                              PO_No = columns[4].Trim(),
-                                              Order_No = columns[5].Trim(),
-                                              Supplier_Code = columns[0].Trim(),
-                                              Supplier_Name = columns[1].Trim(),
-                                              Supplier_Invoice = columns[29].Trim(),
-                                              Delivery_Date = DateTime.Parse(columns[9].Trim()),
-                                              Delivery_Qty = !string.IsNullOrEmpty(columns[10].Trim()) ? double.Parse(columns[10].Trim()) : 0,
-                                              Incharge = columns[15].Trim(),
+                                              Item_Number = Regex.Replace(columns[2], " {2,}", " ").Trim(),
+                                              Item_Name = Regex.Replace(columns[3], " {2,}", " ").Trim(),
+                                              PO_No = Regex.Replace(columns[4], " {2,}", " ").Trim(),
+                                              Order_No = Regex.Replace(columns[5], " {2,}", " ").Trim(),
+                                              Supplier_Code = Regex.Replace(columns[0], " {2,}", " ").Trim(),
+                                              Supplier_Name = Regex.Replace(columns[1], " {2,}", " ").Trim(),
+                                              Supplier_Invoice = Regex.Replace(columns[29], " {2,}", " ").Trim(),
+                                              Delivery_Date = DateTime.Parse(Regex.Replace(columns[9], " {2,}", " ").Trim()),
+                                              Delivery_Qty = !string.IsNullOrEmpty(Regex.Replace(columns[10], " {2,}", " ").Trim()) ? double.Parse(Regex.Replace(columns[10], " {2,}", " ").Trim()) : 0,
+                                              Incharge = Regex.Replace(columns[15], " {2,}", " ").Trim(),
                                           };
             listPremacItem = query.ToList();
             listPremacItem.Sort((a, b) => a.Item_Number.CompareTo(b.Item_Number));

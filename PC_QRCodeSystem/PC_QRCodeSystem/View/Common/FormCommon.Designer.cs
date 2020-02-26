@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCommon));
             this.pnlTitle = new System.Windows.Forms.Panel();
             this.lbTittle = new System.Windows.Forms.Label();
             this.pnlLogo = new System.Windows.Forms.Panel();
@@ -253,6 +254,7 @@
             this.ClientSize = new System.Drawing.Size(750, 472);
             this.Controls.Add(this.pnlUser);
             this.Controls.Add(this.pnlTitle);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormCommon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormCommon";

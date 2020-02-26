@@ -63,6 +63,16 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                if (double.Parse(txtNoPlanWHQty.Text) == 0)
+                {
+                    CustomMessageBox.Notice("Don't have item in stock. Please check and try again!");
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtNoPlanStockOutQty.Text) || double.Parse(txtNoPlanStockOutQty.Text) == 0)
+                {
+                    CustomMessageBox.Notice("Please choose stock-out qty!");
+                    return;
+                }
                 double temp;
                 double stockOutQty = double.Parse(txtNoPlanStockOutQty.Text);
                 string noplancd = "no-" + DateTime.Now.ToString("yyyyMMddHHmmss");

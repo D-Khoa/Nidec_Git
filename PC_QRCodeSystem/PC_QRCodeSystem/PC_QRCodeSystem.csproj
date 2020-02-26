@@ -290,6 +290,7 @@
     <Content Include="Library\LKBSDK.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Bogo-D-Indigo-Barcode-Scanner.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FormIcon.ico" />
