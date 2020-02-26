@@ -73,9 +73,9 @@
             this.btnPrintAll = new System.Windows.Forms.Button();
             this.btnPrintBack = new System.Windows.Forms.Button();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
-            this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRow = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlOption.SuspendLayout();
@@ -648,12 +648,6 @@
             this.statusStrip2.TabIndex = 27;
             this.statusStrip2.Text = "statusStrip2";
             // 
-            // tsTime
-            // 
-            this.tsTime.Name = "tsTime";
-            this.tsTime.Size = new System.Drawing.Size(816, 19);
-            this.tsTime.Spring = true;
-            // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
@@ -667,6 +661,12 @@
             this.tsRow.Name = "tsRow";
             this.tsRow.Size = new System.Drawing.Size(40, 19);
             this.tsRow.Text = "None";
+            // 
+            // tsTime
+            // 
+            this.tsTime.Name = "tsTime";
+            this.tsTime.Size = new System.Drawing.Size(816, 19);
+            this.tsTime.Spring = true;
             // 
             // toolStripStatusLabel5
             // 
