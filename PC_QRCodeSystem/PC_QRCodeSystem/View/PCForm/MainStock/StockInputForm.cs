@@ -16,10 +16,11 @@ namespace PC_QRCodeSystem.View
         #region ITEMS
         pts_item itemData { get; set; }
         pts_stock stockItem { get; set; }
-        PremacIn premacItem { get; set; }
         PrintItem printItem { get; set; }
+        pre_649 premacData { get; set; }
         pts_supplier supplierItem { get; set; }
         List<PrintItem> listPrintItem { get; set; }
+        List<pre_649> listPremac { get; set; }
         BindingList<pts_stock> listStockItem { get; set; }
 
         TfPrint tfprinter = new TfPrint();
@@ -31,10 +32,11 @@ namespace PC_QRCodeSystem.View
             InitializeComponent();
             itemData = new pts_item();
             printItem = new PrintItem();
-            premacItem = new PremacIn();
             stockItem = new pts_stock();
+            premacData = new pre_649();
             supplierItem = new pts_supplier();
             listPrintItem = new List<PrintItem>();
+            listPremac = new List<pre_649>();
             listStockItem = new BindingList<pts_stock>();
             tc_Main.ItemSize = new Size(0, 1);
         }
@@ -42,12 +44,12 @@ namespace PC_QRCodeSystem.View
         private void StockInputForm_Load(object sender, EventArgs e)
         {
             rbtnEven.Checked = true;
-            rbtnItemNumber.Checked = true;
             tc_Main.SelectedTab = tab_Main;
         }
         #endregion
 
         #region MAIN TAB
+        #region BUTTON EVENT
         private void btnPremacImport_Click(object sender, EventArgs e)
         {
             try
@@ -57,12 +59,13 @@ namespace PC_QRCodeSystem.View
                 //Start stopwatch for catch searching time
                 stopWatch.Restart();
                 //Get list data from premac 6-4-9 file
-                premacItem.GetListPremacItem(SettingItem.premacFile);
-                dgvPreInput.DataSource = premacItem.listPremacItem;
+                listPremac = premacData.GetListPremacItem(SettingItem.premacFile);
+                dgvPreInput.DataSource = listPremac;
+                //Search data
+                SearchPremacFile();
                 tsRow.Text = dgvPreInput.Rows.Count.ToString();
                 //Rename file after get data
-                File.Move(SettingItem.premacFile, Path.ChangeExtension(SettingItem.premacFile, DateTime.Now.ToString("yyyyMMddHHmmss")));
-
+                //File.Move(SettingItem.premacFile, Path.ChangeExtension(SettingItem.premacFile, DateTime.Now.ToString("yyyyMMddHHmmss")));
                 //Stop stopwatch and show time
                 stopWatch.Stop();
                 double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
@@ -129,8 +132,8 @@ namespace PC_QRCodeSystem.View
                             Label_Qty = 1
                         });
                     }
-                    premacItem.listPremacItem[dr.Index].Delivery_Qty -= (sizePerLot * numberOfLot + qtymod);
-                    dgvPreInput.DataSource = premacItem.listPremacItem;
+                    //premacItem.listPremacItem[dr.Index].Delivery_Qty -= (sizePerLot * numberOfLot + qtymod);
+                    //dgvPreInput.DataSource = premacItem.listPremacItem;
                     //Change color of row when add print item completed
                     dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
                 }
@@ -199,7 +202,7 @@ namespace PC_QRCodeSystem.View
                                 Label_Qty = 1
                             });
                         }
-                        premacItem.listPremacItem[dr.Index].Delivery_Qty -= (sizePerLot * numberOfLot + qtymod);
+                        //premacItem.listPremacItem[dr.Index].Delivery_Qty -= (sizePerLot * numberOfLot + qtymod);
                         dr.DefaultCellStyle.BackColor = Color.Lime;
                     }
                 }
@@ -221,9 +224,9 @@ namespace PC_QRCodeSystem.View
                         Label_Qty = 1
                     });
                     dr.DefaultCellStyle.BackColor = Color.Yellow;
-                    premacItem.listPremacItem[dr.Index].Delivery_Qty -= sizePerLot;
+                    //premacItem.listPremacItem[dr.Index].Delivery_Qty -= sizePerLot;
                 }
-                dgvPreInput.DataSource = premacItem.listPremacItem;
+                //dgvPreInput.DataSource = premacItem.listPremacItem;
                 dgvPrintList.DataSource = printItem.ListPrintItem;
                 tc_Main.SelectedTab = tab_Print;
             }
@@ -252,10 +255,17 @@ namespace PC_QRCodeSystem.View
 
         private void btnMainClear_Click(object sender, EventArgs e)
         {
+            txtPONo.Clear();
+            txtOrderNo.Clear();
             txtCapaciy.Clear();
+            txtItemNum.Clear();
+            txtIncharge.Clear();
+            txtSupplierCode.Clear();
+            txtSupplierInvoice.Clear();
             tsRow.Text = "None";
             tsTime.Text = "None";
             tsTotalQty.Text = "None";
+            listPremac.Clear();
             dgvPreInput.DataSource = null;
         }
 
@@ -263,42 +273,16 @@ namespace PC_QRCodeSystem.View
         {
             this.Cursor = Cursors.WaitCursor;
             stopWatch.Restart();
-            //If search box is empty then show all data
-            if (string.IsNullOrEmpty(txtSearchCode.Text))
+            premacData.Search(new pre_649
             {
-                dgvPreInput.DataSource = premacItem.listPremacItem;
-            }
-            else
-            {
-                //Search with item number
-                if (rbtnItemNumber.Checked)
-                {
-                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                              where item.Item_Number == txtSearchCode.Text
-                                              select item).ToList();
-                }
-                //Search with supplier code
-                if (rbtnSupplierCD.Checked)
-                {
-                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                              where item.Supplier_Code == txtSearchCode.Text
-                                              select item).ToList();
-                }
-                //Search with order number
-                if (rbtnOrderNo.Checked)
-                {
-                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                              where item.Order_No == txtSearchCode.Text
-                                              select item).ToList();
-                }
-                //Search with invoice
-                if (rbtnInvoice.Checked)
-                {
-                    dgvPreInput.DataSource = (from item in premacItem.listPremacItem
-                                              where item.Supplier_Invoice == txtSearchCode.Text
-                                              select item).ToList();
-                }
-            }
+                item_number = txtItemNum.Text,
+                supplier_cd = txtSupplierCode.Text,
+                supplier_invoice = txtSupplierInvoice.Text,
+                oder_number = txtOrderNo.Text,
+                po_number = txtPONo.Text,
+                incharge = txtIncharge.Text
+            }, dtpFromDate.Value, dtpToDate.Value, cbCheckDate.Checked);
+            dgvPreInput.DataSource = premacData.listPremacItem;
             stopWatch.Stop();
             double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
             tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
@@ -312,6 +296,68 @@ namespace PC_QRCodeSystem.View
             if (rbtnEven.Checked) dgvPreInput.MultiSelect = true;
             if (rbtnOdd.Checked) dgvPreInput.MultiSelect = false;
         }
+        #endregion
+
+        #region SUB EVENT
+        private void UpdatePremacGrid()
+        {
+
+        }
+
+        private void SearchPremacFile()
+        {
+            //Search with item number
+            if (!string.IsNullOrEmpty(txtItemNum.Text))
+            {
+                dgvPreInput.DataSource = (from item in listPremac
+                                          where item.item_number == txtItemNum.Text
+                                          select item).ToList();
+            }
+            //Search with supplier code
+            if (!string.IsNullOrEmpty(txtSupplierCode.Text))
+            {
+                dgvPreInput.DataSource = (from item in listPremac
+                                          where item.supplier_cd == txtSupplierCode.Text
+                                          select item).ToList();
+            }
+            //Search with order number
+            if (!string.IsNullOrEmpty(txtOrderNo.Text))
+            {
+                dgvPreInput.DataSource = (from item in listPremac
+                                          where item.oder_number == txtOrderNo.Text
+                                          select item).ToList();
+            }
+            //Search with invoice
+            if (!string.IsNullOrEmpty(txtSupplierInvoice.Text))
+            {
+                dgvPreInput.DataSource = (from item in listPremac
+                                          where item.supplier_invoice == txtSupplierInvoice.Text
+                                          select item).ToList();
+            }
+            //Search with incharge user
+            if (!string.IsNullOrEmpty(txtIncharge.Text))
+            {
+                dgvPreInput.DataSource = (from item in listPremac
+                                          where item.incharge == txtIncharge.Text
+                                          select item).ToList();
+            }
+            //Search with PO
+            if (!string.IsNullOrEmpty(txtPONo.Text))
+            {
+                dgvPreInput.DataSource = (from item in listPremac
+                                          where item.po_number == txtPONo.Text
+                                          select item).ToList();
+            }
+            //Search with date
+            if (cbCheckDate.Checked)
+            {
+                dgvPreInput.DataSource = (from item in listPremac
+                                          where (item.delivery_date >= dtpFromDate.Value && item.delivery_date <= dtpToDate.Value)
+                                          select item).ToList();
+            }
+        }
+        #endregion
+
         #endregion
 
         #region PRINT TAB

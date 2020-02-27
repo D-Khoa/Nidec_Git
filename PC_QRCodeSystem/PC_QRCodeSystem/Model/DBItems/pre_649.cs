@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace PC_QRCodeSystem.Model
 {
-    public class pts_premac649
+    public class pre_649
     {
         #region ALL FIELDS
         public int premac_id { get; set; }
@@ -19,12 +19,12 @@ namespace PC_QRCodeSystem.Model
         public string po_number { get; set; }
         public double delivery_qty { get; set; }
         public DateTime delivery_date { get; set; }
-        public string oder_number { get; set; }
+        public string order_number { get; set; }
         public string incharge { get; set; }
-        public List<pts_premac649> listPremacItem;
-        public pts_premac649()
+        public List<pre_649> listPremacItem;
+        public pre_649()
         {
-            listPremacItem = new List<pts_premac649>();
+            listPremacItem = new List<pre_649>();
         }
         #endregion
 
@@ -33,13 +33,14 @@ namespace PC_QRCodeSystem.Model
         /// </summary>
         /// <param name="premacfile">path of PREMAC file</param>
         /// <returns></returns>
-        public void GetListPremacItem(string premacfile)
+        public List<pre_649> GetListPremacItem(string premacfile)
         {
+            listPremacItem = new List<pre_649>();
             string[] csvlines = File.ReadAllLines(premacfile);
-            IEnumerable<pts_premac649> query = from csvline in csvlines
+            IEnumerable<pre_649> query = from csvline in csvlines
                                                where (!csvline.Contains("(CPFXE049)") && !csvline.Contains("SupplierCD"))
                                                let columns = csvline.Split('?')
-                                               select new pts_premac649
+                                               select new pre_649
                                                {
                                                    item_number = Regex.Replace(columns[2], " {2,}", " ").Trim(),
                                                    item_name = Regex.Replace(columns[3], " {2,}", " ").Trim(),
@@ -51,23 +52,28 @@ namespace PC_QRCodeSystem.Model
                                                    delivery_date = DateTime.Parse(Regex.Replace(columns[9], " {2,}", " ").Trim()),
                                                    delivery_qty = !string.IsNullOrEmpty(Regex.Replace(columns[10], " {2,}", " ").Trim()) ?
                                                                   double.Parse(Regex.Replace(columns[10], " {2,}", " ").Trim()) : 0,
-                                                   incharge = Regex.Replace(columns[15], " {2,}", " ").Trim(),
+                                                   incharge = Regex.Replace(columns[14], " {2,}", " ").Trim(),
                                                };
             listPremacItem = query.ToList();
             listPremacItem.Sort((a, b) => a.item_number.CompareTo(b.item_number));
+            return listPremacItem;
         }
 
-        public void Search(pts_premac649 inItem)
+        /// <summary>
+        /// Search list premac item from DB
+        /// </summary>
+        /// <param name="inItem">search info</param>
+        public void Search(pre_649 inItem, DateTime fromdate, DateTime todate, bool checkdate)
         {
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            listPremacItem = new List<pts_premac649>();
+            listPremacItem = new List<pre_649>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT premac_id, item_number, item_name, supplier_cd, supplier_name, supplier_invoice, po_number, delivery_qty, delivery_date, oder_number, incharge";
-            query += "FROM pts_premac649 WHERE 1=1 ";
+            query = "SELECT premac_id, item_number, item_name, supplier_cd, supplier_name, supplier_invoice, po_number, delivery_qty, delivery_date, oder_number, incharge ";
+            query += "FROM pre_649 WHERE 1=1 ";
             if (!string.IsNullOrEmpty(inItem.item_number))
                 query += "AND item_number ='" + inItem.item_number + "' ";
             if (!string.IsNullOrEmpty(inItem.item_name))
@@ -80,13 +86,15 @@ namespace PC_QRCodeSystem.Model
                 query += "AND po_number ='" + inItem.po_number + "' ";
             if (!string.IsNullOrEmpty(inItem.oder_number))
                 query += "AND oder_number ='" + inItem.oder_number + "' ";
+            if (checkdate)
+                query += "AND delivery_date >='" + fromdate + "' AND delivery_date <='" + todate + "' ";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
             while (reader.Read())
             {
                 //Get an item
-                pts_premac649 outItem = new pts_premac649
+                pre_649 outItem = new pre_649
                 {
                     premac_id = (int)reader["premac_id"],
                     item_number = reader["item_number"].ToString(),

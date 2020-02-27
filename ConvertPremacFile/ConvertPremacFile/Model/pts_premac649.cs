@@ -8,7 +8,7 @@ using PostgreSQLCopyHelper;
 
 namespace ConvertPremacFile.Model
 {
-    public class pts_premac649
+    public class pre_649
     {
         #region ALL FIELDS
         public string item_number { get; set; }
@@ -21,10 +21,10 @@ namespace ConvertPremacFile.Model
         public DateTime delivery_date { get; set; }
         public string oder_number { get; set; }
         public string incharge { get; set; }
-        public List<pts_premac649> listPremacItem;
-        public pts_premac649()
+        public List<pre_649> listPremacItem;
+        public pre_649()
         {
-            listPremacItem = new List<pts_premac649>();
+            listPremacItem = new List<pre_649>();
         }
         #endregion
 
@@ -36,10 +36,10 @@ namespace ConvertPremacFile.Model
         public void GetListPremacItem(string premacfile)
         {
             string[] csvlines = File.ReadAllLines(premacfile);
-            IEnumerable<pts_premac649> query = from csvline in csvlines
+            IEnumerable<pre_649> query = from csvline in csvlines
                                                where (!csvline.Contains("(CPFXE049)") && !csvline.Contains("SupplierCD"))
                                                let columns = csvline.Split('?')
-                                               select new pts_premac649
+                                               select new pre_649
                                                {
                                                    item_number = Regex.Replace(columns[2], " {2,}", " ").Trim(),
                                                    item_name = Regex.Replace(columns[3], " {2,}", " ").Trim(),
@@ -50,17 +50,21 @@ namespace ConvertPremacFile.Model
                                                    supplier_invoice = Regex.Replace(columns[29], " {2,}", " ").Trim(),
                                                    delivery_date = DateTime.Parse(Regex.Replace(columns[9], " {2,}", " ").Trim()),
                                                    delivery_qty = !string.IsNullOrEmpty(Regex.Replace(columns[10], " {2,}", " ").Trim()) ? double.Parse(Regex.Replace(columns[10], " {2,}", " ").Trim()) : 0,
-                                                   incharge = Regex.Replace(columns[15], " {2,}", " ").Trim(),
+                                                   incharge = Regex.Replace(columns[14], " {2,}", " ").Trim(),
                                                };
             listPremacItem = query.ToList();
             listPremacItem.Sort((a, b) => a.item_number.CompareTo(b.item_number));
         }
 
-        public void WriteToDB(IEnumerable<pts_premac649> listPremacitem)
+        /// <summary>
+        /// Coppy all data to pre_649
+        /// </summary>
+        /// <param name="listPremacitem">list item</param>
+        public void WriteToDB(IEnumerable<pre_649> listPremacitem)
         {
-            PostgreSQLCopyHelper<pts_premac649> coppyHelper = new PostgreSQLCopyHelper<pts_premac649>("pts_premac649")
+            PostgreSQLCopyHelper<pre_649> coppyHelper = new PostgreSQLCopyHelper<pre_649>("pre_649")
                                                               .MapVarchar("item_number", x => x.item_number)
-                                                              .MapVarchar("item_name", x => x.item_name)
+                                                              .MapText("item_name", x => x.item_name)
                                                               .MapVarchar("supplier_cd", x => x.supplier_cd)
                                                               .MapText("supplier_name", x => x.supplier_name)
                                                               .MapVarchar("supplier_invoice", x => x.supplier_invoice)
@@ -75,6 +79,24 @@ namespace ConvertPremacFile.Model
                 coppyHelper.SaveAll(connection, listPremacitem);
                 connection.Close();
             }
+        }
+
+        /// <summary>
+        /// Delete all data of pre_649
+        /// </summary>
+        /// <returns></returns>
+        public int DeleteFromDB()
+        {
+            int result;
+            NpgsqlCommand command;
+            using (NpgsqlConnection connection = new NpgsqlConnection(Properties.Settings.Default.CONNECTSTRING_MES))
+            {
+                connection.Open();
+                command = new NpgsqlCommand("DELETE FROM pre_649", connection);
+                result = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return result;
         }
     }
 }

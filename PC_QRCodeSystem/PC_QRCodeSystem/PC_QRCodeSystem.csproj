@@ -87,7 +87,7 @@
     <Compile Include="Model\DBItems\m_user_position.cs" />
     <Compile Include="Model\DBItems\pts_noplan.cs" />
     <Compile Include="Model\DBItems\pts_plan.cs" />
-    <Compile Include="Model\DBItems\pts_premac649.cs" />
+    <Compile Include="Model\DBItems\pre_649.cs" />
     <Compile Include="Model\DBItems\pts_stock_log.cs" />
     <Compile Include="Model\Temp Items\PrintItem.cs" />
     <Compile Include="Model\Temp Items\SettingItem.cs" />
@@ -128,7 +128,6 @@
     <Compile Include="Model\Class\EncryptDecrypt.cs" />
     <Compile Include="Model\Class\LKBPRINT.cs" />
     <Compile Include="Model\Class\PSQL.cs" />
-    <Compile Include="Model\Temp Items\PremacIn.cs" />
     <Compile Include="Model\Class\TfPrint.cs" />
     <Compile Include="Model\Temp Items\UserData.cs" />
     <Compile Include="Program.cs" />
