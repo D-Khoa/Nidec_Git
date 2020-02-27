@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlOption = new System.Windows.Forms.Panel();
             this.btnMainClear = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.rbtnEven = new System.Windows.Forms.RadioButton();
             this.rbtnOdd = new System.Windows.Forms.RadioButton();
-            this.btnPrintList = new System.Windows.Forms.Button();
             this.btnAutoPacking = new System.Windows.Forms.Button();
             this.btnManualPacking = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.txtCapaciy = new System.Windows.Forms.TextBox();
+            this.btnPrintList = new System.Windows.Forms.Button();
             this.btnInspection = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnPremacImport = new System.Windows.Forms.Button();
@@ -171,17 +172,6 @@
             this.rbtnOdd.UseVisualStyleBackColor = false;
             this.rbtnOdd.CheckedChanged += new System.EventHandler(this.rbtnEven_CheckedChanged);
             // 
-            // btnPrintList
-            // 
-            this.btnPrintList.Location = new System.Drawing.Point(450, 4);
-            this.btnPrintList.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrintList.Name = "btnPrintList";
-            this.btnPrintList.Size = new System.Drawing.Size(100, 50);
-            this.btnPrintList.TabIndex = 24;
-            this.btnPrintList.Text = "Print List";
-            this.btnPrintList.UseVisualStyleBackColor = true;
-            this.btnPrintList.Click += new System.EventHandler(this.btnPrintList_Click);
-            // 
             // btnAutoPacking
             // 
             this.btnAutoPacking.Location = new System.Drawing.Point(10, 5);
@@ -226,6 +216,17 @@
             this.txtCapaciy.TabIndex = 20;
             this.txtCapaciy.Text = "0";
             this.txtCapaciy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnPrintList
+            // 
+            this.btnPrintList.Location = new System.Drawing.Point(450, 4);
+            this.btnPrintList.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintList.Name = "btnPrintList";
+            this.btnPrintList.Size = new System.Drawing.Size(100, 50);
+            this.btnPrintList.TabIndex = 24;
+            this.btnPrintList.Text = "Print List";
+            this.btnPrintList.UseVisualStyleBackColor = true;
+            this.btnPrintList.Click += new System.EventHandler(this.btnPrintList_Click);
             // 
             // btnInspection
             // 
@@ -302,9 +303,21 @@
             this.dgvPreInput.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPreInput.Name = "dgvPreInput";
             this.dgvPreInput.ReadOnly = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPreInput.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvPreInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPreInput.Size = new System.Drawing.Size(898, 220);
             this.dgvPreInput.TabIndex = 3;
+            this.dgvPreInput.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPreInput_DataBindingComplete);
             // 
             // panel8
             // 
@@ -778,7 +791,7 @@
             // tsTime
             // 
             this.tsTime.Name = "tsTime";
-            this.tsTime.Size = new System.Drawing.Size(816, 19);
+            this.tsTime.Size = new System.Drawing.Size(714, 19);
             this.tsTime.Spring = true;
             // 
             // toolStripStatusLabel5

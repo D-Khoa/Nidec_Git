@@ -45,7 +45,7 @@ namespace PC_QRCodeSystem.Model
                                                    item_number = Regex.Replace(columns[2], " {2,}", " ").Trim(),
                                                    item_name = Regex.Replace(columns[3], " {2,}", " ").Trim(),
                                                    po_number = Regex.Replace(columns[4], " {2,}", " ").Trim(),
-                                                   oder_number = Regex.Replace(columns[5], " {2,}", " ").Trim(),
+                                                   order_number = Regex.Replace(columns[5], " {2,}", " ").Trim(),
                                                    supplier_cd = Regex.Replace(columns[0], " {2,}", " ").Trim(),
                                                    supplier_name = Regex.Replace(columns[1], " {2,}", " ").Trim(),
                                                    supplier_invoice = Regex.Replace(columns[29], " {2,}", " ").Trim(),
@@ -72,7 +72,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT premac_id, item_number, item_name, supplier_cd, supplier_name, supplier_invoice, po_number, delivery_qty, delivery_date, oder_number, incharge ";
+            query = "SELECT premac_id, item_number, item_name, supplier_cd, supplier_name, supplier_invoice, po_number, delivery_qty, delivery_date, order_number, incharge ";
             query += "FROM pre_649 WHERE 1=1 ";
             if (!string.IsNullOrEmpty(inItem.item_number))
                 query += "AND item_number ='" + inItem.item_number + "' ";
@@ -84,8 +84,8 @@ namespace PC_QRCodeSystem.Model
                 query += "AND supplier_invoice ='" + inItem.supplier_invoice + "' ";
             if (!string.IsNullOrEmpty(inItem.po_number))
                 query += "AND po_number ='" + inItem.po_number + "' ";
-            if (!string.IsNullOrEmpty(inItem.oder_number))
-                query += "AND oder_number ='" + inItem.oder_number + "' ";
+            if (!string.IsNullOrEmpty(inItem.order_number))
+                query += "AND order_number ='" + inItem.order_number + "' ";
             if (checkdate)
                 query += "AND delivery_date >='" + fromdate + "' AND delivery_date <='" + todate + "' ";
             //Execute reader for read database
@@ -105,7 +105,7 @@ namespace PC_QRCodeSystem.Model
                     po_number = reader["po_number"].ToString(),
                     delivery_qty = (double)reader["delivery_qty"],
                     delivery_date = (DateTime)reader["delivery_date"],
-                    oder_number = reader["oder_number"].ToString(),
+                    order_number = reader["order_number"].ToString(),
                     incharge = reader["incharge"].ToString()
                 };
                 //Add item into list
