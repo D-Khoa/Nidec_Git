@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConvertPremacFile.Model
 {
-    class pts_supplier
+    class pts_232
     {
     }
 }

@@ -8,9 +8,11 @@ namespace ConvertPremacFile
 {
     public partial class AddPremac649ToDB : Form
     {
+        #region SETTING FILE
         bool isStart = false;
         string settingfile = @"C:\ConvertPremac\setting.ini";
         pre_649 premacfile = new pre_649();
+        pre_212 premacfile212 = new pre_212();
         List<string> settingList { get; set; }
         List<ConvertLogs> dataLogs { get; set; }
 
@@ -21,7 +23,8 @@ namespace ConvertPremacFile
             settingList = new List<string>();
             dataLogs = new List<ConvertLogs>();
         }
-
+        #endregion
+        #region FORM LOAD
         private void AddPremac649ToDB_Load(object sender, EventArgs e)
         {
             if (File.Exists(settingfile))
@@ -30,6 +33,10 @@ namespace ConvertPremacFile
                 {
                     if (line.Contains("premac649URL"))
                         txtPremac649Path.Text = line.Split('=')[1].Trim();
+                    if (line.Contains("Premac212URL"))
+                        txtItem212.Text = line.Split('=')[1].Trim();
+                    if (line.Contains("Premac232URL"))
+                        txtSupplier232.Text = line.Split('=')[1].Trim();
                     if (line.Contains("log"))
                         dataLogs.Add(new ConvertLogs
                         {
@@ -40,7 +47,8 @@ namespace ConvertPremacFile
             }
             UpdateGrid();
         }
-
+        #endregion
+        #region CHOOSE FOLDER
         private void btnBrowser_Click(object sender, EventArgs e)
         {
             try
@@ -61,7 +69,53 @@ namespace ConvertPremacFile
                 MessageBox.Show(ex.Message);
             }
         }
+        private void btnBrowseritem_Click(object sender, EventArgs e)
+        {
 
+            try
+            {
+                OpenFileDialog openf = new OpenFileDialog();
+                openf.Filter = "Text file (*.txt)|*.txt|All file (*.*)|*.*";
+                openf.FileName = "CPBE0012.TXT";
+                openf.CheckFileExists = false;
+                openf.CheckPathExists = false;
+                openf.ValidateNames = true;
+                if (openf.ShowDialog() == DialogResult.OK)
+                {
+                    
+                     txtItem212.Text = openf.FileName;
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnSupplier_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openf = new OpenFileDialog();
+                openf.Filter = "Text file (*.txt)|*.txt|All file (*.*)|*.*";
+                openf.FileName = "CPBE0032.TXT";
+                openf.CheckFileExists = false;
+                openf.CheckPathExists = false;
+                openf.ValidateNames = true;
+                if (openf.ShowDialog() == DialogResult.OK)
+                {
+                    txtSupplier232.Text = openf.FileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+        #region BUTTON
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (isStart)
@@ -79,8 +133,10 @@ namespace ConvertPremacFile
         private void btnConvert_Click(object sender, EventArgs e)
         {
             AddPre649();
+            AddPre212();
         }
-
+        #endregion
+        #region TIMER
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (isStart)
@@ -89,14 +145,17 @@ namespace ConvertPremacFile
             }
             tsStatus.Text = DateTime.Now.ToString("HH:mm:ss");
         }
-
+        #endregion
+        #region FORM CLOSING
         private void AddPremac649ToDB_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (isStart) e.Cancel = true;
             else
             {
                 ConvertLogs error = new ConvertLogs();
-                settingList.Add("premac649URL =" + txtPremac649Path.Text);
+                settingList.Add("Premac649URL =" + txtPremac649Path.Text);
+                settingList.Add("Premac212URL=" + txtItem212.Text);
+                settingList.Add("Premac232URL=" + txtSupplier232.Text);
                 foreach (DataGridViewRow dr in dgvLogs.Rows)
                 {
                     error = dr.DataBoundItem as ConvertLogs;
@@ -112,21 +171,26 @@ namespace ConvertPremacFile
                 File.WriteAllLines(settingfile, settingList);
             }
         }
-
+        #endregion
+        #region SUB PROGRAM ADD PREMAC
         private void AddPre649()
         {
             try
             {
                 if (!string.IsNullOrEmpty(txtPremac649Path.Text))
                 {
-                    premacfile.GetListPremacItem(txtPremac649Path.Text);
-                    premacfile.DeleteFromDB();
-                    premacfile.WriteToDB(premacfile.listPremacItem);
-                    dataLogs.Add(new ConvertLogs
+                    string[] files = Directory.GetFiles(Path.GetDirectoryName(txtItem212.Text), "*CPFXE049*");
+                    foreach (string file in files)
                     {
-                        Log_Time = DateTime.Now,
-                        Log_Message = "Completed"
-                    });
+                        premacfile.GetListPremacItem(txtPremac649Path.Text);
+                        premacfile.DeleteFromDB();
+                        premacfile.WriteToDB(premacfile.listPremacItem);
+                        dataLogs.Add(new ConvertLogs
+                        {
+                            Log_Time = DateTime.Now,
+                            Log_Message = "Completed"
+                        });
+                    }
                 }
             }
             catch (Exception ex)
@@ -139,7 +203,38 @@ namespace ConvertPremacFile
             }
             UpdateGrid();
         }
-
+        private void AddPre212()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtItem212.Text))
+                {
+                    string[] files = Directory.GetFiles(Path.GetDirectoryName(txtItem212.Text), "*CPBE0012*");
+                    foreach (string file in files)
+                    {
+                        premacfile212.GetListItems(file);
+                        premacfile212.DeleteFromDB();
+                        premacfile212.WriteToDB(premacfile212.listItems);
+                        dataLogs.Add(new ConvertLogs
+                        {
+                            Log_Time = DateTime.Now,
+                            Log_Message = "Completed"
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dataLogs.Add(new ConvertLogs
+                {
+                    Log_Time = DateTime.Now,
+                    Log_Message = ex.Message
+                });
+            }
+            UpdateGrid();
+        }
+        #endregion
+        #region UPDATEGRID
         private void UpdateGrid()
         {
             dgvLogs.DataSource = null;
@@ -147,10 +242,13 @@ namespace ConvertPremacFile
             dgvLogs.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
     }
+    #endregion
+    #region CONVERT LOGS
     class ConvertLogs
     {
         public DateTime Log_Time { get; set; }
         public string Log_Message { get; set; }
     }
+    #endregion
 
 }
