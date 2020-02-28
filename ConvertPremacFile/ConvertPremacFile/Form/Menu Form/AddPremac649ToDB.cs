@@ -146,9 +146,12 @@ namespace ConvertPremacFile
         {
             if (isStart)
             {
-                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss")) AddPre649();
-                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss")) AddPre649();
-                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss")) AddPre649();
+                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss"))
+                {
+                    AddPre649();
+                    AddPre212();
+                    AddPre232();
+                }
             }
             tsStatus.Text = DateTime.Now.ToString("HH:mm:ss");
         }
