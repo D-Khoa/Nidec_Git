@@ -41,7 +41,7 @@ namespace PC_QRCodeSystem.View
             cmbSupplierCode.DataSource = ptssupllier.listSupplier;
             cmbSupplierCode.DisplayMember = "supplier_cd";
             cmbSupplierCode.ValueMember = "supplier_name";
-            cmbSupplierCode.Text = null;
+            cmbSupplierCode.Text = "";
 
         }
         private void SupplierForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -56,52 +56,40 @@ namespace PC_QRCodeSystem.View
             }
         }
         #endregion
-        private void cmbSupplierCode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(cmbSupplierCode.Text))
-                    txtSupplierName.Text = cmbSupplierCode.SelectedValue.ToString();
-                else
-                {
-                    txtSupplierName.Text = "Supplier Name";
-                    txtSupplierTelephone.Text = "Supplier Telephone";
-                    txtFaxNumber.Text = "Fax Number";
-                    txtSupplierAddress.Text = "Supplier Address";
 
-                }
-                }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
         private void cmbSupplierCode_TextChanged(object sender, EventArgs e)
         {
             txtSupplierName.BackColor = Color.White;
             if (string.IsNullOrEmpty(cmbSupplierCode.Text))
+            {
+                txtSupplierName.Text = "Supplier Name";
                 return;
+            }
             try
             {
-                txtSupplierName.Text = supplierData.GetSupplier(new pts_supplier
+                ptssupllier = supplierData.GetSupplier(new pts_supplier
                 {
                     supplier_id = 0,
-                    supplier_cd = cmbSupplierCode.Text
-                }).supplier_name;
+                    supplier_cd = cmbSupplierCode.Text,
+                });
+                txtSupplierName.Text = ptssupllier.supplier_name;
+                txtFaxNumber.Text = ptssupllier.supplier_fax;
+                txtSupplierTelephone.Text = ptssupllier.supplier_tel;
+                txtSupplierAddress.Text = ptssupllier.supplier_address;
                 txtSupplierName.BackColor = Color.Lime;
             }
             catch
             {
-                // cmbSupplierCode.BackColor = Color.Yellow;
                 txtSupplierName.Text = "";
                 txtSupplierName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
         }
+
+
         #region MAIN BUTTON
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            Searcheven();
+            Searcheven(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -130,10 +118,6 @@ namespace PC_QRCodeSystem.View
         {
             ClearOK();
 
-        }
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void btnOK_Click_1(object sender, EventArgs e)
@@ -246,11 +230,24 @@ namespace PC_QRCodeSystem.View
             cmbSupplierCode.ValueMember = "supplier_name";
             cmbSupplierCode.Text = null;
         }
-        private void Searcheven()
+        private void Searcheven(bool iSSearch)
         {
-            ptssupllier.GetListSupplier(string.Empty);
-            dgvDataSupllier.DataSource = null;
-            dgvDataSupllier.DataSource = ptssupllier.listSupplier;
+            if (iSSearch)
+            {
+                if (!string.IsNullOrEmpty(cmbSupplierCode.Text))
+                {
+                    ptssupllier.GetListSupplier(cmbSupplierCode.Text);
+                    dgvDataSupllier.DataSource = null;
+                    dgvDataSupllier.DataSource = ptssupllier.listSupplier;
+                }
+                else
+                {
+                    ptssupllier.GetListSupplier(string.Empty);
+                    dgvDataSupllier.DataSource = null;
+                    dgvDataSupllier.DataSource = ptssupllier.listSupplier;
+                }
+            }
+           
         }
         /// <summary>
         /// Lock Textbox
@@ -305,6 +302,6 @@ namespace PC_QRCodeSystem.View
         }
         #endregion
 
-       
+
     }
 }
