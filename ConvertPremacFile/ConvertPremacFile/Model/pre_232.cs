@@ -46,7 +46,7 @@ namespace ConvertPremacFile.Model
         }
         public void WriteToDB(IEnumerable<pre_232> listPremacitem)
         {
-            PostgreSQLCopyHelper<pre_232> coppyHelper = new PostgreSQLCopyHelper<pre_232>("pre_232")
+            PostgreSQLCopyHelper<pre_232> coppyHelper = new PostgreSQLCopyHelper<pre_232>("pts_supplier")
                                                               .MapVarchar("supplier_cd", x => x.supplier_cd)
                                                               .MapText("supplier_name", x => x.supplier_name)
                                                               .MapVarchar("supplier_tel", x => x.supplier_tel)
@@ -67,7 +67,7 @@ namespace ConvertPremacFile.Model
             using (NpgsqlConnection connection = new NpgsqlConnection(Properties.Settings.Default.CONNECTSTRING_MES))
             {
                 connection.Open();
-                command = new NpgsqlCommand("DELETE FROM pre_232", connection);
+                command = new NpgsqlCommand("DELETE FROM pts_supplier", connection);
                 result = command.ExecuteNonQuery();
                 connection.Close();
             }
