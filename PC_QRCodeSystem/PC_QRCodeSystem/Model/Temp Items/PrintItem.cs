@@ -16,6 +16,7 @@ namespace PC_QRCodeSystem.Model
         public double Delivery_Qty { get; set; }
         public string SupplierCD { get; set; }
         public string OrderNo { get; set; }
+        public string Remark { get; set; }
         public int Label_Qty { get; set; }
         public BindingList<PrintItem> ListPrintItem;
         public PrintItem()
@@ -55,17 +56,13 @@ namespace PC_QRCodeSystem.Model
             {
                 if (printOneCoppy)
                 {
-                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice,
-                         listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD,
-                         listPrintItem[i].OrderNo);
+                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].OrderNo, listPrintItem[i].Remark);
                 }
                 else
                 {
                     for (int j = 0; j < listPrintItem[i].Label_Qty; j++)
                     {
-                        TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice,
-                            listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD,
-                            listPrintItem[i].OrderNo);
+                        TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].OrderNo, listPrintItem[i].Remark);
                     }
                 }
             }
@@ -76,17 +73,13 @@ namespace PC_QRCodeSystem.Model
         {
             if (printOneCoppy)
             {
-                TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice,
-                     inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD,
-                     inItem.OrderNo);
+                TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice, inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD, inItem.OrderNo, inItem.Remark);
             }
             else
             {
                 for (int j = 0; j < inItem.Label_Qty; j++)
                 {
-                    TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice,
-                    inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD,
-                    inItem.OrderNo);
+                    TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice, inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD, inItem.OrderNo, inItem.Remark);
                 }
             }
             return true;
