@@ -82,11 +82,9 @@ namespace ConvertPremacFile
                 openf.ValidateNames = true;
                 if (openf.ShowDialog() == DialogResult.OK)
                 {
-                    
-                     txtItem212.Text = openf.FileName;
-                }
-                
 
+                    txtItem212.Text = openf.FileName;
+                }
             }
             catch (Exception ex)
             {
@@ -142,6 +140,8 @@ namespace ConvertPremacFile
             if (isStart)
             {
                 if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss")) AddPre649();
+                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss")) AddPre649();
+                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss")) AddPre649();
             }
             tsStatus.Text = DateTime.Now.ToString("HH:mm:ss");
         }
@@ -179,16 +179,16 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtPremac649Path.Text))
                 {
-                    string[] files = Directory.GetFiles(Path.GetDirectoryName(txtItem212.Text), "*CPFXE049*");
+                    string[] files = Directory.GetFiles(Path.GetDirectoryName(txtPremac649Path.Text), "*CPFXE049*");
                     foreach (string file in files)
                     {
-                        premacfile.GetListPremacItem(txtPremac649Path.Text);
+                        premacfile.GetListPremacItem(file);
                         premacfile.DeleteFromDB();
                         premacfile.WriteToDB(premacfile.listPremacItem);
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Completed"
+                            Log_Message = "Pre649 Add Completed"
                         });
                     }
                 }
@@ -203,6 +203,7 @@ namespace ConvertPremacFile
             }
             UpdateGrid();
         }
+
         private void AddPre212()
         {
             try
@@ -218,7 +219,38 @@ namespace ConvertPremacFile
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Completed"
+                            Log_Message = "Pre212 Add Completed"
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dataLogs.Add(new ConvertLogs
+                {
+                    Log_Time = DateTime.Now,
+                    Log_Message = ex.Message
+                });
+            }
+            UpdateGrid();
+        }
+
+        private void AddPre232()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtItem212.Text))
+                {
+                    string[] files = Directory.GetFiles(Path.GetDirectoryName(txtSupplier232.Text), "*CPBE0032*");
+                    foreach (string file in files)
+                    {
+                        premacfile232.GetListItems(file);
+                        premacfile232.DeleteFromDB();
+                        premacfile232.WriteToDB(premacfile232.listItems);
+                        dataLogs.Add(new ConvertLogs
+                        {
+                            Log_Time = DateTime.Now,
+                            Log_Message = "Pre232 Add Completed"
                         });
                     }
                 }
@@ -250,5 +282,4 @@ namespace ConvertPremacFile
         public string Log_Message { get; set; }
     }
     #endregion
-
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tc_Main = new System.Windows.Forms.TabControl();
             this.tab_NoPlan = new System.Windows.Forms.TabPage();
             this.dgvNoPlan = new System.Windows.Forms.DataGridView();
@@ -132,7 +132,7 @@
             this.tc_Main.Margin = new System.Windows.Forms.Padding(4);
             this.tc_Main.Name = "tc_Main";
             this.tc_Main.SelectedIndex = 0;
-            this.tc_Main.Size = new System.Drawing.Size(716, 526);
+            this.tc_Main.Size = new System.Drawing.Size(734, 526);
             this.tc_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tc_Main.TabIndex = 22;
             // 
@@ -145,7 +145,7 @@
             this.tab_NoPlan.Margin = new System.Windows.Forms.Padding(4);
             this.tab_NoPlan.Name = "tab_NoPlan";
             this.tab_NoPlan.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_NoPlan.Size = new System.Drawing.Size(708, 494);
+            this.tab_NoPlan.Size = new System.Drawing.Size(726, 494);
             this.tab_NoPlan.TabIndex = 0;
             this.tab_NoPlan.Text = "No Planned";
             this.tab_NoPlan.UseVisualStyleBackColor = true;
@@ -164,18 +164,18 @@
             this.dgvNoPlan.MultiSelect = false;
             this.dgvNoPlan.Name = "dgvNoPlan";
             this.dgvNoPlan.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvNoPlan.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvNoPlan.Size = new System.Drawing.Size(700, 206);
+            this.dgvNoPlan.Size = new System.Drawing.Size(718, 206);
             this.dgvNoPlan.TabIndex = 6;
             // 
             // panel5
@@ -187,7 +187,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(4, 224);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(700, 60);
+            this.panel5.Size = new System.Drawing.Size(718, 60);
             this.panel5.TabIndex = 8;
             // 
             // btnNoplanClear
@@ -258,7 +258,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(4, 4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(700, 220);
+            this.panel6.Size = new System.Drawing.Size(718, 220);
             this.panel6.TabIndex = 9;
             // 
             // label5
@@ -299,7 +299,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(480, 40);
+            this.label3.Location = new System.Drawing.Point(500, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 20);
             this.label3.TabIndex = 34;
@@ -345,6 +345,7 @@
             this.cmbNoPlanIssueCD.Name = "cmbNoPlanIssueCD";
             this.cmbNoPlanIssueCD.Size = new System.Drawing.Size(350, 24);
             this.cmbNoPlanIssueCD.TabIndex = 28;
+            this.cmbNoPlanIssueCD.SelectedIndexChanged += new System.EventHandler(this.cmbNoPlanIssueCD_SelectedIndexChanged);
             this.cmbNoPlanIssueCD.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbNoPlanIssueCD_Format);
             // 
             // label13
@@ -449,6 +450,7 @@
             this.cmbNoPlanDestinationCD.Name = "cmbNoPlanDestinationCD";
             this.cmbNoPlanDestinationCD.Size = new System.Drawing.Size(350, 24);
             this.cmbNoPlanDestinationCD.TabIndex = 2;
+            this.cmbNoPlanDestinationCD.SelectedIndexChanged += new System.EventHandler(this.cmbNoPlanDestinationCD_SelectedIndexChanged);
             this.cmbNoPlanDestinationCD.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbNoPlanDestinationCD_Format);
             // 
             // txtBarcode
@@ -470,7 +472,7 @@
             // 
             // txtNoPlanComment
             // 
-            this.txtNoPlanComment.Location = new System.Drawing.Point(480, 70);
+            this.txtNoPlanComment.Location = new System.Drawing.Point(500, 70);
             this.txtNoPlanComment.Multiline = true;
             this.txtNoPlanComment.Name = "txtNoPlanComment";
             this.txtNoPlanComment.Size = new System.Drawing.Size(200, 140);
@@ -483,7 +485,7 @@
             this.tab_Plan.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Plan.Name = "tab_Plan";
             this.tab_Plan.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Plan.Size = new System.Drawing.Size(708, 494);
+            this.tab_Plan.Size = new System.Drawing.Size(726, 494);
             this.tab_Plan.TabIndex = 1;
             this.tab_Plan.Text = "Plan";
             this.tab_Plan.UseVisualStyleBackColor = true;
@@ -512,7 +514,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(4, 4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(700, 200);
+            this.panel4.Size = new System.Drawing.Size(718, 200);
             this.panel4.TabIndex = 9;
             // 
             // label12
@@ -698,7 +700,7 @@
             this.tab_Request.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Request.Name = "tab_Request";
             this.tab_Request.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Request.Size = new System.Drawing.Size(708, 494);
+            this.tab_Request.Size = new System.Drawing.Size(726, 494);
             this.tab_Request.TabIndex = 2;
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
@@ -713,7 +715,7 @@
             this.dgvStockOut.Margin = new System.Windows.Forms.Padding(4);
             this.dgvStockOut.Name = "dgvStockOut";
             this.dgvStockOut.ReadOnly = true;
-            this.dgvStockOut.Size = new System.Drawing.Size(700, 424);
+            this.dgvStockOut.Size = new System.Drawing.Size(718, 424);
             this.dgvStockOut.TabIndex = 23;
             // 
             // pnlButtons
@@ -727,7 +729,7 @@
             this.pnlButtons.Location = new System.Drawing.Point(4, 4);
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(700, 62);
+            this.pnlButtons.Size = new System.Drawing.Size(718, 62);
             this.pnlButtons.TabIndex = 22;
             // 
             // btnSearch
@@ -794,7 +796,7 @@
             this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Inspection.Name = "tab_Inspection";
             this.tab_Inspection.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Inspection.Size = new System.Drawing.Size(708, 494);
+            this.tab_Inspection.Size = new System.Drawing.Size(726, 494);
             this.tab_Inspection.TabIndex = 3;
             this.tab_Inspection.Text = "Inspection";
             this.tab_Inspection.UseVisualStyleBackColor = true;
@@ -811,7 +813,7 @@
             this.dgvPrintList.ReadOnly = true;
             this.dgvPrintList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvPrintList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrintList.Size = new System.Drawing.Size(700, 346);
+            this.dgvPrintList.Size = new System.Drawing.Size(718, 346);
             this.dgvPrintList.TabIndex = 12;
             // 
             // dgvProcess
@@ -825,7 +827,7 @@
             this.dgvProcess.Name = "dgvProcess";
             this.dgvProcess.ReadOnly = true;
             this.dgvProcess.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvProcess.Size = new System.Drawing.Size(700, 80);
+            this.dgvProcess.Size = new System.Drawing.Size(718, 80);
             this.dgvProcess.TabIndex = 10;
             // 
             // panel1
@@ -838,12 +840,12 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(700, 60);
+            this.panel1.Size = new System.Drawing.Size(718, 60);
             this.panel1.TabIndex = 9;
             // 
             // btnInspectionBack
             // 
-            this.btnInspectionBack.Location = new System.Drawing.Point(570, 5);
+            this.btnInspectionBack.Location = new System.Drawing.Point(578, 5);
             this.btnInspectionBack.Name = "btnInspectionBack";
             this.btnInspectionBack.Size = new System.Drawing.Size(80, 50);
             this.btnInspectionBack.TabIndex = 7;
@@ -853,7 +855,7 @@
             // 
             // btnPrintManual
             // 
-            this.btnPrintManual.Location = new System.Drawing.Point(310, 5);
+            this.btnPrintManual.Location = new System.Drawing.Point(314, 5);
             this.btnPrintManual.Name = "btnPrintManual";
             this.btnPrintManual.Size = new System.Drawing.Size(80, 50);
             this.btnPrintManual.TabIndex = 6;
@@ -863,7 +865,7 @@
             // 
             // btnInspectionClear
             // 
-            this.btnInspectionClear.Location = new System.Drawing.Point(440, 5);
+            this.btnInspectionClear.Location = new System.Drawing.Point(446, 5);
             this.btnInspectionClear.Name = "btnInspectionClear";
             this.btnInspectionClear.Size = new System.Drawing.Size(80, 50);
             this.btnInspectionClear.TabIndex = 5;
@@ -873,7 +875,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(180, 5);
+            this.btnPrint.Location = new System.Drawing.Point(182, 5);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(80, 50);
             this.btnPrint.TabIndex = 3;
@@ -899,14 +901,14 @@
             this.tsRows});
             this.statusStrip1.Location = new System.Drawing.Point(150, 596);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(716, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(734, 22);
             this.statusStrip1.TabIndex = 23;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(624, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(642, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -925,7 +927,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(866, 618);
+            this.ClientSize = new System.Drawing.Size(884, 618);
             this.Controls.Add(this.tc_Main);
             this.Controls.Add(this.statusStrip1);
             this.dept = "";

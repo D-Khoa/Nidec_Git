@@ -62,9 +62,6 @@ namespace ConvertPremacFile.Model
                                                               .MapDouble("wip_qty", x => x.wip_qty)
                                                               .MapDouble("repair_qty", x => x.repair_qty)
                                                               .MapVarchar("registration_user_cd", x => x.registration_user_cd);
-
-                                                              //.MapVarchar("oder_number", x => x.oder_number)
-                                                              //.MapVarchar("incharge", x => x.incharge);
             using (NpgsqlConnection connection = new NpgsqlConnection(Properties.Settings.Default.CONNECTSTRING_MES))
             {
                 connection.Open();

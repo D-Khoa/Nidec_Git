@@ -63,14 +63,41 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                #region CHECK INFO BEFORE ADD ITEM
+                //Check item empty
+                if (string.IsNullOrEmpty(txtNoPlanItemCD.Text))
+                {
+                    CustomMessageBox.Notice("Item can't empty! Please check and scan barcode again!");
+                    return;
+                }
+                //Check issue code empty
+                if (string.IsNullOrEmpty(cmbNoPlanIssueCD.Text))
+                {
+                    errorProvider.SetError(cmbNoPlanIssueCD, "Please choose issue code!");
+                    return;
+                }
+                //Check destination empty
+                if (string.IsNullOrEmpty(cmbNoPlanDestinationCD.Text))
+                {
+                    errorProvider.SetError(cmbNoPlanDestinationCD, "Please choose destination!");
+                    return;
+                }
+                //Check user code empty
+                if (string.IsNullOrEmpty(txtNoPlanUserCD.Text))
+                {
+                    errorProvider.SetError(txtNoPlanUserCD, "Please fill user code!");
+                    return;
+                }
+                //Check stock-in-hand qty
                 if (double.Parse(txtNoPlanWHQty.Text) == 0)
                 {
                     CustomMessageBox.Notice("Don't have item in stock. Please check and try again!");
                     return;
                 }
+                //Check stock-out qty
                 if (string.IsNullOrEmpty(txtNoPlanStockOutQty.Text) || double.Parse(txtNoPlanStockOutQty.Text) == 0)
                 {
-                    CustomMessageBox.Notice("Please choose stock-out qty!");
+                    CustomMessageBox.Notice("Please fill stock-out qty!");
                     return;
                 }
                 double temp;
@@ -88,6 +115,8 @@ namespace PC_QRCodeSystem.View
                     if (CustomMessageBox.Warring("Stock-out qty is over than stock-in-hand qty!" + Environment.NewLine + "Are you sure to continue?") == DialogResult.No)
                         return;
                 }
+                #endregion
+
                 if (CustomMessageBox.Question("Are you sure add this stock-out item?") == DialogResult.No) return;
 
                 #region ADD NEW NO-PLAN
@@ -154,6 +183,7 @@ namespace PC_QRCodeSystem.View
                     });
                     #endregion
 
+                    #region CALC AND ADD LIST STOCK ITEM
                     //Calculator pack qty in stock
                     stockData.packing_qty = stockData.packing_qty - temp;
                     listStock.Add(stockData);
@@ -173,6 +203,8 @@ namespace PC_QRCodeSystem.View
                             Label_Qty = 1
                         });
                     }
+                    #endregion
+
                     //If get enough stock-out qty then break
                     if (stockOutQty == 0) break;
                 }
@@ -265,6 +297,18 @@ namespace PC_QRCodeSystem.View
                                            Environment.NewLine + ex.Message);
                 }
             }
+        }
+
+        private void cmbNoPlanIssueCD_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbNoPlanIssueCD.Text))
+                errorProvider.SetError(cmbNoPlanIssueCD, null);
+        }
+
+        private void cmbNoPlanDestinationCD_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbNoPlanDestinationCD.Text))
+                errorProvider.SetError(cmbNoPlanDestinationCD, null);
         }
 
         private void txtNoPlanStockOutQty_KeyPress(object sender, KeyPressEventArgs e)
