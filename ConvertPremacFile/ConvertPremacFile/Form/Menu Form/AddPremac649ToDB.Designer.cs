@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddPremac649ToDB));
             this.txtPremac649Path = new System.Windows.Forms.TextBox();
             this.btnBrowser = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,6 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dgvLogs = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
             this.btnSupplier = new System.Windows.Forms.Button();
             this.txtSupplier232 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -80,7 +82,7 @@
             // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(302, 134);
+            this.btnConvert.Location = new System.Drawing.Point(210, 134);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(80, 50);
             this.btnConvert.TabIndex = 3;
@@ -90,7 +92,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(202, 134);
+            this.btnStart.Location = new System.Drawing.Point(120, 134);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(80, 50);
             this.btnStart.TabIndex = 4;
@@ -154,6 +156,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnClear);
             this.panel1.Controls.Add(this.btnSupplier);
             this.panel1.Controls.Add(this.txtSupplier232);
             this.panel1.Controls.Add(this.label4);
@@ -172,6 +175,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(388, 197);
             this.panel1.TabIndex = 9;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(300, 134);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(80, 50);
+            this.btnClear.TabIndex = 14;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSupplier
             // 
@@ -233,8 +246,9 @@
             this.Controls.Add(this.dgvLogs);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddPremac649ToDB";
-            this.Text = "AddPremac649ToDB";
+            this.Text = "Add Premac To Database";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddPremac649ToDB_FormClosing);
             this.Load += new System.EventHandler(this.AddPremac649ToDB_Load);
             this.statusStrip1.ResumeLayout(false);
@@ -267,5 +281,6 @@
         private System.Windows.Forms.Button btnBrowseritem;
         private System.Windows.Forms.TextBox txtItem212;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnClear;
     }
 }

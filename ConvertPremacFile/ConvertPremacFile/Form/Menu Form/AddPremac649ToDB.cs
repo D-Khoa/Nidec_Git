@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using ConvertPremacFile.Model;
 
@@ -13,6 +14,8 @@ namespace ConvertPremacFile
         string settingfile = @"C:\ConvertPremac\setting.ini";
         pre_649 premacfile = new pre_649();
         pre_212 premacfile212 = new pre_212();
+        pre_232 premacfile232 = new pre_232();
+        
         List<string> settingList { get; set; }
         List<ConvertLogs> dataLogs { get; set; }
 
@@ -31,7 +34,7 @@ namespace ConvertPremacFile
             {
                 foreach (string line in File.ReadLines(settingfile))
                 {
-                    if (line.Contains("premac649URL"))
+                    if (line.Contains("Premac649URL"))
                         txtPremac649Path.Text = line.Split('=')[1].Trim();
                     if (line.Contains("Premac212URL"))
                         txtItem212.Text = line.Split('=')[1].Trim();
@@ -131,7 +134,11 @@ namespace ConvertPremacFile
         private void btnConvert_Click(object sender, EventArgs e)
         {
             AddPre649();
+            Thread.Sleep(3000);
             AddPre212();
+            Thread.Sleep(3000);
+            AddPre232();
+            Thread.Sleep(3000);
         }
         #endregion
         #region TIMER
@@ -239,14 +246,14 @@ namespace ConvertPremacFile
         {
             try
             {
-                if (!string.IsNullOrEmpty(txtItem212.Text))
+                if (!string.IsNullOrEmpty(txtSupplier232.Text))
                 {
                     string[] files = Directory.GetFiles(Path.GetDirectoryName(txtSupplier232.Text), "*CPBE0032*");
                     foreach (string file in files)
                     {
                         premacfile232.GetListItems(file);
                         premacfile232.DeleteFromDB();
-                        premacfile232.WriteToDB(premacfile232.listItems);
+                        premacfile232.WriteToDB(premacfile232.listSupplier);
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
@@ -272,6 +279,12 @@ namespace ConvertPremacFile
             dgvLogs.DataSource = null;
             dgvLogs.DataSource = dataLogs;
             dgvLogs.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            dgvLogs.DataSource = null;
+            dataLogs.Clear();
         }
     }
     #endregion

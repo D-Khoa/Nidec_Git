@@ -19,7 +19,7 @@ namespace ConvertPremacFile.Model
         public string po_number { get; set; }
         public double delivery_qty { get; set; }
         public DateTime delivery_date { get; set; }
-        public string odrer_number { get; set; }
+        public string order_number { get; set; }
         public string incharge { get; set; }
         public List<pre_649> listPremacItem;
         public pre_649()
@@ -44,7 +44,7 @@ namespace ConvertPremacFile.Model
                                                    item_number = Regex.Replace(columns[2], " {2,}", " ").Trim(),
                                                    item_name = Regex.Replace(columns[3], " {2,}", " ").Trim(),
                                                    po_number = Regex.Replace(columns[4], " {2,}", " ").Trim(),
-                                                   odrer_number = Regex.Replace(columns[5], " {2,}", " ").Trim(),
+                                                   order_number = Regex.Replace(columns[5], " {2,}", " ").Trim(),
                                                    supplier_cd = Regex.Replace(columns[0], " {2,}", " ").Trim(),
                                                    supplier_name = Regex.Replace(columns[1], " {2,}", " ").Trim(),
                                                    supplier_invoice = Regex.Replace(columns[29], " {2,}", " ").Trim(),
@@ -71,7 +71,7 @@ namespace ConvertPremacFile.Model
                                                               .MapVarchar("po_number", x => x.po_number)
                                                               .MapDouble("delivery_qty", x => x.delivery_qty)
                                                               .MapDate("delivery_date", x => x.delivery_date)
-                                                              .MapVarchar("oder_number", x => x.odrer_number)
+                                                              .MapVarchar("order_number", x => x.order_number)
                                                               .MapVarchar("incharge", x => x.incharge);
             using (NpgsqlConnection connection = new NpgsqlConnection(Properties.Settings.Default.CONNECTSTRING_MES))
             {
