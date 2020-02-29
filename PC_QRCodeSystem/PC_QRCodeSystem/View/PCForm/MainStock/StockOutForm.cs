@@ -13,7 +13,7 @@ namespace PC_QRCodeSystem.View
         #region VARIABLE
         private PrintItem printData { get; set; }
         private List<PrintItem> listPrintItems { get; set; }
-
+        private OutputItem outData { get; set; }
         private pts_stock stockData { get; set; }
         private List<pts_stock> listStock { get; set; }
 
@@ -38,6 +38,7 @@ namespace PC_QRCodeSystem.View
             tc_Main.ItemSize = new Size(0, 1);
             supplierData = new pts_supplier();
             printData = new PrintItem();
+            outData = new OutputItem();
             itemData = new pts_item();
             stockData = new pts_stock();
             mUserData = new m_mes_user();
@@ -180,6 +181,20 @@ namespace PC_QRCodeSystem.View
                         SupplierCD = supplierData.supplier_cd,
                         OrderNo = stockData.order_no,
                         Label_Qty = 1
+                    });
+                    //Add Output item
+                    outData.listOutputItem.Add(new OutputItem
+                    {
+                        issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
+                        item_number = txtNoPlanItemCD.Text,
+                        item_name = itemData.item_name,
+                        supplier_cd = supplierData.supplier_cd,
+                        supplier_name = supplierData.supplier_name,
+                        supplier_invoice = txtNoPlanInvoice.Text,
+                        order_number = stockData.order_no,
+                        delivery_date = dtpNoPlanStockOutDate.Value,
+                        delivery_qty = temp,
+                        incharge = txtNoPlanUserCD.Text,
                     });
                     #endregion
 
@@ -404,6 +419,7 @@ namespace PC_QRCodeSystem.View
                 if (listStockOut.Count > 0)
                 {
                     n = stockOutData.AddMultiItem(listStockOut);
+                    outData.ExportCSV(outData.listOutputItem);
                     CustomMessageBox.Notice("Add " + n + " Stock-Out logs!");
                 }
                 //Update packing qty of stock item in DB
