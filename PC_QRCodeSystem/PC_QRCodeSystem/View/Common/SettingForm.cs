@@ -44,6 +44,19 @@ namespace PC_QRCodeSystem.View
                 txtPremacFolder.Text = openDialog.FileName;
         }
 
+        private void btnBrowserOutput_Click(object sender, EventArgs e)
+        {
+            //Create open file dialog for get premac file url
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.ValidateNames = true;
+            openDialog.CheckPathExists = false;
+            openDialog.CheckFileExists = false;
+            openDialog.FileName = "Output Folder";
+            openDialog.Filter = "Text File (*.txt)|*.txt|All file (*.*)|*.*";
+            if (openDialog.ShowDialog() == DialogResult.OK)
+                txtOutputFolder.Text = Path.GetDirectoryName(openDialog.FileName);
+        }
+
         private void btnPrinterCheck_Click(object sender, EventArgs e)
         {
             //Check status of printer
@@ -63,10 +76,10 @@ namespace PC_QRCodeSystem.View
         {
             printItem.PrintAnItem(new PrintItem
             {
-                Item_Number = "XXXXXXXXXX",
-                Item_Name = "YYYYYYYYYY",
-                SupplierName = "SSSSSSSSSS",
-                Invoice = "ZZZZZZZZZZ",
+                Item_Number = "ABC-123",
+                Item_Name = "XXX YYY ZZZ",
+                SupplierName = "Abcde fghij klmno pqrst uvwyz",
+                Invoice = "ABC0123456",
                 Delivery_Date = DateTime.Parse("2020-02-20"),
                 Delivery_Qty = 1000000,
                 Label_Qty = 1
@@ -82,6 +95,7 @@ namespace PC_QRCodeSystem.View
         private void btnOK_Click(object sender, EventArgs e)
         {
             //Save and exit setting form
+            settingItem.outputTempFolder = txtOutputFolder.Text;
             settingItem.premacFolder = txtPremacFolder.Text;
             settingItem.printerName = cmbPrinter.Text;
             settingItem.SaveSetting();
@@ -110,6 +124,7 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         private void SetField()
         {
+            txtOutputFolder.Text = settingItem.outputTempFolder;
             txtPremacFolder.Text = settingItem.premacFolder;
             cmbPrinter.Text = settingItem.printerName;
         }

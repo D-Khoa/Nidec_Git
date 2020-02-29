@@ -35,7 +35,7 @@ namespace PC_QRCodeSystem.View
         public StockOutForm()
         {
             InitializeComponent();
-            //tc_Main.ItemSize = new Size(0, 1);
+            tc_Main.ItemSize = new Size(0, 1);
             supplierData = new pts_supplier();
             printData = new PrintItem();
             itemData = new pts_item();

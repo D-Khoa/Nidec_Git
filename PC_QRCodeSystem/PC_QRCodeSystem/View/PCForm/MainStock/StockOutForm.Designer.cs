@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tc_Main = new System.Windows.Forms.TabControl();
             this.tab_NoPlan = new System.Windows.Forms.TabPage();
             this.dgvNoPlan = new System.Windows.Forms.DataGridView();
@@ -155,8 +155,6 @@
             // 
             this.dgvNoPlan.AllowUserToAddRows = false;
             this.dgvNoPlan.AllowUserToDeleteRows = false;
-            this.dgvNoPlan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvNoPlan.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
             this.dgvNoPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNoPlan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvNoPlan.Location = new System.Drawing.Point(4, 284);
@@ -164,17 +162,16 @@
             this.dgvNoPlan.MultiSelect = false;
             this.dgvNoPlan.Name = "dgvNoPlan";
             this.dgvNoPlan.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvNoPlan.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvNoPlan.Size = new System.Drawing.Size(718, 206);
             this.dgvNoPlan.TabIndex = 6;
             // 
@@ -805,8 +802,6 @@
             // 
             this.dgvPrintList.AllowUserToAddRows = false;
             this.dgvPrintList.AllowUserToDeleteRows = false;
-            this.dgvPrintList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvPrintList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPrintList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPrintList.Location = new System.Drawing.Point(4, 144);
             this.dgvPrintList.Name = "dgvPrintList";
@@ -820,8 +815,6 @@
             // 
             this.dgvProcess.AllowUserToAddRows = false;
             this.dgvProcess.AllowUserToDeleteRows = false;
-            this.dgvProcess.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvProcess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProcess.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvProcess.Location = new System.Drawing.Point(4, 64);
             this.dgvProcess.Name = "dgvProcess";

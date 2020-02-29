@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlOption = new System.Windows.Forms.Panel();
             this.btnMainClear = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -67,6 +67,8 @@
             this.tab_Inspection = new System.Windows.Forms.TabPage();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.txtPO = new System.Windows.Forms.TextBox();
+            this.lbPO = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.btnInspectionClear = new System.Windows.Forms.Button();
@@ -91,8 +93,6 @@
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtPO = new System.Windows.Forms.TextBox();
-            this.lbPO = new System.Windows.Forms.Label();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -298,23 +298,21 @@
             // 
             this.dgvPreInput.AllowUserToAddRows = false;
             this.dgvPreInput.AllowUserToDeleteRows = false;
-            this.dgvPreInput.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvPreInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPreInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPreInput.Location = new System.Drawing.Point(4, 219);
             this.dgvPreInput.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPreInput.Name = "dgvPreInput";
             this.dgvPreInput.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvPreInput.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPreInput.RowHeadersVisible = false;
             this.dgvPreInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPreInput.Size = new System.Drawing.Size(898, 220);
             this.dgvPreInput.TabIndex = 3;
@@ -514,7 +512,6 @@
             // 
             this.dgvInspection.AllowUserToAddRows = false;
             this.dgvInspection.AllowUserToDeleteRows = false;
-            this.dgvInspection.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvInspection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInspection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInspection.Location = new System.Drawing.Point(4, 134);
@@ -544,6 +541,28 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(898, 130);
             this.panel4.TabIndex = 0;
+            // 
+            // txtPO
+            // 
+            this.txtPO.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPO.Location = new System.Drawing.Point(660, 40);
+            this.txtPO.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPO.Name = "txtPO";
+            this.txtPO.Size = new System.Drawing.Size(120, 23);
+            this.txtPO.TabIndex = 25;
+            this.txtPO.Visible = false;
+            // 
+            // lbPO
+            // 
+            this.lbPO.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPO.Location = new System.Drawing.Point(660, 10);
+            this.lbPO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbPO.Name = "lbPO";
+            this.lbPO.Size = new System.Drawing.Size(100, 30);
+            this.lbPO.TabIndex = 26;
+            this.lbPO.Text = "PO";
+            this.lbPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbPO.Visible = false;
             // 
             // label1
             // 
@@ -676,7 +695,6 @@
             // 
             this.dgvPrintList.AllowUserToAddRows = false;
             this.dgvPrintList.AllowUserToDeleteRows = false;
-            this.dgvPrintList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPrintList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPrintList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPrintList.Location = new System.Drawing.Point(4, 64);
@@ -808,28 +826,6 @@
             this.tsTotalQty.Name = "tsTotalQty";
             this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
             this.tsTotalQty.Text = "None";
-            // 
-            // txtPO
-            // 
-            this.txtPO.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPO.Location = new System.Drawing.Point(660, 40);
-            this.txtPO.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPO.Name = "txtPO";
-            this.txtPO.Size = new System.Drawing.Size(120, 23);
-            this.txtPO.TabIndex = 25;
-            this.txtPO.Visible = false;
-            // 
-            // lbPO
-            // 
-            this.lbPO.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPO.Location = new System.Drawing.Point(660, 10);
-            this.lbPO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbPO.Name = "lbPO";
-            this.lbPO.Size = new System.Drawing.Size(100, 30);
-            this.lbPO.TabIndex = 26;
-            this.lbPO.Text = "PO";
-            this.lbPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lbPO.Visible = false;
             // 
             // StockInputForm
             // 

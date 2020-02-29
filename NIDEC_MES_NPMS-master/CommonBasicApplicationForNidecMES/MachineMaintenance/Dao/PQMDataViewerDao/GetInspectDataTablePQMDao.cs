@@ -21,7 +21,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
             //SELECT TABLE FOLLOW DATETIME
             foreach (string table in InVo.SernoDBList)
             {
-                sql.Append("select serno, inspectdate, inspect, inspectdata from "
+                sql.Append("select serno, inspectdate, inspect, judge from "
                             + table + "data where inspect in (" + InVo.InspectList.ToString() + ")");
                 if (InVo.SernoList.Length > 0)
                 {

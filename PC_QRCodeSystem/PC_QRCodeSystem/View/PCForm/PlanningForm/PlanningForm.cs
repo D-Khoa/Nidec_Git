@@ -44,7 +44,8 @@ namespace PC_QRCodeSystem.View
         #region BUTTONS EVENT
         private void btnOpenPlan_Click(object sender, EventArgs e)
         {
-
+            PlanItemForm planFrm = new PlanItemForm(dgvPlanData.Rows[dgvPlanData.SelectedCells[0].RowIndex].DataBoundItem as pts_plan);
+            planFrm.Show();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -159,18 +160,25 @@ namespace PC_QRCodeSystem.View
             try
             {
                 modelData = modelData.GetItem(txtModelCD.Text);
-                if (modelData.type_id != 0)
-                    errorProvider.SetError(txtModelCD, "This item is not type 0 item!");
-                lbModelName.Text = modelData.item_name;
-                lbModelName.BackColor = Color.Lime;
-                stockData = stockData.GetItem(new pts_stock { item_cd = txtModelCD.Text }, false);
-                if (!string.IsNullOrEmpty(stockData.order_no)) txtSetNumber.Text = stockData.order_no;
-                else txtSetNumber.Text = "None";
             }
             catch
             {
                 errorProvider.SetError(txtModelCD, "Wrong Model Code");
             }
+            if (modelData.type_id != 0)
+                errorProvider.SetError(txtModelCD, "This item is not type 0 item!");
+            lbModelName.Text = modelData.item_name;
+            lbModelName.BackColor = Color.Lime;
+            try
+            {
+                stockData = stockData.GetItem(new pts_stock { item_cd = txtModelCD.Text }, false);
+            }
+            catch
+            {
+                errorProvider.SetError(txtModelCD, "No Item in stock");
+            }
+            if (!string.IsNullOrEmpty(stockData.order_no)) txtSetNumber.Text = stockData.order_no;
+            else txtSetNumber.Text = "None";
         }
 
         private void cmbDestinationCD_SelectedIndexChanged(object sender, EventArgs e)

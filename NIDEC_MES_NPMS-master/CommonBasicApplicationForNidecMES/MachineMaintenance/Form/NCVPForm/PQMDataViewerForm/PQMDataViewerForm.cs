@@ -235,7 +235,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 Vo.SernoDataTable = sernotable.SernoDataTable;
                 DataTable pivot = new DataTable();
                 pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
-                        , Vo.InspectDataTable.Columns["inspectdata"]);
+                        , Vo.InspectDataTable.Columns["judge"]);
                 Vo.JoinedTable = LinQ_Class.Joined(Vo.SernoDataTable, pivot);
                 pivot.Clear();
                 Vo.ThreadComplete = true;

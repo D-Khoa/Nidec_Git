@@ -4,7 +4,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -119,7 +118,23 @@ namespace PC_QRCodeSystem.Model
 
         public void ExportCSV(List<pre_649> inList)
         {
-
+            var properties = inList[0].GetType().GetProperties();
+            string filename = @"\Input649_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            using (StreamWriter sw = new StreamWriter(SettingItem.outputFolder + filename))
+            {
+                string line = string.Empty;
+                //Write columns
+                line = string.Join("|", properties.Select(x => x.Name));
+                sw.WriteLine(line);
+                for (int i = 0; i < inList.Count; i++)
+                {
+                    var propretiesValue = inList[i].GetType().GetProperties();
+                    line = string.Join("|", propretiesValue.Select(x => x.GetValue(inList[i], null)));
+                    sw.WriteLine(line);
+                }
+                sw.Flush();
+                sw.Close();
+            }
         }
     }
 }
