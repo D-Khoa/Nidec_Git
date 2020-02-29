@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -13,6 +14,7 @@ namespace PC_QRCodeSystem.View
         pts_item locationCbm { get; set; }
         pts_item_type typeCbm { get; set; }
         pts_item_type ptsItemType { get; set; }
+
         #endregion
 
         public ItemManagement()
@@ -47,7 +49,15 @@ namespace PC_QRCodeSystem.View
                 {
                     //Get item name and show it
                     if (!string.IsNullOrEmpty(txtItem.Text))
-                        txtItemName.Text = ptsItem.GetItem(txtItem.Text).item_name;
+                    {
+                        ptsItem = ptsItem.GetItem(txtItem.Text);
+                        txtItem.Text = ptsItem.item_cd;
+                        txtItemName.Text = ptsItem.item_name;
+                        cmbLocation.Text = ptsItem.item_location;
+                        cmbUnitCode.Text = ptsItem.item_unit;
+                        cmbItemType.Text = ptsItem.type_id.ToString();
+                        UpdateGrid(ptsItem);
+                    }
                     else
                         txtItemName.Text = "Item Name";
                 }
@@ -192,7 +202,9 @@ namespace PC_QRCodeSystem.View
                     dgvData.Columns["repair_qty"].HeaderText = "Repair Qty";
                     dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
                     dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
-                    UpdateGrid(0);
+                    if (dgvData.SelectedCells.Count > 0)
+                        UpdateGrid(dgvData.Rows[0].DataBoundItem as pts_item);
+                    tsNumberTotal.Text = dgvData.Rows.Count.ToString();
                 }
                 //Search and get item type list
                 if (rbtnItemType.Checked)
@@ -214,15 +226,12 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void UpdateGrid(int rowIndex)
+        private void UpdateGrid(pts_item inItem)
         {
-            if (dgvData.SelectedCells.Count > 0)
-            {
-                dgvItemQty.Rows[0].Cells["lot_size"].Value = dgvData.Rows[rowIndex].Cells["lot_size"].Value;
-                dgvItemQty.Rows[0].Cells["wh_qty"].Value = dgvData.Rows[rowIndex].Cells["wh_qty"].Value;
-                dgvItemQty.Rows[0].Cells["wip_qty"].Value = dgvData.Rows[rowIndex].Cells["wip_qty"].Value;
-                dgvItemQty.Rows[0].Cells["repair_qty"].Value = dgvData.Rows[rowIndex].Cells["repair_qty"].Value;
-            }
+            dgvItemQty.Rows[0].Cells["lot_size"].Value = inItem.lot_size;
+            dgvItemQty.Rows[0].Cells["wh_qty"].Value = inItem.wh_qty;
+            dgvItemQty.Rows[0].Cells["wip_qty"].Value = inItem.wip_qty;
+            dgvItemQty.Rows[0].Cells["repair_qty"].Value = inItem.repair_qty;
         }
 
         /// <summary>
@@ -435,7 +444,7 @@ namespace PC_QRCodeSystem.View
                     cmbLocation.Text = ptsItem.item_location;
                     cmbUnitCode.Text = ptsItem.item_unit;
                     cmbItemType.Text = ptsItem.type_id.ToString();
-                    UpdateGrid(e.RowIndex);
+                    UpdateGrid(dgvData.Rows[e.RowIndex].DataBoundItem as pts_item);
                 }
                 //Get data from datagrid to pts item type
                 if (rbtnItemType.Checked)
@@ -452,7 +461,11 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (rbtnItemCode.Checked) UpdateGrid(dgvData.SelectedCells[0].RowIndex);
+                if (rbtnItemCode.Checked)
+                {
+                    if (dgvData.SelectedCells.Count > 0)
+                        UpdateGrid(dgvData.Rows[dgvData.SelectedCells[0].RowIndex].DataBoundItem as pts_item);
+                }
             }
             catch { }
             LockFields();
@@ -470,5 +483,7 @@ namespace PC_QRCodeSystem.View
             }
         }
         #endregion
+
+
     }
 }

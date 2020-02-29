@@ -36,6 +36,7 @@
             this.btnConvert = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dtpTimeConvert = new System.Windows.Forms.DateTimePicker();
@@ -103,6 +104,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsVersion,
             this.tsStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 378);
             this.statusStrip1.Name = "statusStrip1";
@@ -110,10 +112,16 @@
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // tsVersion
+            // 
+            this.tsVersion.Name = "tsVersion";
+            this.tsVersion.Size = new System.Drawing.Size(86, 17);
+            this.tsVersion.Text = "VERSION : 1_00";
+            // 
             // tsStatus
             // 
             this.tsStatus.Name = "tsStatus";
-            this.tsStatus.Size = new System.Drawing.Size(373, 17);
+            this.tsStatus.Size = new System.Drawing.Size(256, 17);
             this.tsStatus.Spring = true;
             // 
             // timer1
@@ -246,6 +254,7 @@
             this.Controls.Add(this.dgvLogs);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddPremac649ToDB";
             this.Text = "Add Premac To Database";
@@ -282,5 +291,6 @@
         private System.Windows.Forms.TextBox txtItem212;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.ToolStripStatusLabel tsVersion;
     }
 }

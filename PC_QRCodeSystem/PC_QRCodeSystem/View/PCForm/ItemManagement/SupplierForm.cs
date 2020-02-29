@@ -239,12 +239,14 @@ namespace PC_QRCodeSystem.View
                     ptssupllier.GetListSupplier(cmbSupplierCode.Text);
                     dgvDataSupllier.DataSource = null;
                     dgvDataSupllier.DataSource = ptssupllier.listSupplier;
+                    tsSupplierTotal.Text = dgvDataSupllier.Rows.Count.ToString();
                 }
                 else
                 {
                     ptssupllier.GetListSupplier(string.Empty);
                     dgvDataSupllier.DataSource = null;
                     dgvDataSupllier.DataSource = ptssupllier.listSupplier;
+                    tsSupplierTotal.Text = dgvDataSupllier.Rows.Count.ToString();
                 }
             }
            

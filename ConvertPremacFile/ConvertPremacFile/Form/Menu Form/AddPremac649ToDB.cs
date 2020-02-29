@@ -13,9 +13,9 @@ namespace ConvertPremacFile
         bool isStart = false;
         string settingfile = @"C:\ConvertPremac\setting.ini";
         pre_649 premacfile = new pre_649();
-        pre_212 premacfile212 = new pre_212();
+        pts_item premacfile212 = new pts_item();
         pre_232 premacfile232 = new pre_232();
-        
+
         List<string> settingList { get; set; }
         List<ConvertLogs> dataLogs { get; set; }
 
@@ -25,11 +25,13 @@ namespace ConvertPremacFile
             timer1.Enabled = true;
             settingList = new List<string>();
             dataLogs = new List<ConvertLogs>();
+
         }
         #endregion
         #region FORM LOAD
         private void AddPremac649ToDB_Load(object sender, EventArgs e)
         {
+
             if (File.Exists(settingfile))
             {
                 foreach (string line in File.ReadLines(settingfile))
@@ -48,6 +50,10 @@ namespace ConvertPremacFile
                         });
                 }
             }
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+                tsVersion.Text = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
+            else
+                tsVersion.Text = Application.ProductVersion;
             UpdateGrid();
         }
         #endregion
@@ -229,7 +235,7 @@ namespace ConvertPremacFile
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Pre212 Add Completed"
+                            Log_Message = "Pts_item Add Completed"
                         });
                     }
                 }

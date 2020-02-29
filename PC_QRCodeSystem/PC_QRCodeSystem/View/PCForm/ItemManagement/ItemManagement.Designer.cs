@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -110,11 +110,11 @@
             this.dgvData.AllowUserToOrderColumns = true;
             this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(150, 309);
+            this.dgvData.Location = new System.Drawing.Point(150, 310);
             this.dgvData.MultiSelect = false;
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
-            this.dgvData.Size = new System.Drawing.Size(641, 131);
+            this.dgvData.Size = new System.Drawing.Size(641, 130);
             this.dgvData.TabIndex = 17;
             this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
             this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
@@ -127,7 +127,7 @@
             this.pnlButtons.Controls.Add(this.btnAdd);
             this.pnlButtons.Controls.Add(this.btnClear);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlButtons.Location = new System.Drawing.Point(150, 259);
+            this.pnlButtons.Location = new System.Drawing.Point(150, 260);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(641, 50);
             this.pnlButtons.TabIndex = 21;
@@ -201,7 +201,7 @@
             this.panel4.Controls.Add(this.cmbItemType);
             this.panel4.Controls.Add(this.txtItem);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(150, 69);
+            this.panel4.Location = new System.Drawing.Point(150, 70);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(641, 140);
             this.panel4.TabIndex = 20;
@@ -223,38 +223,38 @@
             // 
             // lot_size
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.lot_size.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.lot_size.DefaultCellStyle = dataGridViewCellStyle1;
             this.lot_size.HeaderText = "Lot Size";
             this.lot_size.Name = "lot_size";
             this.lot_size.Width = 70;
             // 
             // wh_qty
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            this.wh_qty.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.wh_qty.DefaultCellStyle = dataGridViewCellStyle2;
             this.wh_qty.HeaderText = "WH Qty";
             this.wh_qty.Name = "wh_qty";
             this.wh_qty.Width = 70;
             // 
             // wip_qty
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            this.wip_qty.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.wip_qty.DefaultCellStyle = dataGridViewCellStyle3;
             this.wip_qty.HeaderText = "W.I.P Qty";
             this.wip_qty.Name = "wip_qty";
             this.wip_qty.Width = 78;
             // 
             // repair_qty
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.repair_qty.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.repair_qty.DefaultCellStyle = dataGridViewCellStyle4;
             this.repair_qty.HeaderText = "Repair Qty";
             this.repair_qty.Name = "repair_qty";
             this.repair_qty.Width = 82;
@@ -394,7 +394,7 @@
             this.pnlSubButton.Controls.Add(this.btnOK);
             this.pnlSubButton.Controls.Add(this.btnCancel);
             this.pnlSubButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSubButton.Location = new System.Drawing.Point(150, 209);
+            this.pnlSubButton.Location = new System.Drawing.Point(150, 210);
             this.pnlSubButton.Name = "pnlSubButton";
             this.pnlSubButton.Size = new System.Drawing.Size(641, 50);
             this.pnlSubButton.TabIndex = 22;
@@ -410,6 +410,7 @@
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.statusStrip1);
             this.dept = "";
+            this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "ItemManagement";

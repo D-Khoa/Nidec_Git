@@ -8,7 +8,7 @@ using PostgreSQLCopyHelper;
 
 namespace ConvertPremacFile.Model
 {
-    public class pre_212
+    public class pts_item
     {
         public int item_id { get; set; }
         public int type_id { get; set; }
@@ -22,18 +22,18 @@ namespace ConvertPremacFile.Model
         public double repair_qty { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public List<pre_212> listItems;
-        public pre_212()
+        public List<pts_item> listItems;
+        public pts_item()
         {
-            listItems = new List<pre_212>();
+            listItems = new List<pts_item>();
         }
         public void GetListItems(string premacitem)
         {
             string[] csvlines = File.ReadAllLines(premacitem);
-            IEnumerable<pre_212> query = from csvline in csvlines
+            IEnumerable<pts_item> query = from csvline in csvlines
                                           where (!csvline.Contains("(CPBE0012)") && !csvline.Contains("Item Number"))
                                           let columns = csvline.Split('?')
-                                          select new pre_212
+                                          select new pts_item
                                           {
                                               type_id = int.Parse(Regex.Replace(columns[2], " {2,}", " ").Trim()),
                                               item_cd = Regex.Replace(columns[0], " {2,}", " ").Trim(),
@@ -49,9 +49,9 @@ namespace ConvertPremacFile.Model
             listItems = query.ToList();
             listItems.Sort((a, b) => a.type_id.CompareTo(b.type_id));
         }
-        public void WriteToDB(IEnumerable<pre_212> listPremacitem)
+        public void WriteToDB(IEnumerable<pts_item> listPremacitem)
         {
-            PostgreSQLCopyHelper<pre_212> coppyHelper = new PostgreSQLCopyHelper<pre_212>("pre_212")
+            PostgreSQLCopyHelper<pts_item> coppyHelper = new PostgreSQLCopyHelper<pts_item>("pts_item")
                                                               .MapInteger("type_id", x => x.type_id)
                                                               .MapVarchar("item_cd", x => x.item_cd)
                                                               .MapText("item_name", x => x.item_name)
@@ -76,7 +76,7 @@ namespace ConvertPremacFile.Model
             using (NpgsqlConnection connection = new NpgsqlConnection(Properties.Settings.Default.CONNECTSTRING_MES))
             {
                 connection.Open();
-                command = new NpgsqlCommand("DELETE FROM pre_212", connection);
+                command = new NpgsqlCommand("DELETE FROM pts_item", connection);
                 result = command.ExecuteNonQuery();
                 connection.Close();
             }
