@@ -96,7 +96,9 @@ namespace PC_QRCodeSystem.View
                     po_number = txtPONo.Text,
                     incharge = txtIncharge.Text
                 }, dtpFromDate.Value, dtpToDate.Value, cbCheckDate.Checked);
+                dgvPreInput.ColumnHeadersVisible = false;
                 dgvPreInput.DataSource = premacData.listPremacItem;
+                dgvPreInput.ColumnHeadersVisible = true;
                 stopWatch.Stop();
                 tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
             }
@@ -529,6 +531,7 @@ namespace PC_QRCodeSystem.View
                     dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                     continue;
                 }
+                premacData.ExportCSV(listInputPremac);
             }
             itemData.UpdateStockValue();
             UpdateInspectionGrid();
@@ -650,7 +653,7 @@ namespace PC_QRCodeSystem.View
                 txtSupplierCD.Clear();
                 txtSupplierName.Clear();
                 //Label of PREMAC 6-4-9 have more 3 fields
-                if (barcode.Length > 6)
+                if (barcode.Length > 8)
                 {
                     if (!string.IsNullOrEmpty(barcode[7])) orderno = barcode[7];
                     if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
@@ -714,7 +717,8 @@ namespace PC_QRCodeSystem.View
                 {
                     if (item.invoice == barcode[3])
                     {
-                        temp = int.Parse(item.packing_cd.Split('-')[1]);
+                        //temp = int.Parse(item.packing_cd.Split('-')[1]);
+                        temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
                         if (temp > n) n = temp;
                     }
                 }
@@ -723,7 +727,7 @@ namespace PC_QRCodeSystem.View
                 {
                     if (item.invoice == barcode[3])
                     {
-                        temp = int.Parse(item.packing_cd.Split('-')[1]);
+                        temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 2));
                         if (temp > n) n = temp;
                     }
                 }

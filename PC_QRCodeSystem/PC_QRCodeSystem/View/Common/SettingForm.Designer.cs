@@ -30,6 +30,7 @@
         {
             this.btnReset = new System.Windows.Forms.Button();
             this.grPrinter = new System.Windows.Forms.GroupBox();
+            this.btnPrintTest = new System.Windows.Forms.Button();
             this.btnPrinterCheck = new System.Windows.Forms.Button();
             this.lbPrinterStatus = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -42,15 +43,19 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnPrintTest = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBrowserOutput = new System.Windows.Forms.Button();
+            this.txtOutputFolder = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.grPrinter.SuspendLayout();
             this.grPremacFolder.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(40, 190);
+            this.btnReset.Location = new System.Drawing.Point(230, 10);
             this.btnReset.Margin = new System.Windows.Forms.Padding(5);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(120, 60);
@@ -77,6 +82,17 @@
             this.grPrinter.TabIndex = 5;
             this.grPrinter.TabStop = false;
             this.grPrinter.Text = "Printer";
+            // 
+            // btnPrintTest
+            // 
+            this.btnPrintTest.Location = new System.Drawing.Point(470, 30);
+            this.btnPrintTest.Margin = new System.Windows.Forms.Padding(5);
+            this.btnPrintTest.Name = "btnPrintTest";
+            this.btnPrintTest.Size = new System.Drawing.Size(100, 30);
+            this.btnPrintTest.TabIndex = 8;
+            this.btnPrintTest.Text = "Print Test";
+            this.btnPrintTest.UseVisualStyleBackColor = true;
+            this.btnPrintTest.Click += new System.EventHandler(this.btnPrintTest_Click);
             // 
             // btnPrinterCheck
             // 
@@ -188,10 +204,11 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnReset);
             this.panel5.Controls.Add(this.btnOK);
             this.panel5.Controls.Add(this.btnCancel);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 259);
+            this.panel5.Location = new System.Drawing.Point(0, 276);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(584, 80);
@@ -209,24 +226,58 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnPrintTest
+            // groupBox1
             // 
-            this.btnPrintTest.Location = new System.Drawing.Point(470, 30);
-            this.btnPrintTest.Margin = new System.Windows.Forms.Padding(5);
-            this.btnPrintTest.Name = "btnPrintTest";
-            this.btnPrintTest.Size = new System.Drawing.Size(100, 30);
-            this.btnPrintTest.TabIndex = 8;
-            this.btnPrintTest.Text = "Print Test";
-            this.btnPrintTest.UseVisualStyleBackColor = true;
-            this.btnPrintTest.Click += new System.EventHandler(this.btnPrintTest_Click);
+            this.groupBox1.Controls.Add(this.btnBrowserOutput);
+            this.groupBox1.Controls.Add(this.txtOutputFolder);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(0, 180);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox1.Size = new System.Drawing.Size(584, 80);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Output Folder";
+            // 
+            // btnBrowserOutput
+            // 
+            this.btnBrowserOutput.Location = new System.Drawing.Point(470, 26);
+            this.btnBrowserOutput.Margin = new System.Windows.Forms.Padding(5);
+            this.btnBrowserOutput.Name = "btnBrowserOutput";
+            this.btnBrowserOutput.Size = new System.Drawing.Size(100, 30);
+            this.btnBrowserOutput.TabIndex = 2;
+            this.btnBrowserOutput.Text = "Browser";
+            this.btnBrowserOutput.UseVisualStyleBackColor = true;
+            this.btnBrowserOutput.Click += new System.EventHandler(this.btnBrowserOutput_Click);
+            // 
+            // txtOutputFolder
+            // 
+            this.txtOutputFolder.Location = new System.Drawing.Point(150, 30);
+            this.txtOutputFolder.Margin = new System.Windows.Forms.Padding(5);
+            this.txtOutputFolder.Name = "txtOutputFolder";
+            this.txtOutputFolder.Size = new System.Drawing.Size(300, 23);
+            this.txtOutputFolder.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 30);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Output Folder";
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 339);
+            this.ClientSize = new System.Drawing.Size(584, 356);
             this.ControlBox = false;
-            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.grPrinter);
             this.Controls.Add(this.grPremacFolder);
@@ -242,6 +293,8 @@
             this.grPremacFolder.ResumeLayout(false);
             this.grPremacFolder.PerformLayout();
             this.panel5.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -262,5 +315,9 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnPrintTest;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnBrowserOutput;
+        private System.Windows.Forms.TextBox txtOutputFolder;
+        private System.Windows.Forms.Label label1;
     }
 }
