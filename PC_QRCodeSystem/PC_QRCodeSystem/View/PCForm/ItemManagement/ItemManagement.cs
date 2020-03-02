@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
@@ -14,6 +15,7 @@ namespace PC_QRCodeSystem.View
         pts_item locationCbm { get; set; }
         pts_item_type typeCbm { get; set; }
         pts_item_type ptsItemType { get; set; }
+        Stopwatch stopWatch = new Stopwatch();
 
         #endregion
 
@@ -98,6 +100,18 @@ namespace PC_QRCodeSystem.View
         #region MAIN BUTTON
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                stopWatch.Restart();
+                stopWatch.Stop();
+                tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+            this.Cursor = Cursors.Default;
             UpdateGrid(true);
         }
 
