@@ -339,6 +339,7 @@ namespace PC_QRCodeSystem.View
             dgvPreInput.Columns["delivery_date"].HeaderText = "Delivery Date";
             //dgvPreInput.Columns["order_number"].HeaderText = "Order Number";
             dgvPreInput.Columns["incharge"].HeaderText = "Incharge";
+            dgvPrintList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["delivery_qty"].Value));
             tsRow.Text = dgvPreInput.Rows.Count.ToString();
             tsTotalQty.Text = total.ToString();
@@ -534,9 +535,10 @@ namespace PC_QRCodeSystem.View
         private void UpdatePrintGrid()
         {
             dgvPrintList.DataSource = printItem.ListPrintItem;
-            tsRow.Text = dgvPrintList.Rows.Count.ToString();
+            dgvPrintList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             double total = dgvPrintList.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
             tsTotalQty.Text = total.ToString();
+            tsRow.Text = dgvPrintList.Rows.Count.ToString();
         }
 
         private void tab_Print_Paint(object sender, PaintEventArgs e)
@@ -557,42 +559,50 @@ namespace PC_QRCodeSystem.View
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure register this list?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
-            for (int i = 0; i < dgvInspection.Rows.Count; i++)
+            try
             {
-                //Register item into stock
-                try
+                if (MessageBox.Show("Are you sure register this list?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    return;
+                for (int i = 0; i < dgvInspection.Rows.Count; i++)
                 {
-                    if (stockItem.AddItem(dgvInspection.Rows[i].DataBoundItem as pts_stock) > 0)
+                    //Register item into stock
+                    try
                     {
-                        listStockItem.Remove(dgvInspection.Rows[i].DataBoundItem as pts_stock);
-                        i--;
+                        if (stockItem.AddItem(dgvInspection.Rows[i].DataBoundItem as pts_stock) > 0)
+                        {
+                            listStockItem.Remove(dgvInspection.Rows[i].DataBoundItem as pts_stock);
+                            i--;
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    //If item already exists, skip it and set color it to red.
-                    string errorNo = ex.Message.Split(':')[0];
-                    switch (errorNo)
+                    catch (Exception ex)
                     {
-                        case "23505":
-                            MessageBox.Show("This package already exists." + Environment.NewLine + "Please check and try again!",
-                                "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        case "23503":
-                            MessageBox.Show("This Item Number is not exist in database!" + Environment.NewLine
-                                + "Please check and try again!", "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        default:
-                            MessageBox.Show(ex.Message, "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        //If item already exists, skip it and set color it to red.
+                        string errorNo = ex.Message.Split(':')[0];
+                        switch (errorNo)
+                        {
+                            case "23505":
+                                MessageBox.Show("This package already exists." + Environment.NewLine + "Please check and try again!",
+                                    "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case "23503":
+                                MessageBox.Show("This Item Number is not exist in database!" + Environment.NewLine
+                                    + "Please check and try again!", "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            default:
+                                MessageBox.Show(ex.Message, "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                        dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                        continue;
                     }
-                    dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
-                    continue;
+                    premacData.ExportCSV(listInputPremac);
                 }
-                premacData.ExportCSV(listInputPremac);
             }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+            listInputPremac.Clear();
             itemData.UpdateStockValue();
             UpdateInspectionGrid();
             txtBarcode.Focus();
@@ -605,7 +615,18 @@ namespace PC_QRCodeSystem.View
                 foreach (DataGridViewCell dc in dgvInspection.SelectedCells)
                 {
                     if (MessageBox.Show("Are you sure delete this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        listStockItem.Remove(dgvInspection.Rows[dc.RowIndex].DataBoundItem as pts_stock);
+                    {
+                        stockItem = dgvInspection.Rows[dc.RowIndex].DataBoundItem as pts_stock;
+                        listInputPremac.Remove(new pre_649
+                        {
+                            item_number = stockItem.item_cd,
+                            supplier_cd = stockItem.supplier_cd,
+                            supplier_invoice = stockItem.invoice,
+                            delivery_date = stockItem.stockin_date,
+                            delivery_qty = stockItem.stockin_qty,
+                        });
+                        listStockItem.Remove(stockItem);
+                    }
                 }
                 dgvInspection.DataSource = listStockItem;
             }
@@ -624,6 +645,7 @@ namespace PC_QRCodeSystem.View
             txtBarcode.Clear();
             txtSupplierCD.Clear();
             listStockItem.Clear();
+            listInputPremac.Clear();
             txtSupplierName.Text = "Supplier Name";
             errorProvider.SetError(txtSupplierCD, null);
             UpdateInspectionGrid();
@@ -694,6 +716,7 @@ namespace PC_QRCodeSystem.View
             dgvInspection.Columns["packing_qty"].HeaderText = "Packing Qty";
             dgvInspection.Columns["registration_user_cd"].HeaderText = "Reg User";
             dgvInspection.Columns["registration_date_time"].HeaderText = "Reg Date";
+            dgvInspection.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             double total = listStockItem.Sum(x => x.stockin_qty);
             tsRow.Text = dgvInspection.Rows.Count.ToString();
             tsTotalQty.Text = total.ToString();
@@ -706,7 +729,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                int n = 1;
+                int n = 0;
                 int temp = 0;
                 //string orderno = "None";
                 string remark = string.Empty;
@@ -719,7 +742,7 @@ namespace PC_QRCodeSystem.View
                 {
                     //if (!string.IsNullOrEmpty(barcode[7])) orderno = barcode[7];
                     if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
-                    if (!string.IsNullOrEmpty(barcode[8])) remark = barcode[7];
+                    if (!string.IsNullOrEmpty(barcode[7])) remark = barcode[7];
                 }
                 #region CHECK SUPPLIER & NOTICE FOR USER
                 errorProvider.SetError(txtSupplierCD, null);
@@ -759,7 +782,7 @@ namespace PC_QRCodeSystem.View
                 try
                 {
                     //Search item in stock with invoice number
-                    if (stockItem.SearchItem(new pts_stock { invoice = barcode[3] }))
+                    if (stockItem.SearchItem(new pts_stock { item_cd = barcode[0], invoice = barcode[3] }))
                     {
                         double totalStockIn = (from x in stockItem.listStockItems where x.item_cd == barcode[0] select x.stockin_qty).Sum();
                         double totalPacking = (from x in stockItem.listStockItems where x.item_cd == barcode[0] select x.packing_qty).Sum();
@@ -768,28 +791,27 @@ namespace PC_QRCodeSystem.View
                         mess += "Total stock-in: " + totalStockIn + Environment.NewLine + "Total packing: " + totalPacking + Environment.NewLine;
                         mess += "Are you sure add new packing with this Invoice?";
                         if (CustomMessageBox.Question(mess) == DialogResult.No) return;
+                        else
+                        {
+                            //Get max number packing of this Invoice in database
+                            foreach (pts_stock item in stockItem.listStockItems)
+                            {
+                                    temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
+                                    if (temp > n) n = temp;
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     CustomMessageBox.Error(ex.Message);
                 }
-                //Get max number packing of this Invoice in database
-                foreach (pts_stock item in stockItem.listStockItems)
-                {
-                    if (item.invoice == barcode[3])
-                    {
-                        //temp = int.Parse(item.packing_cd.Split('-')[1]);
-                        temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
-                        if (temp > n) n = temp;
-                    }
-                }
                 //Create new number of packing with Invoice number
                 foreach (pts_stock item in listStockItem)
                 {
                     if (item.invoice == barcode[3])
                     {
-                        temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 2));
+                        temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
                         if (temp > n) n = temp;
                     }
                 }
