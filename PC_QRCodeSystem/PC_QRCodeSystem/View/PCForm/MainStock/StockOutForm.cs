@@ -179,7 +179,7 @@ namespace PC_QRCodeSystem.View
                         Delivery_Date = dtpNoPlanStockOutDate.Value,
                         Delivery_Qty = temp,
                         SupplierCD = supplierData.supplier_cd,
-                        OrderNo = stockData.order_no,
+                        //OrderNo = stockData.order_no,
                         Label_Qty = 1
                     });
                     //Add Output item
@@ -214,7 +214,7 @@ namespace PC_QRCodeSystem.View
                             Delivery_Date = stockData.stockin_date,
                             Delivery_Qty = stockData.packing_qty,
                             SupplierCD = supplierData.supplier_cd,
-                            OrderNo = stockData.order_no,
+                            //OrderNo = stockData.order_no,
                             Label_Qty = 1
                         });
                     }

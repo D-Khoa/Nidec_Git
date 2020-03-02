@@ -207,7 +207,7 @@
         }
 
         public static void printBarCodeNew(string itemNo, string itemName, string supplier, string invoice,
-                                string date, string qty, string supplierCode, string orderNo, string remark)
+                                string date, string qty, string supplierCode, string remark)
         {
             //itemNo = "A32-164D-X";
             //itemName = "SHAFT";
@@ -224,7 +224,7 @@
 
             int xdots, model; // ydots;
             string TwoBAR_Command;
-            string QRCode_data = itemNo + ";" + itemName + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + supplierCode + ";" + orderNo + ";" + remark;
+            string QRCode_data = itemNo + ";" + itemName + ";" + supplier + ";" + invoice + ";" + date + ";" + qty + ";" + supplierCode + ";" + remark;
 
             /* 1. LK_OpenPrinter() */
             if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)

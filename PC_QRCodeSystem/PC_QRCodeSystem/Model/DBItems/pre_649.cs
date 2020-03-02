@@ -72,7 +72,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT premac_id, item_number, item_name, supplier_cd, supplier_name, supplier_invoice, po_number, delivery_qty, delivery_date, order_number, incharge ";
+            query = "SELECT item_number, item_name, supplier_cd, supplier_name, supplier_invoice, sum(delivery_qty) as delivery_qty, delivery_date, incharge ";
             query += "FROM pre_649 WHERE 1=1 ";
             if (!string.IsNullOrEmpty(inItem.item_number))
                 query += "AND item_number ='" + inItem.item_number + "' ";
@@ -88,6 +88,8 @@ namespace PC_QRCodeSystem.Model
                 query += "AND order_number ='" + inItem.order_number + "' ";
             if (checkdate)
                 query += "AND delivery_date >='" + fromdate + "' AND delivery_date <='" + todate + "' ";
+            query += "GROUP BY item_number, item_name, supplier_cd, supplier_name, supplier_invoice, delivery_date, incharge ";
+            query += "ORDER BY supplier_invoice, item_number";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
@@ -96,16 +98,16 @@ namespace PC_QRCodeSystem.Model
                 //Get an item
                 pre_649 outItem = new pre_649
                 {
-                    premac_id = (int)reader["premac_id"],
+                    //premac_id = (int)reader["premac_id"],
                     item_number = reader["item_number"].ToString(),
                     item_name = reader["item_name"].ToString(),
                     supplier_cd = reader["supplier_cd"].ToString(),
                     supplier_name = reader["supplier_name"].ToString(),
                     supplier_invoice = reader["supplier_invoice"].ToString(),
-                    po_number = reader["po_number"].ToString(),
+                    //po_number = reader["po_number"].ToString(),
                     delivery_qty = (double)reader["delivery_qty"],
                     delivery_date = (DateTime)reader["delivery_date"],
-                    order_number = reader["order_number"].ToString(),
+                    //order_number = reader["order_number"].ToString(),
                     incharge = reader["incharge"].ToString()
                 };
                 //Add item into list
