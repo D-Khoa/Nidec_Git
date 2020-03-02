@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace PC_QRCodeSystem.View
         pts_supplier suppliercbm { get; set; }
         pts_supplier ptssupllier { get; set; }
         private pts_supplier supplierData { get; set; }
+        Stopwatch stopWatch = new Stopwatch();
 
         #endregion
         public SupplierForm()
@@ -89,6 +91,18 @@ namespace PC_QRCodeSystem.View
         #region MAIN BUTTON
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                stopWatch.Restart();
+                stopWatch.Stop();
+                tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+            this.Cursor = Cursors.Default;
             Searcheven(true);
         }
 
