@@ -22,6 +22,7 @@ namespace PC_QRCodeSystem.Model
         public PrintItem()
         {
             ListPrintItem = new BindingList<PrintItem>();
+            TfPrint.printerName = SettingItem.printerSName;
         }
         #endregion
 

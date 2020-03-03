@@ -176,6 +176,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
         }
         #endregion
         #region SUB EVENT
+       
         private void UpdateGrid()
         {
             dgvAccountData.DataSource = Vo.table;
