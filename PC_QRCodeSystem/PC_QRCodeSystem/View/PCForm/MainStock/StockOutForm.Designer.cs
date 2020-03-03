@@ -38,6 +38,8 @@
             this.btnNoPlanInspection = new System.Windows.Forms.Button();
             this.btnNoPlanRegister = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtNoPlanSetNumber = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtNoPlanWHQty = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -103,8 +105,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtNoPlanSetNumber = new System.Windows.Forms.TextBox();
             this.tc_Main.SuspendLayout();
             this.tab_NoPlan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNoPlan)).BeginInit();
@@ -261,6 +261,22 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(718, 220);
             this.panel6.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(470, 10);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 20);
+            this.label6.TabIndex = 40;
+            this.label6.Text = "Set Number";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtNoPlanSetNumber
+            // 
+            this.txtNoPlanSetNumber.Location = new System.Drawing.Point(580, 10);
+            this.txtNoPlanSetNumber.Name = "txtNoPlanSetNumber";
+            this.txtNoPlanSetNumber.Size = new System.Drawing.Size(120, 22);
+            this.txtNoPlanSetNumber.TabIndex = 39;
             // 
             // label5
             // 
@@ -919,22 +935,6 @@
             this.tsRows.Name = "tsRows";
             this.tsRows.Size = new System.Drawing.Size(36, 17);
             this.tsRows.Text = "None";
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(470, 10);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 20);
-            this.label6.TabIndex = 40;
-            this.label6.Text = "Set Number";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtNoPlanSetNumber
-            // 
-            this.txtNoPlanSetNumber.Location = new System.Drawing.Point(580, 10);
-            this.txtNoPlanSetNumber.Name = "txtNoPlanSetNumber";
-            this.txtNoPlanSetNumber.Size = new System.Drawing.Size(120, 22);
-            this.txtNoPlanSetNumber.TabIndex = 39;
             // 
             // StockOutForm
             // 
