@@ -182,10 +182,26 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.NCVPForm.FA_Managem
         {
             accountVo.monthly_depreciation = accountVo.acquisition_cost / (accountVo.asset_life * 12);
             TimeSpan totalMonth = DateTime.Now.Subtract(dtpDeprStart.Value);
-            accountVo.accum_depreciation = accountVo.monthly_depreciation * ((totalMonth.TotalDays / 365) * 12);
+            // accountVo.accum_depreciation = accountVo.monthly_depreciation * ((totalMonth.TotalDays / 365) * 12);
+            accountVo.accum_depreciation = accountVo.current_depreciation + accountVo.monthly_depreciation;
             accountVo.current_depreciation = accountVo.accum_depreciation - accountVo.monthly_depreciation;
             accountVo.net_value = accountVo.acquisition_cost - accountVo.accum_depreciation;
             dgvCost.Rows.Add(accountVo.acquisition_cost, accountVo.monthly_depreciation, accountVo.current_depreciation, accountVo.accum_depreciation, accountVo.net_value);
+            /*
+     thuat toan
+     A = acquisition_cost
+     B = current_depreciation
+     C =  monthl_depreciation
+     D = accum_depreciation
+     E = net_value
+     accountmainVo.MonthCounter = y nhu tren
+     TL = asset_life
+     ==>
+     C= A/(TL*12)
+     B = accountmainVo.MonthCounter*c
+     D = B+ C
+     E = A -D
+     */
         }
     }
 }
