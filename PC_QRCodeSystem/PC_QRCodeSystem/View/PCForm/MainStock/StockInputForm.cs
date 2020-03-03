@@ -595,14 +595,16 @@ namespace PC_QRCodeSystem.View
                         continue;
                     }
                     //Export new item stock-in to csv for register PREMAC
-                    premacData.ExportCSV(GroupByPremac());
+                    if (listInputPremac.Count > 0)
+                        premacData.ExportCSV(GroupByPremac());
                 }
             }
             catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
-            itemData.ListStockInUpdateValue(GroupByPremac());
+            if (listInputPremac.Count > 0)
+                itemData.ListStockInUpdateValue(GroupByPremac());
             listInputPremac.Clear();
             UpdateInspectionGrid();
             txtBarcode.Focus();
@@ -733,7 +735,7 @@ namespace PC_QRCodeSystem.View
             {
                 int n = 0;
                 int temp = 0;
-                //string orderno = "None";
+                string invoice = "None";
                 string remark = string.Empty;
                 string suppliercd = string.Empty;
                 string[] barcode = txtBarcode.Text.Split(';');
@@ -798,7 +800,10 @@ namespace PC_QRCodeSystem.View
                             //Get max number packing of this Invoice in database
                             foreach (pts_stock item in stockItem.listStockItems)
                             {
-                                temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
+                                if (!string.IsNullOrEmpty(item.invoice))
+                                    temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
+                                else
+                                    temp = int.Parse(item.packing_cd.Substring(5));
                                 if (temp > n) n = temp;
                             }
                         }
@@ -813,12 +818,16 @@ namespace PC_QRCodeSystem.View
                 {
                     if (item.invoice == barcode[3])
                     {
-                        temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
+                        if (!string.IsNullOrEmpty(item.invoice))
+                            temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
+                        else
+                            temp = int.Parse(item.packing_cd.Substring(5));
                         if (temp > n) n = temp;
                     }
                 }
                 n++;
-                string packingcd = barcode[3] + "-" + n.ToString("00");
+                if (!string.IsNullOrEmpty(barcode[3].Trim())) invoice = barcode[3];
+                string packingcd = invoice + "-" + n.ToString("00");
                 #endregion
 
                 //Add new barcode item into list stock item
