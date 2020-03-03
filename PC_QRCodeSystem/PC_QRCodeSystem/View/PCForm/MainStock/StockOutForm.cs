@@ -101,24 +101,24 @@ namespace PC_QRCodeSystem.View
                     CustomMessageBox.Notice("Please fill stock-out qty!");
                     return;
                 }
-                double temp;
-                double stockOutQty = double.Parse(txtNoPlanStockOutQty.Text);
-                string noplancd = "no-" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 //When issue code is 30 then required fill comment
                 if ((int)cmbNoPlanIssueCD.SelectedValue == 30 && string.IsNullOrEmpty(txtNoPlanComment.Text))
                 {
                     CustomMessageBox.Notice("Please fill comment when Scrap Item!");
                     return;
                 }
+                double temp;
+                double stockOutQty = double.Parse(txtNoPlanStockOutQty.Text);
+                string noplancd = "no-" + DateTime.Now.ToString("yyyyMMdd-HHmmss");
                 //If stock out qty > packing qty then alert
                 if (stockOutQty > double.Parse(txtNoPlanWHQty.Text))
                 {
-                    if (CustomMessageBox.Warring("Stock-out qty is over than stock-in-hand qty!" + Environment.NewLine + "Are you sure to continue?") == DialogResult.No)
-                        return;
+                    //if (CustomMessageBox.Warring("Stock-out qty is over than stock-in-hand qty!" + Environment.NewLine + "Are you sure to continue?") == DialogResult.No)
+                    CustomMessageBox.Notice("Stock-out qty is over than stock-in-hand qty! Please set another!");
+                    return;
                 }
-                #endregion
-
                 if (CustomMessageBox.Question("Are you sure add this stock-out item?") == DialogResult.No) return;
+                #endregion
 
                 #region ADD NEW NO-PLAN
                 //Add noplan item into list
@@ -242,24 +242,46 @@ namespace PC_QRCodeSystem.View
         private void btnNoPlanSetting_Click(object sender, EventArgs e)
         {
             SettingForm settingFrm = new SettingForm();
-            settingFrm.Show();
+            settingFrm.ShowDialog();
         }
 
         private void btnNoplanClear_Click(object sender, EventArgs e)
         {
+            //Clear all fields of No plan tab
+            txtNoPlanWHQty.Clear();
             txtNoPlanUserCD.Clear();
             txtNoPlanItemCD.Clear();
             txtNoPlanInvoice.Clear();
             txtNoPlanComment.Clear();
-            txtNoPlanWHQty.Clear();
+            txtNoPlanSetNumber.Clear();
             txtNoPlanStockOutQty.Clear();
+            UpdateNoPlanGrid(false);
+            dgvNoPlan.DataSource = null;
             cmbNoPlanIssueCD.Text = null;
             cmbNoPlanDestinationCD.Text = null;
-            dgvNoPlan.DataSource = null;
         }
         #endregion
 
         #region FIELDS EVENT
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            //When scan barcode or press Enter key
+            if (e.KeyCode == Keys.Enter)
+            {
+                string[] barcode = txtBarcode.Text.Split(';');
+                //Get item number
+                txtNoPlanItemCD.Text = barcode[0];
+                //Get invoice
+                txtNoPlanInvoice.Text = barcode[3];
+                txtBarcode.Clear();
+                //Update grid and search stock item
+                UpdateNoPlanGrid(true);
+                //Calculator W/H qty of current item
+                txtNoPlanWHQty.Text = dgvNoPlan.Rows.Cast<DataGridViewRow>()
+                    .Sum(x => Convert.ToDouble(x.Cells["packing_qty"].Value)).ToString();
+            }
+        }
+
         private void cmbNoPlanIssueCD_Format(object sender, ListControlConvertEventArgs e)
         {
             string code = ((pts_issue_code)e.ListItem).issue_cd.ToString();
@@ -332,27 +354,18 @@ namespace PC_QRCodeSystem.View
                 e.Handled = true;
         }
 
-        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                string[] barcode = txtBarcode.Text.Split(';');
-                txtNoPlanItemCD.Text = barcode[0];
-                txtNoPlanInvoice.Text = barcode[3];
-                txtBarcode.Clear();
-                UpdateNoPlanGrid(true);
-                txtNoPlanWHQty.Text = dgvNoPlan.Rows.Cast<DataGridViewRow>()
-                    .Sum(x => Convert.ToDouble(x.Cells["packing_qty"].Value)).ToString();
-            }
-        }
-
         private void tab_NoPlan_Paint(object sender, PaintEventArgs e)
         {
+            if (dgvProcess.Rows.Count > 0) btnNoPlanInspection.Visible = true;
+            else btnNoPlanInspection.Visible = false;
             txtBarcode.Focus();
         }
         #endregion
 
         #region SUB EVENT
+        /// <summary>
+        /// Get list issue code, destination into combobox
+        /// </summary>
         private void GetCmb()
         {
             try
@@ -374,10 +387,15 @@ namespace PC_QRCodeSystem.View
             }
         }
 
+        /// <summary>
+        /// Update No plan tab grid
+        /// </summary>
+        /// <param name="isSearch">true: search stock item</param>
         private void UpdateNoPlanGrid(bool isSearch)
         {
             if (isSearch)
             {
+                //Search stock item with item code and invoice
                 if (!stockData.SearchItem(new pts_stock { item_cd = txtNoPlanItemCD.Text, invoice = txtNoPlanInvoice.Text }))
                 {
                     CustomMessageBox.Error("This item is not exist! Please check and try again!");
@@ -397,7 +415,8 @@ namespace PC_QRCodeSystem.View
             dgvNoPlan.Columns["packing_qty"].HeaderText = "Packing Qty";
             dgvNoPlan.Columns["registration_user_cd"].HeaderText = "Reg User";
             dgvNoPlan.Columns["registration_date_time"].HeaderText = "Reg Date";
-            tsRows.Text = dgvNoPlan.Rows.Count.ToString();
+            if (dgvNoPlan.Rows.Count > 0) tsRows.Text = dgvNoPlan.Rows.Count.ToString();
+            else tsRows.Text = "None";
         }
         #endregion
         #endregion

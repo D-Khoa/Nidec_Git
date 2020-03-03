@@ -748,6 +748,16 @@ namespace PC_QRCodeSystem.View
                     if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
                     if (!string.IsNullOrEmpty(barcode[7])) remark = barcode[7];
                 }
+
+                try
+                {
+                    itemData.GetItem(barcode[0]);
+                }
+                catch
+                {
+                    CustomMessageBox.Error("This item is not exisits! Please check and try again!");
+                    return;
+                }
                 #region CHECK SUPPLIER & NOTICE FOR USER
                 errorProvider.SetError(txtSupplierCD, null);
                 txtSupplierName.Text = barcode[2];
