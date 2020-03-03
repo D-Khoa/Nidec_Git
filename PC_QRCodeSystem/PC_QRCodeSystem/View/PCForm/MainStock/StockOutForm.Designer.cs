@@ -832,7 +832,7 @@
             this.dgvPrintList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvPrintList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPrintList.Size = new System.Drawing.Size(718, 346);
-            this.dgvPrintList.TabIndex = 12;
+            this.dgvPrintList.TabIndex = 3;
             // 
             // dgvProcess
             // 
@@ -844,7 +844,7 @@
             this.dgvProcess.ReadOnly = true;
             this.dgvProcess.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvProcess.Size = new System.Drawing.Size(718, 80);
-            this.dgvProcess.TabIndex = 10;
+            this.dgvProcess.TabIndex = 2;
             // 
             // panel1
             // 
@@ -857,14 +857,14 @@
             this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(718, 60);
-            this.panel1.TabIndex = 9;
+            this.panel1.TabIndex = 1;
             // 
             // btnInspectionBack
             // 
             this.btnInspectionBack.Location = new System.Drawing.Point(578, 5);
             this.btnInspectionBack.Name = "btnInspectionBack";
             this.btnInspectionBack.Size = new System.Drawing.Size(80, 50);
-            this.btnInspectionBack.TabIndex = 7;
+            this.btnInspectionBack.TabIndex = 8;
             this.btnInspectionBack.Text = "Back";
             this.btnInspectionBack.UseVisualStyleBackColor = true;
             this.btnInspectionBack.Click += new System.EventHandler(this.btnInspectionBack_Click);
@@ -884,7 +884,7 @@
             this.btnInspectionClear.Location = new System.Drawing.Point(446, 5);
             this.btnInspectionClear.Name = "btnInspectionClear";
             this.btnInspectionClear.Size = new System.Drawing.Size(80, 50);
-            this.btnInspectionClear.TabIndex = 5;
+            this.btnInspectionClear.TabIndex = 7;
             this.btnInspectionClear.Text = "Clear";
             this.btnInspectionClear.UseVisualStyleBackColor = true;
             this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
@@ -894,7 +894,7 @@
             this.btnPrint.Location = new System.Drawing.Point(182, 5);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(80, 50);
-            this.btnPrint.TabIndex = 3;
+            this.btnPrint.TabIndex = 5;
             this.btnPrint.Text = "Print All";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
@@ -904,7 +904,7 @@
             this.btnStockOutReg.Location = new System.Drawing.Point(50, 5);
             this.btnStockOutReg.Name = "btnStockOutReg";
             this.btnStockOutReg.Size = new System.Drawing.Size(80, 50);
-            this.btnStockOutReg.TabIndex = 0;
+            this.btnStockOutReg.TabIndex = 4;
             this.btnStockOutReg.Text = "Stock-Out Register";
             this.btnStockOutReg.UseVisualStyleBackColor = true;
             this.btnStockOutReg.Click += new System.EventHandler(this.btnStockOutReg_Click);

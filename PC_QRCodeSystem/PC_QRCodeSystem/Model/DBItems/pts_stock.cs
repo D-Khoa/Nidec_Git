@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
+using System.Linq;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -293,6 +296,33 @@ namespace PC_QRCodeSystem.Model
             query = string.Empty;
             SQL.Close();
             return result;
+        }
+        #endregion
+
+        #region IN/OUT
+        /// <summary>
+        /// Export list stock item into CSV file
+        /// </summary>
+        /// <param name="inList">input list item</param>
+        /// <param name="fileName">file path</param>
+        public void ExportToCSV(List<pts_stock> inList, string fileName)
+        {
+            var properties = inList[0].GetType().GetProperties();
+            using (StreamWriter sw = new StreamWriter(fileName))
+            {
+                string line = string.Empty;
+                //Write columns
+                line = string.Join("?", properties.Select(x => x.Name));
+                sw.WriteLine(line);
+                for (int i = 0; i < inList.Count; i++)
+                {
+                    var propretiesValue = inList[i].GetType().GetProperties();
+                    line = string.Join("?", propretiesValue.Select(x => x.GetValue(inList[i], null)));
+                    sw.WriteLine(line);
+                }
+                sw.Flush();
+                sw.Close();
+            }
         }
         #endregion
     }

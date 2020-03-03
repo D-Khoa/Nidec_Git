@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -11,7 +12,23 @@ namespace PC_QRCodeSystem.Model
 
         public static void Error(string message)
         {
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (message.Contains(":"))
+            {
+                string[] errorMes = message.Split(':');
+                string mes = string.Empty;
+                switch(errorMes[0])
+                {
+                    case "23503":
+                        mes = "Can't update or delete this item because it is used in another table.";
+                        break;
+                    default:
+                        mes = errorMes[1];
+                        break;
+                }
+                MessageBox.Show(mes, "Error - " + errorMes[0], MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static DialogResult Warring(string message)

@@ -118,6 +118,10 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
         }
 
+        /// <summary>
+        /// Export list item for menu PREMAC 6-4-9
+        /// </summary>
+        /// <param name="inList"></param>
         public void ExportCSV(List<pre_649> inList)
         {
             var properties = inList[0].GetType().GetProperties();

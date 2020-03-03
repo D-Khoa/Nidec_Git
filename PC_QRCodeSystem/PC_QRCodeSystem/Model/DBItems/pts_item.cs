@@ -403,22 +403,6 @@ namespace PC_QRCodeSystem.Model
             return result;
         }
 
-        public int StockInUpdateValue(pre_649 inItem)
-        {
-            //SQL library
-            PSQL SQL = new PSQL();
-            string query = string.Empty;
-            //Open SQL connection
-            SQL.Open();
-            //SQL query string
-            query = "update pts_item set wh_qty = wh_qty + " + inItem.delivery_qty + " where item_cd ='" + inItem.item_number + "' ";
-            //Execute non query for read database
-            int result = SQL.Command(query).ExecuteNonQuery();
-            query = string.Empty;
-            SQL.Close();
-            return result;
-        }
-
         /// <summary>
         /// Update W/H qty of list item
         /// </summary>

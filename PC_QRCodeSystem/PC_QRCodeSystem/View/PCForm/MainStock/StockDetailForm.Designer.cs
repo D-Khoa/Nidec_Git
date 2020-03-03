@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockDetailForm));
             this.tc_MainStockDetail = new System.Windows.Forms.TabControl();
             this.tab_StockDetail = new System.Windows.Forms.TabPage();
             this.dgvStockDetail = new System.Windows.Forms.DataGridView();
@@ -73,9 +72,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.tsMenuStrip = new System.Windows.Forms.ToolStripSplitButton();
-            this.smenuLogDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.smenuStockDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.smenuLogDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsStockDetailRows = new System.Windows.Forms.ToolStripStatusLabel();
@@ -123,6 +122,7 @@
             // 
             this.dgvStockDetail.AllowUserToAddRows = false;
             this.dgvStockDetail.AllowUserToDeleteRows = false;
+            this.dgvStockDetail.AllowUserToResizeRows = false;
             this.dgvStockDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStockDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvStockDetail.Location = new System.Drawing.Point(4, 334);
@@ -142,7 +142,7 @@
             this.dgvStockDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvStockDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvStockDetail.Size = new System.Drawing.Size(818, 98);
-            this.dgvStockDetail.TabIndex = 1;
+            this.dgvStockDetail.TabIndex = 3;
             this.dgvStockDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockDetail_CellClick);
             this.dgvStockDetail.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvStockDetail_DataBindingComplete);
             // 
@@ -150,14 +150,16 @@
             // 
             this.dgvItemInfo.AllowUserToAddRows = false;
             this.dgvItemInfo.AllowUserToDeleteRows = false;
+            this.dgvItemInfo.AllowUserToResizeRows = false;
             this.dgvItemInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItemInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvItemInfo.Location = new System.Drawing.Point(4, 264);
             this.dgvItemInfo.MultiSelect = false;
             this.dgvItemInfo.Name = "dgvItemInfo";
             this.dgvItemInfo.ReadOnly = true;
+            this.dgvItemInfo.RowHeadersVisible = false;
             this.dgvItemInfo.Size = new System.Drawing.Size(818, 70);
-            this.dgvItemInfo.TabIndex = 3;
+            this.dgvItemInfo.TabIndex = 2;
             // 
             // panel5
             // 
@@ -173,7 +175,7 @@
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(818, 60);
-            this.panel5.TabIndex = 2;
+            this.panel5.TabIndex = 1;
             // 
             // btnUpdate
             // 
@@ -299,7 +301,7 @@
             this.txtPackingQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtPackingQty.Name = "txtPackingQty";
             this.txtPackingQty.Size = new System.Drawing.Size(150, 22);
-            this.txtPackingQty.TabIndex = 46;
+            this.txtPackingQty.TabIndex = 12;
             // 
             // label16
             // 
@@ -318,7 +320,7 @@
             this.txtStockInQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtStockInQty.Name = "txtStockInQty";
             this.txtStockInQty.Size = new System.Drawing.Size(120, 22);
-            this.txtStockInQty.TabIndex = 44;
+            this.txtStockInQty.TabIndex = 10;
             // 
             // label15
             // 
@@ -337,7 +339,7 @@
             this.txtPackingCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtPackingCD.Name = "txtPackingCD";
             this.txtPackingCD.Size = new System.Drawing.Size(150, 22);
-            this.txtPackingCD.TabIndex = 42;
+            this.txtPackingCD.TabIndex = 11;
             // 
             // label14
             // 
@@ -390,7 +392,7 @@
             this.txtSupplierCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtSupplierCD.Name = "txtSupplierCD";
             this.txtSupplierCD.Size = new System.Drawing.Size(150, 22);
-            this.txtSupplierCD.TabIndex = 37;
+            this.txtSupplierCD.TabIndex = 6;
             this.txtSupplierCD.TextChanged += new System.EventHandler(this.txtSupplierCD_TextChanged);
             // 
             // txtOrderNo
@@ -399,7 +401,7 @@
             this.txtOrderNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderNo.Name = "txtOrderNo";
             this.txtOrderNo.Size = new System.Drawing.Size(150, 22);
-            this.txtOrderNo.TabIndex = 36;
+            this.txtOrderNo.TabIndex = 9;
             // 
             // label8
             // 
@@ -417,7 +419,7 @@
             this.cbSearchDate.Location = new System.Drawing.Point(530, 130);
             this.cbSearchDate.Name = "cbSearchDate";
             this.cbSearchDate.Size = new System.Drawing.Size(110, 20);
-            this.cbSearchDate.TabIndex = 34;
+            this.cbSearchDate.TabIndex = 13;
             this.cbSearchDate.Text = "Stock-In Date";
             this.cbSearchDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cbSearchDate.UseVisualStyleBackColor = true;
@@ -463,7 +465,7 @@
             this.txtInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.txtInvoice.Name = "txtInvoice";
             this.txtInvoice.Size = new System.Drawing.Size(150, 22);
-            this.txtInvoice.TabIndex = 24;
+            this.txtInvoice.TabIndex = 8;
             // 
             // txtInCharge
             // 
@@ -471,7 +473,7 @@
             this.txtInCharge.Margin = new System.Windows.Forms.Padding(4);
             this.txtInCharge.Name = "txtInCharge";
             this.txtInCharge.Size = new System.Drawing.Size(150, 22);
-            this.txtInCharge.TabIndex = 28;
+            this.txtInCharge.TabIndex = 7;
             this.txtInCharge.TextChanged += new System.EventHandler(this.txtInCharge_TextChanged);
             // 
             // txtItemCD
@@ -480,7 +482,7 @@
             this.txtItemCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtItemCD.Name = "txtItemCD";
             this.txtItemCD.Size = new System.Drawing.Size(150, 22);
-            this.txtItemCD.TabIndex = 22;
+            this.txtItemCD.TabIndex = 5;
             this.txtItemCD.TextChanged += new System.EventHandler(this.txtItemCD_TextChanged);
             this.txtItemCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItemCD_KeyDown);
             // 
@@ -492,7 +494,7 @@
             this.dtpToDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(120, 22);
-            this.dtpToDate.TabIndex = 16;
+            this.dtpToDate.TabIndex = 15;
             // 
             // label10
             // 
@@ -513,7 +515,7 @@
             this.dtpFromDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(120, 22);
-            this.dtpFromDate.TabIndex = 12;
+            this.dtpFromDate.TabIndex = 14;
             // 
             // label9
             // 
@@ -598,7 +600,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsMenuStrip,
+            this.tsMenu,
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.tsStockDetailRows});
@@ -608,24 +610,14 @@
             this.statusStrip1.TabIndex = 42;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // tsMenuStrip
+            // tsMenu
             // 
-            this.tsMenuStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.smenuLogDetail,
-            this.smenuStockDetail});
-            this.tsMenuStrip.Image = ((System.Drawing.Image)(resources.GetObject("tsMenuStrip.Image")));
-            this.tsMenuStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsMenuStrip.Name = "tsMenuStrip";
-            this.tsMenuStrip.Size = new System.Drawing.Size(32, 22);
-            this.tsMenuStrip.Text = "toolStripSplitButton1";
-            // 
-            // smenuLogDetail
-            // 
-            this.smenuLogDetail.Name = "smenuLogDetail";
-            this.smenuLogDetail.Size = new System.Drawing.Size(136, 22);
-            this.smenuLogDetail.Text = "Logs Detail";
-            this.smenuLogDetail.Click += new System.EventHandler(this.smenuLogDetail_Click);
+            this.tsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smenuStockDetail,
+            this.smenuLogDetail});
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Size = new System.Drawing.Size(51, 22);
+            this.tsMenu.Text = "Menu";
             // 
             // smenuStockDetail
             // 
@@ -634,10 +626,17 @@
             this.smenuStockDetail.Text = "Stock Detail";
             this.smenuStockDetail.Click += new System.EventHandler(this.smenuStockDetail_Click);
             // 
+            // smenuLogDetail
+            // 
+            this.smenuLogDetail.Name = "smenuLogDetail";
+            this.smenuLogDetail.Size = new System.Drawing.Size(136, 22);
+            this.smenuLogDetail.Text = "Logs Detail";
+            this.smenuLogDetail.Click += new System.EventHandler(this.smenuLogDetail_Click);
+            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(706, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(687, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -733,12 +732,12 @@
         private System.Windows.Forms.TextBox txtStockInQty;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripSplitButton tsMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem smenuLogDetail;
-        private System.Windows.Forms.ToolStripMenuItem smenuStockDetail;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tsStockDetailRows;
         private System.Windows.Forms.DataGridView dgvLogDetail;
+        private System.Windows.Forms.ToolStripDropDownButton tsMenu;
+        private System.Windows.Forms.ToolStripMenuItem smenuStockDetail;
+        private System.Windows.Forms.ToolStripMenuItem smenuLogDetail;
     }
 }
