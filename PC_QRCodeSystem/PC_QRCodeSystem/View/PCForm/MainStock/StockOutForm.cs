@@ -536,7 +536,6 @@ namespace PC_QRCodeSystem.View
             dgvPrintList.DataSource = null;
         }
         #endregion
-
         #endregion
     }
 }

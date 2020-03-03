@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
@@ -595,15 +594,16 @@ namespace PC_QRCodeSystem.View
                         dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                         continue;
                     }
-                    premacData.ExportCSV(listInputPremac);
+                    //Export new item stock-in to csv for register PREMAC
+                    premacData.ExportCSV(GroupByPremac());
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
+            itemData.ListStockInUpdateValue(GroupByPremac());
             listInputPremac.Clear();
-            itemData.UpdateStockValue();
             UpdateInspectionGrid();
             txtBarcode.Focus();
         }
@@ -616,15 +616,17 @@ namespace PC_QRCodeSystem.View
                 {
                     if (MessageBox.Show("Are you sure delete this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
+                        //Search item want to delete
                         stockItem = dgvInspection.Rows[dc.RowIndex].DataBoundItem as pts_stock;
-                        listInputPremac.Remove(new pre_649
-                        {
-                            item_number = stockItem.item_cd,
-                            supplier_cd = stockItem.supplier_cd,
-                            supplier_invoice = stockItem.invoice,
-                            delivery_date = stockItem.stockin_date,
-                            delivery_qty = stockItem.stockin_qty,
-                        });
+                        var tempItem = (from x in listInputPremac
+                                        where x.item_number == stockItem.item_cd &&
+                                              x.supplier_cd == stockItem.supplier_cd &&
+                                              x.supplier_invoice == stockItem.invoice &&
+                                              x.delivery_date == stockItem.stockin_date &&
+                                              x.delivery_qty == stockItem.stockin_qty
+                                        select x);
+                        //Delete item from list
+                        listInputPremac.Remove(tempItem.FirstOrDefault());
                         listStockItem.Remove(stockItem);
                     }
                 }
@@ -796,8 +798,8 @@ namespace PC_QRCodeSystem.View
                             //Get max number packing of this Invoice in database
                             foreach (pts_stock item in stockItem.listStockItems)
                             {
-                                    temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
-                                    if (temp > n) n = temp;
+                                temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
+                                if (temp > n) n = temp;
                             }
                         }
                     }
@@ -858,6 +860,34 @@ namespace PC_QRCodeSystem.View
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private List<pre_649> GroupByPremac()
+        {
+            List<pre_649> list = new List<pre_649>();
+            list = (from item in listInputPremac
+                    group item by new
+                    {
+                        item.item_number,
+                        item.item_name,
+                        item.supplier_cd,
+                        item.supplier_name,
+                        item.supplier_invoice,
+                        item.delivery_date,
+                        item.incharge
+                    } into g
+                    select new pre_649()
+                    {
+                        item_number = g.Key.item_number,
+                        item_name = g.Key.item_name,
+                        supplier_cd = g.Key.supplier_cd,
+                        supplier_name = g.Key.supplier_name,
+                        supplier_invoice = g.Key.supplier_invoice,
+                        delivery_qty = g.Sum(a => a.delivery_qty),
+                        delivery_date = g.Key.delivery_date,
+                        incharge = g.Key.incharge
+                    }).OrderBy(x => x.supplier_invoice).ToList();
+            return list;
         }
         #endregion
 

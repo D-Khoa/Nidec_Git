@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 
@@ -372,7 +373,7 @@ namespace PC_QRCodeSystem.Model
                 query = string.Empty;
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex.Message.Split(':')[0] == "23503")
                     throw new Exception("This item is used on another table. Please check and try again!");
@@ -395,6 +396,80 @@ namespace PC_QRCodeSystem.Model
             //SQL query string
             query = "update pts_item a set wh_qty = (select sum(c.packing_qty) from pts_stock c where a.item_cd = c.item_cd)";
             query += "from pts_stock b where a.item_cd = b.item_cd";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        public int StockInUpdateValue(pre_649 inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "update pts_item set wh_qty = wh_qty + " + inItem.delivery_qty + " where item_cd ='" + inItem.item_number + "' ";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Update W/H qty of list item
+        /// </summary>
+        /// <param name="inList">list premac input item</param>
+        /// <returns></returns>
+        public int ListStockInUpdateValue(List<pre_649> inList)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            string listItemCD = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "update pts_item set wh_qty = case item_cd ";
+            for (int i = 0; i < inList.Count; i++)
+            {
+                query += "when '" + inList[i].item_number + "' then wh_qty + " + inList[i].delivery_qty + " ";
+                listItemCD += inList[i].item_number + "','";
+            }
+            listItemCD = listItemCD.Remove(listItemCD.Length - 2);
+            query += "end where item_cd in ('" + listItemCD + ")";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Update W/H qty of list item
+        /// </summary>
+        /// <param name="inList"></param>
+        /// <returns></returns>
+        public int ListStockOutUpdateValue(List<pre_649> inList)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            string listItemCD = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "update pts_item set wh_qty = case item_cd ";
+            for (int i = 0; i < inList.Count; i++)
+            {
+                query += "when '" + inList[i].item_number + "' then wh_qty - " + inList[i].delivery_qty + " ";
+                listItemCD += inList[i].item_number + "','";
+            }
+            listItemCD = listItemCD.Remove(listItemCD.Length - 2);
+            query += "end where item_cd in ('" + listItemCD + ")";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;

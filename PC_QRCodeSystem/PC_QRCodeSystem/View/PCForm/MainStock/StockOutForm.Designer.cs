@@ -103,6 +103,8 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtNoPlanSetNumber = new System.Windows.Forms.TextBox();
             this.tc_Main.SuspendLayout();
             this.tab_NoPlan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNoPlan)).BeginInit();
@@ -229,6 +231,8 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.label6);
+            this.panel6.Controls.Add(this.txtNoPlanSetNumber);
             this.panel6.Controls.Add(this.label5);
             this.panel6.Controls.Add(this.txtNoPlanWHQty);
             this.panel6.Controls.Add(this.label4);
@@ -916,6 +920,22 @@
             this.tsRows.Size = new System.Drawing.Size(36, 17);
             this.tsRows.Text = "None";
             // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(470, 10);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 20);
+            this.label6.TabIndex = 40;
+            this.label6.Text = "Set Number";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtNoPlanSetNumber
+            // 
+            this.txtNoPlanSetNumber.Location = new System.Drawing.Point(580, 10);
+            this.txtNoPlanSetNumber.Name = "txtNoPlanSetNumber";
+            this.txtNoPlanSetNumber.Size = new System.Drawing.Size(120, 22);
+            this.txtNoPlanSetNumber.TabIndex = 39;
+            // 
             // StockOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1034,5 +1054,7 @@
         private System.Windows.Forms.Button btnPrintManual;
         private System.Windows.Forms.Button btnInspectionBack;
         private System.Windows.Forms.DataGridView dgvPrintList;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtNoPlanSetNumber;
     }
 }
