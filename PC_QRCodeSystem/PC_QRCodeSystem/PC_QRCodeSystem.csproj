@@ -217,6 +217,12 @@
     <Compile Include="View\PCForm\MainStock\StockOutForm.Designer.cs">
       <DependentUpon>StockOutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PCForm\StockOutLogForm\StockOutLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PCForm\StockOutLogForm\StockOutLogForm.Designer.cs">
+      <DependentUpon>StockOutLogForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\Common\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -271,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\PlanningForm\PlanningForm.resx">
       <DependentUpon>PlanningForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PCForm\StockOutLogForm\StockOutLogForm.resx">
+      <DependentUpon>StockOutLogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PRODForm\PRODForm.resx">
       <DependentUpon>PRODForm.cs</DependentUpon>

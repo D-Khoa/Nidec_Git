@@ -337,7 +337,7 @@ namespace PC_QRCodeSystem.View
                 }
                 catch (Exception ex)
                 {
-                    errorProvider.SetError(txtNoPlanUserCD, "Wrong Item Code" +
+                    errorProvider.SetError(txtNoPlanUserCD, "Wrong User Code" +
                                            Environment.NewLine + ex.Message);
                 }
             }
