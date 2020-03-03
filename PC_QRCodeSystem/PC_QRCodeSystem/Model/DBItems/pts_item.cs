@@ -453,7 +453,7 @@ namespace PC_QRCodeSystem.Model
         /// </summary>
         /// <param name="inList"></param>
         /// <returns></returns>
-        public int ListStockOutUpdateValue(List<pre_649> inList)
+        public int ListStockOutUpdateValue(List<OutputItem> inList)
         {
             //SQL library
             PSQL SQL = new PSQL();

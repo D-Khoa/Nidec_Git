@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Management;
 
 namespace PC_QRCodeSystem.Model
@@ -35,13 +36,9 @@ namespace PC_QRCodeSystem.Model
         public bool CheckPrinterIsOffline(string printer)
         {
             ManagementObjectSearcher printerSearch = new ManagementObjectSearcher("Select Name, WorkOffline from Win32_Printer");
-            foreach (ManagementBaseObject searchprint in printerSearch.Get())
-            {
-                if (searchprint["Name"].ToString() == printer)
-                {
-                    return (Boolean)searchprint["WorkOffline"];
-                }
-            }
+            var status = printerSearch.Get().OfType<ManagementBaseObject>()
+                .Where(x => x["Name"].ToString() == printer).Select(x=>x).FirstOrDefault();
+            return (Boolean)status["WorkOffline"];
             throw new Exception("Printer is not install");
         }
 

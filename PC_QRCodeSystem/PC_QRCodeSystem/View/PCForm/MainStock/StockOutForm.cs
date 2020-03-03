@@ -138,6 +138,11 @@ namespace PC_QRCodeSystem.View
                 {
                     //Get packing stockOutQty & packing code
                     stockData = dr.DataBoundItem as pts_stock;
+                    if (string.IsNullOrEmpty(stockData.order_no)) stockData.order_no = txtNoPlanSetNumber.Text;
+                    else
+                    {
+                        if (CustomMessageBox.Question("This stock item have set number: " + stockData.order_no + "." + Environment.NewLine + "Do you want to change to set number: " + txtNoPlanSetNumber.Text + "?") == DialogResult.Yes) stockData.order_no = txtNoPlanSetNumber.Text;
+                    }
                     //Get item info
                     itemData = itemData.GetItem(stockData.item_cd);
                     //Get supplier
@@ -169,6 +174,7 @@ namespace PC_QRCodeSystem.View
                         comment = txtNoPlanComment.Text,
                         remark = "N",
                     });
+                    #region ADD LIST LABEL STOCK-OUT AND LIST ITEM FOR CSV
                     //Add new label stock-out
                     printData.ListPrintItem.Add(new PrintItem
                     {
@@ -197,8 +203,9 @@ namespace PC_QRCodeSystem.View
                         incharge = txtNoPlanUserCD.Text,
                     });
                     #endregion
+                    #endregion
 
-                    #region CALC AND ADD LIST STOCK ITEM
+                    #region CALCULATOR, ADD LIST STOCK ITEM AND ADD LIST LABEL STOCK-ON-HAND
                     //Calculator pack qty in stock
                     stockData.packing_qty = stockData.packing_qty - temp;
                     listStock.Add(stockData);
@@ -358,6 +365,7 @@ namespace PC_QRCodeSystem.View
         {
             if (dgvProcess.Rows.Count > 0) btnNoPlanInspection.Visible = true;
             else btnNoPlanInspection.Visible = false;
+            UpdateNoPlanGrid(false);
             txtBarcode.Focus();
         }
         #endregion
@@ -439,6 +447,7 @@ namespace PC_QRCodeSystem.View
                 {
                     n = stockOutData.AddMultiItem(listStockOut);
                     outData.ExportCSV(outData.listOutputItem);
+
                     CustomMessageBox.Notice("Add " + n + " Stock-Out logs!");
                 }
                 //Update packing qty of stock item in DB
@@ -447,7 +456,9 @@ namespace PC_QRCodeSystem.View
                     item.UpdateItem(item);
                 }
                 //Update stock qty
-                itemData.UpdateStockValue();
+                itemData.ListStockOutUpdateValue(outData.listOutputItem);
+                CustomMessageBox.Notice("Register completed!");
+                ClearInspection();
             }
             catch (Exception ex)
             {
@@ -550,6 +561,7 @@ namespace PC_QRCodeSystem.View
             listStock.Clear();
             listNoPlan.Clear();
             listStockOut.Clear();
+            outData.listOutputItem.Clear();
             printData.ListPrintItem.Clear();
             dgvProcess.DataSource = null;
             dgvPrintList.DataSource = null;

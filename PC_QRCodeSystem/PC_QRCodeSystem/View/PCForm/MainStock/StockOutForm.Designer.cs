@@ -175,7 +175,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvNoPlan.Size = new System.Drawing.Size(718, 206);
-            this.dgvNoPlan.TabIndex = 6;
+            this.dgvNoPlan.TabIndex = 3;
             // 
             // panel5
             // 
@@ -187,11 +187,11 @@
             this.panel5.Location = new System.Drawing.Point(4, 224);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(718, 60);
-            this.panel5.TabIndex = 8;
+            this.panel5.TabIndex = 2;
             // 
             // btnNoplanClear
             // 
-            this.btnNoplanClear.Location = new System.Drawing.Point(570, 5);
+            this.btnNoplanClear.Location = new System.Drawing.Point(470, 5);
             this.btnNoplanClear.Name = "btnNoplanClear";
             this.btnNoplanClear.Size = new System.Drawing.Size(80, 50);
             this.btnNoplanClear.TabIndex = 5;
@@ -201,7 +201,7 @@
             // 
             // btnNoPlanSetting
             // 
-            this.btnNoPlanSetting.Location = new System.Drawing.Point(470, 5);
+            this.btnNoPlanSetting.Location = new System.Drawing.Point(570, 5);
             this.btnNoPlanSetting.Name = "btnNoPlanSetting";
             this.btnNoPlanSetting.Size = new System.Drawing.Size(80, 50);
             this.btnNoPlanSetting.TabIndex = 4;
@@ -211,7 +211,7 @@
             // 
             // btnNoPlanInspection
             // 
-            this.btnNoPlanInspection.Location = new System.Drawing.Point(150, 5);
+            this.btnNoPlanInspection.Location = new System.Drawing.Point(370, 5);
             this.btnNoPlanInspection.Name = "btnNoPlanInspection";
             this.btnNoPlanInspection.Size = new System.Drawing.Size(80, 50);
             this.btnNoPlanInspection.TabIndex = 3;
@@ -260,7 +260,7 @@
             this.panel6.Location = new System.Drawing.Point(4, 4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(718, 220);
-            this.panel6.TabIndex = 9;
+            this.panel6.TabIndex = 1;
             // 
             // label6
             // 
@@ -276,7 +276,7 @@
             this.txtNoPlanSetNumber.Location = new System.Drawing.Point(580, 10);
             this.txtNoPlanSetNumber.Name = "txtNoPlanSetNumber";
             this.txtNoPlanSetNumber.Size = new System.Drawing.Size(120, 22);
-            this.txtNoPlanSetNumber.TabIndex = 39;
+            this.txtNoPlanSetNumber.TabIndex = 10;
             // 
             // label5
             // 
@@ -294,6 +294,7 @@
             this.txtNoPlanWHQty.ReadOnly = true;
             this.txtNoPlanWHQty.Size = new System.Drawing.Size(130, 22);
             this.txtNoPlanWHQty.TabIndex = 37;
+            this.txtNoPlanWHQty.TabStop = false;
             this.txtNoPlanWHQty.Text = "0";
             this.txtNoPlanWHQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -313,6 +314,7 @@
             this.txtNoPlanInvoice.ReadOnly = true;
             this.txtNoPlanInvoice.Size = new System.Drawing.Size(130, 22);
             this.txtNoPlanInvoice.TabIndex = 35;
+            this.txtNoPlanInvoice.TabStop = false;
             // 
             // label3
             // 
@@ -351,6 +353,7 @@
             this.txtNoPlanItemCD.ReadOnly = true;
             this.txtNoPlanItemCD.Size = new System.Drawing.Size(120, 22);
             this.txtNoPlanItemCD.TabIndex = 30;
+            this.txtNoPlanItemCD.TabStop = false;
             this.txtNoPlanItemCD.TextChanged += new System.EventHandler(this.txtItemCDStockOut_TextChanged);
             // 
             // cmbNoPlanIssueCD
@@ -361,7 +364,7 @@
             this.cmbNoPlanIssueCD.Location = new System.Drawing.Point(120, 70);
             this.cmbNoPlanIssueCD.Name = "cmbNoPlanIssueCD";
             this.cmbNoPlanIssueCD.Size = new System.Drawing.Size(350, 24);
-            this.cmbNoPlanIssueCD.TabIndex = 28;
+            this.cmbNoPlanIssueCD.TabIndex = 5;
             this.cmbNoPlanIssueCD.SelectedIndexChanged += new System.EventHandler(this.cmbNoPlanIssueCD_SelectedIndexChanged);
             this.cmbNoPlanIssueCD.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbNoPlanIssueCD_Format);
             // 
@@ -397,7 +400,7 @@
             this.txtNoPlanStockOutQty.Location = new System.Drawing.Point(120, 190);
             this.txtNoPlanStockOutQty.Name = "txtNoPlanStockOutQty";
             this.txtNoPlanStockOutQty.Size = new System.Drawing.Size(120, 22);
-            this.txtNoPlanStockOutQty.TabIndex = 21;
+            this.txtNoPlanStockOutQty.TabIndex = 9;
             this.txtNoPlanStockOutQty.Text = "0";
             this.txtNoPlanStockOutQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtNoPlanStockOutQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNoPlanStockOutQty_KeyPress);
@@ -418,7 +421,7 @@
             this.dtpNoPlanStockOutDate.Location = new System.Drawing.Point(120, 160);
             this.dtpNoPlanStockOutDate.Name = "dtpNoPlanStockOutDate";
             this.dtpNoPlanStockOutDate.Size = new System.Drawing.Size(120, 22);
-            this.dtpNoPlanStockOutDate.TabIndex = 15;
+            this.dtpNoPlanStockOutDate.TabIndex = 8;
             // 
             // lbNoPlanUser
             // 
@@ -437,7 +440,7 @@
             this.txtNoPlanUserCD.Location = new System.Drawing.Point(120, 130);
             this.txtNoPlanUserCD.Name = "txtNoPlanUserCD";
             this.txtNoPlanUserCD.Size = new System.Drawing.Size(120, 22);
-            this.txtNoPlanUserCD.TabIndex = 9;
+            this.txtNoPlanUserCD.TabIndex = 7;
             this.txtNoPlanUserCD.TextChanged += new System.EventHandler(this.txtStockOutUser_TextChanged);
             // 
             // label18
@@ -466,7 +469,7 @@
             this.cmbNoPlanDestinationCD.Location = new System.Drawing.Point(120, 100);
             this.cmbNoPlanDestinationCD.Name = "cmbNoPlanDestinationCD";
             this.cmbNoPlanDestinationCD.Size = new System.Drawing.Size(350, 24);
-            this.cmbNoPlanDestinationCD.TabIndex = 2;
+            this.cmbNoPlanDestinationCD.TabIndex = 6;
             this.cmbNoPlanDestinationCD.SelectedIndexChanged += new System.EventHandler(this.cmbNoPlanDestinationCD_SelectedIndexChanged);
             this.cmbNoPlanDestinationCD.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbNoPlanDestinationCD_Format);
             // 
@@ -475,7 +478,7 @@
             this.txtBarcode.Location = new System.Drawing.Point(120, 10);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(350, 22);
-            this.txtBarcode.TabIndex = 1;
+            this.txtBarcode.TabIndex = 4;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
             // label22
@@ -493,7 +496,7 @@
             this.txtNoPlanComment.Multiline = true;
             this.txtNoPlanComment.Name = "txtNoPlanComment";
             this.txtNoPlanComment.Size = new System.Drawing.Size(200, 140);
-            this.txtNoPlanComment.TabIndex = 33;
+            this.txtNoPlanComment.TabIndex = 11;
             // 
             // tab_Plan
             // 
