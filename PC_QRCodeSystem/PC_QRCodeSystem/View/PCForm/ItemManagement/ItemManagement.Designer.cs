@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -86,7 +86,7 @@
             // 
             this.tsTime.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.tsTime.Name = "tsTime";
-            this.tsTime.Size = new System.Drawing.Size(511, 19);
+            this.tsTime.Size = new System.Drawing.Size(542, 19);
             this.tsTime.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -215,45 +215,45 @@
             this.wh_qty,
             this.wip_qty,
             this.repair_qty});
-            this.dgvItemQty.Location = new System.Drawing.Point(270, 70);
+            this.dgvItemQty.Location = new System.Drawing.Point(280, 70);
             this.dgvItemQty.Name = "dgvItemQty";
             this.dgvItemQty.Size = new System.Drawing.Size(350, 70);
             this.dgvItemQty.TabIndex = 9;
             // 
             // lot_size
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.lot_size.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.lot_size.DefaultCellStyle = dataGridViewCellStyle5;
             this.lot_size.HeaderText = "Lot Size";
             this.lot_size.Name = "lot_size";
             this.lot_size.Width = 70;
             // 
             // wh_qty
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.wh_qty.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.wh_qty.DefaultCellStyle = dataGridViewCellStyle6;
             this.wh_qty.HeaderText = "WH Qty";
             this.wh_qty.Name = "wh_qty";
             this.wh_qty.Width = 70;
             // 
             // wip_qty
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.wip_qty.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.wip_qty.DefaultCellStyle = dataGridViewCellStyle7;
             this.wip_qty.HeaderText = "W.I.P Qty";
             this.wip_qty.Name = "wip_qty";
             this.wip_qty.Width = 78;
             // 
             // repair_qty
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.repair_qty.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.repair_qty.DefaultCellStyle = dataGridViewCellStyle8;
             this.repair_qty.HeaderText = "Repair Qty";
             this.repair_qty.Name = "repair_qty";
             this.repair_qty.Width = 82;
@@ -291,7 +291,7 @@
             // txtTypeName
             // 
             this.txtTypeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTypeName.Location = new System.Drawing.Point(270, 40);
+            this.txtTypeName.Location = new System.Drawing.Point(280, 40);
             this.txtTypeName.Name = "txtTypeName";
             this.txtTypeName.ReadOnly = true;
             this.txtTypeName.Size = new System.Drawing.Size(350, 21);
@@ -302,7 +302,7 @@
             // txtItemName
             // 
             this.txtItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtItemName.Location = new System.Drawing.Point(270, 10);
+            this.txtItemName.Location = new System.Drawing.Point(280, 10);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.ReadOnly = true;
             this.txtItemName.Size = new System.Drawing.Size(350, 21);
@@ -364,7 +364,7 @@
             this.txtItem.Name = "txtItem";
             this.txtItem.Size = new System.Drawing.Size(120, 21);
             this.txtItem.TabIndex = 1;
-            this.txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItem_KeyDown);
+            this.txtItem.TextChanged += new System.EventHandler(this.txtItem_TextChanged);
             // 
             // btnOK
             // 

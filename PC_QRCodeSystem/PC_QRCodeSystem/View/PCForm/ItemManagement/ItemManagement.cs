@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -16,9 +15,11 @@ namespace PC_QRCodeSystem.View
         pts_item_type typeCbm { get; set; }
         pts_item_type ptsItemType { get; set; }
         Stopwatch stopWatch = new Stopwatch();
+        ErrorProvider errorProvider = new ErrorProvider();
 
         #endregion
 
+        #region FORM EVENT
         public ItemManagement()
         {
             InitializeComponent();
@@ -41,32 +42,30 @@ namespace PC_QRCodeSystem.View
             GetCmbData();
             txtItem.Focus();
         }
+        #endregion
 
-        #region EVENT CHANGE TEXT ON FIELDS
-        private void txtItem_KeyDown(object sender, KeyEventArgs e)
+        #region FIELDS EVENT
+        private void txtItem_TextChanged(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtItem.Text))
+            {
+                errorProvider.SetError(txtItem, null);
+                txtItemName.Text = "Item Name";
+                return;
+            }
             try
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    //Get item name and show it
-                    if (!string.IsNullOrEmpty(txtItem.Text))
-                    {
-                        ptsItem = ptsItem.GetItem(txtItem.Text);
-                        txtItem.Text = ptsItem.item_cd;
-                        txtItemName.Text = ptsItem.item_name;
-                        cmbLocation.Text = ptsItem.item_location;
-                        cmbUnitCode.Text = ptsItem.item_unit;
-                        cmbItemType.Text = ptsItem.type_id.ToString();
-                        UpdateGrid(ptsItem);
-                    }
-                    else
-                        txtItemName.Text = "Item Name";
-                }
+                ptsItem = ptsItem.GetItem(txtItem.Text);
+                errorProvider.SetError(txtItem, null);
+                txtItemName.Text = ptsItem.item_name;
+                cmbLocation.Text = ptsItem.item_location;
+                cmbUnitCode.Text = ptsItem.item_unit;
+                cmbItemType.Text = ptsItem.type_id.ToString();
+                UpdateGrid(ptsItem);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider.SetError(txtItem, "Wrond item code!" + Environment.NewLine + ex.Message);
             }
         }
 
@@ -82,7 +81,7 @@ namespace PC_QRCodeSystem.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -104,6 +103,7 @@ namespace PC_QRCodeSystem.View
             {
                 this.Cursor = Cursors.WaitCursor;
                 stopWatch.Restart();
+                UpdateGrid(true);
                 stopWatch.Stop();
                 tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
             }
@@ -112,7 +112,6 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
             this.Cursor = Cursors.Default;
-            UpdateGrid(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -127,21 +126,28 @@ namespace PC_QRCodeSystem.View
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("This action is not undo" + Environment.NewLine + "Are you sure delete this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                return;
-            int n = 0;
-            if (rbtnItemCode.Checked)
+            try
             {
-                n = ptsItem.Delete(ptsItem.item_id);
+                if (CustomMessageBox.Warring("This action is not undo" + Environment.NewLine + "Are you sure delete this item?") == DialogResult.No)
+                    return;
+                int n = 0;
+                if (rbtnItemCode.Checked)
+                {
+                    n = ptsItem.Delete(ptsItem.item_id);
+                }
+                if (rbtnItemType.Checked)
+                {
+                    n = ptsItemType.Delete(ptsItemType.type_id);
+                }
+                ClearFields();
+                GetCmbData();
+                UpdateGrid(true);
+                CustomMessageBox.Notice("Delete " + n + " Item");
             }
-            if (rbtnItemType.Checked)
+            catch(Exception ex)
             {
-                n = ptsItemType.Delete(ptsItemType.type_id);
+                CustomMessageBox.Error(ex.Message);
             }
-            ClearFields();
-            GetCmbData();
-            UpdateGrid(true);
-            MessageBox.Show("Delete " + n + " Item", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -183,7 +189,6 @@ namespace PC_QRCodeSystem.View
                 {
                     if (isSearch)
                     {
-                        //ptsItem.UpdateStockValue();
                         //Search with item type
                         if (!string.IsNullOrEmpty(cmbItemType.Text))
                             ptsItem.SearchItem(new pts_item
@@ -218,7 +223,8 @@ namespace PC_QRCodeSystem.View
                     dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
                     if (dgvData.SelectedCells.Count > 0)
                         UpdateGrid(dgvData.Rows[0].DataBoundItem as pts_item);
-                    tsNumberTotal.Text = dgvData.Rows.Count.ToString();
+                    if (dgvData.Rows.Count > 0)
+                        tsNumberTotal.Text = dgvData.Rows.Count.ToString();
                 }
                 //Search and get item type list
                 if (rbtnItemType.Checked)
@@ -236,7 +242,7 @@ namespace PC_QRCodeSystem.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -320,7 +326,7 @@ namespace PC_QRCodeSystem.View
                 string messstring = string.Empty;
                 if (string.IsNullOrEmpty(txtItemName.Text) || string.IsNullOrEmpty(txtTypeName.Text))
                 {
-                    MessageBox.Show("Item Name and Item Type is empty." + Environment.NewLine + "Please check and try again!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Item Name and Item Type is empty." + Environment.NewLine + "Please check and try again!");
                     return;
                 }
                 #region ADD & UPDATE ITEM
@@ -394,11 +400,11 @@ namespace PC_QRCodeSystem.View
                 UpdateGrid(true);
                 if (editMode) messstring = "Update ";
                 else messstring = "Add ";
-                MessageBox.Show(messstring + n + " item complete!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CustomMessageBox.Notice(messstring + n + " item complete!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
             LockFields();
         }
@@ -422,8 +428,8 @@ namespace PC_QRCodeSystem.View
                 dgvItemQty.Visible = true;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
-                txtItemName.BackColor = System.Drawing.Color.Yellow;
-                rbtnItemCode.BackColor = System.Drawing.Color.Yellow;
+                txtItemName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveBorder);
+                rbtnItemCode.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveBorder);
                 txtTypeName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
                 rbtnItemType.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
             }
@@ -437,8 +443,8 @@ namespace PC_QRCodeSystem.View
                 dgvItemQty.Visible = false;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItemType.listItemType;
-                txtTypeName.BackColor = System.Drawing.Color.Yellow;
-                rbtnItemType.BackColor = System.Drawing.Color.Yellow;
+                txtTypeName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveBorder);
+                rbtnItemType.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveBorder);
                 txtItemName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
                 rbtnItemCode.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
             }
@@ -489,15 +495,14 @@ namespace PC_QRCodeSystem.View
         {
             if (btnOK.Visible)
             {
-                if (MessageBox.Show("You are in processing!" + Environment.NewLine + "Are you sure exit?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                if (CustomMessageBox.Question("You are in processing!" + Environment.NewLine + "Are you sure exit?") == DialogResult.No)
                 {
                     e.Cancel = true;
                     return;
                 }
             }
         }
+
         #endregion
-
-
     }
 }

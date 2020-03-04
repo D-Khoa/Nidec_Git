@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlSetting = new System.Windows.Forms.Panel();
+            this.pnlMainStock = new System.Windows.Forms.Panel();
             this.btnStockDetail = new System.Windows.Forms.Button();
             this.btnStockOut = new System.Windows.Forms.Button();
             this.btnStockIn = new System.Windows.Forms.Button();
@@ -49,25 +49,25 @@
             this.grt_Main = new System.Windows.Forms.TabControl();
             this.tab_Menu = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.btnPlanning = new System.Windows.Forms.Button();
+            this.pnlAdminManagement = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnUserPosition = new System.Windows.Forms.Button();
+            this.btnDepartment = new System.Windows.Forms.Button();
+            this.pnlDataLogs = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnPlanning = new System.Windows.Forms.Button();
             this.btnRequestLog = new System.Windows.Forms.Button();
             this.btnStockOutLog = new System.Windows.Forms.Button();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.pnlSetting = new System.Windows.Forms.Panel();
+            this.btnSetting = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnUserPosition = new System.Windows.Forms.Button();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnIssueCode = new System.Windows.Forms.Button();
-            this.btnDepartment = new System.Windows.Forms.Button();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.pnlPCManagement = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnIssueCode = new System.Windows.Forms.Button();
             this.btnSupplier = new System.Windows.Forms.Button();
             this.btnItem = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
-            this.btnSetting = new System.Windows.Forms.Button();
-            this.pnlSetting.SuspendLayout();
+            this.pnlMainStock.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
             this.panel10.SuspendLayout();
@@ -75,24 +75,25 @@
             this.grt_Main.SuspendLayout();
             this.tab_Menu.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.pnlAdminManagement.SuspendLayout();
+            this.pnlDataLogs.SuspendLayout();
+            this.pnlSetting.SuspendLayout();
+            this.pnlPCManagement.SuspendLayout();
             this.tab_Request.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlSetting
+            // pnlMainStock
             // 
-            this.pnlSetting.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlSetting.Controls.Add(this.btnStockDetail);
-            this.pnlSetting.Controls.Add(this.btnStockOut);
-            this.pnlSetting.Controls.Add(this.btnStockIn);
-            this.pnlSetting.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlSetting.Location = new System.Drawing.Point(3, 3);
-            this.pnlSetting.Name = "pnlSetting";
-            this.pnlSetting.Size = new System.Drawing.Size(240, 399);
-            this.pnlSetting.TabIndex = 2;
+            this.pnlMainStock.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMainStock.Controls.Add(this.btnStockDetail);
+            this.pnlMainStock.Controls.Add(this.btnStockOut);
+            this.pnlMainStock.Controls.Add(this.btnStockIn);
+            this.pnlMainStock.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlMainStock.Location = new System.Drawing.Point(3, 3);
+            this.pnlMainStock.Name = "pnlMainStock";
+            this.pnlMainStock.Size = new System.Drawing.Size(240, 399);
+            this.pnlMainStock.TabIndex = 2;
+            this.pnlMainStock.Tag = "pcmp001";
             // 
             // btnStockDetail
             // 
@@ -141,7 +142,7 @@
             this.pnlRequest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRequest.Location = new System.Drawing.Point(3, 3);
             this.pnlRequest.Name = "pnlRequest";
-            this.pnlRequest.Size = new System.Drawing.Size(680, 400);
+            this.pnlRequest.Size = new System.Drawing.Size(680, 399);
             this.pnlRequest.TabIndex = 3;
             // 
             // dgvRequest
@@ -153,7 +154,7 @@
             this.dgvRequest.Location = new System.Drawing.Point(0, 50);
             this.dgvRequest.Name = "dgvRequest";
             this.dgvRequest.ReadOnly = true;
-            this.dgvRequest.Size = new System.Drawing.Size(680, 296);
+            this.dgvRequest.Size = new System.Drawing.Size(680, 295);
             this.dgvRequest.TabIndex = 4;
             // 
             // panel10
@@ -252,7 +253,7 @@
             this.panel4.Controls.Add(this.btnDeny);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel4.Location = new System.Drawing.Point(0, 346);
+            this.panel4.Location = new System.Drawing.Point(0, 345);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(680, 54);
             this.panel4.TabIndex = 5;
@@ -307,7 +308,7 @@
             // tab_Menu
             // 
             this.tab_Menu.Controls.Add(this.panel5);
-            this.tab_Menu.Controls.Add(this.pnlSetting);
+            this.tab_Menu.Controls.Add(this.pnlMainStock);
             this.tab_Menu.Location = new System.Drawing.Point(4, 25);
             this.tab_Menu.Name = "tab_Menu";
             this.tab_Menu.Padding = new System.Windows.Forms.Padding(3);
@@ -318,38 +319,73 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.btnSetting);
-            this.panel5.Controls.Add(this.panel8);
-            this.panel5.Controls.Add(this.panel9);
-            this.panel5.Controls.Add(this.panel7);
-            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Controls.Add(this.pnlAdminManagement);
+            this.panel5.Controls.Add(this.pnlDataLogs);
+            this.panel5.Controls.Add(this.pnlSetting);
+            this.panel5.Controls.Add(this.pnlPCManagement);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(243, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(440, 399);
             this.panel5.TabIndex = 9;
             // 
-            // panel8
+            // pnlAdminManagement
             // 
-            this.panel8.Controls.Add(this.btnPlanning);
-            this.panel8.Controls.Add(this.label7);
-            this.panel8.Controls.Add(this.btnRequestLog);
-            this.panel8.Controls.Add(this.btnStockOutLog);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel8.Location = new System.Drawing.Point(0, 240);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(440, 80);
-            this.panel8.TabIndex = 9;
+            this.pnlAdminManagement.Controls.Add(this.label5);
+            this.pnlAdminManagement.Controls.Add(this.btnUserPosition);
+            this.pnlAdminManagement.Controls.Add(this.btnDepartment);
+            this.pnlAdminManagement.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlAdminManagement.Location = new System.Drawing.Point(0, 160);
+            this.pnlAdminManagement.Name = "pnlAdminManagement";
+            this.pnlAdminManagement.Size = new System.Drawing.Size(440, 80);
+            this.pnlAdminManagement.TabIndex = 8;
+            this.pnlAdminManagement.Tag = "admp001";
+            this.pnlAdminManagement.Visible = false;
             // 
-            // btnPlanning
+            // label5
             // 
-            this.btnPlanning.Location = new System.Drawing.Point(240, 25);
-            this.btnPlanning.Name = "btnPlanning";
-            this.btnPlanning.Size = new System.Drawing.Size(100, 50);
-            this.btnPlanning.TabIndex = 13;
-            this.btnPlanning.Text = "Planning";
-            this.btnPlanning.UseVisualStyleBackColor = true;
-            this.btnPlanning.Click += new System.EventHandler(this.btnPlanning_Click);
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(440, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Admin-Management";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnUserPosition
+            // 
+            this.btnUserPosition.Location = new System.Drawing.Point(20, 24);
+            this.btnUserPosition.Name = "btnUserPosition";
+            this.btnUserPosition.Size = new System.Drawing.Size(100, 50);
+            this.btnUserPosition.TabIndex = 6;
+            this.btnUserPosition.Text = "User Position";
+            this.btnUserPosition.UseVisualStyleBackColor = true;
+            this.btnUserPosition.Click += new System.EventHandler(this.btnUserPosition_Click);
+            // 
+            // btnDepartment
+            // 
+            this.btnDepartment.Location = new System.Drawing.Point(130, 24);
+            this.btnDepartment.Name = "btnDepartment";
+            this.btnDepartment.Size = new System.Drawing.Size(100, 50);
+            this.btnDepartment.TabIndex = 4;
+            this.btnDepartment.Text = "Department";
+            this.btnDepartment.UseVisualStyleBackColor = true;
+            this.btnDepartment.Click += new System.EventHandler(this.btnDepartment_Click);
+            // 
+            // pnlDataLogs
+            // 
+            this.pnlDataLogs.Controls.Add(this.label7);
+            this.pnlDataLogs.Controls.Add(this.btnPlanning);
+            this.pnlDataLogs.Controls.Add(this.btnRequestLog);
+            this.pnlDataLogs.Controls.Add(this.btnStockOutLog);
+            this.pnlDataLogs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlDataLogs.Location = new System.Drawing.Point(0, 80);
+            this.pnlDataLogs.Name = "pnlDataLogs";
+            this.pnlDataLogs.Size = new System.Drawing.Size(440, 80);
+            this.pnlDataLogs.TabIndex = 9;
+            this.pnlDataLogs.Tag = "pcmp003";
             // 
             // label7
             // 
@@ -363,9 +399,19 @@
             this.label7.Text = "Data Log";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnPlanning
+            // 
+            this.btnPlanning.Location = new System.Drawing.Point(240, 25);
+            this.btnPlanning.Name = "btnPlanning";
+            this.btnPlanning.Size = new System.Drawing.Size(100, 50);
+            this.btnPlanning.TabIndex = 13;
+            this.btnPlanning.Text = "Planning";
+            this.btnPlanning.UseVisualStyleBackColor = true;
+            this.btnPlanning.Click += new System.EventHandler(this.btnPlanning_Click);
+            // 
             // btnRequestLog
             // 
-            this.btnRequestLog.Location = new System.Drawing.Point(20, 25);
+            this.btnRequestLog.Location = new System.Drawing.Point(130, 25);
             this.btnRequestLog.Name = "btnRequestLog";
             this.btnRequestLog.Size = new System.Drawing.Size(100, 50);
             this.btnRequestLog.TabIndex = 6;
@@ -375,22 +421,34 @@
             // 
             // btnStockOutLog
             // 
-            this.btnStockOutLog.Location = new System.Drawing.Point(130, 25);
+            this.btnStockOutLog.Location = new System.Drawing.Point(20, 25);
             this.btnStockOutLog.Name = "btnStockOutLog";
             this.btnStockOutLog.Size = new System.Drawing.Size(100, 50);
             this.btnStockOutLog.TabIndex = 5;
             this.btnStockOutLog.Text = "Stock Out Log";
             this.btnStockOutLog.UseVisualStyleBackColor = true;
+            this.btnStockOutLog.Click += new System.EventHandler(this.btnStockOutLog_Click);
             // 
-            // panel9
+            // pnlSetting
             // 
-            this.panel9.Controls.Add(this.label8);
-            this.panel9.Controls.Add(this.btnUserPosition);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 160);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(440, 80);
-            this.panel9.TabIndex = 10;
+            this.pnlSetting.Controls.Add(this.btnSetting);
+            this.pnlSetting.Controls.Add(this.label8);
+            this.pnlSetting.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlSetting.Location = new System.Drawing.Point(0, 319);
+            this.pnlSetting.Name = "pnlSetting";
+            this.pnlSetting.Size = new System.Drawing.Size(440, 80);
+            this.pnlSetting.TabIndex = 10;
+            this.pnlSetting.Tag = "pcmp004";
+            // 
+            // btnSetting
+            // 
+            this.btnSetting.Location = new System.Drawing.Point(20, 25);
+            this.btnSetting.Name = "btnSetting";
+            this.btnSetting.Size = new System.Drawing.Size(100, 50);
+            this.btnSetting.TabIndex = 13;
+            this.btnSetting.Text = "Setting";
+            this.btnSetting.UseVisualStyleBackColor = true;
+            this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
             // label8
             // 
@@ -401,72 +459,21 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(440, 20);
             this.label8.TabIndex = 12;
-            this.label8.Text = "User Position";
+            this.label8.Text = "Setting";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btnUserPosition
+            // pnlPCManagement
             // 
-            this.btnUserPosition.Location = new System.Drawing.Point(20, 25);
-            this.btnUserPosition.Name = "btnUserPosition";
-            this.btnUserPosition.Size = new System.Drawing.Size(100, 50);
-            this.btnUserPosition.TabIndex = 6;
-            this.btnUserPosition.Text = "User Position";
-            this.btnUserPosition.UseVisualStyleBackColor = true;
-            this.btnUserPosition.Click += new System.EventHandler(this.btnUserPosition_Click);
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.label5);
-            this.panel7.Controls.Add(this.btnIssueCode);
-            this.panel7.Controls.Add(this.btnDepartment);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 80);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(440, 80);
-            this.panel7.TabIndex = 8;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(440, 20);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Stock Out Item";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnIssueCode
-            // 
-            this.btnIssueCode.Location = new System.Drawing.Point(20, 25);
-            this.btnIssueCode.Name = "btnIssueCode";
-            this.btnIssueCode.Size = new System.Drawing.Size(100, 50);
-            this.btnIssueCode.TabIndex = 3;
-            this.btnIssueCode.Text = "Issue Code";
-            this.btnIssueCode.UseVisualStyleBackColor = true;
-            this.btnIssueCode.Click += new System.EventHandler(this.btnIssueCode_Click);
-            // 
-            // btnDepartment
-            // 
-            this.btnDepartment.Location = new System.Drawing.Point(130, 25);
-            this.btnDepartment.Name = "btnDepartment";
-            this.btnDepartment.Size = new System.Drawing.Size(100, 50);
-            this.btnDepartment.TabIndex = 4;
-            this.btnDepartment.Text = "Department";
-            this.btnDepartment.UseVisualStyleBackColor = true;
-            this.btnDepartment.Click += new System.EventHandler(this.btnDepartment_Click);
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.label2);
-            this.panel6.Controls.Add(this.btnSupplier);
-            this.panel6.Controls.Add(this.btnItem);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(440, 80);
-            this.panel6.TabIndex = 7;
+            this.pnlPCManagement.Controls.Add(this.label2);
+            this.pnlPCManagement.Controls.Add(this.btnIssueCode);
+            this.pnlPCManagement.Controls.Add(this.btnSupplier);
+            this.pnlPCManagement.Controls.Add(this.btnItem);
+            this.pnlPCManagement.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPCManagement.Location = new System.Drawing.Point(0, 0);
+            this.pnlPCManagement.Name = "pnlPCManagement";
+            this.pnlPCManagement.Size = new System.Drawing.Size(440, 80);
+            this.pnlPCManagement.TabIndex = 7;
+            this.pnlPCManagement.Tag = "pcmp002";
             // 
             // label2
             // 
@@ -477,8 +484,18 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(440, 20);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Stock Item";
+            this.label2.Text = "PC-Management";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnIssueCode
+            // 
+            this.btnIssueCode.Location = new System.Drawing.Point(240, 24);
+            this.btnIssueCode.Name = "btnIssueCode";
+            this.btnIssueCode.Size = new System.Drawing.Size(100, 50);
+            this.btnIssueCode.TabIndex = 3;
+            this.btnIssueCode.Text = "Issue Code";
+            this.btnIssueCode.UseVisualStyleBackColor = true;
+            this.btnIssueCode.Click += new System.EventHandler(this.btnIssueCode_Click);
             // 
             // btnSupplier
             // 
@@ -506,20 +523,10 @@
             this.tab_Request.Location = new System.Drawing.Point(4, 25);
             this.tab_Request.Name = "tab_Request";
             this.tab_Request.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Request.Size = new System.Drawing.Size(686, 406);
+            this.tab_Request.Size = new System.Drawing.Size(686, 405);
             this.tab_Request.TabIndex = 1;
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
-            // 
-            // btnSetting
-            // 
-            this.btnSetting.Location = new System.Drawing.Point(20, 338);
-            this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(100, 50);
-            this.btnSetting.TabIndex = 13;
-            this.btnSetting.Text = "Setting";
-            this.btnSetting.UseVisualStyleBackColor = true;
-            this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
             // PCForm
             // 
@@ -536,7 +543,7 @@
             this.Text = "PC Management";
             this.tittle = "FormCommon";
             this.Controls.SetChildIndex(this.grt_Main, 0);
-            this.pnlSetting.ResumeLayout(false);
+            this.pnlMainStock.ResumeLayout(false);
             this.pnlRequest.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).EndInit();
             this.panel10.ResumeLayout(false);
@@ -545,10 +552,10 @@
             this.grt_Main.ResumeLayout(false);
             this.tab_Menu.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
+            this.pnlAdminManagement.ResumeLayout(false);
+            this.pnlDataLogs.ResumeLayout(false);
+            this.pnlSetting.ResumeLayout(false);
+            this.pnlPCManagement.ResumeLayout(false);
             this.tab_Request.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -556,7 +563,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlSetting;
+        private System.Windows.Forms.Panel pnlMainStock;
         private System.Windows.Forms.Button btnStockDetail;
         private System.Windows.Forms.Button btnStockOut;
         private System.Windows.Forms.Button btnStockIn;
@@ -576,13 +583,13 @@
         private System.Windows.Forms.Button btnRequestLog;
         private System.Windows.Forms.TabPage tab_Request;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel pnlDataLogs;
+        private System.Windows.Forms.Panel pnlAdminManagement;
+        private System.Windows.Forms.Panel pnlPCManagement;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel pnlSetting;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnUserPosition;
         private System.Windows.Forms.Panel panel10;

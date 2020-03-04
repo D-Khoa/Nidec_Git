@@ -76,12 +76,12 @@ namespace PC_QRCodeSystem.View
         {
             printItem.PrintAnItem(new PrintItem
             {
-                Item_Number = "ABC-123",
-                Item_Name = "XXX YYY ZZZ",
-                SupplierName = "Abcde fghij klmno pqrst uvwyz",
-                Invoice = "ABC0123456",
-                Delivery_Date = DateTime.Parse("2020-02-20"),
-                Delivery_Qty = 1000000,
+                Item_Number = txtItemCDTest.Text,
+                Item_Name = txtItemNameTest.Text,
+                SupplierName = txtSupplierTest.Text,
+                Invoice = txtInvoiceTest.Text,
+                Delivery_Date = dtpDateTest.Value,
+                Delivery_Qty = int.Parse(txtQtyTest.Text),
                 Label_Qty = 1
             }, false);
         }
@@ -136,6 +136,12 @@ namespace PC_QRCodeSystem.View
         {
             settingItem.DefaultSetting();
             SetField();
+        }
+
+        private void txtQtyTest_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
         #endregion
     }

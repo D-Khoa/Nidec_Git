@@ -26,6 +26,59 @@ namespace PC_QRCodeSystem.Model
 
         #region QUERY DATA
         /// <summary>
+        /// Search list plan
+        /// </summary>
+        /// <param name="inItem">info want search</param>
+        public void Search(pts_plan inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            listPlan = new BindingList<pts_plan>();
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT plan_id, plan_cd, destination_cd, model_cd, set_number, plan_date, plan_usercd, plan_qty, delivery_date, comment ";
+            query += "FROM pts_plan WHERE 1=1 ";
+            if (inItem.plan_id > 0)
+                query += "AND plan_id ='" + inItem.plan_id + "' ";
+            if (!string.IsNullOrEmpty(inItem.plan_cd))
+                query += "AND plan_cd ='" + inItem.plan_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.destination_cd))
+                query += "AND destination_cd ='" + inItem.destination_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.model_cd))
+                query += "AND model_cd ='" + inItem.model_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.set_number))
+                query += "AND set_number like '" + inItem.set_number.Remove(inItem.set_number.Length - 1) + "%' ";
+            if (!string.IsNullOrEmpty(inItem.plan_usercd))
+                query += "AND plan_usercd ='" + inItem.plan_usercd + "' ";
+            query += "ORDER BY plan_id";
+            //Execute reader for read database
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            query = string.Empty;
+            //Get an item
+            while (reader.Read())
+            {
+                pts_plan outItem = new pts_plan
+                {
+                    plan_id = (int)reader["plan_id"],
+                    plan_cd = reader["plan_cd"].ToString(),
+                    destination_cd = reader["destination_cd"].ToString(),
+                    model_cd = reader["model_cd"].ToString(),
+                    set_number = reader["set_number"].ToString(),
+                    plan_date = (DateTime)reader["plan_date"],
+                    plan_usercd = reader["plan_usercd"].ToString(),
+                    plan_qty = (double)reader["plan_qty"],
+                    delivery_date = (DateTime)reader["delivery_date"],
+                    comment = reader["comment"].ToString(),
+                };
+                listPlan.Add(outItem);
+            }
+            reader.Close();
+            SQL.Close();
+        }
+
+        /// <summary>
         /// Search list plan of PC
         /// </summary>
         /// <param name="inItem">input search info plan</param>
