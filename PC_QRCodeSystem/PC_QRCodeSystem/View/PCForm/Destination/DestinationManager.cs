@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -15,10 +14,8 @@ namespace PC_QRCodeSystem.View
         m_department ptsdept { get; set; }
         pts_destination destcbm { get; set; }
         pts_destination ptsdest { get; set; }
-        m_department deptdata { get; set; }
         m_mes_user userposition { get; set; }
         m_mes_user userpositioncbm { get; set; }
-        Stopwatch stopWatch = new Stopwatch();
 
         #endregion
 
@@ -30,7 +27,6 @@ namespace PC_QRCodeSystem.View
             ptsdept = new m_department();
             destcbm = new pts_destination();
             ptsdest = new pts_destination();
-            deptdata = new m_department();
             userposition = new m_mes_user();
             userpositioncbm = new m_mes_user();
             editMode = false;
@@ -61,7 +57,6 @@ namespace PC_QRCodeSystem.View
         }
         #endregion
         #region EVENT CHANGE TEXT ON FIELDS
-
         private void cmbDepartmentCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -109,20 +104,7 @@ namespace PC_QRCodeSystem.View
         #region MAIN BUTTON
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                this.Cursor = Cursors.WaitCursor;
-                stopWatch.Restart();
-                UpdateGrid(true);
-                stopWatch.Stop();
-                tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-            this.Cursor = Cursors.Default;
-
+            UpdateGrid(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -280,55 +262,43 @@ namespace PC_QRCodeSystem.View
             cmbDepartmentCode.DisplayMember = "dept_cd";
             cmbDepartmentCode.ValueMember = "dept_name";
             cmbDepartmentCode.Text = null;
-            cmbDepartmentCode.DropDownStyle = ComboBoxStyle.DropDown;
             destcbm.GetListDestination(string.Empty, string.Empty);
             cmbDestinationCode.DataSource = destcbm.listdestination;
             cmbDestinationCode.DisplayMember = "destination_cd";
             cmbDestinationCode.ValueMember = "destination_name";
             cmbDestinationCode.Text = null;
-            cmbDestinationCode.DropDownStyle = ComboBoxStyle.DropDown;
             firstload = false;
         }
         private void UpdateGrid(bool isSearch)
         {
-            try
+            if (rbtnDepartMent.Checked)
             {
-                if (rbtnDepartMent.Checked)
-                {
-                    if (isSearch)
-                        ptsdept.GetListDepartment();
-                    dgvData.DataSource = null;
-                    dgvData.DataSource = ptsdept.listDept;
-                    dgvData.Columns["dept_cd"].HeaderText = "Dept CD";
-                    dgvData.Columns["dept_name"].HeaderText = "Dept Name";
-                    dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
-                    dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
-                    tsDesTotal.Text = dgvData.Rows.Count.ToString();
-                }
-                isSearch = false;
-                if (rbtnDestinationCode.Checked)
-                {
-                    if (isSearch)
-                        ptsdest.GetListDestination(string.Empty, string.Empty);
-                    dgvData.DataSource = null;
-                    dgvData.DataSource = ptsdest.listdestination;
-                    dgvData.Columns["destination_id"].HeaderText = "Destination ID";
-                    dgvData.Columns["destination_cd"].HeaderText = "Destination CD";
-                    dgvData.Columns["destination_name"].HeaderText = "Destination Name";
-                    dgvData.Columns["dept_cd"].HeaderText = "Dept CD";
-                    dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
-                    dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
-                    tsDesTotal.Text = dgvData.Rows.Count.ToString();
-                }
-                dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
-                isSearch = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+                if (isSearch)
+                    ptsdept.GetListDepartment();
+                dgvData.DataSource = null;
+                dgvData.DataSource = ptsdept.listDept;
+                dgvData.Columns["dept_cd"].HeaderText = "Dept CD";
+                dgvData.Columns["dept_name"].HeaderText = "Dept Name";
+                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
 
+            }
+            if (rbtnDestinationCode.Checked)
+            {
+                if (isSearch)
+                    ptsdest.GetListDestination(string.Empty, string.Empty);
+                dgvData.DataSource = null;
+                dgvData.DataSource = ptsdest.listdestination;
+                dgvData.Columns["destination_id"].HeaderText = "Destination ID";
+                dgvData.Columns["destination_cd"].HeaderText = "Destination CD";
+                dgvData.Columns["destination_name"].HeaderText = "Destination Name";
+                dgvData.Columns["dept_cd"].HeaderText = "Dept CD";
+                dgvData.Columns["registration_user_cd"].HeaderText = "Registration User";
+                dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
+            }
+            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            isSearch = false;
+        }
         private void ClearFields()
         {
             cmbDepartmentCode.Text = null;
@@ -435,7 +405,6 @@ namespace PC_QRCodeSystem.View
                 rbtnDestinationCode.BackColor = System.Drawing.Color.Yellow;
             }
         }
-
 
         #endregion
 

@@ -19,10 +19,7 @@ namespace PC_QRCodeSystem.Model
         public BindingList<m_department> listDept { get; set; }
         #endregion
 
-        public m_department()
-        {
-            listDept = new BindingList<m_department>();
-        }
+       
         /// <summary>
         /// Get all department
         /// </summary>
@@ -31,7 +28,7 @@ namespace PC_QRCodeSystem.Model
             //SQL library
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            listDept = new BindingList<m_department>();
+            listDept = new BindingList <m_department>();
             //Open SQL connection
             SQL.Open();
             //SQL query string
@@ -81,7 +78,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE m_department SET dept_cd='" + updept.dept_cd + "',dept_name = '" + updept.dept_name;
+            query = "UPDATE m_department SET dept_cd='" + updept.dept_cd+ "',dept_name = '" + updept.dept_name;
             query += "', registration_user_cd ='" + updept.registration_user_cd;
             query += "', registration_date_time = now() where dept_id ='" + updept.dept_id + "'";
             //Execute non query for read database

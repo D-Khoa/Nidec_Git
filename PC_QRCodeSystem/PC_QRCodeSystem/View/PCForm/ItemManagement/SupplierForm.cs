@@ -95,7 +95,6 @@ namespace PC_QRCodeSystem.View
             {
                 this.Cursor = Cursors.WaitCursor;
                 stopWatch.Restart();
-                Searcheven(true);
                 stopWatch.Stop();
                 tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
             }
@@ -104,7 +103,7 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
             this.Cursor = Cursors.Default;
-            
+            Searcheven(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -200,7 +199,6 @@ namespace PC_QRCodeSystem.View
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
             cmbSupplierCode.Text = null;
-            cmbSupplierCode.DropDownStyle = ComboBoxStyle.DropDown;
             txtSupplierName.Text = "Supplier Name";
             txtSupplierTelephone.Text = "Telephone";
             txtFaxNumber.Text = "Fax Number";

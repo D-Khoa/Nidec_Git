@@ -20,11 +20,7 @@ namespace PC_QRCodeSystem.Model
         public DateTime registration_date_time { get; set; }
         public List<pts_issue_code> listIssueCode { get; set; }
         #endregion
-        
-        public pts_issue_code()
-        {
-            listIssueCode = new List<pts_issue_code>();
-        }
+
         /// <summary>
         /// Get infomation of an issue code
         /// </summary>
@@ -44,7 +40,6 @@ namespace PC_QRCodeSystem.Model
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
             //Get an item
-            reader.Read();
             pts_issue_code outItem = new pts_issue_code
             {
                 issue_cd = (int)reader["issue_cd"],
