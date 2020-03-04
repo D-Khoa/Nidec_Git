@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -104,6 +103,7 @@ namespace PC_QRCodeSystem.View
             {
                 this.Cursor = Cursors.WaitCursor;
                 stopWatch.Restart();
+                UpdateGrid(true);
                 stopWatch.Stop();
                 tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
             }
@@ -112,7 +112,7 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
             this.Cursor = Cursors.Default;
-            UpdateGrid(true);
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

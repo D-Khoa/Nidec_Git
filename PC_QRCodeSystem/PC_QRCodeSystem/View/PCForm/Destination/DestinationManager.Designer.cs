@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtGMUserName = new System.Windows.Forms.TextBox();
             this.txtMUserName = new System.Windows.Forms.TextBox();
             this.txtGMUserCode = new System.Windows.Forms.TextBox();
@@ -47,16 +48,19 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsDesTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel4.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.panel5.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel4
@@ -76,10 +80,21 @@
             this.panel4.Controls.Add(this.cmbDestinationCode);
             this.panel4.Controls.Add(this.cmbDepartmentCode);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(145, 69);
+            this.panel4.Location = new System.Drawing.Point(150, 70);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(639, 148);
+            this.panel4.Size = new System.Drawing.Size(634, 148);
             this.panel4.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(90, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 17);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Manager";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtGMUserName
             // 
@@ -232,19 +247,18 @@
             this.pnlButtons.Controls.Add(this.btnUpdate);
             this.pnlButtons.Controls.Add(this.btnDelete);
             this.pnlButtons.Controls.Add(this.btnSearch);
-            this.pnlButtons.Controls.Add(this.btnClose);
             this.pnlButtons.Controls.Add(this.btnAdd);
             this.pnlButtons.Controls.Add(this.btnClear);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlButtons.Location = new System.Drawing.Point(145, 217);
+            this.pnlButtons.Location = new System.Drawing.Point(150, 218);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(639, 60);
+            this.pnlButtons.Size = new System.Drawing.Size(634, 53);
             this.pnlButtons.TabIndex = 3;
             // 
             // btnUpdate
             // 
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(220, 5);
+            this.btnUpdate.Location = new System.Drawing.Point(280, 6);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(80, 40);
             this.btnUpdate.TabIndex = 26;
@@ -255,7 +269,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(320, 5);
+            this.btnDelete.Location = new System.Drawing.Point(400, 6);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 40);
             this.btnDelete.TabIndex = 27;
@@ -266,7 +280,7 @@
             // btnSearch
             // 
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(20, 5);
+            this.btnSearch.Location = new System.Drawing.Point(40, 6);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 40);
             this.btnSearch.TabIndex = 20;
@@ -274,21 +288,10 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnClose
-            // 
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(520, 5);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(80, 40);
-            this.btnClose.TabIndex = 25;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(120, 5);
+            this.btnAdd.Location = new System.Drawing.Point(160, 6);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(80, 40);
             this.btnAdd.TabIndex = 21;
@@ -299,7 +302,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(420, 6);
+            this.btnClear.Location = new System.Drawing.Point(520, 6);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(80, 39);
             this.btnClear.TabIndex = 24;
@@ -331,26 +334,50 @@
             this.panel5.Size = new System.Drawing.Size(639, 205);
             this.panel5.TabIndex = 5;
             // 
-            // label5
+            // statusStrip1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(90, 83);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 17);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Manager";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsTime,
+            this.toolStripStatusLabel2,
+            this.tsDesTotal});
+            this.statusStrip1.Location = new System.Drawing.Point(150, 458);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(634, 24);
+            this.statusStrip1.TabIndex = 19;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsTime
+            // 
+            this.tsTime.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.tsTime.Name = "tsTime";
+            this.tsTime.Size = new System.Drawing.Size(535, 19);
+            this.tsTime.Spring = true;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(44, 19);
+            this.toolStripStatusLabel2.Text = "Total :";
+            // 
+            // tsDesTotal
+            // 
+            this.tsDesTotal.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsDesTotal.Name = "tsDesTotal";
+            this.tsDesTotal.Size = new System.Drawing.Size(40, 19);
+            this.tsDesTotal.Text = "None";
             // 
             // DestinationManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 482);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.panel4);
             this.dept = "";
+            this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "DestinationManager";
@@ -362,12 +389,16 @@
             this.Controls.SetChildIndex(this.panel4, 0);
             this.Controls.SetChildIndex(this.pnlButtons, 0);
             this.Controls.SetChildIndex(this.panel5, 0);
+            this.Controls.SetChildIndex(this.statusStrip1, 0);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.panel5.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -383,7 +414,6 @@
         private System.Windows.Forms.RadioButton rbtnDestinationCode;
         private System.Windows.Forms.RadioButton rbtnDepartMent;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnOK;
@@ -398,5 +428,9 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel tsDesTotal;
     }
 }

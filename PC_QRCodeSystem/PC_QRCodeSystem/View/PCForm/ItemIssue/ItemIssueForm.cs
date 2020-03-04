@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,14 +19,17 @@ namespace PC_QRCodeSystem.View
         bool editMode { get; set; }
         pts_issue_code ptsissuecode { get; set; }
         pts_issue_code ptsissuecodecbm { get; set; }
+        private pts_issue_code issuedata { get; set; }
+        Stopwatch stopWatch = new Stopwatch();
         #endregion
         #region LOAD FORM AND CLOSE FORM
         public ItemIssueForm()
-            
+
         {
             InitializeComponent();
             ptsissuecode = new pts_issue_code();
             ptsissuecodecbm = new pts_issue_code();
+            issuedata = new pts_issue_code();
             editMode = false;
             btnOK.Visible = false;
             btnCancel.Visible = false;
@@ -59,32 +63,47 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-#region Change Commobox
-        private void cmbIssueCode_SelectedIndexChanged(object sender, EventArgs e)
+        #region Change Commobox
+        private void cmbIssueCode_TextChanged(object sender, EventArgs e)
         {
+            txtIssueCode.BackColor = Color.White;
+            if (string.IsNullOrEmpty(cmbIssueCode.Text))
+            {
+                txtIssueCode.Text = "Issue Name";
+                return;
+            }
             try
             {
-                if (!string.IsNullOrEmpty(cmbIssueCode.Text))
-                    txtIssueCode.Text = cmbIssueCode.SelectedValue.ToString();
-                else
-                    txtIssueCode.Text = "Issue Name";
-
+                ptsissuecode = issuedata.GetIssueCode(int.Parse(cmbIssueCode.Text));
+                txtIssueCode.Text = ptsissuecode.issue_name;
+                txtIssueCode.BackColor = Color.Lime;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtIssueCode.Text = "";
+                txtIssueCode.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
         }
+
         #endregion
-        /// <summary>
-        /// MAIN BUTTON
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-#region MAIN BUTTON
+
+        #region MAIN BUTTON
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            Searcheven();
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                stopWatch.Restart();
+                Searcheven(true);
+                stopWatch.Stop();
+                tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+            this.Cursor = Cursors.Default;
+           
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -92,21 +111,13 @@ namespace PC_QRCodeSystem.View
             UnlockFields(false);
 
         }
-        /// <summary>
-        /// Button Update
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             cmbIssueCode.Enabled = false;
             UnlockFields(true);
         }
-        /// <summary>
-        /// Button Delete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("This action is not undo" + Environment.NewLine + "Are you sure delete this item issue?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
@@ -120,30 +131,18 @@ namespace PC_QRCodeSystem.View
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
         }
-        /// <summary>
-        /// Button Clear
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             cmbIssueCode.Enabled = true;
             ClearOK();
         }
-        /// <summary>
-        /// Button Close
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-/// <summary>
-/// Button Ok Update
-/// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             try
@@ -154,10 +153,10 @@ namespace PC_QRCodeSystem.View
                 {
                     if (editMode)
                     {  //CALL FUNTION UPDATE SUPPLIER
-                       
+
                         n = ptsissuecode.UpdateIssueCode(new pts_issue_code
                         {
-                            
+
                             issue_cd = int.Parse(cmbIssueCode.Text),
                             issue_name = txtIssueCode.Text,
                             registration_user_cd = UserData.usercode
@@ -194,32 +193,30 @@ namespace PC_QRCodeSystem.View
             LockAllNameTextbox();
 
         }
-        /// <summary>
-        /// Button Cancel
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            LockAllNameTextbox();
+            // LockAllNameTextbox();
+            txtIssueCode.Text = "Issue Name";
+            cmbIssueCode.Text = null;
+            cmbIssueCode.DropDownStyle = ComboBoxStyle.DropDown;
             cmbIssueCode.Enabled = true;
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
+            btnCancel.Visible = false;
+            btnOK.Visible = false;
+
         }
         #endregion
         #region SUB PROGRAM
-        /// <summary>
-        /// Sub Program Update data
-        /// </summary>
+
         private void UpdateGrid()
         {
             ptsissuecode.GetListIssueCode();
             dgvIssueCode.DataSource = null;
             dgvIssueCode.DataSource = ptsissuecode.listIssueCode;
         }
-        /// <summary>
-        /// Sub program Clear Show datagrirview
-        /// </summary>
+
         private void ClearOK()
         {
             try
@@ -227,7 +224,7 @@ namespace PC_QRCodeSystem.View
                 if (dgvIssueCode.DataSource != null)
                     dgvIssueCode.DataSource = null;
                 cmbIssueCode.Text = null;
-                txtIssueCode.Text = null;
+                txtIssueCode.Text = "Issue Name";
                 ptsissuecode.listIssueCode.Clear();
                 btnUpdate.Enabled = false;
                 btnDelete.Enabled = false;
@@ -239,9 +236,7 @@ namespace PC_QRCodeSystem.View
             }
 
         }
-        /// <summary>
-        /// Get commobox from database
-        /// </summary>
+
         private void Getcmbdata()
         {
             ptsissuecodecbm.GetListIssueCode();
@@ -253,11 +248,27 @@ namespace PC_QRCodeSystem.View
         /// <summary>
         /// Search even datagridview
         /// </summary>
-        private void Searcheven()
+        private void Searcheven(bool iSSearch)
         {
-            ptsissuecode.GetListIssueCode();
-            dgvIssueCode.DataSource = null;
-            dgvIssueCode.DataSource = ptsissuecode.listIssueCode;
+            if (iSSearch)
+            {
+                if (!string.IsNullOrEmpty(cmbIssueCode.Text))
+                {
+                    ptsissuecode.listIssueCode.Clear();
+                    ptsissuecode.listIssueCode.Add(ptsissuecode.GetIssueCode(int.Parse(cmbIssueCode.Text)));
+                    dgvIssueCode.DataSource = null;
+                    dgvIssueCode.DataSource = ptsissuecode.listIssueCode;
+                    tsIssueTotal.Text = dgvIssueCode.Rows.Count.ToString();
+                }
+                else
+                {
+                    ptsissuecode.GetListIssueCode();
+                    dgvIssueCode.DataSource = null;
+                    dgvIssueCode.DataSource = ptsissuecode.listIssueCode;
+                    tsIssueTotal.Text = dgvIssueCode.Rows.Count.ToString();
+                }
+            }
+
         }
         /// <summary>
         /// Lock Textbox
@@ -273,10 +284,6 @@ namespace PC_QRCodeSystem.View
 
         }
 
-        /// <summary>
-        /// Unlock all fields of items
-        /// </summary>
-        /// <param name="edit"></param>
         private void UnlockFields(bool edit)
         {
             editMode = edit;
@@ -287,11 +294,7 @@ namespace PC_QRCodeSystem.View
             btnCancel.Visible = true;
             pnlButtons.Enabled = true;
         }
-        /// <summary>
-        /// Double click datagridview
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void dgvIssueCode_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             ptsissuecode = dgvIssueCode.Rows[e.RowIndex].DataBoundItem as pts_issue_code;
@@ -299,7 +302,10 @@ namespace PC_QRCodeSystem.View
             btnUpdate.Enabled = true;
             btnDelete.Enabled = true;
         }
+
         #endregion
+
+
     }
 }
 
