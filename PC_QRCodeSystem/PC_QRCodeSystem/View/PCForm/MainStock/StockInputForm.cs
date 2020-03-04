@@ -437,13 +437,13 @@ namespace PC_QRCodeSystem.View
             {
                 if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
-                    MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Printer is offline");
                     return;
                 }
                 listPrintItem.Clear();
                 if (dgvPrintList.SelectedRows.Count <= 0)
                 {
-                    MessageBox.Show("Please choose item first!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    CustomMessageBox.Notice("Please choose item first!");
                     return;
                 }
                 foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
@@ -452,11 +452,11 @@ namespace PC_QRCodeSystem.View
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
                 if (printItem.PrintItems(listPrintItem, false))
-                    MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Print items are completed!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -466,13 +466,13 @@ namespace PC_QRCodeSystem.View
             {
                 if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
-                    MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Printer is offline");
                     return;
                 }
                 listPrintItem.Clear();
                 if (dgvPrintList.Rows.Count == 0)
                 {
-                    MessageBox.Show("Don't have item to print!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomMessageBox.Error("Don't have item to print!");
                     return;
                 }
                 foreach (DataGridViewRow dr in dgvPrintList.Rows)
@@ -481,11 +481,11 @@ namespace PC_QRCodeSystem.View
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
                 if (printItem.PrintItems(listPrintItem, false))
-                    MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Print items are completed!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -495,13 +495,13 @@ namespace PC_QRCodeSystem.View
             {
                 if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
-                    MessageBox.Show("Printer is offline", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Printer is offline");
                     return;
                 }
                 listPrintItem.Clear();
                 if (dgvPrintList.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Please choose item first!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    CustomMessageBox.Notice("Please choose item first!");
                     return;
                 }
                 foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
@@ -510,11 +510,11 @@ namespace PC_QRCodeSystem.View
                     dr.DefaultCellStyle.BackColor = Color.Yellow;
                 }
                 if (printItem.PrintItems(listPrintItem, true))
-                    MessageBox.Show("Print items are completed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.Notice("Print items are completed!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -560,7 +560,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (MessageBox.Show("Are you sure register this list?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                if (CustomMessageBox.Question("Are you sure register this list?") == DialogResult.No)
                     return;
                 for (int i = 0; i < dgvInspection.Rows.Count; i++)
                 {
@@ -575,22 +575,7 @@ namespace PC_QRCodeSystem.View
                     }
                     catch (Exception ex)
                     {
-                        //If item already exists, skip it and set color it to red.
-                        string errorNo = ex.Message.Split(':')[0];
-                        switch (errorNo)
-                        {
-                            case "23505":
-                                MessageBox.Show("This package already exists." + Environment.NewLine + "Please check and try again!",
-                                    "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                break;
-                            case "23503":
-                                MessageBox.Show("This Item Number is not exist in database!" + Environment.NewLine
-                                    + "Please check and try again!", "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                break;
-                            default:
-                                MessageBox.Show(ex.Message, "Error - " + errorNo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                break;
-                        }
+                        CustomMessageBox.Error(ex.Message);
                         dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                         continue;
                     }
@@ -616,7 +601,7 @@ namespace PC_QRCodeSystem.View
             {
                 foreach (DataGridViewCell dc in dgvInspection.SelectedCells)
                 {
-                    if (MessageBox.Show("Are you sure delete this item?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (CustomMessageBox.Warring("Are you sure delete this item?") == DialogResult.Yes)
                     {
                         //Search item want to delete
                         stockItem = dgvInspection.Rows[dc.RowIndex].DataBoundItem as pts_stock;
@@ -636,7 +621,7 @@ namespace PC_QRCodeSystem.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
             UpdateInspectionGrid();
             txtBarcode.Focus();
@@ -644,7 +629,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnInspectionClear_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("This list is not register. Are you sure to clear all?", "Warring", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (CustomMessageBox.Warring("This list is not register. Are you sure to clear all?") == DialogResult.No)
                 return;
             txtBarcode.Clear();
             txtSupplierCD.Clear();
@@ -873,11 +858,11 @@ namespace PC_QRCodeSystem.View
             }
             catch (IndexOutOfRangeException)
             {
-                MessageBox.Show("Wrong format barcode!" + Environment.NewLine + "Please check barcode and try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error("Wrong format barcode!" + Environment.NewLine + "Please check barcode and try again!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 

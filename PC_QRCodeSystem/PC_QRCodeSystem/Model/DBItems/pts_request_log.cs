@@ -12,6 +12,7 @@ namespace PC_QRCodeSystem.Model
     {
         #region FIELDS OF REQUEST
         public int request_id { get; set; }
+        public string request_cd { get; set; }
         public string item_cd { get; set; }
         public string model_cd { get; set; }
         public string destination_cd { get; set; }
@@ -27,6 +28,10 @@ namespace PC_QRCodeSystem.Model
         public string comment { get; set; }
         public string remark { get; set; }
         public BindingList<pts_request_log> listRequestItem { get; set; }
+        public pts_request_log()
+        {
+            listRequestItem = new BindingList<pts_request_log>();
+        }
         #endregion
 
         /// <summary>
@@ -45,8 +50,10 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT request_id, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_usercd, ";
+            query = "SELECT request_id, request_cd, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_usercd, ";
             query += "m_confirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment, remark FROM pts_request_log WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.request_cd))
+                query += "and request_cd ='" + inItem.request_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.item_cd))
                 query += "and item_cd ='" + inItem.item_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.model_cd))
@@ -70,6 +77,7 @@ namespace PC_QRCodeSystem.Model
                 pts_request_log outItem = new pts_request_log
                 {
                     request_id = (int)reader["request_id"],
+                    request_cd = reader["request_cd"].ToString(),
                     item_cd = reader["item_cd"].ToString(),
                     model_cd = reader["model_cd"].ToString(),
                     destination_cd = reader["destination_cd"].ToString(),
@@ -102,8 +110,10 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "SELECT request_id, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_usercd, ";
+            query = "SELECT request_id, request_cd, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, request_usercd, ";
             query += "m_confirm, gm_confirm, available_qty, approve_usercd, pc_m_cofirm, comment, remark FROM pts_request_log WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.request_cd))
+                query += "and request_cd ='" + inItem.request_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.item_cd))
                 query += "and item_cd ='" + inItem.item_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.model_cd))
@@ -127,6 +137,7 @@ namespace PC_QRCodeSystem.Model
                 pts_request_log outItem = new pts_request_log
                 {
                     request_id = (int)reader["request_id"],
+                    request_cd = reader["request_cd"].ToString(),
                     item_cd = reader["item_cd"].ToString(),
                     model_cd = reader["model_cd"].ToString(),
                     destination_cd = reader["destination_cd"].ToString(),
@@ -163,9 +174,9 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "INSERT INTO pts_request_log(item_cd, model_cd, destination_cd, use_date, request_date, request_qty, ";
+            query = "INSERT INTO pts_request_log(request_cd, item_cd, model_cd, destination_cd, use_date, request_date, request_qty, ";
             query += "request_usercd, comment, remark) ";
-            query += "VALUES('" + inItem.item_cd + "','" + inItem.model_cd + "','" + inItem.destination_cd + "','";
+            query += "VALUES('" + inItem.request_cd + "','" + inItem.item_cd + "','" + inItem.model_cd + "','" + inItem.destination_cd + "','";
             query += inItem.use_date + "','" + inItem.request_date + "','" + inItem.request_qty + "','";
             query += inItem.request_usercd + "','" + inItem.comment + "','" + inItem.remark + "')";
             //Execute non query for insert database
@@ -184,7 +195,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_request_log SET item_cd ='" + inItem.item_cd + "', model_cd ='" + inItem.model_cd;
+            query = "UPDATE pts_request_log SET request_cd ='" + inItem.request_cd + "', item_cd ='" + inItem.item_cd + "', model_cd ='" + inItem.model_cd;
             query += "', destination_cd ='" + inItem.destination_cd + "', use_date ='" + inItem.use_date + "', request_date ='";
             query += inItem.request_date + "', request_qty ='" + inItem.request_qty + "', request_usercd ='";
             query += inItem.request_usercd + "', comment ='" + inItem.comment;

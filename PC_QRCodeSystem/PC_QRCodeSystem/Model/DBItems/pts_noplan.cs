@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -25,6 +23,49 @@ namespace PC_QRCodeSystem.Model
         #endregion
 
         #region QUERY
+        public void Search(pts_noplan inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT noplan_id, noplan_cd, destination_cd, item_cd, noplan_qty, noplan_usercd, noplan_date ";
+            query += "FROM pts_noplan WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.noplan_cd))
+                query += "AND noplan_cd ='" + inItem.noplan_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.destination_cd))
+                query += "AND destination_cd ='" + inItem.destination_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.item_cd))
+                query += "AND item_cd ='" + inItem.item_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.noplan_usercd))
+                query += "AND noplan_usercd ='" + inItem.noplan_usercd + "' ";
+            query += "ORDER BY noplan_id";
+            //Execute reader for read database
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            //Clear query
+            query = string.Empty;
+            //Read data into list
+            while (reader.Read())
+            {
+                pts_noplan outItem = new pts_noplan
+                {
+                    noplan_id = (int)reader["noplan_id"],
+                    noplan_cd = reader["noplan_cd"].ToString(),
+                    destination_cd = reader["destination_cd"].ToString(),
+                    item_cd = reader["item_cd"].ToString(),
+                    noplan_qty = (double)reader["noplan_qty"],
+                    noplan_usercd = reader["noplan_usercd"].ToString(),
+                    noplan_date = (DateTime)reader["noplan_date"],
+                };
+                listNoPlan.Add(outItem);
+            }
+            //Close reader and connection
+            reader.Close();
+            SQL.Close();
+        }
+
         public int AddItem(pts_noplan inItem)
         {
             //SQL library

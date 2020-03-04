@@ -30,14 +30,17 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtProcessCD = new System.Windows.Forms.TextBox();
+            this.btnClear = new System.Windows.Forms.Button();
             this.cbSearchDate = new System.Windows.Forms.CheckBox();
+            this.btnExport = new System.Windows.Forms.Button();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.txtSetNumber = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtWHQty = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtInvoice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,14 +55,11 @@
             this.cmbDestination = new System.Windows.Forms.ComboBox();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtProcessCD = new System.Windows.Forms.TextBox();
+            this.dgvProcess = new System.Windows.Forms.DataGridView();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProcess)).BeginInit();
             this.SuspendLayout();
             // 
             // panel6
@@ -75,8 +75,6 @@
             this.panel6.Controls.Add(this.dtpFromDate);
             this.panel6.Controls.Add(this.label6);
             this.panel6.Controls.Add(this.txtSetNumber);
-            this.panel6.Controls.Add(this.label5);
-            this.panel6.Controls.Add(this.txtWHQty);
             this.panel6.Controls.Add(this.label4);
             this.panel6.Controls.Add(this.txtInvoice);
             this.panel6.Controls.Add(this.label1);
@@ -97,6 +95,32 @@
             this.panel6.Size = new System.Drawing.Size(734, 220);
             this.panel6.TabIndex = 2;
             // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(480, 130);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 20);
+            this.label2.TabIndex = 46;
+            this.label2.Text = "Process Code";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtProcessCD
+            // 
+            this.txtProcessCD.Location = new System.Drawing.Point(580, 130);
+            this.txtProcessCD.Name = "txtProcessCD";
+            this.txtProcessCD.Size = new System.Drawing.Size(120, 22);
+            this.txtProcessCD.TabIndex = 45;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(320, 160);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(80, 50);
+            this.btnClear.TabIndex = 5;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // cbSearchDate
             // 
             this.cbSearchDate.Location = new System.Drawing.Point(480, 70);
@@ -107,15 +131,35 @@
             this.cbSearchDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cbSearchDate.UseVisualStyleBackColor = true;
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(220, 160);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(80, 50);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // dtpToDate
             // 
             this.dtpToDate.CustomFormat = "yyyy-MM-dd";
-            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpToDate.Location = new System.Drawing.Point(580, 100);
             this.dtpToDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(120, 22);
             this.dtpToDate.TabIndex = 44;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(120, 160);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(80, 50);
+            this.btnSearch.TabIndex = 0;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label10
             // 
@@ -131,12 +175,13 @@
             // dtpFromDate
             // 
             this.dtpFromDate.CustomFormat = "yyyy-MM-dd";
-            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFromDate.Location = new System.Drawing.Point(580, 70);
             this.dtpFromDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(120, 22);
             this.dtpFromDate.TabIndex = 43;
+            this.dtpFromDate.Value = new System.DateTime(2020, 3, 4, 0, 0, 0, 0);
             // 
             // label6
             // 
@@ -153,26 +198,6 @@
             this.txtSetNumber.Name = "txtSetNumber";
             this.txtSetNumber.Size = new System.Drawing.Size(120, 22);
             this.txtSetNumber.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(480, 160);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 20);
-            this.label5.TabIndex = 38;
-            this.label5.Text = "W/H Qty";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtWHQty
-            // 
-            this.txtWHQty.Location = new System.Drawing.Point(580, 160);
-            this.txtWHQty.Name = "txtWHQty";
-            this.txtWHQty.ReadOnly = true;
-            this.txtWHQty.Size = new System.Drawing.Size(120, 22);
-            this.txtWHQty.TabIndex = 37;
-            this.txtWHQty.TabStop = false;
-            this.txtWHQty.Text = "0";
-            this.txtWHQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
@@ -309,43 +334,13 @@
             this.label22.Text = "Destination";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnClear
-            // 
-            this.btnClear.Location = new System.Drawing.Point(320, 160);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(80, 50);
-            this.btnClear.TabIndex = 5;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(220, 160);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(80, 50);
-            this.btnExport.TabIndex = 3;
-            this.btnExport.Text = "Export";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(120, 160);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(80, 50);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // dgvData
             // 
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(150, 290);
+            this.dgvData.Location = new System.Drawing.Point(150, 364);
             this.dgvData.Margin = new System.Windows.Forms.Padding(4);
             this.dgvData.MultiSelect = false;
             this.dgvData.Name = "dgvData";
@@ -360,24 +355,24 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvData.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvData.Size = new System.Drawing.Size(734, 182);
+            this.dgvData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dgvData.Size = new System.Drawing.Size(734, 108);
             this.dgvData.TabIndex = 4;
+            this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
             // 
-            // label2
+            // dgvProcess
             // 
-            this.label2.Location = new System.Drawing.Point(480, 130);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 20);
-            this.label2.TabIndex = 46;
-            this.label2.Text = "Process Code";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtProcessCD
-            // 
-            this.txtProcessCD.Location = new System.Drawing.Point(580, 130);
-            this.txtProcessCD.Name = "txtProcessCD";
-            this.txtProcessCD.Size = new System.Drawing.Size(120, 22);
-            this.txtProcessCD.TabIndex = 45;
+            this.dgvProcess.AllowUserToAddRows = false;
+            this.dgvProcess.AllowUserToDeleteRows = false;
+            this.dgvProcess.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvProcess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProcess.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvProcess.Location = new System.Drawing.Point(150, 290);
+            this.dgvProcess.Name = "dgvProcess";
+            this.dgvProcess.ReadOnly = true;
+            this.dgvProcess.RowHeadersVisible = false;
+            this.dgvProcess.Size = new System.Drawing.Size(734, 74);
+            this.dgvProcess.TabIndex = 5;
             // 
             // StockOutLogForm
             // 
@@ -385,6 +380,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 472);
             this.Controls.Add(this.dgvData);
+            this.Controls.Add(this.dgvProcess);
             this.Controls.Add(this.panel6);
             this.dept = "";
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -397,10 +393,12 @@
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.StockOutLogForm_Load);
             this.Controls.SetChildIndex(this.panel6, 0);
+            this.Controls.SetChildIndex(this.dgvProcess, 0);
             this.Controls.SetChildIndex(this.dgvData, 0);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProcess)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -410,8 +408,6 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtSetNumber;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtWHQty;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtInvoice;
         private System.Windows.Forms.Label label1;
@@ -436,5 +432,6 @@
         private System.Windows.Forms.DateTimePicker dtpFromDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtProcessCD;
+        private System.Windows.Forms.DataGridView dgvProcess;
     }
 }

@@ -53,9 +53,9 @@
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(150, 69);
+            this.panel5.Location = new System.Drawing.Point(150, 70);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(587, 369);
+            this.panel5.Size = new System.Drawing.Size(587, 420);
             this.panel5.TabIndex = 10;
             // 
             // panel8
@@ -166,10 +166,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 438);
+            this.ClientSize = new System.Drawing.Size(737, 490);
             this.Controls.Add(this.panel5);
             this.dept = "";
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "PRODForm";

@@ -237,5 +237,11 @@ namespace PC_QRCodeSystem.View
             SettingForm settingFrm = new SettingForm();
             settingFrm.Show();
         }
+
+        private void btnStockOutLog_Click(object sender, EventArgs e)
+        {
+            StockOutLogForm stockoutLogFrm = new StockOutLogForm();
+            stockoutLogFrm.Show();
+        }
     }
 }
