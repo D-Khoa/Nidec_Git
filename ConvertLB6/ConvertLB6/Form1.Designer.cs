@@ -86,9 +86,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(20, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Source File";
+            this.label2.Text = "Save File";
             // 
             // btnOk
             // 
@@ -124,7 +124,7 @@
             this.Controls.Add(this.txtFileSource);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Convert Data File LB6";
             this.ResumeLayout(false);
             this.PerformLayout();
 

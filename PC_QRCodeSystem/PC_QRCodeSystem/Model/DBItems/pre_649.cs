@@ -130,12 +130,12 @@ namespace PC_QRCodeSystem.Model
             {
                 string line = string.Empty;
                 //Write columns
-                line = string.Join("?", properties.Select(x => x.Name));
+                line = string.Join("?", properties.Where(x => x.Name != "premac_id").Select(x => x.Name));
                 sw.WriteLine(line);
                 for (int i = 0; i < inList.Count; i++)
                 {
                     var propretiesValue = inList[i].GetType().GetProperties();
-                    line = string.Join("?", propretiesValue.Select(x => x.GetValue(inList[i], null)));
+                    line = string.Join("?", propretiesValue.Where(x => x.Name != "premac_id").Select(x => x.GetValue(inList[i], null)));
                     sw.WriteLine(line);
                 }
                 sw.Flush();

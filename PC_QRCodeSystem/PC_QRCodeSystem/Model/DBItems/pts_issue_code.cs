@@ -13,12 +13,15 @@ namespace PC_QRCodeSystem.Model
     public class pts_issue_code
     {
         #region FIELDS OF ISSUE CODE
-
         public int issue_cd { get; set; }
         public string issue_name { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public List<pts_issue_code> listIssueCode { get; set; }
+        public pts_issue_code()
+        {
+            listIssueCode = new List<pts_issue_code>();
+        }
         #endregion
 
         /// <summary>
@@ -40,6 +43,7 @@ namespace PC_QRCodeSystem.Model
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
             //Get an item
+            reader.Read();
             pts_issue_code outItem = new pts_issue_code
             {
                 issue_cd = (int)reader["issue_cd"],

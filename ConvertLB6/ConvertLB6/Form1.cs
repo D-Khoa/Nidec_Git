@@ -51,7 +51,7 @@ namespace ConvertLB6
                 cols = "barcode;JUDGE CW;JUDGE CCW;";
                 for (int i = 1; i < 21; i++)
                     cols += "data " + i + ";";
-                cols += "model" + Environment.NewLine;
+                cols += "model";
                 filecontent.Add(cols);
                 foreach (string line in File.ReadLines(txtFileSource.Text))
                 {
@@ -83,7 +83,7 @@ namespace ConvertLB6
                     if (n == 24)                                            //24
                     {
                         string temp = line.Trim();
-                        dataline += temp + Environment.NewLine;
+                        dataline += temp;
                         filecontent.Add(dataline);
                         dataline = string.Empty;
                         n = 0;

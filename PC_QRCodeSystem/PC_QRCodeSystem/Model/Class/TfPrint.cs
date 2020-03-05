@@ -207,7 +207,7 @@
         }
 
         public static void printBarCodeNew(string itemNo, string itemName, string supplier, string invoice,
-                                string date, string qty, string supplierCode, string remark)
+                                string date, string qty, string supplierCode, string remark, bool isRec)
         {
             //itemNo = "A32-164D-X";
             //itemName = "SHAFT";
@@ -308,7 +308,8 @@
             //LINE 5 - S2
             x = 5 * cell;
             y = (6 + (cell + 1) * 2 + 2) * cell;//Y=22
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 2, 1, 1, 0, "R: ");
+            if (isRec) LKBPRINT.LK_PrintDeviceFont(x, y, 0, 2, 1, 1, 0, "R: ");
+            else LKBPRINT.LK_PrintDeviceFont(x, y, 0, 2, 1, 1, 0, "O: ");
 
             x = (5 + 5) * cell;
             y = (6 + (cell + 1) * 2 + 2) * cell;//Y=22

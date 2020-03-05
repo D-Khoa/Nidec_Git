@@ -20,7 +20,10 @@ namespace PC_QRCodeSystem.Model
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public List<pts_supplier> listSupplier { get; set; }
-        StringBuilder query = new StringBuilder();
+        public pts_supplier()
+        {
+            listSupplier = new List<pts_supplier>();
+        }
         #endregion
 
         #region QUERY

@@ -69,7 +69,7 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "select * from pts_item_type where 1=1 ";
+            query = "select type_id, type_name, registration_user_cd, registration_date_time from pts_item_type where 1=1 ";
             query += "order by type_id";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();

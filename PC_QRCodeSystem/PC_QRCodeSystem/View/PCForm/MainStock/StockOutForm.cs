@@ -138,6 +138,10 @@ namespace PC_QRCodeSystem.View
                 {
                     //Get packing stockOutQty & packing code
                     stockData = dr.DataBoundItem as pts_stock;
+
+                    //If packing is empty then skip it
+                    if (stockData.packing_qty <= 0) continue;
+
                     if (string.IsNullOrEmpty(stockData.order_no)) stockData.order_no = txtNoPlanSetNumber.Text;
                     else
                     {
@@ -147,8 +151,6 @@ namespace PC_QRCodeSystem.View
                     itemData = itemData.GetItem(stockData.item_cd);
                     //Get supplier
                     supplierData = supplierData.GetSupplier(new pts_supplier { supplier_cd = stockData.supplier_cd });
-                    //If packing is empty then skip it
-                    if (stockData.packing_qty <= 0) continue;
 
                     #region ADD STOCK-OUT ITEM
                     //If stock-out qty > packing qty then stock-out next pack
@@ -186,12 +188,14 @@ namespace PC_QRCodeSystem.View
                         Delivery_Qty = temp,
                         SupplierCD = supplierData.supplier_cd,
                         //OrderNo = stockData.order_no,
+                        isRec = false,
                         Label_Qty = 1
                     });
                     //Add Output item
                     outData.listOutputItem.Add(new OutputItem
                     {
                         issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
+                        destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
                         item_number = txtNoPlanItemCD.Text,
                         item_name = itemData.item_name,
                         supplier_cd = supplierData.supplier_cd,
@@ -222,6 +226,7 @@ namespace PC_QRCodeSystem.View
                             Delivery_Qty = stockData.packing_qty,
                             SupplierCD = supplierData.supplier_cd,
                             //OrderNo = stockData.order_no,
+                            isRec = false,
                             Label_Qty = 1
                         });
                     }
@@ -232,6 +237,7 @@ namespace PC_QRCodeSystem.View
                 }
                 //Update grid in inspection tab
                 UpdateProcessGrid(0);
+                btnNoPlanInspection.Visible = true;
                 if (CustomMessageBox.Question("Successful!. Do you want go to Inspection Tab to see it?") == DialogResult.Yes)
                     tc_Main.SelectedTab = tab_Inspection;
             }

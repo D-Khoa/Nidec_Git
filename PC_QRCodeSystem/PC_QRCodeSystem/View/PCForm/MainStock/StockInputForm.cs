@@ -141,6 +141,7 @@ namespace PC_QRCodeSystem.View
                         Delivery_Qty = sizePerLot,
                         //OrderNo = dr.Cells["order_number"].Value.ToString(),
                         Remark = "P",
+                        isRec = true,
                         Label_Qty = numberOfLot
                     });
                     //If the last lot is not enough, create an odd label for it
@@ -158,6 +159,7 @@ namespace PC_QRCodeSystem.View
                             Delivery_Qty = qtymod,
                             //OrderNo = dr.Cells["order_number"].Value.ToString(),
                             Remark = "P",
+                            isRec = true,
                             Label_Qty = 1
                         });
                     }
@@ -211,6 +213,7 @@ namespace PC_QRCodeSystem.View
                             Delivery_Qty = sizePerLot,
                             //OrderNo = dr.Cells["order_number"].Value.ToString(),
                             Remark = "P",
+                            isRec = true,
                             Label_Qty = numberOfLot
                         });
                         if (sizePerLot * numberOfLot < deliveryQty)
@@ -227,6 +230,7 @@ namespace PC_QRCodeSystem.View
                                 Delivery_Qty = qtymod,
                                 //OrderNo = dr.Cells["order_number"].Value.ToString(),
                                 Remark = "P",
+                                isRec = true,
                                 Label_Qty = 1
                             });
                         }
@@ -266,6 +270,7 @@ namespace PC_QRCodeSystem.View
                         Delivery_Qty = sizePerLot,
                         //OrderNo = dr.Cells["order_number"].Value.ToString(),
                         Remark = "P",
+                        isRec = true,
                         Label_Qty = 1
                     });
                     dr.DefaultCellStyle.BackColor = Color.Yellow;
@@ -530,6 +535,7 @@ namespace PC_QRCodeSystem.View
             tc_Main.SelectedTab = tab_Main;
         }
         #endregion
+
         #region SUB EVENT
         private void UpdatePrintGrid()
         {

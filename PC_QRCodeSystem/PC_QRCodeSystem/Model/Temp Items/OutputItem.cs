@@ -11,6 +11,7 @@ namespace PC_QRCodeSystem.Model
     {
         #region ALL FIELDS
         public int issue_cd { get; set; }
+        public string destination_cd { get; set; }
         public string item_number { get; set; }
         public string item_name { get; set; }
         public string supplier_cd { get; set; }

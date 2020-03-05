@@ -82,6 +82,7 @@ namespace PC_QRCodeSystem.View
                 Invoice = txtInvoiceTest.Text,
                 Delivery_Date = dtpDateTest.Value,
                 Delivery_Qty = int.Parse(txtQtyTest.Text),
+                isRec = true,
                 Label_Qty = 1
             }, false);
         }

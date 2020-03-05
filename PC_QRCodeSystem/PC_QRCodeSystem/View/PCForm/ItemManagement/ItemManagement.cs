@@ -58,14 +58,38 @@ namespace PC_QRCodeSystem.View
                 ptsItem = ptsItem.GetItem(txtItem.Text);
                 errorProvider.SetError(txtItem, null);
                 txtItemName.Text = ptsItem.item_name;
-                cmbLocation.Text = ptsItem.item_location;
-                cmbUnitCode.Text = ptsItem.item_unit;
-                cmbItemType.Text = ptsItem.type_id.ToString();
                 UpdateGrid(ptsItem);
             }
             catch (Exception ex)
             {
                 errorProvider.SetError(txtItem, "Wrond item code!" + Environment.NewLine + ex.Message);
+            }
+        }
+
+        private void txtItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (string.IsNullOrEmpty(txtItem.Text))
+                {
+                    errorProvider.SetError(txtItem, null);
+                    txtItemName.Text = "Item Name";
+                    return;
+                }
+                try
+                {
+                    ptsItem = ptsItem.GetItem(txtItem.Text);
+                    errorProvider.SetError(txtItem, null);
+                    txtItemName.Text = ptsItem.item_name;
+                    cmbLocation.Text = ptsItem.item_location;
+                    cmbUnitCode.Text = ptsItem.item_unit;
+                    cmbItemType.Text = ptsItem.type_id.ToString();
+                    UpdateGrid(ptsItem);
+                }
+                catch (Exception ex)
+                {
+                    errorProvider.SetError(txtItem, "Wrond item code!" + Environment.NewLine + ex.Message);
+                }
             }
         }
 
@@ -144,7 +168,7 @@ namespace PC_QRCodeSystem.View
                 UpdateGrid(true);
                 CustomMessageBox.Notice("Delete " + n + " Item");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -184,11 +208,13 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                dgvData.DataSource = null;
                 //Search and get items list
                 if (rbtnItemCode.Checked)
                 {
                     if (isSearch)
                     {
+                        ptsItem.listItems.Clear();
                         //Search with item type
                         if (!string.IsNullOrEmpty(cmbItemType.Text))
                             ptsItem.SearchItem(new pts_item
@@ -207,7 +233,6 @@ namespace PC_QRCodeSystem.View
                                 item_location = cmbLocation.Text,
                             }, false);
                     }
-                    dgvData.DataSource = null;
                     dgvData.DataSource = ptsItem.listItems;
                     dgvData.Columns["item_id"].HeaderText = "Item ID";
                     dgvData.Columns["type_id"].HeaderText = "Type ID";
@@ -223,15 +248,18 @@ namespace PC_QRCodeSystem.View
                     dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
                     if (dgvData.SelectedCells.Count > 0)
                         UpdateGrid(dgvData.Rows[0].DataBoundItem as pts_item);
-                    if (dgvData.Rows.Count > 0)
-                        tsNumberTotal.Text = dgvData.Rows.Count.ToString();
                 }
                 //Search and get item type list
                 if (rbtnItemType.Checked)
                 {
                     if (isSearch)
-                        ptsItemType.GetListItemType();
-                    dgvData.DataSource = null;
+                    {
+                        ptsItemType.listItemType.Clear();
+                        if (string.IsNullOrEmpty(cmbItemType.Text))
+                            ptsItemType.GetListItemType();
+                        else
+                            ptsItemType.listItemType.Add(ptsItemType.GetItemType(int.Parse(cmbItemType.Text)));
+                    }
                     dgvData.DataSource = ptsItemType.listItemType;
                     dgvData.Columns["type_id"].HeaderText = "Type ID";
                     dgvData.Columns["type_name"].HeaderText = "Type Name";
@@ -239,6 +267,9 @@ namespace PC_QRCodeSystem.View
                     dgvData.Columns["registration_date_time"].HeaderText = "Registration Date";
                 }
                 isSearch = false;
+                if (dgvData.Rows.Count > 0)
+                    tsNumberTotal.Text = dgvData.Rows.Count.ToString();
+                dgvData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             }
             catch (Exception ex)
             {
@@ -428,8 +459,8 @@ namespace PC_QRCodeSystem.View
                 dgvItemQty.Visible = true;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
-                txtItemName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveBorder);
-                rbtnItemCode.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveBorder);
+                txtItemName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveCaption);
+                rbtnItemCode.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveCaption);
                 txtTypeName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
                 rbtnItemType.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
             }
@@ -443,8 +474,8 @@ namespace PC_QRCodeSystem.View
                 dgvItemQty.Visible = false;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItemType.listItemType;
-                txtTypeName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveBorder);
-                rbtnItemType.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveBorder);
+                txtTypeName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveCaption);
+                rbtnItemType.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ActiveCaption);
                 txtItemName.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
                 rbtnItemCode.BackColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Control);
             }
