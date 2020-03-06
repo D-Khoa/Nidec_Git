@@ -628,6 +628,12 @@ namespace BoxIdDb
             ShSQL sql = new ShSQL();
             testerTableLastMonth = tablekey + ((VBStrings.Right(DateTime.Today.ToString("yyyyMM"), 2) != "01") ?
                 (long.Parse(DateTime.Today.ToString("yyyyMM")) - 1).ToString() : (long.Parse(DateTime.Today.ToString("yyyy")) - 1).ToString() + "12");
+            string lastlasttable = tablekey + DateTime.Today.AddMonths(-2).ToString("yyyyMM");
+            if (!sql.CheckTableExist(testerTableThisMonth))
+            {
+                testerTableThisMonth = testerTableLastMonth;
+                testerTableLastMonth = lastlasttable;
+            }
             if (!sql.CheckTableExist(testerTableLastMonth))
                 testerTableLastMonth = testerTableThisMonth;
             return filterkey;

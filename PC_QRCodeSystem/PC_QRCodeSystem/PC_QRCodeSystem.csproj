@@ -90,6 +90,7 @@
     <Compile Include="Model\DBItems\pre_649.cs" />
     <Compile Include="Model\DBItems\pts_stock_log.cs" />
     <Compile Include="Model\Temp Items\OutputItem.cs" />
+    <Compile Include="Model\Temp Items\pre661.cs" />
     <Compile Include="Model\Temp Items\PrintItem.cs" />
     <Compile Include="Model\Temp Items\SettingItem.cs" />
     <Compile Include="View\Common\ChangePasswordForm.cs">

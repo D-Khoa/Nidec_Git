@@ -27,6 +27,7 @@ namespace PC_QRCodeSystem.View
             if (!File.Exists(settingItem.settingPath)) ResetDefault();
             else settingItem.LoadSetting();
             SetField();
+            LockPanel(true);
         }
         #endregion
 
@@ -86,6 +87,10 @@ namespace PC_QRCodeSystem.View
                 Label_Qty = 1
             }, false);
         }
+        private void btnPasswordOK_Click(object sender, EventArgs e)
+        {
+            if (txtPassword.Text == "admin") LockPanel(false);
+        }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -137,6 +142,14 @@ namespace PC_QRCodeSystem.View
         {
             settingItem.DefaultSetting();
             SetField();
+        }
+
+        private void LockPanel(bool isLock)
+        {
+            grPass.Visible = isLock;
+            grPrinter.Enabled = !isLock;
+            grOutFolder.Enabled = !isLock;
+            grPremacFolder.Enabled = !isLock;
         }
 
         private void txtQtyTest_KeyPress(object sender, KeyPressEventArgs e)

@@ -135,11 +135,15 @@
             // 
             // dgvIssueCode
             // 
+            this.dgvIssueCode.AllowUserToAddRows = false;
+            this.dgvIssueCode.AllowUserToDeleteRows = false;
+            this.dgvIssueCode.AllowUserToOrderColumns = true;
             this.dgvIssueCode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvIssueCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvIssueCode.Location = new System.Drawing.Point(150, 250);
             this.dgvIssueCode.Margin = new System.Windows.Forms.Padding(4);
             this.dgvIssueCode.Name = "dgvIssueCode";
+            this.dgvIssueCode.ReadOnly = true;
             this.dgvIssueCode.Size = new System.Drawing.Size(640, 232);
             this.dgvIssueCode.TabIndex = 4;
             this.dgvIssueCode.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvIssueCode_CellDoubleClick);

@@ -732,14 +732,12 @@ namespace PC_QRCodeSystem.View
                 string[] barcode = txtBarcode.Text.Split(';');
                 txtSupplierCD.Clear();
                 txtSupplierName.Clear();
-                //Label of PREMAC 6-4-9 have more 3 fields
+                //Label of PREMAC 6-4-9 have more 2 fields
                 if (barcode.Length > 7)
                 {
-                    //if (!string.IsNullOrEmpty(barcode[7])) orderno = barcode[7];
                     if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
                     if (!string.IsNullOrEmpty(barcode[7])) remark = barcode[7];
                 }
-
                 try
                 {
                     itemData.GetItem(barcode[0]);

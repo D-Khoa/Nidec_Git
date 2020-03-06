@@ -125,7 +125,7 @@ namespace PC_QRCodeSystem.Model
         public void ExportCSV(List<pre_649> inList)
         {
             var properties = inList[0].GetType().GetProperties();
-            string filename = @"\Input649_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            string filename = @"\stockin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             using (StreamWriter sw = new StreamWriter(SettingItem.outputFolder + filename))
             {
                 string line = string.Empty;

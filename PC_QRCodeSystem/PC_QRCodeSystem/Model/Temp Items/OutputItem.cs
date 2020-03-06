@@ -13,10 +13,10 @@ namespace PC_QRCodeSystem.Model
         public int issue_cd { get; set; }
         public string destination_cd { get; set; }
         public string item_number { get; set; }
-        public string item_name { get; set; }
-        public string supplier_cd { get; set; }
-        public string supplier_name { get; set; }
-        public string supplier_invoice { get; set; }
+        //public string item_name { get; set; }
+        //public string supplier_cd { get; set; }
+        //public string supplier_name { get; set; }
+        //public string supplier_invoice { get; set; }
         public double delivery_qty { get; set; }
         public DateTime delivery_date { get; set; }
         public string order_number { get; set; }
@@ -31,7 +31,7 @@ namespace PC_QRCodeSystem.Model
         public void ExportCSV(List<OutputItem> inList)
         {
             var properties = inList[0].GetType().GetProperties();
-            string filename = @"\Input910_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            string filename = @"\stockout_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             using (StreamWriter sw = new StreamWriter(SettingItem.outputFolder + filename))
             {
                 string line = string.Empty;

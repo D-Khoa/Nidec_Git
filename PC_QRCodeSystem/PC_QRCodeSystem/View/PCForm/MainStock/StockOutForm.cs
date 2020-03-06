@@ -11,14 +11,18 @@ namespace PC_QRCodeSystem.View
     public partial class StockOutForm : FormCommon
     {
         #region VARIABLE
+        private OutputItem outData { get; set; }
         private PrintItem printData { get; set; }
         private List<PrintItem> listPrintItems { get; set; }
-        private OutputItem outData { get; set; }
+
         private pts_stock stockData { get; set; }
         private List<pts_stock> listStock { get; set; }
 
         private pts_noplan noplanData { get; set; }
         private List<pts_noplan> listNoPlan { get; set; }
+
+        private pts_plan planData { get; set; }
+        private List<pts_plan> listPlan { get; set; }
 
         private pts_stockout_log stockOutData { get; set; }
         private List<pts_stockout_log> listStockOut { get; set; }
@@ -36,19 +40,21 @@ namespace PC_QRCodeSystem.View
         {
             InitializeComponent();
             tc_Main.ItemSize = new Size(0, 1);
-            supplierData = new pts_supplier();
-            printData = new PrintItem();
-            outData = new OutputItem();
+            planData = new pts_plan();
             itemData = new pts_item();
+            outData = new OutputItem();
             stockData = new pts_stock();
+            printData = new PrintItem();
             mUserData = new m_mes_user();
             noplanData = new pts_noplan();
             issueCode = new pts_issue_code();
+            supplierData = new pts_supplier();
             stockOutData = new pts_stockout_log();
             destinationData = new pts_destination();
-            listPrintItems = new List<PrintItem>();
+            listPlan = new List<pts_plan>();
             listStock = new List<pts_stock>();
             listNoPlan = new List<pts_noplan>();
+            listPrintItems = new List<PrintItem>();
             listStockOut = new List<pts_stockout_log>();
         }
 
@@ -102,14 +108,12 @@ namespace PC_QRCodeSystem.View
                     return;
                 }
                 //When issue code is 30 then required fill comment
-                if ((int)cmbNoPlanIssueCD.SelectedValue == 30 && string.IsNullOrEmpty(txtNoPlanComment.Text))
+                if (cmbNoPlanIssueCD.SelectedValue.ToString() == "30" && string.IsNullOrEmpty(txtNoPlanComment.Text))
                 {
                     CustomMessageBox.Notice("Please fill comment when Scrap Item!");
                     return;
                 }
-                double temp;
                 double stockOutQty = double.Parse(txtNoPlanStockOutQty.Text);
-                string noplancd = "no-" + DateTime.Now.ToString("yyyyMMdd-HHmmss");
                 //If stock out qty > packing qty then alert
                 if (stockOutQty > double.Parse(txtNoPlanWHQty.Text))
                 {
@@ -120,19 +124,40 @@ namespace PC_QRCodeSystem.View
                 if (CustomMessageBox.Question("Are you sure add this stock-out item?") == DialogResult.No) return;
                 #endregion
 
-                #region ADD NEW NO-PLAN
-                //Add noplan item into list
-                listNoPlan.Add(new pts_noplan
+                double temp;
+                string processcd = string.Empty;
+                if (txtNoPlanSetNumber.ReadOnly)
                 {
-                    noplan_cd = noplancd,
-                    destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
-                    item_cd = txtNoPlanItemCD.Text,
-                    noplan_qty = stockOutQty,
-                    noplan_usercd = txtNoPlanUserCD.Text,
-                    noplan_date = dtpNoPlanStockOutDate.Value,
-                });
-                #endregion
-
+                    #region ADD NEW NO-PLAN
+                    processcd = "NP" + DateTime.Now.ToString("yyyyMMdd-HHmmss");
+                    //Add noplan item into list
+                    listNoPlan.Add(new pts_noplan
+                    {
+                        noplan_cd = processcd,
+                        destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
+                        item_cd = txtNoPlanItemCD.Text,
+                        noplan_qty = stockOutQty,
+                        noplan_usercd = txtNoPlanUserCD.Text,
+                        noplan_date = dtpNoPlanStockOutDate.Value,
+                    });
+                    #endregion
+                }
+                else
+                {
+                    processcd = "P" + DateTime.Now.ToString("yyyyMMdd-HHmmss");
+                    listPlan.Add(new pts_plan
+                    {
+                        plan_cd = processcd,
+                        model_cd = txtNoPlanItemCD.Text,
+                        set_number = txtNoPlanSetNumber.Text,
+                        destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
+                        plan_qty = stockOutQty,
+                        plan_usercd = txtNoPlanUserCD.Text,
+                        plan_date = dtpNoPlanStockOutDate.Value,
+                        delivery_date = dtpNoPlanStockOutDate.Value.AddDays(7),
+                        comment = txtNoPlanComment.Text
+                    });
+                }
                 //Check all packing in dgv
                 foreach (DataGridViewRow dr in dgvNoPlan.Rows)
                 {
@@ -140,7 +165,7 @@ namespace PC_QRCodeSystem.View
                     stockData = dr.DataBoundItem as pts_stock;
 
                     //If packing is empty then skip it
-                    if (stockData.packing_qty <= 0) continue;
+                    if (!cbSign.Checked && stockData.packing_qty <= 0) continue;
 
                     if (string.IsNullOrEmpty(stockData.order_no)) stockData.order_no = txtNoPlanSetNumber.Text;
                     else
@@ -168,7 +193,7 @@ namespace PC_QRCodeSystem.View
                     listStockOut.Add(new pts_stockout_log
                     {
                         packing_cd = stockData.packing_cd,
-                        process_cd = noplancd,
+                        process_cd = processcd,
                         issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
                         stockout_date = dtpNoPlanStockOutDate.Value,
                         stockout_user_cd = txtNoPlanUserCD.Text,
@@ -197,10 +222,10 @@ namespace PC_QRCodeSystem.View
                         issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
                         destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
                         item_number = txtNoPlanItemCD.Text,
-                        item_name = itemData.item_name,
-                        supplier_cd = supplierData.supplier_cd,
-                        supplier_name = supplierData.supplier_name,
-                        supplier_invoice = txtNoPlanInvoice.Text,
+                        //item_name = itemData.item_name,
+                        //supplier_cd = supplierData.supplier_cd,
+                        //supplier_name = supplierData.supplier_name,
+                        //supplier_invoice = txtNoPlanInvoice.Text,
                         order_number = stockData.order_no,
                         delivery_date = dtpNoPlanStockOutDate.Value,
                         delivery_qty = temp,
@@ -226,7 +251,7 @@ namespace PC_QRCodeSystem.View
                             Delivery_Qty = stockData.packing_qty,
                             SupplierCD = supplierData.supplier_cd,
                             //OrderNo = stockData.order_no,
-                            isRec = false,
+                            isRec = true,
                             Label_Qty = 1
                         });
                     }
@@ -247,6 +272,11 @@ namespace PC_QRCodeSystem.View
             }
         }
 
+        private void btnNoPlanSearch_Click(object sender, EventArgs e)
+        {
+            UpdateNoPlanGrid(true);
+        }
+
         private void btnNoPlanInspection_Click(object sender, EventArgs e)
         {
             tc_Main.SelectedTab = tab_Inspection;
@@ -261,6 +291,10 @@ namespace PC_QRCodeSystem.View
         private void btnNoplanClear_Click(object sender, EventArgs e)
         {
             //Clear all fields of No plan tab
+            UpdateNoPlanGrid(false);
+            dgvNoPlan.DataSource = null;
+            cmbNoPlanIssueCD.Text = null;
+            cmbNoPlanDestinationCD.Text = null;
             txtNoPlanWHQty.Clear();
             txtNoPlanUserCD.Clear();
             txtNoPlanItemCD.Clear();
@@ -268,33 +302,10 @@ namespace PC_QRCodeSystem.View
             txtNoPlanComment.Clear();
             txtNoPlanSetNumber.Clear();
             txtNoPlanStockOutQty.Clear();
-            UpdateNoPlanGrid(false);
-            dgvNoPlan.DataSource = null;
-            cmbNoPlanIssueCD.Text = null;
-            cmbNoPlanDestinationCD.Text = null;
         }
         #endregion
 
         #region FIELDS EVENT
-        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            //When scan barcode or press Enter key
-            if (e.KeyCode == Keys.Enter)
-            {
-                string[] barcode = txtBarcode.Text.Split(';');
-                //Get item number
-                txtNoPlanItemCD.Text = barcode[0];
-                //Get invoice
-                txtNoPlanInvoice.Text = barcode[3];
-                txtBarcode.Clear();
-                //Update grid and search stock item
-                UpdateNoPlanGrid(true);
-                //Calculator W/H qty of current item
-                txtNoPlanWHQty.Text = dgvNoPlan.Rows.Cast<DataGridViewRow>()
-                    .Sum(x => Convert.ToDouble(x.Cells["packing_qty"].Value)).ToString();
-            }
-        }
-
         private void cmbNoPlanIssueCD_Format(object sender, ListControlConvertEventArgs e)
         {
             string code = ((pts_issue_code)e.ListItem).issue_cd.ToString();
@@ -352,7 +363,11 @@ namespace PC_QRCodeSystem.View
         private void cmbNoPlanIssueCD_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(cmbNoPlanIssueCD.Text))
+            {
                 errorProvider.SetError(cmbNoPlanIssueCD, null);
+                if (cmbNoPlanIssueCD.SelectedValue.ToString() == "20") txtNoPlanSetNumber.ReadOnly = false;
+                else txtNoPlanSetNumber.ReadOnly = true;
+            }
         }
 
         private void cmbNoPlanDestinationCD_SelectedIndexChanged(object sender, EventArgs e)
@@ -367,12 +382,17 @@ namespace PC_QRCodeSystem.View
                 e.Handled = true;
         }
 
+        private void cbSign_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSign.Checked) txtNoPlanStockOutQty.Text = "-" + txtNoPlanStockOutQty.Text;
+            else txtNoPlanStockOutQty.Text = txtNoPlanStockOutQty.Text.Replace("-", "");
+        }
+
         private void tab_NoPlan_Paint(object sender, PaintEventArgs e)
         {
             if (dgvProcess.Rows.Count > 0) btnNoPlanInspection.Visible = true;
             else btnNoPlanInspection.Visible = false;
             UpdateNoPlanGrid(false);
-            txtBarcode.Focus();
         }
         #endregion
 
@@ -397,7 +417,7 @@ namespace PC_QRCodeSystem.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Error(ex.Message);
             }
         }
 
@@ -409,11 +429,27 @@ namespace PC_QRCodeSystem.View
         {
             if (isSearch)
             {
-                //Search stock item with item code and invoice
-                if (!stockData.SearchItem(new pts_stock { item_cd = txtNoPlanItemCD.Text, invoice = txtNoPlanInvoice.Text }))
+                if (txtNoPlanSetNumber.ReadOnly)
                 {
-                    CustomMessageBox.Error("This item is not exist! Please check and try again!");
-                    return;
+                    //Search stock item with item code and invoice
+                    if (!stockData.SearchItem(new pts_stock { item_cd = txtNoPlanItemCD.Text, invoice = txtNoPlanInvoice.Text }))
+                    {
+                        CustomMessageBox.Error("This stock item is not exist! Please check and try again!");
+                        lbNoPlanItem.Text = "Item Name";
+                        txtNoPlanItemCD.Clear();
+                        return;
+                    }
+                }
+                else
+                {
+                    //Search stock item with item code and invoice
+                    if (!stockData.SearchItem(new pts_stock { order_no = txtNoPlanSetNumber.Text }))
+                    {
+                        CustomMessageBox.Error("This stock item is not exist! Please check and try again!");
+                        lbNoPlanItem.Text = "Item Name";
+                        txtNoPlanItemCD.Clear();
+                        return;
+                    }
                 }
             }
             dgvNoPlan.DataSource = stockData.listStockItems;
@@ -429,8 +465,18 @@ namespace PC_QRCodeSystem.View
             dgvNoPlan.Columns["packing_qty"].HeaderText = "Packing Qty";
             dgvNoPlan.Columns["registration_user_cd"].HeaderText = "Reg User";
             dgvNoPlan.Columns["registration_date_time"].HeaderText = "Reg Date";
-            if (dgvNoPlan.Rows.Count > 0) tsRows.Text = dgvNoPlan.Rows.Count.ToString();
-            else tsRows.Text = "None";
+            if (dgvNoPlan.Rows.Count > 0)
+            {
+                //Calculator W/H qty of current item
+                txtNoPlanWHQty.Text = dgvNoPlan.Rows.Cast<DataGridViewRow>()
+                    .Sum(x => Convert.ToDouble(x.Cells["packing_qty"].Value)).ToString();
+                tsRows.Text = dgvNoPlan.Rows.Count.ToString();
+            }
+            else
+            {
+                tsRows.Text = "None";
+                txtNoPlanWHQty.Text = "0";
+            }
         }
         #endregion
         #endregion
@@ -453,7 +499,6 @@ namespace PC_QRCodeSystem.View
                 {
                     n = stockOutData.AddMultiItem(listStockOut);
                     outData.ExportCSV(outData.listOutputItem);
-
                     CustomMessageBox.Notice("Add " + n + " Stock-Out logs!");
                 }
                 //Update packing qty of stock item in DB
@@ -573,6 +618,7 @@ namespace PC_QRCodeSystem.View
             dgvPrintList.DataSource = null;
         }
         #endregion
+
         #endregion
     }
 }

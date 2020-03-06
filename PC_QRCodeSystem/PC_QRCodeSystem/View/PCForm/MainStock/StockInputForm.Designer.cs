@@ -54,6 +54,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtIncharge = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtPONo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtOrderNo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -67,7 +68,6 @@
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAddItem = new System.Windows.Forms.Button();
             this.btnInspectionClear = new System.Windows.Forms.Button();
             this.txtSupplierName = new System.Windows.Forms.TextBox();
             this.txtSupplierCD = new System.Windows.Forms.TextBox();
@@ -90,7 +90,8 @@
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtPONo = new System.Windows.Forms.TextBox();
+            this.txtOrderCD = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -413,6 +414,13 @@
             this.label7.Text = "PO Number";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // txtPONo
+            // 
+            this.txtPONo.Location = new System.Drawing.Point(360, 40);
+            this.txtPONo.Name = "txtPONo";
+            this.txtPONo.Size = new System.Drawing.Size(120, 23);
+            this.txtPONo.TabIndex = 8;
+            // 
             // label6
             // 
             this.label6.Location = new System.Drawing.Point(250, 10);
@@ -516,8 +524,9 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label11);
+            this.panel4.Controls.Add(this.txtOrderCD);
             this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.btnAddItem);
             this.panel4.Controls.Add(this.btnInspectionClear);
             this.panel4.Controls.Add(this.txtSupplierName);
             this.panel4.Controls.Add(this.txtSupplierCD);
@@ -544,22 +553,10 @@
             this.label1.Text = "Barcode";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.Location = new System.Drawing.Point(232, 71);
-            this.btnAddItem.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(80, 50);
-            this.btnAddItem.TabIndex = 7;
-            this.btnAddItem.Text = "Add Item";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
-            // 
             // btnInspectionClear
             // 
             this.btnInspectionClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInspectionClear.Location = new System.Drawing.Point(456, 71);
+            this.btnInspectionClear.Location = new System.Drawing.Point(460, 70);
             this.btnInspectionClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspectionClear.Name = "btnInspectionClear";
             this.btnInspectionClear.Size = new System.Drawing.Size(80, 50);
@@ -603,7 +600,7 @@
             // btnInsBack
             // 
             this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsBack.Location = new System.Drawing.Point(568, 71);
+            this.btnInsBack.Location = new System.Drawing.Point(570, 70);
             this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsBack.Name = "btnInsBack";
             this.btnInsBack.Size = new System.Drawing.Size(80, 50);
@@ -615,7 +612,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(344, 71);
+            this.btnDelete.Location = new System.Drawing.Point(350, 70);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 50);
@@ -627,7 +624,7 @@
             // btnRegister
             // 
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(120, 71);
+            this.btnRegister.Location = new System.Drawing.Point(250, 70);
             this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(80, 50);
@@ -795,12 +792,21 @@
             this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
             this.tsTotalQty.Text = "None";
             // 
-            // txtPONo
+            // txtOrderCD
             // 
-            this.txtPONo.Location = new System.Drawing.Point(360, 40);
-            this.txtPONo.Name = "txtPONo";
-            this.txtPONo.Size = new System.Drawing.Size(120, 23);
-            this.txtPONo.TabIndex = 8;
+            this.txtOrderCD.Location = new System.Drawing.Point(120, 70);
+            this.txtOrderCD.Name = "txtOrderCD";
+            this.txtOrderCD.Size = new System.Drawing.Size(120, 23);
+            this.txtOrderCD.TabIndex = 25;
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(10, 70);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 30);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Order Number";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // StockInputForm
             // 
@@ -878,7 +884,6 @@
         private System.Windows.Forms.Button btnManualPrint;
         private System.Windows.Forms.Button btnMainClear;
         private System.Windows.Forms.Button btnInspectionClear;
-        private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.Button btnPrintClear;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button btnSearchPreInput;
@@ -908,5 +913,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtItemNum;
         private System.Windows.Forms.TextBox txtPONo;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtOrderCD;
     }
 }

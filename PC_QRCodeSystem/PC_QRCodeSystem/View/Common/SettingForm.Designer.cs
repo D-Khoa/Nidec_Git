@@ -30,6 +30,18 @@
         {
             this.btnReset = new System.Windows.Forms.Button();
             this.grPrinter = new System.Windows.Forms.GroupBox();
+            this.dtpDateTest = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtInvoiceTest = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtQtyTest = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtSupplierTest = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtItemCDTest = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtItemNameTest = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnPrintTest = new System.Windows.Forms.Button();
             this.btnPrinterCheck = new System.Windows.Forms.Button();
             this.lbPrinterStatus = new System.Windows.Forms.Label();
@@ -43,26 +55,19 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grOutFolder = new System.Windows.Forms.GroupBox();
             this.btnBrowserOutput = new System.Windows.Forms.Button();
             this.txtOutputFolder = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtItemNameTest = new System.Windows.Forms.TextBox();
-            this.txtItemCDTest = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtSupplierTest = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtQtyTest = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtInvoiceTest = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.dtpDateTest = new System.Windows.Forms.DateTimePicker();
+            this.grPass = new System.Windows.Forms.GroupBox();
+            this.btnPasswordOK = new System.Windows.Forms.Button();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.grPrinter.SuspendLayout();
             this.grPremacFolder.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grOutFolder.SuspendLayout();
+            this.grPass.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnReset
@@ -98,7 +103,7 @@
             this.grPrinter.Controls.Add(this.cmbPrinter);
             this.grPrinter.Dock = System.Windows.Forms.DockStyle.Top;
             this.grPrinter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grPrinter.Location = new System.Drawing.Point(0, 160);
+            this.grPrinter.Location = new System.Drawing.Point(0, 240);
             this.grPrinter.Margin = new System.Windows.Forms.Padding(5);
             this.grPrinter.Name = "grPrinter";
             this.grPrinter.Padding = new System.Windows.Forms.Padding(5);
@@ -106,6 +111,105 @@
             this.grPrinter.TabIndex = 5;
             this.grPrinter.TabStop = false;
             this.grPrinter.Text = "Printer";
+            // 
+            // dtpDateTest
+            // 
+            this.dtpDateTest.CustomFormat = "yyyy-MM-dd";
+            this.dtpDateTest.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateTest.Location = new System.Drawing.Point(390, 130);
+            this.dtpDateTest.Name = "dtpDateTest";
+            this.dtpDateTest.Size = new System.Drawing.Size(150, 23);
+            this.dtpDateTest.TabIndex = 20;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(320, 130);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(38, 17);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Date";
+            // 
+            // txtInvoiceTest
+            // 
+            this.txtInvoiceTest.Location = new System.Drawing.Point(390, 100);
+            this.txtInvoiceTest.Name = "txtInvoiceTest";
+            this.txtInvoiceTest.Size = new System.Drawing.Size(150, 23);
+            this.txtInvoiceTest.TabIndex = 18;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(320, 100);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 17);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Invoice";
+            // 
+            // txtQtyTest
+            // 
+            this.txtQtyTest.Location = new System.Drawing.Point(390, 160);
+            this.txtQtyTest.Name = "txtQtyTest";
+            this.txtQtyTest.Size = new System.Drawing.Size(150, 23);
+            this.txtQtyTest.TabIndex = 16;
+            this.txtQtyTest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQtyTest_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(320, 160);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 17);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Qty";
+            // 
+            // txtSupplierTest
+            // 
+            this.txtSupplierTest.Location = new System.Drawing.Point(150, 160);
+            this.txtSupplierTest.Name = "txtSupplierTest";
+            this.txtSupplierTest.Size = new System.Drawing.Size(150, 23);
+            this.txtSupplierTest.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(30, 160);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 17);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Supplier";
+            // 
+            // txtItemCDTest
+            // 
+            this.txtItemCDTest.Location = new System.Drawing.Point(150, 130);
+            this.txtItemCDTest.Name = "txtItemCDTest";
+            this.txtItemCDTest.Size = new System.Drawing.Size(150, 23);
+            this.txtItemCDTest.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(30, 130);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 17);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Item Number";
+            // 
+            // txtItemNameTest
+            // 
+            this.txtItemNameTest.Location = new System.Drawing.Point(150, 100);
+            this.txtItemNameTest.Name = "txtItemNameTest";
+            this.txtItemNameTest.Size = new System.Drawing.Size(150, 23);
+            this.txtItemNameTest.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 100);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Item Name";
             // 
             // btnPrintTest
             // 
@@ -176,7 +280,7 @@
             this.grPremacFolder.Controls.Add(this.label11);
             this.grPremacFolder.Dock = System.Windows.Forms.DockStyle.Top;
             this.grPremacFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grPremacFolder.Location = new System.Drawing.Point(0, 0);
+            this.grPremacFolder.Location = new System.Drawing.Point(0, 80);
             this.grPremacFolder.Margin = new System.Windows.Forms.Padding(5);
             this.grPremacFolder.Name = "grPremacFolder";
             this.grPremacFolder.Padding = new System.Windows.Forms.Padding(5);
@@ -230,8 +334,8 @@
             this.panel5.Controls.Add(this.btnReset);
             this.panel5.Controls.Add(this.btnOK);
             this.panel5.Controls.Add(this.btnCancel);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 412);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 482);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(586, 80);
@@ -249,21 +353,21 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // groupBox1
+            // grOutFolder
             // 
-            this.groupBox1.Controls.Add(this.btnBrowserOutput);
-            this.groupBox1.Controls.Add(this.txtOutputFolder);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 80);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(586, 80);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Output Folder";
+            this.grOutFolder.Controls.Add(this.btnBrowserOutput);
+            this.grOutFolder.Controls.Add(this.txtOutputFolder);
+            this.grOutFolder.Controls.Add(this.label1);
+            this.grOutFolder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grOutFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grOutFolder.Location = new System.Drawing.Point(0, 160);
+            this.grOutFolder.Margin = new System.Windows.Forms.Padding(5);
+            this.grOutFolder.Name = "grOutFolder";
+            this.grOutFolder.Padding = new System.Windows.Forms.Padding(5);
+            this.grOutFolder.Size = new System.Drawing.Size(586, 80);
+            this.grOutFolder.TabIndex = 8;
+            this.grOutFolder.TabStop = false;
+            this.grOutFolder.Text = "Output Folder";
             // 
             // btnBrowserOutput
             // 
@@ -294,104 +398,51 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Output Folder";
             // 
-            // label2
+            // grPass
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 100);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 17);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Item Name";
+            this.grPass.Controls.Add(this.btnPasswordOK);
+            this.grPass.Controls.Add(this.txtPassword);
+            this.grPass.Controls.Add(this.label8);
+            this.grPass.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grPass.Location = new System.Drawing.Point(0, 0);
+            this.grPass.Margin = new System.Windows.Forms.Padding(5);
+            this.grPass.Name = "grPass";
+            this.grPass.Padding = new System.Windows.Forms.Padding(5);
+            this.grPass.Size = new System.Drawing.Size(586, 80);
+            this.grPass.TabIndex = 9;
+            this.grPass.TabStop = false;
+            this.grPass.Text = "Unlock Setting";
             // 
-            // txtItemNameTest
+            // btnPasswordOK
             // 
-            this.txtItemNameTest.Location = new System.Drawing.Point(150, 100);
-            this.txtItemNameTest.Name = "txtItemNameTest";
-            this.txtItemNameTest.Size = new System.Drawing.Size(150, 23);
-            this.txtItemNameTest.TabIndex = 10;
+            this.btnPasswordOK.Location = new System.Drawing.Point(470, 26);
+            this.btnPasswordOK.Margin = new System.Windows.Forms.Padding(5);
+            this.btnPasswordOK.Name = "btnPasswordOK";
+            this.btnPasswordOK.Size = new System.Drawing.Size(100, 30);
+            this.btnPasswordOK.TabIndex = 2;
+            this.btnPasswordOK.Text = "OK";
+            this.btnPasswordOK.UseVisualStyleBackColor = true;
+            this.btnPasswordOK.Click += new System.EventHandler(this.btnPasswordOK_Click);
             // 
-            // txtItemCDTest
+            // txtPassword
             // 
-            this.txtItemCDTest.Location = new System.Drawing.Point(150, 130);
-            this.txtItemCDTest.Name = "txtItemCDTest";
-            this.txtItemCDTest.Size = new System.Drawing.Size(150, 23);
-            this.txtItemCDTest.TabIndex = 12;
+            this.txtPassword.Location = new System.Drawing.Point(150, 30);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(5);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(300, 23);
+            this.txtPassword.TabIndex = 1;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
-            // label3
+            // label8
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 130);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 17);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Item Number";
-            // 
-            // txtSupplierTest
-            // 
-            this.txtSupplierTest.Location = new System.Drawing.Point(150, 160);
-            this.txtSupplierTest.Name = "txtSupplierTest";
-            this.txtSupplierTest.Size = new System.Drawing.Size(150, 23);
-            this.txtSupplierTest.TabIndex = 14;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 160);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 17);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Supplier";
-            // 
-            // txtQtyTest
-            // 
-            this.txtQtyTest.Location = new System.Drawing.Point(390, 160);
-            this.txtQtyTest.Name = "txtQtyTest";
-            this.txtQtyTest.Size = new System.Drawing.Size(150, 23);
-            this.txtQtyTest.TabIndex = 16;
-            this.txtQtyTest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQtyTest_KeyPress);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(320, 160);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 17);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Qty";
-            // 
-            // txtInvoiceTest
-            // 
-            this.txtInvoiceTest.Location = new System.Drawing.Point(390, 100);
-            this.txtInvoiceTest.Name = "txtInvoiceTest";
-            this.txtInvoiceTest.Size = new System.Drawing.Size(150, 23);
-            this.txtInvoiceTest.TabIndex = 18;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(320, 100);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 17);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Invoice";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(320, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 17);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Date";
-            // 
-            // dtpDateTest
-            // 
-            this.dtpDateTest.CustomFormat = "yyyy-MM-dd";
-            this.dtpDateTest.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDateTest.Location = new System.Drawing.Point(390, 130);
-            this.dtpDateTest.Name = "dtpDateTest";
-            this.dtpDateTest.Size = new System.Drawing.Size(150, 23);
-            this.dtpDateTest.TabIndex = 20;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(30, 30);
+            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 17);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Password";
             // 
             // SettingForm
             // 
@@ -399,12 +450,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(586, 492);
+            this.ClientSize = new System.Drawing.Size(586, 555);
             this.ControlBox = false;
-            this.Controls.Add(this.grPrinter);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel5);
+            this.Controls.Add(this.grPrinter);
+            this.Controls.Add(this.grOutFolder);
             this.Controls.Add(this.grPremacFolder);
+            this.Controls.Add(this.grPass);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -417,8 +469,10 @@
             this.grPremacFolder.ResumeLayout(false);
             this.grPremacFolder.PerformLayout();
             this.panel5.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grOutFolder.ResumeLayout(false);
+            this.grOutFolder.PerformLayout();
+            this.grPass.ResumeLayout(false);
+            this.grPass.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -439,7 +493,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnPrintTest;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grOutFolder;
         private System.Windows.Forms.Button btnBrowserOutput;
         private System.Windows.Forms.TextBox txtOutputFolder;
         private System.Windows.Forms.Label label1;
@@ -455,5 +509,9 @@
         private System.Windows.Forms.TextBox txtItemNameTest;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpDateTest;
+        private System.Windows.Forms.GroupBox grPass;
+        private System.Windows.Forms.Button btnPasswordOK;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label8;
     }
 }

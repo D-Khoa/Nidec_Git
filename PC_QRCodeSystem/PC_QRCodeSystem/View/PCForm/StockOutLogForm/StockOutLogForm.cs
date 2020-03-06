@@ -173,12 +173,12 @@ namespace PC_QRCodeSystem.View
             txtSetNumber.Clear();
             cmbIssueCD.Text = null;
             cmbDestination.Text = null;
-            dgvData.DataSource = null;
-            dgvProcess.DataSource = null;
             planData.listPlan.Clear();
             noplanData.listNoPlan.Clear();
             requestData.listRequestItem.Clear();
             stockoutData.listStockOutItem.Clear();
+            dgvData.DataSource = null;
+            dgvProcess.DataSource = null;
         }
         #endregion
 
@@ -263,6 +263,7 @@ namespace PC_QRCodeSystem.View
 
         private void dgvData_SelectionChanged(object sender, EventArgs e)
         {
+            if (dgvData.SelectedCells.Count <= 0) return;
             stockoutData = dgvData.Rows[dgvData.SelectedCells[0].RowIndex].DataBoundItem as pts_stockout_log;
             try
             {
