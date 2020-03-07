@@ -63,6 +63,63 @@ namespace PC_QRCodeSystem.Model
         /// Search list premac item from DB
         /// </summary>
         /// <param name="inItem">search info</param>
+        public void Search(pre_649 inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            listPremacItem = new List<pre_649>();
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT item_number, item_name, supplier_cd, supplier_name, supplier_invoice, sum(delivery_qty) as delivery_qty, delivery_date, incharge ";
+            query += "FROM pre_649 WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.item_number))
+                query += "AND item_number ='" + inItem.item_number + "' ";
+            if (!string.IsNullOrEmpty(inItem.item_name))
+                query += "AND item_name ='" + inItem.item_name + "' ";
+            if (!string.IsNullOrEmpty(inItem.supplier_cd))
+                query += "AND supplier_cd ='" + inItem.supplier_cd + "' ";
+            if (!string.IsNullOrEmpty(inItem.supplier_invoice))
+                query += "AND supplier_invoice ='" + inItem.supplier_invoice + "' ";
+            if (!string.IsNullOrEmpty(inItem.po_number))
+                query += "AND po_number ='" + inItem.po_number + "' ";
+            if (!string.IsNullOrEmpty(inItem.order_number))
+                query += "AND order_number ='" + inItem.order_number + "' ";
+            query += "GROUP BY item_number, item_name, supplier_cd, supplier_name, supplier_invoice, delivery_date, incharge ";
+            query += "ORDER BY supplier_invoice, item_number";
+            //Execute reader for read database
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            query = string.Empty;
+            while (reader.Read())
+            {
+                //Get an item
+                pre_649 outItem = new pre_649
+                {
+                    //premac_id = (int)reader["premac_id"],
+                    item_number = reader["item_number"].ToString(),
+                    item_name = reader["item_name"].ToString(),
+                    supplier_cd = reader["supplier_cd"].ToString(),
+                    supplier_name = reader["supplier_name"].ToString(),
+                    supplier_invoice = reader["supplier_invoice"].ToString(),
+                    //po_number = reader["po_number"].ToString(),
+                    delivery_qty = (double)reader["delivery_qty"],
+                    delivery_date = (DateTime)reader["delivery_date"],
+                    //order_number = reader["order_number"].ToString(),
+                    incharge = reader["incharge"].ToString()
+                };
+                //Add item into list
+                listPremacItem.Add(outItem);
+            }
+            reader.Close();
+            //Close SQL connection
+            SQL.Close();
+        }
+
+        /// <summary>
+        /// Search list premac item from DB
+        /// </summary>
+        /// <param name="inItem">search info</param>
         public void Search(pre_649 inItem, DateTime fromdate, DateTime todate, bool checkdate)
         {
             //SQL library

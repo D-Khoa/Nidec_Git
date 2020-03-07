@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tc_Main = new System.Windows.Forms.TabControl();
             this.tab_NoPlan = new System.Windows.Forms.TabPage();
             this.dgvNoPlan = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnNoPlanSearch = new System.Windows.Forms.Button();
             this.btnNoplanClear = new System.Windows.Forms.Button();
             this.btnNoPlanSetting = new System.Windows.Forms.Button();
             this.btnNoPlanInspection = new System.Windows.Forms.Button();
@@ -63,26 +65,18 @@
             this.label22 = new System.Windows.Forms.Label();
             this.txtNoPlanComment = new System.Windows.Forms.TextBox();
             this.tab_Plan = new System.Windows.Forms.TabPage();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.dgvPlan = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnPlanAddItem = new System.Windows.Forms.Button();
+            this.btnPlanClear = new System.Windows.Forms.Button();
+            this.btnPlanBack = new System.Windows.Forms.Button();
+            this.btnPlanInspection = new System.Windows.Forms.Button();
+            this.btnPlanReg = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.rbtnDeliveryDate = new System.Windows.Forms.RadioButton();
-            this.rbtnPlanDate = new System.Windows.Forms.RadioButton();
-            this.rbtnNoCheckDate = new System.Windows.Forms.RadioButton();
-            this.txtItemCD = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
-            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
-            this.lbUserName = new System.Windows.Forms.Label();
-            this.txtUserCD = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lbItemName = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lbDestinationName = new System.Windows.Forms.Label();
-            this.cmbDestinationCD = new System.Windows.Forms.ComboBox();
-            this.txtSetNumber = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lbPlanItem = new System.Windows.Forms.Label();
+            this.txtPlanItemCD = new System.Windows.Forms.TextBox();
             this.tab_Request = new System.Windows.Forms.TabPage();
             this.dgvStockOut = new System.Windows.Forms.DataGridView();
             this.pnlButtons = new System.Windows.Forms.Panel();
@@ -104,14 +98,15 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnNoPlanSearch = new System.Windows.Forms.Button();
             this.tc_Main.SuspendLayout();
             this.tab_NoPlan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNoPlan)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tab_Plan.SuspendLayout();
-            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlan)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.tab_Request.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).BeginInit();
             this.pnlButtons.SuspendLayout();
@@ -134,7 +129,7 @@
             this.tc_Main.Margin = new System.Windows.Forms.Padding(4);
             this.tc_Main.Name = "tc_Main";
             this.tc_Main.SelectedIndex = 0;
-            this.tc_Main.Size = new System.Drawing.Size(877, 526);
+            this.tc_Main.Size = new System.Drawing.Size(748, 526);
             this.tc_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tc_Main.TabIndex = 22;
             // 
@@ -147,7 +142,7 @@
             this.tab_NoPlan.Margin = new System.Windows.Forms.Padding(4);
             this.tab_NoPlan.Name = "tab_NoPlan";
             this.tab_NoPlan.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_NoPlan.Size = new System.Drawing.Size(869, 494);
+            this.tab_NoPlan.Size = new System.Drawing.Size(740, 494);
             this.tab_NoPlan.TabIndex = 0;
             this.tab_NoPlan.Text = "No Planned";
             this.tab_NoPlan.UseVisualStyleBackColor = true;
@@ -164,18 +159,19 @@
             this.dgvNoPlan.MultiSelect = false;
             this.dgvNoPlan.Name = "dgvNoPlan";
             this.dgvNoPlan.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvNoPlan.Size = new System.Drawing.Size(861, 206);
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNoPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvNoPlan.Size = new System.Drawing.Size(732, 206);
             this.dgvNoPlan.TabIndex = 3;
+            this.dgvNoPlan.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNoPlan_CellDoubleClick);
             // 
             // panel5
             // 
@@ -187,12 +183,22 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(4, 224);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(861, 60);
+            this.panel5.Size = new System.Drawing.Size(732, 60);
             this.panel5.TabIndex = 2;
+            // 
+            // btnNoPlanSearch
+            // 
+            this.btnNoPlanSearch.Location = new System.Drawing.Point(50, 5);
+            this.btnNoPlanSearch.Name = "btnNoPlanSearch";
+            this.btnNoPlanSearch.Size = new System.Drawing.Size(80, 50);
+            this.btnNoPlanSearch.TabIndex = 6;
+            this.btnNoPlanSearch.Text = "Search";
+            this.btnNoPlanSearch.UseVisualStyleBackColor = true;
+            this.btnNoPlanSearch.Click += new System.EventHandler(this.btnNoPlanSearch_Click);
             // 
             // btnNoplanClear
             // 
-            this.btnNoplanClear.Location = new System.Drawing.Point(470, 5);
+            this.btnNoplanClear.Location = new System.Drawing.Point(570, 5);
             this.btnNoplanClear.Name = "btnNoplanClear";
             this.btnNoplanClear.Size = new System.Drawing.Size(80, 50);
             this.btnNoplanClear.TabIndex = 5;
@@ -202,7 +208,7 @@
             // 
             // btnNoPlanSetting
             // 
-            this.btnNoPlanSetting.Location = new System.Drawing.Point(570, 5);
+            this.btnNoPlanSetting.Location = new System.Drawing.Point(480, 5);
             this.btnNoPlanSetting.Name = "btnNoPlanSetting";
             this.btnNoPlanSetting.Size = new System.Drawing.Size(80, 50);
             this.btnNoPlanSetting.TabIndex = 4;
@@ -212,7 +218,7 @@
             // 
             // btnNoPlanInspection
             // 
-            this.btnNoPlanInspection.Location = new System.Drawing.Point(370, 5);
+            this.btnNoPlanInspection.Location = new System.Drawing.Point(390, 5);
             this.btnNoPlanInspection.Name = "btnNoPlanInspection";
             this.btnNoPlanInspection.Size = new System.Drawing.Size(80, 50);
             this.btnNoPlanInspection.TabIndex = 3;
@@ -222,7 +228,7 @@
             // 
             // btnNoPlanRegister
             // 
-            this.btnNoPlanRegister.Location = new System.Drawing.Point(50, 5);
+            this.btnNoPlanRegister.Location = new System.Drawing.Point(140, 5);
             this.btnNoPlanRegister.Name = "btnNoPlanRegister";
             this.btnNoPlanRegister.Size = new System.Drawing.Size(80, 50);
             this.btnNoPlanRegister.TabIndex = 0;
@@ -259,14 +265,14 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(4, 4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(861, 220);
+            this.panel6.Size = new System.Drawing.Size(732, 220);
             this.panel6.TabIndex = 1;
             // 
             // cbSign
             // 
             this.cbSign.AutoSize = true;
             this.cbSign.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.cbSign.Location = new System.Drawing.Point(230, 130);
+            this.cbSign.Location = new System.Drawing.Point(270, 130);
             this.cbSign.Name = "cbSign";
             this.cbSign.Size = new System.Drawing.Size(54, 20);
             this.cbSign.TabIndex = 41;
@@ -339,7 +345,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(10, 40);
+            this.label1.Location = new System.Drawing.Point(10, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.TabIndex = 32;
@@ -351,7 +357,7 @@
             this.lbNoPlanItem.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lbNoPlanItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbNoPlanItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNoPlanItem.Location = new System.Drawing.Point(270, 40);
+            this.lbNoPlanItem.Location = new System.Drawing.Point(270, 100);
             this.lbNoPlanItem.Name = "lbNoPlanItem";
             this.lbNoPlanItem.Size = new System.Drawing.Size(200, 20);
             this.lbNoPlanItem.TabIndex = 31;
@@ -360,7 +366,7 @@
             // 
             // txtNoPlanItemCD
             // 
-            this.txtNoPlanItemCD.Location = new System.Drawing.Point(120, 40);
+            this.txtNoPlanItemCD.Location = new System.Drawing.Point(120, 100);
             this.txtNoPlanItemCD.Name = "txtNoPlanItemCD";
             this.txtNoPlanItemCD.Size = new System.Drawing.Size(120, 22);
             this.txtNoPlanItemCD.TabIndex = 30;
@@ -372,7 +378,7 @@
             this.cmbNoPlanIssueCD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNoPlanIssueCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbNoPlanIssueCD.FormattingEnabled = true;
-            this.cmbNoPlanIssueCD.Location = new System.Drawing.Point(120, 70);
+            this.cmbNoPlanIssueCD.Location = new System.Drawing.Point(120, 10);
             this.cmbNoPlanIssueCD.Name = "cmbNoPlanIssueCD";
             this.cmbNoPlanIssueCD.Size = new System.Drawing.Size(350, 24);
             this.cmbNoPlanIssueCD.TabIndex = 5;
@@ -381,7 +387,7 @@
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(10, 10);
+            this.label13.Location = new System.Drawing.Point(10, 70);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(100, 20);
             this.label13.TabIndex = 27;
@@ -401,7 +407,7 @@
             // 
             this.txtNoPlanStockOutQty.Location = new System.Drawing.Point(120, 130);
             this.txtNoPlanStockOutQty.Name = "txtNoPlanStockOutQty";
-            this.txtNoPlanStockOutQty.Size = new System.Drawing.Size(100, 22);
+            this.txtNoPlanStockOutQty.Size = new System.Drawing.Size(120, 22);
             this.txtNoPlanStockOutQty.TabIndex = 9;
             this.txtNoPlanStockOutQty.Text = "0";
             this.txtNoPlanStockOutQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -424,13 +430,14 @@
             this.dtpNoPlanStockOutDate.Name = "dtpNoPlanStockOutDate";
             this.dtpNoPlanStockOutDate.Size = new System.Drawing.Size(120, 22);
             this.dtpNoPlanStockOutDate.TabIndex = 8;
+            this.dtpNoPlanStockOutDate.Value = new System.DateTime(2020, 3, 7, 0, 0, 0, 0);
             // 
             // lbNoPlanUser
             // 
             this.lbNoPlanUser.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lbNoPlanUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbNoPlanUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNoPlanUser.Location = new System.Drawing.Point(270, 10);
+            this.lbNoPlanUser.Location = new System.Drawing.Point(270, 70);
             this.lbNoPlanUser.Name = "lbNoPlanUser";
             this.lbNoPlanUser.Size = new System.Drawing.Size(200, 20);
             this.lbNoPlanUser.TabIndex = 10;
@@ -439,7 +446,7 @@
             // 
             // txtNoPlanUserCD
             // 
-            this.txtNoPlanUserCD.Location = new System.Drawing.Point(120, 10);
+            this.txtNoPlanUserCD.Location = new System.Drawing.Point(120, 70);
             this.txtNoPlanUserCD.Name = "txtNoPlanUserCD";
             this.txtNoPlanUserCD.Size = new System.Drawing.Size(120, 22);
             this.txtNoPlanUserCD.TabIndex = 7;
@@ -456,7 +463,7 @@
             // 
             // label20
             // 
-            this.label20.Location = new System.Drawing.Point(10, 70);
+            this.label20.Location = new System.Drawing.Point(10, 10);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(100, 20);
             this.label20.TabIndex = 6;
@@ -468,7 +475,7 @@
             this.cmbNoPlanDestinationCD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNoPlanDestinationCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbNoPlanDestinationCD.FormattingEnabled = true;
-            this.cmbNoPlanDestinationCD.Location = new System.Drawing.Point(120, 100);
+            this.cmbNoPlanDestinationCD.Location = new System.Drawing.Point(120, 40);
             this.cmbNoPlanDestinationCD.Name = "cmbNoPlanDestinationCD";
             this.cmbNoPlanDestinationCD.Size = new System.Drawing.Size(350, 24);
             this.cmbNoPlanDestinationCD.TabIndex = 6;
@@ -477,7 +484,7 @@
             // 
             // label22
             // 
-            this.label22.Location = new System.Drawing.Point(10, 100);
+            this.label22.Location = new System.Drawing.Point(10, 40);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(100, 20);
             this.label22.TabIndex = 0;
@@ -494,217 +501,153 @@
             // 
             // tab_Plan
             // 
-            this.tab_Plan.Controls.Add(this.panel4);
+            this.tab_Plan.Controls.Add(this.dgvPlan);
+            this.tab_Plan.Controls.Add(this.panel2);
+            this.tab_Plan.Controls.Add(this.panel3);
             this.tab_Plan.Location = new System.Drawing.Point(4, 28);
             this.tab_Plan.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Plan.Name = "tab_Plan";
             this.tab_Plan.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Plan.Size = new System.Drawing.Size(726, 494);
+            this.tab_Plan.Size = new System.Drawing.Size(740, 494);
             this.tab_Plan.TabIndex = 1;
             this.tab_Plan.Text = "Plan";
             this.tab_Plan.UseVisualStyleBackColor = true;
             // 
-            // panel4
+            // dgvPlan
             // 
-            this.panel4.Controls.Add(this.label12);
-            this.panel4.Controls.Add(this.label11);
-            this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.rbtnDeliveryDate);
-            this.panel4.Controls.Add(this.rbtnPlanDate);
-            this.panel4.Controls.Add(this.rbtnNoCheckDate);
-            this.panel4.Controls.Add(this.txtItemCD);
-            this.panel4.Controls.Add(this.label8);
-            this.panel4.Controls.Add(this.dtpToDate);
-            this.panel4.Controls.Add(this.dtpFromDate);
-            this.panel4.Controls.Add(this.lbUserName);
-            this.panel4.Controls.Add(this.txtUserCD);
-            this.panel4.Controls.Add(this.label10);
-            this.panel4.Controls.Add(this.lbItemName);
-            this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.lbDestinationName);
-            this.panel4.Controls.Add(this.cmbDestinationCD);
-            this.panel4.Controls.Add(this.txtSetNumber);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(4, 4);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(718, 200);
-            this.panel4.TabIndex = 9;
+            this.dgvPlan.AllowUserToAddRows = false;
+            this.dgvPlan.AllowUserToDeleteRows = false;
+            this.dgvPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPlan.Location = new System.Drawing.Point(4, 116);
+            this.dgvPlan.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvPlan.MultiSelect = false;
+            this.dgvPlan.Name = "dgvPlan";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.Format = "N0";
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPlan.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvPlan.Size = new System.Drawing.Size(732, 374);
+            this.dgvPlan.TabIndex = 6;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnPlanAddItem);
+            this.panel2.Controls.Add(this.btnPlanClear);
+            this.panel2.Controls.Add(this.btnPlanBack);
+            this.panel2.Controls.Add(this.btnPlanInspection);
+            this.panel2.Controls.Add(this.btnPlanReg);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(4, 56);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(732, 60);
+            this.panel2.TabIndex = 5;
+            // 
+            // btnPlanAddItem
+            // 
+            this.btnPlanAddItem.Location = new System.Drawing.Point(50, 5);
+            this.btnPlanAddItem.Name = "btnPlanAddItem";
+            this.btnPlanAddItem.Size = new System.Drawing.Size(80, 50);
+            this.btnPlanAddItem.TabIndex = 6;
+            this.btnPlanAddItem.Text = "Add Item ";
+            this.btnPlanAddItem.UseVisualStyleBackColor = true;
+            this.btnPlanAddItem.Click += new System.EventHandler(this.btnPlanAddItem_Click);
+            // 
+            // btnPlanClear
+            // 
+            this.btnPlanClear.Location = new System.Drawing.Point(500, 5);
+            this.btnPlanClear.Name = "btnPlanClear";
+            this.btnPlanClear.Size = new System.Drawing.Size(80, 50);
+            this.btnPlanClear.TabIndex = 5;
+            this.btnPlanClear.Text = "Clear";
+            this.btnPlanClear.UseVisualStyleBackColor = true;
+            this.btnPlanClear.Click += new System.EventHandler(this.btnPlanClear_Click);
+            // 
+            // btnPlanBack
+            // 
+            this.btnPlanBack.Location = new System.Drawing.Point(600, 5);
+            this.btnPlanBack.Name = "btnPlanBack";
+            this.btnPlanBack.Size = new System.Drawing.Size(80, 50);
+            this.btnPlanBack.TabIndex = 4;
+            this.btnPlanBack.Text = "Back";
+            this.btnPlanBack.UseVisualStyleBackColor = true;
+            this.btnPlanBack.Click += new System.EventHandler(this.btnInspectionBack_Click);
+            // 
+            // btnPlanInspection
+            // 
+            this.btnPlanInspection.Location = new System.Drawing.Point(390, 5);
+            this.btnPlanInspection.Name = "btnPlanInspection";
+            this.btnPlanInspection.Size = new System.Drawing.Size(80, 50);
+            this.btnPlanInspection.TabIndex = 3;
+            this.btnPlanInspection.Text = "Inspection";
+            this.btnPlanInspection.UseVisualStyleBackColor = true;
+            this.btnPlanInspection.Click += new System.EventHandler(this.btnNoPlanInspection_Click);
+            // 
+            // btnPlanReg
+            // 
+            this.btnPlanReg.Location = new System.Drawing.Point(140, 5);
+            this.btnPlanReg.Name = "btnPlanReg";
+            this.btnPlanReg.Size = new System.Drawing.Size(80, 50);
+            this.btnPlanReg.TabIndex = 0;
+            this.btnPlanReg.Text = "Register";
+            this.btnPlanReg.UseVisualStyleBackColor = true;
+            this.btnPlanReg.Click += new System.EventHandler(this.btnPlanReg_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Controls.Add(this.lbPlanItem);
+            this.panel3.Controls.Add(this.txtPlanItemCD);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(4, 4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(732, 52);
+            this.panel3.TabIndex = 4;
             // 
             // label12
             // 
-            this.label12.Location = new System.Drawing.Point(10, 70);
+            this.label12.Location = new System.Drawing.Point(10, 10);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(100, 20);
             this.label12.TabIndex = 27;
-            this.label12.Text = "Destination";
+            this.label12.Text = "Item Code";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label11
+            // label17
             // 
-            this.label11.Location = new System.Drawing.Point(10, 160);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(100, 20);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "To Date";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label17.Location = new System.Drawing.Point(856, 40);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(50, 20);
+            this.label17.TabIndex = 18;
+            this.label17.Text = "~";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // lbPlanItem
             // 
-            this.label7.Location = new System.Drawing.Point(10, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 20);
-            this.label7.TabIndex = 25;
-            this.label7.Text = "From Date";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbPlanItem.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbPlanItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbPlanItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPlanItem.Location = new System.Drawing.Point(270, 10);
+            this.lbPlanItem.Name = "lbPlanItem";
+            this.lbPlanItem.Size = new System.Drawing.Size(200, 20);
+            this.lbPlanItem.TabIndex = 10;
+            this.lbPlanItem.Text = "Item Name";
+            this.lbPlanItem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // rbtnDeliveryDate
+            // txtPlanItemCD
             // 
-            this.rbtnDeliveryDate.AutoSize = true;
-            this.rbtnDeliveryDate.Location = new System.Drawing.Point(260, 160);
-            this.rbtnDeliveryDate.Name = "rbtnDeliveryDate";
-            this.rbtnDeliveryDate.Size = new System.Drawing.Size(108, 20);
-            this.rbtnDeliveryDate.TabIndex = 14;
-            this.rbtnDeliveryDate.TabStop = true;
-            this.rbtnDeliveryDate.Text = "Delivery Date";
-            this.rbtnDeliveryDate.UseVisualStyleBackColor = true;
-            // 
-            // rbtnPlanDate
-            // 
-            this.rbtnPlanDate.AutoSize = true;
-            this.rbtnPlanDate.Location = new System.Drawing.Point(260, 130);
-            this.rbtnPlanDate.Name = "rbtnPlanDate";
-            this.rbtnPlanDate.Size = new System.Drawing.Size(140, 20);
-            this.rbtnPlanDate.TabIndex = 13;
-            this.rbtnPlanDate.TabStop = true;
-            this.rbtnPlanDate.Text = "Plan/Request Date";
-            this.rbtnPlanDate.UseVisualStyleBackColor = true;
-            // 
-            // rbtnNoCheckDate
-            // 
-            this.rbtnNoCheckDate.AutoSize = true;
-            this.rbtnNoCheckDate.Location = new System.Drawing.Point(260, 100);
-            this.rbtnNoCheckDate.Name = "rbtnNoCheckDate";
-            this.rbtnNoCheckDate.Size = new System.Drawing.Size(117, 20);
-            this.rbtnNoCheckDate.TabIndex = 22;
-            this.rbtnNoCheckDate.TabStop = true;
-            this.rbtnNoCheckDate.Text = "No Check Date";
-            this.rbtnNoCheckDate.UseVisualStyleBackColor = true;
-            // 
-            // txtItemCD
-            // 
-            this.txtItemCD.Location = new System.Drawing.Point(120, 40);
-            this.txtItemCD.Name = "txtItemCD";
-            this.txtItemCD.Size = new System.Drawing.Size(120, 22);
-            this.txtItemCD.TabIndex = 21;
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(856, 40);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 20);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "~";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dtpToDate
-            // 
-            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(120, 157);
-            this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(120, 22);
-            this.dtpToDate.TabIndex = 17;
-            // 
-            // dtpFromDate
-            // 
-            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(120, 129);
-            this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(120, 22);
-            this.dtpFromDate.TabIndex = 15;
-            // 
-            // lbUserName
-            // 
-            this.lbUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUserName.Location = new System.Drawing.Point(260, 10);
-            this.lbUserName.Name = "lbUserName";
-            this.lbUserName.Size = new System.Drawing.Size(200, 20);
-            this.lbUserName.TabIndex = 10;
-            this.lbUserName.Text = "User Name";
-            this.lbUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtUserCD
-            // 
-            this.txtUserCD.Location = new System.Drawing.Point(120, 10);
-            this.txtUserCD.Name = "txtUserCD";
-            this.txtUserCD.Size = new System.Drawing.Size(120, 22);
-            this.txtUserCD.TabIndex = 9;
-            // 
-            // label10
-            // 
-            this.label10.Location = new System.Drawing.Point(10, 10);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(100, 20);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "User Code";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbItemName
-            // 
-            this.lbItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbItemName.Location = new System.Drawing.Point(260, 40);
-            this.lbItemName.Name = "lbItemName";
-            this.lbItemName.Size = new System.Drawing.Size(200, 20);
-            this.lbItemName.TabIndex = 7;
-            this.lbItemName.Text = "Item Name";
-            this.lbItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.Location = new System.Drawing.Point(10, 40);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(100, 20);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "Item Code";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbDestinationName
-            // 
-            this.lbDestinationName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbDestinationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDestinationName.Location = new System.Drawing.Point(260, 70);
-            this.lbDestinationName.Name = "lbDestinationName";
-            this.lbDestinationName.Size = new System.Drawing.Size(200, 20);
-            this.lbDestinationName.TabIndex = 4;
-            this.lbDestinationName.Text = "Destination Name";
-            this.lbDestinationName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cmbDestinationCD
-            // 
-            this.cmbDestinationCD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDestinationCD.FormattingEnabled = true;
-            this.cmbDestinationCD.Location = new System.Drawing.Point(120, 70);
-            this.cmbDestinationCD.Name = "cmbDestinationCD";
-            this.cmbDestinationCD.Size = new System.Drawing.Size(120, 24);
-            this.cmbDestinationCD.TabIndex = 2;
-            // 
-            // txtSetNumber
-            // 
-            this.txtSetNumber.Location = new System.Drawing.Point(120, 100);
-            this.txtSetNumber.Name = "txtSetNumber";
-            this.txtSetNumber.Size = new System.Drawing.Size(120, 22);
-            this.txtSetNumber.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(10, 100);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Set Number";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtPlanItemCD.Location = new System.Drawing.Point(120, 10);
+            this.txtPlanItemCD.Name = "txtPlanItemCD";
+            this.txtPlanItemCD.Size = new System.Drawing.Size(120, 22);
+            this.txtPlanItemCD.TabIndex = 7;
+            this.txtPlanItemCD.TextChanged += new System.EventHandler(this.txtItemCDStockOut_TextChanged);
             // 
             // tab_Request
             // 
@@ -714,7 +657,7 @@
             this.tab_Request.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Request.Name = "tab_Request";
             this.tab_Request.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Request.Size = new System.Drawing.Size(726, 494);
+            this.tab_Request.Size = new System.Drawing.Size(740, 494);
             this.tab_Request.TabIndex = 2;
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
@@ -729,7 +672,7 @@
             this.dgvStockOut.Margin = new System.Windows.Forms.Padding(4);
             this.dgvStockOut.Name = "dgvStockOut";
             this.dgvStockOut.ReadOnly = true;
-            this.dgvStockOut.Size = new System.Drawing.Size(718, 424);
+            this.dgvStockOut.Size = new System.Drawing.Size(732, 424);
             this.dgvStockOut.TabIndex = 23;
             // 
             // pnlButtons
@@ -743,7 +686,7 @@
             this.pnlButtons.Location = new System.Drawing.Point(4, 4);
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(718, 62);
+            this.pnlButtons.Size = new System.Drawing.Size(732, 62);
             this.pnlButtons.TabIndex = 22;
             // 
             // btnSearch
@@ -810,7 +753,7 @@
             this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Inspection.Name = "tab_Inspection";
             this.tab_Inspection.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Inspection.Size = new System.Drawing.Size(726, 494);
+            this.tab_Inspection.Size = new System.Drawing.Size(740, 494);
             this.tab_Inspection.TabIndex = 3;
             this.tab_Inspection.Text = "Inspection";
             this.tab_Inspection.UseVisualStyleBackColor = true;
@@ -825,7 +768,7 @@
             this.dgvPrintList.ReadOnly = true;
             this.dgvPrintList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvPrintList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrintList.Size = new System.Drawing.Size(718, 346);
+            this.dgvPrintList.Size = new System.Drawing.Size(732, 346);
             this.dgvPrintList.TabIndex = 3;
             // 
             // dgvProcess
@@ -837,7 +780,7 @@
             this.dgvProcess.Name = "dgvProcess";
             this.dgvProcess.ReadOnly = true;
             this.dgvProcess.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvProcess.Size = new System.Drawing.Size(718, 80);
+            this.dgvProcess.Size = new System.Drawing.Size(732, 80);
             this.dgvProcess.TabIndex = 2;
             // 
             // panel1
@@ -850,7 +793,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(718, 60);
+            this.panel1.Size = new System.Drawing.Size(732, 60);
             this.panel1.TabIndex = 1;
             // 
             // btnInspectionBack
@@ -911,14 +854,14 @@
             this.tsRows});
             this.statusStrip1.Location = new System.Drawing.Point(150, 596);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(877, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(748, 22);
             this.statusStrip1.TabIndex = 23;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(785, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(656, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -933,21 +876,11 @@
             this.tsRows.Size = new System.Drawing.Size(36, 17);
             this.tsRows.Text = "None";
             // 
-            // btnNoPlanSearch
-            // 
-            this.btnNoPlanSearch.Location = new System.Drawing.Point(160, 5);
-            this.btnNoPlanSearch.Name = "btnNoPlanSearch";
-            this.btnNoPlanSearch.Size = new System.Drawing.Size(80, 50);
-            this.btnNoPlanSearch.TabIndex = 6;
-            this.btnNoPlanSearch.Text = "Search";
-            this.btnNoPlanSearch.UseVisualStyleBackColor = true;
-            this.btnNoPlanSearch.Click += new System.EventHandler(this.btnNoPlanSearch_Click);
-            // 
             // StockOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1027, 618);
+            this.ClientSize = new System.Drawing.Size(898, 618);
             this.Controls.Add(this.tc_Main);
             this.Controls.Add(this.statusStrip1);
             this.dept = "";
@@ -958,7 +891,7 @@
             this.name = "";
             this.Name = "StockOutForm";
             this.position = "";
-            this.Text = "StockOutForm";
+            this.Text = "Stock Out";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.StockOutForm_Load);
             this.Controls.SetChildIndex(this.statusStrip1, 0);
@@ -970,8 +903,10 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.tab_Plan.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlan)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.tab_Request.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).EndInit();
             this.pnlButtons.ResumeLayout(false);
@@ -1020,26 +955,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cmbNoPlanDestinationCD;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RadioButton rbtnDeliveryDate;
-        private System.Windows.Forms.RadioButton rbtnPlanDate;
-        private System.Windows.Forms.RadioButton rbtnNoCheckDate;
-        private System.Windows.Forms.TextBox txtItemCD;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dtpToDate;
-        private System.Windows.Forms.DateTimePicker dtpFromDate;
-        private System.Windows.Forms.Label lbUserName;
-        private System.Windows.Forms.TextBox txtUserCD;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label lbItemName;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lbDestinationName;
-        private System.Windows.Forms.ComboBox cmbDestinationCD;
-        private System.Windows.Forms.TextBox txtSetNumber;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbNoPlanItem;
         private System.Windows.Forms.TextBox txtNoPlanItemCD;
@@ -1063,5 +978,17 @@
         private System.Windows.Forms.TextBox txtNoPlanSetNumber;
         private System.Windows.Forms.CheckBox cbSign;
         private System.Windows.Forms.Button btnNoPlanSearch;
+        private System.Windows.Forms.DataGridView dgvPlan;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnPlanAddItem;
+        private System.Windows.Forms.Button btnPlanClear;
+        private System.Windows.Forms.Button btnPlanBack;
+        private System.Windows.Forms.Button btnPlanInspection;
+        private System.Windows.Forms.Button btnPlanReg;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lbPlanItem;
+        private System.Windows.Forms.TextBox txtPlanItemCD;
     }
 }

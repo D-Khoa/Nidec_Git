@@ -70,7 +70,7 @@ namespace ConvertPremacFile
                 openf.ValidateNames = true;
                 if (openf.ShowDialog() == DialogResult.OK)
                 {
-                    txtPremac649Path.Text = openf.FileName;
+                    txtPremac649Path.Text = Path.GetDirectoryName(openf.FileName);
                 }
             }
             catch (Exception ex)
@@ -92,7 +92,7 @@ namespace ConvertPremacFile
                 if (openf.ShowDialog() == DialogResult.OK)
                 {
 
-                    txtItem212.Text = openf.FileName;
+                    txtItem212.Text = Path.GetDirectoryName(openf.FileName);
                 }
             }
             catch (Exception ex)
@@ -113,7 +113,7 @@ namespace ConvertPremacFile
                 openf.ValidateNames = true;
                 if (openf.ShowDialog() == DialogResult.OK)
                 {
-                    txtSupplier232.Text = openf.FileName;
+                    txtSupplier232.Text = Path.GetDirectoryName(openf.FileName);
                 }
             }
             catch (Exception ex)
@@ -195,7 +195,7 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtPremac649Path.Text))
                 {
-                    string[] files = Directory.GetFiles(Path.GetDirectoryName(txtPremac649Path.Text), "*CPFXE049*");
+                    string[] files = Directory.GetFiles(txtPremac649Path.Text, "*CPFXE049*");
                     foreach (string file in files)
                     {
                         premacfile.GetListPremacItem(file);
@@ -226,7 +226,7 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtItem212.Text))
                 {
-                    string[] files = Directory.GetFiles(Path.GetDirectoryName(txtItem212.Text), "*CPBE0012*");
+                    string[] files = Directory.GetFiles(txtItem212.Text, "*CPBE0012*");
                     foreach (string file in files)
                     {
                         premacfile212.GetListItems(file);
@@ -257,7 +257,7 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtSupplier232.Text))
                 {
-                    string[] files = Directory.GetFiles(Path.GetDirectoryName(txtSupplier232.Text), "*CPBE0032*");
+                    string[] files = Directory.GetFiles(txtSupplier232.Text, "*CPBE0032*");
                     foreach (string file in files)
                     {
                         premacfile232.GetListItems(file);

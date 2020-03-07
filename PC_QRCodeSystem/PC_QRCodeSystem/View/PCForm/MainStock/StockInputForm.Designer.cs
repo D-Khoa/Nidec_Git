@@ -67,6 +67,8 @@
             this.tab_Inspection = new System.Windows.Forms.TabPage();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtOrderCD = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnInspectionClear = new System.Windows.Forms.Button();
             this.txtSupplierName = new System.Windows.Forms.TextBox();
@@ -90,8 +92,6 @@
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtOrderCD = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -542,6 +542,22 @@
             this.panel4.Size = new System.Drawing.Size(898, 130);
             this.panel4.TabIndex = 1;
             // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(10, 70);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 30);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Order Number";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtOrderCD
+            // 
+            this.txtOrderCD.Location = new System.Drawing.Point(120, 70);
+            this.txtOrderCD.Name = "txtOrderCD";
+            this.txtOrderCD.Size = new System.Drawing.Size(120, 23);
+            this.txtOrderCD.TabIndex = 25;
+            // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -792,22 +808,6 @@
             this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
             this.tsTotalQty.Text = "None";
             // 
-            // txtOrderCD
-            // 
-            this.txtOrderCD.Location = new System.Drawing.Point(120, 70);
-            this.txtOrderCD.Name = "txtOrderCD";
-            this.txtOrderCD.Size = new System.Drawing.Size(120, 23);
-            this.txtOrderCD.TabIndex = 25;
-            // 
-            // label11
-            // 
-            this.label11.Location = new System.Drawing.Point(10, 70);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(100, 30);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "Order Number";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // StockInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -823,7 +823,7 @@
             this.name = "";
             this.Name = "StockInputForm";
             this.position = "";
-            this.Text = "Stock-In";
+            this.Text = "Stock In";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.StockInputForm_Load);
             this.Controls.SetChildIndex(this.statusStrip2, 0);

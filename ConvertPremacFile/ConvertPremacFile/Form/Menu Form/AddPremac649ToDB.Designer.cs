@@ -59,12 +59,12 @@
             // 
             this.txtPremac649Path.Location = new System.Drawing.Point(100, 10);
             this.txtPremac649Path.Name = "txtPremac649Path";
-            this.txtPremac649Path.Size = new System.Drawing.Size(190, 20);
+            this.txtPremac649Path.Size = new System.Drawing.Size(400, 20);
             this.txtPremac649Path.TabIndex = 0;
             // 
             // btnBrowser
             // 
-            this.btnBrowser.Location = new System.Drawing.Point(300, 10);
+            this.btnBrowser.Location = new System.Drawing.Point(520, 10);
             this.btnBrowser.Name = "btnBrowser";
             this.btnBrowser.Size = new System.Drawing.Size(80, 23);
             this.btnBrowser.TabIndex = 1;
@@ -83,7 +83,7 @@
             // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(210, 134);
+            this.btnConvert.Location = new System.Drawing.Point(186, 121);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(80, 50);
             this.btnConvert.TabIndex = 3;
@@ -93,7 +93,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(120, 134);
+            this.btnStart.Location = new System.Drawing.Point(100, 121);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(80, 50);
             this.btnStart.TabIndex = 4;
@@ -108,7 +108,7 @@
             this.tsStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 378);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(388, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(614, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -121,7 +121,7 @@
             // tsStatus
             // 
             this.tsStatus.Name = "tsStatus";
-            this.tsStatus.Size = new System.Drawing.Size(256, 17);
+            this.tsStatus.Size = new System.Drawing.Size(513, 17);
             this.tsStatus.Spring = true;
             // 
             // timer1
@@ -132,7 +132,7 @@
             // dtpTimeConvert
             // 
             this.dtpTimeConvert.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTimeConvert.Location = new System.Drawing.Point(12, 154);
+            this.dtpTimeConvert.Location = new System.Drawing.Point(13, 137);
             this.dtpTimeConvert.Name = "dtpTimeConvert";
             this.dtpTimeConvert.ShowUpDown = true;
             this.dtpTimeConvert.Size = new System.Drawing.Size(80, 20);
@@ -141,7 +141,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 134);
+            this.label2.Location = new System.Drawing.Point(10, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 7;
@@ -155,11 +155,11 @@
             this.dgvLogs.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLogs.Location = new System.Drawing.Point(0, 197);
+            this.dgvLogs.Location = new System.Drawing.Point(0, 177);
             this.dgvLogs.Name = "dgvLogs";
             this.dgvLogs.ReadOnly = true;
             this.dgvLogs.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dgvLogs.Size = new System.Drawing.Size(388, 181);
+            this.dgvLogs.Size = new System.Drawing.Size(614, 201);
             this.dgvLogs.TabIndex = 8;
             // 
             // panel1
@@ -181,12 +181,12 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(388, 197);
+            this.panel1.Size = new System.Drawing.Size(614, 177);
             this.panel1.TabIndex = 9;
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(300, 134);
+            this.btnClear.Location = new System.Drawing.Point(272, 121);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(80, 50);
             this.btnClear.TabIndex = 14;
@@ -196,7 +196,7 @@
             // 
             // btnSupplier
             // 
-            this.btnSupplier.Location = new System.Drawing.Point(299, 87);
+            this.btnSupplier.Location = new System.Drawing.Point(520, 80);
             this.btnSupplier.Name = "btnSupplier";
             this.btnSupplier.Size = new System.Drawing.Size(80, 23);
             this.btnSupplier.TabIndex = 12;
@@ -206,15 +206,15 @@
             // 
             // txtSupplier232
             // 
-            this.txtSupplier232.Location = new System.Drawing.Point(99, 87);
+            this.txtSupplier232.Location = new System.Drawing.Point(99, 80);
             this.txtSupplier232.Name = "txtSupplier232";
-            this.txtSupplier232.Size = new System.Drawing.Size(190, 20);
+            this.txtSupplier232.Size = new System.Drawing.Size(400, 20);
             this.txtSupplier232.TabIndex = 11;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 87);
+            this.label4.Location = new System.Drawing.Point(9, 86);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 13);
             this.label4.TabIndex = 13;
@@ -222,7 +222,7 @@
             // 
             // btnBrowseritem
             // 
-            this.btnBrowseritem.Location = new System.Drawing.Point(299, 50);
+            this.btnBrowseritem.Location = new System.Drawing.Point(520, 45);
             this.btnBrowseritem.Name = "btnBrowseritem";
             this.btnBrowseritem.Size = new System.Drawing.Size(80, 23);
             this.btnBrowseritem.TabIndex = 9;
@@ -232,15 +232,15 @@
             // 
             // txtItem212
             // 
-            this.txtItem212.Location = new System.Drawing.Point(99, 50);
+            this.txtItem212.Location = new System.Drawing.Point(99, 45);
             this.txtItem212.Name = "txtItem212";
-            this.txtItem212.Size = new System.Drawing.Size(190, 20);
+            this.txtItem212.Size = new System.Drawing.Size(400, 20);
             this.txtItem212.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 50);
+            this.label3.Location = new System.Drawing.Point(9, 48);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 10;
@@ -250,11 +250,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 400);
+            this.ClientSize = new System.Drawing.Size(614, 400);
             this.Controls.Add(this.dgvLogs);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddPremac649ToDB";
             this.Text = "Add Premac To Database";

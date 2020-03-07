@@ -236,7 +236,7 @@
             this.name = "";
             this.Name = "ItemIssueForm";
             this.position = "";
-            this.Text = "ItemIssueForm";
+            this.Text = "Stock Issue";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.ItemIssueForm_Load);
             this.Controls.SetChildIndex(this.panel4, 0);

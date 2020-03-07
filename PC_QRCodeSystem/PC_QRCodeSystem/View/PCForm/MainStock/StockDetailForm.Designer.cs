@@ -667,7 +667,7 @@
             this.name = "";
             this.Name = "StockDetailForm";
             this.position = "";
-            this.Text = "StockDetailForm";
+            this.Text = "Stock Detail";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.StockDetailForm_Load);
             this.Controls.SetChildIndex(this.statusStrip1, 0);

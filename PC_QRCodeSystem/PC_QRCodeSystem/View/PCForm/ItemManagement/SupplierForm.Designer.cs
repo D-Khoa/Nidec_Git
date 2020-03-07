@@ -352,7 +352,7 @@
             this.name = "";
             this.Name = "SupplierForm";
             this.position = "";
-            this.Text = "SupplierForm";
+            this.Text = "Supplier Management";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.SupplierForm_Load);
             this.Controls.SetChildIndex(this.panel4, 0);

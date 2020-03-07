@@ -10,10 +10,10 @@ namespace ConvertPremacFile.Model
 {
     public class pts_item
     {
-        public int item_id { get; set; }
-        public int type_id { get; set; }
         public string item_cd { get; set; }
         public string item_name { get; set; }
+        public int type_id { get; set; }
+        public int item_lv { get; set; }
         public string item_location { get; set; }
         public string item_unit { get; set; }
         public double lot_size { get; set; }
@@ -35,9 +35,10 @@ namespace ConvertPremacFile.Model
                                           let columns = csvline.Split('?')
                                           select new pts_item
                                           {
-                                              type_id = int.Parse(Regex.Replace(columns[2], " {2,}", " ").Trim()),
                                               item_cd = Regex.Replace(columns[0], " {2,}", " ").Trim(),
                                               item_name = Regex.Replace(columns[1], " {2,}", " ").Trim(),
+                                              type_id = int.Parse(Regex.Replace(columns[2], " {2,}", " ").Trim()),
+                                              item_lv = int.Parse(Regex.Replace(columns[30], " {2,}", " ").Trim()),
                                               item_location = Regex.Replace(columns[40], " {2,}", " ").Trim(),
                                               item_unit = Regex.Replace(columns[14], " {2,}", " ").Trim(),
                                               lot_size = double.Parse(Regex.Replace(columns[17], " {2,}", " ").Trim()),
@@ -52,9 +53,10 @@ namespace ConvertPremacFile.Model
         public void WriteToDB(IEnumerable<pts_item> listPremacitem)
         {
             PostgreSQLCopyHelper<pts_item> coppyHelper = new PostgreSQLCopyHelper<pts_item>("pts_item")
-                                                              .MapInteger("type_id", x => x.type_id)
                                                               .MapVarchar("item_cd", x => x.item_cd)
                                                               .MapText("item_name", x => x.item_name)
+                                                              .MapInteger("type_id", x => x.type_id)
+                                                              .MapInteger("item_lv", x => x.item_lv)
                                                               .MapVarchar("item_location", x => x.item_location)
                                                               .MapVarchar("item_unit", x => x.item_unit)
                                                               .MapDouble("lot_size", x => x.lot_size)

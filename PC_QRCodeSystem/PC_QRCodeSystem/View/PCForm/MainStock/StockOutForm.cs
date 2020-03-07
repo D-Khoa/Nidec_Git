@@ -11,6 +11,8 @@ namespace PC_QRCodeSystem.View
     public partial class StockOutForm : FormCommon
     {
         #region VARIABLE
+        private pre_649 pre649Data { get; set; }
+
         private OutputItem outData { get; set; }
         private PrintItem printData { get; set; }
         private List<PrintItem> listPrintItems { get; set; }
@@ -40,6 +42,7 @@ namespace PC_QRCodeSystem.View
         {
             InitializeComponent();
             tc_Main.ItemSize = new Size(0, 1);
+            pre649Data = new pre_649();
             planData = new pts_plan();
             itemData = new pts_item();
             outData = new OutputItem();
@@ -141,10 +144,114 @@ namespace PC_QRCodeSystem.View
                         noplan_date = dtpNoPlanStockOutDate.Value,
                     });
                     #endregion
+                    //Update grid in inspection tab
+                    UpdateProcessGrid(0);
+                    //Check all packing in dgv
+                    foreach (DataGridViewRow dr in dgvNoPlan.Rows)
+                    {
+                        //Get packing stockOutQty & packing code
+                        stockData = dr.DataBoundItem as pts_stock;
+
+                        //If packing is empty then skip it
+                        if (!cbSign.Checked && stockData.packing_qty <= 0) continue;
+
+                        //Get item info
+                        itemData = itemData.GetItem(stockData.item_cd);
+                        //Get supplier
+                        supplierData = supplierData.GetSupplier(new pts_supplier { supplier_cd = stockData.supplier_cd });
+
+                        #region ADD STOCK-OUT ITEM
+                        //If stock-out qty > packing qty then stock-out next pack
+                        if (stockOutQty > stockData.packing_qty)
+                        {
+                            temp = stockData.packing_qty;
+                            stockOutQty = stockOutQty - stockData.packing_qty;
+                        }
+                        else //When stock-out qty < pack qty then get a number = stock-out qty
+                        {
+                            temp = stockOutQty;
+                            stockOutQty = 0;
+                        }
+                        //Add stock-out item into a list
+                        listStockOut.Add(new pts_stockout_log
+                        {
+                            packing_cd = stockData.packing_cd,
+                            process_cd = processcd,
+                            issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
+                            stockout_date = dtpNoPlanStockOutDate.Value,
+                            stockout_user_cd = txtNoPlanUserCD.Text,
+                            stockout_qty = temp,
+                            comment = txtNoPlanComment.Text,
+                            remark = "N",
+                        });
+                        #region ADD LIST LABEL STOCK-OUT AND LIST ITEM FOR CSV
+                        //Add new label stock-out
+                        printData.ListPrintItem.Add(new PrintItem
+                        {
+                            Item_Number = txtNoPlanItemCD.Text,
+                            Item_Name = itemData.item_name,
+                            SupplierName = supplierData.supplier_name,
+                            Invoice = txtNoPlanInvoice.Text,
+                            Delivery_Date = dtpNoPlanStockOutDate.Value,
+                            Delivery_Qty = temp,
+                            SupplierCD = supplierData.supplier_cd,
+                            //OrderNo = stockData.order_no,
+                            isRec = false,
+                            Label_Qty = 1
+                        });
+                        //Add Output item
+                        outData.listOutputItem.Add(new OutputItem
+                        {
+                            issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
+                            destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
+                            item_number = txtNoPlanItemCD.Text,
+                            //item_name = itemData.item_name,
+                            //supplier_cd = supplierData.supplier_cd,
+                            //supplier_name = supplierData.supplier_name,
+                            //supplier_invoice = txtNoPlanInvoice.Text,
+                            //order_number = stockData.order_no,
+                            delivery_date = dtpNoPlanStockOutDate.Value,
+                            delivery_qty = temp,
+                            incharge = txtNoPlanUserCD.Text,
+                        });
+                        #endregion
+                        #endregion
+
+                        #region CALCULATOR, ADD LIST STOCK ITEM AND ADD LIST LABEL STOCK-ON-HAND
+                        //Calculator pack qty in stock
+                        stockData.packing_qty = stockData.packing_qty - temp;
+                        listStock.Add(stockData);
+                        //Add new label stock-in when it not empty
+                        if (stockData.packing_qty > 0)
+                        {
+                            printData.ListPrintItem.Add(new PrintItem
+                            {
+                                Item_Number = txtNoPlanItemCD.Text,
+                                Item_Name = itemData.item_name,
+                                SupplierName = supplierData.supplier_name,
+                                Invoice = txtNoPlanInvoice.Text,
+                                Delivery_Date = stockData.stockin_date,
+                                Delivery_Qty = stockData.packing_qty,
+                                SupplierCD = supplierData.supplier_cd,
+                                //OrderNo = stockData.order_no,
+                                isRec = true,
+                                Label_Qty = 1
+                            });
+                        }
+                        #endregion
+
+                        //If get enough stock-out qty then break
+                        if (stockOutQty == 0) break;
+                    }
+                    btnNoPlanInspection.Visible = true;
+                    if (CustomMessageBox.Question("Successful!. Do you want go to Inspection Tab to see it?") == DialogResult.Yes)
+                        tc_Main.SelectedTab = tab_Inspection;
                 }
                 else
                 {
-                    processcd = "P" + DateTime.Now.ToString("yyyyMMdd-HHmmss");
+                    #region ADD NEW PLAN
+                    listPlan.Clear();
+                    processcd = "P" + txtNoPlanSetNumber.Text;
                     listPlan.Add(new pts_plan
                     {
                         plan_cd = processcd,
@@ -157,114 +264,12 @@ namespace PC_QRCodeSystem.View
                         delivery_date = dtpNoPlanStockOutDate.Value.AddDays(7),
                         comment = txtNoPlanComment.Text
                     });
+                    #endregion
+                    //Update grid in inspection tab
+                    UpdateProcessGrid(1);
+                    txtNoPlanItemCD.Clear();
+                    tc_Main.SelectedTab = tab_Plan;
                 }
-                //Check all packing in dgv
-                foreach (DataGridViewRow dr in dgvNoPlan.Rows)
-                {
-                    //Get packing stockOutQty & packing code
-                    stockData = dr.DataBoundItem as pts_stock;
-
-                    //If packing is empty then skip it
-                    if (!cbSign.Checked && stockData.packing_qty <= 0) continue;
-
-                    if (string.IsNullOrEmpty(stockData.order_no)) stockData.order_no = txtNoPlanSetNumber.Text;
-                    else
-                    {
-                        if (CustomMessageBox.Question("This stock item have set number: " + stockData.order_no + "." + Environment.NewLine + "Do you want to change to set number: " + txtNoPlanSetNumber.Text + "?") == DialogResult.Yes) stockData.order_no = txtNoPlanSetNumber.Text;
-                    }
-                    //Get item info
-                    itemData = itemData.GetItem(stockData.item_cd);
-                    //Get supplier
-                    supplierData = supplierData.GetSupplier(new pts_supplier { supplier_cd = stockData.supplier_cd });
-
-                    #region ADD STOCK-OUT ITEM
-                    //If stock-out qty > packing qty then stock-out next pack
-                    if (stockOutQty > stockData.packing_qty)
-                    {
-                        temp = stockData.packing_qty;
-                        stockOutQty = stockOutQty - stockData.packing_qty;
-                    }
-                    else //When stock-out qty < pack qty then get a number = stock-out qty
-                    {
-                        temp = stockOutQty;
-                        stockOutQty = 0;
-                    }
-                    //Add stock-out item into a list
-                    listStockOut.Add(new pts_stockout_log
-                    {
-                        packing_cd = stockData.packing_cd,
-                        process_cd = processcd,
-                        issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
-                        stockout_date = dtpNoPlanStockOutDate.Value,
-                        stockout_user_cd = txtNoPlanUserCD.Text,
-                        stockout_qty = temp,
-                        comment = txtNoPlanComment.Text,
-                        remark = "N",
-                    });
-                    #region ADD LIST LABEL STOCK-OUT AND LIST ITEM FOR CSV
-                    //Add new label stock-out
-                    printData.ListPrintItem.Add(new PrintItem
-                    {
-                        Item_Number = txtNoPlanItemCD.Text,
-                        Item_Name = itemData.item_name,
-                        SupplierName = supplierData.supplier_name,
-                        Invoice = txtNoPlanInvoice.Text,
-                        Delivery_Date = dtpNoPlanStockOutDate.Value,
-                        Delivery_Qty = temp,
-                        SupplierCD = supplierData.supplier_cd,
-                        //OrderNo = stockData.order_no,
-                        isRec = false,
-                        Label_Qty = 1
-                    });
-                    //Add Output item
-                    outData.listOutputItem.Add(new OutputItem
-                    {
-                        issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
-                        destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
-                        item_number = txtNoPlanItemCD.Text,
-                        //item_name = itemData.item_name,
-                        //supplier_cd = supplierData.supplier_cd,
-                        //supplier_name = supplierData.supplier_name,
-                        //supplier_invoice = txtNoPlanInvoice.Text,
-                        order_number = stockData.order_no,
-                        delivery_date = dtpNoPlanStockOutDate.Value,
-                        delivery_qty = temp,
-                        incharge = txtNoPlanUserCD.Text,
-                    });
-                    #endregion
-                    #endregion
-
-                    #region CALCULATOR, ADD LIST STOCK ITEM AND ADD LIST LABEL STOCK-ON-HAND
-                    //Calculator pack qty in stock
-                    stockData.packing_qty = stockData.packing_qty - temp;
-                    listStock.Add(stockData);
-                    //Add new label stock-in when it not empty
-                    if (stockData.packing_qty > 0)
-                    {
-                        printData.ListPrintItem.Add(new PrintItem
-                        {
-                            Item_Number = txtNoPlanItemCD.Text,
-                            Item_Name = itemData.item_name,
-                            SupplierName = supplierData.supplier_name,
-                            Invoice = txtNoPlanInvoice.Text,
-                            Delivery_Date = stockData.stockin_date,
-                            Delivery_Qty = stockData.packing_qty,
-                            SupplierCD = supplierData.supplier_cd,
-                            //OrderNo = stockData.order_no,
-                            isRec = true,
-                            Label_Qty = 1
-                        });
-                    }
-                    #endregion
-
-                    //If get enough stock-out qty then break
-                    if (stockOutQty == 0) break;
-                }
-                //Update grid in inspection tab
-                UpdateProcessGrid(0);
-                btnNoPlanInspection.Visible = true;
-                if (CustomMessageBox.Question("Successful!. Do you want go to Inspection Tab to see it?") == DialogResult.Yes)
-                    tc_Main.SelectedTab = tab_Inspection;
             }
             catch (Exception ex)
             {
@@ -290,18 +295,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnNoplanClear_Click(object sender, EventArgs e)
         {
-            //Clear all fields of No plan tab
-            UpdateNoPlanGrid(false);
-            dgvNoPlan.DataSource = null;
-            cmbNoPlanIssueCD.Text = null;
-            cmbNoPlanDestinationCD.Text = null;
-            txtNoPlanWHQty.Clear();
-            txtNoPlanUserCD.Clear();
-            txtNoPlanItemCD.Clear();
-            txtNoPlanInvoice.Clear();
-            txtNoPlanComment.Clear();
-            txtNoPlanSetNumber.Clear();
-            txtNoPlanStockOutQty.Clear();
+            ClearNoPlan();
         }
         #endregion
 
@@ -323,7 +317,10 @@ namespace PC_QRCodeSystem.View
         private void txtItemCDStockOut_TextChanged(object sender, EventArgs e)
         {
             errorProvider.SetError(txtNoPlanItemCD, null);
+            errorProvider.SetError(txtPlanItemCD, null);
+            lbPlanItem.Text = "Item Name";
             lbNoPlanItem.Text = "Item Name";
+            lbPlanItem.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             lbNoPlanItem.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             if (!string.IsNullOrEmpty(txtNoPlanItemCD.Text))
             {
@@ -338,6 +335,20 @@ namespace PC_QRCodeSystem.View
                                            Environment.NewLine + ex.Message);
                 }
             }
+            if (!string.IsNullOrEmpty(txtPlanItemCD.Text))
+            {
+                try
+                {
+                    lbPlanItem.Text = itemData.GetItem(txtPlanItemCD.Text).item_name;
+                    lbPlanItem.BackColor = Color.Lime;
+                }
+                catch (Exception ex)
+                {
+                    errorProvider.SetError(txtPlanItemCD, "Wrong Item Code" +
+                                           Environment.NewLine + ex.Message);
+                }
+            }
+
         }
 
         private void txtStockOutUser_TextChanged(object sender, EventArgs e)
@@ -388,6 +399,13 @@ namespace PC_QRCodeSystem.View
             else txtNoPlanStockOutQty.Text = txtNoPlanStockOutQty.Text.Replace("-", "");
         }
 
+        private void dgvNoPlan_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            txtNoPlanItemCD.Text = dgvNoPlan.Rows[e.RowIndex].Cells["item_cd"].Value.ToString();
+            txtNoPlanInvoice.Text = dgvNoPlan.Rows[e.RowIndex].Cells["invoice"].Value.ToString();
+        }
+
         private void tab_NoPlan_Paint(object sender, PaintEventArgs e)
         {
             if (dgvProcess.Rows.Count > 0) btnNoPlanInspection.Visible = true;
@@ -429,35 +447,31 @@ namespace PC_QRCodeSystem.View
         {
             if (isSearch)
             {
+                bool result = false;
                 if (txtNoPlanSetNumber.ReadOnly)
                 {
                     //Search stock item with item code and invoice
-                    if (!stockData.SearchItem(new pts_stock { item_cd = txtNoPlanItemCD.Text, invoice = txtNoPlanInvoice.Text }))
-                    {
-                        CustomMessageBox.Error("This stock item is not exist! Please check and try again!");
-                        lbNoPlanItem.Text = "Item Name";
-                        txtNoPlanItemCD.Clear();
-                        return;
-                    }
+                    result = stockData.SearchItem(new pts_stock { item_cd = txtNoPlanItemCD.Text });
                 }
                 else
                 {
-                    //Search stock item with item code and invoice
-                    if (!stockData.SearchItem(new pts_stock { order_no = txtNoPlanSetNumber.Text }))
-                    {
-                        CustomMessageBox.Error("This stock item is not exist! Please check and try again!");
-                        lbNoPlanItem.Text = "Item Name";
-                        txtNoPlanItemCD.Clear();
-                        return;
-                    }
+                    //Search stock item with set number
+                    pre649Data.Search(new pre_649 { order_number = txtNoPlanSetNumber.Text });
+                    result = stockData.SearchItem(new pts_stock { item_cd = pre649Data.listPremacItem[0].item_number });
+                }
+                if (!result)
+                {
+                    CustomMessageBox.Error("This stock item is not exist! Please check and try again!");
+                    ClearNoPlan();
                 }
             }
             dgvNoPlan.DataSource = stockData.listStockItems;
+            if (dgvNoPlan.Columns.Contains("order_no")) dgvNoPlan.Columns.Remove("order_no");
             dgvNoPlan.Columns["stock_id"].HeaderText = "Stock ID";
             dgvNoPlan.Columns["packing_cd"].HeaderText = "Packing Code";
             dgvNoPlan.Columns["item_cd"].HeaderText = "Item Code";
             dgvNoPlan.Columns["supplier_cd"].HeaderText = "Supplier Code";
-            dgvNoPlan.Columns["order_no"].HeaderText = "Order Number";
+            //dgvNoPlan.Columns["order_no"].HeaderText = "Order Number";
             dgvNoPlan.Columns["invoice"].HeaderText = "Invoice";
             dgvNoPlan.Columns["stockin_date"].HeaderText = "Stock In Date";
             dgvNoPlan.Columns["stockin_user_cd"].HeaderText = "Incharge";
@@ -477,6 +491,24 @@ namespace PC_QRCodeSystem.View
                 tsRows.Text = "None";
                 txtNoPlanWHQty.Text = "0";
             }
+        }
+
+        /// <summary>
+        /// Clear all fields of No plan tab
+        /// </summary>
+        private void ClearNoPlan()
+        {
+            UpdateNoPlanGrid(false);
+            dgvNoPlan.DataSource = null;
+            cmbNoPlanIssueCD.Text = null;
+            cmbNoPlanDestinationCD.Text = null;
+            txtNoPlanWHQty.Clear();
+            txtNoPlanUserCD.Clear();
+            txtNoPlanItemCD.Clear();
+            txtNoPlanInvoice.Clear();
+            txtNoPlanComment.Clear();
+            txtNoPlanSetNumber.Clear();
+            txtNoPlanStockOutQty.Clear();
         }
         #endregion
         #endregion
@@ -584,6 +616,7 @@ namespace PC_QRCodeSystem.View
         private void btnInspectionBack_Click(object sender, EventArgs e)
         {
             tc_Main.SelectedTab = tab_NoPlan;
+            txtPlanItemCD.Clear();
         }
         #endregion
 
@@ -600,6 +633,7 @@ namespace PC_QRCodeSystem.View
                     dgvProcess.DataSource = listNoPlan;
                     break;
                 case 1:
+                    dgvProcess.DataSource = listPlan;
                     break;
                 case 2:
                     break;
@@ -609,6 +643,7 @@ namespace PC_QRCodeSystem.View
 
         private void ClearInspection()
         {
+            listPlan.Clear();
             listStock.Clear();
             listNoPlan.Clear();
             listStockOut.Clear();
@@ -620,5 +655,128 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #endregion
+        pts_stock itemAdd = new pts_stock();
+        List<pts_stock> listADd = new List<pts_stock>();
+        private void btnPlanAddItem_Click(object sender, EventArgs e)
+        {
+            itemAdd.SearchItem(new pts_stock { item_cd = txtPlanItemCD.Text });
+            listADd.AddRange(itemAdd.listStockItems.Where(x => x.packing_qty > 0).Select(x => x));
+            UpdatePlanGrid();
+        }
+
+        private void btnPlanReg_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow dr in dgvPlan.Rows)
+            {
+                if ((double)dr.Cells["packing_qty"].Value <= 0 || dr.Cells["stockout_qty"].Value == null) continue;
+
+                #region ADD STOCK-OUT ITEM
+                //Add stock-out item into a list
+                listStockOut.Add(new pts_stockout_log
+                {
+                    packing_cd = dr.Cells["packing_cd"].Value.ToString(),
+                    process_cd = listPlan[0].plan_cd,
+                    issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
+                    stockout_date = dtpNoPlanStockOutDate.Value,
+                    stockout_user_cd = txtNoPlanUserCD.Text,
+                    stockout_qty = (double)dr.Cells["stockout_qty"].Value,
+                    comment = txtNoPlanComment.Text,
+                    remark = "N",
+                });
+                #region ADD LIST LABEL STOCK-OUT AND LIST ITEM FOR CSV
+                //Add new label stock-out
+                printData.ListPrintItem.Add(new PrintItem
+                {
+                    Item_Number = dr.Cells["item_cd"].Value.ToString(),
+                    Item_Name = itemData.GetItem(dr.Cells["item_cd"].Value.ToString()).item_name,
+                    SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = dr.Cells["supplier_cd"].Value.ToString() }).supplier_name,
+                    Invoice = dr.Cells["invoice"].Value.ToString(),
+                    Delivery_Date = dtpNoPlanStockOutDate.Value,
+                    Delivery_Qty = (double)dr.Cells["stockout_qty"].Value,
+                    SupplierCD = dr.Cells["supplier_cd"].Value.ToString(),
+                    //OrderNo = stockData.order_no,
+                    isRec = false,
+                    Label_Qty = 1
+                });
+                //Add Output item
+                outData.listOutputItem.Add(new OutputItem
+                {
+                    issue_cd = (int)cmbNoPlanIssueCD.SelectedValue,
+                    destination_cd = cmbNoPlanDestinationCD.SelectedValue.ToString(),
+                    item_number = dr.Cells["item_cd"].Value.ToString(),
+                    //item_name = itemData.item_name,
+                    //supplier_cd = supplierData.supplier_cd,
+                    //supplier_name = supplierData.supplier_name,
+                    //supplier_invoice = txtNoPlanInvoice.Text,
+                    //order_number = stockData.order_no,
+                    delivery_date = dtpNoPlanStockOutDate.Value,
+                    delivery_qty = (double)dr.Cells["stockout_qty"].Value,
+                    incharge = txtNoPlanUserCD.Text,
+                });
+                #endregion
+                #endregion
+
+                #region CALCULATOR, ADD LIST STOCK ITEM AND ADD LIST LABEL STOCK-ON-HAND
+                //Calculator pack qty in stock
+                double oddnum = (double)dr.Cells["packing_qty"].Value - (double)dr.Cells["stockout_qty"].Value;
+                //listStock.Add(stockData);
+                //Add new label stock-in when it not empty
+                if (oddnum > 0)
+                {
+                    printData.ListPrintItem.Add(new PrintItem
+                    {
+                        Item_Number = dr.Cells["item_cd"].Value.ToString(),
+                        Item_Name = itemData.GetItem(dr.Cells["item_cd"].Value.ToString()).item_name,
+                        SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = dr.Cells["supplier_cd"].Value.ToString() }).supplier_name,
+                        Invoice = dr.Cells["invoice"].Value.ToString(),
+                        Delivery_Date = (DateTime)dr.Cells["stockin_date"].Value,
+                        Delivery_Qty = oddnum,
+                        SupplierCD = dr.Cells["supplier_cd"].Value.ToString(),
+                        //OrderNo = stockData.order_no,
+                        isRec = true,
+                        Label_Qty = 1
+                    });
+                }
+                #endregion
+            }
+            btnNoPlanInspection.Visible = true;
+            if (CustomMessageBox.Question("Successful!. Do you want go to Inspection Tab to see it?") == DialogResult.Yes)
+                tc_Main.SelectedTab = tab_Inspection;
+        }
+
+        private void btnPlanClear_Click(object sender, EventArgs e)
+        {
+            listADd.Clear();
+            itemAdd.listStockItems.Clear();
+            dgvPlan.DataSource = null;
+            txtPlanItemCD.Clear();
+        }
+
+        private void UpdatePlanGrid()
+        {
+            dgvPlan.DataSource = listADd;
+            if (dgvPlan.Columns.Contains("order_no")) dgvPlan.Columns.Remove("order_no");
+            if (dgvPlan.Columns.Contains("stock_id")) dgvPlan.Columns.Remove("stock_id");
+            //if (dgvPlan.Columns.Contains("stockin_date")) dgvPlan.Columns.Remove("stockin_date");
+            if (dgvPlan.Columns.Contains("registration_user_cd")) dgvPlan.Columns.Remove("registration_user_cd");
+            if (dgvPlan.Columns.Contains("registration_date_time")) dgvPlan.Columns.Remove("registration_date_time");
+            if (dgvPlan.Columns.Contains("stockin_qty")) dgvPlan.Columns.Remove("stockin_qty");
+            if (dgvPlan.Columns.Contains("stockin_user_cd")) dgvPlan.Columns.Remove("stockin_user_cd");
+
+            //dgvPlan.Columns["stock_id"].HeaderText = "Stock ID";
+            dgvPlan.Columns["packing_cd"].HeaderText = "Packing Code";
+            dgvPlan.Columns["item_cd"].HeaderText = "Item Code";
+            dgvPlan.Columns["supplier_cd"].HeaderText = "Supplier Code";
+            //dgvPlan.Columns["order_no"].HeaderText = "Order Number";
+            dgvPlan.Columns["invoice"].HeaderText = "Invoice";
+            dgvPlan.Columns["stockin_date"].HeaderText = "Stock In Date";
+            //dgvPlan.Columns["stockin_user_cd"].HeaderText = "Incharge";
+            //dgvPlan.Columns["stockin_qty"].HeaderText = "Stock In Qty";
+            dgvPlan.Columns["packing_qty"].HeaderText = "Packing Qty";
+            //dgvPlan.Columns["registration_user_cd"].HeaderText = "Reg User";
+            //dgvPlan.Columns["registration_date_time"].HeaderText = "Reg Date";
+            if (!dgvPlan.Columns.Contains("stockout_qty")) dgvPlan.Columns.Add("stockout_qty", "Stock-Out Qty");
+            dgvPlan.Columns["stockout_qty"].ValueType = typeof(double);
+        }
     }
 }

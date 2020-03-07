@@ -10,6 +10,7 @@ namespace PC_QRCodeSystem.View
         #region VARIABLE
         bool editMode { get; set; }
         pts_item unitCbm { get; set; }
+        pts_item itemlvCbm { get; set; }
         pts_item ptsItem { get; set; }
         pts_item locationCbm { get; set; }
         pts_item_type typeCbm { get; set; }
@@ -26,6 +27,7 @@ namespace PC_QRCodeSystem.View
             #region SETUP CONTROLS
             ptsItem = new pts_item();
             unitCbm = new pts_item();
+            itemlvCbm = new pts_item();
             locationCbm = new pts_item();
             typeCbm = new pts_item_type();
             ptsItemType = new pts_item_type();
@@ -157,7 +159,7 @@ namespace PC_QRCodeSystem.View
                 int n = 0;
                 if (rbtnItemCode.Checked)
                 {
-                    n = ptsItem.Delete(ptsItem.item_id);
+                    n = ptsItem.Delete(ptsItem.item_cd);
                 }
                 if (rbtnItemType.Checked)
                 {
@@ -195,6 +197,10 @@ namespace PC_QRCodeSystem.View
             cmbUnitCode.DataSource = unitCbm.listItems;
             cmbUnitCode.DisplayMember = "item_unit";
             cmbUnitCode.Text = null;
+            itemlvCbm.GetListItemLv();
+            cmbItemLv.DataSource = itemlvCbm.listItems;
+            cmbItemLv.DisplayMember = "item_lv";
+            cmbItemLv.Text = null;
             locationCbm.GetListLocation();
             cmbLocation.DataSource = locationCbm.listItems;
             cmbLocation.DisplayMember = "item_location";
@@ -234,10 +240,10 @@ namespace PC_QRCodeSystem.View
                             }, false);
                     }
                     dgvData.DataSource = ptsItem.listItems;
-                    dgvData.Columns["item_id"].HeaderText = "Item ID";
-                    dgvData.Columns["type_id"].HeaderText = "Type ID";
                     dgvData.Columns["item_cd"].HeaderText = "Item Number";
                     dgvData.Columns["item_name"].HeaderText = "Item Name";
+                    dgvData.Columns["type_id"].HeaderText = "Type ID";
+                    dgvData.Columns["item_lv"].HeaderText = "Item Level";
                     dgvData.Columns["item_location"].HeaderText = "Item Location";
                     dgvData.Columns["item_unit"].HeaderText = "Unit";
                     dgvData.Columns["lot_size"].HeaderText = "Lot Size";
@@ -368,7 +374,6 @@ namespace PC_QRCodeSystem.View
                     {
                         n = ptsItem.Update(new pts_item
                         {
-                            item_id = ptsItem.item_id,
                             item_cd = txtItem.Text,
                             item_name = txtItemName.Text,
                             type_id = int.Parse(cmbItemType.Text),
@@ -456,6 +461,7 @@ namespace PC_QRCodeSystem.View
                 lbLocation.Visible = true;
                 cmbUnitCode.Visible = true;
                 cmbLocation.Visible = true;
+                cmbItemLv.Visible = false;
                 dgvItemQty.Visible = true;
                 dgvData.DataSource = null;
                 dgvData.DataSource = ptsItem.listItems;
@@ -470,6 +476,7 @@ namespace PC_QRCodeSystem.View
                 lbLocation.Visible = false;
                 txtItem.Enabled = false;
                 cmbUnitCode.Visible = false;
+                cmbItemLv.Visible = false;
                 cmbLocation.Visible = false;
                 dgvItemQty.Visible = false;
                 dgvData.DataSource = null;
@@ -494,6 +501,7 @@ namespace PC_QRCodeSystem.View
                     txtItemName.Text = ptsItem.item_name;
                     cmbLocation.Text = ptsItem.item_location;
                     cmbUnitCode.Text = ptsItem.item_unit;
+                    cmbItemLv.Text = ptsItem.item_lv.ToString();
                     cmbItemType.Text = ptsItem.type_id.ToString();
                     UpdateGrid(dgvData.Rows[e.RowIndex].DataBoundItem as pts_item);
                 }
@@ -512,28 +520,12 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (rbtnItemCode.Checked)
-                {
-                    if (dgvData.SelectedCells.Count > 0)
-                        UpdateGrid(dgvData.Rows[dgvData.SelectedCells[0].RowIndex].DataBoundItem as pts_item);
-                }
+                if (rbtnItemCode.Checked && dgvData.SelectedCells.Count > 0)
+                    UpdateGrid(dgvData.Rows[dgvData.SelectedCells[0].RowIndex].DataBoundItem as pts_item);
             }
             catch { }
             LockFields();
         }
-
-        private void SubForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (btnOK.Visible)
-            {
-                if (CustomMessageBox.Question("You are in processing!" + Environment.NewLine + "Are you sure exit?") == DialogResult.No)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-            }
-        }
-
         #endregion
     }
 }
