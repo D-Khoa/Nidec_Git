@@ -86,12 +86,15 @@
     <Compile Include="Model\DBItems\m_mes_user.cs" />
     <Compile Include="Model\DBItems\m_mes_user_role.cs" />
     <Compile Include="Model\DBItems\m_user_position.cs" />
+    <Compile Include="Model\DBItems\pre_223.cs" />
+    <Compile Include="Model\DBItems\pre_649_order.cs" />
     <Compile Include="Model\DBItems\pts_noplan.cs" />
     <Compile Include="Model\DBItems\pts_plan.cs" />
     <Compile Include="Model\DBItems\pre_649.cs" />
     <Compile Include="Model\DBItems\pts_stock_log.cs" />
     <Compile Include="Model\Temp Items\OutputItem.cs" />
     <Compile Include="Model\Temp Items\pre661.cs" />
+    <Compile Include="Model\Temp Items\pre_223_view.cs" />
     <Compile Include="Model\Temp Items\PrintItem.cs" />
     <Compile Include="Model\Temp Items\SettingItem.cs" />
     <Compile Include="View\Common\ChangePasswordForm.cs">
@@ -158,6 +161,12 @@
     </Compile>
     <Compile Include="View\PCForm\ItemManagement\ItemIssueForm.Designer.cs">
       <DependentUpon>ItemIssueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PCForm\MainStock\StockOutputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PCForm\MainStock\StockOutputForm.Designer.cs">
+      <DependentUpon>StockOutputForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PCForm\PCForm.cs">
       <SubType>Form</SubType>
@@ -258,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\ItemManagement\ItemIssueForm.resx">
       <DependentUpon>ItemIssueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PCForm\MainStock\StockOutputForm.resx">
+      <DependentUpon>StockOutputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\PCForm.resx">
       <DependentUpon>PCForm.cs</DependentUpon>

@@ -252,7 +252,7 @@ namespace PC_QRCodeSystem.View
         private void UpdateGrid()
         {
             dgvItemInfo.DataSource = itemData.listItems;
-            dgvItemInfo.Columns["item_id"].HeaderText = "Item ID";
+            //dgvItemInfo.Columns["item_id"].HeaderText = "Item ID";
             dgvItemInfo.Columns["type_id"].HeaderText = "Type";
             dgvItemInfo.Columns["item_cd"].HeaderText = "Item Code";
             dgvItemInfo.Columns["item_name"].HeaderText = "Item Name";

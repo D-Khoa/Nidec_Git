@@ -34,6 +34,7 @@ namespace ConvertLB6
             savefrm.CheckFileExists = false;
             savefrm.CheckPathExists = false;
             savefrm.Filter = "Text File (*.txt)|*.txt|CSV File (*.csv)|*.csv|All File (*.*)|*.*";
+            savefrm.FilterIndex = 2;
             if (savefrm.ShowDialog() == DialogResult.OK)
             {
                 txtFileTo.Text = savefrm.FileName;
@@ -80,13 +81,25 @@ namespace ConvertLB6
                         }
                         n++;
                     }
-                    if (n == 24)                                            //24
+                    if (n >= 23)                                            //24
                     {
-                        string temp = line.Trim();
-                        dataline += temp;
-                        filecontent.Add(dataline);
-                        dataline = string.Empty;
-                        n = 0;
+                        string temp = string.Empty;
+                        if (n == 24)
+                        {
+                            temp = line.Trim();
+                            dataline += temp;
+                            filecontent.Add(dataline);
+                            dataline = string.Empty;
+                            n = 0;
+                        }
+                        else if (string.IsNullOrEmpty(line))
+                        {
+                            temp = "none";
+                            dataline += temp;
+                            filecontent.Add(dataline);
+                            dataline = string.Empty;
+                            n = 0;
+                        }
                     }
                 }
                 File.WriteAllLines(txtFileTo.Text, filecontent);

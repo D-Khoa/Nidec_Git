@@ -12,9 +12,11 @@ namespace ConvertPremacFile
         #region SETTING FILE
         bool isStart = false;
         string settingfile = @"C:\ConvertPremac\setting.ini";
-        pre_649 premacfile = new pre_649();
+        pre_649_order stockout649 = new pre_649_order();
         pts_item premacfile212 = new pts_item();
         pre_232 premacfile232 = new pre_232();
+        pre_649 stockin649 = new pre_649();
+        pre_223 struct223 = new pre_223();
 
         List<string> settingList { get; set; }
         List<ConvertLogs> dataLogs { get; set; }
@@ -25,23 +27,35 @@ namespace ConvertPremacFile
             timer1.Enabled = true;
             settingList = new List<string>();
             dataLogs = new List<ConvertLogs>();
-
         }
         #endregion
         #region FORM LOAD
         private void AddPremac649ToDB_Load(object sender, EventArgs e)
         {
-
             if (File.Exists(settingfile))
             {
                 foreach (string line in File.ReadLines(settingfile))
                 {
-                    if (line.Contains("Premac649URL"))
-                        txtPremac649Path.Text = line.Split('=')[1].Trim();
+                    if (line.Contains("CheckStockIn649="))
+                        cbStockIn649.Checked = Boolean.Parse(line.Split('=')[1].Trim());
+                    if (line.Contains("CheckStockOut649="))
+                        cbStockOut649.Checked = Boolean.Parse(line.Split('=')[1].Trim());
+                    if (line.Contains("CheckItem212="))
+                        cbItem212.Checked = Boolean.Parse(line.Split('=')[1].Trim());
+                    if (line.Contains("CheckSupplier232="))
+                        cbSupplier232.Checked = Boolean.Parse(line.Split('=')[1].Trim());
+                    if (line.Contains("CheckStruct223="))
+                        cbStruct223.Checked = Boolean.Parse(line.Split('=')[1].Trim());
+                    if (line.Contains("StockIn649URL"))
+                        txtStockIn649.Text = line.Split('=')[1].Trim();
+                    if (line.Contains("StockOut649URL"))
+                        txtStockOut649.Text = line.Split('=')[1].Trim();
                     if (line.Contains("Premac212URL"))
                         txtItem212.Text = line.Split('=')[1].Trim();
                     if (line.Contains("Premac232URL"))
                         txtSupplier232.Text = line.Split('=')[1].Trim();
+                    if (line.Contains("Premac223URL"))
+                        txtStruct223.Text = line.Split('=')[1].Trim();
                     if (line.Contains("log"))
                         dataLogs.Add(new ConvertLogs
                         {
@@ -70,7 +84,7 @@ namespace ConvertPremacFile
                 openf.ValidateNames = true;
                 if (openf.ShowDialog() == DialogResult.OK)
                 {
-                    txtPremac649Path.Text = Path.GetDirectoryName(openf.FileName);
+                    txtStockIn649.Text = Path.GetDirectoryName(openf.FileName);
                 }
             }
             catch (Exception ex)
@@ -78,9 +92,30 @@ namespace ConvertPremacFile
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnBrowserStockOut649_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openf = new OpenFileDialog();
+                openf.Filter = "Text file (*.txt)|*.txt|All file (*.*)|*.*";
+                openf.FileName = "CPFXE049.TXT";
+                openf.CheckFileExists = false;
+                openf.CheckPathExists = false;
+                openf.ValidateNames = true;
+                if (openf.ShowDialog() == DialogResult.OK)
+                {
+                    txtStockOut649.Text = Path.GetDirectoryName(openf.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void btnBrowseritem_Click(object sender, EventArgs e)
         {
-
             try
             {
                 OpenFileDialog openf = new OpenFileDialog();
@@ -91,7 +126,6 @@ namespace ConvertPremacFile
                 openf.ValidateNames = true;
                 if (openf.ShowDialog() == DialogResult.OK)
                 {
-
                     txtItem212.Text = Path.GetDirectoryName(openf.FileName);
                 }
             }
@@ -121,6 +155,27 @@ namespace ConvertPremacFile
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnBrowserStruct223_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openf = new OpenFileDialog();
+                openf.Filter = "Text file (*.txt)|*.txt|All file (*.*)|*.*";
+                openf.FileName = "CPBE0023.TXT";
+                openf.CheckFileExists = false;
+                openf.CheckPathExists = false;
+                openf.ValidateNames = true;
+                if (openf.ShowDialog() == DialogResult.OK)
+                {
+                    txtStruct223.Text = Path.GetDirectoryName(openf.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         #region BUTTON
         private void btnStart_Click(object sender, EventArgs e)
@@ -139,12 +194,30 @@ namespace ConvertPremacFile
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
-            AddPre649();
-            Thread.Sleep(3000);
-            AddPre212();
-            Thread.Sleep(3000);
-            AddPre232();
-            Thread.Sleep(3000);
+            if (cbStockIn649.Checked)
+            {
+                AddStockIn649();
+            }
+            if (cbStockOut649.Checked)
+            {
+                Thread.Sleep(3000);
+                AddStockOut649();
+            }
+            if (cbItem212.Checked)
+            {
+                Thread.Sleep(3000);
+                AddPre212();
+            }
+            if (cbSupplier232.Checked)
+            {
+                Thread.Sleep(3000);
+                AddPre232();
+            }
+            if (cbStruct223.Checked)
+            {
+                Thread.Sleep(3000);
+                AddPre223();
+            }
         }
         #endregion
         #region TIMER
@@ -154,9 +227,30 @@ namespace ConvertPremacFile
             {
                 if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss"))
                 {
-                    AddPre649();
-                    AddPre212();
-                    AddPre232();
+                    if (cbStockIn649.Checked)
+                    {
+                        AddStockIn649();
+                    }
+                    if (cbStockOut649.Checked)
+                    {
+                        Thread.Sleep(3000);
+                        AddStockOut649();
+                    }
+                    if (cbItem212.Checked)
+                    {
+                        Thread.Sleep(3000);
+                        AddPre212();
+                    }
+                    if (cbSupplier232.Checked)
+                    {
+                        Thread.Sleep(3000);
+                        AddPre232();
+                    }
+                    if (cbStruct223.Checked)
+                    {
+                        Thread.Sleep(3000);
+                        AddPre223();
+                    }
                 }
             }
             tsStatus.Text = DateTime.Now.ToString("HH:mm:ss");
@@ -169,9 +263,16 @@ namespace ConvertPremacFile
             else
             {
                 ConvertLogs error = new ConvertLogs();
-                settingList.Add("Premac649URL =" + txtPremac649Path.Text);
+                settingList.Add("CheckStockIn649=" + cbStockIn649.Checked);
+                settingList.Add("CheckStockOut649=" + cbStockOut649.Checked);
+                settingList.Add("CheckItem212=" + cbItem212.Checked);
+                settingList.Add("CheckSupplier232=" + cbSupplier232.Checked);
+                settingList.Add("CheckStruct223=" + cbStruct223.Checked);
+                settingList.Add("StockIn649URL =" + txtStockIn649.Text);
+                settingList.Add("StockOut649URL =" + txtStockOut649.Text);
                 settingList.Add("Premac212URL=" + txtItem212.Text);
                 settingList.Add("Premac232URL=" + txtSupplier232.Text);
+                settingList.Add("Premac223URL=" + txtStruct223.Text);
                 foreach (DataGridViewRow dr in dgvLogs.Rows)
                 {
                     error = dr.DataBoundItem as ConvertLogs;
@@ -189,22 +290,53 @@ namespace ConvertPremacFile
         }
         #endregion
         #region SUB PROGRAM ADD PREMAC
-        private void AddPre649()
+        private void AddStockIn649()
         {
             try
             {
-                if (!string.IsNullOrEmpty(txtPremac649Path.Text))
+                if (!string.IsNullOrEmpty(txtStockIn649.Text))
                 {
-                    string[] files = Directory.GetFiles(txtPremac649Path.Text, "*CPFXE049*");
+                    string[] files = Directory.GetFiles(txtStockIn649.Text, "*CPFXE049*");
                     foreach (string file in files)
                     {
-                        premacfile.GetListPremacItem(file);
-                        premacfile.DeleteFromDB();
-                        premacfile.WriteToDB(premacfile.listPremacItem);
+                        stockin649.GetListPremacItem(file);
+                        stockin649.DeleteFromDB();
+                        stockin649.WriteToDB(stockin649.listPremacItem);
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Pre649 Add Completed"
+                            Log_Message = "Add stock-in file: " + file + " completed"
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dataLogs.Add(new ConvertLogs
+                {
+                    Log_Time = DateTime.Now,
+                    Log_Message = ex.Message
+                });
+            }
+            UpdateGrid();
+        }
+
+        private void AddStockOut649()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtStockOut649.Text))
+                {
+                    string[] files = Directory.GetFiles(txtStockOut649.Text, "*CPFXE049*");
+                    foreach (string file in files)
+                    {
+                        stockout649.GetListPremacItem(file);
+                        stockout649.DeleteFromDB();
+                        stockout649.WriteToDB(stockout649.listOrderItem);
+                        dataLogs.Add(new ConvertLogs
+                        {
+                            Log_Time = DateTime.Now,
+                            Log_Message = "Add stock-out file: " + file + " completed"
                         });
                     }
                 }
@@ -235,7 +367,7 @@ namespace ConvertPremacFile
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Pts_item Add Completed"
+                            Log_Message = "Add item file: " + file + " completed"
                         });
                     }
                 }
@@ -266,7 +398,38 @@ namespace ConvertPremacFile
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Pre232 Add Completed"
+                            Log_Message = "Add supplier file: " + file + " completed"
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dataLogs.Add(new ConvertLogs
+                {
+                    Log_Time = DateTime.Now,
+                    Log_Message = ex.Message
+                });
+            }
+            UpdateGrid();
+        }
+
+        private void AddPre223()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtSupplier232.Text))
+                {
+                    string[] files = Directory.GetFiles(txtStruct223.Text, "*CPBE0023*");
+                    foreach (string file in files)
+                    {
+                        struct223.GetListItems(file);
+                        struct223.DeleteFromDB();
+                        struct223.WriteToDB(struct223.listStructItem);
+                        dataLogs.Add(new ConvertLogs
+                        {
+                            Log_Time = DateTime.Now,
+                            Log_Message = "Add product struct file: " + file + " completed"
                         });
                     }
                 }
@@ -288,6 +451,7 @@ namespace ConvertPremacFile
             dgvLogs.DataSource = null;
             dgvLogs.DataSource = dataLogs;
             dgvLogs.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLogs.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         private void btnClear_Click(object sender, EventArgs e)

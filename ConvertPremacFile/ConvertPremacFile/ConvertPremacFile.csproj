@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -105,6 +105,8 @@
     <Compile Include="Form\Menu Form\AddPremac649ToDB.Designer.cs">
       <DependentUpon>AddPremac649ToDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\pre_223.cs" />
+    <Compile Include="Model\pre_649_order.cs" />
     <Compile Include="Model\pts_premac649.cs" />
     <Compile Include="Model\pts_item.cs" />
     <Compile Include="Model\pre_232.cs" />
