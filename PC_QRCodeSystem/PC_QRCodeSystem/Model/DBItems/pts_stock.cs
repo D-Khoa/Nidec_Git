@@ -121,7 +121,7 @@ namespace PC_QRCodeSystem.Model
                     query += "AND invoice ='" + inItem.invoice + "' ";
                 if (!string.IsNullOrEmpty(inItem.stockin_user_cd))
                     query += "AND stockin_user_cd ='" + inItem.stockin_user_cd + "' ";
-                query += "ORDER BY stock_id";
+                query += "ORDER BY item_cd, packing_cd";
                 //Execute reader for read database
                 IDataReader reader = SQL.Command(query).ExecuteReader();
                 while (reader.Read())
@@ -193,7 +193,7 @@ namespace PC_QRCodeSystem.Model
                 }
                 if (!string.IsNullOrEmpty(inItem.stockin_user_cd))
                     query += "AND stockin_user_cd ='" + inItem.stockin_user_cd + "' ";
-                query += "ORDER BY stock_id";
+                query += "ORDER BY item_cd, packing_cd";
                 //Execute reader for read database
                 IDataReader reader = SQL.Command(query).ExecuteReader();
                 while (reader.Read())
@@ -278,6 +278,29 @@ namespace PC_QRCodeSystem.Model
             return result;
         }
 
+        public int UpdateMultiItem(List<pts_stock> inList)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            int result = 0;
+            //SQL query string
+            foreach (pts_stock inItem in inList)
+            {
+                query = "UPDATE pts_stock SET packing_cd ='" + inItem.packing_cd + "', item_cd ='" + inItem.item_cd + "', supplier_cd ='";
+                query += inItem.supplier_cd + "', order_no ='" + inItem.order_no + "', invoice ='" + inItem.invoice;
+                query += "', stockin_date ='" + inItem.stockin_date + "', stockin_user_cd ='" + inItem.stockin_user_cd;
+                query += "', stockin_qty ='" + inItem.stockin_qty + "', packing_qty ='" + inItem.packing_qty + "', registration_user_cd ='";
+                query += inItem.registration_user_cd + "' WHERE stock_id ='" + inItem.stock_id + "'";
+                //Execute non query for read database
+                result += SQL.Command(query).ExecuteNonQuery();
+                query = string.Empty;
+            }
+            SQL.Close();
+            return result;
+        }
         /// <summary>
         /// Delete current stock item
         /// </summary>

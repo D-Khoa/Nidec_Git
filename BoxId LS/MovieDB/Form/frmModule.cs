@@ -483,7 +483,8 @@ namespace BoxIdDb
                             lot = VBStrings.Mid(serShort, 5, 3);
                             break;
                         default:
-                            if (serLong.Length == 8) { model = "LA10"; lot = VBStrings.Mid(serShort, 5, 3); }
+                            if (serLong.Length == 13) { model = "BMS69"; lot = VBStrings.Mid(serShort, 3, 3); }
+                            else if (serLong.Length == 8) { model = "LA10"; lot = VBStrings.Mid(serShort, 5, 3); }
                             else if (VBStrings.Mid(serLong, 6, 1) == "L") { model = "LS3L"; lot = VBStrings.Mid(serShort, 3, 3); }
                             else if (VBStrings.Left(serLong, 1) == "M") { model = "LMOD"; lot = VBStrings.Mid(serShort, 5, 3); }
                             else model = "Error";
@@ -535,6 +536,7 @@ namespace BoxIdDb
                             case "LS3L":
                             case "LS3P":
                             case "LMOD":
+                            case "BMS69":
                                 limit = limitls12;
                                 break;
                             case "LA10":
@@ -603,6 +605,7 @@ namespace BoxIdDb
                     break;
                 default:
                     if (serno.Length == 8) tablekey = "laa10_003"; filterkey = "LA10";
+                    if (serno.Length == 13) tablekey = "bms_0069"; filterkey = "BMS69";
                     if (VBStrings.Mid(serno, 6, 1) == "L") tablekey = "ls12_003l"; filterkey = "LS3L";
                     if (VBStrings.Left(serno, 1) == "M") tablekey = "ls12_003mod"; filterkey = "LMOD";
                     break;
@@ -724,7 +727,6 @@ namespace BoxIdDb
                 btnDeleteAll.Enabled = true;
                 btnCancel.Enabled = true;
             }
-
         }
 
         // Sub procedure: Check if datatable's product serial is included in the database table
@@ -773,22 +775,38 @@ namespace BoxIdDb
             DateTime dateOld = new DateTime(0);
             long numberOld = 0;
             string boxIdNew;
-
-            if (boxIdOld != string.Empty)
+            if (m_model == "BMS69")
             {
-                dateOld = DateTime.ParseExact(VBStrings.Mid(boxIdOld, 6, 6), "yyMMdd", CultureInfo.InvariantCulture);
-                numberOld = long.Parse(VBStrings.Right(boxIdOld, 2));
-            }
-
-            if (dateOld != DateTime.Today)
-            {
-                boxIdNew = m_model + "-" + DateTime.Today.ToString("yyMMdd") + "01";
+                if (!string.IsNullOrEmpty(boxIdOld))
+                {
+                    dateOld = DateTime.ParseExact(VBStrings.Mid(boxIdOld, 7, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                    numberOld = long.Parse(VBStrings.Right(boxIdOld, 2));
+                }
+                if (dateOld != DateTime.Today)
+                {
+                    boxIdNew = m_model + "-" + DateTime.Today.ToString("yyMMdd") + "01";
+                }
+                else
+                {
+                    boxIdNew = m_model + "-" + DateTime.Today.ToString("yyMMdd") + (numberOld + 1).ToString("00");
+                }
             }
             else
             {
-                boxIdNew = m_model + "-" + DateTime.Today.ToString("yyMMdd") + (numberOld + 1).ToString("00");
+                if (boxIdOld != string.Empty)
+                {
+                    dateOld = DateTime.ParseExact(VBStrings.Mid(boxIdOld, 6, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                    numberOld = long.Parse(VBStrings.Right(boxIdOld, 2));
+                }
+                if (dateOld != DateTime.Today)
+                {
+                    boxIdNew = m_model + "-" + DateTime.Today.ToString("yyMMdd") + "01";
+                }
+                else
+                {
+                    boxIdNew = m_model + "-" + DateTime.Today.ToString("yyMMdd") + (numberOld + 1).ToString("00");
+                }
             }
-
             sql = "INSERT INTO box_id(" +
                 "boxid," +
                 "suser," +
