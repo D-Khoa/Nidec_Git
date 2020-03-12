@@ -68,6 +68,18 @@ namespace PC_QRCodeSystem.Model
             return true;
         }
 
+        public bool PrintItems(List<PrintItem> listPrintItem, int qty)
+        {
+            for (int i = 0; i < listPrintItem.Count; i++)
+            {
+                for (int j = 0; j < qty; j++)
+                {
+                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec);
+                }
+            }
+            return true;
+        }
+
         public bool PrintAnItem(PrintItem inItem, bool printOneCoppy)
         {
             if (printOneCoppy)

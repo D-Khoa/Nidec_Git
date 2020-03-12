@@ -408,7 +408,9 @@ namespace BoxIdDb
                 //    case "3L":
                 serShort = serLong;
                 //}
-                string filterkey = decideReferenceTable(serShort);
+                DateTime sDate = DateTime.Today;
+                A:
+                string filterkey = decideReferenceTable(serShort, sDate);
                 if (serLong != String.Empty)
                 {
                     // Get the tester data from current month's table and store it in datatable
@@ -424,7 +426,11 @@ namespace BoxIdDb
                     DataTable dt1 = new DataTable();
                     ShSQL tf = new ShSQL();
                     tf.sqlDataAdapterFillDatatableFromTesterDb(sql, ref dt1);
-
+                    if (dt1.Rows.Count <= 0)
+                    {
+                        sDate = sDate.AddMonths(1);
+                        goto A;
+                    }
                     System.Diagnostics.Debug.Print(sql);
 
                     // Get the tester data from last month's table and store it in the same datatable
@@ -573,7 +579,7 @@ namespace BoxIdDb
         }
 
         // Select datatable
-        private string decideReferenceTable(string serno)
+        private string decideReferenceTable(string serno, DateTime tbldate)
         {
             string tablekey = string.Empty;
             string filterkey = string.Empty;
@@ -627,18 +633,27 @@ namespace BoxIdDb
             //else if (serno.Length == 8)
             //{ tablekey = "laa10_003"; filterkey = "LA10"; }
 
-            testerTableThisMonth = tablekey + DateTime.Today.ToString("yyyyMM");
             ShSQL sql = new ShSQL();
-            testerTableLastMonth = tablekey + ((VBStrings.Right(DateTime.Today.ToString("yyyyMM"), 2) != "01") ?
-                (long.Parse(DateTime.Today.ToString("yyyyMM")) - 1).ToString() : (long.Parse(DateTime.Today.ToString("yyyy")) - 1).ToString() + "12");
-            string lastlasttable = tablekey + DateTime.Today.AddMonths(-2).ToString("yyyyMM");
-            if (!sql.CheckTableExist(testerTableThisMonth))
+            //testerTableLastMonth = tablekey + ((VBStrings.Right(DateTime.Today.ToString("yyyyMM"), 2) != "01") ?
+            //    (long.Parse(DateTime.Today.ToString("yyyyMM")) - 1).ToString() : (long.Parse(DateTime.Today.ToString("yyyy")) - 1).ToString() + "12");
+            int n = 3;
+            B:
+            testerTableThisMonth = tablekey + tbldate.ToString("yyyyMM");
+            if (!sql.CheckTableExist(testerTableThisMonth) && n > 0)
             {
-                testerTableThisMonth = testerTableLastMonth;
-                testerTableLastMonth = lastlasttable;
+                n--;
+                tbldate = tbldate.AddMonths(-1);
+                goto B;
             }
-            if (!sql.CheckTableExist(testerTableLastMonth))
-                testerTableLastMonth = testerTableThisMonth;
+            n = 3;
+            C:
+            testerTableLastMonth = tablekey + tbldate.AddMonths(-1).ToString("yyyyMM");
+            if (!sql.CheckTableExist(testerTableLastMonth) && n > 0)
+            {
+                n--;
+                tbldate = tbldate.AddMonths(-1);
+                goto C;
+            }
             return filterkey;
         }
 

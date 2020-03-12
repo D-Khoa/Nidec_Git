@@ -184,7 +184,7 @@
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 50);
-            this.btnUpdate.TabIndex = 24;
+            this.btnUpdate.TabIndex = 17;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -196,7 +196,7 @@
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 50);
-            this.btnDelete.TabIndex = 23;
+            this.btnDelete.TabIndex = 18;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -208,7 +208,7 @@
             this.btnPrintPreview.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintPreview.Name = "btnPrintPreview";
             this.btnPrintPreview.Size = new System.Drawing.Size(100, 50);
-            this.btnPrintPreview.TabIndex = 22;
+            this.btnPrintPreview.TabIndex = 21;
             this.btnPrintPreview.Text = "Print Preview";
             this.btnPrintPreview.UseVisualStyleBackColor = true;
             this.btnPrintPreview.Click += new System.EventHandler(this.btnPrintPreview_Click);
@@ -220,7 +220,7 @@
             this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(100, 50);
-            this.btnPrint.TabIndex = 21;
+            this.btnPrint.TabIndex = 20;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
@@ -232,7 +232,7 @@
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(100, 50);
-            this.btnClear.TabIndex = 20;
+            this.btnClear.TabIndex = 22;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -244,7 +244,7 @@
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 50);
-            this.btnSearch.TabIndex = 18;
+            this.btnSearch.TabIndex = 16;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);

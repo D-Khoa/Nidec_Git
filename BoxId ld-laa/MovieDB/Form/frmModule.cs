@@ -73,6 +73,8 @@ namespace BoxIdDb
                         limit = limitld;
                         break;
                     case "LA10":
+                    case "BMA60":
+                    case "BMA-":
                         limit = limitlaa;
                         break;
                     default:
@@ -391,7 +393,9 @@ namespace BoxIdDb
 
                 string serLong = txtProductSerial.Text;
                 string serShort = serLong;
-                string filterkey = decideReferenceTable(serShort);
+                DateTime tbDate = DateTime.Today;
+                A:
+                string filterkey = decideReferenceTable(serShort, tbDate);
                 if (serLong != String.Empty)
                 {
                     // Get the tester data from current month's table and store it in datatable
@@ -409,12 +413,16 @@ namespace BoxIdDb
                         " FROM " + testerTableLastMonth +
                         " WHERE serno = '" + serShort + "'";
                     tf.sqlDataAdapterFillDatatableFromTesterDb(sql, ref dt1);
-
+                    if (dt1.Rows.Count <= 0)
+                    {
+                        tbDate = tbDate.AddMonths(-1);
+                        goto A;
+                    }
                     System.Diagnostics.Debug.Print(sql);
 
                     string filterLine = string.Empty;
                     if (filterkey == "LD4") { filterLine = fltld4; }
-                    else if (filterkey == "LA10") { filterLine = fltlaa; }
+                    else if (filterkey == "LA10" || filterkey == "BMA60"|| filterkey == "BMA-") { filterLine = fltlaa; }
                     else { filterLine = fltld25; }
 
                     DataView dv = new DataView(dt1);
@@ -434,11 +442,11 @@ namespace BoxIdDb
                     { model = "LD04"; }
                     else if (serLong.Length == 8)
                         //model = "LA10";
-                        model = "BMA-";
+                        model = "BMA60";
                     else
                     { model = "LD25"; }
 
-                    if (model == "BMA-")
+                    if (model == "BMA60")
                     {
                         line = "1";
                         lot = VBStrings.Mid(serShort, 1, 4);
@@ -490,6 +498,8 @@ namespace BoxIdDb
                                 limit = limitld;
                                 break;
                             case "LA10":
+                            case "BMA60":
+                            case "BMA-":
                                 limit = limitlaa;
                                 break;
                             default:
@@ -521,7 +531,7 @@ namespace BoxIdDb
         }
 
         // Select datatable
-        private string decideReferenceTable(string serno)
+        private string decideReferenceTable(string serno, DateTime tabledate)
         {
             string tablekey = string.Empty;
             string filterkey = string.Empty;
@@ -531,11 +541,10 @@ namespace BoxIdDb
             { tablekey = "laa10_003"; filterkey = "LA10"; }
             else
             { tablekey = "ld25"; filterkey = "LD25"; }// エラー対策
-
-            testerTableThisMonth = tablekey + DateTime.Today.ToString("yyyyMM");
-            testerTableLastMonth = tablekey + ((VBStrings.Right(DateTime.Today.ToString("yyyyMM"), 2) != "01") ?
-                (long.Parse(DateTime.Today.ToString("yyyyMM")) - 1).ToString() : (long.Parse(DateTime.Today.ToString("yyyy")) - 1).ToString() + "12");
-
+            testerTableThisMonth = tablekey + tabledate.ToString("yyyyMM");
+            //testerTableLastMonth = tablekey + ((VBStrings.Right(DateTime.Today.ToString("yyyyMM"), 2) != "01") ?
+            //    (long.Parse(DateTime.Today.ToString("yyyyMM")) - 1).ToString() : (long.Parse(DateTime.Today.ToString("yyyy")) - 1).ToString() + "12");
+            testerTableLastMonth = tablekey + tabledate.AddMonths(-1).ToString("yyyyMM");
             return filterkey;
         }
 
@@ -562,7 +571,10 @@ namespace BoxIdDb
                     dtOverall.Clear();
 
                     txtBoxId.Text = boxIdNew;
-                    dtpPrintDate.Value = DateTime.ParseExact(VBStrings.Mid(boxIdNew, 6, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                    if (boxIdNew.Contains("BMA60"))
+                        dtpPrintDate.Value = DateTime.ParseExact(VBStrings.Mid(boxIdNew, 7, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                    else
+                        dtpPrintDate.Value = DateTime.ParseExact(VBStrings.Mid(boxIdNew, 6, 6), "yyMMdd", CultureInfo.InvariantCulture);
                 }
             }
         }
@@ -628,7 +640,7 @@ namespace BoxIdDb
             bool res1 = tf.sqlMultipleInsertOverall(dt);
             bool res2 = false;
 
-            if (VBStrings.Left(boxIdNew, 4) == "LA10" && txtOkCount.Text == "3000") { res2 = true; }
+            if ((VBStrings.Left(boxIdNew, 4) == "LA10" || VBStrings.Left(boxIdNew, 5) == "BMA60") && txtOkCount.Text == "3000") { res2 = true; }
             if (res1 & res2)
             {
                 if (okCount == limit && dgvProductSerial.Rows.Count == limit)
@@ -640,7 +652,10 @@ namespace BoxIdDb
                     dtOverall.Clear();
 
                     txtBoxId.Text = boxIdNew;
-                    dtpPrintDate.Value = DateTime.ParseExact(VBStrings.Mid(boxIdNew, 6, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                    if (boxIdNew.Contains("BMA60"))
+                        dtpPrintDate.Value = DateTime.ParseExact(VBStrings.Mid(boxIdNew, 7, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                    else
+                        dtpPrintDate.Value = DateTime.ParseExact(VBStrings.Mid(boxIdNew, 6, 6), "yyMMdd", CultureInfo.InvariantCulture);
                 }
                 // Generate delegate event to update parant form frmBoxid's datagridview (box id list)
                 this.RefreshEvent(this, new EventArgs());
@@ -717,7 +732,10 @@ namespace BoxIdDb
 
             if (boxIdOld != string.Empty)
             {
-                dateOld = DateTime.ParseExact(VBStrings.Mid(boxIdOld, 6, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                if (boxIdOld.Contains("BMA60"))
+                    dateOld = DateTime.ParseExact(VBStrings.Mid(boxIdOld, 7, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                else
+                    dateOld = DateTime.ParseExact(VBStrings.Mid(boxIdOld, 6, 6), "yyMMdd", CultureInfo.InvariantCulture);
                 numberOld = long.Parse(VBStrings.Right(boxIdOld, 3));
             }
 
@@ -845,7 +863,9 @@ namespace BoxIdDb
         // シリアル付帯情報を取得する
         private void setSerialInfoAndTesterResult(string serLong)
         {
-            string filterkey = decideReferenceTable(serLong);
+            DateTime tbdate = DateTime.Today;
+            B:
+            string filterkey = decideReferenceTable(serLong, tbdate);
             if (serLong != String.Empty)
             {
                 // Get the tester data from current month's table and store it in datatable
@@ -863,7 +883,11 @@ namespace BoxIdDb
                     " FROM " + testerTableLastMonth +
                     " WHERE serno = '" + serLong + "'";
                 tf.sqlDataAdapterFillDatatableFromTesterDb(sql, ref dt1);
-
+                if (dt1.Rows.Count <= 0)
+                {
+                    tbdate = tbdate.AddMonths(-1);
+                    goto B;
+                }
                 System.Diagnostics.Debug.Print(sql);
 
                 string filterLine = string.Empty;

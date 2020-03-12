@@ -63,6 +63,7 @@
             this.btnPasswordOK = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.cbReceive = new System.Windows.Forms.CheckBox();
             this.grPrinter.SuspendLayout();
             this.grPremacFolder.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -76,13 +77,14 @@
             this.btnReset.Margin = new System.Windows.Forms.Padding(5);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(120, 60);
-            this.btnReset.TabIndex = 3;
+            this.btnReset.TabIndex = 23;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // grPrinter
             // 
+            this.grPrinter.Controls.Add(this.cbReceive);
             this.grPrinter.Controls.Add(this.dtpDateTest);
             this.grPrinter.Controls.Add(this.label7);
             this.grPrinter.Controls.Add(this.txtInvoiceTest);
@@ -108,7 +110,7 @@
             this.grPrinter.Name = "grPrinter";
             this.grPrinter.Padding = new System.Windows.Forms.Padding(5);
             this.grPrinter.Size = new System.Drawing.Size(586, 242);
-            this.grPrinter.TabIndex = 5;
+            this.grPrinter.TabIndex = 4;
             this.grPrinter.TabStop = false;
             this.grPrinter.Text = "Printer";
             // 
@@ -119,7 +121,7 @@
             this.dtpDateTest.Location = new System.Drawing.Point(390, 130);
             this.dtpDateTest.Name = "dtpDateTest";
             this.dtpDateTest.Size = new System.Drawing.Size(150, 23);
-            this.dtpDateTest.TabIndex = 20;
+            this.dtpDateTest.TabIndex = 18;
             // 
             // label7
             // 
@@ -135,7 +137,8 @@
             this.txtInvoiceTest.Location = new System.Drawing.Point(390, 100);
             this.txtInvoiceTest.Name = "txtInvoiceTest";
             this.txtInvoiceTest.Size = new System.Drawing.Size(150, 23);
-            this.txtInvoiceTest.TabIndex = 18;
+            this.txtInvoiceTest.TabIndex = 17;
+            this.txtInvoiceTest.Text = "Invoice";
             // 
             // label6
             // 
@@ -151,7 +154,8 @@
             this.txtQtyTest.Location = new System.Drawing.Point(390, 160);
             this.txtQtyTest.Name = "txtQtyTest";
             this.txtQtyTest.Size = new System.Drawing.Size(150, 23);
-            this.txtQtyTest.TabIndex = 16;
+            this.txtQtyTest.TabIndex = 19;
+            this.txtQtyTest.Text = "1";
             this.txtQtyTest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQtyTest_KeyPress);
             // 
             // label5
@@ -168,7 +172,8 @@
             this.txtSupplierTest.Location = new System.Drawing.Point(150, 160);
             this.txtSupplierTest.Name = "txtSupplierTest";
             this.txtSupplierTest.Size = new System.Drawing.Size(150, 23);
-            this.txtSupplierTest.TabIndex = 14;
+            this.txtSupplierTest.TabIndex = 16;
+            this.txtSupplierTest.Text = "Supplier Name";
             // 
             // label4
             // 
@@ -184,7 +189,8 @@
             this.txtItemCDTest.Location = new System.Drawing.Point(150, 130);
             this.txtItemCDTest.Name = "txtItemCDTest";
             this.txtItemCDTest.Size = new System.Drawing.Size(150, 23);
-            this.txtItemCDTest.TabIndex = 12;
+            this.txtItemCDTest.TabIndex = 15;
+            this.txtItemCDTest.Text = "Item Number";
             // 
             // label3
             // 
@@ -200,7 +206,8 @@
             this.txtItemNameTest.Location = new System.Drawing.Point(150, 100);
             this.txtItemNameTest.Name = "txtItemNameTest";
             this.txtItemNameTest.Size = new System.Drawing.Size(150, 23);
-            this.txtItemNameTest.TabIndex = 10;
+            this.txtItemNameTest.TabIndex = 14;
+            this.txtItemNameTest.Text = "Item Name";
             // 
             // label2
             // 
@@ -217,7 +224,7 @@
             this.btnPrintTest.Margin = new System.Windows.Forms.Padding(5);
             this.btnPrintTest.Name = "btnPrintTest";
             this.btnPrintTest.Size = new System.Drawing.Size(100, 30);
-            this.btnPrintTest.TabIndex = 8;
+            this.btnPrintTest.TabIndex = 21;
             this.btnPrintTest.Text = "Print Test";
             this.btnPrintTest.UseVisualStyleBackColor = true;
             this.btnPrintTest.Click += new System.EventHandler(this.btnPrintTest_Click);
@@ -228,7 +235,7 @@
             this.btnPrinterCheck.Margin = new System.Windows.Forms.Padding(5);
             this.btnPrinterCheck.Name = "btnPrinterCheck";
             this.btnPrinterCheck.Size = new System.Drawing.Size(100, 30);
-            this.btnPrinterCheck.TabIndex = 4;
+            this.btnPrinterCheck.TabIndex = 13;
             this.btnPrinterCheck.Text = "Check";
             this.btnPrinterCheck.UseVisualStyleBackColor = true;
             this.btnPrinterCheck.Click += new System.EventHandler(this.btnPrinterCheck_Click);
@@ -271,7 +278,7 @@
             this.cmbPrinter.Margin = new System.Windows.Forms.Padding(5);
             this.cmbPrinter.Name = "cmbPrinter";
             this.cmbPrinter.Size = new System.Drawing.Size(200, 24);
-            this.cmbPrinter.TabIndex = 0;
+            this.cmbPrinter.TabIndex = 12;
             // 
             // grPremacFolder
             // 
@@ -285,7 +292,7 @@
             this.grPremacFolder.Name = "grPremacFolder";
             this.grPremacFolder.Padding = new System.Windows.Forms.Padding(5);
             this.grPremacFolder.Size = new System.Drawing.Size(586, 80);
-            this.grPremacFolder.TabIndex = 6;
+            this.grPremacFolder.TabIndex = 2;
             this.grPremacFolder.TabStop = false;
             this.grPremacFolder.Text = "Premac Folder";
             // 
@@ -295,7 +302,7 @@
             this.btnBrowserPremac.Margin = new System.Windows.Forms.Padding(5);
             this.btnBrowserPremac.Name = "btnBrowserPremac";
             this.btnBrowserPremac.Size = new System.Drawing.Size(100, 30);
-            this.btnBrowserPremac.TabIndex = 2;
+            this.btnBrowserPremac.TabIndex = 9;
             this.btnBrowserPremac.Text = "Browser";
             this.btnBrowserPremac.UseVisualStyleBackColor = true;
             this.btnBrowserPremac.Click += new System.EventHandler(this.btnBrowserPremac_Click);
@@ -306,7 +313,7 @@
             this.txtPremacFolder.Margin = new System.Windows.Forms.Padding(5);
             this.txtPremacFolder.Name = "txtPremacFolder";
             this.txtPremacFolder.Size = new System.Drawing.Size(300, 23);
-            this.txtPremacFolder.TabIndex = 1;
+            this.txtPremacFolder.TabIndex = 8;
             // 
             // label11
             // 
@@ -324,7 +331,7 @@
             this.btnOK.Margin = new System.Windows.Forms.Padding(5);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(120, 60);
-            this.btnOK.TabIndex = 2;
+            this.btnOK.TabIndex = 22;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -339,7 +346,7 @@
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(586, 80);
-            this.panel5.TabIndex = 7;
+            this.panel5.TabIndex = 5;
             // 
             // btnCancel
             // 
@@ -348,7 +355,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 60);
-            this.btnCancel.TabIndex = 4;
+            this.btnCancel.TabIndex = 24;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -365,7 +372,7 @@
             this.grOutFolder.Name = "grOutFolder";
             this.grOutFolder.Padding = new System.Windows.Forms.Padding(5);
             this.grOutFolder.Size = new System.Drawing.Size(586, 80);
-            this.grOutFolder.TabIndex = 8;
+            this.grOutFolder.TabIndex = 3;
             this.grOutFolder.TabStop = false;
             this.grOutFolder.Text = "Output Folder";
             // 
@@ -375,7 +382,7 @@
             this.btnBrowserOutput.Margin = new System.Windows.Forms.Padding(5);
             this.btnBrowserOutput.Name = "btnBrowserOutput";
             this.btnBrowserOutput.Size = new System.Drawing.Size(100, 30);
-            this.btnBrowserOutput.TabIndex = 2;
+            this.btnBrowserOutput.TabIndex = 11;
             this.btnBrowserOutput.Text = "Browser";
             this.btnBrowserOutput.UseVisualStyleBackColor = true;
             this.btnBrowserOutput.Click += new System.EventHandler(this.btnBrowserOutput_Click);
@@ -386,7 +393,7 @@
             this.txtOutputFolder.Margin = new System.Windows.Forms.Padding(5);
             this.txtOutputFolder.Name = "txtOutputFolder";
             this.txtOutputFolder.Size = new System.Drawing.Size(300, 23);
-            this.txtOutputFolder.TabIndex = 1;
+            this.txtOutputFolder.TabIndex = 10;
             // 
             // label1
             // 
@@ -410,7 +417,7 @@
             this.grPass.Name = "grPass";
             this.grPass.Padding = new System.Windows.Forms.Padding(5);
             this.grPass.Size = new System.Drawing.Size(586, 80);
-            this.grPass.TabIndex = 9;
+            this.grPass.TabIndex = 1;
             this.grPass.TabStop = false;
             this.grPass.Text = "Unlock Setting";
             // 
@@ -420,7 +427,7 @@
             this.btnPasswordOK.Margin = new System.Windows.Forms.Padding(5);
             this.btnPasswordOK.Name = "btnPasswordOK";
             this.btnPasswordOK.Size = new System.Drawing.Size(100, 30);
-            this.btnPasswordOK.TabIndex = 2;
+            this.btnPasswordOK.TabIndex = 7;
             this.btnPasswordOK.Text = "OK";
             this.btnPasswordOK.UseVisualStyleBackColor = true;
             this.btnPasswordOK.Click += new System.EventHandler(this.btnPasswordOK_Click);
@@ -431,7 +438,7 @@
             this.txtPassword.Margin = new System.Windows.Forms.Padding(5);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(300, 23);
-            this.txtPassword.TabIndex = 1;
+            this.txtPassword.TabIndex = 6;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label8
@@ -444,9 +451,19 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Password";
             // 
+            // cbReceive
+            // 
+            this.cbReceive.AutoSize = true;
+            this.cbReceive.Location = new System.Drawing.Point(390, 189);
+            this.cbReceive.Name = "cbReceive";
+            this.cbReceive.Size = new System.Drawing.Size(86, 21);
+            this.cbReceive.TabIndex = 20;
+            this.cbReceive.Text = "Received";
+            this.cbReceive.UseVisualStyleBackColor = true;
+            // 
             // SettingForm
             // 
-            this.AcceptButton = this.btnOK;
+            this.AcceptButton = this.btnPasswordOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
@@ -513,5 +530,6 @@
         private System.Windows.Forms.Button btnPasswordOK;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox cbReceive;
     }
 }

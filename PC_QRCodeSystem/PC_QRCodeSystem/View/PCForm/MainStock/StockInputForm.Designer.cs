@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlOption = new System.Windows.Forms.Panel();
             this.btnMainClear = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -66,21 +66,26 @@
             this.btnSearchPreInput = new System.Windows.Forms.Button();
             this.tab_Inspection = new System.Windows.Forms.TabPage();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlInspection = new System.Windows.Forms.Panel();
+            this.txtLabelQty = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtOrderCD = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnInspectionClear = new System.Windows.Forms.Button();
             this.txtSupplierName = new System.Windows.Forms.TextBox();
             this.txtSupplierCD = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnInsBack = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtBarcode = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lbUserName = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtUserCD = new System.Windows.Forms.TextBox();
+            this.btnInsBack = new System.Windows.Forms.Button();
             this.tab_Print = new System.Windows.Forms.TabPage();
             this.dgvPrintList = new System.Windows.Forms.DataGridView();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btnRegPre649 = new System.Windows.Forms.Button();
             this.btnPrintClear = new System.Windows.Forms.Button();
             this.btnManualPrint = new System.Windows.Forms.Button();
             this.btnPrintSelected = new System.Windows.Forms.Button();
@@ -92,6 +97,8 @@
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtPrintLabelQty = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -100,7 +107,8 @@
             this.panel8.SuspendLayout();
             this.tab_Inspection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).BeginInit();
-            this.panel4.SuspendLayout();
+            this.pnlInspection.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tab_Print.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).BeginInit();
             this.panel7.SuspendLayout();
@@ -304,15 +312,15 @@
             this.dgvPreInput.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPreInput.Name = "dgvPreInput";
             this.dgvPreInput.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPreInput.RowHeadersVisible = false;
             this.dgvPreInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPreInput.Size = new System.Drawing.Size(898, 220);
@@ -348,7 +356,7 @@
             // cbCheckDate
             // 
             this.cbCheckDate.AutoSize = true;
-            this.cbCheckDate.Location = new System.Drawing.Point(490, 10);
+            this.cbCheckDate.Location = new System.Drawing.Point(600, 10);
             this.cbCheckDate.Name = "cbCheckDate";
             this.cbCheckDate.Size = new System.Drawing.Size(100, 21);
             this.cbCheckDate.TabIndex = 10;
@@ -498,7 +506,8 @@
             // tab_Inspection
             // 
             this.tab_Inspection.Controls.Add(this.dgvInspection);
-            this.tab_Inspection.Controls.Add(this.panel4);
+            this.tab_Inspection.Controls.Add(this.pnlInspection);
+            this.tab_Inspection.Controls.Add(this.panel1);
             this.tab_Inspection.Location = new System.Drawing.Point(4, 28);
             this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Inspection.Name = "tab_Inspection";
@@ -515,48 +524,56 @@
             this.dgvInspection.AllowUserToDeleteRows = false;
             this.dgvInspection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInspection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInspection.Location = new System.Drawing.Point(4, 134);
+            this.dgvInspection.Location = new System.Drawing.Point(4, 224);
             this.dgvInspection.Margin = new System.Windows.Forms.Padding(4);
             this.dgvInspection.Name = "dgvInspection";
             this.dgvInspection.ReadOnly = true;
-            this.dgvInspection.Size = new System.Drawing.Size(898, 305);
-            this.dgvInspection.TabIndex = 2;
+            this.dgvInspection.Size = new System.Drawing.Size(898, 215);
+            this.dgvInspection.TabIndex = 3;
             // 
-            // panel4
+            // pnlInspection
             // 
-            this.panel4.Controls.Add(this.label11);
-            this.panel4.Controls.Add(this.txtOrderCD);
-            this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.btnInspectionClear);
-            this.panel4.Controls.Add(this.txtSupplierName);
-            this.panel4.Controls.Add(this.txtSupplierCD);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.btnInsBack);
-            this.panel4.Controls.Add(this.btnDelete);
-            this.panel4.Controls.Add(this.btnRegister);
-            this.panel4.Controls.Add(this.txtBarcode);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(4, 4);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(898, 130);
-            this.panel4.TabIndex = 1;
+            this.pnlInspection.Controls.Add(this.txtLabelQty);
+            this.pnlInspection.Controls.Add(this.label11);
+            this.pnlInspection.Controls.Add(this.label1);
+            this.pnlInspection.Controls.Add(this.btnInspectionClear);
+            this.pnlInspection.Controls.Add(this.txtSupplierName);
+            this.pnlInspection.Controls.Add(this.txtSupplierCD);
+            this.pnlInspection.Controls.Add(this.label2);
+            this.pnlInspection.Controls.Add(this.btnDelete);
+            this.pnlInspection.Controls.Add(this.btnRegister);
+            this.pnlInspection.Controls.Add(this.txtBarcode);
+            this.pnlInspection.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlInspection.Location = new System.Drawing.Point(4, 64);
+            this.pnlInspection.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlInspection.Name = "pnlInspection";
+            this.pnlInspection.Size = new System.Drawing.Size(898, 160);
+            this.pnlInspection.TabIndex = 2;
+            this.pnlInspection.Visible = false;
+            // 
+            // txtLabelQty
+            // 
+            this.txtLabelQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLabelQty.Location = new System.Drawing.Point(120, 100);
+            this.txtLabelQty.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLabelQty.Name = "txtLabelQty";
+            this.txtLabelQty.Size = new System.Drawing.Size(120, 50);
+            this.txtLabelQty.TabIndex = 6;
+            this.txtLabelQty.Text = "1";
+            this.txtLabelQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLabelQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLabelQty_KeyDown);
+            this.txtLabelQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLabelQty_KeyPress);
             // 
             // label11
             // 
-            this.label11.Location = new System.Drawing.Point(10, 70);
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(10, 100);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(100, 30);
+            this.label11.Size = new System.Drawing.Size(100, 25);
             this.label11.TabIndex = 26;
-            this.label11.Text = "Order Number";
+            this.label11.Text = "Label Qty";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtOrderCD
-            // 
-            this.txtOrderCD.Location = new System.Drawing.Point(120, 70);
-            this.txtOrderCD.Name = "txtOrderCD";
-            this.txtOrderCD.Size = new System.Drawing.Size(120, 23);
-            this.txtOrderCD.TabIndex = 25;
             // 
             // label1
             // 
@@ -564,7 +581,7 @@
             this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 30);
+            this.label1.Size = new System.Drawing.Size(100, 25);
             this.label1.TabIndex = 24;
             this.label1.Text = "Barcode";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -572,11 +589,11 @@
             // btnInspectionClear
             // 
             this.btnInspectionClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInspectionClear.Location = new System.Drawing.Point(460, 70);
+            this.btnInspectionClear.Location = new System.Drawing.Point(470, 100);
             this.btnInspectionClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspectionClear.Name = "btnInspectionClear";
-            this.btnInspectionClear.Size = new System.Drawing.Size(80, 50);
-            this.btnInspectionClear.TabIndex = 9;
+            this.btnInspectionClear.Size = new System.Drawing.Size(100, 50);
+            this.btnInspectionClear.TabIndex = 11;
             this.btnInspectionClear.Text = "Clear";
             this.btnInspectionClear.UseVisualStyleBackColor = true;
             this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
@@ -584,55 +601,43 @@
             // txtSupplierName
             // 
             this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSupplierName.Location = new System.Drawing.Point(250, 40);
+            this.txtSupplierName.Location = new System.Drawing.Point(250, 70);
             this.txtSupplierName.Margin = new System.Windows.Forms.Padding(4);
             this.txtSupplierName.Name = "txtSupplierName";
-            this.txtSupplierName.Size = new System.Drawing.Size(400, 23);
-            this.txtSupplierName.TabIndex = 5;
+            this.txtSupplierName.Size = new System.Drawing.Size(430, 23);
+            this.txtSupplierName.TabIndex = 8;
             this.txtSupplierName.Text = "Supplier Name";
             this.txtSupplierName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtSupplierCD
             // 
             this.txtSupplierCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSupplierCD.Location = new System.Drawing.Point(120, 40);
+            this.txtSupplierCD.Location = new System.Drawing.Point(120, 70);
             this.txtSupplierCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtSupplierCD.Name = "txtSupplierCD";
             this.txtSupplierCD.Size = new System.Drawing.Size(120, 23);
-            this.txtSupplierCD.TabIndex = 4;
+            this.txtSupplierCD.TabIndex = 7;
             this.txtSupplierCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSupplierCD_KeyDown);
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 40);
+            this.label2.Location = new System.Drawing.Point(10, 70);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 30);
+            this.label2.Size = new System.Drawing.Size(100, 25);
             this.label2.TabIndex = 23;
             this.label2.Text = "Supplier Code";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnInsBack
-            // 
-            this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsBack.Location = new System.Drawing.Point(570, 70);
-            this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
-            this.btnInsBack.Name = "btnInsBack";
-            this.btnInsBack.Size = new System.Drawing.Size(80, 50);
-            this.btnInsBack.TabIndex = 10;
-            this.btnInsBack.Text = "Back";
-            this.btnInsBack.UseVisualStyleBackColor = true;
-            this.btnInsBack.Click += new System.EventHandler(this.btnPrintBack_Click);
-            // 
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(350, 70);
+            this.btnDelete.Location = new System.Drawing.Point(360, 100);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 50);
-            this.btnDelete.TabIndex = 8;
+            this.btnDelete.Size = new System.Drawing.Size(100, 50);
+            this.btnDelete.TabIndex = 10;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -640,24 +645,82 @@
             // btnRegister
             // 
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(250, 70);
+            this.btnRegister.Location = new System.Drawing.Point(250, 100);
             this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(80, 50);
-            this.btnRegister.TabIndex = 6;
+            this.btnRegister.Size = new System.Drawing.Size(100, 50);
+            this.btnRegister.TabIndex = 9;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // txtBarcode
             // 
-            this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBarcode.Location = new System.Drawing.Point(120, 10);
             this.txtBarcode.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBarcode.Multiline = true;
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(530, 23);
-            this.txtBarcode.TabIndex = 3;
+            this.txtBarcode.Size = new System.Drawing.Size(560, 50);
+            this.txtBarcode.TabIndex = 5;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbUserName);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.txtUserCD);
+            this.panel1.Controls.Add(this.btnInsBack);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(4, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(898, 60);
+            this.panel1.TabIndex = 1;
+            // 
+            // lbUserName
+            // 
+            this.lbUserName.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUserName.Location = new System.Drawing.Point(250, 10);
+            this.lbUserName.Name = "lbUserName";
+            this.lbUserName.Size = new System.Drawing.Size(200, 23);
+            this.lbUserName.TabIndex = 29;
+            this.lbUserName.Text = "User Name";
+            this.lbUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(10, 10);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(100, 25);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "User Code";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtUserCD
+            // 
+            this.txtUserCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUserCD.Location = new System.Drawing.Point(120, 10);
+            this.txtUserCD.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUserCD.Name = "txtUserCD";
+            this.txtUserCD.Size = new System.Drawing.Size(120, 23);
+            this.txtUserCD.TabIndex = 4;
+            this.txtUserCD.TextChanged += new System.EventHandler(this.txtUserCD_TextChanged);
+            this.txtUserCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserCD_KeyDown);
+            // 
+            // btnInsBack
+            // 
+            this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsBack.Location = new System.Drawing.Point(760, 5);
+            this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInsBack.Name = "btnInsBack";
+            this.btnInsBack.Size = new System.Drawing.Size(100, 50);
+            this.btnInsBack.TabIndex = 12;
+            this.btnInsBack.Text = "Back";
+            this.btnInsBack.UseVisualStyleBackColor = true;
+            this.btnInsBack.Click += new System.EventHandler(this.btnPrintBack_Click);
             // 
             // tab_Print
             // 
@@ -689,6 +752,9 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.label13);
+            this.panel7.Controls.Add(this.txtPrintLabelQty);
+            this.panel7.Controls.Add(this.btnRegPre649);
             this.panel7.Controls.Add(this.btnPrintClear);
             this.panel7.Controls.Add(this.btnManualPrint);
             this.panel7.Controls.Add(this.btnPrintSelected);
@@ -701,6 +767,18 @@
             this.panel7.Size = new System.Drawing.Size(898, 60);
             this.panel7.TabIndex = 1;
             // 
+            // btnRegPre649
+            // 
+            this.btnRegPre649.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegPre649.Location = new System.Drawing.Point(520, 5);
+            this.btnRegPre649.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRegPre649.Name = "btnRegPre649";
+            this.btnRegPre649.Size = new System.Drawing.Size(100, 50);
+            this.btnRegPre649.TabIndex = 6;
+            this.btnRegPre649.Text = "Register";
+            this.btnRegPre649.UseVisualStyleBackColor = true;
+            this.btnRegPre649.Click += new System.EventHandler(this.btnRegPre649_Click);
+            // 
             // btnPrintClear
             // 
             this.btnPrintClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -708,7 +786,7 @@
             this.btnPrintClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintClear.Name = "btnPrintClear";
             this.btnPrintClear.Size = new System.Drawing.Size(100, 50);
-            this.btnPrintClear.TabIndex = 6;
+            this.btnPrintClear.TabIndex = 7;
             this.btnPrintClear.Text = "Clear";
             this.btnPrintClear.UseVisualStyleBackColor = true;
             this.btnPrintClear.Click += new System.EventHandler(this.btnPrintClear_Click);
@@ -756,7 +834,7 @@
             this.btnPrintBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintBack.Name = "btnPrintBack";
             this.btnPrintBack.Size = new System.Drawing.Size(100, 50);
-            this.btnPrintBack.TabIndex = 7;
+            this.btnPrintBack.TabIndex = 8;
             this.btnPrintBack.Text = "Back";
             this.btnPrintBack.UseVisualStyleBackColor = true;
             this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
@@ -808,6 +886,23 @@
             this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
             this.tsTotalQty.Text = "None";
             // 
+            // txtPrintLabelQty
+            // 
+            this.txtPrintLabelQty.Location = new System.Drawing.Point(351, 30);
+            this.txtPrintLabelQty.Name = "txtPrintLabelQty";
+            this.txtPrintLabelQty.Size = new System.Drawing.Size(100, 23);
+            this.txtPrintLabelQty.TabIndex = 9;
+            this.txtPrintLabelQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrintLabelQty_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(348, 9);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(30, 17);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Qty";
+            // 
             // StockInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -838,11 +933,14 @@
             this.panel8.PerformLayout();
             this.tab_Inspection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.pnlInspection.ResumeLayout(false);
+            this.pnlInspection.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tab_Print.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).EndInit();
             this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -861,7 +959,7 @@
         private System.Windows.Forms.Button btnAutoPacking;
         private System.Windows.Forms.DataGridView dgvPreInput;
         private System.Windows.Forms.DataGridView dgvInspection;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnlInspection;
         private System.Windows.Forms.TextBox txtCapacity;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnInspection;
@@ -913,7 +1011,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtItemNum;
         private System.Windows.Forms.TextBox txtPONo;
+        private System.Windows.Forms.Button btnRegPre649;
+        private System.Windows.Forms.TextBox txtLabelQty;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtOrderCD;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lbUserName;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtUserCD;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtPrintLabelQty;
     }
 }

@@ -25,6 +25,7 @@ namespace PC_QRCodeSystem.View
         public StockOutputForm()
         {
             InitializeComponent();
+            tc_StockOut.ItemSize = new Size(0, 1);
         }
 
         private void StockOutputForm_Load(object sender, EventArgs e)
@@ -40,51 +41,51 @@ namespace PC_QRCodeSystem.View
         {
             if (e.KeyCode == Keys.Enter)
             {
-                string temp = txtUserCode.Text;
-                if (temp.Contains(";"))
-                    txtUserCode.Text = temp.Split(';')[0].Trim();
-                txtItemCode.Focus();
+                try
+                {
+                    string temp = txtUserCode.Text;
+                    if (temp.Contains(";"))
+                        txtUserCode.Text = temp.Split(';')[0].Trim();
+                    m_mes_user muser = new m_mes_user();
+                    muser = muser.GetUser(txtUserCode.Text);
+                    lbUserName.Text = muser.user_name;
+                    lbUserName.BackColor = Color.Lime;
+                    errorProvider.SetError(txtUserCode, null);
+                    if (pnlNoSetOption.Visible) txtBarcode.Focus();
+                    else txtItemCode.Focus();
+                }
+                catch (Exception ex)
+                {
+                    errorProvider.SetError(txtUserCode, "Wrong User Code" + Environment.NewLine + ex.Message);
+                }
+
             }
         }
 
         private void txtUserCode_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(txtUserCode.Text))
             {
-                if (string.IsNullOrEmpty(txtUserCode.Text))
-                {
-                    lbUserName.Text = "User Name";
-                    lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-                }
-                else
-                {
-                    m_mes_user muser = new m_mes_user();
-                    muser = muser.GetUser(txtUserCode.Text);
-                    lbUserName.Text = muser.user_name;
-                    lbUserName.BackColor = Color.Lime;
-                }
-                errorProvider.SetError(txtUserCode, null);
-            }
-            catch (Exception ex)
-            {
-                errorProvider.SetError(txtUserCode, "Wrong User Code" + Environment.NewLine + ex.Message);
+                lbUserName.Text = "User Name";
+                lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
         }
         #endregion
 
         #region ITEM EVENT
-        private void txtNoPlanItemCD_KeyDown(object sender, KeyEventArgs e)
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                string temp = txtItemCode.Text;
+                string temp = txtBarcode.Text;
                 if (temp.Contains(";"))
                 {
                     string[] barcode = temp.Split(';');
                     txtItemCode.Text = barcode[0].Trim();
                     txtInvoice.Text = barcode[3].Trim();
                 }
-                cmbIssue.Focus();
+                if (cmbIssue.SelectedValue.ToString() != "20") SearchNoSet(txtItemCode.Text);
+                txtBarcode.Clear();
             }
         }
 
@@ -688,6 +689,7 @@ namespace PC_QRCodeSystem.View
                         if (res == 0) break;
                     }
                     #endregion
+                    dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
                     UpdateGridProcess();
                     UpdateGridPrint(listPrint);
                     UpdateGridStockOut(listStockOut);
@@ -864,6 +866,7 @@ namespace PC_QRCodeSystem.View
             dgvPrint.DataSource = inList;
         }
         #endregion
+
         #endregion
     }
 }

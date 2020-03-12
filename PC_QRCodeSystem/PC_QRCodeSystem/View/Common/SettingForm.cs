@@ -28,6 +28,7 @@ namespace PC_QRCodeSystem.View
             else settingItem.LoadSetting();
             SetField();
             LockPanel(true);
+            //AcceptButton = btnPasswordOK;
         }
         #endregion
 
@@ -83,13 +84,17 @@ namespace PC_QRCodeSystem.View
                 Invoice = txtInvoiceTest.Text,
                 Delivery_Date = dtpDateTest.Value,
                 Delivery_Qty = int.Parse(txtQtyTest.Text),
-                isRec = true,
+                isRec = cbReceive.Checked,
                 Label_Qty = 1
             }, false);
         }
         private void btnPasswordOK_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text == "admin") LockPanel(false);
+            if (txtPassword.Text == "admin")
+            {
+                AcceptButton = btnOK;
+                LockPanel(false);
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)

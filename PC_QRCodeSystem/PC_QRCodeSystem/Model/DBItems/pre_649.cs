@@ -10,7 +10,6 @@ namespace PC_QRCodeSystem.Model
     public class pre_649
     {
         #region ALL FIELDS
-        public int premac_id { get; set; }
         public string item_number { get; set; }
         public string item_name { get; set; }
         public string supplier_cd { get; set; }
@@ -54,8 +53,9 @@ namespace PC_QRCodeSystem.Model
                                                             double.Parse(Regex.Replace(columns[10], " {2,}", " ").Trim()) : 0,
                                              incharge = Regex.Replace(columns[14], " {2,}", " ").Trim(),
                                          };
-            listPremacItem = query.ToList();
-            listPremacItem.Sort((a, b) => a.item_number.CompareTo(b.item_number));
+            listPremacItem = query.OrderBy(x => x.delivery_date).ThenBy(x => x.supplier_invoice).ThenBy(x => x.item_number).ToList();
+            //listPremacItem.Sort((a, b) => a.item_number.CompareTo(b.item_number));
+            //listPremacItem.OrderBy(x => x.delivery_date).ThenBy(x => x.supplier_invoice).ThenBy(x => x.item_number);
             return listPremacItem;
         }
 
@@ -87,7 +87,7 @@ namespace PC_QRCodeSystem.Model
             if (!string.IsNullOrEmpty(inItem.order_number))
                 query += "AND order_number ='" + inItem.order_number + "' ";
             query += "GROUP BY item_number, item_name, supplier_cd, supplier_name, supplier_invoice, delivery_date, incharge ";
-            query += "ORDER BY supplier_invoice, item_number";
+            query += "ORDER BY delivery_date, supplier_invoice, item_number";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
@@ -146,7 +146,7 @@ namespace PC_QRCodeSystem.Model
             if (checkdate)
                 query += "AND delivery_date >='" + fromdate + "' AND delivery_date <='" + todate + "' ";
             query += "GROUP BY item_number, item_name, supplier_cd, supplier_name, supplier_invoice, delivery_date, incharge ";
-            query += "ORDER BY supplier_invoice, item_number";
+            query += "ORDER BY delivery_date, supplier_invoice, item_number";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
