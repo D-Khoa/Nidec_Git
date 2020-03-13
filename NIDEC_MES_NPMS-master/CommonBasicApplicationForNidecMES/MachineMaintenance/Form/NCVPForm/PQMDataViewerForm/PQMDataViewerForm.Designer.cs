@@ -49,6 +49,8 @@
             this.groupBoxCommon1 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
             this.trInspect = new Com.Nidec.Mes.Framework.TreeViewCommon();
             this.panelCommon1 = new Com.Nidec.Mes.Framework.PanelCommon();
+            this.btnBySerno = new System.Windows.Forms.RadioButton();
+            this.btnByLot = new System.Windows.Forms.RadioButton();
             this.btnClear = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.txtBarcode = new Com.Nidec.Mes.Framework.TextBoxCommon();
             this.labelCommon1 = new Com.Nidec.Mes.Framework.LabelCommon();
@@ -64,8 +66,9 @@
             this.btnSearch = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.btnLoad = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.bgwGetData = new System.ComponentModel.BackgroundWorker();
-            this.btnByLot = new System.Windows.Forms.RadioButton();
-            this.btnBySerno = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rbtnJudge = new System.Windows.Forms.RadioButton();
+            this.rbtnData = new System.Windows.Forms.RadioButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvdt)).BeginInit();
             this.groupBoxCommon1.SuspendLayout();
@@ -73,6 +76,7 @@
             this.groupBoxCommon2.SuspendLayout();
             this.groupBoxCommon3.SuspendLayout();
             this.groupBoxCommon4.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -87,7 +91,7 @@
             this.tsTime});
             this.statusStrip1.Location = new System.Drawing.Point(0, 390);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(693, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(945, 24);
             this.statusStrip1.TabIndex = 13;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -109,7 +113,7 @@
             this.tsSpace.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.tsSpace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsSpace.Name = "tsSpace";
-            this.tsSpace.Size = new System.Drawing.Size(373, 19);
+            this.tsSpace.Size = new System.Drawing.Size(625, 19);
             this.tsSpace.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -194,7 +198,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvdt.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvdt.Size = new System.Drawing.Size(687, 81);
+            this.dgvdt.Size = new System.Drawing.Size(939, 81);
             this.dgvdt.TabIndex = 23;
             // 
             // groupBoxCommon1
@@ -203,7 +207,7 @@
             this.groupBoxCommon1.ControlId = null;
             this.groupBoxCommon1.Controls.Add(this.trInspect);
             this.groupBoxCommon1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxCommon1.Location = new System.Drawing.Point(474, 108);
+            this.groupBoxCommon1.Location = new System.Drawing.Point(726, 108);
             this.groupBoxCommon1.Name = "groupBoxCommon1";
             this.groupBoxCommon1.Size = new System.Drawing.Size(216, 191);
             this.groupBoxCommon1.TabIndex = 24;
@@ -227,6 +231,7 @@
             this.panelCommon1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCommon1.ControlId = null;
+            this.panelCommon1.Controls.Add(this.panel1);
             this.panelCommon1.Controls.Add(this.btnBySerno);
             this.panelCommon1.Controls.Add(this.btnByLot);
             this.panelCommon1.Controls.Add(this.btnClear);
@@ -236,8 +241,30 @@
             this.panelCommon1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelCommon1.Location = new System.Drawing.Point(273, 109);
             this.panelCommon1.Name = "panelCommon1";
-            this.panelCommon1.Size = new System.Drawing.Size(198, 191);
+            this.panelCommon1.Size = new System.Drawing.Size(450, 191);
             this.panelCommon1.TabIndex = 25;
+            // 
+            // btnBySerno
+            // 
+            this.btnBySerno.AutoSize = true;
+            this.btnBySerno.Checked = true;
+            this.btnBySerno.Location = new System.Drawing.Point(6, 53);
+            this.btnBySerno.Name = "btnBySerno";
+            this.btnBySerno.Size = new System.Drawing.Size(118, 19);
+            this.btnBySerno.TabIndex = 36;
+            this.btnBySerno.TabStop = true;
+            this.btnBySerno.Text = "By serial number";
+            this.btnBySerno.UseVisualStyleBackColor = true;
+            // 
+            // btnByLot
+            // 
+            this.btnByLot.AutoSize = true;
+            this.btnByLot.Location = new System.Drawing.Point(6, 33);
+            this.btnByLot.Name = "btnByLot";
+            this.btnByLot.Size = new System.Drawing.Size(58, 19);
+            this.btnByLot.TabIndex = 35;
+            this.btnByLot.Text = "By Lot";
+            this.btnByLot.UseVisualStyleBackColor = true;
             // 
             // btnClear
             // 
@@ -245,7 +272,7 @@
             this.btnClear.BackColor = System.Drawing.SystemColors.Control;
             this.btnClear.ControlId = null;
             this.btnClear.Font = new System.Drawing.Font("Arial", 9F);
-            this.btnClear.Location = new System.Drawing.Point(124, 33);
+            this.btnClear.Location = new System.Drawing.Point(376, 33);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(71, 36);
             this.btnClear.TabIndex = 34;
@@ -264,7 +291,7 @@
             this.txtBarcode.Location = new System.Drawing.Point(3, 75);
             this.txtBarcode.Multiline = true;
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(192, 110);
+            this.txtBarcode.Size = new System.Drawing.Size(300, 110);
             this.txtBarcode.TabIndex = 2;
             // 
             // labelCommon1
@@ -287,7 +314,7 @@
             this.cmbModel.FormattingEnabled = true;
             this.cmbModel.Location = new System.Drawing.Point(49, 4);
             this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(146, 23);
+            this.cmbModel.Size = new System.Drawing.Size(398, 23);
             this.cmbModel.TabIndex = 0;
             this.cmbModel.SelectedIndexChanged += new System.EventHandler(this.cmbModel_SelectedIndexChanged);
             // 
@@ -417,33 +444,42 @@
             this.btnLoad.UseVisualStyleBackColor = false;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
-            // btnByLot
+            // panel1
             // 
-            this.btnByLot.AutoSize = true;
-            this.btnByLot.Location = new System.Drawing.Point(6, 33);
-            this.btnByLot.Name = "btnByLot";
-            this.btnByLot.Size = new System.Drawing.Size(58, 19);
-            this.btnByLot.TabIndex = 35;
-            this.btnByLot.Text = "By Lot";
-            this.btnByLot.UseVisualStyleBackColor = true;
+            this.panel1.Controls.Add(this.rbtnJudge);
+            this.panel1.Controls.Add(this.rbtnData);
+            this.panel1.Location = new System.Drawing.Point(309, 75);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(138, 53);
+            this.panel1.TabIndex = 38;
             // 
-            // btnBySerno
+            // rbtnJudge
             // 
-            this.btnBySerno.AutoSize = true;
-            this.btnBySerno.Checked = true;
-            this.btnBySerno.Location = new System.Drawing.Point(6, 53);
-            this.btnBySerno.Name = "btnBySerno";
-            this.btnBySerno.Size = new System.Drawing.Size(118, 19);
-            this.btnBySerno.TabIndex = 36;
-            this.btnBySerno.TabStop = true;
-            this.btnBySerno.Text = "By serial number";
-            this.btnBySerno.UseVisualStyleBackColor = true;
+            this.rbtnJudge.AutoSize = true;
+            this.rbtnJudge.Checked = true;
+            this.rbtnJudge.Location = new System.Drawing.Point(3, 28);
+            this.rbtnJudge.Name = "rbtnJudge";
+            this.rbtnJudge.Size = new System.Drawing.Size(81, 19);
+            this.rbtnJudge.TabIndex = 38;
+            this.rbtnJudge.TabStop = true;
+            this.rbtnJudge.Text = "Get Judge";
+            this.rbtnJudge.UseVisualStyleBackColor = true;
+            // 
+            // rbtnData
+            // 
+            this.rbtnData.AutoSize = true;
+            this.rbtnData.Location = new System.Drawing.Point(3, 3);
+            this.rbtnData.Name = "rbtnData";
+            this.rbtnData.Size = new System.Drawing.Size(73, 19);
+            this.rbtnData.TabIndex = 37;
+            this.rbtnData.Text = "Get Data";
+            this.rbtnData.UseVisualStyleBackColor = true;
             // 
             // PQMDataViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 414);
+            this.ClientSize = new System.Drawing.Size(945, 414);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnCSV);
@@ -481,6 +517,8 @@
             this.groupBoxCommon3.ResumeLayout(false);
             this.groupBoxCommon4.ResumeLayout(false);
             this.groupBoxCommon4.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -520,6 +558,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.RadioButton btnBySerno;
         private System.Windows.Forms.RadioButton btnByLot;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rbtnJudge;
+        private System.Windows.Forms.RadioButton rbtnData;
     }
 }
 

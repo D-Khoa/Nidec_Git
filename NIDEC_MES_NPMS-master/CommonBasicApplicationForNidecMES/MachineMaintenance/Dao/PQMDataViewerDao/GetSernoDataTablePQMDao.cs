@@ -19,7 +19,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
             //ADD COMMAND
             foreach (string table in InVo.SernoDBList)
             {
-                sql.Append("select serno, lot, model, site, factory, line, process, inspectdate from " + table + " where 1=1");
+                sql.Append("select serno, lot, model, site, factory, line, process, inspectdate, tjudge from " + table + " where 1=1");
                 if (InVo.SernoList.Length > 0)
                 {
                     if (InVo.CheckLot)

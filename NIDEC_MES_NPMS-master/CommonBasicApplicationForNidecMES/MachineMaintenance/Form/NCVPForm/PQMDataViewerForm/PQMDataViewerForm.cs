@@ -8,7 +8,7 @@ using Com.Nidec.Mes.Framework;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.PQMDataViewerCbm;
-
+using System.Threading.Tasks;
 
 namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
 {
@@ -199,9 +199,9 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
             Vo.DateTimeTo = dtDatet.GetDateTime();
         }
 
-        private void GetDataToTable()
+        private Task<DataTable> GetDataToTable()
         {
-            try
+            return Task.Run(() =>
             {
                 GetTableName();
                 GetSernoList();
@@ -234,17 +234,17 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 Vo.InspectDataTable = inspectable.InspectDataTable;
                 Vo.SernoDataTable = sernotable.SernoDataTable;
                 DataTable pivot = new DataTable();
-                pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
-                        , Vo.InspectDataTable.Columns["judge"]);
+                if (rbtnData.Checked)
+                    pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
+                        , Vo.InspectDataTable.Columns["inspectdata"]);
+                if (rbtnJudge.Checked)
+                    pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
+                            , Vo.InspectDataTable.Columns["judge"]);
                 Vo.JoinedTable = LinQ_Class.Joined(Vo.SernoDataTable, pivot);
                 pivot.Clear();
-                Vo.ThreadComplete = true;
-                GetTable.Abort();
-            }
-            catch (Framework.SystemException ex)
-            {
-                MessageBox.Show("Please select model and inspect before search data!");
-                //MessageBox.Show(ex.GetMessageData().ToString());
+                //Vo.ThreadComplete = true;
+                //GetTable.Abort();
+                return Vo.JoinedTable;
             }
         }
         #endregion
@@ -260,7 +260,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 RenewData();
                 timer1.Enabled = true;
                 //CREATE THREAD TO RUN IN BACKGROUND
-                GetTable = new Thread(GetDataToTable);
+                //GetTable = new Thread(GetDataToTable);
                 GetTable.Start();
                 GetTable.IsBackground = true;
                 tsProcessing.Text = "processing...";
