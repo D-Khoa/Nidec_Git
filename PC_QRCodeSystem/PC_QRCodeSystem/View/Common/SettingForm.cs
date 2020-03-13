@@ -76,6 +76,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnPrintTest_Click(object sender, EventArgs e)
         {
+            TfPrint.printerName = cmbPrinter.Text;
             printItem.PrintAnItem(new PrintItem
             {
                 Item_Number = txtItemCDTest.Text,

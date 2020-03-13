@@ -212,7 +212,7 @@ namespace PC_QRCodeSystem.Model
             //SQL query string
             query = "SELECT stockout_id, packing_cd, process_cd, issue_cd, stockout_date, stockout_user_cd, stockout_qty, ";
             query += "real_qty, received_user_cd, comment, remark FROM pts_stockout_log WHERE 1=1 ";
-            query += "AND process_cd ='" + processCD + "' and packing_cd in(select packing_cd from pts_stock where item_cd ='" + itemCD + "') ";
+            query += "AND process_cd like '" + processCD + "%' and packing_cd in(select packing_cd from pts_stock where item_cd ='" + itemCD + "') ";
             query += "ORDER BY packing_cd";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();

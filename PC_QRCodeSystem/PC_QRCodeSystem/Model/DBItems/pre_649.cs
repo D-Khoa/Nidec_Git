@@ -146,7 +146,7 @@ namespace PC_QRCodeSystem.Model
             if (checkdate)
                 query += "AND delivery_date >='" + fromdate + "' AND delivery_date <='" + todate + "' ";
             query += "GROUP BY item_number, item_name, supplier_cd, supplier_name, supplier_invoice, delivery_date, incharge ";
-            query += "ORDER BY delivery_date, supplier_invoice, item_number";
+            query += "ORDER BY delivery_date DESC, supplier_invoice, item_number";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;

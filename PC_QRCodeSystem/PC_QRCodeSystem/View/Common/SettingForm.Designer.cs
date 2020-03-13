@@ -30,6 +30,7 @@
         {
             this.btnReset = new System.Windows.Forms.Button();
             this.grPrinter = new System.Windows.Forms.GroupBox();
+            this.cbReceive = new System.Windows.Forms.CheckBox();
             this.dtpDateTest = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.txtInvoiceTest = new System.Windows.Forms.TextBox();
@@ -63,7 +64,6 @@
             this.btnPasswordOK = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.cbReceive = new System.Windows.Forms.CheckBox();
             this.grPrinter.SuspendLayout();
             this.grPremacFolder.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -113,6 +113,16 @@
             this.grPrinter.TabIndex = 4;
             this.grPrinter.TabStop = false;
             this.grPrinter.Text = "Printer";
+            // 
+            // cbReceive
+            // 
+            this.cbReceive.AutoSize = true;
+            this.cbReceive.Location = new System.Drawing.Point(390, 189);
+            this.cbReceive.Name = "cbReceive";
+            this.cbReceive.Size = new System.Drawing.Size(86, 21);
+            this.cbReceive.TabIndex = 20;
+            this.cbReceive.Text = "Received";
+            this.cbReceive.UseVisualStyleBackColor = true;
             // 
             // dtpDateTest
             // 
@@ -190,7 +200,7 @@
             this.txtItemCDTest.Name = "txtItemCDTest";
             this.txtItemCDTest.Size = new System.Drawing.Size(150, 23);
             this.txtItemCDTest.TabIndex = 15;
-            this.txtItemCDTest.Text = "Item Number";
+            this.txtItemCDTest.Text = "Item Number / User ID";
             // 
             // label3
             // 
@@ -207,7 +217,7 @@
             this.txtItemNameTest.Name = "txtItemNameTest";
             this.txtItemNameTest.Size = new System.Drawing.Size(150, 23);
             this.txtItemNameTest.TabIndex = 14;
-            this.txtItemNameTest.Text = "Item Name";
+            this.txtItemNameTest.Text = "Item / User Name";
             // 
             // label2
             // 
@@ -450,16 +460,6 @@
             this.label8.Size = new System.Drawing.Size(69, 17);
             this.label8.TabIndex = 0;
             this.label8.Text = "Password";
-            // 
-            // cbReceive
-            // 
-            this.cbReceive.AutoSize = true;
-            this.cbReceive.Location = new System.Drawing.Point(390, 189);
-            this.cbReceive.Name = "cbReceive";
-            this.cbReceive.Size = new System.Drawing.Size(86, 21);
-            this.cbReceive.TabIndex = 20;
-            this.cbReceive.Text = "Received";
-            this.cbReceive.UseVisualStyleBackColor = true;
             // 
             // SettingForm
             // 

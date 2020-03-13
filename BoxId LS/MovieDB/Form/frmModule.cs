@@ -654,6 +654,8 @@ namespace BoxIdDb
                 tbldate = tbldate.AddMonths(-1);
                 goto C;
             }
+            else if (n == 0)
+                testerTableLastMonth = testerTableThisMonth;
             return filterkey;
         }
 

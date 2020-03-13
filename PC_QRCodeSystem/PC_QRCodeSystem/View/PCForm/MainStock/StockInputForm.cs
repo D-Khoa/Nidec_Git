@@ -69,13 +69,12 @@ namespace PC_QRCodeSystem.View
                 //Stop stopwatch and show time
                 stopWatch.Stop();
                 tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
-                UpdatePremacGrid(true);
             }
             catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
-                UpdatePremacGrid(false);
             }
+            UpdatePremacGrid(false);
             this.Cursor = Cursors.Default;
         }
 
@@ -100,13 +99,12 @@ namespace PC_QRCodeSystem.View
                 dgvPreInput.ColumnHeadersVisible = true;
                 stopWatch.Stop();
                 tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
-                UpdatePremacGrid(true);
             }
             catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
-                UpdatePremacGrid(false);
             }
+            UpdatePremacGrid(false);
             this.Cursor = Cursors.Default;
         }
 
@@ -440,6 +438,16 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
         }
+
+        private void dgvPreInput_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridViewRow dr = dgvPreInput.Rows[e.RowIndex];
+            txtItemNum.Text = dr.Cells["item_number"].Value.ToString();
+            txtSupplierCD.Text = dr.Cells["supplier_cd"].Value.ToString();
+            txtSupplierInvoice.Text = dr.Cells["supplier_invoice"].Value.ToString();
+            txtIncharge.Text = dr.Cells["incharge"].Value.ToString();
+        }
         #endregion
 
         #endregion
@@ -526,6 +534,7 @@ namespace PC_QRCodeSystem.View
                 }
                 if (printItem.PrintItems(listPrintItem, int.Parse(txtPrintLabelQty.Text)))
                     CustomMessageBox.Notice("Print " + txtPrintLabelQty.Text + " items are completed!");
+                txtPrintLabelQty.Text = "1";
             }
             catch (Exception ex)
             {
@@ -535,7 +544,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnRegPre649_Click(object sender, EventArgs e)
         {
-
+            tc_Main.SelectedTab = tab_Inspection;
         }
 
         private void btnPrintClear_Click(object sender, EventArgs e)
@@ -728,9 +737,10 @@ namespace PC_QRCodeSystem.View
                 }
                 catch (Exception ex)
                 {
-                    CustomMessageBox.Error("Wrong User Code!" + Environment.NewLine + "(" + ex.Message + ")");
-                    lbUserName.Text = "User Name";
                     txtUserCD.Focus();
+                    lbUserName.Text = "User Name";
+                    lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                    CustomMessageBox.Error("Wrong User Code!" + Environment.NewLine + "(" + ex.Message + ")");
                 }
             }
         }
@@ -796,8 +806,8 @@ namespace PC_QRCodeSystem.View
                 //Label of PREMAC 6-4-9 have more 2 fields
                 if (barcode.Length > 7)
                 {
-                    if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6];
-                    if (!string.IsNullOrEmpty(barcode[7])) remark = barcode[7];
+                    if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6].Trim();
+                    if (!string.IsNullOrEmpty(barcode[7])) remark = barcode[7].Trim();
                 }
                 try
                 {

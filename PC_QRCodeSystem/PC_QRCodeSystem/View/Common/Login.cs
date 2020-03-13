@@ -30,7 +30,12 @@ namespace PC_QRCodeSystem
         private void txtUsername_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+            {
+                string temp = txtUsername.Text;
+                if (temp.Contains(";"))
+                    txtUsername.Text = temp.Split(';')[0];
                 txtpass.Focus();
+            }
         }
 
         private void txtpass_KeyDown(object sender, KeyEventArgs e)
