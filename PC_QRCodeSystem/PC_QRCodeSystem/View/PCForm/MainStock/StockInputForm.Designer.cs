@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlOption = new System.Windows.Forms.Panel();
             this.btnMainClear = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -67,6 +67,8 @@
             this.tab_Inspection = new System.Windows.Forms.TabPage();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.pnlInspection = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.txtLabelQty = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -78,6 +80,7 @@
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
             this.lbUserName = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.txtUserCD = new System.Windows.Forms.TextBox();
@@ -312,15 +315,15 @@
             this.dgvPreInput.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPreInput.Name = "dgvPreInput";
             this.dgvPreInput.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPreInput.RowHeadersVisible = false;
             this.dgvPreInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPreInput.Size = new System.Drawing.Size(898, 220);
@@ -535,6 +538,8 @@
             // 
             // pnlInspection
             // 
+            this.pnlInspection.Controls.Add(this.label16);
+            this.pnlInspection.Controls.Add(this.label15);
             this.pnlInspection.Controls.Add(this.txtLabelQty);
             this.pnlInspection.Controls.Add(this.label11);
             this.pnlInspection.Controls.Add(this.label1);
@@ -552,6 +557,26 @@
             this.pnlInspection.Size = new System.Drawing.Size(898, 160);
             this.pnlInspection.TabIndex = 2;
             this.pnlInspection.Visible = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label16.Location = new System.Drawing.Point(56, 35);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(42, 17);
+            this.label16.TabIndex = 28;
+            this.label16.Text = "Enter";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label15.Location = new System.Drawing.Point(56, 125);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 17);
+            this.label15.TabIndex = 27;
+            this.label15.Text = "Enter";
             // 
             // txtLabelQty
             // 
@@ -670,6 +695,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.lbUserName);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.txtUserCD);
@@ -680,11 +706,21 @@
             this.panel1.Size = new System.Drawing.Size(898, 60);
             this.panel1.TabIndex = 1;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label17.Location = new System.Drawing.Point(56, 35);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(42, 17);
+            this.label17.TabIndex = 29;
+            this.label17.Text = "Enter";
+            // 
             // lbUserName
             // 
             this.lbUserName.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUserName.Location = new System.Drawing.Point(250, 20);
+            this.lbUserName.Location = new System.Drawing.Point(250, 10);
             this.lbUserName.Name = "lbUserName";
             this.lbUserName.Size = new System.Drawing.Size(200, 23);
             this.lbUserName.TabIndex = 29;
@@ -694,7 +730,7 @@
             // label12
             // 
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(10, 20);
+            this.label12.Location = new System.Drawing.Point(10, 10);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(100, 25);
@@ -705,7 +741,7 @@
             // txtUserCD
             // 
             this.txtUserCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserCD.Location = new System.Drawing.Point(120, 20);
+            this.txtUserCD.Location = new System.Drawing.Point(120, 10);
             this.txtUserCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtUserCD.Name = "txtUserCD";
             this.txtUserCD.Size = new System.Drawing.Size(120, 23);
@@ -773,7 +809,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(348, 9);
+            this.label13.Location = new System.Drawing.Point(350, 10);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(66, 17);
             this.label13.TabIndex = 10;
@@ -781,7 +817,7 @@
             // 
             // txtPrintLabelQty
             // 
-            this.txtPrintLabelQty.Location = new System.Drawing.Point(351, 30);
+            this.txtPrintLabelQty.Location = new System.Drawing.Point(350, 30);
             this.txtPrintLabelQty.Name = "txtPrintLabelQty";
             this.txtPrintLabelQty.Size = new System.Drawing.Size(100, 23);
             this.txtPrintLabelQty.TabIndex = 9;
@@ -1025,5 +1061,8 @@
         private System.Windows.Forms.TextBox txtUserCD;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtPrintLabelQty;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
     }
 }

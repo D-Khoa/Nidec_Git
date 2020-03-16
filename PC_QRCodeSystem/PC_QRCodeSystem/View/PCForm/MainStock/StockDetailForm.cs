@@ -19,7 +19,6 @@ namespace PC_QRCodeSystem.View
         private pts_item_type typeData { get; set; }
         private pts_supplier supplierData { get; set; }
         private List<pts_stock_log> listStockLog { get; set; }
-        private ErrorProvider errprovider = new ErrorProvider();
         private string[] barcode;
         private bool isEditData;
         #endregion
@@ -57,79 +56,81 @@ namespace PC_QRCodeSystem.View
         {
             if (e.KeyCode == Keys.Enter)
             {
-                barcode = txtItemCD.Text.Split(';');
-                //GET ITEM CODE
-                txtItemCD.Text = barcode[0];
-                //GET SUPPLIER CODE
-                if (barcode.Length > 6)
-                    txtSupplierCD.Text = barcode[6];
-                //GET INVOICE
-                txtInvoice.Text = barcode[3];
-                //GET DATE
-                dtpFromDate.Value = DateTime.Parse(barcode[4]);
-                dtpToDate.Value = DateTime.Parse(barcode[4]);
-                //GET ORDER NO
-                //txtOrderNo.Text = barcode[7];
+                try
+                {
+                    itemData = itemData.GetItem(txtItemCD.Text);
+                    lbItemName.Text = itemData.item_name;
+                    lbItemName.BackColor = Color.Lime;
+                }
+                catch
+                {
+                    lbItemName.Text = "Wrong Item Code";
+                    lbItemName.BackColor = Color.FromKnownColor(KnownColor.Yellow);
+                }
             }
         }
 
         private void txtItemCD_TextChanged(object sender, EventArgs e)
         {
-            errprovider.SetError(txtItemCD, null);
-            txtItemCD.BackColor = Color.White;
             if (string.IsNullOrEmpty(txtItemCD.Text))
-                return;
-            try
             {
-                itemData = itemData.GetItem(txtItemCD.Text);
-                lbItemName.Text = itemData.item_name;
-                lbItemName.BackColor = Color.Lime;
-            }
-            catch
-            {
-                errprovider.SetError(txtItemCD, "Wrong item code!");
-                txtItemCD.BackColor = Color.Yellow;
                 lbItemName.Text = "Item Name";
                 lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
         }
 
+        private void txtSupplierCD_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    lbSupplierName.Text = supplierData.GetSupplier(new pts_supplier
+                    {
+                        supplier_id = 0,
+                        supplier_cd = txtSupplierCD.Text
+                    }).supplier_name;
+                    lbSupplierName.BackColor = Color.Lime;
+                }
+                catch
+                {
+                    lbSupplierName.Text = "Wrong Supplier Code";
+                    lbSupplierName.BackColor = Color.FromKnownColor(KnownColor.Yellow);
+                }
+            }
+        }
+
         private void txtSupplierCD_TextChanged(object sender, EventArgs e)
         {
-            txtSupplierCD.BackColor = Color.White;
             if (string.IsNullOrEmpty(txtSupplierCD.Text))
-                return;
-            try
             {
-                lbSupplierName.Text = supplierData.GetSupplier(new pts_supplier
-                {
-                    supplier_id = 0,
-                    supplier_cd = txtSupplierCD.Text
-                }).supplier_name;
-                lbSupplierName.BackColor = Color.Lime;
-            }
-            catch
-            {
-                txtSupplierCD.BackColor = Color.Yellow;
                 lbSupplierName.Text = "Supplier Name";
                 lbSupplierName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
         }
 
+        private void txtInCharge_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    userData = userData.GetUser(txtInCharge.Text);
+                    lbInchagre.Text = userData.user_name;
+                    lbInchagre.BackColor = Color.Lime;
+                }
+                catch
+                {
+                    lbInchagre.Text = "Wrong User Code";
+                    lbInchagre.BackColor = Color.FromKnownColor(KnownColor.Yellow);
+                }
+            }
+        }
+
         private void txtInCharge_TextChanged(object sender, EventArgs e)
         {
-            txtInCharge.BackColor = Color.White;
             if (string.IsNullOrEmpty(txtInCharge.Text))
-                return;
-            try
             {
-                userData = userData.GetUser(txtInCharge.Text);
-                lbInchagre.Text = userData.user_name;
-                lbInchagre.BackColor = Color.Lime;
-            }
-            catch
-            {
-                txtInCharge.BackColor = Color.Yellow;
                 lbInchagre.Text = "User Incharge";
                 lbInchagre.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
@@ -196,9 +197,40 @@ namespace PC_QRCodeSystem.View
             }
         }
 
+        private void btnLogs_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tc_MainStockDetail.SelectedTab = tab_LogDetail;
+                //Search all logs
+                stockLog.Search(new pts_stock_log
+                {
+                    log_action = string.Empty,
+                    log_user_cd = string.Empty,
+                    stock_field = string.Empty,
+                }, DateTime.Now, DateTime.Now, false);
+                dgvLogDetail.DataSource = stockLog.listStockLog;
+                for (int i = 0; i < dgvLogDetail.Rows.Count; i++)
+                {
+                    dgvLogDetail.Rows[i].HeaderCell.Value = (i + 1).ToString();
+                }
+                if (dgvLogDetail.Rows.Count > 0)
+                    tsStockDetailRows.Text = dgvLogDetail.Rows.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+        }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearFields();
+        }
+
+        private void btnLogsBack_Click(object sender, EventArgs e)
+        {
+            tc_MainStockDetail.SelectedTab = tab_StockDetail;
         }
         #endregion
 
@@ -431,7 +463,7 @@ namespace PC_QRCodeSystem.View
                     CustomMessageBox.Notice("No change has been detected!");
                     return;
                 }
-                    n = stockLog.AddMultiLog(listStockLog);
+                n = stockLog.AddMultiLog(listStockLog);
                 //Update stock item
                 stockData.UpdateItem(new pts_stock
                 {
@@ -525,71 +557,6 @@ namespace PC_QRCodeSystem.View
         {
             for (int i = 0; i < dgvStockDetail.Rows.Count; i++)
                 dgvStockDetail.Rows[i].HeaderCell.Value = (i + 1).ToString();
-        }
-
-        private void smenuStockDetail_Click(object sender, EventArgs e)
-        {
-            tc_MainStockDetail.SelectedTab = tab_StockDetail;
-        }
-
-        private void smenuLogDetail_Click(object sender, EventArgs e)
-        {
-            tc_MainStockDetail.SelectedTab = tab_LogDetail;
-            //Search all logs
-            stockLog.Search(new pts_stock_log
-            {
-                log_action = string.Empty,
-                log_user_cd = string.Empty,
-                stock_field = string.Empty,
-            }, DateTime.Now, DateTime.Now, false);
-            dgvLogDetail.DataSource = stockLog.listStockLog;
-            for (int i = 0; i < dgvLogDetail.Rows.Count; i++)
-            {
-                dgvLogDetail.Rows[i].HeaderCell.Value = (i + 1).ToString();
-            }
-            if (dgvLogDetail.Rows.Count > 0)
-                tsStockDetailRows.Text = dgvLogDetail.Rows.Count.ToString();
-        }
-        #endregion
-
-        #region PRINT
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            PrintDialog pDL = new PrintDialog();
-            PrintDocument pDOC = new PrintDocument();
-            pDOC.DocumentName = "Print Doc";
-            pDL.Document = pDOC;
-            pDL.AllowSelection = true;
-            pDL.AllowSomePages = true;
-            if (pDL.ShowDialog() == DialogResult.OK)
-            {
-                pDOC.Print();
-            }
-        }
-
-        PrintClass pcla = new PrintClass(400, 600, 10, 10, 10, 10);
-
-        private void btnPrintPreview_Click(object sender, EventArgs e)
-        {
-            PrintDocument pDOC = new PrintDocument();
-            pDOC.DocumentName = "Print Doc";
-            pDOC.PrintPage += PDOC_PrintPage;
-            PrintPreviewDialog ppDL = new PrintPreviewDialog();
-            ppDL.Document = pDOC;
-            ppDL.ShowDialog();
-        }
-
-        private void PDOC_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            int temp = 10;
-            Bitmap page = new Bitmap(dgvStockDetail.Width, dgvStockDetail.Height);
-            for (int c = 0; c < dgvStockDetail.Columns.Count; c++)
-            {
-                e.Graphics.DrawRectangle(new Pen(Color.Black), new Rectangle(temp, 50, dgvStockDetail.Columns[c].Width, 100));
-                e.Graphics.DrawString(dgvStockDetail.Columns[c].HeaderText, dgvStockDetail.Columns[c].InheritedStyle.Font, new SolidBrush(Color.Black), temp + 5, 90);
-                temp += dgvStockDetail.Columns[c].Width;
-            }
-            e.Graphics.DrawImage(page, 0, 0);
         }
         #endregion
     }

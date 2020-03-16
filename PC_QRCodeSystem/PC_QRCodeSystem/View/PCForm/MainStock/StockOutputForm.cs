@@ -857,7 +857,11 @@ namespace PC_QRCodeSystem.View
                     delivery_date = dtpStockOutDate.Value,
                     comment = txtComment.Text
                 };
-                try { planData.Search(planData); }
+                try
+                {
+                    planData.Search(planData);
+                    if (planData.listPlan.Count <= 0) planData.Add(planData);
+                }
                 catch { planData.Add(planData); }
                 listPlan.Add(planData);
                 listOut[0].ExportCSV(listOut);

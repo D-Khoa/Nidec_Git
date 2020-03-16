@@ -36,8 +36,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnPrintPreview = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
@@ -72,12 +70,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.tsMenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.smenuStockDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.smenuLogDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsStockDetailRows = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnLogs = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnLogsBack = new System.Windows.Forms.Button();
             this.tc_MainStockDetail.SuspendLayout();
             this.tab_StockDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockDetail)).BeginInit();
@@ -87,6 +85,7 @@
             this.tab_LogDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogDetail)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tc_MainStockDetail
@@ -142,7 +141,7 @@
             this.dgvStockDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvStockDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvStockDetail.Size = new System.Drawing.Size(818, 98);
-            this.dgvStockDetail.TabIndex = 3;
+            this.dgvStockDetail.TabIndex = 4;
             this.dgvStockDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockDetail_CellClick);
             this.dgvStockDetail.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvStockDetail_DataBindingComplete);
             // 
@@ -159,14 +158,13 @@
             this.dgvItemInfo.ReadOnly = true;
             this.dgvItemInfo.RowHeadersVisible = false;
             this.dgvItemInfo.Size = new System.Drawing.Size(818, 70);
-            this.dgvItemInfo.TabIndex = 2;
+            this.dgvItemInfo.TabIndex = 3;
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnLogs);
             this.panel5.Controls.Add(this.btnUpdate);
             this.panel5.Controls.Add(this.btnDelete);
-            this.panel5.Controls.Add(this.btnPrintPreview);
-            this.panel5.Controls.Add(this.btnPrint);
             this.panel5.Controls.Add(this.btnClear);
             this.panel5.Controls.Add(this.btnSearch);
             this.panel5.Controls.Add(this.btnExport);
@@ -175,12 +173,12 @@
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(818, 60);
-            this.panel5.TabIndex = 1;
+            this.panel5.TabIndex = 2;
             // 
             // btnUpdate
             // 
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(140, 5);
+            this.btnUpdate.Location = new System.Drawing.Point(162, 5);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 50);
@@ -192,7 +190,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(250, 5);
+            this.btnDelete.Location = new System.Drawing.Point(294, 5);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 50);
@@ -201,30 +199,6 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnPrintPreview
-            // 
-            this.btnPrintPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintPreview.Location = new System.Drawing.Point(580, 5);
-            this.btnPrintPreview.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrintPreview.Name = "btnPrintPreview";
-            this.btnPrintPreview.Size = new System.Drawing.Size(100, 50);
-            this.btnPrintPreview.TabIndex = 21;
-            this.btnPrintPreview.Text = "Print Preview";
-            this.btnPrintPreview.UseVisualStyleBackColor = true;
-            this.btnPrintPreview.Click += new System.EventHandler(this.btnPrintPreview_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(470, 5);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(100, 50);
-            this.btnPrint.TabIndex = 20;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -232,7 +206,7 @@
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(100, 50);
-            this.btnClear.TabIndex = 22;
+            this.btnClear.TabIndex = 21;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -252,7 +226,7 @@
             // btnExport
             // 
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.Location = new System.Drawing.Point(360, 5);
+            this.btnExport.Location = new System.Drawing.Point(426, 5);
             this.btnExport.Margin = new System.Windows.Forms.Padding(4);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(100, 50);
@@ -293,33 +267,33 @@
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(818, 200);
-            this.panel4.TabIndex = 0;
+            this.panel4.TabIndex = 1;
             // 
             // txtPackingQty
             // 
-            this.txtPackingQty.Location = new System.Drawing.Point(370, 160);
+            this.txtPackingQty.Location = new System.Drawing.Point(400, 160);
             this.txtPackingQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtPackingQty.Name = "txtPackingQty";
-            this.txtPackingQty.Size = new System.Drawing.Size(150, 22);
+            this.txtPackingQty.Size = new System.Drawing.Size(120, 22);
             this.txtPackingQty.TabIndex = 12;
             // 
             // label16
             // 
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(260, 160);
+            this.label16.Location = new System.Drawing.Point(280, 160);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(100, 25);
             this.label16.TabIndex = 45;
             this.label16.Text = "Packing Q\'ty";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtStockInQty
             // 
             this.txtStockInQty.Location = new System.Drawing.Point(120, 160);
             this.txtStockInQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtStockInQty.Name = "txtStockInQty";
-            this.txtStockInQty.Size = new System.Drawing.Size(120, 22);
+            this.txtStockInQty.Size = new System.Drawing.Size(150, 22);
             this.txtStockInQty.TabIndex = 10;
             // 
             // label15
@@ -350,7 +324,7 @@
             this.label14.Size = new System.Drawing.Size(80, 25);
             this.label14.TabIndex = 41;
             this.label14.Text = "Packing";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label13
             // 
@@ -384,7 +358,7 @@
             this.label11.Size = new System.Drawing.Size(80, 25);
             this.label11.TabIndex = 38;
             this.label11.Text = "Item Type";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtSupplierCD
             // 
@@ -394,6 +368,7 @@
             this.txtSupplierCD.Size = new System.Drawing.Size(150, 22);
             this.txtSupplierCD.TabIndex = 6;
             this.txtSupplierCD.TextChanged += new System.EventHandler(this.txtSupplierCD_TextChanged);
+            this.txtSupplierCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSupplierCD_KeyDown);
             // 
             // txtOrderNo
             // 
@@ -475,6 +450,7 @@
             this.txtInCharge.Size = new System.Drawing.Size(150, 22);
             this.txtInCharge.TabIndex = 7;
             this.txtInCharge.TextChanged += new System.EventHandler(this.txtInCharge_TextChanged);
+            this.txtInCharge.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtInCharge_KeyDown);
             // 
             // txtItemCD
             // 
@@ -495,6 +471,7 @@
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(120, 22);
             this.dtpToDate.TabIndex = 15;
+            this.dtpToDate.Value = new System.DateTime(2020, 3, 16, 0, 0, 0, 0);
             // 
             // label10
             // 
@@ -516,6 +493,7 @@
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(120, 22);
             this.dtpFromDate.TabIndex = 14;
+            this.dtpFromDate.Value = new System.DateTime(2020, 3, 16, 0, 0, 0, 0);
             // 
             // label9
             // 
@@ -554,6 +532,7 @@
             // tab_LogDetail
             // 
             this.tab_LogDetail.Controls.Add(this.dgvLogDetail);
+            this.tab_LogDetail.Controls.Add(this.panel1);
             this.tab_LogDetail.Location = new System.Drawing.Point(4, 28);
             this.tab_LogDetail.Margin = new System.Windows.Forms.Padding(4);
             this.tab_LogDetail.Name = "tab_LogDetail";
@@ -569,11 +548,11 @@
             this.dgvLogDetail.AllowUserToDeleteRows = false;
             this.dgvLogDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLogDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLogDetail.Location = new System.Drawing.Point(4, 4);
+            this.dgvLogDetail.Location = new System.Drawing.Point(4, 64);
             this.dgvLogDetail.Name = "dgvLogDetail";
             this.dgvLogDetail.ReadOnly = true;
             this.dgvLogDetail.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvLogDetail.Size = new System.Drawing.Size(818, 428);
+            this.dgvLogDetail.Size = new System.Drawing.Size(818, 368);
             this.dgvLogDetail.TabIndex = 0;
             // 
             // label5
@@ -600,7 +579,6 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsMenu,
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.tsStockDetailRows});
@@ -610,33 +588,10 @@
             this.statusStrip1.TabIndex = 42;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // tsMenu
-            // 
-            this.tsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.smenuStockDetail,
-            this.smenuLogDetail});
-            this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Size = new System.Drawing.Size(51, 22);
-            this.tsMenu.Text = "Menu";
-            // 
-            // smenuStockDetail
-            // 
-            this.smenuStockDetail.Name = "smenuStockDetail";
-            this.smenuStockDetail.Size = new System.Drawing.Size(136, 22);
-            this.smenuStockDetail.Text = "Stock Detail";
-            this.smenuStockDetail.Click += new System.EventHandler(this.smenuStockDetail_Click);
-            // 
-            // smenuLogDetail
-            // 
-            this.smenuLogDetail.Name = "smenuLogDetail";
-            this.smenuLogDetail.Size = new System.Drawing.Size(136, 22);
-            this.smenuLogDetail.Text = "Logs Detail";
-            this.smenuLogDetail.Click += new System.EventHandler(this.smenuLogDetail_Click);
-            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(687, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(738, 19);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -651,6 +606,40 @@
             this.tsStockDetailRows.Name = "tsStockDetailRows";
             this.tsStockDetailRows.Size = new System.Drawing.Size(36, 19);
             this.tsStockDetailRows.Text = "None";
+            // 
+            // btnLogs
+            // 
+            this.btnLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogs.Location = new System.Drawing.Point(558, 5);
+            this.btnLogs.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLogs.Name = "btnLogs";
+            this.btnLogs.Size = new System.Drawing.Size(100, 50);
+            this.btnLogs.TabIndex = 20;
+            this.btnLogs.Text = "Logs";
+            this.btnLogs.UseVisualStyleBackColor = true;
+            this.btnLogs.Click += new System.EventHandler(this.btnLogs_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnLogsBack);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(818, 60);
+            this.panel1.TabIndex = 2;
+            // 
+            // btnLogsBack
+            // 
+            this.btnLogsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogsBack.Location = new System.Drawing.Point(690, 5);
+            this.btnLogsBack.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLogsBack.Name = "btnLogsBack";
+            this.btnLogsBack.Size = new System.Drawing.Size(100, 50);
+            this.btnLogsBack.TabIndex = 22;
+            this.btnLogsBack.Text = "Back";
+            this.btnLogsBack.UseVisualStyleBackColor = true;
+            this.btnLogsBack.Click += new System.EventHandler(this.btnLogsBack_Click);
             // 
             // StockDetailForm
             // 
@@ -683,6 +672,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogDetail)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -718,8 +708,6 @@
         private System.Windows.Forms.TextBox txtSupplierCD;
         private System.Windows.Forms.DataGridView dgvItemInfo;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Button btnPrintPreview;
         private System.Windows.Forms.Label lbItemTypeName;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnUpdate;
@@ -736,8 +724,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tsStockDetailRows;
         private System.Windows.Forms.DataGridView dgvLogDetail;
-        private System.Windows.Forms.ToolStripDropDownButton tsMenu;
-        private System.Windows.Forms.ToolStripMenuItem smenuStockDetail;
-        private System.Windows.Forms.ToolStripMenuItem smenuLogDetail;
+        private System.Windows.Forms.Button btnLogs;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnLogsBack;
     }
 }
