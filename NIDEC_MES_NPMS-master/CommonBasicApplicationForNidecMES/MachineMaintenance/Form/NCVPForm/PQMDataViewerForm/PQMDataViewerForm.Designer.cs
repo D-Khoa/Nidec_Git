@@ -49,9 +49,6 @@
             this.groupBoxCommon1 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
             this.trInspect = new Com.Nidec.Mes.Framework.TreeViewCommon();
             this.panelCommon1 = new Com.Nidec.Mes.Framework.PanelCommon();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rbtnJudge = new System.Windows.Forms.RadioButton();
-            this.rbtnData = new System.Windows.Forms.RadioButton();
             this.btnBySerno = new System.Windows.Forms.RadioButton();
             this.btnByLot = new System.Windows.Forms.RadioButton();
             this.btnClear = new Com.Nidec.Mes.Framework.ButtonCommon();
@@ -73,7 +70,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvdt)).BeginInit();
             this.groupBoxCommon1.SuspendLayout();
             this.panelCommon1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.groupBoxCommon2.SuspendLayout();
             this.groupBoxCommon3.SuspendLayout();
             this.groupBoxCommon4.SuspendLayout();
@@ -231,7 +227,6 @@
             this.panelCommon1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCommon1.ControlId = null;
-            this.panelCommon1.Controls.Add(this.panel1);
             this.panelCommon1.Controls.Add(this.btnBySerno);
             this.panelCommon1.Controls.Add(this.btnByLot);
             this.panelCommon1.Controls.Add(this.btnClear);
@@ -243,38 +238,6 @@
             this.panelCommon1.Name = "panelCommon1";
             this.panelCommon1.Size = new System.Drawing.Size(450, 191);
             this.panelCommon1.TabIndex = 25;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.rbtnJudge);
-            this.panel1.Controls.Add(this.rbtnData);
-            this.panel1.Location = new System.Drawing.Point(309, 75);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(138, 53);
-            this.panel1.TabIndex = 38;
-            // 
-            // rbtnJudge
-            // 
-            this.rbtnJudge.AutoSize = true;
-            this.rbtnJudge.Checked = true;
-            this.rbtnJudge.Location = new System.Drawing.Point(3, 28);
-            this.rbtnJudge.Name = "rbtnJudge";
-            this.rbtnJudge.Size = new System.Drawing.Size(81, 19);
-            this.rbtnJudge.TabIndex = 38;
-            this.rbtnJudge.TabStop = true;
-            this.rbtnJudge.Text = "Get Judge";
-            this.rbtnJudge.UseVisualStyleBackColor = true;
-            // 
-            // rbtnData
-            // 
-            this.rbtnData.AutoSize = true;
-            this.rbtnData.Location = new System.Drawing.Point(3, 3);
-            this.rbtnData.Name = "rbtnData";
-            this.rbtnData.Size = new System.Drawing.Size(73, 19);
-            this.rbtnData.TabIndex = 37;
-            this.rbtnData.Text = "Get Data";
-            this.rbtnData.UseVisualStyleBackColor = true;
             // 
             // btnBySerno
             // 
@@ -323,7 +286,7 @@
             this.txtBarcode.Location = new System.Drawing.Point(3, 75);
             this.txtBarcode.Multiline = true;
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(300, 110);
+            this.txtBarcode.Size = new System.Drawing.Size(444, 110);
             this.txtBarcode.TabIndex = 2;
             // 
             // labelCommon1
@@ -516,8 +479,6 @@
             this.groupBoxCommon1.ResumeLayout(false);
             this.panelCommon1.ResumeLayout(false);
             this.panelCommon1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.groupBoxCommon2.ResumeLayout(false);
             this.groupBoxCommon3.ResumeLayout(false);
             this.groupBoxCommon4.ResumeLayout(false);
@@ -561,9 +522,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.RadioButton btnBySerno;
         private System.Windows.Forms.RadioButton btnByLot;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton rbtnJudge;
-        private System.Windows.Forms.RadioButton rbtnData;
     }
 }
 

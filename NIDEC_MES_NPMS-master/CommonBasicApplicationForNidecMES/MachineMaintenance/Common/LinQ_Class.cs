@@ -5,13 +5,14 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common
 {
     public static class LinQ_Class
     {
-        public static DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
+        public static DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue, DataColumn pivotValue1)
         {
             // find primary key columns 
             //(i.e. everything but pivot column and pivot value)
             DataTable temp = dt.Copy();
             temp.Columns.Remove(pivotColumn.ColumnName);
             temp.Columns.Remove(pivotValue.ColumnName);
+            temp.Columns.Remove(pivotValue1.ColumnName);
             string[] pkColumnNames = temp.Columns.Cast<DataColumn>()
                 .Select(c => c.ColumnName)
                 .ToArray();
@@ -22,7 +23,11 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common
             dt.AsEnumerable()
                 .Select(r => r[pivotColumn.ColumnName].ToString())
                 .Distinct().ToList()
-                .ForEach(c => result.Columns.Add(c, pivotColumn.DataType));
+                .ForEach(c =>
+                {
+                    result.Columns.Add(c, pivotColumn.DataType);
+                    result.Columns.Add(c + "judge", pivotColumn.DataType);
+                });
 
             // load it
             foreach (DataRow row in dt.Rows)
@@ -35,6 +40,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common
                 // the aggregate used here is LATEST 
                 // adjust the next line if you want (SUM, MAX, etc...)
                 aggRow[row[pivotColumn.ColumnName].ToString()] = row[pivotValue.ColumnName];
+                aggRow[row[pivotColumn.ColumnName].ToString() + "judge"] = row[pivotValue1.ColumnName];
             }
 
             return result;

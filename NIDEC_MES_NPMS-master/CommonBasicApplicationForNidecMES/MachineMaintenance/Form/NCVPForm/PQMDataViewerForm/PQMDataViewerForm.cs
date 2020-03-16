@@ -234,18 +234,21 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 Vo.InspectDataTable = inspectable.InspectDataTable;
                 Vo.SernoDataTable = sernotable.SernoDataTable;
                 DataTable pivot = new DataTable();
-                if (rbtnData.Checked)
-                {
-                    Vo.InspectDataTable.Columns.Remove("judge");
-                    pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
-                        , Vo.InspectDataTable.Columns["inspectdata"]);
-                }
-                if (rbtnJudge.Checked)
-                {
-                    Vo.InspectDataTable.Columns.Remove("inspectdata");
-                    pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
-                            , Vo.InspectDataTable.Columns["judge"]);
-                }
+                pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
+                    , Vo.InspectDataTable.Columns["inspectdata"], Vo.InspectDataTable.Columns["judge"]);
+
+                //if (rbtnData.Checked)
+                //{
+                //    Vo.InspectDataTable.Columns.Remove("judge");
+                //    pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
+                //        , Vo.InspectDataTable.Columns["inspectdata"]);
+                //}
+                //if (rbtnJudge.Checked)
+                //{
+                //    Vo.InspectDataTable.Columns.Remove("inspectdata");
+                //    pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
+                //            , Vo.InspectDataTable.Columns["judge"]);
+                //}
                 Vo.JoinedTable = LinQ_Class.Joined(Vo.SernoDataTable, pivot);
                 pivot.Clear();
                 //Vo.ThreadComplete = true;
