@@ -235,17 +235,23 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 Vo.SernoDataTable = sernotable.SernoDataTable;
                 DataTable pivot = new DataTable();
                 if (rbtnData.Checked)
+                {
+                    Vo.InspectDataTable.Columns.Remove("judge");
                     pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
                         , Vo.InspectDataTable.Columns["inspectdata"]);
+                }
                 if (rbtnJudge.Checked)
+                {
+                    Vo.InspectDataTable.Columns.Remove("inspectdata");
                     pivot = LinQ_Class.Pivot(Vo.InspectDataTable, Vo.InspectDataTable.Columns["inspect"]
                             , Vo.InspectDataTable.Columns["judge"]);
+                }
                 Vo.JoinedTable = LinQ_Class.Joined(Vo.SernoDataTable, pivot);
                 pivot.Clear();
                 //Vo.ThreadComplete = true;
                 //GetTable.Abort();
                 return Vo.JoinedTable;
-            }
+            });
         }
         #endregion
 
@@ -253,7 +259,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
         //****************************************************************************************************************//
         //                                            SEARCH DATA                                                         //
         //****************************************************************************************************************//
-        private void btnSearch_Click(object sender, EventArgs e)
+        private async void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
@@ -261,8 +267,10 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 timer1.Enabled = true;
                 //CREATE THREAD TO RUN IN BACKGROUND
                 //GetTable = new Thread(GetDataToTable);
-                GetTable.Start();
-                GetTable.IsBackground = true;
+                //GetTable.Start();
+                //GetTable.IsBackground = true;
+                dgvdt.DataSource = await GetDataToTable();
+                timer1.Enabled = false;
                 tsProcessing.Text = "processing...";
             }
             catch (Exception ex)
@@ -276,13 +284,13 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
             int c = Vo.Timer_Counter;
             Vo.Timer_Counter++;
             tsTime.Text = (c / 100).ToString() + "," + ((c % 100) / 10).ToString() + " s";
-            if (Vo.ThreadComplete)
-            {
-                Vo.ThreadComplete = false;
-                dgvdt.DataSource = Vo.JoinedTable;
-                tsProcessing.Text = dgvdt.Rows.Count.ToString() + " Rows";
-                timer1.Enabled = false;
-            }
+            //if (Vo.ThreadComplete)
+            //{
+            //    Vo.ThreadComplete = false;
+            //    dgvdt.DataSource = Vo.JoinedTable;
+            //    tsProcessing.Text = dgvdt.Rows.Count.ToString() + " Rows";
+            //    timer1.Enabled = false;
+            //}
         }
         #endregion
 
@@ -294,13 +302,25 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
         {
             try
             {
-                RenewData();
-                timer2.Enabled = true;
-                //CREATE THREAD TO RUN IN BACKGROUND
-                GetTable = new Thread(GetDataToTable);
-                GetTable.Start();
-                GetTable.IsBackground = true;
-                tsProcessing.Text = "processing...";
+                //RenewData();
+                ////timer2.Enabled = true;
+                ////CREATE THREAD TO RUN IN BACKGROUND
+                ////GetTable = new Thread(GetDataToTable);
+                ////GetTable.Start();
+                ////GetTable.IsBackground = true;
+                ////dgvdt.DataSource = await GetDataToTable();
+                //timer2.Enabled = false;
+                //tsProcessing.Text = "processing...";
+                sfSaveCSV = new SaveFileDialog();
+                sfSaveCSV.RestoreDirectory = true;
+                sfSaveCSV.Title = "Save file...";
+                sfSaveCSV.Filter = "csv file(*.csv)|*.csv|text file(*.txt)|*.txt|All file(*.*)|*.*";
+                if (sfSaveCSV.ShowDialog() == DialogResult.OK)
+                {
+                    Vo.SavePath = sfSaveCSV.FileName;
+                    ((DataTable)dgvdt.DataSource).ToCSV(Vo.SavePath);
+                }
+
             }
             catch (Exception ex)
             {
@@ -313,21 +333,21 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
             int c = Vo.Timer_Counter;
             Vo.Timer_Counter++;
             tsTime.Text = (c / 100).ToString() + "," + ((c % 100) / 10).ToString() + " s";
-            if (Vo.ThreadComplete)
-            {
-                Vo.ThreadComplete = false;
-                tsProcessing.Text = Vo.JoinedTable.Rows.Count + " Rows";
-                sfSaveCSV = new SaveFileDialog();
-                sfSaveCSV.RestoreDirectory = true;
-                sfSaveCSV.Title = "Save file...";
-                sfSaveCSV.Filter = "csv file(*.csv)|*.csv|text file(*.txt)|*.txt|All file(*.*)|*.*";
-                if (sfSaveCSV.ShowDialog() == DialogResult.OK)
-                {
-                    Vo.SavePath = sfSaveCSV.FileName;
-                    Vo.JoinedTable.ToCSV(Vo.SavePath);
-                }
-                timer2.Enabled = false;
-            }
+            //if (Vo.ThreadComplete)
+            //{
+            //    Vo.ThreadComplete = false;
+            //    tsProcessing.Text = Vo.JoinedTable.Rows.Count + " Rows";
+            //    sfSaveCSV = new SaveFileDialog();
+            //    sfSaveCSV.RestoreDirectory = true;
+            //    sfSaveCSV.Title = "Save file...";
+            //    sfSaveCSV.Filter = "csv file(*.csv)|*.csv|text file(*.txt)|*.txt|All file(*.*)|*.*";
+            //    if (sfSaveCSV.ShowDialog() == DialogResult.OK)
+            //    {
+            //        Vo.SavePath = sfSaveCSV.FileName;
+            //        Vo.JoinedTable.ToCSV(Vo.SavePath);
+            //    }
+            //    timer2.Enabled = false;
+            //}
         }
         #endregion
 
@@ -341,12 +361,12 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 Vo.CheckLot = true;
             else
                 Vo.CheckLot = false;
-            Vo.ThreadComplete = false;
+           // Vo.ThreadComplete = false;
             Vo.Timer_Counter = 0;
             Vo.InspectList.Clear();
             Vo.JoinedTable = new DataTable();
             Vo.JoinedTable.Clear();
-            dgvdt.Refresh();
+            dgvdt.DataSource = null;
             temp.Clear();
             SelectedNode(trInspect.Nodes);
         }

@@ -9,17 +9,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PQMDataViewer.Class;
 using Npgsql;
+using System.Diagnostics;
 
 namespace PQMDataViewer
 {
     public partial class DataViewer : Form
     {
         private string SQLConnectString = @"Server=192.168.145.12;Port=5432;UserId=pqm;Password=dbuser;Database=pqmdb;";
+        DataTable PQMDataTable = new DataTable();
+        DataTable dt1 = new DataTable();
+        DataTable dt2 = new DataTable();
 
         #region FORM EVENT
         public DataViewer()
         {
             InitializeComponent();
+            rbData.Checked = true;
+            rbSerial.Checked = true;
+            cbProcess.Checked = true;
+            cbCheckDate.Checked = true;
         }
 
         private async void DataViewer_Load(object sender, EventArgs e)
@@ -29,9 +37,15 @@ namespace PQMDataViewer
         #endregion
 
         #region BUTTONS EVENT
-        private void btnSearch_Click(object sender, EventArgs e)
+        private async void btnSearch_Click(object sender, EventArgs e)
         {
-
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Restart();
+            Cursor = Cursors.WaitCursor;
+            await UpdateGrid(true);
+            Cursor = Cursors.Default;
+            stopWatch.Stop();
+            tsTime.Text = ((double)stopWatch.ElapsedMilliseconds / 1000).ToString("00.##") + " s";
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -41,12 +55,14 @@ namespace PQMDataViewer
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-
+            txtbarcode.Clear();
+            PQMDataTable.Clear();
+            dgvData.DataSource = null;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
         #endregion
 
@@ -68,7 +84,8 @@ namespace PQMDataViewer
         private async Task GetModel()
         {
             PostgresDatabase database = new PostgresDatabase();
-            string sSQL = "select distinct model from procinsplink order by model asc";
+            List<processtbl> listModel = new List<processtbl>();
+            string sSQL = "select distinct model from processtbl order by model asc";
             await database.ExecuteReaderAsync(SQLConnectString, sSQL)
                           .ContinueWith(t => this.Invoke((Action)(() => { ModelResult(t.Result); })));
         }
@@ -97,7 +114,7 @@ namespace PQMDataViewer
             string sSQL = "select distinct inspect from procinsplink where model = @model and process = @process order by inspect asc";
             var modelpara = new NpgsqlParameter("@model", inModel);
             var processpara = new NpgsqlParameter("@process", inProcess);
-            await database.ExecuteReaderAsync(SQLConnectString, sSQL, modelpara, processpara)
+            await database.ExecuteReaderAsyncIns(SQLConnectString, sSQL, modelpara, processpara)
                           .ContinueWith(t => this.Invoke((Action)(() => { InspectResult(t.Result); })));
         }
 
@@ -144,7 +161,8 @@ namespace PQMDataViewer
         {
             if (dbResult.Success)
             {
-                clInspect.Items.AddRange(dbResult.Data.ToArray());
+                clInspect.Items.Clear();
+                clInspect.Items.AddRange(dbResult.Data.Select(x => x.GetType().GetProperty("inspect").GetValue(x)).ToArray());
             }
             else
             {
@@ -153,12 +171,14 @@ namespace PQMDataViewer
         }
         #endregion
 
-        private void UpdateGrid(bool isSearch)
+        private async Task UpdateGrid(bool isSearch)
         {
             if (isSearch)
             {
-
+                await GetDataTable();
             }
+            dgvData.DataSource = PQMDataTable;
+            tsRows.Text = dgvData.Rows.Count.ToString();
         }
 
         private string DefineTableName()
@@ -168,12 +188,13 @@ namespace PQMDataViewer
                 string table = string.Empty;
                 DateTime date = dtpFromDate.Value;
                 DateTime toDate = dtpToDate.Value;
-                while(date < toDate)
+                table = cmbModel.Text + date.ToString("yyyyMM") + ",";
+                while (int.Parse(date.ToString("yyyyMM")) < int.Parse(toDate.ToString("yyyyMM")))
                 {
                     date = date.AddMonths(1);
                     table = cmbModel.Text + date.ToString("yyyyMM") + ",";
                 }
-                table = table.Remove(table.Length - 1);
+                if (table.Contains(",")) table = table.Remove(table.Length - 1);
                 return table;
             }
             else
@@ -183,7 +204,7 @@ namespace PQMDataViewer
         private string SerialString()
         {
             string serno = string.Empty;
-            foreach(string line in txtbarcode.Lines)
+            foreach (string line in txtbarcode.Lines)
             {
                 serno += "'" + line + "',";
             }
@@ -191,29 +212,88 @@ namespace PQMDataViewer
             return serno;
         }
 
-        private async Task GetSernoTable()
+        private string InspectString()
         {
-            PostgresDatabase database = new PostgresDatabase();
-            string table = DefineTableName();
-            string sSQL = "select * from " + table +" where 1=1 ";
-            if (cbLine.Checked) sSQL += "and line ='" + cmbLine.Text + "' ";
-            if (cbProcess.Checked) sSQL += "and process ='" + cmbProcess.Text + "' ";
-            if (!string.IsNullOrEmpty(txtbarcode.Text))
+            string inspect = string.Empty;
+            if (cbInspect.Checked)
             {
-                string serno = SerialString();
-                if (rbLot.Checked) sSQL += "and lot =" + serno + " ";
-                if (rbSerial.Checked) sSQL += "and serno =" + serno + " ";
+                foreach (string item in clInspect.CheckedItems)
+                {
+                    inspect += "'" + item + "',";
+                }
+                inspect = inspect.Remove(inspect.Length - 1);
             }
-            DataSet results1 = await database.GetDatasetAsync(SQLConnectString, sSQL);
+            else
+            {
+                foreach (string item in clInspect.Items)
+                {
+                    inspect += "'" + item + "',";
+                }
+                inspect = inspect.Remove(inspect.Length - 1);
+            }
+            return inspect;
+        }
 
-            sSQL = "select * from " + table + "data where 1=1 ";
-            if (!string.IsNullOrEmpty(txtbarcode.Text))
+        private async Task GetDataTable()
+        {
+            try
             {
-                string serno = SerialString();
-                if (rbLot.Checked) sSQL += "and lot =" + serno + " ";
-                if (rbSerial.Checked) sSQL += "and serno =" + serno + " ";
+                PostgresDatabase database = new PostgresDatabase();
+                string table = DefineTableName();
+                string sSQL = "SELECT a.serno, a.lot, a.model, a.site, a.factory, a.line, a.process, a.inspectdate, a.tjudge ";
+                sSQL += "FROM " + table + " a WHERE 1=1 ";
+                //sSQL += "FROM " + table + " a LEFT JOIN " + table + "data b on a.serno = b.serno and a.inspectdate = b.inspectdate WHERE 1=1 ";
+                if (cbLine.Checked) sSQL += "and line ='" + cmbLine.Text + "' ";
+                if (cbProcess.Checked) sSQL += "and process ='" + cmbProcess.Text + "' ";
+                if (!string.IsNullOrEmpty(txtbarcode.Text))
+                {
+                    string serno = SerialString();
+                    if (rbLot.Checked) sSQL += "and lot in (" + serno + ") ";
+                    if (rbSerial.Checked) sSQL += "and serno in (" + serno + ") ";
+                }
+                if (cbCheckDate.Checked)
+                {
+                    sSQL += "and inspectdate >= '" + dtpFromDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                    sSQL += "' and inspectdate <= '" + dtpToDate.Value.ToString("yyyy-MM-dd HH:mm:ss") + "' ";
+                }
+                sSQL += "ORDER BY inspectdate ASC, serno ASC";
+                DataSet results1 = await database.GetDatasetAsync(SQLConnectString, sSQL);
+                dt1 = results1.Tables[0];
+
+                if (rbData.Checked)
+                    sSQL = "SELECT b.serno, b.inspectdate, b.inspect,  b.inspectdata ";
+                if (rbJudge.Checked)
+                    sSQL = "SELECT b.serno, b.inspectdate, b.inspect,  b.judge ";
+                sSQL += "FROM " + table + "data b WHERE 1=1 ";
+                if (!string.IsNullOrEmpty(txtbarcode.Text))
+                {
+                    string serno = SerialString();
+                    if (rbLot.Checked) sSQL += "and lot in (" + serno + ") ";
+                    if (rbSerial.Checked) sSQL += "and serno in (" + serno + ") ";
+                }
+                if (cbInspect.Checked)
+                {
+                    string inspect = InspectString();
+                    sSQL += "and inspect in (" + inspect + ") ";
+                }
+                if (cbCheckDate.Checked)
+                {
+                    sSQL += "and inspectdate >= '" + dtpFromDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                    sSQL += "' and inspectdate <= '" + dtpToDate.Value.ToString("yyyy-MM-dd HH:mm:ss") + "' ";
+                }
+                sSQL += "ORDER BY inspectdate ASC, serno ASC";
+
+                DataSet results2 = await database.GetDatasetAsync(SQLConnectString, sSQL);
+                dt2 = results2.Tables[0];
+                DataTable pivot = new DataTable();
+                pivot = LinQ_Class.Pivot(dt2, dt2.Columns["inspect"], dt2.Columns[3]);
+                PQMDataTable = LinQ_Class.Joined(dt1, pivot);
+                MessageBox.Show("Completed!");
             }
-            DataSet results2 = await database.GetDatasetAsync(SQLConnectString, sSQL);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
     }

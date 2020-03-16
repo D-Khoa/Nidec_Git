@@ -74,7 +74,6 @@
             this.pnlSetButtons = new System.Windows.Forms.Panel();
             this.btnSetBack = new System.Windows.Forms.Button();
             this.btnSetClear = new System.Windows.Forms.Button();
-            this.btnSetInspection = new System.Windows.Forms.Button();
             this.btnSetReg = new System.Windows.Forms.Button();
             this.pnlSetOptions = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -105,6 +104,7 @@
             this.btnInsClear = new System.Windows.Forms.Button();
             this.btnPrintSelect = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
+            this.btnFinalRegister = new System.Windows.Forms.Button();
             this.tc_StockOut.SuspendLayout();
             this.tab_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMainStockOut)).BeginInit();
@@ -182,6 +182,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvMainStockOut.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvMainStockOut.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMainStockOut.Size = new System.Drawing.Size(971, 161);
             this.dgvMainStockOut.TabIndex = 4;
             this.dgvMainStockOut.DataSourceChanged += new System.EventHandler(this.dgvMainStockOut_DataSourceChanged);
@@ -241,7 +242,7 @@
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(100, 50);
             this.btnRegister.TabIndex = 15;
-            this.btnRegister.Text = "9. Register";
+            this.btnRegister.Text = "9. Create Item";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
@@ -576,7 +577,7 @@
             this.dgvSetData.AllowUserToDeleteRows = false;
             this.dgvSetData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSetData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSetData.Location = new System.Drawing.Point(4, 258);
+            this.dgvSetData.Location = new System.Drawing.Point(4, 244);
             this.dgvSetData.Margin = new System.Windows.Forms.Padding(5);
             this.dgvSetData.MultiSelect = false;
             this.dgvSetData.Name = "dgvSetData";
@@ -592,28 +593,28 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSetData.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSetData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvSetData.Size = new System.Drawing.Size(971, 218);
+            this.dgvSetData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullColumnSelect;
+            this.dgvSetData.Size = new System.Drawing.Size(971, 232);
             this.dgvSetData.TabIndex = 4;
             // 
             // pnlSetButtons
             // 
             this.pnlSetButtons.Controls.Add(this.btnSetBack);
             this.pnlSetButtons.Controls.Add(this.btnSetClear);
-            this.pnlSetButtons.Controls.Add(this.btnSetInspection);
             this.pnlSetButtons.Controls.Add(this.btnSetReg);
             this.pnlSetButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSetButtons.Location = new System.Drawing.Point(4, 184);
             this.pnlSetButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSetButtons.Name = "pnlSetButtons";
-            this.pnlSetButtons.Size = new System.Drawing.Size(971, 74);
+            this.pnlSetButtons.Size = new System.Drawing.Size(971, 60);
             this.pnlSetButtons.TabIndex = 2;
             // 
             // btnSetBack
             // 
-            this.btnSetBack.Location = new System.Drawing.Point(773, 6);
+            this.btnSetBack.Location = new System.Drawing.Point(790, 5);
             this.btnSetBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetBack.Name = "btnSetBack";
-            this.btnSetBack.Size = new System.Drawing.Size(107, 62);
+            this.btnSetBack.Size = new System.Drawing.Size(100, 50);
             this.btnSetBack.TabIndex = 8;
             this.btnSetBack.Text = "Back";
             this.btnSetBack.UseVisualStyleBackColor = true;
@@ -621,34 +622,23 @@
             // 
             // btnSetClear
             // 
-            this.btnSetClear.Location = new System.Drawing.Point(640, 6);
+            this.btnSetClear.Location = new System.Drawing.Point(670, 5);
             this.btnSetClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetClear.Name = "btnSetClear";
-            this.btnSetClear.Size = new System.Drawing.Size(107, 62);
+            this.btnSetClear.Size = new System.Drawing.Size(100, 50);
             this.btnSetClear.TabIndex = 7;
             this.btnSetClear.Text = "Clear";
             this.btnSetClear.UseVisualStyleBackColor = true;
             this.btnSetClear.Click += new System.EventHandler(this.btnSetClear_Click);
             // 
-            // btnSetInspection
-            // 
-            this.btnSetInspection.Location = new System.Drawing.Point(507, 6);
-            this.btnSetInspection.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSetInspection.Name = "btnSetInspection";
-            this.btnSetInspection.Size = new System.Drawing.Size(107, 62);
-            this.btnSetInspection.TabIndex = 6;
-            this.btnSetInspection.Text = "3. Inspection";
-            this.btnSetInspection.UseVisualStyleBackColor = true;
-            this.btnSetInspection.Click += new System.EventHandler(this.btnInspection_Click);
-            // 
             // btnSetReg
             // 
-            this.btnSetReg.Location = new System.Drawing.Point(160, 6);
+            this.btnSetReg.Location = new System.Drawing.Point(160, 5);
             this.btnSetReg.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetReg.Name = "btnSetReg";
-            this.btnSetReg.Size = new System.Drawing.Size(107, 62);
+            this.btnSetReg.Size = new System.Drawing.Size(100, 50);
             this.btnSetReg.TabIndex = 5;
-            this.btnSetReg.Text = "2. Register";
+            this.btnSetReg.Text = "2. Create Set";
             this.btnSetReg.UseVisualStyleBackColor = true;
             this.btnSetReg.Click += new System.EventHandler(this.btnSetReg_Click);
             // 
@@ -905,7 +895,7 @@
             this.dgvPrint.AllowUserToDeleteRows = false;
             this.dgvPrint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPrint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPrint.Location = new System.Drawing.Point(4, 275);
+            this.dgvPrint.Location = new System.Drawing.Point(4, 261);
             this.dgvPrint.Margin = new System.Windows.Forms.Padding(5);
             this.dgvPrint.Name = "dgvPrint";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -919,7 +909,7 @@
             this.dgvPrint.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPrint.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvPrint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrint.Size = new System.Drawing.Size(971, 201);
+            this.dgvPrint.Size = new System.Drawing.Size(971, 215);
             this.dgvPrint.TabIndex = 4;
             // 
             // dgvStockOut
@@ -928,7 +918,7 @@
             this.dgvStockOut.AllowUserToDeleteRows = false;
             this.dgvStockOut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStockOut.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgvStockOut.Location = new System.Drawing.Point(4, 152);
+            this.dgvStockOut.Location = new System.Drawing.Point(4, 138);
             this.dgvStockOut.Margin = new System.Windows.Forms.Padding(5);
             this.dgvStockOut.MultiSelect = false;
             this.dgvStockOut.Name = "dgvStockOut";
@@ -942,6 +932,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvStockOut.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvStockOut.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dgvStockOut.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStockOut.Size = new System.Drawing.Size(971, 123);
             this.dgvStockOut.TabIndex = 3;
             // 
@@ -951,7 +942,7 @@
             this.dgvProcess.AllowUserToDeleteRows = false;
             this.dgvProcess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProcess.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgvProcess.Location = new System.Drawing.Point(4, 78);
+            this.dgvProcess.Location = new System.Drawing.Point(4, 64);
             this.dgvProcess.Margin = new System.Windows.Forms.Padding(5);
             this.dgvProcess.MultiSelect = false;
             this.dgvProcess.Name = "dgvProcess";
@@ -965,11 +956,13 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvProcess.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvProcess.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dgvProcess.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProcess.Size = new System.Drawing.Size(971, 74);
             this.dgvProcess.TabIndex = 2;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnFinalRegister);
             this.panel1.Controls.Add(this.btnInsBack);
             this.panel1.Controls.Add(this.btnInsClear);
             this.panel1.Controls.Add(this.btnPrintSelect);
@@ -978,15 +971,15 @@
             this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(971, 74);
+            this.panel1.Size = new System.Drawing.Size(971, 60);
             this.panel1.TabIndex = 1;
             // 
             // btnInsBack
             // 
-            this.btnInsBack.Location = new System.Drawing.Point(773, 6);
+            this.btnInsBack.Location = new System.Drawing.Point(770, 5);
             this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsBack.Name = "btnInsBack";
-            this.btnInsBack.Size = new System.Drawing.Size(107, 62);
+            this.btnInsBack.Size = new System.Drawing.Size(100, 50);
             this.btnInsBack.TabIndex = 8;
             this.btnInsBack.Text = "Back";
             this.btnInsBack.UseVisualStyleBackColor = true;
@@ -994,10 +987,10 @@
             // 
             // btnInsClear
             // 
-            this.btnInsClear.Location = new System.Drawing.Point(640, 6);
+            this.btnInsClear.Location = new System.Drawing.Point(640, 5);
             this.btnInsClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsClear.Name = "btnInsClear";
-            this.btnInsClear.Size = new System.Drawing.Size(107, 62);
+            this.btnInsClear.Size = new System.Drawing.Size(100, 50);
             this.btnInsClear.TabIndex = 7;
             this.btnInsClear.Text = "Clear";
             this.btnInsClear.UseVisualStyleBackColor = true;
@@ -1005,10 +998,10 @@
             // 
             // btnPrintSelect
             // 
-            this.btnPrintSelect.Location = new System.Drawing.Point(173, 6);
+            this.btnPrintSelect.Location = new System.Drawing.Point(170, 5);
             this.btnPrintSelect.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintSelect.Name = "btnPrintSelect";
-            this.btnPrintSelect.Size = new System.Drawing.Size(107, 62);
+            this.btnPrintSelect.Size = new System.Drawing.Size(100, 50);
             this.btnPrintSelect.TabIndex = 6;
             this.btnPrintSelect.Text = "1b. Print Select";
             this.btnPrintSelect.UseVisualStyleBackColor = true;
@@ -1016,14 +1009,25 @@
             // 
             // btnPrintAll
             // 
-            this.btnPrintAll.Location = new System.Drawing.Point(40, 6);
+            this.btnPrintAll.Location = new System.Drawing.Point(40, 5);
             this.btnPrintAll.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintAll.Name = "btnPrintAll";
-            this.btnPrintAll.Size = new System.Drawing.Size(107, 62);
+            this.btnPrintAll.Size = new System.Drawing.Size(100, 50);
             this.btnPrintAll.TabIndex = 5;
             this.btnPrintAll.Text = "1a. Print All";
             this.btnPrintAll.UseVisualStyleBackColor = true;
             this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
+            // 
+            // btnFinalRegister
+            // 
+            this.btnFinalRegister.Location = new System.Drawing.Point(510, 5);
+            this.btnFinalRegister.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFinalRegister.Name = "btnFinalRegister";
+            this.btnFinalRegister.Size = new System.Drawing.Size(100, 50);
+            this.btnFinalRegister.TabIndex = 9;
+            this.btnFinalRegister.Text = "2. Register";
+            this.btnFinalRegister.UseVisualStyleBackColor = true;
+            this.btnFinalRegister.Click += new System.EventHandler(this.btnFinalRegister_Click);
             // 
             // StockOutputForm
             // 
@@ -1120,7 +1124,6 @@
         private System.Windows.Forms.TextBox txtSetLowItem;
         private System.Windows.Forms.Panel pnlSetButtons;
         private System.Windows.Forms.Button btnSetClear;
-        private System.Windows.Forms.Button btnSetInspection;
         private System.Windows.Forms.Button btnSetReg;
         private System.Windows.Forms.TextBox txtSetDesCode;
         private System.Windows.Forms.Label lbSetDesName;
@@ -1142,5 +1145,6 @@
         private System.Windows.Forms.Button btnPrintAll;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnFinalRegister;
     }
 }

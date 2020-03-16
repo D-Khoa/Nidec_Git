@@ -49,6 +49,9 @@
             this.groupBoxCommon1 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
             this.trInspect = new Com.Nidec.Mes.Framework.TreeViewCommon();
             this.panelCommon1 = new Com.Nidec.Mes.Framework.PanelCommon();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rbtnJudge = new System.Windows.Forms.RadioButton();
+            this.rbtnData = new System.Windows.Forms.RadioButton();
             this.btnBySerno = new System.Windows.Forms.RadioButton();
             this.btnByLot = new System.Windows.Forms.RadioButton();
             this.btnClear = new Com.Nidec.Mes.Framework.ButtonCommon();
@@ -66,17 +69,14 @@
             this.btnSearch = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.btnLoad = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.bgwGetData = new System.ComponentModel.BackgroundWorker();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rbtnJudge = new System.Windows.Forms.RadioButton();
-            this.rbtnData = new System.Windows.Forms.RadioButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvdt)).BeginInit();
             this.groupBoxCommon1.SuspendLayout();
             this.panelCommon1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.groupBoxCommon2.SuspendLayout();
             this.groupBoxCommon3.SuspendLayout();
             this.groupBoxCommon4.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -244,6 +244,38 @@
             this.panelCommon1.Size = new System.Drawing.Size(450, 191);
             this.panelCommon1.TabIndex = 25;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.rbtnJudge);
+            this.panel1.Controls.Add(this.rbtnData);
+            this.panel1.Location = new System.Drawing.Point(309, 75);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(138, 53);
+            this.panel1.TabIndex = 38;
+            // 
+            // rbtnJudge
+            // 
+            this.rbtnJudge.AutoSize = true;
+            this.rbtnJudge.Checked = true;
+            this.rbtnJudge.Location = new System.Drawing.Point(3, 28);
+            this.rbtnJudge.Name = "rbtnJudge";
+            this.rbtnJudge.Size = new System.Drawing.Size(81, 19);
+            this.rbtnJudge.TabIndex = 38;
+            this.rbtnJudge.TabStop = true;
+            this.rbtnJudge.Text = "Get Judge";
+            this.rbtnJudge.UseVisualStyleBackColor = true;
+            // 
+            // rbtnData
+            // 
+            this.rbtnData.AutoSize = true;
+            this.rbtnData.Location = new System.Drawing.Point(3, 3);
+            this.rbtnData.Name = "rbtnData";
+            this.rbtnData.Size = new System.Drawing.Size(73, 19);
+            this.rbtnData.TabIndex = 37;
+            this.rbtnData.Text = "Get Data";
+            this.rbtnData.UseVisualStyleBackColor = true;
+            // 
             // btnBySerno
             // 
             this.btnBySerno.AutoSize = true;
@@ -309,6 +341,8 @@
             // 
             this.cmbModel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbModel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbModel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbModel.ControlId = null;
             this.cmbModel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbModel.FormattingEnabled = true;
@@ -444,37 +478,6 @@
             this.btnLoad.UseVisualStyleBackColor = false;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.rbtnJudge);
-            this.panel1.Controls.Add(this.rbtnData);
-            this.panel1.Location = new System.Drawing.Point(309, 75);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(138, 53);
-            this.panel1.TabIndex = 38;
-            // 
-            // rbtnJudge
-            // 
-            this.rbtnJudge.AutoSize = true;
-            this.rbtnJudge.Checked = true;
-            this.rbtnJudge.Location = new System.Drawing.Point(3, 28);
-            this.rbtnJudge.Name = "rbtnJudge";
-            this.rbtnJudge.Size = new System.Drawing.Size(81, 19);
-            this.rbtnJudge.TabIndex = 38;
-            this.rbtnJudge.TabStop = true;
-            this.rbtnJudge.Text = "Get Judge";
-            this.rbtnJudge.UseVisualStyleBackColor = true;
-            // 
-            // rbtnData
-            // 
-            this.rbtnData.AutoSize = true;
-            this.rbtnData.Location = new System.Drawing.Point(3, 3);
-            this.rbtnData.Name = "rbtnData";
-            this.rbtnData.Size = new System.Drawing.Size(73, 19);
-            this.rbtnData.TabIndex = 37;
-            this.rbtnData.Text = "Get Data";
-            this.rbtnData.UseVisualStyleBackColor = true;
-            // 
             // PQMDataViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -513,12 +516,12 @@
             this.groupBoxCommon1.ResumeLayout(false);
             this.panelCommon1.ResumeLayout(false);
             this.panelCommon1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.groupBoxCommon2.ResumeLayout(false);
             this.groupBoxCommon3.ResumeLayout(false);
             this.groupBoxCommon4.ResumeLayout(false);
             this.groupBoxCommon4.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

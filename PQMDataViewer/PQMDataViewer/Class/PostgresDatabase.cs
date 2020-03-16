@@ -31,14 +31,14 @@ namespace PQMDataViewer.Class
                         if (parameters != null) newCommand.Parameters.AddRange(parameters);
                         newConnection.Open();
                         NpgsqlDataReader reader = newCommand.ExecuteReader();
-                        while(reader.Read())
+                        while (reader.Read())
                         {
-                            object oData = new object();
-                            foreach(var pro in oData.GetType().GetProperties())
+                            processtbl oData = new processtbl();
+                            foreach (var pro in oData.GetType().GetProperties())
                             {
-                                for(int i = 0; i < reader.FieldCount; i++)
+                                for (int i = 0; i < reader.FieldCount; i++)
                                 {
-                                    if(pro.Name == reader.GetName(i))
+                                    if (pro.Name == reader.GetName(i))
                                     {
                                         pro.SetValue(oData, reader[i]);
                                     }
@@ -55,7 +55,57 @@ namespace PQMDataViewer.Class
                     };
                     return result;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
+                {
+                    PGDatabaseResult result = new PGDatabaseResult()
+                    {
+                        Result = "Error: " + ex.Message,
+                        Success = false
+                    };
+                    return result;
+                }
+            });
+        }
+
+        public Task<PGDatabaseResult> ExecuteReaderAsyncIns(string sConnectionString, string sSQL, params NpgsqlParameter[] parameters)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    List<object> sData = new List<object>();
+                    using (var newConnection = new NpgsqlConnection(sConnectionString))
+                    using (var newCommand = new NpgsqlCommand(sSQL, newConnection))
+                    {
+                        newCommand.CommandType = CommandType.Text;
+                        if (parameters != null) newCommand.Parameters.AddRange(parameters);
+                        newConnection.Open();
+                        NpgsqlDataReader reader = newCommand.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            procinsplink oData = new procinsplink();
+                            foreach (var pro in oData.GetType().GetProperties())
+                            {
+                                for (int i = 0; i < reader.FieldCount; i++)
+                                {
+                                    if (pro.Name == reader.GetName(i))
+                                    {
+                                        pro.SetValue(oData, reader[i]);
+                                    }
+                                }
+                            }
+                            sData.Add(oData);
+                        }
+                        newConnection.Close();
+                    }
+                    PGDatabaseResult result = new PGDatabaseResult()
+                    {
+                        Data = sData,
+                        Success = true
+                    };
+                    return result;
+                }
+                catch (Exception ex)
                 {
                     PGDatabaseResult result = new PGDatabaseResult()
                     {

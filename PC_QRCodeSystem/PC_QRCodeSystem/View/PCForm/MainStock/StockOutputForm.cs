@@ -11,6 +11,7 @@ namespace PC_QRCodeSystem.View
     public partial class StockOutputForm : FormCommon
     {
         #region VARIABLE
+        bool isSet = false;
         string processCD = string.Empty;
         List<pts_plan> listPlan = new List<pts_plan>();
         ErrorProvider errorProvider = new ErrorProvider();
@@ -173,7 +174,7 @@ namespace PC_QRCodeSystem.View
             if (cmbIssue.SelectedValue.ToString() == "20")
             {
                 btnRegister.Enabled = true;
-                btnRegister.Text = "Open Set";
+                btnRegister.Text = "9. Open Set";
                 if (e.ColumnIndex == dgvMainStockOut.Columns["btnOpenSet"].Index)
                 {
                     //if (!CheckFields()) return;
@@ -183,7 +184,7 @@ namespace PC_QRCodeSystem.View
             else
             {
                 btnRegister.Enabled = true;
-                btnRegister.Text = "Register";
+                btnRegister.Text = "9. Create Item";
             }
         }
 
@@ -194,8 +195,8 @@ namespace PC_QRCodeSystem.View
                 btnRegister.Enabled = false;
                 return;
             }
-            if (cmbIssue.SelectedValue.ToString() == "20") btnRegister.Text = "Open Set";
-            else btnRegister.Text = "Register";
+            if (cmbIssue.SelectedValue.ToString() == "20") btnRegister.Text = "9. Open Set";
+            else btnRegister.Text = "9. Create Item";
             dgvMainStockOut.ClearSelection();
             btnRegister.Enabled = false;
         }
@@ -216,6 +217,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                isSet = false;
                 listOut.Clear();
                 listPlan.Clear();
                 listPrint.Clear();
@@ -232,10 +234,7 @@ namespace PC_QRCodeSystem.View
                 else
                 {
                     if (CustomMessageBox.Question("Do you want stock-out this item?") == DialogResult.No) return;
-                    RegNoSet();
-                    listOut[0].ExportCSV(listOut);
-                    listStock[0].UpdateMultiItem(listStock);
-                    listStockOut[0].AddMultiItem(listStockOut);
+                    CreateListNoSet();
                 }
             }
             catch (Exception ex)
@@ -256,6 +255,7 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region SUB EVENT
+        #region FIELDS
         /// <summary>
         /// Get data lis for combobox
         /// </summary>
@@ -320,31 +320,49 @@ namespace PC_QRCodeSystem.View
             }
             return true;
         }
+        #endregion
 
+        #region NO SET
         /// <summary>
-        /// Open set list item with select cell
+        /// Search stock item
         /// </summary>
-        /// <param name="RowIndex"></param>
-        private void OpenSet(int RowIndex)
+        /// <param name="itemNumber"></param>
+        private void SearchNoSet(string itemNumber, string invoiceText)
         {
-            if (!CheckFields()) return;
-            DataGridViewRow dr = dgvMainStockOut.Rows[RowIndex];
-            GetSetOptions(dr.Cells["order_number"].Value.ToString(), (double)dr.Cells["order_qty"].Value, (DateTime)dr.Cells["order_date"].Value);
-            SearchLowItem(txtItemCode.Text, (double)dr.Cells["order_qty"].Value, dr.Cells["order_number"].Value.ToString());
-            pts_stockout_log stockoutData = new pts_stockout_log();
-            foreach (DataGridViewRow drow in dgvSetData.Rows)
+            try
             {
-                stockoutData.SearchMultiPacking(dr.Cells["order_number"].Value.ToString(), drow.Cells["low_level_item"].Value.ToString());
-                drow.Cells["stockout_qty"].Value = stockoutData.listStockOutItem.Select(x => x.stockout_qty).Sum();
+                pts_stock stockdata = new pts_stock();
+                stockdata.SearchItem(new pts_stock { item_cd = itemNumber, invoice = invoiceText });
+                double stockQty = stockdata.listStockItems.Select(x => x.packing_qty).Sum();
+                txtWHQty.Text = stockQty.ToString();
+                dgvMainStockOut.DataSource = stockdata.listStockItems;
+                dgvMainStockOut.Columns["stock_id"].HeaderText = "ID";
+                dgvMainStockOut.Columns["packing_cd"].HeaderText = "Packing Code";
+                dgvMainStockOut.Columns["item_cd"].HeaderText = "Item Number";
+                dgvMainStockOut.Columns["supplier_cd"].HeaderText = "Supplier Code";
+                dgvMainStockOut.Columns["order_no"].HeaderText = "Order Number";
+                dgvMainStockOut.Columns["invoice"].HeaderText = "Invoice";
+                dgvMainStockOut.Columns["stockin_date"].HeaderText = "Stock-In Date";
+                dgvMainStockOut.Columns["stockin_user_cd"].HeaderText = "Incharge";
+                dgvMainStockOut.Columns["stockin_qty"].HeaderText = "Stock-In Qty";
+                dgvMainStockOut.Columns["packing_qty"].HeaderText = "Packing Qty";
+                dgvMainStockOut.Columns["registration_user_cd"].HeaderText = "Reg User";
+                dgvMainStockOut.Columns["registration_date_time"].HeaderText = "Reg Time";
+                if (dgvMainStockOut.Columns.Contains("order_no")) dgvMainStockOut.Columns.Remove("order_no");
+                if (dgvMainStockOut.Columns.Contains("registration_user_cd")) dgvMainStockOut.Columns.Remove("registration_user_cd");
+                if (dgvMainStockOut.Columns.Contains("registration_date_time")) dgvMainStockOut.Columns.Remove("registration_date_time");
+                if (dgvMainStockOut.Columns.Contains("btnOpenSet")) dgvMainStockOut.Columns.Remove("btnOpenSet");
             }
-            tc_StockOut.SelectedTab = tab_ItemSet;
-            txtSetLowItem.Focus();
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         /// <summary>
-        /// Register No Set Item
+        /// Create list no plan items
         /// </summary>
-        private void RegNoSet()
+        private void CreateListNoSet()
         {
             if (!CheckFields()) return;
             if (txtStockOutQty.Text == "0" || string.IsNullOrEmpty(txtStockOutQty.Text))
@@ -355,21 +373,7 @@ namespace PC_QRCodeSystem.View
             double deliveryQty = 0;
             double stockQty = double.Parse(txtWHQty.Text);
             double stockoutQty = double.Parse(txtStockOutQty.Text);
-            string processCD = "NP" + DateTime.Now.ToString("yyyyMMdd-HHmmss");
 
-            #region ADD NEW NO PLAN ITEM
-            pts_noplan noplanData = new pts_noplan()
-            {
-                noplan_cd = processCD,
-                destination_cd = cmbDestination.SelectedValue.ToString(),
-                item_cd = txtItemCode.Text,
-                noplan_qty = stockoutQty,
-                noplan_usercd = txtUserCode.Text,
-                noplan_date = dtpStockOutDate.Value
-            };
-            noplanData.AddItem(noplanData);
-            listNoplan.Add(noplanData);
-            #endregion
             //CALCULATOR STOCK AND STOCK OUT QTY
             pts_stock currentStock = new pts_stock();
             pts_supplier supplierData = new pts_supplier();
@@ -447,13 +451,40 @@ namespace PC_QRCodeSystem.View
                 });
                 if (stockoutQty == 0) break;
             }
-            UpdateGridProcess(0);
             UpdateGridPrint(listPrint);
             UpdateGridStockOut(listStockOut);
-            CustomMessageBox.Notice("Register process " + processCD + " successful!");
             tc_StockOut.SelectedTab = tab_Inspection;
         }
 
+        /// <summary>
+        /// Register No Set
+        /// </summary>
+        private void RegNoSet()
+        {
+            if (CustomMessageBox.Question("Do you want register this stock-out item?") == DialogResult.No) return;
+            #region ADD NEW NO PLAN ITEM
+            string processCD = "NP" + DateTime.Now.ToString("yyyyMMdd-HHmmss");
+            pts_noplan noplanData = new pts_noplan()
+            {
+                noplan_cd = processCD,
+                destination_cd = cmbDestination.SelectedValue.ToString(),
+                item_cd = txtItemCode.Text,
+                noplan_qty = double.Parse(txtStockOutQty.Text),
+                noplan_usercd = txtUserCode.Text,
+                noplan_date = dtpStockOutDate.Value
+            };
+            noplanData.AddItem(noplanData);
+            listNoplan.Add(noplanData);
+            #endregion
+            UpdateGridProcess(0);
+            listOut[0].ExportCSV(listOut);
+            listStock[0].UpdateMultiItem(listStock);
+            listStockOut[0].AddMultiItem(listStockOut);
+            CustomMessageBox.Notice("Register process " + processCD + " successful!");
+        }
+        #endregion
+
+        #region SET
         /// <summary>
         /// Search order number
         /// </summary>
@@ -491,39 +522,23 @@ namespace PC_QRCodeSystem.View
         }
 
         /// <summary>
-        /// Search stock item
+        /// Open set list item with select cell
         /// </summary>
-        /// <param name="itemNumber"></param>
-        private void SearchNoSet(string itemNumber, string invoiceText)
+        /// <param name="RowIndex"></param>
+        private void OpenSet(int RowIndex)
         {
-            try
+            if (!CheckFields()) return;
+            DataGridViewRow dr = dgvMainStockOut.Rows[RowIndex];
+            GetSetOptions(dr.Cells["order_number"].Value.ToString(), (double)dr.Cells["order_qty"].Value, (DateTime)dr.Cells["order_date"].Value);
+            SearchLowItem(txtItemCode.Text, (double)dr.Cells["order_qty"].Value, dr.Cells["order_number"].Value.ToString());
+            pts_stockout_log stockoutData = new pts_stockout_log();
+            foreach (DataGridViewRow drow in dgvSetData.Rows)
             {
-                pts_stock stockdata = new pts_stock();
-                stockdata.SearchItem(new pts_stock { item_cd = itemNumber, invoice = invoiceText });
-                double stockQty = stockdata.listStockItems.Select(x => x.packing_qty).Sum();
-                txtWHQty.Text = stockQty.ToString();
-                dgvMainStockOut.DataSource = stockdata.listStockItems;
-                dgvMainStockOut.Columns["stock_id"].HeaderText = "ID";
-                dgvMainStockOut.Columns["packing_cd"].HeaderText = "Packing Code";
-                dgvMainStockOut.Columns["item_cd"].HeaderText = "Item Number";
-                dgvMainStockOut.Columns["supplier_cd"].HeaderText = "Supplier Code";
-                dgvMainStockOut.Columns["order_no"].HeaderText = "Order Number";
-                dgvMainStockOut.Columns["invoice"].HeaderText = "Invoice";
-                dgvMainStockOut.Columns["stockin_date"].HeaderText = "Stock-In Date";
-                dgvMainStockOut.Columns["stockin_user_cd"].HeaderText = "Incharge";
-                dgvMainStockOut.Columns["stockin_qty"].HeaderText = "Stock-In Qty";
-                dgvMainStockOut.Columns["packing_qty"].HeaderText = "Packing Qty";
-                dgvMainStockOut.Columns["registration_user_cd"].HeaderText = "Reg User";
-                dgvMainStockOut.Columns["registration_date_time"].HeaderText = "Reg Time";
-                if (dgvMainStockOut.Columns.Contains("order_no")) dgvMainStockOut.Columns.Remove("order_no");
-                if (dgvMainStockOut.Columns.Contains("registration_user_cd")) dgvMainStockOut.Columns.Remove("registration_user_cd");
-                if (dgvMainStockOut.Columns.Contains("registration_date_time")) dgvMainStockOut.Columns.Remove("registration_date_time");
-                if (dgvMainStockOut.Columns.Contains("btnOpenSet")) dgvMainStockOut.Columns.Remove("btnOpenSet");
+                stockoutData.SearchMultiPacking(dr.Cells["order_number"].Value.ToString(), drow.Cells["low_level_item"].Value.ToString());
+                drow.Cells["stockout_qty"].Value = stockoutData.listStockOutItem.Select(x => x.stockout_qty).Sum();
             }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
+            tc_StockOut.SelectedTab = tab_ItemSet;
+            txtSetLowItem.Focus();
         }
 
         /// <summary>
@@ -555,6 +570,7 @@ namespace PC_QRCodeSystem.View
             }
             dgvSetData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
+        #endregion
         #endregion
         #endregion
 
@@ -802,37 +818,8 @@ namespace PC_QRCodeSystem.View
         #region BUTTONS EVENT
         private void btnSetReg_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (CustomMessageBox.Question("Do you want register this set items?") == DialogResult.No) return;
-                pts_plan planData = new pts_plan();
-                string plancode = txtSetOrderNum.Text + "-" + dtpStockOutDate.Value.ToString("yyMMdd");
-                planData = new pts_plan
-                {
-                    plan_cd = plancode,
-                    destination_cd = cmbDestination.SelectedValue.ToString(),
-                    model_cd = txtSetHiItem.Text,
-                    set_number = txtSetOrderNum.Text,
-                    plan_date = dtpSetOrderDate.Value,
-                    plan_usercd = txtSetUserCD.Text,
-                    plan_qty = double.Parse(txtSetOrderQty.Text),
-                    delivery_date = dtpStockOutDate.Value,
-                    comment = txtComment.Text
-                };
-                try { planData.Search(planData); }
-                catch { planData.Add(planData); }
-                listPlan.Add(planData);
-                UpdateGridProcess(1);
-                listOut[0].ExportCSV(listOut);
-                listStock[0].UpdateMultiItem(listStock);
-                listStockOut[0].AddMultiItem(listStockOut);
-                CustomMessageBox.Notice("Register process " + txtSetOrderNum.Text + " successful!");
-                tc_StockOut.SelectTab(tab_Inspection);
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
+            isSet = true;
+            tc_StockOut.SelectedTab = tab_Inspection;
         }
 
         private void btnSetClear_Click(object sender, EventArgs e)
@@ -848,6 +835,40 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region SUB EVENT
+        private void RegSet()
+        {
+            try
+            {
+                if (CustomMessageBox.Question("Do you want register this set items?") == DialogResult.No) return;
+                string plancode = txtSetOrderNum.Text + "-" + dtpStockOutDate.Value.ToString("yyMMdd");
+                pts_plan planData = new pts_plan();
+                planData = new pts_plan
+                {
+                    plan_cd = plancode,
+                    destination_cd = cmbDestination.SelectedValue.ToString(),
+                    model_cd = txtSetHiItem.Text,
+                    set_number = txtSetOrderNum.Text,
+                    plan_date = dtpSetOrderDate.Value,
+                    plan_usercd = txtSetUserCD.Text,
+                    plan_qty = double.Parse(txtSetOrderQty.Text),
+                    delivery_date = dtpStockOutDate.Value,
+                    comment = txtComment.Text
+                };
+                try { planData.Search(planData); }
+                catch { planData.Add(planData); }
+                listPlan.Add(planData);
+                listOut[0].ExportCSV(listOut);
+                listStock[0].UpdateMultiItem(listStock);
+                listStockOut[0].AddMultiItem(listStockOut);
+                CustomMessageBox.Notice("Register process " + txtSetOrderNum.Text + " successful!");
+                UpdateGridProcess(1);
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+        }
+
         private void GetSetOptions(string orderNo, double orderQty, DateTime orderDate)
         {
             dtpSetOrderDate.Value = orderDate;
@@ -880,6 +901,12 @@ namespace PC_QRCodeSystem.View
 
         #region TAB_INSPECTION
         #region BUTTONS EVENT
+        private void btnFinalRegister_Click(object sender, EventArgs e)
+        {
+            if (isSet) RegSet();
+            else RegNoSet();
+        }
+
         private void btnInsClear_Click(object sender, EventArgs e)
         {
             listPlan.Clear();

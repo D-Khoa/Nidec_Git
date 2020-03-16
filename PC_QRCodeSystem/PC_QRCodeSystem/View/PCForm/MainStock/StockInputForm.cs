@@ -627,12 +627,12 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                foreach (DataGridViewCell dc in dgvInspection.SelectedCells)
+                foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
                 {
                     if (CustomMessageBox.Warring("Are you sure delete this item?") == DialogResult.Yes)
                     {
                         //Search item want to delete
-                        stockItem = dgvInspection.Rows[dc.RowIndex].DataBoundItem as pts_stock;
+                        stockItem = dr.DataBoundItem as pts_stock;
                         var tempItem = (from x in listInputPremac
                                         where x.item_number == stockItem.item_cd &&
                                               x.supplier_cd == stockItem.supplier_cd &&

@@ -38,33 +38,37 @@
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.pnlDate = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.pnlOptions = new System.Windows.Forms.Panel();
+            this.clInspect = new System.Windows.Forms.CheckedListBox();
+            this.pnlBarcode = new System.Windows.Forms.Panel();
+            this.rbSerial = new System.Windows.Forms.RadioButton();
             this.txtbarcode = new System.Windows.Forms.TextBox();
             this.rbLot = new System.Windows.Forms.RadioButton();
-            this.rbSerial = new System.Windows.Forms.RadioButton();
-            this.pnlBarcode = new System.Windows.Forms.Panel();
-            this.clInspect = new System.Windows.Forms.CheckedListBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.pnlButtons = new System.Windows.Forms.Panel();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRows = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.cbInspect = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rbData = new System.Windows.Forms.RadioButton();
+            this.rbJudge = new System.Windows.Forms.RadioButton();
+            this.tsProcessBar = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlDate.SuspendLayout();
             this.pnlOptions.SuspendLayout();
             this.pnlBarcode.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbLine
@@ -134,21 +138,23 @@
             // 
             // dtpFromDate
             // 
-            this.dtpFromDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpFromDate.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFromDate.Location = new System.Drawing.Point(70, 10);
+            this.dtpFromDate.Location = new System.Drawing.Point(46, 10);
             this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(120, 20);
+            this.dtpFromDate.Size = new System.Drawing.Size(140, 20);
             this.dtpFromDate.TabIndex = 10;
+            this.dtpFromDate.Value = new System.DateTime(2020, 3, 16, 0, 0, 0, 0);
             // 
             // dtpToDate
             // 
-            this.dtpToDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpToDate.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpToDate.Location = new System.Drawing.Point(70, 40);
+            this.dtpToDate.Location = new System.Drawing.Point(46, 40);
             this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(120, 20);
+            this.dtpToDate.Size = new System.Drawing.Size(140, 20);
             this.dtpToDate.TabIndex = 11;
+            this.dtpToDate.Value = new System.DateTime(2020, 3, 16, 23, 59, 59, 0);
             // 
             // pnlDate
             // 
@@ -161,15 +167,6 @@
             this.pnlDate.Size = new System.Drawing.Size(200, 70);
             this.pnlDate.TabIndex = 12;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "From";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -179,9 +176,18 @@
             this.label3.TabIndex = 13;
             this.label3.Text = "To";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "From";
+            // 
             // pnlOptions
             // 
-            this.pnlOptions.Controls.Add(this.label4);
+            this.pnlOptions.Controls.Add(this.cbInspect);
             this.pnlOptions.Controls.Add(this.clInspect);
             this.pnlOptions.Controls.Add(this.pnlBarcode);
             this.pnlOptions.Controls.Add(this.label1);
@@ -198,9 +204,42 @@
             this.pnlOptions.Size = new System.Drawing.Size(640, 218);
             this.pnlOptions.TabIndex = 13;
             // 
+            // clInspect
+            // 
+            this.clInspect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.clInspect.FormattingEnabled = true;
+            this.clInspect.Location = new System.Drawing.Point(430, 40);
+            this.clInspect.Name = "clInspect";
+            this.clInspect.ScrollAlwaysVisible = true;
+            this.clInspect.Size = new System.Drawing.Size(200, 169);
+            this.clInspect.TabIndex = 17;
+            // 
+            // pnlBarcode
+            // 
+            this.pnlBarcode.Controls.Add(this.rbSerial);
+            this.pnlBarcode.Controls.Add(this.txtbarcode);
+            this.pnlBarcode.Controls.Add(this.rbLot);
+            this.pnlBarcode.Location = new System.Drawing.Point(220, 20);
+            this.pnlBarcode.Name = "pnlBarcode";
+            this.pnlBarcode.Size = new System.Drawing.Size(200, 190);
+            this.pnlBarcode.TabIndex = 16;
+            // 
+            // rbSerial
+            // 
+            this.rbSerial.AutoSize = true;
+            this.rbSerial.Location = new System.Drawing.Point(5, 5);
+            this.rbSerial.Name = "rbSerial";
+            this.rbSerial.Size = new System.Drawing.Size(91, 17);
+            this.rbSerial.TabIndex = 15;
+            this.rbSerial.TabStop = true;
+            this.rbSerial.Text = "Serial Number";
+            this.rbSerial.UseVisualStyleBackColor = true;
+            // 
             // txtbarcode
             // 
-            this.txtbarcode.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtbarcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtbarcode.Location = new System.Drawing.Point(0, 30);
             this.txtbarcode.Multiline = true;
             this.txtbarcode.Name = "txtbarcode";
@@ -219,45 +258,6 @@
             this.rbLot.Text = "Lot Number";
             this.rbLot.UseVisualStyleBackColor = true;
             // 
-            // rbSerial
-            // 
-            this.rbSerial.AutoSize = true;
-            this.rbSerial.Location = new System.Drawing.Point(5, 5);
-            this.rbSerial.Name = "rbSerial";
-            this.rbSerial.Size = new System.Drawing.Size(91, 17);
-            this.rbSerial.TabIndex = 15;
-            this.rbSerial.TabStop = true;
-            this.rbSerial.Text = "Serial Number";
-            this.rbSerial.UseVisualStyleBackColor = true;
-            // 
-            // pnlBarcode
-            // 
-            this.pnlBarcode.Controls.Add(this.rbSerial);
-            this.pnlBarcode.Controls.Add(this.txtbarcode);
-            this.pnlBarcode.Controls.Add(this.rbLot);
-            this.pnlBarcode.Location = new System.Drawing.Point(220, 20);
-            this.pnlBarcode.Name = "pnlBarcode";
-            this.pnlBarcode.Size = new System.Drawing.Size(200, 190);
-            this.pnlBarcode.TabIndex = 16;
-            // 
-            // clInspect
-            // 
-            this.clInspect.FormattingEnabled = true;
-            this.clInspect.Location = new System.Drawing.Point(430, 40);
-            this.clInspect.Name = "clInspect";
-            this.clInspect.ScrollAlwaysVisible = true;
-            this.clInspect.Size = new System.Drawing.Size(200, 169);
-            this.clInspect.TabIndex = 17;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(430, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Inspect";
-            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(20, 10);
@@ -270,6 +270,7 @@
             // 
             // pnlButtons
             // 
+            this.pnlButtons.Controls.Add(this.panel1);
             this.pnlButtons.Controls.Add(this.btnClear);
             this.pnlButtons.Controls.Add(this.btnClose);
             this.pnlButtons.Controls.Add(this.btnExport);
@@ -280,6 +281,26 @@
             this.pnlButtons.Size = new System.Drawing.Size(640, 60);
             this.pnlButtons.TabIndex = 20;
             // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(440, 10);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(80, 40);
+            this.btnClear.TabIndex = 22;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(540, 10);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(80, 40);
+            this.btnClose.TabIndex = 21;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // btnExport
             // 
             this.btnExport.Location = new System.Drawing.Point(120, 10);
@@ -289,28 +310,6 @@
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(540, 10);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(80, 40);
-            this.btnClose.TabIndex = 21;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnClear
-            // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(440, 10);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(80, 40);
-            this.btnClear.TabIndex = 22;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // dgvData
             // 
@@ -328,7 +327,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.tsRows,
-            this.tsStatus,
+            this.tsProcessBar,
             this.toolStripStatusLabel4,
             this.tsTime});
             this.statusStrip1.Location = new System.Drawing.Point(0, 484);
@@ -340,32 +339,73 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(33, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(33, 18);
             this.toolStripStatusLabel1.Text = "Row:";
             // 
             // tsRows
             // 
             this.tsRows.Name = "tsRows";
-            this.tsRows.Size = new System.Drawing.Size(36, 17);
+            this.tsRows.Size = new System.Drawing.Size(36, 18);
             this.tsRows.Text = "None";
-            // 
-            // tsStatus
-            // 
-            this.tsStatus.Name = "tsStatus";
-            this.tsStatus.Size = new System.Drawing.Size(484, 17);
-            this.tsStatus.Spring = true;
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(36, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(37, 18);
             this.toolStripStatusLabel4.Text = "Time:";
             // 
             // tsTime
             // 
             this.tsTime.Name = "tsTime";
-            this.tsTime.Size = new System.Drawing.Size(36, 17);
+            this.tsTime.Size = new System.Drawing.Size(36, 18);
             this.tsTime.Text = "None";
+            // 
+            // cbInspect
+            // 
+            this.cbInspect.AutoSize = true;
+            this.cbInspect.Location = new System.Drawing.Point(430, 20);
+            this.cbInspect.Name = "cbInspect";
+            this.cbInspect.Size = new System.Drawing.Size(61, 17);
+            this.cbInspect.TabIndex = 18;
+            this.cbInspect.Text = "Inspect";
+            this.cbInspect.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.rbData);
+            this.panel1.Controls.Add(this.rbJudge);
+            this.panel1.Location = new System.Drawing.Point(220, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(64, 54);
+            this.panel1.TabIndex = 23;
+            // 
+            // rbData
+            // 
+            this.rbData.AutoSize = true;
+            this.rbData.Location = new System.Drawing.Point(5, 5);
+            this.rbData.Name = "rbData";
+            this.rbData.Size = new System.Drawing.Size(48, 17);
+            this.rbData.TabIndex = 15;
+            this.rbData.TabStop = true;
+            this.rbData.Text = "Data";
+            this.rbData.UseVisualStyleBackColor = true;
+            // 
+            // rbJudge
+            // 
+            this.rbJudge.AutoSize = true;
+            this.rbJudge.Location = new System.Drawing.Point(5, 28);
+            this.rbJudge.Name = "rbJudge";
+            this.rbJudge.Size = new System.Drawing.Size(54, 17);
+            this.rbJudge.TabIndex = 14;
+            this.rbJudge.TabStop = true;
+            this.rbJudge.Text = "Judge";
+            this.rbJudge.UseVisualStyleBackColor = true;
+            // 
+            // tsProcessBar
+            // 
+            this.tsProcessBar.Name = "tsProcessBar";
+            this.tsProcessBar.Size = new System.Drawing.Size(452, 17);
+            this.tsProcessBar.Spring = true;
             // 
             // DataViewer
             // 
@@ -378,6 +418,7 @@
             this.Controls.Add(this.pnlOptions);
             this.Name = "DataViewer";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Data Viewer";
             this.Load += new System.EventHandler(this.DataViewer_Load);
             this.pnlDate.ResumeLayout(false);
@@ -390,6 +431,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,7 +457,6 @@
         private System.Windows.Forms.RadioButton rbSerial;
         private System.Windows.Forms.TextBox txtbarcode;
         private System.Windows.Forms.RadioButton rbLot;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckedListBox clInspect;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel pnlButtons;
@@ -425,9 +467,13 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tsRows;
-        private System.Windows.Forms.ToolStripStatusLabel tsStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel tsTime;
+        private System.Windows.Forms.CheckBox cbInspect;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rbData;
+        private System.Windows.Forms.RadioButton rbJudge;
+        private System.Windows.Forms.ToolStripStatusLabel tsProcessBar;
     }
 }
 

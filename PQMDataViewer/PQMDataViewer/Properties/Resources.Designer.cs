@@ -63,6 +63,16 @@ namespace PQMDataViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Mono_Security {
+            get {
+                object obj = ResourceManager.GetObject("Mono_Security", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Npgsql {
             get {
                 object obj = ResourceManager.GetObject("Npgsql", resourceCulture);
