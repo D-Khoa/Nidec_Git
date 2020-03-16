@@ -819,7 +819,10 @@ namespace PC_QRCodeSystem.View
         private void btnSetReg_Click(object sender, EventArgs e)
         {
             isSet = true;
-            tc_StockOut.SelectedTab = tab_Inspection;
+            if (dgvStockOut.Rows.Count > 0)
+                tc_StockOut.SelectedTab = tab_Inspection;
+            else
+                CustomMessageBox.Notice("This set no data! Please check and try again!");
         }
 
         private void btnSetClear_Click(object sender, EventArgs e)
@@ -905,6 +908,8 @@ namespace PC_QRCodeSystem.View
         {
             if (isSet) RegSet();
             else RegNoSet();
+            pts_item itemData = new pts_item();
+            itemData.ListStockOutUpdateValue(listOut);
         }
 
         private void btnInsClear_Click(object sender, EventArgs e)

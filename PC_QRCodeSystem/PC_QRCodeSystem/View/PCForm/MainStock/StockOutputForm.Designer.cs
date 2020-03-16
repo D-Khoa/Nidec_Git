@@ -100,11 +100,11 @@
             this.dgvStockOut = new System.Windows.Forms.DataGridView();
             this.dgvProcess = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnFinalRegister = new System.Windows.Forms.Button();
             this.btnInsBack = new System.Windows.Forms.Button();
             this.btnInsClear = new System.Windows.Forms.Button();
             this.btnPrintSelect = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
-            this.btnFinalRegister = new System.Windows.Forms.Button();
             this.tc_StockOut.SuspendLayout();
             this.tab_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMainStockOut)).BeginInit();
@@ -593,7 +593,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSetData.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSetData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvSetData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullColumnSelect;
+            this.dgvSetData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSetData.Size = new System.Drawing.Size(971, 232);
             this.dgvSetData.TabIndex = 4;
             // 
@@ -974,6 +974,17 @@
             this.panel1.Size = new System.Drawing.Size(971, 60);
             this.panel1.TabIndex = 1;
             // 
+            // btnFinalRegister
+            // 
+            this.btnFinalRegister.Location = new System.Drawing.Point(510, 5);
+            this.btnFinalRegister.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFinalRegister.Name = "btnFinalRegister";
+            this.btnFinalRegister.Size = new System.Drawing.Size(100, 50);
+            this.btnFinalRegister.TabIndex = 9;
+            this.btnFinalRegister.Text = "2. Register";
+            this.btnFinalRegister.UseVisualStyleBackColor = true;
+            this.btnFinalRegister.Click += new System.EventHandler(this.btnFinalRegister_Click);
+            // 
             // btnInsBack
             // 
             this.btnInsBack.Location = new System.Drawing.Point(770, 5);
@@ -1017,17 +1028,6 @@
             this.btnPrintAll.Text = "1a. Print All";
             this.btnPrintAll.UseVisualStyleBackColor = true;
             this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
-            // 
-            // btnFinalRegister
-            // 
-            this.btnFinalRegister.Location = new System.Drawing.Point(510, 5);
-            this.btnFinalRegister.Margin = new System.Windows.Forms.Padding(4);
-            this.btnFinalRegister.Name = "btnFinalRegister";
-            this.btnFinalRegister.Size = new System.Drawing.Size(100, 50);
-            this.btnFinalRegister.TabIndex = 9;
-            this.btnFinalRegister.Text = "2. Register";
-            this.btnFinalRegister.UseVisualStyleBackColor = true;
-            this.btnFinalRegister.Click += new System.EventHandler(this.btnFinalRegister_Click);
             // 
             // StockOutputForm
             // 
