@@ -54,7 +54,7 @@
             // 
             // pnlTitle
             // 
-            this.pnlTitle.BackColor = System.Drawing.Color.Green;
+            this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.pnlTitle.Controls.Add(this.lbTittle);
             this.pnlTitle.Controls.Add(this.pnlLogo);
             this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;

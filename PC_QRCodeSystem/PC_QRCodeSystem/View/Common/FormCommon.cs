@@ -74,7 +74,7 @@ namespace PC_QRCodeSystem
             position = UserData.position;
             logintime = UserData.logintime;
             listper = UserData.role_permision;
-            this.Text = tittle + "-QRCode System";
+            this.Text = tittle + "- Warehouse QrCode Tracy System";
             lbOnlineTime.Text = TimeSpan.FromSeconds(UserData.onTime).ToString();
             SettingItem settingItem = new SettingItem();
             settingItem.LoadSetting();

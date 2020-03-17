@@ -47,7 +47,9 @@ namespace PC_QRCodeSystem.View
                 {
                     string temp = txtUserCode.Text;
                     if (temp.Contains(";"))
-                        txtUserCode.Text = temp.Split(';')[0].Trim();
+                        temp = temp.Split(';')[0].Trim();
+                    if (temp.Length > 6) txtUserCode.Text = temp.Substring(temp.Length - 6);
+                    else txtUserCode.Text = temp;
                     m_mes_user muser = new m_mes_user();
                     muser = muser.GetUser(txtUserCode.Text);
                     lbUserName.Text = muser.user_name;
@@ -68,6 +70,7 @@ namespace PC_QRCodeSystem.View
         {
             if (string.IsNullOrEmpty(txtUserCode.Text))
             {
+                errorProvider.SetError(txtUserCode, null);
                 lbUserName.Text = "User Name";
                 lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
@@ -534,7 +537,7 @@ namespace PC_QRCodeSystem.View
             tc_StockOut.SelectedTab = tab_ItemSet;
             pts_stockout_log stockoutData = new pts_stockout_log();
             double temp = 0;
-            for(int i = 0; i < dgvSetData.Rows.Count; i++)
+            for (int i = 0; i < dgvSetData.Rows.Count; i++)
             {
                 temp = stockoutData.GetStockOutQty(dr.Cells["order_number"].Value.ToString(), dgvSetData.Rows[i].Cells["low_level_item"].Value.ToString());
                 dgvSetData.Rows[i].Cells["stockout_qty"].Value = temp;

@@ -73,10 +73,15 @@
             this.tab_ItemSet = new System.Windows.Forms.TabPage();
             this.dgvSetData = new System.Windows.Forms.DataGridView();
             this.pnlSetButtons = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtSetStockOutQty = new System.Windows.Forms.TextBox();
             this.btnSetBack = new System.Windows.Forms.Button();
             this.btnSetClear = new System.Windows.Forms.Button();
             this.btnSetReg = new System.Windows.Forms.Button();
             this.pnlSetOptions = new System.Windows.Forms.Panel();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txtSetLowItemCode = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtSetInvoice = new System.Windows.Forms.TextBox();
@@ -107,11 +112,6 @@
             this.btnInsClear = new System.Windows.Forms.Button();
             this.btnPrintSelect = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
-            this.txtSetStockOutQty = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.txtSetLowItemCode = new System.Windows.Forms.TextBox();
             this.tc_StockOut.SuspendLayout();
             this.tab_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMainStockOut)).BeginInit();
@@ -163,7 +163,7 @@
             this.tab_Main.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Main.Name = "tab_Main";
             this.tab_Main.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Main.Size = new System.Drawing.Size(979, 480);
+            this.tab_Main.Size = new System.Drawing.Size(948, 480);
             this.tab_Main.TabIndex = 0;
             this.tab_Main.Text = "Main";
             this.tab_Main.UseVisualStyleBackColor = true;
@@ -190,7 +190,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvMainStockOut.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMainStockOut.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMainStockOut.Size = new System.Drawing.Size(971, 161);
+            this.dgvMainStockOut.Size = new System.Drawing.Size(940, 161);
             this.dgvMainStockOut.TabIndex = 4;
             this.dgvMainStockOut.DataSourceChanged += new System.EventHandler(this.dgvMainStockOut_DataSourceChanged);
             this.dgvMainStockOut.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMainStockOut_CellClick);
@@ -205,7 +205,7 @@
             this.pnlButtons.Location = new System.Drawing.Point(4, 255);
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(971, 60);
+            this.pnlButtons.Size = new System.Drawing.Size(940, 60);
             this.pnlButtons.TabIndex = 3;
             // 
             // btnSearch
@@ -268,7 +268,7 @@
             this.pnlNoSetOption.Location = new System.Drawing.Point(4, 164);
             this.pnlNoSetOption.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNoSetOption.Name = "pnlNoSetOption";
-            this.pnlNoSetOption.Size = new System.Drawing.Size(971, 91);
+            this.pnlNoSetOption.Size = new System.Drawing.Size(940, 91);
             this.pnlNoSetOption.TabIndex = 2;
             this.pnlNoSetOption.Visible = false;
             // 
@@ -391,7 +391,7 @@
             this.pnlOptions.Location = new System.Drawing.Point(4, 4);
             this.pnlOptions.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOptions.Name = "pnlOptions";
-            this.pnlOptions.Size = new System.Drawing.Size(971, 160);
+            this.pnlOptions.Size = new System.Drawing.Size(940, 160);
             this.pnlOptions.TabIndex = 1;
             // 
             // label15
@@ -503,7 +503,7 @@
             this.txtUserCode.Location = new System.Drawing.Point(120, 70);
             this.txtUserCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtUserCode.Name = "txtUserCode";
-            this.txtUserCode.Size = new System.Drawing.Size(150, 22);
+            this.txtUserCode.Size = new System.Drawing.Size(140, 22);
             this.txtUserCode.TabIndex = 7;
             this.txtUserCode.TextChanged += new System.EventHandler(this.txtUserCode_TextChanged);
             this.txtUserCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserCode_KeyDown);
@@ -630,6 +630,37 @@
             this.pnlSetButtons.Size = new System.Drawing.Size(940, 60);
             this.pnlSetButtons.TabIndex = 2;
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label19.Location = new System.Drawing.Point(100, 30);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(39, 16);
+            this.label19.TabIndex = 49;
+            this.label19.Text = "Enter";
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(10, 5);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(133, 25);
+            this.label23.TabIndex = 48;
+            this.label23.Text = "2. Stock-Out Q\'ty";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtSetStockOutQty
+            // 
+            this.txtSetStockOutQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSetStockOutQty.Location = new System.Drawing.Point(160, 5);
+            this.txtSetStockOutQty.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSetStockOutQty.Name = "txtSetStockOutQty";
+            this.txtSetStockOutQty.Size = new System.Drawing.Size(300, 45);
+            this.txtSetStockOutQty.TabIndex = 9;
+            this.txtSetStockOutQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSetStockOutQty_KeyDown);
+            this.txtSetStockOutQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSetStockOutQty_KeyPress);
+            // 
             // btnSetBack
             // 
             this.btnSetBack.Location = new System.Drawing.Point(790, 5);
@@ -693,6 +724,26 @@
             this.pnlSetOptions.Name = "pnlSetOptions";
             this.pnlSetOptions.Size = new System.Drawing.Size(940, 160);
             this.pnlSetOptions.TabIndex = 1;
+            // 
+            // label24
+            // 
+            this.label24.Location = new System.Drawing.Point(620, 130);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(107, 25);
+            this.label24.TabIndex = 49;
+            this.label24.Text = "Low-Level Item";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtSetLowItemCode
+            // 
+            this.txtSetLowItemCode.Location = new System.Drawing.Point(730, 130);
+            this.txtSetLowItemCode.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSetLowItemCode.Name = "txtSetLowItemCode";
+            this.txtSetLowItemCode.ReadOnly = true;
+            this.txtSetLowItemCode.Size = new System.Drawing.Size(160, 22);
+            this.txtSetLowItemCode.TabIndex = 48;
+            this.txtSetLowItemCode.TabStop = false;
             // 
             // label16
             // 
@@ -918,7 +969,7 @@
             this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Inspection.Name = "tab_Inspection";
             this.tab_Inspection.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Inspection.Size = new System.Drawing.Size(979, 480);
+            this.tab_Inspection.Size = new System.Drawing.Size(948, 480);
             this.tab_Inspection.TabIndex = 2;
             this.tab_Inspection.Text = "Inspection";
             this.tab_Inspection.UseVisualStyleBackColor = true;
@@ -943,7 +994,7 @@
             this.dgvPrint.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPrint.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvPrint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrint.Size = new System.Drawing.Size(971, 215);
+            this.dgvPrint.Size = new System.Drawing.Size(940, 215);
             this.dgvPrint.TabIndex = 4;
             // 
             // dgvStockOut
@@ -967,7 +1018,7 @@
             this.dgvStockOut.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvStockOut.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvStockOut.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvStockOut.Size = new System.Drawing.Size(971, 123);
+            this.dgvStockOut.Size = new System.Drawing.Size(940, 123);
             this.dgvStockOut.TabIndex = 3;
             // 
             // dgvProcess
@@ -991,7 +1042,7 @@
             this.dgvProcess.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvProcess.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvProcess.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProcess.Size = new System.Drawing.Size(971, 74);
+            this.dgvProcess.Size = new System.Drawing.Size(940, 74);
             this.dgvProcess.TabIndex = 2;
             // 
             // panel1
@@ -1005,7 +1056,7 @@
             this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(971, 60);
+            this.panel1.Size = new System.Drawing.Size(940, 60);
             this.panel1.TabIndex = 1;
             // 
             // btnFinalRegister
@@ -1062,57 +1113,6 @@
             this.btnPrintAll.Text = "1a. Print All";
             this.btnPrintAll.UseVisualStyleBackColor = true;
             this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
-            // 
-            // txtSetStockOutQty
-            // 
-            this.txtSetStockOutQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSetStockOutQty.Location = new System.Drawing.Point(160, 5);
-            this.txtSetStockOutQty.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSetStockOutQty.Name = "txtSetStockOutQty";
-            this.txtSetStockOutQty.Size = new System.Drawing.Size(300, 45);
-            this.txtSetStockOutQty.TabIndex = 9;
-            this.txtSetStockOutQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSetStockOutQty_KeyDown);
-            this.txtSetStockOutQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSetStockOutQty_KeyPress);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label19.Location = new System.Drawing.Point(100, 30);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(39, 16);
-            this.label19.TabIndex = 49;
-            this.label19.Text = "Enter";
-            // 
-            // label23
-            // 
-            this.label23.Location = new System.Drawing.Point(10, 5);
-            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(133, 25);
-            this.label23.TabIndex = 48;
-            this.label23.Text = "2. Stock-Out Q\'ty";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label24
-            // 
-            this.label24.Location = new System.Drawing.Point(620, 130);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(107, 25);
-            this.label24.TabIndex = 49;
-            this.label24.Text = "Low-Level Item";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtSetLowItemCode
-            // 
-            this.txtSetLowItemCode.Location = new System.Drawing.Point(730, 130);
-            this.txtSetLowItemCode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSetLowItemCode.Name = "txtSetLowItemCode";
-            this.txtSetLowItemCode.ReadOnly = true;
-            this.txtSetLowItemCode.Size = new System.Drawing.Size(160, 22);
-            this.txtSetLowItemCode.TabIndex = 48;
-            this.txtSetLowItemCode.TabStop = false;
             // 
             // StockOutputForm
             // 

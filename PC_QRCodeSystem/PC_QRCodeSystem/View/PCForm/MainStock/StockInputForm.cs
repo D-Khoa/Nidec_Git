@@ -726,7 +726,10 @@ namespace PC_QRCodeSystem.View
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (txtUserCD.Text.Contains(";")) txtUserCD.Text = txtUserCD.Text.Split(';')[0].Trim();
+                string temp = txtUserCD.Text;
+                if (temp.Contains(";")) temp = temp.Split(';')[0].Trim();
+                if (temp.Length > 6) txtUserCD.Text = temp.Substring(temp.Length - 6);
+                else txtUserCD.Text = temp;
                 try
                 {
                     m_mes_user mUser = new m_mes_user();

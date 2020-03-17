@@ -45,27 +45,28 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Green;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.lbTittle);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(484, 68);
+            this.panel1.Size = new System.Drawing.Size(584, 71);
             this.panel1.TabIndex = 1;
             // 
             // lbTittle
             // 
+            this.lbTittle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.lbTittle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbTittle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTittle.Location = new System.Drawing.Point(152, 0);
-            this.lbTittle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbTittle.Location = new System.Drawing.Point(151, 0);
+            this.lbTittle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbTittle.Name = "lbTittle";
-            this.lbTittle.Size = new System.Drawing.Size(332, 68);
+            this.lbTittle.Size = new System.Drawing.Size(433, 71);
             this.lbTittle.TabIndex = 3;
-            this.lbTittle.Text = "Log In";
+            this.lbTittle.Text = "WAREHOUSE QR-CODE TRACY SYSTEM";
             this.lbTittle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
@@ -74,17 +75,18 @@
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(152, 68);
+            this.panel2.Size = new System.Drawing.Size(151, 71);
             this.panel2.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(120, 100);
+            this.label2.Location = new System.Drawing.Point(80, 100);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 20);
+            this.label2.Size = new System.Drawing.Size(120, 25);
             this.label2.TabIndex = 2;
             this.label2.Text = "Username:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -92,29 +94,32 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(120, 140);
+            this.label3.Location = new System.Drawing.Point(80, 140);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 20);
+            this.label3.Size = new System.Drawing.Size(120, 25);
             this.label3.TabIndex = 3;
             this.label3.Text = "Password:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtpass
             // 
-            this.txtpass.Location = new System.Drawing.Point(210, 140);
+            this.txtpass.Location = new System.Drawing.Point(200, 140);
+            this.txtpass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtpass.Name = "txtpass";
             this.txtpass.PasswordChar = '*';
-            this.txtpass.Size = new System.Drawing.Size(160, 20);
+            this.txtpass.Size = new System.Drawing.Size(240, 23);
             this.txtpass.TabIndex = 2;
             this.txtpass.UseSystemPasswordChar = true;
             this.txtpass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtpass_KeyDown);
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(150, 180);
+            this.btnOK.Location = new System.Drawing.Point(200, 180);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOK.Name = "btnOK";
             this.btnOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnOK.Size = new System.Drawing.Size(75, 36);
+            this.btnOK.Size = new System.Drawing.Size(100, 44);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -123,9 +128,10 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(280, 180);
+            this.btnCancel.Location = new System.Drawing.Point(340, 180);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 36);
+            this.btnCancel.Size = new System.Drawing.Size(100, 44);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -133,9 +139,10 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(210, 100);
+            this.txtUsername.Location = new System.Drawing.Point(200, 100);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(160, 20);
+            this.txtUsername.Size = new System.Drawing.Size(240, 23);
             this.txtUsername.TabIndex = 1;
             this.txtUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyDown);
             // 
@@ -148,7 +155,8 @@
             // 
             this.lbVersion.AutoSize = true;
             this.lbVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbVersion.Location = new System.Drawing.Point(10, 240);
+            this.lbVersion.Location = new System.Drawing.Point(13, 236);
+            this.lbVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(63, 17);
             this.lbVersion.TabIndex = 5;
@@ -157,10 +165,10 @@
             // Login
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(484, 262);
+            this.ClientSize = new System.Drawing.Size(584, 262);
             this.ControlBox = false;
             this.Controls.Add(this.lbVersion);
             this.Controls.Add(this.txtUsername);
@@ -170,7 +178,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Login";
