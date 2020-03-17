@@ -236,6 +236,25 @@ namespace IPQC
             dgv2.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             DisableSortMode(dgvHistory);
 
+            //Calc UCL, LCL
+            if (dgv2.Rows.Count > 0)
+            {
+                double avg_x = 0;
+                double avg_r = 0;
+                double UCL = 0;
+                double LCL = 0;
+                for (int i = 0; i < dgv2.Rows.Count; i++)
+                {
+                    avg_x += (double)dgv2.Rows[i].Cells["x"].Value;
+                    avg_r += (double)dgv2.Rows[i].Cells["r"].Value;
+                }
+                avg_x = avg_x / dgv2.Rows.Count;
+                avg_r = avg_r / dgv2.Rows.Count;
+                UCL = avg_x + 0.577 * avg_r;
+                LCL = avg_x - 0.577 * avg_r;
+                txtUCL.Text = UCL.ToString("00.###");
+                txtLCL.Text = LCL.ToString("00.###");
+            }
             // スペック外のセルをマーキングする
             colorHistoryViewBySpec(dtHistory, ref dgvHistory);
 

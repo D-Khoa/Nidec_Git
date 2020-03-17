@@ -242,6 +242,24 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
         }
 
+        public double GetStockOutQty(string processCD, string itemCD)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT sum(stockout_qty) FROM pts_stockout_log WHERE ";
+            query += "process_cd like '" + processCD + "%' ";
+            query += "and packing_cd in(select packing_cd from pts_stock where item_cd ='" + itemCD + "') ";
+            //Execute reader for read database
+            object result = SQL.Command(query).ExecuteScalar();
+            SQL.Close();
+            if (result is System.DBNull) return 0;
+            else return (double)result;
+        }
+
         /// <summary>
         /// Add an stock out log
         /// </summary>

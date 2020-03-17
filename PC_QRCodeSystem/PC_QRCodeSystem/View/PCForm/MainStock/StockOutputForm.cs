@@ -531,13 +531,14 @@ namespace PC_QRCodeSystem.View
             DataGridViewRow dr = dgvMainStockOut.Rows[RowIndex];
             GetSetOptions(dr.Cells["order_number"].Value.ToString(), (double)dr.Cells["order_qty"].Value, (DateTime)dr.Cells["order_date"].Value);
             SearchLowItem(txtItemCode.Text, (double)dr.Cells["order_qty"].Value, dr.Cells["order_number"].Value.ToString());
-            pts_stockout_log stockoutData = new pts_stockout_log();
-            foreach (DataGridViewRow drow in dgvSetData.Rows)
-            {
-                stockoutData.SearchMultiPacking(dr.Cells["order_number"].Value.ToString(), drow.Cells["low_level_item"].Value.ToString());
-                drow.Cells["stockout_qty"].Value = stockoutData.listStockOutItem.Select(x => x.stockout_qty).Sum();
-            }
             tc_StockOut.SelectedTab = tab_ItemSet;
+            pts_stockout_log stockoutData = new pts_stockout_log();
+            double temp = 0;
+            for(int i = 0; i < dgvSetData.Rows.Count; i++)
+            {
+                temp = stockoutData.GetStockOutQty(dr.Cells["order_number"].Value.ToString(), dgvSetData.Rows[i].Cells["low_level_item"].Value.ToString());
+                dgvSetData.Rows[i].Cells["stockout_qty"].Value = temp;
+            }
             txtSetLowItem.Focus();
         }
 
@@ -566,7 +567,8 @@ namespace PC_QRCodeSystem.View
                 col.ValueType = typeof(double);
                 col.DefaultCellStyle.NullValue = "0";
                 col.CellTemplate = new DataGridViewTextBoxCell();
-                dgvSetData.Columns.Insert(6, col);
+                //dgvSetData.Columns.Insert(6, col);
+                dgvSetData.Columns.Add(col);
             }
             dgvSetData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
@@ -578,21 +580,121 @@ namespace PC_QRCodeSystem.View
         #region FIELDS EVENT
         private void txtSetLowItem_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter)
+            {
+                #region GET QR-CODE DATA
+                if (txtSetLowItem.Text.Contains(";"))
+                {
+                    string[] barcode = txtSetLowItem.Text.Split(';');
+                    txtSetLowItemCode.Text = barcode[0].Trim();
+                    txtSetInvoice.Text = barcode[3].Trim();
+                    txtSetStockOutQty.Text = barcode[5];
+                }
+                #endregion
+
+                #region OLD
+                //CHECK STOCKOUT QTY
+                ////IF STOCKOUT QTY < REQUEST QTY => GET ALL
+                //if (orderQty > (stockQty + stockoutQty))
+                //{
+                //    dr.Cells["stockout_qty"].Value = stockQty + stockoutQty;
+                //    res = stockQty;
+                //}
+                ////ELSE GET ENOUGH REQUEST QTY
+                //else
+                //{
+                //    dr.Cells["stockout_qty"].Value = orderQty;
+                //    res = orderQty - stockoutQty;
+                //}
+                //pts_supplier supplierData = new pts_supplier();
+                //#region ADD LIST STOCK AND LIST STOCK OUT WITH RES QTY
+                //foreach (pts_stock item in stockData.listStockItems)
+                //{
+                //    //IF PACKING QTY = 0 SKIP
+                //    if (item.packing_qty == 0) continue;
+                //    //ADD NEW STOCK OUT LOG
+                //    listStockOut.Add(new pts_stockout_log
+                //    {
+                //        packing_cd = item.packing_cd,
+                //        process_cd = txtSetOrderNum.Text,
+                //        issue_cd = 20,
+                //        stockout_date = dtpStockOutDate.Value,
+                //        stockout_user_cd = txtSetUserCD.Text,
+                //        stockout_qty = res,
+                //        comment = txtComment.Text,
+                //        remark = "N",
+                //    });
+                //    //ADD OUTPUT ITEM FOR CSV
+                //    listOut.Add(new OutputItem
+                //    {
+                //        issue_cd = 20,
+                //        destination_cd = cmbDestination.SelectedValue.ToString(),
+                //        item_number = item.item_cd,
+                //        delivery_qty = res,
+                //        delivery_date = dtpStockOutDate.Value,
+                //        order_number = txtSetOrderNum.Text,
+                //        incharge = txtSetUserCD.Text,
+                //    });
+                //    //ADD STOCK-OUT TO PRINT LIST
+                //    listPrint.Add(new PrintItem
+                //    {
+                //        Item_Number = item.item_cd,
+                //        Item_Name = dr.Cells["item_name"].Value.ToString(),
+                //        SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
+                //        Invoice = txtSetInvoice.Text,
+                //        Delivery_Date = dtpStockOutDate.Value,
+                //        Delivery_Qty = res,
+                //        SupplierCD = item.supplier_cd,
+                //        isRec = false,
+                //        Label_Qty = 1,
+                //    });
+                //    //IF PACKING QTY > RES QTY THEN PACKING QTY = PACKING QTY - RES QTY
+                //    if (item.packing_qty > res)
+                //    {
+                //        item.packing_qty -= res;
+                //        res = 0;
+                //    }
+                //    //ELSE RES QTY = RES QTY - PACKING QTY
+                //    else
+                //    {
+                //        res -= item.packing_qty;
+                //        item.packing_qty = 0;
+                //    }
+                //    //ADD STOCK ITEM
+                //    item.order_no = txtSetOrderNum.Text;
+                //    listStock.Add(item);
+                //    if (item.packing_qty > 0)
+                //    {
+                //        //ADD STOCK-IN TO PRINT LIST
+                //        listPrint.Add(new PrintItem
+                //        {
+                //            Item_Number = item.item_cd,
+                //            Item_Name = dr.Cells["item_name"].Value.ToString(),
+                //            SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
+                //            Invoice = txtSetInvoice.Text,
+                //            Delivery_Date = item.stockin_date,
+                //            Delivery_Qty = item.packing_qty,
+                //            SupplierCD = item.supplier_cd,
+                //            isRec = true,
+                //            Label_Qty = 1
+                //        });
+                //    }
+                //    if (res == 0) break;
+                //}
+                //#endregion
+                #endregion
+
+                txtSetStockOutQty.Focus();
+            }
+        }
+
+        private void txtSetStockOutQty_KeyDown(object sender, KeyEventArgs e)
+        {
             try
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    double packingQty = 0;
-                    string itemCode = string.Empty;
-                    #region GET QR-CODE DATA
-                    if (txtSetLowItem.Text.Contains(";"))
-                    {
-                        string[] barcode = txtSetLowItem.Text.Split(';');
-                        itemCode = barcode[0].Trim();
-                        txtSetInvoice.Text = barcode[3].Trim();
-                        packingQty = double.Parse(barcode[5]);
-                    }
-                    #endregion
+                    string itemCode = txtSetLowItemCode.Text;
 
                     pts_stock stockData = new pts_stock();
                     #region CHECK ITEM IS EXIST IN STOCK?
@@ -601,6 +703,7 @@ namespace PC_QRCodeSystem.View
                         CustomMessageBox.Error("This item is not exist in stock!");
                         txtSetLowItem.Clear();
                         txtSetInvoice.Clear();
+                        txtSetLowItem.Focus();
                         return;
                     }
                     #endregion
@@ -618,12 +721,14 @@ namespace PC_QRCodeSystem.View
                         CustomMessageBox.Error("This item is not exist in list!" + Environment.NewLine + ex.Message);
                         txtSetLowItem.Clear();
                         txtSetInvoice.Clear();
+                        txtSetLowItem.Focus();
                         return;
                     }
                     #endregion
 
                     DataGridViewRow dr = dgvSetData.Rows[rindex];
                     double totalpackingQty = stockData.listStockItems.Sum(x => x.packing_qty);
+                    double packingQty = double.Parse(txtSetStockOutQty.Text);
                     double orderQty = (double)dr.Cells["request_qty"].Value;
                     double stockQty = (double)dr.Cells["wh_qty"].Value;
                     double stockoutQty = 0;
@@ -631,99 +736,12 @@ namespace PC_QRCodeSystem.View
                     if (dr.Cells["stockout_qty"].Value != null)
                         stockoutQty = (double)dr.Cells["stockout_qty"].Value;
 
-                    #region OLD
-                    //CHECK STOCKOUT QTY
-                    ////IF STOCKOUT QTY < REQUEST QTY => GET ALL
-                    //if (orderQty > (stockQty + stockoutQty))
-                    //{
-                    //    dr.Cells["stockout_qty"].Value = stockQty + stockoutQty;
-                    //    res = stockQty;
-                    //}
-                    ////ELSE GET ENOUGH REQUEST QTY
-                    //else
-                    //{
-                    //    dr.Cells["stockout_qty"].Value = orderQty;
-                    //    res = orderQty - stockoutQty;
-                    //}
-                    //pts_supplier supplierData = new pts_supplier();
-                    //#region ADD LIST STOCK AND LIST STOCK OUT WITH RES QTY
-                    //foreach (pts_stock item in stockData.listStockItems)
-                    //{
-                    //    //IF PACKING QTY = 0 SKIP
-                    //    if (item.packing_qty == 0) continue;
-                    //    //ADD NEW STOCK OUT LOG
-                    //    listStockOut.Add(new pts_stockout_log
-                    //    {
-                    //        packing_cd = item.packing_cd,
-                    //        process_cd = txtSetOrderNum.Text,
-                    //        issue_cd = 20,
-                    //        stockout_date = dtpStockOutDate.Value,
-                    //        stockout_user_cd = txtSetUserCD.Text,
-                    //        stockout_qty = res,
-                    //        comment = txtComment.Text,
-                    //        remark = "N",
-                    //    });
-                    //    //ADD OUTPUT ITEM FOR CSV
-                    //    listOut.Add(new OutputItem
-                    //    {
-                    //        issue_cd = 20,
-                    //        destination_cd = cmbDestination.SelectedValue.ToString(),
-                    //        item_number = item.item_cd,
-                    //        delivery_qty = res,
-                    //        delivery_date = dtpStockOutDate.Value,
-                    //        order_number = txtSetOrderNum.Text,
-                    //        incharge = txtSetUserCD.Text,
-                    //    });
-                    //    //ADD STOCK-OUT TO PRINT LIST
-                    //    listPrint.Add(new PrintItem
-                    //    {
-                    //        Item_Number = item.item_cd,
-                    //        Item_Name = dr.Cells["item_name"].Value.ToString(),
-                    //        SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
-                    //        Invoice = txtSetInvoice.Text,
-                    //        Delivery_Date = dtpStockOutDate.Value,
-                    //        Delivery_Qty = res,
-                    //        SupplierCD = item.supplier_cd,
-                    //        isRec = false,
-                    //        Label_Qty = 1,
-                    //    });
-                    //    //IF PACKING QTY > RES QTY THEN PACKING QTY = PACKING QTY - RES QTY
-                    //    if (item.packing_qty > res)
-                    //    {
-                    //        item.packing_qty -= res;
-                    //        res = 0;
-                    //    }
-                    //    //ELSE RES QTY = RES QTY - PACKING QTY
-                    //    else
-                    //    {
-                    //        res -= item.packing_qty;
-                    //        item.packing_qty = 0;
-                    //    }
-                    //    //ADD STOCK ITEM
-                    //    item.order_no = txtSetOrderNum.Text;
-                    //    listStock.Add(item);
-                    //    if (item.packing_qty > 0)
-                    //    {
-                    //        //ADD STOCK-IN TO PRINT LIST
-                    //        listPrint.Add(new PrintItem
-                    //        {
-                    //            Item_Number = item.item_cd,
-                    //            Item_Name = dr.Cells["item_name"].Value.ToString(),
-                    //            SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
-                    //            Invoice = txtSetInvoice.Text,
-                    //            Delivery_Date = item.stockin_date,
-                    //            Delivery_Qty = item.packing_qty,
-                    //            SupplierCD = item.supplier_cd,
-                    //            isRec = true,
-                    //            Label_Qty = 1
-                    //        });
-                    //    }
-                    //    if (res == 0) break;
-                    //}
-                    //#endregion
-                    #endregion
                     //Check qty of label
-                    if (packingQty > totalpackingQty) packingQty = totalpackingQty;
+                    if (packingQty > totalpackingQty)
+                    {
+                        packingQty = totalpackingQty;
+                        CustomMessageBox.Notice("Packing Qty of this item is empty! Please stock-in first!");
+                    }
                     stockoutQty += packingQty;
                     if (stockoutQty > orderQty)
                     {
@@ -811,7 +829,13 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
                 txtSetLowItem.Clear();
                 txtSetInvoice.Clear();
+                txtSetLowItem.Focus();
             }
+        }
+
+        private void txtSetStockOutQty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) e.Handled = true;
         }
         #endregion
 

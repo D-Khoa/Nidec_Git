@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -18,6 +19,24 @@ namespace PC_QRCodeSystem
 
         private void Login_Load(object sender, EventArgs e)
         {
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+
+                Version deploy = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+
+                StringBuilder version = new StringBuilder();
+                version.Append("VERSION: ");
+                //version.Append(applicationName + "_");
+                version.Append(deploy.Major);
+                version.Append("_");
+                //version.Append(deploy.Minor);
+                //version.Append("_");
+                version.Append(deploy.Build);
+                version.Append("_");
+                version.Append(deploy.Revision);
+
+                lbVersion.Text = version.ToString();
+            }
             this.AcceptButton = null;
             txtUsername.Focus();
         }
