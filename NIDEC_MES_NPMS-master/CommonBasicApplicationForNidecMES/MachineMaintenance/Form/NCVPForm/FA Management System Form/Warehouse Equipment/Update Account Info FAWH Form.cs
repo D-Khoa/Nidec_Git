@@ -25,8 +25,6 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.NCVPForm.FA_Managem
         public UpdateAccountInfoFAWHForm(int account_id)
         {
             InitializeComponent();
-            //pnlAddAccount.Visible = false;
-            //this.Width -= pnlAddAccount.Width;
             accountVo.account_main_id = account_id;
             accountVo = (AccountInfoFAWHVo)DefaultCbmInvoker.Invoke(new GetAccountInfoFAWHCbm(), accountVo);
         }
@@ -118,7 +116,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.NCVPForm.FA_Managem
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnOK_Click(object sender, EventArgs e)

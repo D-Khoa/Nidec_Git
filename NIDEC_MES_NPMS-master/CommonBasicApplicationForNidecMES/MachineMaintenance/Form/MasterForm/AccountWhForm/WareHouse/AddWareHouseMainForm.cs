@@ -27,101 +27,101 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
             
             //rank
             ValueObjectList<RankVo> rankname = (ValueObjectList<RankVo>)DefaultCbmInvoker.Invoke(new GetRankCbm(), new RankVo());
-            rank_code_cmb.DisplayMember = "RankCode";
-            rank_code_cmb.DataSource = rankname.GetList();
-            rank_code_cmb.Text = "";
+            cmbRankCode.DisplayMember = "RankCode";
+            cmbRankCode.DataSource = rankname.GetList();
+            cmbRankCode.Text = "";
 
 
             //location 
             LocationVo Locationvo = (LocationVo)DefaultCbmInvoker.Invoke(new GetLocationMasterMntCbm(), new LocationVo());
-            before_location_cmb.DataSource = Locationvo.LocationListVo;
-            before_location_cmb.DisplayMember = "LocationCode";
-            before_location_cmb.Text = "";
+            cmbBeforeLocation.DataSource = Locationvo.LocationListVo;
+            cmbBeforeLocation.DisplayMember = "LocationCode";
+            cmbBeforeLocation.Text = "";
 
             // account_code
             ValueObjectList<AccountCodeVo> accountcodevo = (ValueObjectList<AccountCodeVo>)DefaultCbmInvoker.Invoke(new GetAccountCodeCbm(), new AccountCodeVo());
-            account_code_cmb.DisplayMember = "AccountCodeCode";
-            account_code_cmb.DataSource = accountcodevo.GetList();
-            account_code_cmb.Text = "";
+            cmbAccountCode.DisplayMember = "AccountCodeCode";
+            cmbAccountCode.DataSource = accountcodevo.GetList();
+            cmbAccountCode.Text = "";
 
             //accountlocationcode
             ValueObjectList<AccountLocationVo> accountlocationcodevo = (ValueObjectList<AccountLocationVo>)DefaultCbmInvoker.Invoke(new GetAccountLocationCbm(), new AccountLocationVo());
-            section_cd_cmb.DisplayMember = "AccountLocationCode";
-            section_cd_cmb.DataSource = accountlocationcodevo.GetList();
-            section_cd_cmb.Text = "";
+            cmbSectionCode.DisplayMember = "AccountLocationCode";
+            cmbSectionCode.DataSource = accountlocationcodevo.GetList();
+            cmbSectionCode.Text = "";
 
 
             //cau cua dang
             ValueObjectList<AssetVo> assetmodelvo = (ValueObjectList<AssetVo>)DefaultCbmInvoker.Invoke(new GetAssetCbm(), new AssetVo());
-            no_cbm.DisplayMember = "AssetNo";
-            no_cbm.ValueMember = "AssetId";
-            no_cbm.DataSource = assetmodelvo.GetList();
+            cmbNoNumber.DisplayMember = "AssetNo";
+            cmbNoNumber.ValueMember = "AssetId";
+            cmbNoNumber.DataSource = assetmodelvo.GetList();
             //end
 
             ValueObjectList<UnitVo> unitvo = (ValueObjectList<UnitVo>)DefaultCbmInvoker.Invoke(new GetUnitCbm(), new UnitVo());
-            unit_cmb.DisplayMember = "UnitCode";
-            unit_cmb.DataSource = unitvo.GetList();
-            unit_cmb.Text = "";
+            cmbUnit.DisplayMember = "UnitCode";
+            cmbUnit.DataSource = unitvo.GetList();
+            cmbUnit.Text = "";
            
             {
 
-                user_location_name_cmb.Enabled = false;
-                asset_model_cmb.Enabled = false;
-                end_depreciation_dtp.Enabled = false;
-                asset_life_cmb.Enabled = false;
-                acquisition_cost_cmb.Enabled = false;
-                current_depreciation_txt.Enabled = false;
-                monthl_depreciation_txt.Enabled = false;
-                accum_depreciation_txt.Enabled = false;
-                net_value_txt.Enabled = false;
+                cmbUserName.Enabled = false;
+                cmbAssetModel.Enabled = false;
+                dtpEndDepreciation.Enabled = false;
+                cmbAssetLife.Enabled = false;
+                cmbAcquisitionCost.Enabled = false;
+                txtCurrentDepreciation.Enabled = false;
+                txtMonthlyDepreciation.Enabled = false;
+                txtAccumDepreciation.Enabled = false;
+                txtNetValue.Enabled = false;
               
             }
             if (WareHouseMainVo.WareHouseMainId > 0)
             {
-                asset_code_txt.Enabled = false;
-                no_cbm.Enabled = false;
+                txtAssetCode.Enabled = false;
+                cmbNoNumber.Enabled = false;
 
-                before_location_cmb.Text = WareHouseMainVo.BeforeLocationCd;
-                after_location_cmb.Text = WareHouseMainVo.AfterLocationCd;
-                detail_position_cmb.Text = WareHouseMainVo.DetailPositionCd;
-                no_cbm.Text = WareHouseMainVo.AssetNo.ToString();
-                asset_code_txt.Text = WareHouseMainVo.AssetCode;
-                asset_model_cmb.Text = WareHouseMainVo.AssetModel;
-                rank_code_cmb.Text = WareHouseMainVo.RankCode;
-                account_code_cmb.Text = WareHouseMainVo.AccountCodeCode;
-                section_cd_cmb.Text = WareHouseMainVo.AccountLocationCode;
-                qty_txt.Text = WareHouseMainVo.QTY.ToString();
-                unit_cmb.Text = WareHouseMainVo.UnitName;
-                start_depreciation_dtp.Value = WareHouseMainVo.StartDepreciation;
-                end_depreciation_dtp.Value = WareHouseMainVo.EndDepreciation;
-                asset_life_cmb.Text = WareHouseMainVo.AssetLife.ToString();
-                acquisition_cost_cmb.Text = WareHouseMainVo.AcquisitionCost.ToString();
-                current_depreciation_txt.Text = WareHouseMainVo.CurrentDepreciation.ToString();
-                monthl_depreciation_txt.Text = WareHouseMainVo.MonthlyDepreciation.ToString();
-                accum_depreciation_txt.Text = WareHouseMainVo.AccumDepreciation.ToString();
-                net_value_txt.Text = WareHouseMainVo.NetValue.ToString();
+                cmbBeforeLocation.Text = WareHouseMainVo.BeforeLocationCd;
+                cmbAfterLocation.Text = WareHouseMainVo.AfterLocationCd;
+                cmbDetailPosition.Text = WareHouseMainVo.DetailPositionCd;
+                cmbNoNumber.Text = WareHouseMainVo.AssetNo.ToString();
+                txtAssetCode.Text = WareHouseMainVo.AssetCode;
+                cmbAssetModel.Text = WareHouseMainVo.AssetModel;
+                cmbRankCode.Text = WareHouseMainVo.RankCode;
+                cmbAccountCode.Text = WareHouseMainVo.AccountCodeCode;
+                cmbSectionCode.Text = WareHouseMainVo.AccountLocationCode;
+                txtqty.Text = WareHouseMainVo.QTY.ToString();
+                cmbUnit.Text = WareHouseMainVo.UnitName;
+                dtpStartDepreciation.Value = WareHouseMainVo.StartDepreciation;
+                dtpEndDepreciation.Value = WareHouseMainVo.EndDepreciation;
+                cmbAssetLife.Text = WareHouseMainVo.AssetLife.ToString();
+                cmbAcquisitionCost.Text = WareHouseMainVo.AcquisitionCost.ToString();
+                txtCurrentDepreciation.Text = WareHouseMainVo.CurrentDepreciation.ToString();
+                txtMonthlyDepreciation.Text = WareHouseMainVo.MonthlyDepreciation.ToString();
+                txtAccumDepreciation.Text = WareHouseMainVo.AccumDepreciation.ToString();
+                txtNetValue.Text = WareHouseMainVo.NetValue.ToString();
 
                 this.TitleText = Com.Nidec.Mes.GlobalMasterMaintenance.CommonConstants.MODE_UPDATE;
             }
             else
             {
-                comments_txt.Text = "Add";
+                txtComment.Text = "Add";
                 this.TitleText = Com.Nidec.Mes.GlobalMasterMaintenance.CommonConstants.MODE_ADD;
             }
         }
         private void after_location_cmb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ValueObjectList<DetailPositionVo> detailposition = (ValueObjectList<DetailPositionVo>)DefaultCbmInvoker.Invoke(new GetDetailPositionCbm(), new DetailPositionVo() { LocationCd = after_location_cmb.Text, });
-            detail_position_cmb.DisplayMember = "DetailPositionCode";
-            detail_position_cmb.DataSource = detailposition.GetList();
-            detail_position_cmb.Text = "";
+            ValueObjectList<DetailPositionVo> detailposition = (ValueObjectList<DetailPositionVo>)DefaultCbmInvoker.Invoke(new GetDetailPositionCbm(), new DetailPositionVo() { LocationCd = cmbAfterLocation.Text, });
+            cmbDetailPosition.DisplayMember = "DetailPositionCode";
+            cmbDetailPosition.DataSource = detailposition.GetList();
+            cmbDetailPosition.Text = "";
         }
         private void before_location_cmb_SelectedIndexChanged(object sender, EventArgs e)
         {
             //location 
             LocationVo Locationvo = (LocationVo)DefaultCbmInvoker.Invoke(new GetLocationMasterMntCbm(), new LocationVo());
-            after_location_cmb.DataSource = Locationvo.LocationListVo;
-            after_location_cmb.DisplayMember = "LocationCode";
+            cmbAfterLocation.DataSource = Locationvo.LocationListVo;
+            cmbAfterLocation.DisplayMember = "LocationCode";
 
         }
         private void ok_btn_Click(object sender, EventArgs e)
@@ -136,25 +136,25 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
 
                     WareHouseMainId = WareHouseMainVo.WareHouseMainId,
                     ///
-                    BeforeLocationId = ((LocationVo)this.before_location_cmb.SelectedItem).LocationId,
-                    DetailPositionId = ((DetailPositionVo)this.detail_position_cmb.SelectedItem).DetailPositionId,
-                    AfterLocationId = ((LocationVo)this.after_location_cmb.SelectedItem).LocationId,
-                    AssetId = ((AssetVo)this.no_cbm.SelectedItem).AssetId,
-                    QTY = Int16.Parse(qty_txt.Text),
-                    UnitId = ((UnitVo)unit_cmb.SelectedItem).UnitId,
-                    AssetNo = Int16.Parse(no_cbm.Text),
-                    AccountCodeId = ((AccountCodeVo)this.account_code_cmb.SelectedItem).AccountCodeId,
-                    AccountLocationId = ((AccountLocationVo)this.section_cd_cmb.SelectedItem).AccountLocationId,
-                    RankId = ((RankVo)this.rank_code_cmb.SelectedItem).RankId,
-                    CommnetsData = comments_txt.Text,
-                    StartDepreciation = start_depreciation_dtp.Value,
-                    EndDepreciation = end_depreciation_dtp.Value,
-                    CurrentDepreciation = double.Parse(current_depreciation_txt.Text),
-                    MonthlyDepreciation = double.Parse(monthl_depreciation_txt.Text),
-                    AccumDepreciation = double.Parse(accum_depreciation_txt.Text),
-                    NetValue = double.Parse(net_value_txt.Text),
+                    BeforeLocationId = ((LocationVo)this.cmbBeforeLocation.SelectedItem).LocationId,
+                    DetailPositionId = ((DetailPositionVo)this.cmbDetailPosition.SelectedItem).DetailPositionId,
+                    AfterLocationId = ((LocationVo)this.cmbAfterLocation.SelectedItem).LocationId,
+                    AssetId = ((AssetVo)this.cmbNoNumber.SelectedItem).AssetId,
+                    QTY = Int16.Parse(txtqty.Text),
+                    UnitId = ((UnitVo)cmbUnit.SelectedItem).UnitId,
+                    AssetNo = Int16.Parse(cmbNoNumber.Text),
+                    AccountCodeId = ((AccountCodeVo)this.cmbAccountCode.SelectedItem).AccountCodeId,
+                    AccountLocationId = ((AccountLocationVo)this.cmbSectionCode.SelectedItem).AccountLocationId,
+                    RankId = ((RankVo)this.cmbRankCode.SelectedItem).RankId,
+                    CommnetsData = txtComment.Text,
+                    StartDepreciation = dtpStartDepreciation.Value,
+                    EndDepreciation = dtpEndDepreciation.Value,
+                    CurrentDepreciation = double.Parse(txtCurrentDepreciation.Text),
+                    MonthlyDepreciation = double.Parse(txtMonthlyDepreciation.Text),
+                    AccumDepreciation = double.Parse(txtAccumDepreciation.Text),
+                    NetValue = double.Parse(txtNetValue.Text),
                     //  LocationId = ((LocationVo)this.location_cmb.SelectedItem).LocationId,
-                    UserLocationId = ((UserLocationVo)this.user_location_name_cmb.SelectedItem).UserLocationId,
+                    UserLocationId = ((UserLocationVo)this.cmbUserName.SelectedItem).UserLocationId,
                     RegistrationDateTime = DateTime.Now,
                     FactoryCode = UserData.GetUserData().FactoryCode,
                     RegistrationUserCode = UserData.GetUserData().UserCode,
@@ -176,7 +176,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
 
                         if (outVo1.AffectedCount > 0)
                         {
-                            ValueObjectList<WareHouseMainVo> outVoWareHouse = (ValueObjectList<WareHouseMainVo>)DefaultCbmInvoker.Invoke(new GetWarehouseMainIdCbm(), new WareHouseMainVo() { AssetCode = asset_code_txt.Text });
+                            ValueObjectList<WareHouseMainVo> outVoWareHouse = (ValueObjectList<WareHouseMainVo>)DefaultCbmInvoker.Invoke(new GetWarehouseMainIdCbm(), new WareHouseMainVo() { AssetCode = txtAssetCode.Text });
 
                             InvertoryVo outVoCheckTime = new InvertoryVo();
                             InvertoryVo inVoCheckTime = new InvertoryVo()
@@ -186,12 +186,12 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
                                 InvertoryValue = true,
                                 RegistrationUserCode = UserData.GetUserData().UserName,
                                 FactoryCode = UserData.GetUserData().FactoryCode,
-                                LocationID = ((LocationVo)this.after_location_cmb.SelectedItem).LocationId,
+                                LocationID = ((LocationVo)this.cmbAfterLocation.SelectedItem).LocationId,
                             };
                             outVoCheckTime = (InvertoryVo)DefaultCbmInvoker.Invoke(new AddInvertoryCheckCbm(), inVoCheckTime);
                         }
-                        unit_cmb.Text = "";
-                        asset_code_txt.Text = "";
+                        cmbUnit.Text = "";
+                        txtAssetCode.Text = "";
                     }
                     AccountMainVo accountOutVo = new AccountMainVo();
                     accountOutVo = (AccountMainVo)DefaultCbmInvoker.Invoke(new UpdateItemAccountMainCbm(), new AccountMainVo() { AssetId = inVo.AssetId, LocationId = inVo.AfterLocationId, RankId = inVo.RankId, UserLocationId = inVo.UserLocationId, RegistrationUserCode = inVo.RegistrationUserCode, RegistrationDateTime = DateTime.Now, });
@@ -205,14 +205,14 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
                 }
                 if (outVo1.AffectedCount > 0)
                 {
-                    messageData = new MessageData("mmce00001", Properties.Resources.mmce00001, asset_code_lbl.Text + " : " + asset_code_txt.Text);
+                    messageData = new MessageData("mmce00001", Properties.Resources.mmce00001, asset_code_lbl.Text + " : " + txtAssetCode.Text);
                     logger.Info(messageData);
                     popUpMessage.Information(messageData, Text);
                     return;
                 }
                 if (outVo2.AffectedCount > 0)
                 {
-                    messageData = new MessageData("mmce00001", Properties.Resources.mmce00001, asset_code_lbl.Text + " : " + asset_code_txt.Text);
+                    messageData = new MessageData("mmce00001", Properties.Resources.mmce00001, asset_code_lbl.Text + " : " + txtAssetCode.Text);
                     logger.Info(messageData);
                     popUpMessage.Information(messageData, Text);
 
@@ -225,20 +225,20 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
 
         private void user_location_code_txt_TextChanged(object sender, EventArgs e)
         {
-            if ((user_location_code_txt.Text.Length == 13) || (user_location_code_txt.Text.Length == 10))
+            if ((txtUserCode.Text.Length == 13) || (txtUserCode.Text.Length == 10))
             {
                 WareHouseMainVo inVo = new WareHouseMainVo()
                 {
-                    UserTem = user_location_code_txt.Text
+                    UserTem = txtUserCode.Text
                 };
                 ValueObjectList<UserLocationVo> userlocationvo = (ValueObjectList<UserLocationVo>)DefaultCbmInvoker.Invoke(new GetUserLocationCbm(), new UserLocationVo { UserLocationCode = inVo.UserTem });
-                user_location_name_cmb.DisplayMember = "UserLocationName";
-                user_location_name_cmb.DataSource = userlocationvo.GetList();
+                cmbUserName.DisplayMember = "UserLocationName";
+                cmbUserName.DataSource = userlocationvo.GetList();
             }
             else
             {
-                user_location_name_cmb.Text = "";
-                user_location_name_cmb.SelectedItem = null;
+                cmbUserName.Text = "";
+                cmbUserName.SelectedItem = null;
             }
         }
 
@@ -262,39 +262,39 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
            // if (asset_code_txt.Text.Length >= 10)
             {
                 //assetcodetrim = asset_code_txt.Text.Substring(0, 10);
-                string str = asset_code_txt.Text;
+                string str = txtAssetCode.Text;
                 string[] arrListStr = str.Split(',');
                 assetcodetrim = arrListStr[0];
             }
             if (WareHouseMainVo.WareHouseMainId > 0)
             {
                 ValueObjectList<AssetVo> assetmodelvo = (ValueObjectList<AssetVo>)DefaultCbmInvoker.Invoke(new GetAssetCbm(), new AssetVo { AssetNo = int.Parse(WareHouseMainVo.AssetNo.ToString()), AssetCode = assetcodetrim });
-                no_cbm.DisplayMember = "AssetNo";
-                no_cbm.DataSource = assetmodelvo.GetList();
+                cmbNoNumber.DisplayMember = "AssetNo";
+                cmbNoNumber.DataSource = assetmodelvo.GetList();
             }
             else
             {
                 ValueObjectList<AssetVo> assetmodelvo = (ValueObjectList<AssetVo>)DefaultCbmInvoker.Invoke(new GetAssetCbm(), new AssetVo { AssetNo = 10000, AssetCode = assetcodetrim });
-                no_cbm.DisplayMember = "AssetNo";
-                no_cbm.DataSource = assetmodelvo.GetList();
-                no_cbm.Text = "";
+                cmbNoNumber.DisplayMember = "AssetNo";
+                cmbNoNumber.DataSource = assetmodelvo.GetList();
+                cmbNoNumber.Text = "";
 
             }
         }
         private void callvaluecost(object sender, EventArgs e)
         {
             //call asset model ok
-            ValueObjectList<AssetVo> assetmodelvo = (ValueObjectList<AssetVo>)DefaultCbmInvoker.Invoke(new GetAssetCbm(), new AssetVo { AssetCode = assetcodetrim, AssetNo = int.Parse(no_cbm.Text) });
+            ValueObjectList<AssetVo> assetmodelvo = (ValueObjectList<AssetVo>)DefaultCbmInvoker.Invoke(new GetAssetCbm(), new AssetVo { AssetCode = assetcodetrim, AssetNo = int.Parse(cmbNoNumber.Text) });
 
-            asset_model_cmb.DisplayMember = "AssetModel";
-            asset_model_cmb.DataSource = assetmodelvo.GetList();
+            cmbAssetModel.DisplayMember = "AssetModel";
+            cmbAssetModel.DataSource = assetmodelvo.GetList();
 
             //life                    
-            asset_life_cmb.DisplayMember = "AssetLife";
-            asset_life_cmb.DataSource = assetmodelvo.GetList();
+            cmbAssetLife.DisplayMember = "AssetLife";
+            cmbAssetLife.DataSource = assetmodelvo.GetList();
             //AcquistionCost                    
-            acquisition_cost_cmb.DisplayMember = "AcquistionCost";
-            acquisition_cost_cmb.DataSource = assetmodelvo.GetList();
+            cmbAcquisitionCost.DisplayMember = "AcquistionCost";
+            cmbAcquisitionCost.DataSource = assetmodelvo.GetList();
             //call again datetime
             start_depreciation_dtp_CloseUp(sender, e);
             //call vaule
@@ -302,52 +302,52 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
 
         private void start_depreciation_dtp_CloseUp(object sender, EventArgs e)
         {
-            DateTime dt = start_depreciation_dtp.Value.Date.AddMonths(int.Parse(asset_life_cmb.Text) * 12);
-            end_depreciation_dtp.Value = dt.AddDays(-1);
+            DateTime dt = dtpStartDepreciation.Value.Date.AddMonths(int.Parse(cmbAssetLife.Text) * 12);
+            dtpEndDepreciation.Value = dt.AddDays(-1);
 
             // WareHouseMainVo
-            int YearNow = int.Parse(datetime_view_dtp.Value.ToString("yyyy"));
-            int MonthNow = int.Parse(datetime_view_dtp.Value.ToString("MM"));
-            int YearStart = int.Parse(start_depreciation_dtp.Value.ToString("yyyy"));
-            int MonthStart = int.Parse(start_depreciation_dtp.Value.ToString("MM"));
+            int YearNow = int.Parse(dtpDateTimeView.Value.ToString("yyyy"));
+            int MonthNow = int.Parse(dtpDateTimeView.Value.ToString("MM"));
+            int YearStart = int.Parse(dtpStartDepreciation.Value.ToString("yyyy"));
+            int MonthStart = int.Parse(dtpStartDepreciation.Value.ToString("MM"));
             WareHouseMainVo.MonthCounter = ((YearNow - YearStart) * 12) + (MonthNow - MonthStart);
 
             //callmonthly dep 
-            double monthl_value = double.Parse(acquisition_cost_cmb.Text) / (double.Parse(asset_life_cmb.Text) * 12);
-            monthl_depreciation_txt.Text = Math.Round(monthl_value, 3).ToString();
+            double monthl_value = double.Parse(cmbAcquisitionCost.Text) / (double.Parse(cmbAssetLife.Text) * 12);
+            txtMonthlyDepreciation.Text = Math.Round(monthl_value, 3).ToString();
 
             //call current_depreciation_txt
             double current_depr = (WareHouseMainVo.MonthCounter - 1) * monthl_value;
-            current_depreciation_txt.Text = Math.Round(current_depr, 3).ToString();
-            if (current_depr > double.Parse(acquisition_cost_cmb.Text))
+            txtCurrentDepreciation.Text = Math.Round(current_depr, 3).ToString();
+            if (current_depr > double.Parse(cmbAcquisitionCost.Text))
             {
-                current_depreciation_txt.Text = acquisition_cost_cmb.Text;
+                txtCurrentDepreciation.Text = cmbAcquisitionCost.Text;
             }
             if (current_depr < 0)
             {
-                current_depreciation_txt.Text = 0.ToString();
+                txtCurrentDepreciation.Text = 0.ToString();
             }
             //call accum_depreciation_txt
             double accum_depr = WareHouseMainVo.MonthCounter * monthl_value;
-            accum_depreciation_txt.Text = Math.Round(accum_depr, 3).ToString();
-            if (accum_depr > double.Parse(acquisition_cost_cmb.Text))
+            txtAccumDepreciation.Text = Math.Round(accum_depr, 3).ToString();
+            if (accum_depr > double.Parse(cmbAcquisitionCost.Text))
             {
-                accum_depreciation_txt.Text = acquisition_cost_cmb.Text;
+                txtAccumDepreciation.Text = cmbAcquisitionCost.Text;
             }
             if (accum_depr < 0)
             {
-                accum_depreciation_txt.Text = 0.ToString();
+                txtAccumDepreciation.Text = 0.ToString();
             }
             //call net_value_txt
-            double net_value = (double.Parse(acquisition_cost_cmb.Text) - accum_depr);
-            net_value_txt.Text = Math.Round(net_value, 3).ToString();
+            double net_value = (double.Parse(cmbAcquisitionCost.Text) - accum_depr);
+            txtNetValue.Text = Math.Round(net_value, 3).ToString();
             if (net_value < 0)
             {
-                net_value_txt.Text = 0.ToString();
+                txtNetValue.Text = 0.ToString();
             }
-            if (net_value > double.Parse(acquisition_cost_cmb.Text))
+            if (net_value > double.Parse(cmbAcquisitionCost.Text))
             {
-                net_value_txt.Text = acquisition_cost_cmb.Text;
+                txtNetValue.Text = cmbAcquisitionCost.Text;
             }
         }
         /*
@@ -367,89 +367,89 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
         */
         bool Checkdata()
         {
-            if (user_location_code_txt.Text.Trim().Length == 0)
+            if (txtUserCode.Text.Trim().Length == 0)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, UserCode_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                user_location_code_txt.Focus();
+                txtUserCode.Focus();
                 return false;
             }
-            if (asset_code_txt.Text.Trim().Length == 0)
+            if (txtAssetCode.Text.Trim().Length == 0)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, asset_code_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                asset_code_txt.Focus();
+                txtAssetCode.Focus();
                 return false;
             }
-            if (rank_code_cmb.SelectedItem == null)
+            if (cmbRankCode.SelectedItem == null)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, rank_code_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                rank_code_cmb.Focus();
+                cmbRankCode.Focus();
                 return false;
             }
-            if (account_code_cmb.SelectedItem == null)
+            if (cmbAccountCode.SelectedItem == null)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, account_code_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                account_code_cmb.Focus();
+                cmbAccountCode.Focus();
                 return false;
             }
-            if (user_location_name_cmb.SelectedItem == null)
+            if (cmbUserName.SelectedItem == null)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, user_location_name_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                user_location_name_cmb.Focus();
+                cmbUserName.Focus();
                 return false;
             }
-            if (section_cd_cmb.SelectedItem == null)
+            if (cmbSectionCode.SelectedItem == null)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, section_cd_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                section_cd_cmb.Focus();
+                cmbSectionCode.Focus();
                 return false;
             }
-            if (after_location_cmb.SelectedItem == null)
+            if (cmbAfterLocation.SelectedItem == null)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, location_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                after_location_cmb.Focus();
+                cmbAfterLocation.Focus();
                 return false;
             }
-            if (unit_cmb.SelectedItem == null)
+            if (cmbUnit.SelectedItem == null)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, unit_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                unit_cmb.Focus();
+                cmbUnit.Focus();
                 return false;
             }
-            if (before_location_cmb.SelectedItem == null)
+            if (cmbBeforeLocation.SelectedItem == null)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, before_location_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                before_location_cmb.Focus();
+                cmbBeforeLocation.Focus();
                 return false;
             }
-            if (detail_position_cmb.SelectedItem == null)
+            if (cmbDetailPosition.SelectedItem == null)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, detail_position_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                detail_position_cmb.Focus();
+                cmbDetailPosition.Focus();
                 return false;
             }
-            if (qty_txt.Text.Trim().Length == 0)
+            if (txtqty.Text.Trim().Length == 0)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, qty_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                qty_txt.Focus();
+                txtqty.Focus();
                 return false;
             }
 
-            if (end_depreciation_dtp.Value <= start_depreciation_dtp.Value)
+            if (dtpEndDepreciation.Value <= dtpStartDepreciation.Value)
             {
                 messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, end_depreciation_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
-                end_depreciation_dtp.Focus();
+                dtpEndDepreciation.Focus();
                 return false;
             }
             return true;

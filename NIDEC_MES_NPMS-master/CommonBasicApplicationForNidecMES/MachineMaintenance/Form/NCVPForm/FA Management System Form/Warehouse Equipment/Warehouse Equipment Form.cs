@@ -122,7 +122,8 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.FA_Management_Syste
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
+            Add_FA_Warehouse_Equipment_Form adFrm = new Add_FA_Warehouse_Equipment_Form();
+            adFrm.ShowDialog();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
