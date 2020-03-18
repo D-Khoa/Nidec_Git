@@ -28,6 +28,7 @@ namespace PC_QRCodeSystem.View
         {
             InitializeComponent();
             tc_StockOut.ItemSize = new Size(0, 1);
+            dtpStockOutDate.Value = DateTime.Today;
         }
 
         private void StockOutputForm_Load(object sender, EventArgs e)
@@ -44,27 +45,12 @@ namespace PC_QRCodeSystem.View
         {
             if (e.KeyCode == Keys.Enter)
             {
-                try
-                {
-                    string temp = txtUserCode.Text;
-                    if (temp.Contains(";"))
-                        temp = temp.Split(';')[0].Trim();
-                    if (temp.Length > 6) txtUserCode.Text = temp.Substring(temp.Length - 6);
-                    else txtUserCode.Text = temp;
-                    m_mes_user muser = new m_mes_user();
-                    muser = muser.GetUser(txtUserCode.Text);
-                    lbUserName.Text = muser.user_name;
-                    lbUserName.BackColor = Color.Lime;
-                    errorProvider.SetError(txtUserCode, null);
-                    txtBarcode.Focus();
-                }
-                catch (Exception ex)
-                {
-                    txtUserCode.Focus();
-                    lbUserName.Text = "User Name";
-                    lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-                    errorProvider.SetError(txtUserCode, "Wrong User Code" + Environment.NewLine + ex.Message);
-                }
+                string temp = txtUserCode.Text;
+                if (temp.Contains(";"))
+                    temp = temp.Split(';')[0].Trim();
+                if (temp.Length > 6) txtUserCode.Text = temp.Substring(temp.Length - 6);
+                else txtUserCode.Text = temp;
+                txtBarcode.Focus();
             }
         }
 
@@ -75,6 +61,25 @@ namespace PC_QRCodeSystem.View
                 errorProvider.SetError(txtUserCode, null);
                 lbUserName.Text = "User Name";
                 lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+            }
+        }
+
+        private void txtUserCode_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                m_mes_user muser = new m_mes_user();
+                muser = muser.GetUser(txtUserCode.Text);
+                lbUserName.Text = muser.user_name;
+                lbUserName.BackColor = Color.Lime;
+                errorProvider.SetError(txtUserCode, null);
+            }
+            catch (Exception ex)
+            {
+                txtUserCode.Focus();
+                lbUserName.Text = "User Name";
+                lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                errorProvider.SetError(txtUserCode, "Wrong User Code" + Environment.NewLine + ex.Message);
             }
         }
         #endregion
@@ -215,6 +220,18 @@ namespace PC_QRCodeSystem.View
         {
             dgvMainStockOut.DataSource = null;
             dgvMainStockOut.Columns.Clear();
+            string temp = txtBarcode.Text;
+            if (temp.Contains(";"))
+            {
+                string[] barcode = temp.Split(';');
+                txtItemCode.Text = barcode[0].Trim();
+                txtInvoice.Text = barcode[3].Trim();
+            }
+            else
+            {
+                txtItemCode.Text = temp;
+                txtInvoice.Clear();
+            }
             if (cmbIssue.SelectedValue.ToString() == "20")
                 SearchSet(txtItemCode.Text, txtSetNumber.Text);
             else SearchNoSet(txtItemCode.Text, txtInvoice.Text);
@@ -250,9 +267,9 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void btnInspection_Click(object sender, EventArgs e)
+        private void btnPrint_Click(object sender, EventArgs e)
         {
-            tc_StockOut.SelectedTab = tab_Inspection;
+            tc_StockOut.SelectedTab = tab_Print;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -337,10 +354,14 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                pts_item itemdata = new pts_item();
+                itemdata = itemdata.GetItem(itemNumber);
+                double totalWHQty = itemdata.wh_qty;
+                txtWHQty.Text = totalWHQty.ToString();
                 pts_stock stockdata = new pts_stock();
                 stockdata.SearchItem(new pts_stock { item_cd = itemNumber, invoice = invoiceText });
-                double stockQty = stockdata.listStockItems.Select(x => x.packing_qty).Sum();
-                txtWHQty.Text = stockQty.ToString();
+                double totalPackingQty = stockdata.listStockItems.Select(x => x.packing_qty).Sum();
+                txtTotalPackingQty.Text = totalPackingQty.ToString();
                 dgvMainStockOut.DataSource = stockdata.listStockItems;
                 dgvMainStockOut.Columns["stock_id"].HeaderText = "ID";
                 dgvMainStockOut.Columns["packing_cd"].HeaderText = "Packing Code";
@@ -377,9 +398,13 @@ namespace PC_QRCodeSystem.View
                 return;
             }
             double deliveryQty = 0;
-            double stockQty = double.Parse(txtWHQty.Text);
+            double whQty = double.Parse(txtWHQty.Text);
             double stockoutQty = double.Parse(txtStockOutQty.Text);
-
+            if (stockoutQty > whQty)
+            {
+                CustomMessageBox.Notice("This item is not enough!");
+                return;
+            }
             //CALCULATOR STOCK AND STOCK OUT QTY
             pts_stock currentStock = new pts_stock();
             pts_supplier supplierData = new pts_supplier();
@@ -402,6 +427,17 @@ namespace PC_QRCodeSystem.View
 
                 #region ADD LIST STOCK AND LIST STOCK OUT
                 listStock.Add(currentStock);
+                listStockOut.Add(new pts_stockout_log
+                {
+                    packing_cd = currentStock.packing_cd,
+                    process_cd = processCD,
+                    issue_cd = (int)cmbIssue.SelectedValue,
+                    stockout_date = dtpStockOutDate.Value,
+                    stockout_user_cd = txtSetUserCD.Text,
+                    stockout_qty = deliveryQty,
+                    comment = txtComment.Text,
+                    remark = "N",
+                });
                 if (currentStock.packing_qty > 0)
                 {
                     listPrint.Add(new PrintItem
@@ -416,20 +452,6 @@ namespace PC_QRCodeSystem.View
                         isRec = true,
                         Label_Qty = 1,
                     });
-                }
-                listStockOut.Add(new pts_stockout_log
-                {
-                    packing_cd = currentStock.packing_cd,
-                    process_cd = processCD,
-                    issue_cd = (int)cmbIssue.SelectedValue,
-                    stockout_date = dtpStockOutDate.Value,
-                    stockout_user_cd = txtSetUserCD.Text,
-                    stockout_qty = deliveryQty,
-                    comment = txtComment.Text,
-                    remark = "N",
-                });
-                if (deliveryQty > 0)
-                {
                     listPrint.Add(new PrintItem
                     {
                         Item_Number = txtItemCode.Text,
@@ -459,7 +481,7 @@ namespace PC_QRCodeSystem.View
             }
             UpdateGridPrint(listPrint);
             UpdateGridStockOut(listStockOut);
-            tc_StockOut.SelectedTab = tab_Inspection;
+            tc_StockOut.SelectedTab = tab_Print;
         }
 
         /// <summary>
@@ -736,7 +758,7 @@ namespace PC_QRCodeSystem.View
                     double totalpackingQty = stockData.listStockItems.Sum(x => x.packing_qty);
                     double packingQty = double.Parse(txtSetStockOutQty.Text);
                     double orderQty = (double)dr.Cells["request_qty"].Value;
-                    double stockQty = (double)dr.Cells["wh_qty"].Value;
+                    //double stockQty = (double)dr.Cells["wh_qty"].Value;
                     double stockoutQty = 0;
                     double residualQty = 0;
                     if (dr.Cells["stockout_qty"].Value != null)
@@ -850,7 +872,7 @@ namespace PC_QRCodeSystem.View
         {
             isSet = true;
             if (dgvStockOut.Rows.Count > 0)
-                tc_StockOut.SelectedTab = tab_Inspection;
+                tc_StockOut.SelectedTab = tab_Print;
             else
                 CustomMessageBox.Notice("This set no data! Please check and try again!");
         }
@@ -936,16 +958,8 @@ namespace PC_QRCodeSystem.View
         #endregion
         #endregion
 
-        #region TAB_INSPECTION
+        #region TAB_PRINT
         #region BUTTONS EVENT
-        private void btnFinalRegister_Click(object sender, EventArgs e)
-        {
-            if (isSet) RegSet();
-            else RegNoSet();
-            pts_item itemData = new pts_item();
-            itemData.ListStockOutUpdateValue(listOut);
-        }
-
         private void btnInsClear_Click(object sender, EventArgs e)
         {
             listPlan.Clear();
@@ -1014,6 +1028,11 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
         }
+
+        private void btnPrintInspection_Click(object sender, EventArgs e)
+        {
+            tc_StockOut.SelectedTab = tab_Inspection;
+        }
         #endregion
 
         #region SUB EVENT
@@ -1041,6 +1060,16 @@ namespace PC_QRCodeSystem.View
         }
         #endregion
 
+        #endregion
+
+        #region TAB_INSPECTION
+        private void btnFinalRegister_Click(object sender, EventArgs e)
+        {
+            if (isSet) RegSet();
+            else RegNoSet();
+            pts_item itemData = new pts_item();
+            itemData.ListStockOutUpdateValue(listOut);
+        }
         #endregion
     }
 }

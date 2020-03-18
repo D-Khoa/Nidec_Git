@@ -67,7 +67,7 @@ namespace ConvertPremacFile.Model
             using (NpgsqlConnection connection = new NpgsqlConnection(Properties.Settings.Default.CONNECTSTRING_MES))
             {
                 connection.Open();
-                command = new NpgsqlCommand("DELETE FROM pts_supplier", connection);
+                command = new NpgsqlCommand("DELETE FROM pts_supplier; SELECT setval('public.pts_supplier_supplier_id_seq', 1, true);", connection);
                 result = command.ExecuteNonQuery();
                 connection.Close();
             }

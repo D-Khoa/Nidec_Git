@@ -8,9 +8,11 @@ namespace PC_QRCodeSystem.Model
     {
         #region ALL FIELDS
         public static string outputFolder { get; set; }
+        public static string backupFolder { get; set; }
         public static string premacFile { get; set; }
         public static string printerSName { get; set; }
         public string outputTempFolder { get; set; }
+        public string backupTempFolder { get; set; }
         public string premacFolder { get; set; }
         public string printerName { get; set; }
         public string settingFolder;
@@ -32,6 +34,7 @@ namespace PC_QRCodeSystem.Model
         {
             premacFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CPFXE049.txt";
             outputTempFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            backupTempFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             printerName = "LUKHAN Label Printer";
             premacFile = premacFolder;
             printerSName = printerName;
@@ -55,6 +58,7 @@ namespace PC_QRCodeSystem.Model
             listSetting.Add(nameof(printerName) + "=" + printerName);
             File.WriteAllLines(settingPath, listSetting);
             outputFolder = outputTempFolder;
+            backupFolder = backupTempFolder;
             printerSName = printerName;
             premacFile = premacFolder;
         }
@@ -76,6 +80,7 @@ namespace PC_QRCodeSystem.Model
                     if (line.StartsWith(propertyValue[i].Name)) propertyValue[i].SetValue(this, line.Split('=')[1]);
             }
             outputFolder = outputTempFolder;
+            backupFolder = backupTempFolder;
             printerSName = printerName;
             premacFile = premacFolder;
         }

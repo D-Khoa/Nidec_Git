@@ -64,6 +64,9 @@
             this.btnPasswordOK = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnBrowserBackup = new System.Windows.Forms.Button();
+            this.txtBackupFolder = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.grPrinter.SuspendLayout();
             this.grPremacFolder.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -105,7 +108,7 @@
             this.grPrinter.Controls.Add(this.cmbPrinter);
             this.grPrinter.Dock = System.Windows.Forms.DockStyle.Top;
             this.grPrinter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grPrinter.Location = new System.Drawing.Point(0, 240);
+            this.grPrinter.Location = new System.Drawing.Point(0, 265);
             this.grPrinter.Margin = new System.Windows.Forms.Padding(5);
             this.grPrinter.Name = "grPrinter";
             this.grPrinter.Padding = new System.Windows.Forms.Padding(5);
@@ -352,7 +355,7 @@
             this.panel5.Controls.Add(this.btnOK);
             this.panel5.Controls.Add(this.btnCancel);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 482);
+            this.panel5.Location = new System.Drawing.Point(0, 507);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(586, 80);
@@ -372,6 +375,9 @@
             // 
             // grOutFolder
             // 
+            this.grOutFolder.Controls.Add(this.btnBrowserBackup);
+            this.grOutFolder.Controls.Add(this.txtBackupFolder);
+            this.grOutFolder.Controls.Add(this.label9);
             this.grOutFolder.Controls.Add(this.btnBrowserOutput);
             this.grOutFolder.Controls.Add(this.txtOutputFolder);
             this.grOutFolder.Controls.Add(this.label1);
@@ -381,7 +387,7 @@
             this.grOutFolder.Margin = new System.Windows.Forms.Padding(5);
             this.grOutFolder.Name = "grOutFolder";
             this.grOutFolder.Padding = new System.Windows.Forms.Padding(5);
-            this.grOutFolder.Size = new System.Drawing.Size(586, 80);
+            this.grOutFolder.Size = new System.Drawing.Size(586, 105);
             this.grOutFolder.TabIndex = 3;
             this.grOutFolder.TabStop = false;
             this.grOutFolder.Text = "Output Folder";
@@ -461,13 +467,42 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Password";
             // 
+            // btnBrowserBackup
+            // 
+            this.btnBrowserBackup.Location = new System.Drawing.Point(470, 65);
+            this.btnBrowserBackup.Margin = new System.Windows.Forms.Padding(5);
+            this.btnBrowserBackup.Name = "btnBrowserBackup";
+            this.btnBrowserBackup.Size = new System.Drawing.Size(100, 30);
+            this.btnBrowserBackup.TabIndex = 14;
+            this.btnBrowserBackup.Text = "Browser";
+            this.btnBrowserBackup.UseVisualStyleBackColor = true;
+            this.btnBrowserBackup.Click += new System.EventHandler(this.btnBrowserBackup_Click);
+            // 
+            // txtBackupFolder
+            // 
+            this.txtBackupFolder.Location = new System.Drawing.Point(150, 69);
+            this.txtBackupFolder.Margin = new System.Windows.Forms.Padding(5);
+            this.txtBackupFolder.Name = "txtBackupFolder";
+            this.txtBackupFolder.Size = new System.Drawing.Size(300, 23);
+            this.txtBackupFolder.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(30, 69);
+            this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(99, 17);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Backup Folder";
+            // 
             // SettingForm
             // 
             this.AcceptButton = this.btnPasswordOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(586, 555);
+            this.ClientSize = new System.Drawing.Size(586, 587);
             this.ControlBox = false;
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.grPrinter);
@@ -531,5 +566,8 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox cbReceive;
+        private System.Windows.Forms.Button btnBrowserBackup;
+        private System.Windows.Forms.TextBox txtBackupFolder;
+        private System.Windows.Forms.Label label9;
     }
 }

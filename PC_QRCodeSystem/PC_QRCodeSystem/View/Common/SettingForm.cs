@@ -59,6 +59,18 @@ namespace PC_QRCodeSystem.View
                 txtOutputFolder.Text = Path.GetDirectoryName(openDialog.FileName);
         }
 
+        private void btnBrowserBackup_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.ValidateNames = true;
+            openDialog.CheckPathExists = false;
+            openDialog.CheckFileExists = false;
+            openDialog.FileName = "Backup Folder";
+            openDialog.Filter = "Text File (*.txt)|*.txt|All file (*.*)|*.*";
+            if (openDialog.ShowDialog() == DialogResult.OK)
+                txtBackupFolder.Text = Path.GetDirectoryName(openDialog.FileName);
+        }
+
         private void btnPrinterCheck_Click(object sender, EventArgs e)
         {
             //Check status of printer
@@ -108,6 +120,7 @@ namespace PC_QRCodeSystem.View
         {
             //Save and exit setting form
             settingItem.outputTempFolder = txtOutputFolder.Text;
+            settingItem.backupTempFolder = txtBackupFolder.Text;
             settingItem.premacFolder = txtPremacFolder.Text;
             settingItem.printerName = cmbPrinter.Text;
             settingItem.SaveSetting();
@@ -137,6 +150,7 @@ namespace PC_QRCodeSystem.View
         private void SetField()
         {
             txtOutputFolder.Text = settingItem.outputTempFolder;
+            txtBackupFolder.Text = settingItem.backupTempFolder;
             txtPremacFolder.Text = settingItem.premacFolder;
             cmbPrinter.Text = settingItem.printerName;
         }

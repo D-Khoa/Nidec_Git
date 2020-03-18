@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
@@ -118,6 +119,17 @@ namespace PC_QRCodeSystem
         #endregion
 
         #region SUB EVENT
+        public void Show()
+        {
+            var isExist = Application.OpenForms.OfType<FormCommon>().Where(x => x.Name == base.Name).Select(x => x);
+            if (isExist.Count() > 0)
+            {
+                CustomMessageBox.Notice(base.Text + " is openning! Please close it first!");
+                return;
+            }
+            else base.Show();
+        }
+
         private void FormCommon_Shown(object sender, EventArgs e)
         {
             FormCommon frm = (FormCommon)sender;

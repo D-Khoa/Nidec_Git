@@ -207,7 +207,7 @@
         }
 
         public static void printBarCodeNew(string itemNo, string itemName, string supplier, string invoice,
-                                string date, string qty, string supplierCode, string remark, bool isRec)
+                                string date, string qty, string supplierCode, string remark, bool isRec, int lbqty)
         {
             //itemNo = "A32-164D-X";
             //itemName = "SHAFT";
@@ -238,7 +238,7 @@
                             "0",            // if(MediaType==0) <not used> else <distance from BlackMark to perforation>. (Unit is mm)
                             8,              // 0 ~ 15
                             6,              // 2 ~ 6 (Unit is Inch)
-                            1               // 1 ~ 9999 copies
+                            lbqty               // 1 ~ 9999 copies
                             );
 
             if (rtn != LKBPRINT.LK_SUCCESS)

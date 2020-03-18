@@ -55,14 +55,14 @@ namespace PC_QRCodeSystem.Model
             {
                 if (printOneCoppy)
                 {
-                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec);
+                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, 1);
                 }
                 else
                 {
-                    for (int j = 0; j < listPrintItem[i].Label_Qty; j++)
-                    {
-                        TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec);
-                    }
+                    //for (int j = 0; j < listPrintItem[i].Label_Qty; j++)
+                    //{
+                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, listPrintItem[i].Label_Qty);
+                    //}
                 }
             }
             return true;
@@ -72,10 +72,10 @@ namespace PC_QRCodeSystem.Model
         {
             for (int i = 0; i < listPrintItem.Count; i++)
             {
-                for (int j = 0; j < qty; j++)
-                {
-                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec);
-                }
+                //for (int j = 0; j < qty; j++)
+                //{
+                TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, qty);
+                //}
             }
             return true;
         }
@@ -84,14 +84,14 @@ namespace PC_QRCodeSystem.Model
         {
             if (printOneCoppy)
             {
-                TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice, inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD, inItem.Remark, inItem.isRec);
+                TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice, inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD, inItem.Remark, inItem.isRec, 1);
             }
             else
             {
-                for (int j = 0; j < inItem.Label_Qty; j++)
-                {
-                    TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice, inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD, inItem.Remark, inItem.isRec);
-                }
+                //for (int j = 0; j < inItem.Label_Qty; j++)
+                //{
+                TfPrint.printBarCodeNew(inItem.Item_Number, inItem.Item_Name, inItem.SupplierName, inItem.Invoice, inItem.Delivery_Date.ToString("yyyy/MM/dd"), inItem.Delivery_Qty.ToString(), inItem.SupplierCD, inItem.Remark, inItem.isRec, inItem.Label_Qty);
+                //}
             }
             return true;
         }
