@@ -33,6 +33,7 @@ namespace PC_QRCodeSystem.View
         private void StockOutputForm_Load(object sender, EventArgs e)
         {
             GetCmb();
+            cmbIssue.Select();
         }
         #endregion
 
@@ -59,6 +60,7 @@ namespace PC_QRCodeSystem.View
                 }
                 catch (Exception ex)
                 {
+                    txtUserCode.Focus();
                     lbUserName.Text = "User Name";
                     lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
                     errorProvider.SetError(txtUserCode, "Wrong User Code" + Environment.NewLine + ex.Message);
@@ -97,6 +99,7 @@ namespace PC_QRCodeSystem.View
                 if (cmbIssue.SelectedValue.ToString() == "20") SearchSet(txtItemCode.Text, txtSetNumber.Text);
                 else SearchNoSet(txtItemCode.Text, txtInvoice.Text);
                 txtBarcode.Clear();
+                txtStockOutQty.Focus();
             }
         }
 
@@ -135,10 +138,11 @@ namespace PC_QRCodeSystem.View
             e.Value = code + ": " + iname;
         }
 
-        private void cmbIssue_TextChanged(object sender, EventArgs e)
+        private void cmbIssue_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbIssue.SelectedIndex > 0) pnlNoSetOption.Visible = true;
             else pnlNoSetOption.Visible = false;
+            cmbDestination.Select();
         }
         #endregion
 
@@ -152,7 +156,7 @@ namespace PC_QRCodeSystem.View
 
         private void cmbDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbDestination.Text)) txtStockOutQty.Focus();
+            if (!string.IsNullOrEmpty(cmbDestination.Text)) txtUserCode.Focus();
         }
         #endregion
 
@@ -176,7 +180,7 @@ namespace PC_QRCodeSystem.View
             if (e.RowIndex < 0) return;
             if (cmbIssue.SelectedValue.ToString() == "20")
             {
-                btnRegister.Enabled = true;
+                //btnRegister.Enabled = true;
                 btnRegister.Text = "9. Open Set";
                 if (e.ColumnIndex == dgvMainStockOut.Columns["btnOpenSet"].Index)
                 {
@@ -186,7 +190,7 @@ namespace PC_QRCodeSystem.View
             }
             else
             {
-                btnRegister.Enabled = true;
+                //btnRegister.Enabled = true;
                 btnRegister.Text = "9. Create Item";
             }
         }
@@ -195,13 +199,13 @@ namespace PC_QRCodeSystem.View
         {
             if (dgvMainStockOut.DataSource == null)
             {
-                btnRegister.Enabled = false;
+                //btnRegister.Enabled = false;
                 return;
             }
             if (cmbIssue.SelectedValue.ToString() == "20") btnRegister.Text = "9. Open Set";
             else btnRegister.Text = "9. Create Item";
             dgvMainStockOut.ClearSelection();
-            btnRegister.Enabled = false;
+            //btnRegister.Enabled = false;
         }
         #endregion
         #endregion
@@ -292,7 +296,6 @@ namespace PC_QRCodeSystem.View
             cmbDestination.Text = null;
             dgvMainStockOut.Columns.Clear();
             dgvMainStockOut.DataSource = null;
-            btnRegister.Enabled = false;
         }
 
         /// <summary>

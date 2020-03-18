@@ -46,6 +46,7 @@ namespace PC_QRCodeSystem.View
         {
             rbtnEven.Checked = true;
             tc_Main.SelectedTab = tab_Main;
+            txtItemNum.Focus();
         }
         #endregion
 
@@ -449,7 +450,6 @@ namespace PC_QRCodeSystem.View
             txtIncharge.Text = dr.Cells["incharge"].Value.ToString();
         }
         #endregion
-
         #endregion
 
         #region PRINT TAB

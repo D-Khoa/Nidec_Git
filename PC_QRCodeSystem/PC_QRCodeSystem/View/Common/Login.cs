@@ -7,86 +7,69 @@ namespace PC_QRCodeSystem
 {
     public partial class Login : Form
     {
+        #region VARIABLE
         m_mes_user mesuser = new m_mes_user();
         m_mes_user_role userrole = new m_mes_user_role();
         m_login_password loginpass = new m_login_password();
+        #endregion
 
+        #region FORM EVENT
         public Login()
         {
             InitializeComponent();
-            this.Text = lbTittle.Text + "-" + this.Text;
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
-
                 Version deploy = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
-
                 StringBuilder version = new StringBuilder();
                 version.Append("VERSION: ");
-                //version.Append(applicationName + "_");
                 version.Append(deploy.Major);
                 version.Append("_");
-                //version.Append(deploy.Minor);
-                //version.Append("_");
                 version.Append(deploy.Build);
                 version.Append("_");
                 version.Append(deploy.Revision);
-
                 lbVersion.Text = version.ToString();
             }
-            this.AcceptButton = null;
             txtUsername.Focus();
         }
 
-        /// <summary>
-        /// Press ENTER for jump to password textbox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (e.KeyCode == Keys.Enter)
+            if(keyData == Keys.Enter)
             {
-                string temp = txtUsername.Text;
-                if (temp.Contains(";"))
-                    txtUsername.Text = temp.Split(';')[0];
-                txtpass.Focus();
+                if (ActiveControl == txtUsername)
+                {
+                    string temp = txtUsername.Text;
+                    if (temp.Contains(";"))
+                        txtUsername.Text = temp.Split(';')[0];
+                    txtpass.Focus();
+                    return true;
+                }
+                else if (ActiveControl == txtpass)
+                {
+                    btnOK.PerformClick();
+                    return true;
+                }
             }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void txtpass_KeyDown(object sender, KeyEventArgs e)
+        private void Login_Shown(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                LoginEvent();
+            timerOnTimeSet.Enabled = false;
         }
+        #endregion
 
+        #region BUTTONS EVENT
         /// <summary>
         /// Click button OK for login
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
-        {
-            LoginEvent();
-        }
-
-        /// <summary>
-        /// Click button Cancel for return
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        /// <summary>
-        /// Login Event
-        /// </summary>
-        private void LoginEvent()
         {
             try
             {
@@ -123,17 +106,24 @@ namespace PC_QRCodeSystem
             catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
+                txtpass.Clear();
             }
         }
+
+        /// <summary>
+        /// Click button Cancel for return
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        #endregion
 
         private void timerOnTimeSet_Tick(object sender, EventArgs e)
         {
             UserData.onTime++;
-        }
-
-        private void Login_Shown(object sender, EventArgs e)
-        {
-            timerOnTimeSet.Enabled = false;
         }
     }
 }

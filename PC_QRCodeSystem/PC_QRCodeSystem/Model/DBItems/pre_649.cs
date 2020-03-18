@@ -182,8 +182,10 @@ namespace PC_QRCodeSystem.Model
         public void ExportCSV(List<pre_649> inList)
         {
             var properties = inList[0].GetType().GetProperties();
+            string foldername = SettingItem.outputFolder + @"\StockIn";
+            if (!Directory.Exists(foldername)) Directory.CreateDirectory(foldername);
             string filename = @"\stockin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            using (StreamWriter sw = new StreamWriter(SettingItem.outputFolder + filename))
+            using (StreamWriter sw = new StreamWriter(foldername + filename))
             {
                 string line = string.Empty;
                 //Write columns
