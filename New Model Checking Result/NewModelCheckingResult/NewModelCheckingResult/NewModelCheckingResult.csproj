@@ -63,7 +63,14 @@
     <Compile Include="Model\DBItems\m_mes_user.cs" />
     <Compile Include="Model\DBItems\m_mes_user_role.cs" />
     <Compile Include="Model\DBItems\m_user_position.cs" />
+    <Compile Include="Model\DBItems\SettingItem.cs" />
     <Compile Include="Model\DBItems\UserData.cs" />
+    <Compile Include="View\Common\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\ChangePassword.Designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Common\FormCommon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +95,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\Common\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Common\FormCommon.resx">
       <DependentUpon>FormCommon.cs</DependentUpon>
     </EmbeddedResource>
