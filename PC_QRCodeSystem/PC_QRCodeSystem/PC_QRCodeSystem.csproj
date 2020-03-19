@@ -181,6 +181,12 @@
     <Compile Include="View\PCForm\MainStock\StockOutputForm.Designer.cs">
       <DependentUpon>StockOutputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PCForm\MainStock\StockOutV2Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PCForm\MainStock\StockOutV2Form.Designer.cs">
+      <DependentUpon>StockOutV2Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PCForm\PCForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\MainStock\StockOutputForm.resx">
       <DependentUpon>StockOutputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PCForm\MainStock\StockOutV2Form.resx">
+      <DependentUpon>StockOutV2Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\PCForm.resx">
       <DependentUpon>PCForm.cs</DependentUpon>

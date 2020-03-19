@@ -147,7 +147,6 @@ namespace PC_QRCodeSystem.View
         {
             if (cmbIssue.SelectedIndex > 0) pnlNoSetOption.Visible = true;
             else pnlNoSetOption.Visible = false;
-            cmbDestination.Select();
         }
         #endregion
 
