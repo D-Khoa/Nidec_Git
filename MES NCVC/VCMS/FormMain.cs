@@ -95,8 +95,8 @@ namespace Com.Nidec.Mes.VCMS
         /// <param name="e"></param>
         private void jig_repair_btn_Click(object sender, EventArgs e)
         {
-            JigRepairInformationForm reportdowntimeform = new JigRepairInformationForm();
-            reportdowntimeform.ShowDialog();
+            //JigRepairInformationForm reportdowntimeform = new JigRepairInformationForm();
+            //reportdowntimeform.ShowDialog();
         }
         /// <summary>
         /// Register Drawing Click
@@ -105,8 +105,8 @@ namespace Com.Nidec.Mes.VCMS
         /// <param name="e"></param>
         private void DrawRegist_btn_Click(object sender, EventArgs e)
         {
-            DrawForm drawform = new DrawForm();
-            drawform.ShowDialog();
+            //DrawForm drawform = new DrawForm();
+            //drawform.ShowDialog();
         }
         /// <summary>
         /// Document Management Click
@@ -115,8 +115,8 @@ namespace Com.Nidec.Mes.VCMS
         /// <param name="e"></param>
         private void Doc_Main_btn_Click(object sender, EventArgs e)
         {
-            DocumentForm docfrm = new DocumentForm();
-            docfrm.ShowDialog();
+            //DocumentForm docfrm = new DocumentForm();
+            //docfrm.ShowDialog();
         }
         /// <summary>
         /// Warehouse Management Click
@@ -312,18 +312,18 @@ namespace Com.Nidec.Mes.VCMS
         }
         private void Asset_btn_Click(object sender, EventArgs e)
         {
-            AssetForm asf = new AssetForm();
-            asf.ShowDialog();
+            //AssetForm asf = new AssetForm();
+            //asf.ShowDialog();
         }
         private void Rank_btn_Click(object sender, EventArgs e)
         {
-            RankForm rkf = new RankForm();
-            rkf.ShowDialog();
+            //RankForm rkf = new RankForm();
+            //rkf.ShowDialog();
         }
         private void User_Localtion_btn_Click(object sender, EventArgs e)
         {
-            UserLocationForm ulf = new UserLocationForm();
-            ulf.ShowDialog();
+            //UserLocationForm ulf = new UserLocationForm();
+            //ulf.ShowDialog();
         }
         #endregion
 
@@ -347,32 +347,32 @@ namespace Com.Nidec.Mes.VCMS
 
         private void AccountCode_btn_Click(object sender, EventArgs e)
         {
-            AccountCodeForm acForm = new AccountCodeForm();
-            acForm.ShowDialog();
+            //AccountCodeForm acForm = new AccountCodeForm();
+            //acForm.ShowDialog();
         }
 
         private void AccountLocation_btn_Click(object sender, EventArgs e)
         {
-            AccountLocationForm acForm = new AccountLocationForm();
-            acForm.ShowDialog();
+            //AccountLocationForm acForm = new AccountLocationForm();
+            //acForm.ShowDialog();
         }
 
         private void account_equipments_btn_Click(object sender, EventArgs e)
         {
-            AccountMainForm accountForm = new AccountMainForm();
-            accountForm.ShowDialog();
+            //AccountMainForm accountForm = new AccountMainForm();
+            //accountForm.ShowDialog();
         }
 
         private void WarehouseManagement_New_frm_Click(object sender, EventArgs e)
         {
-            WarehouseMainForm nwe = new WarehouseMainForm();
-            nwe.ShowDialog();
+            //WarehouseMainForm nwe = new WarehouseMainForm();
+            //nwe.ShowDialog();
         }
 
         private void DetailPosition_btn_Click(object sender, EventArgs e)
         {
-            DetailPositionForm fdf = new DetailPositionForm();
-            fdf.ShowDialog();
+            //DetailPositionForm fdf = new DetailPositionForm();
+            //fdf.ShowDialog();
         }
 
         private void production_controller_btn_Click(object sender, EventArgs e)
@@ -385,8 +385,8 @@ namespace Com.Nidec.Mes.VCMS
 
         private void Unit_btn_Click(object sender, EventArgs e)
         {
-            UnitForm unitform = new UnitForm();
-            unitform.ShowDialog();
+            //UnitForm unitform = new UnitForm();
+            //unitform.ShowDialog();
         }
 
         private void ovenrange_btn_Click(object sender, EventArgs e)

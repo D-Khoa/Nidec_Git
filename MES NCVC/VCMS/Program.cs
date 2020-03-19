@@ -25,9 +25,7 @@ namespace Com.Nidec.Mes.VCMS
                 {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new LoginForm(
-
-                                                  Assembly.GetExecutingAssembly().ManifestModule.Name,
+                    Application.Run(new LoginForm(Assembly.GetExecutingAssembly().ManifestModule.Name,
                                                   Properties.Settings.Default.ApplicationTypeName,
                                                   Assembly.GetExecutingAssembly().GetName().Name, true));
                 }

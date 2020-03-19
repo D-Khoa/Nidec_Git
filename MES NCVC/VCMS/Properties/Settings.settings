@@ -17,5 +17,11 @@
     <Setting Name="SERVER_TIME_ZONE" Type="System.String" Scope="User">
       <Value Profile="(Default)">Singapore Standard Time</Value>
     </Setting>
+    <Setting Name="APPLICATION_ENVIRONMENT_SETTINGS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.setting</Value>
+    </Setting>
+    <Setting Name="APPLICATION_ENVIRONMENT_HEADER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NCVC MASTER MAINTENANCE</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

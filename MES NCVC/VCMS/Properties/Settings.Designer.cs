@@ -82,5 +82,29 @@ namespace Com.Nidec.Mes.VCMS.Properties {
                 this["SERVER_TIME_ZONE"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".setting")]
+        public string APPLICATION_ENVIRONMENT_SETTINGS {
+            get {
+                return ((string)(this["APPLICATION_ENVIRONMENT_SETTINGS"]));
+            }
+            set {
+                this["APPLICATION_ENVIRONMENT_SETTINGS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NCVC MASTER MAINTENANCE")]
+        public string APPLICATION_ENVIRONMENT_HEADER {
+            get {
+                return ((string)(this["APPLICATION_ENVIRONMENT_HEADER"]));
+            }
+            set {
+                this["APPLICATION_ENVIRONMENT_HEADER"] = value;
+            }
+        }
     }
 }
