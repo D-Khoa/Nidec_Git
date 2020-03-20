@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CONNECTSTRING_MES" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Server=192.168.145.12;Port=5432;UserId=mes;Password=dbuser;Database=mesdb;</Value>
+      <Value Profile="(Default)">Server=192.168.145.4;Port=5432;UserId=pqm;Password=dbuser;Database=iqc_db;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

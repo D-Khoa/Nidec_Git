@@ -28,18 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.lbTittle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtUsername = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.txtpass = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbVersion = new System.Windows.Forms.Label();
-            this.timerOnTimeSet = new System.Windows.Forms.Timer(this.components);
+            this.cbmname = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +51,7 @@
             this.lbTittle.Name = "lbTittle";
             this.lbTittle.Size = new System.Drawing.Size(448, 70);
             this.lbTittle.TabIndex = 4;
-            this.lbTittle.Text = "IQC CHECKING RESULT";
+            this.lbTittle.Text = "IQC NEW MODEL CHECKING RESULT";
             this.lbTittle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
@@ -69,14 +67,6 @@
             this.panel1.Size = new System.Drawing.Size(590, 70);
             this.panel1.TabIndex = 5;
             // 
-            // txtUsername
-            // 
-            this.txtUsername.Location = new System.Drawing.Point(217, 88);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(240, 20);
-            this.txtUsername.TabIndex = 6;
-            // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -84,7 +74,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 44);
-            this.btnCancel.TabIndex = 11;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -96,7 +86,7 @@
             this.btnOK.Name = "btnOK";
             this.btnOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnOK.Size = new System.Drawing.Size(100, 44);
-            this.btnOK.TabIndex = 9;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -108,7 +98,7 @@
             this.txtpass.Name = "txtpass";
             this.txtpass.PasswordChar = '*';
             this.txtpass.Size = new System.Drawing.Size(240, 20);
-            this.txtpass.TabIndex = 7;
+            this.txtpass.TabIndex = 2;
             this.txtpass.UseSystemPasswordChar = true;
             // 
             // label3
@@ -144,10 +134,13 @@
             this.lbVersion.TabIndex = 12;
             this.lbVersion.Text = "Version";
             // 
-            // timerOnTimeSet
+            // cbmname
             // 
-            this.timerOnTimeSet.Interval = 1000;
-            this.timerOnTimeSet.Tick += new System.EventHandler(this.timerOnTimeSet_Tick);
+            this.cbmname.FormattingEnabled = true;
+            this.cbmname.Location = new System.Drawing.Point(217, 91);
+            this.cbmname.Name = "cbmname";
+            this.cbmname.Size = new System.Drawing.Size(240, 21);
+            this.cbmname.TabIndex = 1;
             // 
             // Login
             // 
@@ -155,8 +148,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 262);
+            this.Controls.Add(this.cbmname);
             this.Controls.Add(this.lbVersion);
-            this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtpass);
@@ -170,7 +163,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
-            this.Shown += new System.EventHandler(this.Login_Shown);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -181,14 +173,13 @@
 
         private System.Windows.Forms.Label lbTittle;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.TextBox txtpass;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbVersion;
-        private System.Windows.Forms.Timer timerOnTimeSet;
+        private System.Windows.Forms.ComboBox cbmname;
     }
 }
 

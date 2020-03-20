@@ -13,31 +13,25 @@ namespace NewModelCheckingResult.View.Common
 {
     public partial class ChangePassword : Form
     {
-        m_login_password mLoginUser { get; set; }
+     
         ErrorProvider errorProvider { get; set; }
         public ChangePassword()
         {
             InitializeComponent();
-            mLoginUser = new m_login_password();
-            errorProvider = new ErrorProvider();
-            lbUsername.Text = UserData.username;
-            txtNewPass.Focus();
+          
         }
-
+        public string name
+        {
+            get { return lbUsername.Text; }
+            set { lbUsername.Text = value; }
+        }
+        private void ChangePassword_Load(object sender, EventArgs e)
+        {
+            name = UserData.username;
+        }
         private void txtNewPass_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
-            {
-                if (txtNewPass.Text.Length < 6)
-                {
-                    CustomMessageBox.Notice("Password contains at least 6 character!");
-                    txtNewPass.Focus();
-                }
-                else
-                {
-                    txtConfirmPass.Focus();
-                }
-            }
+            
         }
 
         private void txtConfirmPass_KeyDown(object sender, KeyEventArgs e)
@@ -54,33 +48,36 @@ namespace NewModelCheckingResult.View.Common
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            string mess = string.Empty;
+            TfSQL tf = new TfSQL();
+           // string mess = string.Empty;
             if (string.IsNullOrEmpty(txtNewPass.Text) || string.IsNullOrEmpty(txtConfirmPass.Text))
-                mess = "Please fill password and confirm password";
+                MessageBox.Show("Please fill password and confirm password!!","Notice", MessageBoxButtons.OK,MessageBoxIcon.Information);
             else
             {
                 if (txtConfirmPass.Text != txtNewPass.Text)
                 {
-                    mess = "Confirm password does not match!";
-                    txtConfirmPass.Focus();
+                    MessageBox.Show("Confirm password does not match!", "Warning", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    txtConfirmPass.Clear();
+                    txtNewPass.Clear();
                 }
                 else
                 {
-                    if (mLoginUser.ChangePassword(new m_login_password { user_cd = UserData.usercode, password = txtNewPass.Text }))
+                    tf.sqlExecuteScalarString("update iqc_user set user_pass = '" + txtNewPass.Text + "' where user_name = '" + lbUsername.Text + "'");
+                    DialogResult result = MessageBox.Show("Your password has been changed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (result == DialogResult.OK)
                     {
-                        mess = "Password change successfully!";
                         this.Close();
                     }
-                    else
-                        mess = "Password did not change successfully!";
                 }
+
             }
-            CustomMessageBox.Notice(mess);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+      
+      
     }
 }
