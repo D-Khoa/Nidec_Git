@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NewModelCheckingResult.Model;
 using NewModelCheckingResult.View.Common;
+using NewModelCheckingResult.View.DiagaugeForm;
 
 
 namespace NewModelCheckingResult
@@ -54,9 +56,10 @@ namespace NewModelCheckingResult
                 //  select user_pass from m_user where user_name = 'dang'
                 if (con.sqlExecuteScalarString(sqlpass) == txtpass.Text)
                 {
-                    FormCommon lt = new FormCommon();
+                    UserData.username = cbmname.Text;
+                    DiagaugeForm dg = new DiagaugeForm();
                     this.Hide();
-                    lt.ShowDialog();
+                    dg.ShowDialog();
                     this.Close();
                 }
                 else

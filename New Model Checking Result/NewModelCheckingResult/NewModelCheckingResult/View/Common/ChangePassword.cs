@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using NewModelCheckingResult.Model;
 
 namespace NewModelCheckingResult.View.Common
 {
@@ -20,10 +20,18 @@ namespace NewModelCheckingResult.View.Common
             InitializeComponent();
           
         }
-
+        public string name
+        {
+            get { return lbUsername.Text; }
+            set { lbUsername.Text = value; }
+        }
+        private void ChangePassword_Load(object sender, EventArgs e)
+        {
+            name = UserData.username;
+        }
         private void txtNewPass_KeyDown(object sender, KeyEventArgs e)
         {
-           
+            
         }
 
         private void txtConfirmPass_KeyDown(object sender, KeyEventArgs e)
@@ -40,12 +48,36 @@ namespace NewModelCheckingResult.View.Common
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-           
+            TfSQL tf = new TfSQL();
+           // string mess = string.Empty;
+            if (string.IsNullOrEmpty(txtNewPass.Text) || string.IsNullOrEmpty(txtConfirmPass.Text))
+                MessageBox.Show("Please fill password and confirm password!!","Notice", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            else
+            {
+                if (txtConfirmPass.Text != txtNewPass.Text)
+                {
+                    MessageBox.Show("Confirm password does not match!", "Warning", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    txtConfirmPass.Clear();
+                    txtNewPass.Clear();
+                }
+                else
+                {
+                    tf.sqlExecuteScalarString("update iqc_user set user_pass = '" + txtNewPass.Text + "' where user_name = '" + lbUsername.Text + "'");
+                    DialogResult result = MessageBox.Show("Your password has been changed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (result == DialogResult.OK)
+                    {
+                        this.Close();
+                    }
+                }
+
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+      
+      
     }
 }

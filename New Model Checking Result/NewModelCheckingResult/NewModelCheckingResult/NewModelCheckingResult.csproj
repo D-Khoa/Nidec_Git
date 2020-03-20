@@ -62,6 +62,7 @@
     <Compile Include="Model\Class\TfGeneral.cs" />
     <Compile Include="Model\Class\TfSQL.cs" />
     <Compile Include="Model\Class\VBStrings.cs" />
+    <Compile Include="Model\DBItems\UserData.cs" />
     <Compile Include="View\Common\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,9 +131,7 @@
   <ItemGroup>
     <None Include="Resources\NIDEC_Logo_small_1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\DBItems\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
