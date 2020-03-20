@@ -8,5 +8,6 @@
         public string item_unit { get; set; }
         public double request_qty { get; set; }
         public double wh_qty { get; set; }
+        public double stockout_qty { get; set; }
     }
 }
