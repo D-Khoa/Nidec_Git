@@ -40,5 +40,10 @@ namespace PC_QRCodeSystem.Model
         {
             return MessageBox.Show(message, "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
+
+        public static DialogResult QuestionChange(string message)
+        {
+            return MessageBox.Show(message, "Question for change", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+        }
     }
 }
