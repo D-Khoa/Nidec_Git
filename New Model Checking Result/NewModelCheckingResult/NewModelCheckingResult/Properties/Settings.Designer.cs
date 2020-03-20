@@ -25,7 +25,7 @@ namespace NewModelCheckingResult.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.145.12;Port=5432;UserId=mes;Password=dbuser;Database=mesdb;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.145.4;Port=5432;UserId=pqm;Password=dbuser;Database=iqc_db;")]
         public string CONNECTSTRING_MES {
             get {
                 return ((string)(this["CONNECTSTRING_MES"]));

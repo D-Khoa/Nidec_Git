@@ -41,6 +41,9 @@
     <Reference Include="npgsql">
       <HintPath>..\..\..\FW\NidecMES\Dll\npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,17 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Class\CSVUtility.cs" />
-    <Compile Include="Model\Class\CustomMessageBox.cs" />
-    <Compile Include="Model\Class\EncryptDecrypt.cs" />
-    <Compile Include="Model\Class\ExcelClass2019.cs" />
-    <Compile Include="Model\Class\PSQL.cs" />
-    <Compile Include="Model\DBItems\m_login_password.cs" />
-    <Compile Include="Model\DBItems\m_mes_user.cs" />
-    <Compile Include="Model\DBItems\m_mes_user_role.cs" />
-    <Compile Include="Model\DBItems\m_user_position.cs" />
-    <Compile Include="Model\DBItems\SettingItem.cs" />
-    <Compile Include="Model\DBItems\UserData.cs" />
+    <Compile Include="Model\Class\ExcelClass.cs" />
+    <Compile Include="Model\Class\ExcelClassnew.cs" />
+    <Compile Include="Model\Class\TfGeneral.cs" />
+    <Compile Include="Model\Class\TfSQL.cs" />
+    <Compile Include="Model\Class\VBStrings.cs" />
     <Compile Include="View\Common\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,7 +124,9 @@
   <ItemGroup>
     <None Include="Resources\NIDEC_Logo_small_1.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\DBItems\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
