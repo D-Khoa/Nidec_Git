@@ -51,7 +51,7 @@
             this.lbTittle.Name = "lbTittle";
             this.lbTittle.Size = new System.Drawing.Size(448, 70);
             this.lbTittle.TabIndex = 4;
-            this.lbTittle.Text = "IQC CHECKING RESULT";
+            this.lbTittle.Text = "IQC NEW MODEL CHECKING RESULT";
             this.lbTittle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
