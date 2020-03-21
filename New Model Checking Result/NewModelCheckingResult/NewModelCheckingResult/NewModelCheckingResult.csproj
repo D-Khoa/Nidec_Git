@@ -57,12 +57,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Class\CustomMessageBox.cs" />
     <Compile Include="Model\Class\ExcelClass.cs" />
     <Compile Include="Model\Class\ExcelClassnew.cs" />
+    <Compile Include="Model\Class\DatatableClass.cs" />
+    <Compile Include="Model\Class\PSQL.cs" />
     <Compile Include="Model\Class\TfGeneral.cs" />
     <Compile Include="Model\Class\TfSQL.cs" />
     <Compile Include="Model\Class\VBStrings.cs" />
+    <Compile Include="Model\DBItems\tbl_inspect_data.cs" />
+    <Compile Include="Model\DBItems\tbl_inspect_master.cs" />
+    <Compile Include="Model\DBItems\tbl_part_box.cs" />
     <Compile Include="Model\DBItems\UserData.cs" />
+    <Compile Include="View\BoxDataFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BoxDataFrom.Designer.cs">
+      <DependentUpon>BoxDataFrom.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Common\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +101,24 @@
     <Compile Include="View\DiagaugeForm\DiagaugeForm.Designer.cs">
       <DependentUpon>DiagaugeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\MainFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainFrm.Designer.cs">
+      <DependentUpon>MainFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MasterFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MasterFrm.Designer.cs">
+      <DependentUpon>MasterFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MeasurementFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MeasurementFrm.Designer.cs">
+      <DependentUpon>MeasurementFrm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -99,6 +129,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\BoxDataFrom.resx">
+      <DependentUpon>BoxDataFrom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Common\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +143,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\DiagaugeForm\DiagaugeForm.resx">
       <DependentUpon>DiagaugeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainFrm.resx">
+      <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MasterFrm.resx">
+      <DependentUpon>MasterFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MeasurementFrm.resx">
+      <DependentUpon>MeasurementFrm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
