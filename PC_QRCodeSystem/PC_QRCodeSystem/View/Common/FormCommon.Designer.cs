@@ -134,7 +134,7 @@
             this.btnCloseForm.Location = new System.Drawing.Point(15, 333);
             this.btnCloseForm.Name = "btnCloseForm";
             this.btnCloseForm.Size = new System.Drawing.Size(120, 50);
-            this.btnCloseForm.TabIndex = 9;
+            this.btnCloseForm.TabIndex = 3;
             this.btnCloseForm.TabStop = false;
             this.btnCloseForm.Text = "Close";
             this.btnCloseForm.UseVisualStyleBackColor = true;
@@ -166,7 +166,7 @@
             this.btnChangePassword.Location = new System.Drawing.Point(15, 213);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(120, 50);
-            this.btnChangePassword.TabIndex = 6;
+            this.btnChangePassword.TabIndex = 1;
             this.btnChangePassword.TabStop = false;
             this.btnChangePassword.Text = "Change Password";
             this.btnChangePassword.UseVisualStyleBackColor = true;

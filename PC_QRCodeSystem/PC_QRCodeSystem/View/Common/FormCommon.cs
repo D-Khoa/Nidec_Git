@@ -60,11 +60,15 @@ namespace PC_QRCodeSystem
         /// </summary>
         public List<string> listper { get; set; }
 
+        private Color tempColor { get; set; }
+
         public FormCommon()
         {
             InitializeComponent();
+            tempColor = new Color();
             listper = new List<string>();
             timerFormLoad.Enabled = true;
+            ControlLoadEvent(this, true);
         }
 
         private void FormCommon_Load(object sender, EventArgs e)
@@ -119,12 +123,42 @@ namespace PC_QRCodeSystem
         #endregion
 
         #region SUB EVENT
+        private void ControlLoadEvent(Control ctrl, bool isAdd)
+        {
+            foreach (Control c in ctrl.Controls)
+            {
+                if (c.Controls.Count > 0) ControlLoadEvent(c, true);
+                if (c.TabStop && isAdd)
+                {
+                    c.Enter += ControlEventEnter;
+                    c.Leave += ControlEventLeave;
+                }
+                else if (c.TabStop && !isAdd)
+                {
+                    c.Enter -= ControlEventEnter;
+                    c.Leave -= ControlEventLeave;
+                }
+            }
+        }
+
+        private void ControlEventEnter(object sender, EventArgs e)
+        {
+            tempColor = ((Control)sender).BackColor;
+            ((Control)sender).BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+        }
+
+        private void ControlEventLeave(object sender, EventArgs e)
+        {
+            ((Control)sender).BackColor = tempColor;
+            if (sender.GetType().Name == "Button") ((Button)sender).UseVisualStyleBackColor = true;
+        }
+
         public void Show()
         {
             var isExist = Application.OpenForms.OfType<FormCommon>().Where(x => x.Name == base.Name).Select(x => x);
             if (isExist.Count() > 0)
             {
-                CustomMessageBox.Notice(base.Text + " is openning! Please close it first!");
+                CustomMessageBox.Notice(base.Text + " is openning! Please close it first!" + Environment.NewLine + "Có một cửa sổ tương tự đang mở!");
                 return;
             }
             else base.Show();
