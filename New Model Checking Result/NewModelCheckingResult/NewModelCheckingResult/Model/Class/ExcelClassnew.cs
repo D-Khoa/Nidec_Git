@@ -308,7 +308,8 @@ namespace NewModelCheckingResult
         {
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
-            Excel.Worksheet xlWorkSheet;
+            Excel.Worksheet xlWorkSheet1;
+            Excel.Worksheet xlWorkSheet2;
             object misValue = System.Reflection.Missing.Value;
             try
             {
@@ -316,32 +317,55 @@ namespace NewModelCheckingResult
                 xlWorkBook = xlApp.Workbooks.Open(Application.StartupPath + @"\Template\G2-QA-IQC-F074Rev01.xlsx", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
 
                 #region ADD BOX INFO
-                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1); //add data sheet1
-                xlWorkSheet.Cells[3, 2] = inBox.part_name;
-                xlWorkSheet.Cells[4, 2] = inBox.part_number;
-                xlWorkSheet.Cells[5, 2] = inBox.model_cd;
-                xlWorkSheet.Cells[6, 2] = inBox.purpose_cmt;
-                xlWorkSheet.Cells[3, 15] = inBox.invoice;
-                xlWorkSheet.Cells[4, 15] = inBox.part_box_qty;
-                xlWorkSheet.Cells[5, 15] = inBox.part_box_lot;
-                xlWorkSheet.Cells[3, 20] = inBox.part_box_date.ToString("yyyy-MM-dd");
-                xlWorkSheet.Cells[4, 20] = inBox.vender_cd;
-                xlWorkSheet.Cells[5, 20] = inBox.incharge;
-                xlWorkSheet.Cells[6, 20] = inBox.incharge;
-                xlWorkSheet.Cells[8, 9] = "CP ITEMS (n = " + inBox.part_box_qty + ")";
-                #endregion
+                xlWorkSheet1 = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1); //add data sheet1
+                xlWorkSheet1.Cells[3, 2] = inBox.part_name;
+                xlWorkSheet1.Cells[4, 2] = inBox.part_number;
+                xlWorkSheet1.Cells[5, 2] = inBox.model_cd;
+                xlWorkSheet1.Cells[6, 2] = inBox.purpose_cmt;
+                xlWorkSheet1.Cells[3, 15] = inBox.invoice;
+                xlWorkSheet1.Cells[4, 15] = inBox.part_box_qty;
+                xlWorkSheet1.Cells[5, 15] = inBox.part_box_lot;
+                xlWorkSheet1.Cells[3, 20] = inBox.part_box_date.ToString("yyyy-MM-dd");
+                xlWorkSheet1.Cells[4, 20] = inBox.vender_cd;
+                xlWorkSheet1.Cells[5, 20] = inBox.incharge;
+                xlWorkSheet1.Cells[6, 20] = inBox.incharge;
+                xlWorkSheet1.Cells[8, 9] = "CP ITEMS (n = " + inBox.part_box_qty + ")";
                 if (inMaster.Count <= 16)
                 {
                     for (int i = 0; i < inMaster.Count; i++)
                     {
-                        xlWorkSheet.Cells[9, 9 + i] = inMaster[i].inspect_cd;
-                        xlWorkSheet.Cells[10, 9 + i] = inMaster[i].inspect_tool;
-                        xlWorkSheet.Cells[11, 9 + i] = inMaster[i].inspect_spec;
-                        xlWorkSheet.Cells[12, 9 + i] = inMaster[i].tol_plus;
-                        xlWorkSheet.Cells[13, 9 + i] = inMaster[i].tol_minus;
+                        xlWorkSheet1.Cells[9, 9 + i] = inMaster[i].inspect_cd;
+                        xlWorkSheet1.Cells[10, 9 + i] = inMaster[i].inspect_tool;
+                        xlWorkSheet1.Cells[11, 9 + i] = inMaster[i].inspect_spec;
+                        xlWorkSheet1.Cells[12, 9 + i] = inMaster[i].tol_plus;
+                        xlWorkSheet1.Cells[13, 9 + i] = inMaster[i].tol_minus;
                     }
                 }
-
+                else
+                {
+                    xlWorkSheet2 = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(2); //add data sheet2
+                    xlWorkSheet2.Cells[3, 2] = inBox.part_name;
+                    xlWorkSheet2.Cells[4, 2] = inBox.part_number;
+                    xlWorkSheet2.Cells[5, 2] = inBox.model_cd;
+                    xlWorkSheet2.Cells[6, 2] = inBox.purpose_cmt;
+                    xlWorkSheet2.Cells[3, 9] = inBox.invoice;
+                    xlWorkSheet2.Cells[4, 9] = inBox.part_box_qty;
+                    xlWorkSheet2.Cells[5, 9] = inBox.part_box_lot;
+                    xlWorkSheet2.Cells[3, 14] = inBox.part_box_date.ToString("yyyy-MM-dd");
+                    xlWorkSheet2.Cells[4, 14] = inBox.vender_cd;
+                    xlWorkSheet2.Cells[5, 14] = inBox.incharge;
+                    xlWorkSheet2.Cells[6, 14] = inBox.incharge;
+                    xlWorkSheet2.Cells[8, 2] = "CP ITEMS (n = " + inBox.part_box_qty + ")";
+                    for (int i = 0; i < inMaster.Count - 16; i++)
+                    {
+                        xlWorkSheet2.Cells[9, 2 + i] = inMaster[i].inspect_cd;
+                        xlWorkSheet2.Cells[10, 2 + i] = inMaster[i].inspect_tool;
+                        xlWorkSheet2.Cells[11, 2 + i] = inMaster[i].inspect_spec;
+                        xlWorkSheet2.Cells[12, 2 + i] = inMaster[i].tol_plus;
+                        xlWorkSheet2.Cells[13, 2 + i] = inMaster[i].tol_minus;
+                    }
+                }
+                #endregion
 
 
                 if (!Directory.Exists(@"C:\IQC_Excel")) Directory.CreateDirectory(@"C:\IQC_Excel");
