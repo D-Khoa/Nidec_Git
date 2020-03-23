@@ -46,8 +46,8 @@ namespace NewModelCheckingResult.Model
         {
             var result = from a in dt1.AsEnumerable()
                          join b in dt2.AsEnumerable()
-                         on new { x = a["serno"], y = a["inspectdate"] }
-                         equals new { x = b["serno"], y = b["inspectdate"] }
+                         on new { x = a["inspect_id"] }
+                         equals new { x = b["inspect_id"] }
                          select new
                          {
                              a,
@@ -65,10 +65,10 @@ namespace NewModelCheckingResult.Model
             {
                 var newrow = dtjoined.NewRow();
                 int n = row.b.ItemArray.Count();
-                object[] a = new object[n - 2];
-                for (int i = 0; i < n - 2; i++)
+                object[] a = new object[n - 1];
+                for (int i = 0; i < n - 1; i++)
                 {
-                    a[i] = row.b.ItemArray[i + 2];
+                    a[i] = row.b.ItemArray[i + 1];
                 }
                 newrow.ItemArray = (row.a.ItemArray.Concat(a)).ToArray();
                 dtjoined.Rows.Add(newrow);

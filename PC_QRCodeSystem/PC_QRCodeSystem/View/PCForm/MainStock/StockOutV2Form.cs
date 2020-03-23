@@ -225,7 +225,8 @@ namespace PC_QRCodeSystem.View
         #region ITEM QTY
         private void txtStockOutQty_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            //if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (char.IsLetter(e.KeyChar))
                 e.Handled = true;
         }
 
@@ -691,7 +692,9 @@ namespace PC_QRCodeSystem.View
         #region FIELDS EVENT
         private void txtSetOutQty_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) e.Handled = true;
+            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (char.IsLetter(e.KeyChar))
+                e.Handled = true;
         }
         #endregion
         #region SUBS EVENT
@@ -1089,7 +1092,9 @@ namespace PC_QRCodeSystem.View
         #region FIELDS EVEMT
         private void txtInsLabelQty_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) e.Handled = true;
+            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) 
+            if (char.IsLetter(e.KeyChar))
+                e.Handled = true;
         }
         #endregion
 

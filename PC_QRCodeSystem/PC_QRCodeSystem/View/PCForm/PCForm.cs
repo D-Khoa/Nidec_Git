@@ -51,8 +51,9 @@ namespace PC_QRCodeSystem.View
         /// <param name="e"></param>
         private void btnStockOut_Click(object sender, EventArgs e)
         {
-            StockOutV2Form outFrm = new StockOutV2Form();
+            //StockOutV2Form outFrm = new StockOutV2Form();
             //StockOutputForm outFrm = new StockOutputForm();
+            StockOutNewForm outFrm = new StockOutNewForm();
             outFrm.Show();
         }
 

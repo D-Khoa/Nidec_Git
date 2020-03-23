@@ -15,7 +15,7 @@ namespace NewModelCheckingResult.View
     {
         int insID = 0;
         int maxNo = 0;
-        int currNo = 0;
+        int currNo = 1;
         BindingList<tbl_inspect_data> listNewData { get; set; }
 
         public DGMeasureFrm(string boxid, tbl_inspect_master inItem)
@@ -24,7 +24,7 @@ namespace NewModelCheckingResult.View
             txtBoxID.Text = boxid;
             insID = inItem.inspect_id;
             txtInsCode.Text = inItem.inspect_cd;
-            txtInsName.Text = inItem.inspec_name;
+            txtInsName.Text = inItem.inspect_name;
             txtInsPart.Text = inItem.part_number;
             txtInsTool.Text = inItem.inspect_tool;
             txtInsSpec.Text = inItem.inspect_spec.ToString();
@@ -36,6 +36,7 @@ namespace NewModelCheckingResult.View
         private void DGMeasureFrm_Load(object sender, EventArgs e)
         {
             tbpEnterValue.Visible = false;
+            btnRefresh.PerformClick();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -47,6 +48,7 @@ namespace NewModelCheckingResult.View
         private void btnNew_Click(object sender, EventArgs e)
         {
             tbpEnterValue.Visible = true;
+            txtMeasureValue.Focus();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -56,13 +58,16 @@ namespace NewModelCheckingResult.View
                 tbl_inspect_data insData = new tbl_inspect_data();
                 int n = insData.AddMultiData(listNewData.ToList());
                 tbl_part_box boxData = new tbl_part_box();
-                if (boxData.Search(new tbl_part_box { part_box_cd = insData.part_box_cd }, false) > 0)
+                if (boxData.Search(new tbl_part_box { part_box_cd = listNewData[0].part_box_cd }, false) > 0)
                 {
                     boxData = boxData.listBox[0];
-                    if (!boxData.incharge.Contains(UserData.username)) boxData.incharge += "+" + UserData.username;
+                    if (string.IsNullOrEmpty(boxData.incharge)) boxData.incharge = UserData.username;
+                    else if (!boxData.incharge.Contains(UserData.username)) boxData.incharge += "+" + UserData.username;
                     boxData.UpdateIncharge(boxData.part_box_cd, boxData.incharge);
                 }
                 CustomMessageBox.Notice("Added " + n + " item!" + Environment.NewLine + "Đăng ký " + n + " con hàng!");
+                listNewData.Clear();
+                txtMeasureValue.Focus();
             }
             catch (Exception ex)
             {
@@ -72,12 +77,11 @@ namespace NewModelCheckingResult.View
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvNewMeasure.SelectedRows[0].Index < 0) return;
+            if (dgvNewMeasure.SelectedRows.Count <= 0) return;
             if (CustomMessageBox.Question("Do you want delete this item?" + Environment.NewLine + "Bạn có muốn xóa con hàng này?") == DialogResult.No)
                 return;
             listNewData.RemoveAt(dgvNewMeasure.SelectedRows[0].Index);
-            UpdateGridNew();
-            UpdateGridReg();
+            btnRefresh.PerformClick();
         }
 
         private void txtMeasureValue_KeyDown(object sender, KeyEventArgs e)
@@ -88,6 +92,7 @@ namespace NewModelCheckingResult.View
 
         private void btnEnterValue_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtMeasureValue.Text)) return;
             double measVal = double.Parse(txtMeasureValue.Text);
             double uslVal = double.Parse(txtUSL.Text);
             double lslVal = double.Parse(txtLSL.Text);
@@ -105,10 +110,11 @@ namespace NewModelCheckingResult.View
                 incharge = UserData.username
             };
             listNewData.Add(insData);
+            currNo++;
             UpdateGridNew();
-            UpdateGridReg();
+            //UpdateGridReg();
             txtMeasureValue.ResetText();
-            txtMeasureValue.Select();
+            txtMeasureValue.Focus();
         }
 
         private void txtMeasureValue_KeyPress(object sender, KeyPressEventArgs e)
@@ -137,6 +143,7 @@ namespace NewModelCheckingResult.View
                 if (dr.Cells["judge"].Value.ToString() == "1") dr.DefaultCellStyle.BackColor = Color.Red;
                 else dr.DefaultCellStyle.BackColor = Color.White;
             }
+            currNo = maxNo + 1;
         }
     }
 }

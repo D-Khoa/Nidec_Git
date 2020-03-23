@@ -68,7 +68,6 @@ namespace PC_QRCodeSystem
             tempColor = new Color();
             listper = new List<string>();
             timerFormLoad.Enabled = true;
-            ControlLoadEvent(this, true);
         }
 
         private void FormCommon_Load(object sender, EventArgs e)
@@ -83,6 +82,7 @@ namespace PC_QRCodeSystem
             lbOnlineTime.Text = TimeSpan.FromSeconds(UserData.onTime).ToString();
             SettingItem settingItem = new SettingItem();
             settingItem.LoadSetting();
+            ControlLoadEvent(this, true);
         }
         #endregion
 
@@ -144,7 +144,7 @@ namespace PC_QRCodeSystem
         private void ControlEventEnter(object sender, EventArgs e)
         {
             tempColor = ((Control)sender).BackColor;
-            ((Control)sender).BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+            ((Control)sender).BackColor = Color.FromKnownColor(KnownColor.Yellow);
         }
 
         private void ControlEventLeave(object sender, EventArgs e)

@@ -69,7 +69,7 @@ namespace PC_QRCodeSystem.View
                 SelectNextControl(ActiveControl, true, true, true, true);
                 return true;
             }
-            else if (keyData == Keys.Back)
+            else if (keyData == Keys.Escape)
             {
                 SelectNextControl(ActiveControl, false, true, true, true);
                 return true;
@@ -82,22 +82,29 @@ namespace PC_QRCodeSystem.View
         #region BUTTONS EVENT
         private void btnStockOut_Click(object sender, EventArgs e)
         {
-            int i = dgvSearch.SelectedRows[0].Index;
-            if (issueFlag == "30" && string.IsNullOrEmpty(txtComment.Text))
+            try
             {
-                CustomMessageBox.Notice("Need comment when scrap item!" + Environment.NewLine + "Vui lòng điền lí do hủy hàng!");
-                return;
-            }
-            else if (issueFlag == "20")
-            {
-                if (i < 0)
+                int i = dgvSearch.SelectedRows[0].Index;
+                if (issueFlag == "30" && string.IsNullOrEmpty(txtComment.Text))
                 {
-                    CustomMessageBox.Error("Please select one set!" + Environment.NewLine + "Vui lòng chọn một bộ nguyên liệu!");
+                    CustomMessageBox.Notice("Need comment when scrap item!" + Environment.NewLine + "Vui lòng điền lí do hủy hàng!");
                     return;
                 }
-                else OpenSet(i);
+                else if (issueFlag == "20")
+                {
+                    if (i < 0)
+                    {
+                        CustomMessageBox.Error("Please select one set!" + Environment.NewLine + "Vui lòng chọn một bộ nguyên liệu!");
+                        return;
+                    }
+                    else OpenSet(i);
+                }
+                else OutNoSet();
             }
-            else OutNoSet();
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

@@ -11,7 +11,7 @@ namespace NewModelCheckingResult.Model
     {
         public int inspect_id { get; set; }
         public string inspect_cd { get; set; }
-        public string inspec_name { get; set; }
+        public string inspect_name { get; set; }
         public string part_number { get; set; }
         public string inspect_tool { get; set; }
         public double inspect_spec { get; set; }
@@ -27,7 +27,7 @@ namespace NewModelCheckingResult.Model
         {
             PSQL SQL = new PSQL();
             string query = string.Empty;
-            query = "SELECT inspect_id, inspect_cd, inspec_name, part_number, inspect_tool, inspect_spec, tol_plus, tol_minus FROM tbl_inspect_master WHERE 1=1 ";
+            query = "SELECT inspect_id, inspect_cd, inspect_name, part_number, inspect_tool, inspect_spec, tol_plus, tol_minus FROM tbl_inspect_master WHERE 1=1 ";
             if (inItem.inspect_id > 0)
                 query += "AND inspect_id='" + inItem.inspect_id + "' ";
             if (!string.IsNullOrEmpty(inItem.inspect_cd))
@@ -45,7 +45,7 @@ namespace NewModelCheckingResult.Model
                 {
                     inspect_id = (int)reader["inspect_id"],
                     inspect_cd = reader["inspect_cd"].ToString(),
-                    inspec_name = reader["inspec_name"].ToString(),
+                    inspect_name = reader["inspect_name"].ToString(),
                     part_number = reader["part_number"].ToString(),
                     inspect_tool = reader["inspect_tool"].ToString(),
                     inspect_spec = (double)reader["inspect_spec"],
@@ -79,8 +79,8 @@ namespace NewModelCheckingResult.Model
             PSQL SQL = new PSQL();
             string query = string.Empty;
             SQL.Open();
-            query = "INSERT INTO tbl_inspect_master(inspect_cd, inspec_name, part_number, inspect_tool, inspect_spec, tol_plus, tol_minus) ";
-            query += "VALUES ('" + inItem.inspect_cd + "','" + inItem.inspec_name + "','" + inItem.part_number + "','" + inItem.inspect_tool + "','";
+            query = "INSERT INTO tbl_inspect_master(inspect_cd, inspect_name, part_number, inspect_tool, inspect_spec, tol_plus, tol_minus) ";
+            query += "VALUES ('" + inItem.inspect_cd + "','" + inItem.inspect_name + "','" + inItem.part_number + "','" + inItem.inspect_tool + "','";
             query += inItem.inspect_spec + "','" + inItem.tol_plus + "','" + inItem.tol_minus + "') ";
             int result = SQL.Command(query).ExecuteNonQuery();
             SQL.Close();

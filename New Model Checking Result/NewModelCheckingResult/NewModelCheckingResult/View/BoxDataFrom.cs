@@ -39,29 +39,23 @@ namespace NewModelCheckingResult.View
         private void UpdateGrid(bool isSearch)
         {
             tbl_inspect_data insData = new tbl_inspect_data();
-            tbl_inspect_master masterData = new tbl_inspect_master();
             DataTable dt1 = new DataTable();
-            DataTable dt2 = new DataTable();
             DataTable dtFinal = new DataTable();
             if (isSearch)
             {
-                //DateTime date = DateTime.Parse(txtDate.Text);
-                //int n = 3;
-                //ChangeDate:
-                //if (insData.Search(txtBoxID.Text, date) == 0)
-                //{
-                //    n--;
-                //    if (n > 0)
-                //    {
-                //        date = date.AddMonths(-1);
-                //        goto ChangeDate;
-                //    }
-                //}
                 insData.Search(txtBoxID.Text);
                 dt1 = insData.listData.CreateDatatableFromClass<tbl_inspect_data>();
-                dtFinal = DatatableClass.Joined(dt1, dt2);
-                dt1 = DatatableClass.Pivot(dt1, dt1.Columns["inspect_id"], dt1.Columns["inspect_data"]);
-                int masterQty = masterData.Search(new tbl_inspect_master { inspect_id = 0, part_number = txtPartNumber.Text });
+                if (dt1.Columns.Contains("inspect_date")) dt1.Columns.Remove("inspect_date");
+                if (dt1.Columns.Contains("judge")) dt1.Columns.Remove("judge");
+                dtFinal = DatatableClass.Pivot(dt1, dt1.Columns["item_no"], dt1.Columns["inspect_data"]);
+            }
+            tbl_inspect_master masterData = new tbl_inspect_master();
+            masterData.Search(new tbl_inspect_master { inspect_id = 0, part_number = txtPartNumber.Text });
+            for (int i = 0; i < dtFinal.Rows.Count; i++)
+            {
+                int id = int.Parse(dtFinal.Rows[i]["inspect_id"].ToString());
+                string insName = masterData.listMaster.Where(x => x.inspect_id == id).Select(x => x.inspect_name).First();
+                dtFinal.Rows[i]["inspect_id"] = insName;
             }
             dgvMain.DataSource = dtFinal;
         }
@@ -107,7 +101,7 @@ namespace NewModelCheckingResult.View
                 int n = boxData.Delete(boxID);
                 CustomMessageBox.Notice("Deleted box " + txtBoxID.Text + " !" + Environment.NewLine + "Đã xóa hộp " + txtBoxID.Text + " !");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }

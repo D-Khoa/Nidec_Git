@@ -66,7 +66,7 @@ namespace NewModelCheckingResult.View
                 {
                     inspect_cd = txtInsCode.Text,
                     part_number = txtInsPart.Text,
-                    inspec_name = txtInsName.Text,
+                    inspect_name = txtInsName.Text,
                     inspect_tool = cmbInsTool.Text,
                     inspect_spec = double.Parse(txtInsSpec.Text),
                     tol_plus = double.Parse(txtInsPlus.Text),
