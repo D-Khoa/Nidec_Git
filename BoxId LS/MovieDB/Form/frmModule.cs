@@ -428,9 +428,15 @@ namespace BoxIdDb
                     tf.sqlDataAdapterFillDatatableFromTesterDb(sql, ref dt1);
                     if (dt1.Rows.Count <= 0)
                     {
-                        sDate = sDate.AddMonths(1);
+                        if (sDate.Year.ToString() == "2015")
+                        {
+                            MessageBox.Show("Not Found!");
+                            goto B;
+                        }
+                        sDate = sDate.AddMonths(-1);
                         goto A;
                     }
+                    B:
                     System.Diagnostics.Debug.Print(sql);
 
                     // Get the tester data from last month's table and store it in the same datatable

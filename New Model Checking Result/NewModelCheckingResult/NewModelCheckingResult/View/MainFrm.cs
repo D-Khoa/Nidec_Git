@@ -41,7 +41,7 @@ namespace NewModelCheckingResult.View
         private void btnAddBox_Click(object sender, EventArgs e)
         {
             if (!CheckFields()) return;
-            string boxCD = txtPartNumber.Text + "#" + txtInvoice.Text;
+            string boxCD = txtPartNumber.Text + "#" + txtInvoice.Text + "#" + dtpDate.Value.ToString("yyyyMMdd");
             BoxDataFrom boxfrm = new BoxDataFrom(new tbl_part_box
             {
                 invoice = txtInvoice.Text,
@@ -52,7 +52,7 @@ namespace NewModelCheckingResult.View
                 part_number = txtPartNumber.Text,
                 vender_cd = txtVender.Text,
                 purpose_cmt = txtPurpose.Text
-            }, 32);
+            });
             boxfrm.ShowDialog();
         }
 
@@ -93,7 +93,7 @@ namespace NewModelCheckingResult.View
                     vender_cd = txtVender.Text,
                     purpose_cmt = txtPurpose.Text
                 }, cbCheckDate.Checked);
-                CustomMessageBox.Notice("Found " + itemQty + " boxes!" + Environment.NewLine + "Tìm được " + itemQty + " hộp dữ liệu!");
+                //CustomMessageBox.Notice("Found " + itemQty + " boxes!" + Environment.NewLine + "Tìm được " + itemQty + " hộp dữ liệu!");
             }
             dgvMain.DataSource = boxData.listBox;
             dgvMain.Columns["part_box_id"].HeaderText = "Box ID";
@@ -152,16 +152,16 @@ namespace NewModelCheckingResult.View
 
         private void ClearTextBox(Control ctrl)
         {
-            foreach (TextBox t in ctrl.Controls)
+            foreach (Control c in ctrl.Controls)
             {
-                t.Clear();
+                if (c.GetType().Name == "TextBox") c.ResetText();
             }
         }
 
         private void OpenBox(int index)
         {
             tbl_part_box boxData = dgvMain.Rows[index].DataBoundItem as tbl_part_box;
-            BoxDataFrom boxfrm = new BoxDataFrom(boxData, 32);
+            BoxDataFrom boxfrm = new BoxDataFrom(boxData);
             boxfrm.ShowDialog();
         }
         #endregion

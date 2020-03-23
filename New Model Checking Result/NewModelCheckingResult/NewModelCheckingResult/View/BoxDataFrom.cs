@@ -13,9 +13,9 @@ namespace NewModelCheckingResult.View
 {
     public partial class BoxDataFrom : Common.FormCommon
     {
-        private int limit { get; set; }
+        private int boxID { get; set; }
         private int current { get; set; }
-        public BoxDataFrom(tbl_part_box inBox, int limitQty)
+        public BoxDataFrom(tbl_part_box inBox)
         {
             InitializeComponent();
             txtBoxID.Text = inBox.part_box_cd;
@@ -26,8 +26,9 @@ namespace NewModelCheckingResult.View
             txtDate.Text = inBox.part_box_date.ToString("yyyy-MM-dd");
             txtVender.Text = inBox.vender_cd;
             txtPurpose.Text = inBox.purpose_cmt;
-            limit = limitQty;
+            txtLot.Text = inBox.part_box_lot;
             current = dgvMain.Rows.Count;
+            boxID = inBox.part_box_id;
         }
 
         private void BoxDataFrom_Load(object sender, EventArgs e)
@@ -44,18 +45,19 @@ namespace NewModelCheckingResult.View
             DataTable dtFinal = new DataTable();
             if (isSearch)
             {
-                DateTime date = DateTime.Parse(txtDate.Text);
-                int n = 3;
-                ChangeDate:
-                if (insData.Search(txtBoxID.Text, date) == 0)
-                {
-                    n--;
-                    if (n > 0)
-                    {
-                        date = date.AddMonths(-1);
-                        goto ChangeDate;
-                    }
-                }
+                //DateTime date = DateTime.Parse(txtDate.Text);
+                //int n = 3;
+                //ChangeDate:
+                //if (insData.Search(txtBoxID.Text, date) == 0)
+                //{
+                //    n--;
+                //    if (n > 0)
+                //    {
+                //        date = date.AddMonths(-1);
+                //        goto ChangeDate;
+                //    }
+                //}
+                insData.Search(txtBoxID.Text);
                 dt1 = insData.listData.CreateDatatableFromClass<tbl_inspect_data>();
                 dtFinal = DatatableClass.Joined(dt1, dt2);
                 dt1 = DatatableClass.Pivot(dt1, dt1.Columns["inspect_id"], dt1.Columns["inspect_data"]);
@@ -93,6 +95,22 @@ namespace NewModelCheckingResult.View
         private void btnExport_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDeleteBox_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CustomMessageBox.Question("Are you sure delete this box?" + Environment.NewLine + "Bạn có đồng ý xóa hộp dữ liệu này?") == DialogResult.No)
+                    return;
+                tbl_part_box boxData = new tbl_part_box();
+                int n = boxData.Delete(boxID);
+                CustomMessageBox.Notice("Deleted box " + txtBoxID.Text + " !" + Environment.NewLine + "Đã xóa hộp " + txtBoxID.Text + " !");
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
     }
 }

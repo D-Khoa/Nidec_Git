@@ -94,6 +94,7 @@
             this.btnCloseForm.TabStop = false;
             this.btnCloseForm.Text = "Close";
             this.btnCloseForm.UseVisualStyleBackColor = true;
+            this.btnCloseForm.Click += new System.EventHandler(this.btnCloseForm_Click);
             // 
             // btnChangePassword
             // 

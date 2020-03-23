@@ -31,11 +31,11 @@
             this.tcMaster = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
             this.tbpMain = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbTools = new System.Windows.Forms.ComboBox();
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPartNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtTools = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnAddMaster = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -52,13 +52,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtInsTool = new System.Windows.Forms.TextBox();
             this.txtInsCode = new System.Windows.Forms.TextBox();
             this.txtInsPart = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtInsName = new System.Windows.Forms.TextBox();
+            this.cmbInsTool = new System.Windows.Forms.ComboBox();
             this.tcMaster.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tbpMain.SuspendLayout();
@@ -100,11 +100,11 @@
             this.tbpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tbpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tbpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tbpMain.Controls.Add(this.cmbTools, 3, 0);
             this.tbpMain.Controls.Add(this.dgvMain, 0, 2);
             this.tbpMain.Controls.Add(this.label3, 2, 0);
             this.tbpMain.Controls.Add(this.txtPartNumber, 1, 0);
             this.tbpMain.Controls.Add(this.label1, 0, 0);
-            this.tbpMain.Controls.Add(this.txtTools, 3, 0);
             this.tbpMain.Controls.Add(this.btnSearch, 0, 1);
             this.tbpMain.Controls.Add(this.btnAddMaster, 1, 1);
             this.tbpMain.Controls.Add(this.btnClear, 3, 1);
@@ -122,13 +122,24 @@
             this.tbpMain.Size = new System.Drawing.Size(818, 352);
             this.tbpMain.TabIndex = 10;
             // 
+            // cmbTools
+            // 
+            this.cmbTools.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbTools.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbTools.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbTools.FormattingEnabled = true;
+            this.cmbTools.Location = new System.Drawing.Point(613, 3);
+            this.cmbTools.Name = "cmbTools";
+            this.cmbTools.Size = new System.Drawing.Size(195, 24);
+            this.cmbTools.TabIndex = 13;
+            this.cmbTools.SelectedIndexChanged += new System.EventHandler(this.cmbTools_SelectedIndexChanged);
+            // 
             // dgvMain
             // 
             this.dgvMain.AllowUserToAddRows = false;
             this.dgvMain.AllowUserToDeleteRows = false;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tbpMain.SetColumnSpan(this.dgvMain, 4);
-            this.dgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMain.Location = new System.Drawing.Point(11, 133);
             this.dgvMain.Margin = new System.Windows.Forms.Padding(4);
             this.dgvMain.Name = "dgvMain";
@@ -169,15 +180,6 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Part Number / Số Linh Kiện";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtTools
-            // 
-            this.txtTools.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTools.Location = new System.Drawing.Point(614, 4);
-            this.txtTools.Margin = new System.Windows.Forms.Padding(4);
-            this.txtTools.Name = "txtTools";
-            this.txtTools.Size = new System.Drawing.Size(193, 23);
-            this.txtTools.TabIndex = 2;
             // 
             // btnSearch
             // 
@@ -257,13 +259,13 @@
             this.tbpAddMaster.Controls.Add(this.label10, 2, 2);
             this.tbpAddMaster.Controls.Add(this.label2, 2, 1);
             this.tbpAddMaster.Controls.Add(this.label5, 2, 0);
-            this.tbpAddMaster.Controls.Add(this.txtInsTool, 3, 0);
             this.tbpAddMaster.Controls.Add(this.txtInsCode, 1, 1);
             this.tbpAddMaster.Controls.Add(this.txtInsPart, 1, 0);
             this.tbpAddMaster.Controls.Add(this.label6, 0, 1);
             this.tbpAddMaster.Controls.Add(this.label7, 0, 0);
             this.tbpAddMaster.Controls.Add(this.label4, 0, 2);
             this.tbpAddMaster.Controls.Add(this.txtInsName, 1, 2);
+            this.tbpAddMaster.Controls.Add(this.cmbInsTool, 3, 0);
             this.tbpAddMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbpAddMaster.Location = new System.Drawing.Point(4, 4);
             this.tbpAddMaster.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
@@ -391,15 +393,6 @@
             this.label5.Text = "Inspect Tool";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtInsTool
-            // 
-            this.txtInsTool.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInsTool.Location = new System.Drawing.Point(614, 4);
-            this.txtInsTool.Margin = new System.Windows.Forms.Padding(4);
-            this.txtInsTool.Name = "txtInsTool";
-            this.txtInsTool.Size = new System.Drawing.Size(193, 23);
-            this.txtInsTool.TabIndex = 4;
-            // 
             // txtInsCode
             // 
             this.txtInsCode.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -465,6 +458,15 @@
             this.txtInsName.Size = new System.Drawing.Size(193, 52);
             this.txtInsName.TabIndex = 3;
             // 
+            // cmbInsTool
+            // 
+            this.cmbInsTool.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbInsTool.FormattingEnabled = true;
+            this.cmbInsTool.Location = new System.Drawing.Point(613, 3);
+            this.cmbInsTool.Name = "cmbInsTool";
+            this.cmbInsTool.Size = new System.Drawing.Size(195, 24);
+            this.cmbInsTool.TabIndex = 30;
+            // 
             // MasterFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -501,7 +503,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPartNumber;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtTools;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnAddMaster;
         private System.Windows.Forms.Button btnSearch;
@@ -513,7 +514,6 @@
         private System.Windows.Forms.TextBox txtInsCode;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtInsTool;
         private System.Windows.Forms.TextBox txtInsPart;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtInsMinus;
@@ -525,5 +525,7 @@
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Button btnDelMaster;
         private System.Windows.Forms.DataGridView dgvMain;
+        private System.Windows.Forms.ComboBox cmbTools;
+        private System.Windows.Forms.ComboBox cmbInsTool;
     }
 }

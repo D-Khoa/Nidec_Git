@@ -102,6 +102,7 @@
             this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMain.Size = new System.Drawing.Size(805, 256);
             this.dgvMain.TabIndex = 5;
+            this.dgvMain.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMain_CellDoubleClick);
             // 
             // label3
             // 
@@ -121,7 +122,6 @@
             this.txtPartNumber.Location = new System.Drawing.Point(214, 34);
             this.txtPartNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txtPartNumber.Name = "txtPartNumber";
-            this.txtPartNumber.ReadOnly = true;
             this.txtPartNumber.Size = new System.Drawing.Size(195, 23);
             this.txtPartNumber.TabIndex = 9;
             this.txtPartNumber.TabStop = false;
@@ -192,6 +192,7 @@
             this.cmbTools.Name = "cmbTools";
             this.cmbTools.Size = new System.Drawing.Size(198, 24);
             this.cmbTools.TabIndex = 1;
+            this.cmbTools.SelectedIndexChanged += new System.EventHandler(this.cmbTools_SelectedIndexChanged);
             // 
             // MeasurementFrm
             // 
@@ -203,7 +204,7 @@
             this.name = "";
             this.Name = "MeasurementFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MeasurementFrm";
+            this.Text = "Measurement";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.MeasurementFrm_Load);
             this.Controls.SetChildIndex(this.tbpMain, 0);

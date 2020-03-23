@@ -44,15 +44,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtVender = new System.Windows.Forms.TextBox();
             this.txtPartName = new System.Windows.Forms.TextBox();
-            this.btnExport = new System.Windows.Forms.Button();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtLot = new System.Windows.Forms.TextBox();
-            this.btnMeasure = new System.Windows.Forms.Button();
-            this.btnRegister = new System.Windows.Forms.Button();
             this.dgvMain = new System.Windows.Forms.DataGridView();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.btnMeasure = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnDeleteBox = new System.Windows.Forms.Button();
             this.tbpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
@@ -79,21 +80,22 @@
             this.tbpMain.Controls.Add(this.label6, 2, 2);
             this.tbpMain.Controls.Add(this.txtVender, 3, 2);
             this.tbpMain.Controls.Add(this.txtPartName, 3, 0);
-            this.tbpMain.Controls.Add(this.btnExport, 3, 5);
             this.tbpMain.Controls.Add(this.txtDate, 3, 1);
             this.tbpMain.Controls.Add(this.label7, 2, 1);
             this.tbpMain.Controls.Add(this.label9, 0, 4);
             this.tbpMain.Controls.Add(this.label10, 2, 4);
             this.tbpMain.Controls.Add(this.txtLot, 1, 4);
-            this.tbpMain.Controls.Add(this.btnMeasure, 2, 5);
-            this.tbpMain.Controls.Add(this.btnRegister, 1, 5);
             this.tbpMain.Controls.Add(this.dgvMain, 2, 6);
+            this.tbpMain.Controls.Add(this.btnRegister, 0, 5);
+            this.tbpMain.Controls.Add(this.btnMeasure, 1, 5);
+            this.tbpMain.Controls.Add(this.btnExport, 2, 5);
+            this.tbpMain.Controls.Add(this.btnDeleteBox, 3, 5);
             this.tbpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbpMain.Location = new System.Drawing.Point(150, 70);
             this.tbpMain.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.tbpMain.Name = "tbpMain";
             this.tbpMain.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
-            this.tbpMain.RowCount = 7;
+            this.tbpMain.RowCount = 8;
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -101,6 +103,7 @@
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tbpMain.Size = new System.Drawing.Size(834, 392);
             this.tbpMain.TabIndex = 9;
@@ -277,18 +280,6 @@
             this.txtPartName.TabIndex = 26;
             this.txtPartName.TabStop = false;
             // 
-            // btnExport
-            // 
-            this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExport.Location = new System.Drawing.Point(626, 154);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(197, 92);
-            this.btnExport.TabIndex = 4;
-            this.btnExport.Text = "Export Excel / Xuất ra file Excel";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
             // txtDate
             // 
             this.txtDate.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -345,31 +336,6 @@
             this.txtLot.Size = new System.Drawing.Size(197, 23);
             this.txtLot.TabIndex = 1;
             // 
-            // btnMeasure
-            // 
-            this.btnMeasure.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnMeasure.Location = new System.Drawing.Point(421, 154);
-            this.btnMeasure.Margin = new System.Windows.Forms.Padding(4);
-            this.btnMeasure.Name = "btnMeasure";
-            this.btnMeasure.Size = new System.Drawing.Size(197, 92);
-            this.btnMeasure.TabIndex = 3;
-            this.btnMeasure.Text = "Measurement / Đo kich thước";
-            this.btnMeasure.UseVisualStyleBackColor = true;
-            this.btnMeasure.Click += new System.EventHandler(this.btnMeasure_Click);
-            // 
-            // btnRegister
-            // 
-            this.btnRegister.BackColor = System.Drawing.SystemColors.Control;
-            this.btnRegister.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRegister.Location = new System.Drawing.Point(216, 154);
-            this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(197, 92);
-            this.btnRegister.TabIndex = 2;
-            this.btnRegister.Text = "Register / Đăng Ký";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-            // 
             // dgvMain
             // 
             this.dgvMain.AllowUserToAddRows = false;
@@ -384,6 +350,54 @@
             this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMain.Size = new System.Drawing.Size(812, 134);
             this.dgvMain.TabIndex = 5;
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.BackColor = System.Drawing.SystemColors.Control;
+            this.btnRegister.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRegister.Location = new System.Drawing.Point(11, 154);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(197, 92);
+            this.btnRegister.TabIndex = 2;
+            this.btnRegister.Text = "Register / Đăng Ký";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // btnMeasure
+            // 
+            this.btnMeasure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnMeasure.Location = new System.Drawing.Point(216, 154);
+            this.btnMeasure.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMeasure.Name = "btnMeasure";
+            this.btnMeasure.Size = new System.Drawing.Size(197, 92);
+            this.btnMeasure.TabIndex = 3;
+            this.btnMeasure.Text = "Measurement / Đo kich thước";
+            this.btnMeasure.UseVisualStyleBackColor = true;
+            this.btnMeasure.Click += new System.EventHandler(this.btnMeasure_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnExport.Location = new System.Drawing.Point(421, 154);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(197, 92);
+            this.btnExport.TabIndex = 4;
+            this.btnExport.Text = "Export Excel / Xuất ra file Excel";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnDeleteBox
+            // 
+            this.btnDeleteBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteBox.Location = new System.Drawing.Point(625, 153);
+            this.btnDeleteBox.Name = "btnDeleteBox";
+            this.btnDeleteBox.Size = new System.Drawing.Size(199, 94);
+            this.btnDeleteBox.TabIndex = 34;
+            this.btnDeleteBox.Text = "Delete / Xóa Hộp";
+            this.btnDeleteBox.UseVisualStyleBackColor = true;
+            this.btnDeleteBox.Click += new System.EventHandler(this.btnDeleteBox_Click);
             // 
             // BoxDataFrom
             // 
@@ -434,5 +448,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtLot;
         private System.Windows.Forms.DataGridView dgvMain;
+        private System.Windows.Forms.Button btnDeleteBox;
     }
 }

@@ -21,17 +21,15 @@ namespace NewModelCheckingResult.View
 
         private void MasterFrm_Load(object sender, EventArgs e)
         {
-            tbl_inspect_master masterData = new tbl_inspect_master();
-            masterData.Search(new tbl_inspect_master { part_number = txtPartNumber.Text, inspect_tool = txtTools.Text });
-            dgvMain.DataSource = masterData.listMaster;
+            GetCmb();
+            UpdateGrid(true);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            tbl_inspect_master masterData = new tbl_inspect_master();
-            masterData.Search(new tbl_inspect_master { part_number = txtPartNumber.Text, inspect_tool = txtTools.Text });
-            dgvMain.DataSource = masterData.listMaster;
+            UpdateGrid(true);
         }
+
         private void btnAddMaster_Click(object sender, EventArgs e)
         {
             tcMaster.SelectedTab = tabAddMaster;
@@ -44,6 +42,7 @@ namespace NewModelCheckingResult.View
                 tbl_inspect_master masterData = dgvMain.SelectedRows[0].DataBoundItem as tbl_inspect_master;
                 int n = masterData.Delete(masterData.inspect_id);
                 CustomMessageBox.Notice("Deleted " + n + " master inspect!" + Environment.NewLine + "Đã xóa " + n + " hạng mục!");
+                UpdateGrid(true);
             }
             catch (Exception ex)
             {
@@ -54,7 +53,7 @@ namespace NewModelCheckingResult.View
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtPartNumber.ResetText();
-            txtTools.ResetText();
+            cmbTools.ResetText();
             dgvMain.DataSource = null;
         }
 
@@ -68,7 +67,7 @@ namespace NewModelCheckingResult.View
                     inspect_cd = txtInsCode.Text,
                     part_number = txtInsPart.Text,
                     inspec_name = txtInsName.Text,
-                    inspect_tool = txtInsTool.Text,
+                    inspect_tool = cmbInsTool.Text,
                     inspect_spec = double.Parse(txtInsSpec.Text),
                     tol_plus = double.Parse(txtInsPlus.Text),
                     tol_minus = double.Parse(txtInsMinus.Text)
@@ -90,6 +89,27 @@ namespace NewModelCheckingResult.View
         private void btnBack_Click(object sender, EventArgs e)
         {
             tcMaster.SelectedTab = tabMain;
+        }
+
+        private void cmbTools_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateGrid(true);
+        }
+
+        private void UpdateGrid(bool isSearch)
+        {
+            tbl_inspect_master masterData = new tbl_inspect_master();
+            if (isSearch) masterData.Search(new tbl_inspect_master { part_number = txtPartNumber.Text, inspect_tool = cmbTools.Text });
+            dgvMain.DataSource = masterData.listMaster;
+        }
+
+        private void GetCmb()
+        {
+            tbl_inspect_master masterData = new tbl_inspect_master();
+            cmbTools.DataSource = masterData.GetTools();
+            cmbTools.ResetText();
+            cmbInsTool.DataSource = masterData.GetTools();
+            cmbInsTool.ResetText();
         }
     }
 }

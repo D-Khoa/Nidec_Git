@@ -325,7 +325,7 @@
             this.name = "";
             this.Name = "MainFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainFrm";
+            this.Text = "Main Form";
             this.tittle = "FormCommon";
             this.Load += new System.EventHandler(this.MainFrm_Load);
             this.Controls.SetChildIndex(this.tbpMain, 0);

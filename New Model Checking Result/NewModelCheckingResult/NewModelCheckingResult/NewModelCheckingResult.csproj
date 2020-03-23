@@ -95,6 +95,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\MeasurementForm\DGMeasureFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MeasurementForm\DGMeasureFrm.Designer.cs">
+      <DependentUpon>DGMeasureFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\DiagaugeForm\DiagaugeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,16 +113,16 @@
     <Compile Include="View\MainFrm.Designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MasterFrm.cs">
+    <Compile Include="View\MeasurementForm\MasterFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\MasterFrm.Designer.cs">
+    <Compile Include="View\MeasurementForm\MasterFrm.Designer.cs">
       <DependentUpon>MasterFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MeasurementFrm.cs">
+    <Compile Include="View\MeasurementForm\MeasurementFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\MeasurementFrm.Designer.cs">
+    <Compile Include="View\MeasurementForm\MeasurementFrm.Designer.cs">
       <DependentUpon>MeasurementFrm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -147,10 +153,13 @@
     <EmbeddedResource Include="View\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MasterFrm.resx">
+    <EmbeddedResource Include="View\MeasurementForm\DGMeasureFrm.resx">
+      <DependentUpon>DGMeasureFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MeasurementForm\MasterFrm.resx">
       <DependentUpon>MasterFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MeasurementFrm.resx">
+    <EmbeddedResource Include="View\MeasurementForm\MeasurementFrm.resx">
       <DependentUpon>MeasurementFrm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

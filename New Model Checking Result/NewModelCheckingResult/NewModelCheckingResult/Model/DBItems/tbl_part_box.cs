@@ -21,6 +21,7 @@ namespace NewModelCheckingResult.Model
         public DateTime part_box_date { get; set; }
         public string vender_cd { get; set; }
         public string purpose_cmt { get; set; }
+        public string incharge { get; set; }
         public List<tbl_part_box> listBox { get; set; }
         public tbl_part_box()
         {
@@ -88,10 +89,32 @@ namespace NewModelCheckingResult.Model
             string query = string.Empty;
             SQL.Open();
             query = "INSERT INTO tbl_part_box(part_box_cd, part_number, part_name, model_cd, invoice, part_box_qty, part_box_lot, ";
-            query += "part_box_date, vender_cd, purpose_cmt) ";
+            query += "part_box_date, vender_cd, purpose_cmt, incharge) ";
             query += "VALUES ('" + inItem.part_box_cd + "','" + inItem.part_number + "','" + inItem.part_name + "','" + inItem.model_cd + "','";
             query += inItem.invoice + "','" + inItem.part_box_qty + "','" + inItem.part_box_lot + "','" + inItem.part_box_date + "','" + inItem.vender_cd;
-            query += "','" + inItem.purpose_cmt + "') ";
+            query += "','" + inItem.purpose_cmt + "','" + inItem.incharge + "') ";
+            int result = SQL.Command(query).ExecuteNonQuery();
+            SQL.Close();
+            return result;
+        }
+
+        public int UpdateIncharge(string boxid, string name)
+        {
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            SQL.Open();
+            query = "UPDATE tbl_part_box SET incharge='" + name + "' WHERE part_box_cd ='" + boxid + "'";
+            int result = SQL.Command(query).ExecuteNonQuery();
+            SQL.Close();
+            return result;
+        }
+
+        public int Delete(int boxid)
+        {
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            SQL.Open();
+            query = "DELETE FROM tbl_part_box WHERE part_box_id ='" + boxid + "' ";
             int result = SQL.Command(query).ExecuteNonQuery();
             SQL.Close();
             return result;

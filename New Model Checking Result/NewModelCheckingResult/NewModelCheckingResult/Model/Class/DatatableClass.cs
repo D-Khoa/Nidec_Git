@@ -82,12 +82,15 @@ namespace NewModelCheckingResult.Model
             Type type = typeof(T);
             var properties = type.GetProperties();
             for (int i = 0; i < properties.Length; i++)
-                dt.Columns.Add(properties[i].Name);
+            {
+                if (properties[i].PropertyType != typeof(List<T>))
+                    dt.Columns.Add(properties[i].Name);
+            }
             foreach (object o in inList)
             {
                 DataRow dr = dt.NewRow();
                 properties = o.GetType().GetProperties();
-                dr.ItemArray = properties.Select(x => x.GetValue(o)).ToArray();
+                dr.ItemArray = properties.Where(x => x.PropertyType != typeof(List<T>)).Select(x => x.GetValue(o)).ToArray();
                 dt.Rows.Add(dr);
             }
             return dt;
