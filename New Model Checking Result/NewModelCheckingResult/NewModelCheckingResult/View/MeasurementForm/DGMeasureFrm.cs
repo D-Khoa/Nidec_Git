@@ -15,7 +15,7 @@ namespace NewModelCheckingResult.View
     {
         int insID = 0;
         int maxNo = 0;
-        int currNo = 1;
+        int currNo = 0;
         BindingList<tbl_inspect_data> listNewData { get; set; }
 
         public DGMeasureFrm(string boxid, tbl_inspect_master inItem)
@@ -63,10 +63,14 @@ namespace NewModelCheckingResult.View
                     boxData = boxData.listBox[0];
                     if (string.IsNullOrEmpty(boxData.incharge)) boxData.incharge = UserData.username;
                     else if (!boxData.incharge.Contains(UserData.username)) boxData.incharge += "+" + UserData.username;
-                    boxData.UpdateIncharge(boxData.part_box_cd, boxData.incharge);
+                    int m = insData.GetMaxQty(boxData.part_box_cd);
+                    if (currNo < m) currNo = m;
+                    boxData.UpdateInchargeQty(boxData.part_box_cd, boxData.incharge, currNo);
                 }
                 CustomMessageBox.Notice("Added " + n + " item!" + Environment.NewLine + "Đăng ký " + n + " con hàng!");
+                currNo = 0;
                 listNewData.Clear();
+                btnRefresh.PerformClick();
                 txtMeasureValue.Focus();
             }
             catch (Exception ex)
@@ -92,29 +96,36 @@ namespace NewModelCheckingResult.View
 
         private void btnEnterValue_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMeasureValue.Text)) return;
-            double measVal = double.Parse(txtMeasureValue.Text);
-            double uslVal = double.Parse(txtUSL.Text);
-            double lslVal = double.Parse(txtLSL.Text);
-            string judge = "0";
-            if (measVal > uslVal || measVal < lslVal) judge = "1";
-            else judge = "0";
-            tbl_inspect_data insData = new tbl_inspect_data
+            try
             {
-                judge = judge,
-                item_no = currNo,
-                inspect_id = insID,
-                part_box_cd = txtBoxID.Text,
-                inspect_date = DateTime.Now,
-                inspect_data = measVal,
-                incharge = UserData.username
-            };
-            listNewData.Add(insData);
-            currNo++;
-            UpdateGridNew();
-            //UpdateGridReg();
-            txtMeasureValue.ResetText();
-            txtMeasureValue.Focus();
+                currNo++;
+                if (string.IsNullOrEmpty(txtMeasureValue.Text)) return;
+                double measVal = double.Parse(txtMeasureValue.Text);
+                double uslVal = double.Parse(txtUSL.Text);
+                double lslVal = double.Parse(txtLSL.Text);
+                string judge = "0";
+                if (measVal > uslVal || measVal < lslVal) judge = "1";
+                else judge = "0";
+                tbl_inspect_data insData = new tbl_inspect_data
+                {
+                    judge = judge,
+                    item_no = currNo,
+                    inspect_id = insID,
+                    part_box_cd = txtBoxID.Text,
+                    inspect_date = DateTime.Now,
+                    inspect_data = measVal,
+                    incharge = UserData.username
+                };
+                listNewData.Add(insData);
+                UpdateGridNew();
+                //UpdateGridReg();
+                txtMeasureValue.ResetText();
+                txtMeasureValue.Focus();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void txtMeasureValue_KeyPress(object sender, KeyPressEventArgs e)
@@ -136,14 +147,14 @@ namespace NewModelCheckingResult.View
         {
             tbl_inspect_data insData = new tbl_inspect_data();
             insData.Search(txtBoxID.Text);
-            maxNo = insData.GetMax(txtBoxID.Text);
+            maxNo = insData.GetMax(txtBoxID.Text, insID);
             dgvRegMeasure.DataSource = insData.listData;
             foreach (DataGridViewRow dr in dgvRegMeasure.Rows)
             {
                 if (dr.Cells["judge"].Value.ToString() == "1") dr.DefaultCellStyle.BackColor = Color.Red;
                 else dr.DefaultCellStyle.BackColor = Color.White;
             }
-            currNo = maxNo + 1;
+            currNo = maxNo;
         }
     }
 }

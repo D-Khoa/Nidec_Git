@@ -2,7 +2,9 @@
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Data;
 using System.Windows.Forms;
-
+using System.IO;
+using NewModelCheckingResult.Model;
+using System.Collections.Generic;
 
 namespace NewModelCheckingResult
 {
@@ -293,6 +295,60 @@ namespace NewModelCheckingResult
                 MessageBox.Show("Excel file created, you can find in the folder D:\\Database IPQC", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 xlWorkBook.Close(true, misValue, misValue);
                 xlApp.Workbooks.Open("D:\\Database IPQC\\#" + line + "#" + descrip + "#CheckCL.xlsx");
+                xlApp.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error happened in the process.");
+                throw new Exception("ExportToExcel: \n" + ex.Message);
+            }
+        }
+
+        public void exportExcelIQC(tbl_part_box inBox, List<tbl_inspect_master> inMaster, List<tbl_inspect_data> inData)
+        {
+            Excel.Application xlApp;
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+            try
+            {
+                xlApp = new Excel.Application();
+                xlWorkBook = xlApp.Workbooks.Open(Application.StartupPath + @"\Template\G2-QA-IQC-F074Rev01.xlsx", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+
+                #region ADD BOX INFO
+                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1); //add data sheet1
+                xlWorkSheet.Cells[3, 2] = inBox.part_name;
+                xlWorkSheet.Cells[4, 2] = inBox.part_number;
+                xlWorkSheet.Cells[5, 2] = inBox.model_cd;
+                xlWorkSheet.Cells[6, 2] = inBox.purpose_cmt;
+                xlWorkSheet.Cells[3, 15] = inBox.invoice;
+                xlWorkSheet.Cells[4, 15] = inBox.part_box_qty;
+                xlWorkSheet.Cells[5, 15] = inBox.part_box_lot;
+                xlWorkSheet.Cells[3, 20] = inBox.part_box_date.ToString("yyyy-MM-dd");
+                xlWorkSheet.Cells[4, 20] = inBox.vender_cd;
+                xlWorkSheet.Cells[5, 20] = inBox.incharge;
+                xlWorkSheet.Cells[6, 20] = inBox.incharge;
+                xlWorkSheet.Cells[8, 9] = "CP ITEMS (n = " + inBox.part_box_qty + ")";
+                #endregion
+                if (inMaster.Count <= 16)
+                {
+                    for (int i = 0; i < inMaster.Count; i++)
+                    {
+                        xlWorkSheet.Cells[9, 9 + i] = inMaster[i].inspect_cd;
+                        xlWorkSheet.Cells[10, 9 + i] = inMaster[i].inspect_tool;
+                        xlWorkSheet.Cells[11, 9 + i] = inMaster[i].inspect_spec;
+                        xlWorkSheet.Cells[12, 9 + i] = inMaster[i].tol_plus;
+                        xlWorkSheet.Cells[13, 9 + i] = inMaster[i].tol_minus;
+                    }
+                }
+
+
+
+                if (!Directory.Exists(@"C:\IQC_Excel")) Directory.CreateDirectory(@"C:\IQC_Excel");
+                xlWorkBook.SaveAs(@"C:\IQC_Excel\" + inBox.part_box_cd + ".xlsx", Excel.XlFileFormat.xlWorkbookDefault, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                MessageBox.Show("Excel file created, you can find in the folder C:\\IQC_Excel", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                xlWorkBook.Close(true, misValue, misValue);
+                xlApp.Workbooks.Open(@"C:\IQC_Excel\" + inBox.part_box_cd + ".xlsx");
                 xlApp.Visible = true;
             }
             catch (Exception ex)

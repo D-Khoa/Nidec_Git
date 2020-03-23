@@ -113,7 +113,7 @@ namespace NewModelCheckingResult.Model
             return listData.Count;
         }
 
-        public int GetMax(string boxCD)
+        public int GetMax(string boxCD, int insID)
         {
             PSQL SQL = new PSQL();
             string query = string.Empty;
@@ -121,7 +121,23 @@ namespace NewModelCheckingResult.Model
             string month = box[2].Remove(6, 2);
             string tablename = "tbl_inspect_data" + month;
             if (!CheckTblExist(tablename)) return 0;
-            query = "SELECT MAX(item_no) FROM " + tablename + " WHERE part_box_cd ='" + boxCD + "' ";
+            query = "SELECT MAX(item_no) FROM " + tablename + " WHERE part_box_cd ='" + boxCD + "' AND inspect_id ='" + insID + "'";
+            SQL.Open();
+            object result = SQL.Command(query).ExecuteScalar();
+            SQL.Close();
+            if (result != DBNull.Value) return (int)result;
+            else return 0;
+        }
+
+        public int GetMaxQty(string boxCD)
+        {
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            string[] box = boxCD.Split('#');
+            string month = box[2].Remove(6, 2);
+            string tablename = "tbl_inspect_data" + month;
+            if (!CheckTblExist(tablename)) return 0;
+            query = "SELECT MAX(item_no) FROM " + tablename + " WHERE part_box_cd ='" + boxCD + "'";
             SQL.Open();
             object result = SQL.Command(query).ExecuteScalar();
             SQL.Close();

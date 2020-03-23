@@ -75,7 +75,8 @@ namespace NewModelCheckingResult.Model
                     part_box_lot = reader["part_box_lot"].ToString(),
                     part_box_date = (DateTime)reader["part_box_date"],
                     vender_cd = reader["vender_cd"].ToString(),
-                    purpose_cmt = reader["purpose_cmt"].ToString()
+                    purpose_cmt = reader["purpose_cmt"].ToString(),
+                    incharge = reader["incharge"].ToString()
                 };
                 listBox.Add(outItem);
             }
@@ -98,12 +99,12 @@ namespace NewModelCheckingResult.Model
             return result;
         }
 
-        public int UpdateIncharge(string boxid, string name)
+        public int UpdateInchargeQty(string boxid, string name, int qty)
         {
             PSQL SQL = new PSQL();
             string query = string.Empty;
             SQL.Open();
-            query = "UPDATE tbl_part_box SET incharge='" + name + "' WHERE part_box_cd ='" + boxid + "'";
+            query = "UPDATE tbl_part_box SET incharge='" + name + "', part_box_qty ='" + qty + "' WHERE part_box_cd ='" + boxid + "'";
             int result = SQL.Command(query).ExecuteNonQuery();
             SQL.Close();
             return result;

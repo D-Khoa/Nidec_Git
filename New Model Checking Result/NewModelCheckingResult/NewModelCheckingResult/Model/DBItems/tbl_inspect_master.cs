@@ -36,7 +36,7 @@ namespace NewModelCheckingResult.Model
                 query += "AND part_number='" + inItem.part_number + "' ";
             if (!string.IsNullOrEmpty(inItem.inspect_tool))
                 query += "AND inspect_tool='" + inItem.inspect_tool + "' ";
-            query += "ORDER BY part_number, inspect_cd";
+            query += "ORDER BY part_number, inspect_id";
             SQL.Open();
             IDataReader reader = SQL.Command(query).ExecuteReader();
             while (reader.Read())

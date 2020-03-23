@@ -27,7 +27,6 @@ namespace NewModelCheckingResult.View
             txtVender.Text = inBox.vender_cd;
             txtPurpose.Text = inBox.purpose_cmt;
             txtLot.Text = inBox.part_box_lot;
-            current = dgvMain.Rows.Count;
             boxID = inBox.part_box_id;
         }
 
@@ -58,6 +57,8 @@ namespace NewModelCheckingResult.View
                 dtFinal.Rows[i]["inspect_id"] = insName;
             }
             dgvMain.DataSource = dtFinal;
+            current = insData.GetMaxQty(txtBoxID.Text);
+            txtBoxQty.Text = current.ToString();
         }
 
         private void btnMeasure_Click(object sender, EventArgs e)
@@ -88,7 +89,21 @@ namespace NewModelCheckingResult.View
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                tbl_part_box boxData = new tbl_part_box();
+                tbl_inspect_data insData = new tbl_inspect_data();
+                tbl_inspect_master masterData = new tbl_inspect_master();
+                insData.Search(txtBoxID.Text);
+                boxData.Search(new tbl_part_box { part_box_cd = txtBoxID.Text }, false);
+                masterData.Search(new tbl_inspect_master { inspect_id = 0, part_number = txtPartNumber.Text });
+                ExcelClassnew excel = new ExcelClassnew();
+                excel.exportExcelIQC(boxData.listBox[0], masterData.listMaster, insData.listData);
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnDeleteBox_Click(object sender, EventArgs e)
