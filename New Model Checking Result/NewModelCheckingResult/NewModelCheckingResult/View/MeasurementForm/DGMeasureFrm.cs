@@ -72,6 +72,7 @@ namespace NewModelCheckingResult.View
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (dgvNewMeasure.SelectedRows[0].Index < 0) return;
             if (CustomMessageBox.Question("Do you want delete this item?" + Environment.NewLine + "Bạn có muốn xóa con hàng này?") == DialogResult.No)
                 return;
             listNewData.RemoveAt(dgvNewMeasure.SelectedRows[0].Index);

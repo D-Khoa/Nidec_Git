@@ -141,8 +141,9 @@ namespace NewModelCheckingResult.Model
             for (int i = 0; i < inList.Count; i++)
             {
                 query += "('" + inList[i].part_box_cd + "','" + inList[i].item_no + "','" + inList[i].inspect_id + "','" + inList[i].inspect_data + "','";
-                query += inList[i].judge + "','" + inList[i].inspect_date + "','" + inList[i].incharge + "')";
+                query += inList[i].judge + "','" + inList[i].inspect_date + "','" + inList[i].incharge + "'),";
             }
+            query = query.Remove(query.Length - 1);
             SQL.Open();
             int result = (int)SQL.Command(query).ExecuteNonQuery();
             SQL.Close();
