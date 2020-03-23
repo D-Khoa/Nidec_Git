@@ -347,6 +347,290 @@ namespace PC_QRCodeSystem.View
             return true;
         }
         #endregion
+        #endregion
+
+        #region SET TAB
+        #region BUTTONS EVENT
+        private void btnSetReg_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSetDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteLowItem();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+        }
+
+        private void btnSetBack_Click(object sender, EventArgs e)
+        {
+            tc_Main.SelectedTab = tab_Main;
+        }
+        #endregion
+
+        #region FIELDS EVENT
+
+        #endregion
+
+        #region SUBS EVENT
+        /// <summary>
+        /// Delete an item in set
+        /// </summary>
+        private void DeleteLowItem()
+        {
+            if (CustomMessageBox.Question("Are you sure delete this item?" + Environment.NewLine + "Bạn có chắc xóa nguyên liệu này?") == DialogResult.No)
+                return;
+            string itemCD = dgvSetData.SelectedRows[0].Cells["low_level_item"].Value.ToString();
+            dgvSetData.SelectedRows[0].Cells["stockout_qty"].Value = "0";
+            var listDel = listStock.Where(x => x.item_cd == itemCD).Select(x => x).ToList();
+            var outIndex = listOut.Where(x => x.item_number == itemCD).Select(x => listOut.IndexOf(x)).First();
+            listOut.RemoveAt(outIndex);
+            for (int i = 0; i < listPrint.Count; i++)
+            {
+                if (listPrint[i].Item_Number == itemCD)
+                {
+                    listPrint.RemoveAt(i);
+                    i--;
+                }
+            }
+            for (int i = 0; i < listDel.Count; i++)
+            {
+                var stockoutIndex = listStockOut.Where(x => x.packing_cd == listDel[i].packing_cd).Select(x => listStockOut.IndexOf(x)).First();
+                listStockOut.RemoveAt(stockoutIndex);
+                listDel.RemoveAt(i);
+                i--;
+            }
+            txtSetBarcode.Select();
+        }
+
+        private void GetOutSetQty()
+        {
+            try
+            {
+                string itemCode = txtSetItemCD.Text;
+                pts_stock stockData = new pts_stock();
+
+                #region CHECK ITEM IS EXIST IN STOCK?
+                if (!stockData.SearchItem(new pts_stock { item_cd = itemCode, invoice = txtSetInvoice.Text }))
+                {
+                    CustomMessageBox.Error("This item is not exist in stock!" + Environment.NewLine + "Nguyên liệu không có trong kho!");
+                    txtSetBarcode.ResetText();
+                    txtSetInvoice.ResetText();
+                    txtSetBarcode.Focus();
+                    return;
+                }
+                #endregion
+
+                #region GET INDEX OF ITEM IF IT IS EXIST IN SET LIST
+                int rindex = 0;
+                try
+                {
+                    rindex = dgvSetData.Rows.Cast<DataGridViewRow>()
+                                .Where(x => x.Cells["low_level_item"].Value.ToString() == itemCode)
+                                .Select(x => x.Index).First();
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Error("This item is not exist in list!" + Environment.NewLine + "Nguyên liệu không có trong danh sách!" + Environment.NewLine + ex.Message);
+                    txtSetBarcode.ResetText();
+                    txtSetInvoice.ResetText();
+                    txtSetBarcode.Focus();
+                    return;
+                }
+                #endregion
+
+                DataGridViewRow dr = dgvSetData.Rows[rindex];
+                double packingQty = double.Parse(txtSetOutQty.Text);
+                double orderQty = (double)dr.Cells["request_qty"].Value;
+                double stockoutQty = 0;
+                if (dr.Cells["stockout_qty"].Value != DBNull.Value && dr.Cells["stockout_qty"].Value != null)
+                    stockoutQty = (double)dr.Cells["stockout_qty"].Value;
+
+                #region CHECK ITEM QTY
+                double whQty = (double)dr.Cells["wh_qty"].Value;
+                double totalpackingQty = stockData.listStockItems.Sum(x => x.packing_qty);
+                if (packingQty > whQty)
+                {
+                    CustomMessageBox.Error("This item is not enough in PREMAC!" + Environment.NewLine + "Số lượng hàng tồn trên PREMAC không đủ!");
+                    return;
+                }
+                if (packingQty > totalpackingQty)
+                {
+                    CustomMessageBox.Error("This item's pack qty is not enough! Please stock-in first!" + Environment.NewLine + "Số lượng hàng không đủ! Cần nhập hàng trước!");
+                    return;
+                }
+                #endregion
+
+                stockoutQty += packingQty;
+                if (stockoutQty > orderQty)
+                {
+                    packingQty -= stockoutQty - orderQty;
+                    stockoutQty = orderQty;
+                }
+                dr.Cells["stockout_qty"].Value = stockoutQty;
+
+                pts_supplier supplierData = new pts_supplier();
+                foreach (pts_stock item in stockData.listStockItems)
+                {
+                    if (item.packing_qty == 0) continue;
+                    ListOutAdd(item.packing_cd, packingQty);
+
+                    if (packingQty < item.packing_qty)
+                    {
+                        item.packing_qty -= packingQty;
+
+                        #region ADD PRINT ITEM
+                        //ADD STOCK-IN TO PRINT LIST
+                        listPrint.Add(new PrintItem
+                        {
+                            Item_Number = item.item_cd,
+                            Item_Name = dr.Cells["item_name"].Value.ToString(),
+                            SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
+                            Invoice = txtSetInvoice.Text,
+                            Delivery_Date = item.stockin_date,
+                            Delivery_Qty = item.packing_qty,
+                            SupplierCD = item.supplier_cd,
+                            isRec = true,
+                            Label_Qty = 1
+                        });
+                        //ADD STOCK-OUT TO PRINT LIST
+                        listPrint.Add(new PrintItem
+                        {
+                            Item_Number = item.item_cd,
+                            Item_Name = dr.Cells["item_name"].Value.ToString(),
+                            SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
+                            Invoice = txtSetInvoice.Text,
+                            Delivery_Date = dtpStockOutDate.Value,
+                            Delivery_Qty = packingQty,
+                            SupplierCD = item.supplier_cd,
+                            isRec = false,
+                            Label_Qty = 1
+                        });
+                        #endregion
+
+                        packingQty = 0;
+                    }
+                    else
+                    {
+                        //ADD LABEL OUT
+                        listLabel.Add(new PrintItem
+                        {
+                            Item_Number = item.item_cd,
+                            Item_Name = dr.Cells["item_name"].Value.ToString(),
+                            SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
+                            Invoice = txtSetInvoice.Text,
+                            Delivery_Date = dtpStockOutDate.Value,
+                            Delivery_Qty = item.packing_qty,
+                            SupplierCD = item.supplier_cd,
+                            isRec = false,
+                            Label_Qty = 1
+                        });
+                        packingQty -= item.packing_qty;
+                        item.packing_qty = 0;
+                    }
+                    listStock.Add(item);
+                    if (packingQty == 0) break;
+                }
+                dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                UpdateGridStockOut(listStockOut);
+                UpdateGridPrint(listPrint);
+                txtSetBarcode.ResetText();
+                txtSetBarcode.Focus();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+                txtSetBarcode.ResetText();
+                txtSetInvoice.ResetText();
+                txtSetBarcode.Focus();
+            }
+        }
+        #endregion
+        #endregion
+
+        #region PRINT TAB
+        #region BUTTONS EVENT
+        private void btnPrintAll_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrintSelect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrintInspection_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrinClear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrintBack_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+        /// <summary>
+        /// Update print grid
+        /// </summary>
+        /// <param name="inList"></param>
+        private void UpdateGridPrint(BindingList<PrintItem> inList)
+        {
+            dgvPrint.DataSource = inList;
+        }
+        #endregion
+
+        #region INSPECTIONS TAB
+        /// <summary>
+        /// Clear all list item
+        /// </summary>
+        private void ClearDataList()
+        {
+            listOut.Clear();
+            listLabel.Clear();
+            listPrint.Clear();
+            listStock.Clear();
+            listStockOut.Clear();
+        }
+
+        private void UpdateGridLabel(List<PrintItem> inlist)
+        {
+            dgvLabel.DataSource = inlist;
+        }
+
+        /// <summary>
+        /// Update stock out grid
+        /// </summary>
+        /// <param name="inList"></param>
+        private void UpdateGridStockOut(BindingList<pts_stockout_log> inList)
+        {
+            dgvStockOut.DataSource = inList;
+            //dgvStockOut.Columns["stockout_id"].HeaderText = "ID";
+            dgvStockOut.Columns["process_cd"].HeaderText = "Process Code";
+            dgvStockOut.Columns["issue_cd"].HeaderText = "Issue Code";
+            dgvStockOut.Columns["stockout_date"].HeaderText = "Stock-out date";
+            dgvStockOut.Columns["stockout_user_cd"].HeaderText = "Incharge";
+            dgvStockOut.Columns["stockout_qty"].HeaderText = "Stock-out Qty";
+            //dgvStockOut.Columns["real_qty"].HeaderText = "Real Qty";
+            //dgvStockOut.Columns["received_user_cd"].HeaderText = "Received User";
+            dgvStockOut.Columns["comment"].HeaderText = "Comment";
+            dgvStockOut.Columns["remark"].HeaderText = "Remark";
+            if (dgvStockOut.Columns.Contains("stockout_id")) dgvStockOut.Columns.Remove("stockout_id");
+            if (dgvStockOut.Columns.Contains("real_qty")) dgvStockOut.Columns.Remove("real_qty");
+            if (dgvStockOut.Columns.Contains("received_user_cd")) dgvStockOut.Columns.Remove("received_user_cd");
+        }
+        #endregion
 
         #region NO SET EVENT
         /// <summary>
@@ -597,7 +881,7 @@ namespace PC_QRCodeSystem.View
         }
         #endregion
 
-        #region ADD LIST
+        #region ADD OUTPUT LIST
         private void ListOutAdd(string packingcode, double deliveryQty)
         {
             listStockOut.Add(new pts_stockout_log
@@ -615,297 +899,13 @@ namespace PC_QRCodeSystem.View
             listOut.Add(new OutputItem
             {
                 issue_cd = (int)cmbIssue.SelectedValue,
-                destination_cd = issueFlag,
+                destination_cd = cmbDestination.SelectedValue.ToString(),
                 item_number = txtItemCode.Text,
                 delivery_qty = deliveryQty,
                 delivery_date = dtpStockOutDate.Value,
                 order_number = string.Empty,
                 incharge = txtUserCode.Text,
             });
-        }
-        #endregion
-        #endregion
-
-        #region SET TAB
-        #region BUTTONS EVENT
-        private void btnSetReg_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSetDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DeleteLowItem();
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-
-        private void btnSetBack_Click(object sender, EventArgs e)
-        {
-            tc_Main.SelectedTab = tab_Main;
-        }
-        #endregion
-
-        #region FIELDS EVENT
-
-        #endregion
-
-        #region SUBS EVENT
-        /// <summary>
-        /// Delete an item in set
-        /// </summary>
-        private void DeleteLowItem()
-        {
-            if (CustomMessageBox.Question("Are you sure delete this item?" + Environment.NewLine + "Bạn có chắc xóa nguyên liệu này?") == DialogResult.No)
-                return;
-            string itemCD = dgvSetData.SelectedRows[0].Cells["low_level_item"].Value.ToString();
-            dgvSetData.SelectedRows[0].Cells["stockout_qty"].Value = "0";
-            var listDel = listStock.Where(x => x.item_cd == itemCD).Select(x => x).ToList();
-            var outIndex = listOut.Where(x => x.item_number == itemCD).Select(x => listOut.IndexOf(x)).First();
-            listOut.RemoveAt(outIndex);
-            for (int i = 0; i < listPrint.Count; i++)
-            {
-                if (listPrint[i].Item_Number == itemCD)
-                {
-                    listPrint.RemoveAt(i);
-                    i--;
-                }
-            }
-            for (int i = 0; i < listDel.Count; i++)
-            {
-                var stockoutIndex = listStockOut.Where(x => x.packing_cd == listDel[i].packing_cd).Select(x => listStockOut.IndexOf(x)).First();
-                listStockOut.RemoveAt(stockoutIndex);
-                listDel.RemoveAt(i);
-                i--;
-            }
-            txtSetBarcode.Select();
-        }
-
-        private void GetOutSetQty()
-        {
-            try
-            {
-                string itemCode = txtSetItemCD.Text;
-                pts_stock stockData = new pts_stock();
-
-                #region CHECK ITEM IS EXIST IN STOCK?
-                if (!stockData.SearchItem(new pts_stock { item_cd = itemCode, invoice = txtSetInvoice.Text }))
-                {
-                    CustomMessageBox.Error("This item is not exist in stock!" + Environment.NewLine + "Nguyên liệu không có trong kho!");
-                    txtSetBarcode.ResetText();
-                    txtSetInvoice.ResetText();
-                    txtSetBarcode.Focus();
-                    return;
-                }
-                #endregion
-
-                #region GET INDEX OF ITEM IF IT IS EXIST IN SET LIST
-                int rindex = 0;
-                try
-                {
-                    rindex = dgvSetData.Rows.Cast<DataGridViewRow>()
-                                .Where(x => x.Cells["low_level_item"].Value.ToString() == itemCode)
-                                .Select(x => x.Index).First();
-                }
-                catch (Exception ex)
-                {
-                    CustomMessageBox.Error("This item is not exist in list!" + Environment.NewLine + "Nguyên liệu không có trong danh sách!" + Environment.NewLine + ex.Message);
-                    txtSetBarcode.ResetText();
-                    txtSetInvoice.ResetText();
-                    txtSetBarcode.Focus();
-                    return;
-                }
-                #endregion
-
-                DataGridViewRow dr = dgvSetData.Rows[rindex];
-                double packingQty = double.Parse(txtSetOutQty.Text);
-                double orderQty = (double)dr.Cells["request_qty"].Value;
-                double stockoutQty = 0;
-                if (dr.Cells["stockout_qty"].Value != DBNull.Value && dr.Cells["stockout_qty"].Value != null)
-                    stockoutQty = (double)dr.Cells["stockout_qty"].Value;
-
-                #region CHECK ITEM QTY
-                double whQty = (double)dr.Cells["wh_qty"].Value;
-                double totalpackingQty = stockData.listStockItems.Sum(x => x.packing_qty);
-                if (packingQty > whQty)
-                {
-                    CustomMessageBox.Error("This item is not enough in PREMAC!" + Environment.NewLine + "Số lượng hàng tồn trên PREMAC không đủ!");
-                    return;
-                }
-                if (packingQty > totalpackingQty)
-                {
-                    CustomMessageBox.Error("This item's pack qty is not enough! Please stock-in first!" + Environment.NewLine + "Số lượng hàng không đủ! Cần nhập hàng trước!");
-                    return;
-                }
-                #endregion
-
-                stockoutQty += packingQty;
-                if (stockoutQty > orderQty)
-                {
-                    packingQty -= stockoutQty - orderQty;
-                    stockoutQty = orderQty;
-                }
-                dr.Cells["stockout_qty"].Value = stockoutQty;
-
-                #region ADD OUTPUT ITEM
-                listOut.Add(new OutputItem
-                {
-                    issue_cd = 20,
-                    destination_cd = cmbDestination.SelectedValue.ToString(),
-                    item_number = itemCode,
-                    delivery_qty = packingQty,
-                    delivery_date = dtpStockOutDate.Value,
-                    order_number = txtSetOrderNo.Text,
-                    incharge = txtSetUserCD.Text,
-                });
-                #endregion
-
-                pts_supplier supplierData = new pts_supplier();
-                foreach (pts_stock item in stockData.listStockItems)
-                {
-                    if (item.packing_qty == 0) continue;
-
-                    #region ADD STOCK OUT ITEM
-                    listStockOut.Add(new pts_stockout_log
-                    {
-                        packing_cd = item.packing_cd,
-                        process_cd = txtSetOrderNo.Text,
-                        issue_cd = 20,
-                        stockout_date = dtpStockOutDate.Value,
-                        stockout_user_cd = txtSetUserCD.Text,
-                        stockout_qty = packingQty,
-                        comment = txtComment.Text,
-                        remark = "N",
-                    });
-                    #endregion
-
-                    if (packingQty < item.packing_qty)
-                    {
-                        item.packing_qty -= packingQty;
-
-                        #region ADD PRINT ITEM
-                        //ADD STOCK-IN TO PRINT LIST
-                        listPrint.Add(new PrintItem
-                        {
-                            Item_Number = item.item_cd,
-                            Item_Name = dr.Cells["item_name"].Value.ToString(),
-                            SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
-                            Invoice = txtSetInvoice.Text,
-                            Delivery_Date = item.stockin_date,
-                            Delivery_Qty = item.packing_qty,
-                            SupplierCD = item.supplier_cd,
-                            isRec = true,
-                            Label_Qty = 1
-                        });
-                        //ADD STOCK-OUT TO PRINT LIST
-                        listPrint.Add(new PrintItem
-                        {
-                            Item_Number = item.item_cd,
-                            Item_Name = dr.Cells["item_name"].Value.ToString(),
-                            SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
-                            Invoice = txtSetInvoice.Text,
-                            Delivery_Date = dtpStockOutDate.Value,
-                            Delivery_Qty = packingQty,
-                            SupplierCD = item.supplier_cd,
-                            isRec = false,
-                            Label_Qty = 1
-                        });
-                        #endregion
-
-                        packingQty = 0;
-                    }
-                    else
-                    {
-                        //ADD LABEL OUT
-                        listLabel.Add(new PrintItem
-                        {
-                            Item_Number = item.item_cd,
-                            Item_Name = dr.Cells["item_name"].Value.ToString(),
-                            SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
-                            Invoice = txtSetInvoice.Text,
-                            Delivery_Date = dtpStockOutDate.Value,
-                            Delivery_Qty = item.packing_qty,
-                            SupplierCD = item.supplier_cd,
-                            isRec = false,
-                            Label_Qty = 1
-                        });
-                        packingQty -= item.packing_qty;
-                        item.packing_qty = 0;
-                    }
-                    listStock.Add(item);
-                    if (packingQty == 0) break;
-                }
-                dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-                UpdateGridStockOut(listStockOut);
-                UpdateGridPrint(listPrint);
-                txtSetBarcode.ResetText();
-                txtSetBarcode.Focus();
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-                txtSetBarcode.ResetText();
-                txtSetInvoice.ResetText();
-                txtSetBarcode.Focus();
-            }
-        }
-        #endregion
-        #endregion
-
-        #region PRINT TAB
-        /// <summary>
-        /// Update print grid
-        /// </summary>
-        /// <param name="inList"></param>
-        private void UpdateGridPrint(BindingList<PrintItem> inList)
-        {
-            dgvPrint.DataSource = inList;
-        }
-        #endregion
-
-        #region INSPECTIONS TAB
-        /// <summary>
-        /// Clear all list item
-        /// </summary>
-        private void ClearDataList()
-        {
-            listOut.Clear();
-            listLabel.Clear();
-            listPrint.Clear();
-            listStock.Clear();
-            listStockOut.Clear();
-        }
-
-        private void UpdateGridLabel(List<PrintItem> inlist)
-        {
-            dgvLabel.DataSource = inlist;
-        }
-
-        /// <summary>
-        /// Update stock out grid
-        /// </summary>
-        /// <param name="inList"></param>
-        private void UpdateGridStockOut(BindingList<pts_stockout_log> inList)
-        {
-            dgvStockOut.DataSource = inList;
-            //dgvStockOut.Columns["stockout_id"].HeaderText = "ID";
-            dgvStockOut.Columns["process_cd"].HeaderText = "Process Code";
-            dgvStockOut.Columns["issue_cd"].HeaderText = "Issue Code";
-            dgvStockOut.Columns["stockout_date"].HeaderText = "Stock-out date";
-            dgvStockOut.Columns["stockout_user_cd"].HeaderText = "Incharge";
-            dgvStockOut.Columns["stockout_qty"].HeaderText = "Stock-out Qty";
-            //dgvStockOut.Columns["real_qty"].HeaderText = "Real Qty";
-            //dgvStockOut.Columns["received_user_cd"].HeaderText = "Received User";
-            dgvStockOut.Columns["comment"].HeaderText = "Comment";
-            dgvStockOut.Columns["remark"].HeaderText = "Remark";
-            if (dgvStockOut.Columns.Contains("stockout_id")) dgvStockOut.Columns.Remove("stockout_id");
-            if (dgvStockOut.Columns.Contains("real_qty")) dgvStockOut.Columns.Remove("real_qty");
-            if (dgvStockOut.Columns.Contains("received_user_cd")) dgvStockOut.Columns.Remove("received_user_cd");
         }
         #endregion
     }

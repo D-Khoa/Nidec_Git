@@ -136,7 +136,7 @@
             this.btnCloseForm.Size = new System.Drawing.Size(120, 50);
             this.btnCloseForm.TabIndex = 3;
             this.btnCloseForm.TabStop = false;
-            this.btnCloseForm.Text = "Close";
+            this.btnCloseForm.Text = "Close\r\nĐóng";
             this.btnCloseForm.UseVisualStyleBackColor = true;
             this.btnCloseForm.Click += new System.EventHandler(this.btnCloseForm_Click);
             // 
@@ -168,7 +168,7 @@
             this.btnChangePassword.Size = new System.Drawing.Size(120, 50);
             this.btnChangePassword.TabIndex = 1;
             this.btnChangePassword.TabStop = false;
-            this.btnChangePassword.Text = "Change Password";
+            this.btnChangePassword.Text = "Change Password\r\nĐổi Mật Khẩu";
             this.btnChangePassword.UseVisualStyleBackColor = true;
             this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
@@ -181,7 +181,7 @@
             this.btnLogOut.Size = new System.Drawing.Size(120, 50);
             this.btnLogOut.TabIndex = 2;
             this.btnLogOut.TabStop = false;
-            this.btnLogOut.Text = "Log Out";
+            this.btnLogOut.Text = "Log Out\r\nĐăng Xuất";
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 

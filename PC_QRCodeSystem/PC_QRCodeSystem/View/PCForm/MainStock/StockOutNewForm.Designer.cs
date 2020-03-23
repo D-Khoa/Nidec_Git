@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tc_Main = new System.Windows.Forms.TabControl();
             this.tab_Main = new System.Windows.Forms.TabPage();
             this.dgvSearch = new System.Windows.Forms.DataGridView();
@@ -213,7 +213,7 @@
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(184, 50);
             this.btnClear.TabIndex = 13;
-            this.btnClear.Text = "CLEAR";
+            this.btnClear.Text = "CLEAR /\r\nXóa Thông Tin";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
@@ -225,7 +225,7 @@
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(182, 50);
             this.btnSearch.TabIndex = 10;
-            this.btnSearch.Text = "6. SEARCH";
+            this.btnSearch.Text = "6. SEARCH /\r\nTìm Kiếm";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -237,7 +237,7 @@
             this.btnPrintList.Name = "btnPrintList";
             this.btnPrintList.Size = new System.Drawing.Size(182, 50);
             this.btnPrintList.TabIndex = 12;
-            this.btnPrintList.Text = "10. PRINT LIST";
+            this.btnPrintList.Text = "10. PRINT LIST /\r\nDanh Sách In";
             this.btnPrintList.UseVisualStyleBackColor = true;
             this.btnPrintList.Click += new System.EventHandler(this.btnPrintList_Click);
             // 
@@ -249,12 +249,13 @@
             this.btnStockOut.Name = "btnStockOut";
             this.btnStockOut.Size = new System.Drawing.Size(182, 50);
             this.btnStockOut.TabIndex = 11;
-            this.btnStockOut.Text = "9. STOCK-OUT";
+            this.btnStockOut.Text = "9. STOCK-OUT /\r\nXuất Hàng";
             this.btnStockOut.UseVisualStyleBackColor = true;
             this.btnStockOut.Click += new System.EventHandler(this.btnStockOut_Click);
             // 
             // tbpNoSet
             // 
+            this.tbpNoSet.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tbpNoSet.ColumnCount = 6;
             this.tbpNoSet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tbpNoSet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -291,30 +292,30 @@
             // 
             this.tbpNoSet.SetColumnSpan(this.txtComment, 5);
             this.txtComment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtComment.Location = new System.Drawing.Point(163, 71);
+            this.txtComment.Location = new System.Drawing.Point(163, 81);
             this.txtComment.Margin = new System.Windows.Forms.Padding(4);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.tbpNoSet.SetRowSpan(this.txtComment, 2);
-            this.txtComment.Size = new System.Drawing.Size(608, 40);
+            this.txtComment.Size = new System.Drawing.Size(607, 40);
             this.txtComment.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(9, 67);
+            this.label3.Location = new System.Drawing.Point(10, 77);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.tbpNoSet.SetRowSpan(this.label3, 2);
-            this.label3.Size = new System.Drawing.Size(146, 48);
+            this.label3.Size = new System.Drawing.Size(144, 48);
             this.label3.TabIndex = 34;
-            this.label3.Text = "8. COMMENT";
+            this.label3.Text = "8. COMMENT /\r\nGhi chú";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtInvoice
             // 
             this.txtInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInvoice.Location = new System.Drawing.Point(624, 40);
+            this.txtInvoice.Location = new System.Drawing.Point(623, 49);
             this.txtInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.txtInvoice.Name = "txtInvoice";
             this.txtInvoice.ReadOnly = true;
@@ -326,11 +327,11 @@
             // 
             this.txtWHQty.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtWHQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWHQty.Location = new System.Drawing.Point(509, 40);
+            this.txtWHQty.Location = new System.Drawing.Point(508, 49);
             this.txtWHQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtWHQty.Name = "txtWHQty";
             this.txtWHQty.ReadOnly = true;
-            this.txtWHQty.Size = new System.Drawing.Size(107, 23);
+            this.txtWHQty.Size = new System.Drawing.Size(106, 23);
             this.txtWHQty.TabIndex = 37;
             this.txtWHQty.TabStop = false;
             this.txtWHQty.Text = "0";
@@ -340,24 +341,24 @@
             // label18
             // 
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Location = new System.Drawing.Point(9, 5);
+            this.label18.Location = new System.Drawing.Point(10, 6);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.tbpNoSet.SetRowSpan(this.label18, 2);
-            this.label18.Size = new System.Drawing.Size(146, 62);
+            this.label18.Size = new System.Drawing.Size(144, 70);
             this.label18.TabIndex = 8;
-            this.label18.Text = "7A. STOCK-OUT QTY";
+            this.label18.Text = "7A. STOCK-OUT QTY /\r\nSố lượng xuất";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtStockOutQty
             // 
             this.txtStockOutQty.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtStockOutQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStockOutQty.Location = new System.Drawing.Point(163, 9);
+            this.txtStockOutQty.Location = new System.Drawing.Point(163, 10);
             this.txtStockOutQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtStockOutQty.Name = "txtStockOutQty";
             this.tbpNoSet.SetRowSpan(this.txtStockOutQty, 2);
-            this.txtStockOutQty.Size = new System.Drawing.Size(146, 53);
+            this.txtStockOutQty.Size = new System.Drawing.Size(144, 53);
             this.txtStockOutQty.TabIndex = 7;
             this.txtStockOutQty.Text = "0";
             this.txtStockOutQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -368,57 +369,57 @@
             this.cbSign.AutoSize = true;
             this.cbSign.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.cbSign.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbSign.Location = new System.Drawing.Point(317, 9);
+            this.cbSign.Location = new System.Drawing.Point(316, 10);
             this.cbSign.Margin = new System.Windows.Forms.Padding(4);
             this.cbSign.Name = "cbSign";
-            this.cbSign.Size = new System.Drawing.Size(69, 23);
+            this.cbSign.Size = new System.Drawing.Size(68, 30);
             this.cbSign.TabIndex = 8;
-            this.cbSign.Text = "7B. SIGN";
+            this.cbSign.Text = "7B. \r\nSIGN";
             this.cbSign.UseVisualStyleBackColor = false;
             this.cbSign.CheckedChanged += new System.EventHandler(this.cbSign_CheckedChanged);
             // 
             // label5
             // 
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(394, 5);
+            this.label5.Location = new System.Drawing.Point(393, 6);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 31);
+            this.label5.Size = new System.Drawing.Size(106, 38);
             this.label5.TabIndex = 38;
-            this.label5.Text = "PACKING Q\'TY";
+            this.label5.Text = "PACKING Q\'TY /\r\nTổng SL đóng gói";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label25
             // 
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label25.Location = new System.Drawing.Point(394, 36);
+            this.label25.Location = new System.Drawing.Point(393, 45);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(107, 31);
+            this.label25.Size = new System.Drawing.Size(106, 31);
             this.label25.TabIndex = 40;
-            this.label25.Text = "W/H Q\'TY";
+            this.label25.Text = "W/H Q\'TY /\r\nTổng SL trong kho";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(624, 5);
+            this.label4.Location = new System.Drawing.Point(623, 6);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(147, 31);
+            this.label4.Size = new System.Drawing.Size(147, 38);
             this.label4.TabIndex = 36;
-            this.label4.Text = "INVOICE";
+            this.label4.Text = "INVOICE /\r\nHóa đơn";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtTotalPackingQty
             // 
             this.txtTotalPackingQty.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtTotalPackingQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalPackingQty.Location = new System.Drawing.Point(509, 9);
+            this.txtTotalPackingQty.Location = new System.Drawing.Point(508, 10);
             this.txtTotalPackingQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtTotalPackingQty.Name = "txtTotalPackingQty";
             this.txtTotalPackingQty.ReadOnly = true;
-            this.txtTotalPackingQty.Size = new System.Drawing.Size(107, 23);
+            this.txtTotalPackingQty.Size = new System.Drawing.Size(106, 23);
             this.txtTotalPackingQty.TabIndex = 39;
             this.txtTotalPackingQty.TabStop = false;
             this.txtTotalPackingQty.Text = "0";
@@ -427,6 +428,7 @@
             // 
             // tbpMain
             // 
+            this.tbpMain.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tbpMain.ColumnCount = 5;
             this.tbpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tbpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
@@ -472,10 +474,10 @@
             this.cmbDestination.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDestination.FormattingEnabled = true;
-            this.cmbDestination.Location = new System.Drawing.Point(163, 69);
+            this.cmbDestination.Location = new System.Drawing.Point(163, 72);
             this.cmbDestination.Margin = new System.Windows.Forms.Padding(4);
             this.cmbDestination.Name = "cmbDestination";
-            this.cmbDestination.Size = new System.Drawing.Size(299, 24);
+            this.cmbDestination.Size = new System.Drawing.Size(298, 24);
             this.cmbDestination.Sorted = true;
             this.cmbDestination.TabIndex = 4;
             this.cmbDestination.SelectedIndexChanged += new System.EventHandler(this.cmbDestination_SelectedIndexChanged);
@@ -485,13 +487,14 @@
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(9, 95);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 99);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.tbpMain.SetRowSpan(this.label1, 2);
-            this.label1.Size = new System.Drawing.Size(146, 63);
+            this.label1.Size = new System.Drawing.Size(144, 61);
             this.label1.TabIndex = 51;
-            this.label1.Text = "5B. BARCODE / ITEM CODE";
+            this.label1.Text = "5B. BARCODE /\r\nMã Model";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbItemName
@@ -501,10 +504,10 @@
             this.tbpMain.SetColumnSpan(this.lbItemName, 2);
             this.lbItemName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbItemName.Location = new System.Drawing.Point(470, 125);
+            this.lbItemName.Location = new System.Drawing.Point(470, 130);
             this.lbItemName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbItemName.Name = "lbItemName";
-            this.lbItemName.Size = new System.Drawing.Size(301, 33);
+            this.lbItemName.Size = new System.Drawing.Size(300, 30);
             this.lbItemName.TabIndex = 46;
             this.lbItemName.Text = "Item Name";
             this.lbItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -512,10 +515,10 @@
             // txtUserCode
             // 
             this.txtUserCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUserCode.Location = new System.Drawing.Point(163, 9);
+            this.txtUserCode.Location = new System.Drawing.Point(163, 10);
             this.txtUserCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtUserCode.Name = "txtUserCode";
-            this.txtUserCode.Size = new System.Drawing.Size(107, 23);
+            this.txtUserCode.Size = new System.Drawing.Size(106, 23);
             this.txtUserCode.TabIndex = 1;
             this.txtUserCode.TextChanged += new System.EventHandler(this.txtUserCode_TextChanged);
             this.txtUserCode.Validated += new System.EventHandler(this.txtUserCode_Validated);
@@ -525,7 +528,7 @@
             this.dtpStockOutDate.CustomFormat = "yyyy-MM-dd";
             this.dtpStockOutDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtpStockOutDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStockOutDate.Location = new System.Drawing.Point(624, 9);
+            this.dtpStockOutDate.Location = new System.Drawing.Point(623, 10);
             this.dtpStockOutDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpStockOutDate.Name = "dtpStockOutDate";
             this.dtpStockOutDate.Size = new System.Drawing.Size(147, 23);
@@ -542,10 +545,10 @@
             this.cmbIssue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbIssue.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cmbIssue.FormattingEnabled = true;
-            this.cmbIssue.Location = new System.Drawing.Point(163, 39);
+            this.cmbIssue.Location = new System.Drawing.Point(163, 41);
             this.cmbIssue.Margin = new System.Windows.Forms.Padding(4);
             this.cmbIssue.Name = "cmbIssue";
-            this.cmbIssue.Size = new System.Drawing.Size(299, 24);
+            this.cmbIssue.Size = new System.Drawing.Size(298, 24);
             this.cmbIssue.Sorted = true;
             this.cmbIssue.TabIndex = 3;
             this.cmbIssue.SelectedIndexChanged += new System.EventHandler(this.cmbIssue_SelectedIndexChanged);
@@ -557,17 +560,17 @@
             this.tbpMain.SetColumnSpan(this.txtBarcode, 2);
             this.txtBarcode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarcode.Location = new System.Drawing.Point(163, 99);
+            this.txtBarcode.Location = new System.Drawing.Point(163, 103);
             this.txtBarcode.Margin = new System.Windows.Forms.Padding(4);
             this.txtBarcode.Name = "txtBarcode";
             this.tbpMain.SetRowSpan(this.txtBarcode, 2);
-            this.txtBarcode.Size = new System.Drawing.Size(299, 53);
+            this.txtBarcode.Size = new System.Drawing.Size(298, 53);
             this.txtBarcode.TabIndex = 6;
             // 
             // txtItemCode
             // 
             this.txtItemCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtItemCode.Location = new System.Drawing.Point(624, 99);
+            this.txtItemCode.Location = new System.Drawing.Point(623, 103);
             this.txtItemCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtItemCode.Name = "txtItemCode";
             this.txtItemCode.ReadOnly = true;
@@ -579,23 +582,25 @@
             // label22
             // 
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Location = new System.Drawing.Point(9, 65);
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(10, 68);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(146, 30);
+            this.label22.Size = new System.Drawing.Size(144, 30);
             this.label22.TabIndex = 47;
-            this.label22.Text = "4. DESTINATION";
+            this.label22.Text = "4. DESTINATION /\r\nPhòng ban";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label13
             // 
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Location = new System.Drawing.Point(9, 5);
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(10, 6);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(146, 30);
+            this.label13.Size = new System.Drawing.Size(144, 30);
             this.label13.TabIndex = 31;
-            this.label13.Text = "1. USER CODE";
+            this.label13.Text = "1. USER ID /\r\nMã số nhân viên";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbUserName
@@ -604,10 +609,10 @@
             this.lbUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbUserName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUserName.Location = new System.Drawing.Point(278, 5);
+            this.lbUserName.Location = new System.Drawing.Point(278, 6);
             this.lbUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbUserName.Name = "lbUserName";
-            this.lbUserName.Size = new System.Drawing.Size(184, 30);
+            this.lbUserName.Size = new System.Drawing.Size(183, 30);
             this.lbUserName.TabIndex = 29;
             this.lbUserName.Text = "User Name";
             this.lbUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -615,40 +620,43 @@
             // label20
             // 
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(9, 35);
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(10, 37);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(146, 30);
+            this.label20.Size = new System.Drawing.Size(144, 30);
             this.label20.TabIndex = 46;
-            this.label20.Text = "3. ISSUE CODE";
+            this.label20.Text = "3. ISSUE CODE /\r\nLý do xuất";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
             // 
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(470, 5);
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(470, 6);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(146, 30);
+            this.label9.Size = new System.Drawing.Size(144, 30);
             this.label9.TabIndex = 44;
-            this.label9.Text = "2. DELIVERY DATE";
+            this.label9.Text = "2. DELIVERY DATE /\r\nNgày xuất";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label12
             // 
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(470, 95);
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(470, 99);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(146, 30);
+            this.label12.Size = new System.Drawing.Size(144, 30);
             this.label12.TabIndex = 48;
-            this.label12.Text = "ITEM CODE";
+            this.label12.Text = "ITEM CODE /\r\nMã nguyên liệu";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtSetNumber
             // 
             this.txtSetNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetNumber.Location = new System.Drawing.Point(624, 69);
+            this.txtSetNumber.Location = new System.Drawing.Point(623, 72);
             this.txtSetNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetNumber.Name = "txtSetNumber";
             this.txtSetNumber.Size = new System.Drawing.Size(147, 23);
@@ -657,12 +665,13 @@
             // label6
             // 
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(470, 65);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(470, 68);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(146, 30);
+            this.label6.Size = new System.Drawing.Size(144, 30);
             this.label6.TabIndex = 50;
-            this.label6.Text = "5A. ORDER NO.";
+            this.label6.Text = "5A. ORDER NO. /\r\nMã đặt hàng";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label6.UseCompatibleTextRendering = true;
             // 
@@ -685,28 +694,29 @@
             this.dgvSetData.AllowUserToDeleteRows = false;
             this.dgvSetData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSetData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSetData.Location = new System.Drawing.Point(3, 237);
-            this.dgvSetData.Margin = new System.Windows.Forms.Padding(5);
+            this.dgvSetData.Location = new System.Drawing.Point(3, 273);
+            this.dgvSetData.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.dgvSetData.MultiSelect = false;
             this.dgvSetData.Name = "dgvSetData";
             this.dgvSetData.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSetData.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.Format = "N0";
+            dataGridViewCellStyle25.NullValue = null;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSetData.RowHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvSetData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvSetData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSetData.Size = new System.Drawing.Size(780, 140);
+            this.dgvSetData.Size = new System.Drawing.Size(780, 104);
             this.dgvSetData.TabIndex = 6;
             // 
             // tabSetButtons
             // 
+            this.tabSetButtons.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tabSetButtons.ColumnCount = 6;
             this.tabSetButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tabSetButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -722,62 +732,63 @@
             this.tabSetButtons.Controls.Add(this.txtSetOutQty, 1, 0);
             this.tabSetButtons.Controls.Add(this.btnSetDelete, 4, 0);
             this.tabSetButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabSetButtons.Location = new System.Drawing.Point(3, 166);
+            this.tabSetButtons.Location = new System.Drawing.Point(3, 203);
             this.tabSetButtons.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.tabSetButtons.Name = "tabSetButtons";
-            this.tabSetButtons.Padding = new System.Windows.Forms.Padding(5);
+            this.tabSetButtons.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.tabSetButtons.RowCount = 2;
-            this.tabSetButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tabSetButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tabSetButtons.Size = new System.Drawing.Size(780, 71);
+            this.tabSetButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tabSetButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tabSetButtons.Size = new System.Drawing.Size(780, 70);
             this.tabSetButtons.TabIndex = 3;
             // 
             // btnSetBack
             // 
             this.btnSetBack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSetBack.Location = new System.Drawing.Point(662, 9);
+            this.btnSetBack.Location = new System.Drawing.Point(661, 5);
             this.btnSetBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetBack.Name = "btnSetBack";
             this.tabSetButtons.SetRowSpan(this.btnSetBack, 2);
-            this.btnSetBack.Size = new System.Drawing.Size(109, 54);
+            this.btnSetBack.Size = new System.Drawing.Size(109, 63);
             this.btnSetBack.TabIndex = 5;
-            this.btnSetBack.Text = "BACK";
+            this.btnSetBack.Text = "BACK /\r\nTrở Lại";
             this.btnSetBack.UseVisualStyleBackColor = true;
             this.btnSetBack.Click += new System.EventHandler(this.btnSetBack_Click);
             // 
             // label21
             // 
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Location = new System.Drawing.Point(9, 5);
+            this.label21.Location = new System.Drawing.Point(10, 1);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.tabSetButtons.SetRowSpan(this.label21, 2);
-            this.label21.Size = new System.Drawing.Size(107, 62);
+            this.label21.Size = new System.Drawing.Size(106, 71);
             this.label21.TabIndex = 8;
-            this.label21.Text = "2. STOCK-OUT Q\'TY";
+            this.label21.Text = "2. STOCK-OUT Q\'TY /\r\nSố lượng xuất";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label24
             // 
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Location = new System.Drawing.Point(278, 5);
+            this.label24.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label24.Location = new System.Drawing.Point(278, 1);
             this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(146, 31);
+            this.label24.Size = new System.Drawing.Size(144, 40);
             this.label24.TabIndex = 40;
-            this.label24.Text = "OUT DATE";
+            this.label24.Text = "STOCK OUT DATE /\r\nNgày xuất";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnSetReg
             // 
             this.btnSetReg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSetReg.Location = new System.Drawing.Point(432, 9);
+            this.btnSetReg.Location = new System.Drawing.Point(431, 5);
             this.btnSetReg.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetReg.Name = "btnSetReg";
             this.tabSetButtons.SetRowSpan(this.btnSetReg, 2);
-            this.btnSetReg.Size = new System.Drawing.Size(107, 54);
+            this.btnSetReg.Size = new System.Drawing.Size(106, 63);
             this.btnSetReg.TabIndex = 3;
-            this.btnSetReg.Text = "3. STOCK OUT SET";
+            this.btnSetReg.Text = "3. STOCK OUT SET /\r\nXuất Bộ NL";
             this.btnSetReg.UseVisualStyleBackColor = true;
             this.btnSetReg.Click += new System.EventHandler(this.btnSetReg_Click);
             // 
@@ -785,11 +796,11 @@
             // 
             this.txtSetOutDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSetOutDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSetOutDate.Location = new System.Drawing.Point(278, 40);
+            this.txtSetOutDate.Location = new System.Drawing.Point(278, 46);
             this.txtSetOutDate.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetOutDate.Name = "txtSetOutDate";
             this.txtSetOutDate.ReadOnly = true;
-            this.txtSetOutDate.Size = new System.Drawing.Size(146, 23);
+            this.txtSetOutDate.Size = new System.Drawing.Size(144, 23);
             this.txtSetOutDate.TabIndex = 39;
             this.txtSetOutDate.TabStop = false;
             this.txtSetOutDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -798,11 +809,11 @@
             // 
             this.txtSetOutQty.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSetOutQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSetOutQty.Location = new System.Drawing.Point(124, 9);
+            this.txtSetOutQty.Location = new System.Drawing.Point(125, 5);
             this.txtSetOutQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetOutQty.Name = "txtSetOutQty";
             this.tabSetButtons.SetRowSpan(this.txtSetOutQty, 2);
-            this.txtSetOutQty.Size = new System.Drawing.Size(146, 53);
+            this.txtSetOutQty.Size = new System.Drawing.Size(144, 53);
             this.txtSetOutQty.TabIndex = 2;
             this.txtSetOutQty.Text = "0";
             this.txtSetOutQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -811,18 +822,19 @@
             // btnSetDelete
             // 
             this.btnSetDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSetDelete.Location = new System.Drawing.Point(547, 9);
+            this.btnSetDelete.Location = new System.Drawing.Point(546, 5);
             this.btnSetDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetDelete.Name = "btnSetDelete";
             this.tabSetButtons.SetRowSpan(this.btnSetDelete, 2);
-            this.btnSetDelete.Size = new System.Drawing.Size(107, 54);
+            this.btnSetDelete.Size = new System.Drawing.Size(106, 63);
             this.btnSetDelete.TabIndex = 4;
-            this.btnSetDelete.Text = "DELETE";
+            this.btnSetDelete.Text = "DELETE /\r\nXóa SL Nhập";
             this.btnSetDelete.UseVisualStyleBackColor = true;
             this.btnSetDelete.Click += new System.EventHandler(this.btnSetDelete_Click);
             // 
             // tbpSetMain
             // 
+            this.tbpSetMain.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tbpSetMain.ColumnCount = 5;
             this.tbpSetMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tbpSetMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -855,42 +867,44 @@
             this.tbpSetMain.Location = new System.Drawing.Point(3, 3);
             this.tbpSetMain.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.tbpSetMain.Name = "tbpSetMain";
-            this.tbpSetMain.Padding = new System.Windows.Forms.Padding(5);
+            this.tbpSetMain.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.tbpSetMain.RowCount = 5;
-            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tbpSetMain.Size = new System.Drawing.Size(780, 163);
+            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbpSetMain.Size = new System.Drawing.Size(780, 200);
             this.tbpSetMain.TabIndex = 2;
             // 
             // label11
             // 
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(509, 35);
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(508, 42);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(107, 30);
+            this.label11.Size = new System.Drawing.Size(106, 40);
             this.label11.TabIndex = 49;
-            this.label11.Text = "REQUEST DATE";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label11.Text = "REQUEST DATE /\r\nNgày yêu cầu";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label7
             // 
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(509, 125);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(508, 165);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 33);
+            this.label7.Size = new System.Drawing.Size(106, 40);
             this.label7.TabIndex = 49;
-            this.label7.Text = "INVOICE";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label7.Text = "INVOICE /\r\nHóa đơn";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtSetInvoice
             // 
             this.txtSetInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetInvoice.Location = new System.Drawing.Point(624, 129);
+            this.txtSetInvoice.Location = new System.Drawing.Point(623, 169);
             this.txtSetInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetInvoice.Name = "txtSetInvoice";
             this.txtSetInvoice.ReadOnly = true;
@@ -901,7 +915,7 @@
             // txtSetOrderNo
             // 
             this.txtSetOrderNo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetOrderNo.Location = new System.Drawing.Point(624, 9);
+            this.txtSetOrderNo.Location = new System.Drawing.Point(623, 5);
             this.txtSetOrderNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetOrderNo.Name = "txtSetOrderNo";
             this.txtSetOrderNo.ReadOnly = true;
@@ -912,7 +926,7 @@
             // txtSetRequestQty
             // 
             this.txtSetRequestQty.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetRequestQty.Location = new System.Drawing.Point(624, 69);
+            this.txtSetRequestQty.Location = new System.Drawing.Point(623, 87);
             this.txtSetRequestQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetRequestQty.Name = "txtSetRequestQty";
             this.txtSetRequestQty.ReadOnly = true;
@@ -923,7 +937,7 @@
             // txtSetRequestDate
             // 
             this.txtSetRequestDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetRequestDate.Location = new System.Drawing.Point(624, 39);
+            this.txtSetRequestDate.Location = new System.Drawing.Point(623, 46);
             this.txtSetRequestDate.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetRequestDate.Name = "txtSetRequestDate";
             this.txtSetRequestDate.ReadOnly = true;
@@ -934,11 +948,11 @@
             // txtSetDesCD
             // 
             this.txtSetDesCD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetDesCD.Location = new System.Drawing.Point(124, 69);
+            this.txtSetDesCD.Location = new System.Drawing.Point(125, 87);
             this.txtSetDesCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetDesCD.Name = "txtSetDesCD";
             this.txtSetDesCD.ReadOnly = true;
-            this.txtSetDesCD.Size = new System.Drawing.Size(146, 23);
+            this.txtSetDesCD.Size = new System.Drawing.Size(144, 23);
             this.txtSetDesCD.TabIndex = 51;
             this.txtSetDesCD.TabStop = false;
             // 
@@ -948,10 +962,10 @@
             this.lbSetDesName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbSetDesName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSetDesName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSetDesName.Location = new System.Drawing.Point(278, 65);
+            this.lbSetDesName.Location = new System.Drawing.Point(278, 83);
             this.lbSetDesName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSetDesName.Name = "lbSetDesName";
-            this.lbSetDesName.Size = new System.Drawing.Size(223, 30);
+            this.lbSetDesName.Size = new System.Drawing.Size(221, 40);
             this.lbSetDesName.TabIndex = 47;
             this.lbSetDesName.Text = "Destionation Name";
             this.lbSetDesName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -962,10 +976,10 @@
             this.lbSetModelName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbSetModelName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSetModelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSetModelName.Location = new System.Drawing.Point(278, 35);
+            this.lbSetModelName.Location = new System.Drawing.Point(278, 42);
             this.lbSetModelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSetModelName.Name = "lbSetModelName";
-            this.lbSetModelName.Size = new System.Drawing.Size(223, 30);
+            this.lbSetModelName.Size = new System.Drawing.Size(221, 40);
             this.lbSetModelName.TabIndex = 47;
             this.lbSetModelName.Text = "Model Name";
             this.lbSetModelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -973,22 +987,23 @@
             // txtSetModelCD
             // 
             this.txtSetModelCD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetModelCD.Location = new System.Drawing.Point(124, 39);
-            this.txtSetModelCD.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSetModelCD.Location = new System.Drawing.Point(121, 52);
+            this.txtSetModelCD.Margin = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.txtSetModelCD.Name = "txtSetModelCD";
             this.txtSetModelCD.ReadOnly = true;
-            this.txtSetModelCD.Size = new System.Drawing.Size(146, 23);
+            this.txtSetModelCD.Size = new System.Drawing.Size(152, 23);
             this.txtSetModelCD.TabIndex = 50;
             this.txtSetModelCD.TabStop = false;
             // 
             // label2
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(9, 95);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(10, 124);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.tbpSetMain.SetRowSpan(this.label2, 2);
-            this.label2.Size = new System.Drawing.Size(107, 63);
+            this.label2.Size = new System.Drawing.Size(106, 81);
             this.label2.TabIndex = 33;
             this.label2.Text = "1. BARCODE";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -998,43 +1013,45 @@
             this.tbpSetMain.SetColumnSpan(this.txtSetBarcode, 2);
             this.txtSetBarcode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSetBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSetBarcode.Location = new System.Drawing.Point(124, 99);
+            this.txtSetBarcode.Location = new System.Drawing.Point(125, 128);
             this.txtSetBarcode.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetBarcode.Name = "txtSetBarcode";
             this.tbpSetMain.SetRowSpan(this.txtSetBarcode, 2);
-            this.txtSetBarcode.Size = new System.Drawing.Size(377, 53);
+            this.txtSetBarcode.Size = new System.Drawing.Size(374, 53);
             this.txtSetBarcode.TabIndex = 1;
             // 
             // label8
             // 
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(9, 65);
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(10, 83);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(107, 30);
+            this.label8.Size = new System.Drawing.Size(106, 40);
             this.label8.TabIndex = 47;
-            this.label8.Text = "DESTINATION";
+            this.label8.Text = "DESTINATION /\r\nPhòng ban";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(9, 5);
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(10, 1);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(107, 30);
+            this.label10.Size = new System.Drawing.Size(106, 40);
             this.label10.TabIndex = 31;
-            this.label10.Text = "USER CODE";
+            this.label10.Text = "USER ID /\r\nMã số nhân viên";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtSetUserCD
             // 
             this.txtSetUserCD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetUserCD.Location = new System.Drawing.Point(124, 9);
-            this.txtSetUserCD.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSetUserCD.Location = new System.Drawing.Point(121, 11);
+            this.txtSetUserCD.Margin = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.txtSetUserCD.Name = "txtSetUserCD";
             this.txtSetUserCD.ReadOnly = true;
-            this.txtSetUserCD.Size = new System.Drawing.Size(146, 23);
+            this.txtSetUserCD.Size = new System.Drawing.Size(152, 23);
             this.txtSetUserCD.TabIndex = 5;
             this.txtSetUserCD.TabStop = false;
             // 
@@ -1044,10 +1061,10 @@
             this.lbSetUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbSetUserName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSetUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSetUserName.Location = new System.Drawing.Point(278, 5);
+            this.lbSetUserName.Location = new System.Drawing.Point(278, 1);
             this.lbSetUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSetUserName.Name = "lbSetUserName";
-            this.lbSetUserName.Size = new System.Drawing.Size(223, 30);
+            this.lbSetUserName.Size = new System.Drawing.Size(221, 40);
             this.lbSetUserName.TabIndex = 29;
             this.lbSetUserName.Text = "User Name";
             this.lbSetUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1055,51 +1072,55 @@
             // label14
             // 
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(9, 35);
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(10, 42);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(107, 30);
+            this.label14.Size = new System.Drawing.Size(106, 40);
             this.label14.TabIndex = 46;
-            this.label14.Text = "MODEL NUMBER";
+            this.label14.Text = "MODEL /\r\nMã Model";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label15
             // 
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(509, 5);
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(508, 1);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(107, 30);
+            this.label15.Size = new System.Drawing.Size(106, 40);
             this.label15.TabIndex = 44;
-            this.label15.Text = "ORDER NUMBER";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label15.Text = "ORDER NO. /\r\nMã đặt hàng";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label16
             // 
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(509, 65);
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(508, 83);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(107, 30);
+            this.label16.Size = new System.Drawing.Size(106, 40);
             this.label16.TabIndex = 47;
-            this.label16.Text = "REQUEST Q\'TY";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label16.Text = "REQUEST Q\'TY /\r\nSố lượng yêu cầu";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label17
             // 
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Location = new System.Drawing.Point(509, 95);
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(508, 124);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(107, 30);
+            this.label17.Size = new System.Drawing.Size(106, 40);
             this.label17.TabIndex = 48;
-            this.label17.Text = "ITEM CODE";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label17.Text = "ITEM CODE /\r\nMã nguyên liệu";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtSetItemCD
             // 
             this.txtSetItemCD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSetItemCD.Location = new System.Drawing.Point(624, 99);
+            this.txtSetItemCD.Location = new System.Drawing.Point(623, 128);
             this.txtSetItemCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetItemCD.Name = "txtSetItemCD";
             this.txtSetItemCD.ReadOnly = true;
@@ -1143,15 +1164,15 @@
             this.dgvPrint.Margin = new System.Windows.Forms.Padding(5);
             this.dgvPrint.Name = "dgvPrint";
             this.dgvPrint.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPrint.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.NullValue = null;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPrint.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.dgvPrint.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvPrint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPrint.Size = new System.Drawing.Size(770, 304);
@@ -1189,8 +1210,9 @@
             this.btnPrintAll.Name = "btnPrintAll";
             this.btnPrintAll.Size = new System.Drawing.Size(146, 52);
             this.btnPrintAll.TabIndex = 10;
-            this.btnPrintAll.Text = "1A. PRINT ALL";
+            this.btnPrintAll.Text = "1A. PRINT ALL /\r\nIN TOÀN BỘ";
             this.btnPrintAll.UseVisualStyleBackColor = true;
+            this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
             // 
             // btnPrintBack
             // 
@@ -1200,8 +1222,9 @@
             this.btnPrintBack.Name = "btnPrintBack";
             this.btnPrintBack.Size = new System.Drawing.Size(146, 52);
             this.btnPrintBack.TabIndex = 13;
-            this.btnPrintBack.Text = "BACK";
+            this.btnPrintBack.Text = "BACK /\r\nTRỞ LẠI";
             this.btnPrintBack.UseVisualStyleBackColor = true;
+            this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
             // 
             // btnPrintInspection
             // 
@@ -1211,8 +1234,9 @@
             this.btnPrintInspection.Name = "btnPrintInspection";
             this.btnPrintInspection.Size = new System.Drawing.Size(146, 52);
             this.btnPrintInspection.TabIndex = 14;
-            this.btnPrintInspection.Text = "2. INSPECTION";
+            this.btnPrintInspection.Text = "2. INSPECTION /\r\nKIỂM TRA";
             this.btnPrintInspection.UseVisualStyleBackColor = true;
+            this.btnPrintInspection.Click += new System.EventHandler(this.btnPrintInspection_Click);
             // 
             // btnPrinClear
             // 
@@ -1222,8 +1246,9 @@
             this.btnPrinClear.Name = "btnPrinClear";
             this.btnPrinClear.Size = new System.Drawing.Size(146, 52);
             this.btnPrinClear.TabIndex = 12;
-            this.btnPrinClear.Text = "CLEAR";
+            this.btnPrinClear.Text = "CLEAR /\r\nXÓA DS";
             this.btnPrinClear.UseVisualStyleBackColor = true;
+            this.btnPrinClear.Click += new System.EventHandler(this.btnPrinClear_Click);
             // 
             // btnPrintSelect
             // 
@@ -1233,8 +1258,9 @@
             this.btnPrintSelect.Name = "btnPrintSelect";
             this.btnPrintSelect.Size = new System.Drawing.Size(146, 52);
             this.btnPrintSelect.TabIndex = 11;
-            this.btnPrintSelect.Text = "1B. PRINT SELECTED";
+            this.btnPrintSelect.Text = "1B. PRINT SELECTED /\r\nIN CHỈ MỤC";
             this.btnPrintSelect.UseVisualStyleBackColor = true;
+            this.btnPrintSelect.Click += new System.EventHandler(this.btnPrintSelect_Click);
             // 
             // tab_Inspection
             // 
@@ -1275,15 +1301,15 @@
             this.dgvStockOut.MultiSelect = false;
             this.dgvStockOut.Name = "dgvStockOut";
             this.dgvStockOut.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvStockOut.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle27.NullValue = null;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStockOut.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.dgvStockOut.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvStockOut.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStockOut.Size = new System.Drawing.Size(770, 117);
@@ -1340,7 +1366,7 @@
             this.btnInsReg.Name = "btnInsReg";
             this.btnInsReg.Size = new System.Drawing.Size(146, 52);
             this.btnInsReg.TabIndex = 10;
-            this.btnInsReg.Text = "3. REGISTER";
+            this.btnInsReg.Text = "3. REGISTER /\r\nĐăng Ký";
             this.btnInsReg.UseVisualStyleBackColor = true;
             // 
             // label31
@@ -1363,7 +1389,7 @@
             this.btnInsBack.Name = "btnInsBack";
             this.btnInsBack.Size = new System.Drawing.Size(109, 52);
             this.btnInsBack.TabIndex = 11;
-            this.btnInsBack.Text = "BACK";
+            this.btnInsBack.Text = "BACK /\r\nTrở Lại";
             this.btnInsBack.UseVisualStyleBackColor = true;
             // 
             // txtInsBarcode
@@ -1386,7 +1412,7 @@
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(107, 60);
             this.label19.TabIndex = 8;
-            this.label19.Text = "2. LABEL Q\'TY";
+            this.label19.Text = "2. LABEL Q\'TY /\r\nSố lượng tem";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnInsDelete
@@ -1397,7 +1423,7 @@
             this.btnInsDelete.Name = "btnInsDelete";
             this.btnInsDelete.Size = new System.Drawing.Size(107, 52);
             this.btnInsDelete.TabIndex = 9;
-            this.btnInsDelete.Text = "DELETE";
+            this.btnInsDelete.Text = "DELETE /\r\nXóa NL";
             this.btnInsDelete.UseVisualStyleBackColor = true;
             // 
             // txtInsLabelQty
@@ -1421,7 +1447,7 @@
             this.btnInsClear.Name = "btnInsClear";
             this.btnInsClear.Size = new System.Drawing.Size(107, 52);
             this.btnInsClear.TabIndex = 10;
-            this.btnInsClear.Text = "CLEAR";
+            this.btnInsClear.Text = "CLEAR /\r\nXóa Thông Tin";
             this.btnInsClear.UseVisualStyleBackColor = true;
             // 
             // statusStrip1
