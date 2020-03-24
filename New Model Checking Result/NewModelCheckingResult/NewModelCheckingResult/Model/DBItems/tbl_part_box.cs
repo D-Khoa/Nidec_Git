@@ -41,7 +41,7 @@ namespace NewModelCheckingResult.Model
             PSQL SQL = new PSQL();
             string query = string.Empty;
             query = "SELECT part_box_id, part_box_cd, part_number, part_name, model_cd, invoice, part_box_qty, part_box_lot, part_box_date, ";
-            query += "vender_cd, purpose_cmt FROM tbl_part_box WHERE 1=1 ";
+            query += "vender_cd, purpose_cmt, incharge FROM tbl_part_box WHERE 1=1 ";
             if (!string.IsNullOrEmpty(inItem.part_box_cd))
                 query += "AND part_box_cd ='" + inItem.part_box_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.part_number))

@@ -330,18 +330,26 @@ namespace NewModelCheckingResult
                 xlWorkSheet1.Cells[5, 20] = inBox.incharge;
                 xlWorkSheet1.Cells[6, 20] = inBox.incharge;
                 xlWorkSheet1.Cells[8, 9] = "CP ITEMS (n = " + inBox.part_box_qty + ")";
-                if (inMaster.Count <= 16)
+                for (int i = 0; i < inMaster.Count; i++)
                 {
-                    for (int i = 0; i < inMaster.Count; i++)
+                    if (i == 16) break;
+                    xlWorkSheet1.Cells[9, 9 + i] = inMaster[i].inspect_cd;
+                    xlWorkSheet1.Cells[10, 9 + i] = inMaster[i].inspect_tool;
+                    xlWorkSheet1.Cells[11, 9 + i] = inMaster[i].inspect_spec;
+                    xlWorkSheet1.Cells[12, 9 + i] = inMaster[i].tol_plus;
+                    xlWorkSheet1.Cells[13, 9 + i] = inMaster[i].tol_minus;
+                    int n = 0;
+                    for (int j = 0; j < inData.Count; j++)
                     {
-                        xlWorkSheet1.Cells[9, 9 + i] = inMaster[i].inspect_cd;
-                        xlWorkSheet1.Cells[10, 9 + i] = inMaster[i].inspect_tool;
-                        xlWorkSheet1.Cells[11, 9 + i] = inMaster[i].inspect_spec;
-                        xlWorkSheet1.Cells[12, 9 + i] = inMaster[i].tol_plus;
-                        xlWorkSheet1.Cells[13, 9 + i] = inMaster[i].tol_minus;
+                        if (inData[j].inspect_id == inMaster[i].inspect_id)
+                        {
+                            n++;
+                            if (inData[j].item_no == n)
+                                xlWorkSheet1.Cells[16 + j, 9 + i] = inData[j].inspect_data;
+                        }
                     }
                 }
-                else
+                if (inMaster.Count > 16)
                 {
                     xlWorkSheet2 = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(2); //add data sheet2
                     xlWorkSheet2.Cells[3, 2] = inBox.part_name;
@@ -363,6 +371,16 @@ namespace NewModelCheckingResult
                         xlWorkSheet2.Cells[11, 2 + i] = inMaster[i].inspect_spec;
                         xlWorkSheet2.Cells[12, 2 + i] = inMaster[i].tol_plus;
                         xlWorkSheet2.Cells[13, 2 + i] = inMaster[i].tol_minus;
+                        int n = 0;
+                        for (int j = 0; j < inData.Count; j++)
+                        {
+                            if (inData[j].inspect_id == inMaster[i].inspect_id)
+                            {
+                                n++;
+                                if (inData[j].item_no == n)
+                                    xlWorkSheet1.Cells[16 + j, 2 + i] = inData[j].inspect_data;
+                            }
+                        }
                     }
                 }
                 #endregion

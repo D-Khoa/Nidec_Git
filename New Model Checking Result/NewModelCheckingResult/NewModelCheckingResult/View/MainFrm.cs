@@ -107,6 +107,7 @@ namespace NewModelCheckingResult.View
             dgvMain.Columns["part_box_date"].HeaderText = "Box Date";
             dgvMain.Columns["vender_cd"].HeaderText = "Vender";
             dgvMain.Columns["purpose_cmt"].HeaderText = "Purpose";
+            dgvMain.Columns["incharge"].HeaderText = "Incharge";
         }
 
         private bool CheckFields()
