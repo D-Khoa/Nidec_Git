@@ -151,22 +151,22 @@ namespace NewModelCheckingResult
         public bool sqlExecuteScalarBool(string sql)
         {
             bool response;
-            try
-            {
+            //try
+            //{
                 connection = new NpgsqlConnection(strConnection);
                 connection.Open();
                 NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                 response = (bool)command.ExecuteScalar();
                 connection.Close();
                 return response;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("SQL executeschalar moethod failed." + System.Environment.NewLine + ex.Message
-                                , "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                connection.Close();
-                return false;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("SQL executeschalar moethod failed." + System.Environment.NewLine + ex.Message
+            //                    , "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    connection.Close();
+            //    return false;
+            //}
         }
 
         public long sqlExecuteScalarLong(string sql)
@@ -189,7 +189,26 @@ namespace NewModelCheckingResult
                 return 0;
             }
         }
-
+        public DataTable sqlExecuteReader(string sql)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                connection = new NpgsqlConnection(strConnection);
+                connection.Open();
+                NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                IDataReader reader = command.ExecuteReader();
+                dt.Load(reader);
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("SQL executeschalar moethod failed." + System.Environment.NewLine + ex.Message
+                                , "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                connection.Close();
+            }
+            return dt;
+        }
         public bool sqlExecuteNonQuery(string sql, bool result_message_show)
         {
             try

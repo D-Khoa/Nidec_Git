@@ -33,12 +33,12 @@
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPartNumber = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnOpenMeasure = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBoxID = new System.Windows.Forms.TextBox();
             this.cmbTools = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tbpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +54,6 @@
             this.tbpMain.Controls.Add(this.dgvMain, 0, 4);
             this.tbpMain.Controls.Add(this.label3, 2, 1);
             this.tbpMain.Controls.Add(this.txtPartNumber, 1, 1);
-            this.tbpMain.Controls.Add(this.label1, 0, 1);
             this.tbpMain.Controls.Add(this.btnOpenMeasure, 3, 2);
             this.tbpMain.Controls.Add(this.btnSearch, 2, 2);
             this.tbpMain.Controls.Add(this.label2, 0, 0);
@@ -74,6 +73,15 @@
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tbpMain.Size = new System.Drawing.Size(827, 424);
             this.tbpMain.TabIndex = 11;
+            this.tbpMain.Controls.SetChildIndex(this.cmbTools, 0);
+            this.tbpMain.Controls.SetChildIndex(this.txtBoxID, 0);
+            this.tbpMain.Controls.SetChildIndex(this.label2, 0);
+            this.tbpMain.Controls.SetChildIndex(this.btnSearch, 0);
+            this.tbpMain.Controls.SetChildIndex(this.btnOpenMeasure, 0);
+            this.tbpMain.Controls.SetChildIndex(this.txtPartNumber, 0);
+            this.tbpMain.Controls.SetChildIndex(this.label3, 0);
+            this.tbpMain.Controls.SetChildIndex(this.dgvMain, 0);
+            this.tbpMain.Controls.SetChildIndex(this.btnOpenMaster, 0);
             // 
             // btnOpenMaster
             // 
@@ -125,18 +133,6 @@
             this.txtPartNumber.Size = new System.Drawing.Size(195, 23);
             this.txtPartNumber.TabIndex = 9;
             this.txtPartNumber.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(11, 30);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 30);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Part Number / Số Linh Kiện";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnOpenMeasure
             // 
@@ -194,11 +190,24 @@
             this.cmbTools.TabIndex = 1;
             this.cmbTools.SelectedIndexChanged += new System.EventHandler(this.cmbTools_SelectedIndexChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(11, 30);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(195, 30);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Part Number / Số Linh Kiện";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // MeasurementFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(977, 494);
+            this.code = "";
             this.Controls.Add(this.tbpMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.name = "";

@@ -25,9 +25,15 @@ namespace NewModelCheckingResult.View.Common
             get { return lbUsername.Text; }
             set { lbUsername.Text = value; }
         }
+        public string code
+        {
+            get { return lbCode.Text; }
+            set { lbCode.Text = value; }
+        }
         private void ChangePassword_Load(object sender, EventArgs e)
         {
             name = UserData.username;
+            code = UserData.usercode;
         }
         private void txtNewPass_KeyDown(object sender, KeyEventArgs e)
         {
@@ -62,7 +68,7 @@ namespace NewModelCheckingResult.View.Common
                 }
                 else
                 {
-                    tf.sqlExecuteScalarString("update iqc_user set user_pass = '" + txtNewPass.Text + "' where user_name = '" + lbUsername.Text + "'");
+                    tf.sqlExecuteScalarString("update iqc_user set user_pass = '" + txtNewPass.Text + "' where user_name = '" + lbCode.Text+"' and  full_name = '" + lbUsername.Text + "'");
                     DialogResult result = MessageBox.Show("Your password has been changed!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (result == DialogResult.OK)
                     {

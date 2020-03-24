@@ -32,6 +32,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbTittle = new System.Windows.Forms.Label();
             this.pnlUser = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbCode = new System.Windows.Forms.Label();
+            this.btnCreatAccount = new System.Windows.Forms.Button();
             this.btnCloseForm = new System.Windows.Forms.Button();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.lbNameUser = new System.Windows.Forms.Label();
@@ -71,6 +74,9 @@
             // 
             this.pnlUser.BackColor = System.Drawing.SystemColors.Control;
             this.pnlUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlUser.Controls.Add(this.label1);
+            this.pnlUser.Controls.Add(this.lbCode);
+            this.pnlUser.Controls.Add(this.btnCreatAccount);
             this.pnlUser.Controls.Add(this.btnCloseForm);
             this.pnlUser.Controls.Add(this.btnChangePassword);
             this.pnlUser.Controls.Add(this.lbNameUser);
@@ -83,11 +89,43 @@
             this.pnlUser.Size = new System.Drawing.Size(150, 424);
             this.pnlUser.TabIndex = 7;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "User Code :";
+            // 
+            // lbCode
+            // 
+            this.lbCode.AutoSize = true;
+            this.lbCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.lbCode.Location = new System.Drawing.Point(12, 33);
+            this.lbCode.Name = "lbCode";
+            this.lbCode.Size = new System.Drawing.Size(36, 13);
+            this.lbCode.TabIndex = 11;
+            this.lbCode.Text = "Code";
+            // 
+            // btnCreatAccount
+            // 
+            this.btnCreatAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreatAccount.Location = new System.Drawing.Point(15, 214);
+            this.btnCreatAccount.Name = "btnCreatAccount";
+            this.btnCreatAccount.Size = new System.Drawing.Size(120, 50);
+            this.btnCreatAccount.TabIndex = 10;
+            this.btnCreatAccount.TabStop = false;
+            this.btnCreatAccount.Text = "Creat Account";
+            this.btnCreatAccount.UseVisualStyleBackColor = true;
+            this.btnCreatAccount.Click += new System.EventHandler(this.btnCreatAccount_Click);
+            // 
             // btnCloseForm
             // 
             this.btnCloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCloseForm.Location = new System.Drawing.Point(15, 355);
+            this.btnCloseForm.Location = new System.Drawing.Point(15, 354);
             this.btnCloseForm.Name = "btnCloseForm";
             this.btnCloseForm.Size = new System.Drawing.Size(120, 50);
             this.btnCloseForm.TabIndex = 9;
@@ -100,7 +138,7 @@
             // 
             this.btnChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangePassword.Location = new System.Drawing.Point(15, 287);
+            this.btnChangePassword.Location = new System.Drawing.Point(15, 284);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(120, 50);
             this.btnChangePassword.TabIndex = 6;
@@ -112,7 +150,7 @@
             // lbNameUser
             // 
             this.lbNameUser.AutoSize = true;
-            this.lbNameUser.Location = new System.Drawing.Point(10, 10);
+            this.lbNameUser.Location = new System.Drawing.Point(12, 61);
             this.lbNameUser.Name = "lbNameUser";
             this.lbNameUser.Size = new System.Drawing.Size(77, 13);
             this.lbNameUser.TabIndex = 4;
@@ -122,7 +160,7 @@
             // 
             this.lbName.AutoSize = true;
             this.lbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lbName.Location = new System.Drawing.Point(10, 30);
+            this.lbName.Location = new System.Drawing.Point(12, 81);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(39, 13);
             this.lbName.TabIndex = 0;
@@ -156,5 +194,8 @@
         private System.Windows.Forms.Button btnChangePassword;
         private System.Windows.Forms.Label lbNameUser;
         private System.Windows.Forms.Label lbName;
+        private System.Windows.Forms.Button btnCreatAccount;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbCode;
     }
 }

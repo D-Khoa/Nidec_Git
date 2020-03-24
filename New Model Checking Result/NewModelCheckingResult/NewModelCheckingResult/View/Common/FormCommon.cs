@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NewModelCheckingResult.Model;
+//using NewModelCheckingResult.View.Common;
 
 
 namespace NewModelCheckingResult.View.Common
@@ -21,16 +22,21 @@ namespace NewModelCheckingResult.View.Common
             get { return lbName.Text; }
             set { lbName.Text = value; }
         }
-     
+        public string code
+        {
+            get { return lbCode.Text; }
+            set { lbCode.Text = value; }
+        }
+
         public string tittle
         {
             get { return lbTittle.Text; }
             set { lbTittle.Text = value; }
         }
-        
         public FormCommon()
         {
             InitializeComponent();
+            btnCreatAccount.Enabled = false;
         }
         #endregion
 
@@ -38,7 +44,10 @@ namespace NewModelCheckingResult.View.Common
         {
             tittle = this.Text;
             name = UserData.username;
+            code = UserData.usercode;
             this.Text = tittle + "- IQC Model Checking Result";
+            btnCreatAccount.Enabled = UserData.isadmin;           
+            
             AddEventLoad(this, true);
         }
 
@@ -82,5 +91,13 @@ namespace NewModelCheckingResult.View.Common
         {
             this.Close();
         }
+
+        private void btnCreatAccount_Click(object sender, EventArgs e)
+        {
+            CreatAccount cracc = new CreatAccount();
+            cracc.ShowDialog();
+        }
+
+     
     }
 }
