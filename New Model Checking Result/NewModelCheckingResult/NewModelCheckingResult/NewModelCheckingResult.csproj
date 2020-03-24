@@ -81,6 +81,12 @@
     <Compile Include="View\Common\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Common\CreatAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\CreatAccount.Designer.cs">
+      <DependentUpon>CreatAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Common\FormCommon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Common\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\CreatAccount.resx">
+      <DependentUpon>CreatAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Common\FormCommon.resx">
       <DependentUpon>FormCommon.cs</DependentUpon>

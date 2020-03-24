@@ -50,24 +50,29 @@ namespace NewModelCheckingResult
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (cbmname.Text != "")
+            if (!string.IsNullOrEmpty(cbmname.Text))
             {
                 TfSQL con = new TfSQL();
-                string sqlpass = "select user_pass from iqc_user where user_name = '" + cbmname.Text + "'";
-                //  select user_pass from m_user where user_name = 'dang'
-                if (con.sqlExecuteScalarString(sqlpass) == txtpass.Text)
+                string sqlpass = "select user_name, user_pass, full_name, admin_flag from iqc_user where user_name = '" + cbmname.Text + "' and user_pass = '" + txtpass.Text + "' ";
                 {
-                    UserData.username = cbmname.Text;
-                    MainFrm dg = new MainFrm();
-                    this.Hide();
-                    dg.ShowDialog();
-                    this.Close();
+                    DataTable dt = new DataTable();
+                    dt = con.sqlExecuteReader(sqlpass);
+                    //if (con.sqlExecuteScalarString(sqlpass) == cbmname.Text)
+                    if (dt.Rows.Count > 0 && dt.Rows[0]["user_name"].ToString() == cbmname.Text && dt.Rows[0]["user_pass"].ToString() == txtpass.Text)
+                    {
+                        UserData.usercode = dt.Rows[0]["user_name"].ToString();
+                        UserData.username = dt.Rows[0]["full_name"].ToString();
+                        UserData.isadmin = bool.Parse(dt.Rows[0]["admin_flag"].ToString());
+                        MainFrm dg = new MainFrm();
+                        this.Hide();
+                        dg.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pass is not correct", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Pass is not correct", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
             }
             else
             {
