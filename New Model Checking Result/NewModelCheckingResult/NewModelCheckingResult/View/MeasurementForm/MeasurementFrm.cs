@@ -61,7 +61,7 @@ namespace NewModelCheckingResult.View
 
         private void btnOpenMaster_Click(object sender, EventArgs e)
         {
-            MasterFrm masterfrm = new MasterFrm();
+            MasterFrm masterfrm = new MasterFrm(txtPartNumber.Text);
             masterfrm.ShowDialog();
         }
 

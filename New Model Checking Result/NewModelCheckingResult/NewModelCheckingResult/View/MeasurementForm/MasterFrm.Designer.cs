@@ -127,6 +127,7 @@
             this.cmbTools.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbTools.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbTools.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbTools.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTools.FormattingEnabled = true;
             this.cmbTools.Location = new System.Drawing.Point(613, 3);
             this.cmbTools.Name = "cmbTools";

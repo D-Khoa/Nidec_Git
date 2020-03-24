@@ -59,6 +59,35 @@ namespace NewModelCheckingResult.Model
         }
 
         /// <summary>
+        /// Create table with string year month
+        /// </summary>
+        /// <param name="month">"yyyyMM"</param>
+        /// <returns></returns>
+        public bool CreateMonthTable(string month)
+        {
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            string tbl = "tbl_inspect_data" + month;
+            if (CheckTblExist(tbl)) return true;
+            else
+            {
+                query = "CREATE TABLE " + tbl;
+                query += @"(part_box_cd character varying(50) NOT NULL,
+                            item_no integer NOT NULL DEFAULT 0,
+                            inspect_id integer NOT NULL,
+                            inspect_data double precision NOT NULL DEFAULT 0::double precision,
+                            judge character varying(1) NOT NULL,
+                            inspect_date timestamp without time zone NOT NULL DEFAULT now(),
+                            incharge character varying(30) NOT NULL,
+                            CONSTRAINT " + tbl + "_pk PRIMARY KEY(part_box_cd, item_no, inspect_id, inspect_date));";
+                SQL.Open();
+                int result = SQL.Command(query).ExecuteNonQuery();
+                SQL.Close();
+                if (result > 0) return true;
+                else return false;
+            }
+        }
+        /// <summary>
         /// Check table
         /// </summary>
         /// <param name="tblName">table name</param>
@@ -152,7 +181,7 @@ namespace NewModelCheckingResult.Model
             string[] box = inList[0].part_box_cd.Split('#');
             string month = box[2].Remove(6, 2);
             string tablename = "tbl_inspect_data" + month;
-            if (!CheckTblExist(tablename)) return 0;
+            if (!CheckTblExist(tablename)) CreateMonthTable(month);
             query = "INSERT INTO " + tablename + "(part_box_cd, item_no, inspect_id, inspect_data, judge, inspect_date, incharge) VALUES";
             for (int i = 0; i < inList.Count; i++)
             {

@@ -13,10 +13,11 @@ namespace NewModelCheckingResult.View
 {
     public partial class MasterFrm : Common.FormCommon
     {
-        public MasterFrm()
+        public MasterFrm(string partnum)
         {
             InitializeComponent();
             tcMaster.ItemSize = new Size(0, 1);
+            txtPartNumber.Text = partnum;
         }
 
         private void MasterFrm_Load(object sender, EventArgs e)
@@ -32,6 +33,8 @@ namespace NewModelCheckingResult.View
 
         private void btnAddMaster_Click(object sender, EventArgs e)
         {
+            txtInsPart.Text = txtPartNumber.Text;
+            cmbInsTool.Text = cmbTools.Text;
             tcMaster.SelectedTab = tabAddMaster;
         }
 

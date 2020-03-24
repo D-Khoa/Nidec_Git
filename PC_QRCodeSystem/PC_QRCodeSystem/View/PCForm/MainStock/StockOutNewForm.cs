@@ -169,8 +169,8 @@ namespace PC_QRCodeSystem.View
         private void cmbIssue_SelectedIndexChanged(object sender, EventArgs e)
         {
             issueFlag = cmbIssue.SelectedValue.ToString();
-            if (issueFlag == "20") tbpNoSet.Visible = true;
-            else tbpNoSet.Visible = false;
+            if (issueFlag == "20" || string.IsNullOrEmpty(issueFlag)) tbpNoSet.Visible = false;
+            else tbpNoSet.Visible = true;
         }
 
         private void cmbIssue_Validated(object sender, EventArgs e)
