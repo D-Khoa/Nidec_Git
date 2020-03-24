@@ -121,7 +121,40 @@ namespace NewModelCheckingResult.Model
             string tablename = "tbl_inspect_data" + month;
             if (!CheckTblExist(tablename)) return 0;
             query = "SELECT part_box_cd, item_no, inspect_id, inspect_data, judge, inspect_date, incharge FROM " + tablename + " WHERE 1=1 ";
-            query += "AND part_box_cd ='" + boxCD + "' ORDER BY part_box_cd, inspect_date";
+            query += "AND part_box_cd ='" + boxCD;
+            query += "' ORDER BY inspect_id, item_no";
+            SQL.Open();
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            while (reader.Read())
+            {
+                tbl_inspect_data outItem = new tbl_inspect_data
+                {
+                    part_box_cd = reader["part_box_cd"].ToString(),
+                    item_no = (int)reader["item_no"],
+                    inspect_id = (int)reader["inspect_id"],
+                    inspect_data = (double)reader["inspect_data"],
+                    judge = reader["judge"].ToString(),
+                    inspect_date = (DateTime)reader["inspect_date"],
+                    incharge = reader["incharge"].ToString(),
+                };
+                listData.Add(outItem);
+            }
+            SQL.Close();
+            return listData.Count;
+        }
+
+        public int Search(tbl_inspect_data inItem)
+        {
+            listData.Clear();
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            string[] box = inItem.part_box_cd.Split('#');
+            string month = box[2].Remove(6, 2);
+            string tablename = "tbl_inspect_data" + month;
+            if (!CheckTblExist(tablename)) return 0;
+            query = "SELECT part_box_cd, item_no, inspect_id, inspect_data, judge, inspect_date, incharge FROM " + tablename + " WHERE 1=1 ";
+            query += "AND part_box_cd ='" + inItem.part_box_cd + "' AND inspect_id ='" + inItem.inspect_id;
+            query += "' ORDER BY inspect_id, item_no";
             SQL.Open();
             IDataReader reader = SQL.Command(query).ExecuteReader();
             while (reader.Read())

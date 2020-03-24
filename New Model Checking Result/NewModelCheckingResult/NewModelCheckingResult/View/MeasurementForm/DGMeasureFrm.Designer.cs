@@ -392,6 +392,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvRegMeasure.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvRegMeasure.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRegMeasure.Size = new System.Drawing.Size(368, 208);
             this.dgvRegMeasure.TabIndex = 8;
             // 
@@ -428,8 +429,10 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvNewMeasure.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvNewMeasure.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNewMeasure.Size = new System.Drawing.Size(367, 208);
             this.dgvNewMeasure.TabIndex = 7;
+            this.dgvNewMeasure.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvNewMeasure_DataBindingComplete);
             // 
             // txtMeasureValue
             // 

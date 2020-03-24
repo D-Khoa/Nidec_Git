@@ -121,5 +121,10 @@ namespace NewModelCheckingResult.View
                 CustomMessageBox.Error(ex.Message);
             }
         }
+
+        private void tbpMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

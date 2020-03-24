@@ -35,7 +35,6 @@
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPartNumber = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnAddMaster = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -59,6 +58,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtInsName = new System.Windows.Forms.TextBox();
             this.cmbInsTool = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tcMaster.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tbpMain.SuspendLayout();
@@ -104,7 +104,6 @@
             this.tbpMain.Controls.Add(this.dgvMain, 0, 2);
             this.tbpMain.Controls.Add(this.label3, 2, 0);
             this.tbpMain.Controls.Add(this.txtPartNumber, 1, 0);
-            this.tbpMain.Controls.Add(this.label1, 0, 0);
             this.tbpMain.Controls.Add(this.btnSearch, 0, 1);
             this.tbpMain.Controls.Add(this.btnAddMaster, 1, 1);
             this.tbpMain.Controls.Add(this.btnClear, 3, 1);
@@ -169,18 +168,6 @@
             this.txtPartNumber.Name = "txtPartNumber";
             this.txtPartNumber.Size = new System.Drawing.Size(193, 23);
             this.txtPartNumber.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(11, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(193, 31);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Part Number / Số Linh Kiện";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnSearch
             // 
@@ -468,11 +455,24 @@
             this.cmbInsTool.Size = new System.Drawing.Size(195, 24);
             this.cmbInsTool.TabIndex = 30;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(11, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(193, 31);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Part Number / Số Linh Kiện";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // MasterFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 462);
+            this.code = "";
             this.Controls.Add(this.tcMaster);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);

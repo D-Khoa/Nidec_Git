@@ -73,15 +73,6 @@
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tbpMain.Size = new System.Drawing.Size(827, 424);
             this.tbpMain.TabIndex = 11;
-            this.tbpMain.Controls.SetChildIndex(this.cmbTools, 0);
-            this.tbpMain.Controls.SetChildIndex(this.txtBoxID, 0);
-            this.tbpMain.Controls.SetChildIndex(this.label2, 0);
-            this.tbpMain.Controls.SetChildIndex(this.btnSearch, 0);
-            this.tbpMain.Controls.SetChildIndex(this.btnOpenMeasure, 0);
-            this.tbpMain.Controls.SetChildIndex(this.txtPartNumber, 0);
-            this.tbpMain.Controls.SetChildIndex(this.label3, 0);
-            this.tbpMain.Controls.SetChildIndex(this.dgvMain, 0);
-            this.tbpMain.Controls.SetChildIndex(this.btnOpenMaster, 0);
             // 
             // btnOpenMaster
             // 

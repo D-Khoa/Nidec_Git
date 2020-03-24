@@ -98,7 +98,7 @@ namespace NewModelCheckingResult.View
         {
             try
             {
-                currNo++;
+                //currNo++;
                 if (string.IsNullOrEmpty(txtMeasureValue.Text)) return;
                 double measVal = double.Parse(txtMeasureValue.Text);
                 double uslVal = double.Parse(txtUSL.Text);
@@ -145,8 +145,12 @@ namespace NewModelCheckingResult.View
 
         private void UpdateGridReg()
         {
-            tbl_inspect_data insData = new tbl_inspect_data();
-            insData.Search(txtBoxID.Text);
+            tbl_inspect_data insData = new tbl_inspect_data()
+            {
+                part_box_cd = txtBoxID.Text,
+                inspect_id = insID
+            };
+            insData.Search(insData);
             maxNo = insData.GetMax(txtBoxID.Text, insID);
             dgvRegMeasure.DataSource = insData.listData;
             foreach (DataGridViewRow dr in dgvRegMeasure.Rows)
@@ -155,6 +159,14 @@ namespace NewModelCheckingResult.View
                 else dr.DefaultCellStyle.BackColor = Color.White;
             }
             currNo = maxNo;
+        }
+
+        private void dgvNewMeasure_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            for (int i = 0; i < listNewData.Count; i++)
+            {
+                listNewData[i].item_no = currNo + 1 + i;
+            }
         }
     }
 }

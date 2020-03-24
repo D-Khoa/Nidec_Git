@@ -32,7 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbTittle = new System.Windows.Forms.Label();
             this.pnlUser = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbUserCode = new System.Windows.Forms.Label();
             this.lbCode = new System.Windows.Forms.Label();
             this.btnCreatAccount = new System.Windows.Forms.Button();
             this.btnCloseForm = new System.Windows.Forms.Button();
@@ -74,7 +74,7 @@
             // 
             this.pnlUser.BackColor = System.Drawing.SystemColors.Control;
             this.pnlUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlUser.Controls.Add(this.label1);
+            this.pnlUser.Controls.Add(this.lbUserCode);
             this.pnlUser.Controls.Add(this.lbCode);
             this.pnlUser.Controls.Add(this.btnCreatAccount);
             this.pnlUser.Controls.Add(this.btnCloseForm);
@@ -89,14 +89,14 @@
             this.pnlUser.Size = new System.Drawing.Size(150, 424);
             this.pnlUser.TabIndex = 7;
             // 
-            // label1
+            // lbUserCode
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "User Code :";
+            this.lbUserCode.AutoSize = true;
+            this.lbUserCode.Location = new System.Drawing.Point(12, 13);
+            this.lbUserCode.Name = "lbUserCode";
+            this.lbUserCode.Size = new System.Drawing.Size(74, 13);
+            this.lbUserCode.TabIndex = 12;
+            this.lbUserCode.Text = "User Code :";
             // 
             // lbCode
             // 
@@ -195,7 +195,7 @@
         private System.Windows.Forms.Label lbNameUser;
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.Button btnCreatAccount;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbUserCode;
         private System.Windows.Forms.Label lbCode;
     }
 }

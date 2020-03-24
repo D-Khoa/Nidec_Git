@@ -17,16 +17,17 @@ namespace NewModelCheckingResult.View.Common
     {
         #region ALL OPTION FIELDS
         Color tempColor = new Color();
-        public string name
-        {
-            get { return lbName.Text; }
-            set { lbName.Text = value; }
-        }
         public string code
         {
             get { return lbCode.Text; }
             set { lbCode.Text = value; }
         }
+        public string name
+        {
+            get { return lbName.Text; }
+            set { lbName.Text = value; }
+        }
+       
 
         public string tittle
         {

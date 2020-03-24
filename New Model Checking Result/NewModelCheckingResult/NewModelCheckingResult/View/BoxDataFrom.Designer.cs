@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtModel = new System.Windows.Forms.TextBox();
             this.txtPartNumber = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtBoxID = new System.Windows.Forms.TextBox();
             this.txtInvoice = new System.Windows.Forms.TextBox();
@@ -54,6 +53,7 @@
             this.btnMeasure = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnDeleteBox = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.tbpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +71,6 @@
             this.tbpMain.Controls.Add(this.label2, 0, 1);
             this.tbpMain.Controls.Add(this.txtModel, 1, 1);
             this.tbpMain.Controls.Add(this.txtPartNumber, 1, 0);
-            this.tbpMain.Controls.Add(this.label1, 0, 0);
             this.tbpMain.Controls.Add(this.label4, 0, 2);
             this.tbpMain.Controls.Add(this.txtBoxID, 1, 3);
             this.tbpMain.Controls.Add(this.txtInvoice, 1, 2);
@@ -90,6 +89,7 @@
             this.tbpMain.Controls.Add(this.btnMeasure, 1, 5);
             this.tbpMain.Controls.Add(this.btnExport, 2, 5);
             this.tbpMain.Controls.Add(this.btnDeleteBox, 3, 5);
+            this.tbpMain.Controls.Add(this.label1, 0, 0);
             this.tbpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbpMain.Location = new System.Drawing.Point(150, 70);
             this.tbpMain.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
@@ -107,6 +107,7 @@
             this.tbpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tbpMain.Size = new System.Drawing.Size(834, 392);
             this.tbpMain.TabIndex = 9;
+            this.tbpMain.Paint += new System.Windows.Forms.PaintEventHandler(this.tbpMain_Paint);
             // 
             // txtBoxQty
             // 
@@ -176,18 +177,6 @@
             this.txtPartNumber.Size = new System.Drawing.Size(197, 23);
             this.txtPartNumber.TabIndex = 9;
             this.txtPartNumber.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(11, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 30);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Part Number / Số Linh Kiện";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
@@ -399,11 +388,23 @@
             this.btnDeleteBox.UseVisualStyleBackColor = true;
             this.btnDeleteBox.Click += new System.EventHandler(this.btnDeleteBox_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(10, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(199, 30);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "Part Number";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // BoxDataFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 462);
+            this.code = "";
             this.Controls.Add(this.tbpMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -429,7 +430,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtModel;
         private System.Windows.Forms.TextBox txtPartNumber;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtBoxID;
         private System.Windows.Forms.TextBox txtInvoice;
@@ -449,5 +449,6 @@
         private System.Windows.Forms.TextBox txtLot;
         private System.Windows.Forms.DataGridView dgvMain;
         private System.Windows.Forms.Button btnDeleteBox;
+        private System.Windows.Forms.Label label1;
     }
 }
