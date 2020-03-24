@@ -345,7 +345,7 @@ namespace NewModelCheckingResult
                         {
                             n++;
                             if (inData[j].item_no == n)
-                                xlWorkSheet1.Cells[16 + j, 9 + i] = inData[j].inspect_data;
+                                xlWorkSheet1.Cells[15 + n, 9 + i] = inData[j].inspect_data;
                         }
                     }
                 }
@@ -378,7 +378,7 @@ namespace NewModelCheckingResult
                             {
                                 n++;
                                 if (inData[j].item_no == n)
-                                    xlWorkSheet1.Cells[16 + j, 2 + i] = inData[j].inspect_data;
+                                    xlWorkSheet1.Cells[15 + n, 2 + i] = inData[j].inspect_data;
                             }
                         }
                     }
