@@ -33,8 +33,15 @@ namespace PC_QRCodeSystem.View
 
         private void StockOutputForm_Load(object sender, EventArgs e)
         {
-            GetCmb();
-            cmbIssue.Select();
+            try
+            {
+                GetCmb();
+                cmbIssue.Select();
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
         #endregion
 

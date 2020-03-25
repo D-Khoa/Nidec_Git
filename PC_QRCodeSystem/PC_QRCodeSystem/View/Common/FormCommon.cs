@@ -118,6 +118,7 @@ namespace PC_QRCodeSystem
 
         private void btnCloseForm_Click(object sender, EventArgs e)
         {
+            ControlLoadEvent(this, false);
             this.Close();
         }
         #endregion

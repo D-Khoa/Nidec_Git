@@ -30,8 +30,8 @@ namespace PC_QRCodeSystem.Model
             }
             catch(Exception ex)
             {
-                throw new Exception("Can't connect to server! Please check network connection and try again!" + Environment.NewLine + "Không thể kết nối đến máy chủ! Vui lòng kiểm tra kết nói và thử lại!");
                 System.Diagnostics.Debug.Print(ex.Message);
+                throw new Exception("Can't connect to server! Please check network connection and try again!" + Environment.NewLine + "Không thể kết nối đến máy chủ! Vui lòng kiểm tra kết nói và thử lại!");
             }
         }
 
@@ -40,7 +40,7 @@ namespace PC_QRCodeSystem.Model
         /// </summary>
         public void Close()
         {
-            connection.Dispose();
+            NpgsqlConnection.ClearAllPools();
             connection.Close();
         }
 
