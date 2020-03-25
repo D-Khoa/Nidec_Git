@@ -44,9 +44,16 @@ namespace PC_QRCodeSystem.View
 
         private void StockInputForm_Load(object sender, EventArgs e)
         {
-            rbtnEven.Checked = true;
-            tc_Main.SelectedTab = tab_Main;
-            txtItemNum.Focus();
+            try
+            {
+                rbtnEven.Checked = true;
+                tc_Main.SelectedTab = tab_Main;
+                txtItemNum.Focus();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
         #endregion
 
@@ -297,24 +304,38 @@ namespace PC_QRCodeSystem.View
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
-            SettingForm settingFrm = new SettingForm();
-            settingFrm.ShowDialog();
+            try
+            {
+                SettingForm settingFrm = new SettingForm();
+                settingFrm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnMainClear_Click(object sender, EventArgs e)
         {
-            txtPONo.Clear();
-            txtOrderNo.Clear();
-            txtCapacity.Clear();
-            txtItemNum.Clear();
-            txtIncharge.Clear();
-            txtSupplierCode.Clear();
-            txtSupplierInvoice.Clear();
-            tsRow.Text = "None";
-            tsTime.Text = "None";
-            tsTotalQty.Text = "None";
-            UpdatePremacGrid(false);
-            dgvPreInput.DataSource = null;
+            try
+            {
+                txtPONo.Clear();
+                txtOrderNo.Clear();
+                txtCapacity.Clear();
+                txtItemNum.Clear();
+                txtIncharge.Clear();
+                txtSupplierCode.Clear();
+                txtSupplierInvoice.Clear();
+                tsRow.Text = "None";
+                tsTime.Text = "None";
+                tsTotalQty.Text = "None";
+                UpdatePremacGrid(false);
+                dgvPreInput.DataSource = null;
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void rbtnEven_CheckedChanged(object sender, EventArgs e)
@@ -549,9 +570,16 @@ namespace PC_QRCodeSystem.View
 
         private void btnPrintClear_Click(object sender, EventArgs e)
         {
-            listPrintItem.Clear();
-            printItem.ListPrintItem.Clear();
-            dgvPrintList.DataSource = null;
+            try
+            {
+                listPrintItem.Clear();
+                printItem.ListPrintItem.Clear();
+                dgvPrintList.DataSource = null;
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnPrintBack_Click(object sender, EventArgs e)
@@ -657,18 +685,25 @@ namespace PC_QRCodeSystem.View
 
         private void btnInspectionClear_Click(object sender, EventArgs e)
         {
-            if (CustomMessageBox.Warring("This list is not register. Are you sure to clear all?") == DialogResult.No)
-                return;
-            txtUserCD.Clear();
-            txtBarcode.Clear();
-            txtSupplierCD.Clear();
-            listStockItem.Clear();
-            listInputPremac.Clear();
-            txtSupplierName.Text = "Supplier Name";
-            errorProvider.SetError(txtSupplierCD, null);
-            UpdateInspectionGrid();
-            dgvInspection.DataSource = null;
-            txtBarcode.Focus();
+            try
+            {
+                if (CustomMessageBox.Warring("This list is not register. Are you sure to clear all?") == DialogResult.No)
+                    return;
+                txtUserCD.Clear();
+                txtBarcode.Clear();
+                txtSupplierCD.Clear();
+                listStockItem.Clear();
+                listInputPremac.Clear();
+                txtSupplierName.Text = "Supplier Name";
+                errorProvider.SetError(txtSupplierCD, null);
+                UpdateInspectionGrid();
+                dgvInspection.DataSource = null;
+                txtBarcode.Focus();
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
         #endregion
 

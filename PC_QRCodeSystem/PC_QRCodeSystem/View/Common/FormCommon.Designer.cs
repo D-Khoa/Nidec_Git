@@ -145,9 +145,9 @@
             this.lbPosUser.AutoSize = true;
             this.lbPosUser.Location = new System.Drawing.Point(10, 50);
             this.lbPosUser.Name = "lbPosUser";
-            this.lbPosUser.Size = new System.Drawing.Size(60, 13);
+            this.lbPosUser.Size = new System.Drawing.Size(116, 13);
             this.lbPosUser.TabIndex = 8;
-            this.lbPosUser.Text = "Position :";
+            this.lbPosUser.Text = "Position (Chức Vụ):";
             // 
             // lbPosition
             // 
@@ -200,9 +200,9 @@
             this.lbNameUser.AutoSize = true;
             this.lbNameUser.Location = new System.Drawing.Point(10, 10);
             this.lbNameUser.Name = "lbNameUser";
-            this.lbNameUser.Size = new System.Drawing.Size(77, 13);
+            this.lbNameUser.Size = new System.Drawing.Size(127, 13);
             this.lbNameUser.TabIndex = 4;
-            this.lbNameUser.Text = "User Name :";
+            this.lbNameUser.Text = "User Name (Họ Tên):";
             // 
             // lbLoginTime
             // 
@@ -228,9 +228,9 @@
             this.lbDeptUser.AutoSize = true;
             this.lbDeptUser.Location = new System.Drawing.Point(10, 90);
             this.lbDeptUser.Name = "lbDeptUser";
-            this.lbDeptUser.Size = new System.Drawing.Size(80, 13);
+            this.lbDeptUser.Size = new System.Drawing.Size(136, 13);
             this.lbDeptUser.TabIndex = 1;
-            this.lbDeptUser.Text = "Department :";
+            this.lbDeptUser.Text = "Department (Bộ Phận):";
             // 
             // lbName
             // 

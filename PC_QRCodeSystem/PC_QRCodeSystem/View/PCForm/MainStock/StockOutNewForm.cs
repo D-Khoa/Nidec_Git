@@ -36,8 +36,15 @@ namespace PC_QRCodeSystem.View
 
         private void StockOutNewForm_Load(object sender, EventArgs e)
         {
-            GetCmb();
-            txtUserCode.Select();
+            try
+            {
+                GetCmb();
+                txtUserCode.Select();
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -155,13 +162,27 @@ namespace PC_QRCodeSystem.View
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            MainSearch();
+            try
+            {
+                MainSearch();
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnPrintList_Click(object sender, EventArgs e)
         {
-            if (dgvPrint.Rows.Count > 0) tc_Main.SelectedTab = tab_Print;
-            else CustomMessageBox.Notice("No item in print list!" + Environment.NewLine + "Không có tem cần in!");
+            try
+            {
+                if (dgvPrint.Rows.Count > 0) tc_Main.SelectedTab = tab_Print;
+                else CustomMessageBox.Notice("No item in print list!" + Environment.NewLine + "Không có tem cần in!");
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnInspection_Click(object sender, EventArgs e)
@@ -172,7 +193,14 @@ namespace PC_QRCodeSystem.View
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            MainClear();
+            try
+            {
+                MainClear();
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
         #endregion
         //OK
@@ -821,47 +849,61 @@ namespace PC_QRCodeSystem.View
 
         private void btnInsDelete_Click(object sender, EventArgs e)
         {
-            if (dgvLabel.SelectedRows.Count <= 0) return;
-            int deleteqty = 0;
-            int rindex = dgvLabel.SelectedRows[0].Index;
-            InputCommon inputfrm = new InputCommon(false);
-            if (inputfrm.ShowDialog() == DialogResult.OK) deleteqty = inputfrm.inputQty;
-            if (deleteqty > listLabel[rindex].Label_Qty)
+            try
             {
-                CustomMessageBox.Error("Delete qty more than label qty!" + Environment.NewLine + "Số lượng xóa lớn hơn số lượng tem hiện có!");
-                return;
-            }
-            int outIndex = listOut.Where(x => x.item_number == listLabel[rindex].Item_Number).Select(x => listOut.IndexOf(x)).First();
-            var stockList = listStock.Where(x => x.item_cd == listLabel[rindex].Item_Number && x.invoice == listLabel[rindex].Invoice)
-                                     .Select(x => x).ToList();
-            int temp = deleteqty;
-            for (int i = 0; i < stockList.Count; i++)
-            {
-                try
+                if (dgvLabel.SelectedRows.Count <= 0) return;
+                int deleteqty = 0;
+                int rindex = dgvLabel.SelectedRows[0].Index;
+                InputCommon inputfrm = new InputCommon(false);
+                if (inputfrm.ShowDialog() == DialogResult.OK) deleteqty = inputfrm.inputQty;
+                if (deleteqty > listLabel[rindex].Label_Qty)
                 {
-                    int stockoutIndex = listStockOut.Where(x => x.packing_cd == stockList[i].packing_cd && x.stockout_qty == listLabel[rindex].Delivery_Qty)
-                                                .Select(x => listStockOut.IndexOf(x)).First();
-                    int stockIndex = listStock.Where(x => x.packing_cd == listStockOut[stockoutIndex].packing_cd).Select(x => listStock.IndexOf(x)).First();
-                    listStock.RemoveAt(stockIndex);
-                    listStockOut.RemoveAt(stockoutIndex);
-                    temp--;
-                    if (temp == 0) break;
+                    CustomMessageBox.Error("Delete qty more than label qty!" + Environment.NewLine + "Số lượng xóa lớn hơn số lượng tem hiện có!");
+                    return;
                 }
-                catch { continue; }
+                int outIndex = listOut.Where(x => x.item_number == listLabel[rindex].Item_Number).Select(x => listOut.IndexOf(x)).First();
+                var stockList = listStock.Where(x => x.item_cd == listLabel[rindex].Item_Number && x.invoice == listLabel[rindex].Invoice)
+                                         .Select(x => x).ToList();
+                int temp = deleteqty;
+                for (int i = 0; i < stockList.Count; i++)
+                {
+                    try
+                    {
+                        int stockoutIndex = listStockOut.Where(x => x.packing_cd == stockList[i].packing_cd && x.stockout_qty == listLabel[rindex].Delivery_Qty)
+                                                    .Select(x => listStockOut.IndexOf(x)).First();
+                        int stockIndex = listStock.Where(x => x.packing_cd == listStockOut[stockoutIndex].packing_cd).Select(x => listStock.IndexOf(x)).First();
+                        listStock.RemoveAt(stockIndex);
+                        listStockOut.RemoveAt(stockoutIndex);
+                        temp--;
+                        if (temp == 0) break;
+                    }
+                    catch { continue; }
+                }
+                listOut[outIndex].delivery_qty -= listLabel[rindex].Delivery_Qty * deleteqty;
+                if (listOut[outIndex].delivery_qty == 0) listOut.RemoveAt(outIndex);
+                listLabel[rindex].Label_Qty -= deleteqty;
+                if (listLabel[rindex].Label_Qty == 0) listLabel.RemoveAt(rindex);
+                UpdateGridStockOut(listStockOut);
+                UpdateGridLabel(listLabel);
             }
-            listOut[outIndex].delivery_qty -= listLabel[rindex].Delivery_Qty * deleteqty;
-            if (listOut[outIndex].delivery_qty == 0) listOut.RemoveAt(outIndex);
-            listLabel[rindex].Label_Qty -= deleteqty;
-            if (listLabel[rindex].Label_Qty == 0) listLabel.RemoveAt(rindex);
-            UpdateGridStockOut(listStockOut);
-            UpdateGridLabel(listLabel);
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnInsClear_Click(object sender, EventArgs e)
         {
-            if (CustomMessageBox.Warring("Data is not register! Are you sure to clear all?" + Environment.NewLine + "Dữ liệu chưa được đăng ký! Bạn có chắc muốn xóa?") == DialogResult.No) return;
-            ClearDataList();
-            CustomMessageBox.Notice("Clear all data!" + Environment.NewLine + "Đã xóa toàn bộ dữ liệu!");
+            try
+            {
+                if (CustomMessageBox.Warring("Data is not register! Are you sure to clear all?" + Environment.NewLine + "Dữ liệu chưa được đăng ký! Bạn có chắc muốn xóa?") == DialogResult.No) return;
+                ClearDataList();
+                CustomMessageBox.Notice("Clear all data!" + Environment.NewLine + "Đã xóa toàn bộ dữ liệu!");
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnInsBack_Click(object sender, EventArgs e)

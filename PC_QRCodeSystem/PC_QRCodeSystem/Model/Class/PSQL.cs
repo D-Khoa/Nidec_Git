@@ -23,8 +23,16 @@ namespace PC_QRCodeSystem.Model
         /// </summary>
         public void Open()
         {
-            connection = new NpgsqlConnection(strConnection);
-            connection.Open();
+            try
+            {
+                connection = new NpgsqlConnection(strConnection);
+                connection.Open();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Can't connect to server! Please check network connection and try again!" + Environment.NewLine + "Không thể kết nối đến máy chủ! Vui lòng kiểm tra kết nói và thử lại!");
+                System.Diagnostics.Debug.Print(ex.Message);
+            }
         }
 
         /// <summary>

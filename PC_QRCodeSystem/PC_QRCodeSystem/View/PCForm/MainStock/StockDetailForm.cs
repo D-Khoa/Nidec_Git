@@ -41,20 +41,56 @@ namespace PC_QRCodeSystem.View
 
         private void StockDetailForm_Load(object sender, EventArgs e)
         {
-            ClearFields();
-            txtItemCD.Focus();
-            isEditData = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
-            tc_MainStockDetail.SelectedTab = tab_StockDetail;
+            try
+            {
+                ClearFields();
+                txtBarcode.Focus();
+                isEditData = false;
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+                tc_MainStockDetail.SelectedTab = tab_StockDetail;
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (ActiveControl == txtBarcode)
+                {
+                    string temp = txtBarcode.Text;
+                    if (temp.Contains(";"))
+                    {
+                        string[] barcode = temp.Split(';');
+                        txtItemCD.Text = barcode[0].Trim();
+                        txtInvoice.Text = barcode[3].Trim();
+                    }
+                }
+                SelectNextControl(ActiveControl, true, true, true, true);
+                return true;
+            }
+            if (keyData == Keys.Escape)
+            {
+                SelectNextControl(ActiveControl, false, true, true, true);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
         #endregion
 
         #region FIELDS EVENT
-        //GET BARCODE DATA INTO FIELDS IN FORM
-        private void txtItemCD_KeyDown(object sender, KeyEventArgs e)
+        private void txtItemCD_Validated(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (string.IsNullOrEmpty(txtItemCD.Text))
+            {
+                lbItemName.Text = "Item Name";
+                lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+            }
+            else
             {
                 try
                 {
@@ -70,18 +106,14 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void txtItemCD_TextChanged(object sender, EventArgs e)
+        private void txtSupplierCD_Validated(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtItemCD.Text))
             {
                 lbItemName.Text = "Item Name";
                 lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
-        }
-
-        private void txtSupplierCD_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else
             {
                 try
                 {
@@ -100,18 +132,14 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void txtSupplierCD_TextChanged(object sender, EventArgs e)
+        private void txtInCharge_Validated(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtSupplierCD.Text))
+            if (string.IsNullOrEmpty(txtItemCD.Text))
             {
-                lbSupplierName.Text = "Supplier Name";
-                lbSupplierName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                lbItemName.Text = "Item Name";
+                lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
-        }
-
-        private void txtInCharge_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else
             {
                 try
                 {
@@ -126,21 +154,19 @@ namespace PC_QRCodeSystem.View
                 }
             }
         }
-
-        private void txtInCharge_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtInCharge.Text))
-            {
-                lbInchagre.Text = "User Incharge";
-                lbInchagre.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            }
-        }
         #endregion
 
         #region BUTTONS EVENT
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            UpdateGrid(true);
+            try
+            {
+                UpdateGrid(true);
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -225,12 +251,26 @@ namespace PC_QRCodeSystem.View
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearFields();
+            try
+            {
+                ClearFields();
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnLogsBack_Click(object sender, EventArgs e)
         {
-            tc_MainStockDetail.SelectedTab = tab_StockDetail;
+            try
+            {
+                tc_MainStockDetail.SelectedTab = tab_StockDetail;
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
         #endregion
 
@@ -267,10 +307,12 @@ namespace PC_QRCodeSystem.View
                 dgvStockDetail.Columns["packing_qty"].HeaderText = "Packing Qty";
                 dgvStockDetail.Columns["registration_user_cd"].HeaderText = "Reg User";
                 dgvStockDetail.Columns["registration_date_time"].HeaderText = "Reg Date";
+                //if (dgvStockDetail.Columns.Contains("order_no")) dgvStockDetail.Columns.Remove("order_no");
                 if (dgvStockDetail.Rows.Count > 0)
                     tsStockDetailRows.Text = dgvStockDetail.Rows.Count.ToString();
                 else
                     tsStockDetailRows.Text = "None";
+                this.ValidateChildren();
             }
             catch (Exception ex)
             {
@@ -303,6 +345,7 @@ namespace PC_QRCodeSystem.View
                 lbItemTypeName.Text = typeData.type_name;
                 lbItemTypeName.BackColor = Color.Lime;
             }
+            this.ValidateChildren();
         }
 
         /// <summary>
