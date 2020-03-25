@@ -122,6 +122,12 @@
     <Compile Include="View\Common\FormCommon.Designer.cs">
       <DependentUpon>FormCommon.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Common\InputCommon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\InputCommon.Designer.cs">
+      <DependentUpon>InputCommon.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Common\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Common\FormCommon.resx">
       <DependentUpon>FormCommon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\InputCommon.resx">
+      <DependentUpon>InputCommon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Common\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

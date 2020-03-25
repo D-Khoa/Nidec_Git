@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tc_Main = new System.Windows.Forms.TabControl();
             this.tab_Main = new System.Windows.Forms.TabPage();
             this.dgvSearch = new System.Windows.Forms.DataGridView();
@@ -109,7 +109,6 @@
             this.btnPrintAll = new System.Windows.Forms.Button();
             this.btnPrintBack = new System.Windows.Forms.Button();
             this.btnPrintInspection = new System.Windows.Forms.Button();
-            this.btnPrinClear = new System.Windows.Forms.Button();
             this.btnPrintSelect = new System.Windows.Forms.Button();
             this.tab_Inspection = new System.Windows.Forms.TabPage();
             this.tbpInsDGV = new System.Windows.Forms.TableLayoutPanel();
@@ -719,16 +718,16 @@
             this.dgvSetData.MultiSelect = false;
             this.dgvSetData.Name = "dgvSetData";
             this.dgvSetData.ReadOnly = true;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.Format = "N0";
-            dataGridViewCellStyle10.NullValue = null;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSetData.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSetData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvSetData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvSetData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSetData.Size = new System.Drawing.Size(780, 124);
@@ -1192,33 +1191,31 @@
             this.dgvPrint.Margin = new System.Windows.Forms.Padding(5);
             this.dgvPrint.Name = "dgvPrint";
             this.dgvPrint.ReadOnly = true;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.NullValue = null;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPrint.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPrint.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvPrint.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvPrint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPrint.Size = new System.Drawing.Size(770, 304);
-            this.dgvPrint.TabIndex = 18;
+            this.dgvPrint.TabIndex = 6;
             // 
             // tbpPrintButtons
             // 
-            this.tbpPrintButtons.ColumnCount = 5;
-            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbpPrintButtons.ColumnCount = 4;
+            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tbpPrintButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tbpPrintButtons.Controls.Add(this.btnPrintAll, 0, 0);
-            this.tbpPrintButtons.Controls.Add(this.btnPrintBack, 4, 0);
+            this.tbpPrintButtons.Controls.Add(this.btnPrintBack, 3, 0);
             this.tbpPrintButtons.Controls.Add(this.btnPrintInspection, 2, 0);
-            this.tbpPrintButtons.Controls.Add(this.btnPrinClear, 3, 0);
             this.tbpPrintButtons.Controls.Add(this.btnPrintSelect, 1, 0);
             this.tbpPrintButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.tbpPrintButtons.Location = new System.Drawing.Point(3, 3);
@@ -1236,8 +1233,8 @@
             this.btnPrintAll.Location = new System.Drawing.Point(9, 4);
             this.btnPrintAll.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintAll.Name = "btnPrintAll";
-            this.btnPrintAll.Size = new System.Drawing.Size(146, 52);
-            this.btnPrintAll.TabIndex = 10;
+            this.btnPrintAll.Size = new System.Drawing.Size(184, 52);
+            this.btnPrintAll.TabIndex = 1;
             this.btnPrintAll.Text = "1A. PRINT ALL /\r\nIn Toàn Bộ";
             this.btnPrintAll.UseVisualStyleBackColor = true;
             this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
@@ -1245,11 +1242,11 @@
             // btnPrintBack
             // 
             this.btnPrintBack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPrintBack.Location = new System.Drawing.Point(625, 4);
+            this.btnPrintBack.Location = new System.Drawing.Point(585, 4);
             this.btnPrintBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintBack.Name = "btnPrintBack";
-            this.btnPrintBack.Size = new System.Drawing.Size(146, 52);
-            this.btnPrintBack.TabIndex = 13;
+            this.btnPrintBack.Size = new System.Drawing.Size(186, 52);
+            this.btnPrintBack.TabIndex = 5;
             this.btnPrintBack.Text = "BACK /\r\nTrở Lại";
             this.btnPrintBack.UseVisualStyleBackColor = true;
             this.btnPrintBack.Click += new System.EventHandler(this.btnPrintBack_Click);
@@ -1257,35 +1254,23 @@
             // btnPrintInspection
             // 
             this.btnPrintInspection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPrintInspection.Location = new System.Drawing.Point(317, 4);
+            this.btnPrintInspection.Location = new System.Drawing.Point(393, 4);
             this.btnPrintInspection.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintInspection.Name = "btnPrintInspection";
-            this.btnPrintInspection.Size = new System.Drawing.Size(146, 52);
-            this.btnPrintInspection.TabIndex = 14;
+            this.btnPrintInspection.Size = new System.Drawing.Size(184, 52);
+            this.btnPrintInspection.TabIndex = 3;
             this.btnPrintInspection.Text = "2. INSPECTION /\r\nKiểm Tra";
             this.btnPrintInspection.UseVisualStyleBackColor = true;
             this.btnPrintInspection.Click += new System.EventHandler(this.btnPrintInspection_Click);
             // 
-            // btnPrinClear
-            // 
-            this.btnPrinClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPrinClear.Location = new System.Drawing.Point(471, 4);
-            this.btnPrinClear.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrinClear.Name = "btnPrinClear";
-            this.btnPrinClear.Size = new System.Drawing.Size(146, 52);
-            this.btnPrinClear.TabIndex = 12;
-            this.btnPrinClear.Text = "CLEAR LABEL/\r\nXóa Danh Sách Tem";
-            this.btnPrinClear.UseVisualStyleBackColor = true;
-            this.btnPrinClear.Click += new System.EventHandler(this.btnPrinClear_Click);
-            // 
             // btnPrintSelect
             // 
             this.btnPrintSelect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPrintSelect.Location = new System.Drawing.Point(163, 4);
+            this.btnPrintSelect.Location = new System.Drawing.Point(201, 4);
             this.btnPrintSelect.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintSelect.Name = "btnPrintSelect";
-            this.btnPrintSelect.Size = new System.Drawing.Size(146, 52);
-            this.btnPrintSelect.TabIndex = 11;
+            this.btnPrintSelect.Size = new System.Drawing.Size(184, 52);
+            this.btnPrintSelect.TabIndex = 2;
             this.btnPrintSelect.Text = "1B. PRINT SELECTED /\r\nIn Tem Đã Chọn";
             this.btnPrintSelect.UseVisualStyleBackColor = true;
             this.btnPrintSelect.Click += new System.EventHandler(this.btnPrintSelect_Click);
@@ -1329,19 +1314,19 @@
             this.dgvStockOut.MultiSelect = false;
             this.dgvStockOut.Name = "dgvStockOut";
             this.dgvStockOut.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.NullValue = null;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvStockOut.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStockOut.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvStockOut.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvStockOut.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStockOut.Size = new System.Drawing.Size(770, 117);
-            this.dgvStockOut.TabIndex = 18;
+            this.dgvStockOut.TabIndex = 8;
             // 
             // dgvLabel
             // 
@@ -1355,7 +1340,7 @@
             this.dgvLabel.ReadOnly = true;
             this.dgvLabel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLabel.Size = new System.Drawing.Size(772, 119);
-            this.dgvLabel.TabIndex = 6;
+            this.dgvLabel.TabIndex = 7;
             // 
             // tbpInsOption
             // 
@@ -1393,7 +1378,7 @@
             this.btnInsReg.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsReg.Name = "btnInsReg";
             this.btnInsReg.Size = new System.Drawing.Size(146, 52);
-            this.btnInsReg.TabIndex = 10;
+            this.btnInsReg.TabIndex = 3;
             this.btnInsReg.Text = "3. REGISTER /\r\nĐăng Ký";
             this.btnInsReg.UseVisualStyleBackColor = true;
             this.btnInsReg.Click += new System.EventHandler(this.btnInsReg_Click);
@@ -1417,7 +1402,7 @@
             this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsBack.Name = "btnInsBack";
             this.btnInsBack.Size = new System.Drawing.Size(109, 52);
-            this.btnInsBack.TabIndex = 11;
+            this.btnInsBack.TabIndex = 6;
             this.btnInsBack.Text = "BACK /\r\nTrở Lại";
             this.btnInsBack.UseVisualStyleBackColor = true;
             this.btnInsBack.Click += new System.EventHandler(this.btnInsBack_Click);
@@ -1426,13 +1411,12 @@
             // 
             this.tbpInsOption.SetColumnSpan(this.txtInsBarcode, 5);
             this.txtInsBarcode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInsBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInsBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInsBarcode.Location = new System.Drawing.Point(124, 4);
             this.txtInsBarcode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtInsBarcode.Multiline = true;
             this.txtInsBarcode.Name = "txtInsBarcode";
-            this.txtInsBarcode.Size = new System.Drawing.Size(647, 52);
-            this.txtInsBarcode.TabIndex = 6;
+            this.txtInsBarcode.Size = new System.Drawing.Size(647, 53);
+            this.txtInsBarcode.TabIndex = 1;
             // 
             // label19
             // 
@@ -1452,7 +1436,7 @@
             this.btnInsDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsDelete.Name = "btnInsDelete";
             this.btnInsDelete.Size = new System.Drawing.Size(107, 52);
-            this.btnInsDelete.TabIndex = 9;
+            this.btnInsDelete.TabIndex = 4;
             this.btnInsDelete.Text = "DELETE SELECTED /\r\nXóa NL Đã Chọn";
             this.btnInsDelete.UseVisualStyleBackColor = true;
             this.btnInsDelete.Click += new System.EventHandler(this.btnInsDelete_Click);
@@ -1465,7 +1449,7 @@
             this.txtInsLabelQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtInsLabelQty.Name = "txtInsLabelQty";
             this.txtInsLabelQty.Size = new System.Drawing.Size(146, 53);
-            this.txtInsLabelQty.TabIndex = 11;
+            this.txtInsLabelQty.TabIndex = 2;
             this.txtInsLabelQty.Text = "0";
             this.txtInsLabelQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtInsLabelQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckDigit_KeyPress);
@@ -1477,7 +1461,7 @@
             this.btnInsClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsClear.Name = "btnInsClear";
             this.btnInsClear.Size = new System.Drawing.Size(107, 52);
-            this.btnInsClear.TabIndex = 10;
+            this.btnInsClear.TabIndex = 5;
             this.btnInsClear.Text = "CLEAR DATA /\r\nXóa Dữ Liệu";
             this.btnInsClear.UseVisualStyleBackColor = true;
             this.btnInsClear.Click += new System.EventHandler(this.btnInsClear_Click);
@@ -1616,7 +1600,6 @@
         private System.Windows.Forms.Button btnPrintAll;
         private System.Windows.Forms.Button btnPrintBack;
         private System.Windows.Forms.Button btnPrintInspection;
-        private System.Windows.Forms.Button btnPrinClear;
         private System.Windows.Forms.Button btnPrintSelect;
         private System.Windows.Forms.TabPage tab_Inspection;
         private System.Windows.Forms.TableLayoutPanel tbpInsDGV;
