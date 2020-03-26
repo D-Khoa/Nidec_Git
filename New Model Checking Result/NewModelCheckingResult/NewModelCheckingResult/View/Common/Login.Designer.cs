@@ -136,6 +136,9 @@
             // 
             // cbmname
             // 
+            this.cbmname.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cbmname.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbmname.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.cbmname.FormattingEnabled = true;
             this.cbmname.Location = new System.Drawing.Point(217, 91);
             this.cbmname.Name = "cbmname";

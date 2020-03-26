@@ -306,6 +306,10 @@ namespace NewModelCheckingResult
 
         public void exportExcelIQC(tbl_part_box inBox, List<tbl_inspect_master> inMaster, List<tbl_inspect_data> inData)
         {
+            string folderExcel = @"D:\IQC_Excel";
+            string templateFile = folderExcel + @"\G2-QA-IQC-F074Rev01.xlsx";
+            string dataFile = folderExcel + "\\" + inBox.part_box_cd + ".xlsx";
+            string serverFile = @"\\192.168.145.7\software\IQC Checkman\G2-QA-IQC-F074Rev01.xlsx";
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
             Excel.Worksheet xlWorkSheet1;
@@ -314,7 +318,10 @@ namespace NewModelCheckingResult
             try
             {
                 xlApp = new Excel.Application();
-                xlWorkBook = xlApp.Workbooks.Open(Application.StartupPath + @"\Template\G2-QA-IQC-F074Rev01.xlsx", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+                if (!Directory.Exists(folderExcel)) Directory.CreateDirectory(folderExcel);
+                if (File.Exists(templateFile)) File.Delete(templateFile);
+                File.Move(serverFile, templateFile);
+                xlWorkBook = xlApp.Workbooks.Open(templateFile, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
 
                 #region ADD BOX INFO
                 xlWorkSheet1 = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1); //add data sheet1
@@ -384,12 +391,11 @@ namespace NewModelCheckingResult
                     }
                 }
                 #endregion
-                
-                if (!Directory.Exists(@"C:\IQC_Excel")) Directory.CreateDirectory(@"C:\IQC_Excel");
-                xlWorkBook.SaveAs(@"C:\IQC_Excel\" + inBox.part_box_cd + ".xlsx", Excel.XlFileFormat.xlWorkbookDefault, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-                MessageBox.Show("Excel file created, you can find in the folder C:\\IQC_Excel", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                xlWorkBook.SaveAs(dataFile, Excel.XlFileFormat.xlWorkbookDefault, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                MessageBox.Show("Excel file created, you can find in the folder " + folderExcel, "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 xlWorkBook.Close(true, misValue, misValue);
-                xlApp.Workbooks.Open(@"C:\IQC_Excel\" + inBox.part_box_cd + ".xlsx");
+                xlApp.Workbooks.Open(dataFile);
                 xlApp.Visible = true;
             }
             catch (Exception ex)
