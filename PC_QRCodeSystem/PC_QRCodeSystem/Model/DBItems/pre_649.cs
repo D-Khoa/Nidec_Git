@@ -27,6 +27,7 @@ namespace PC_QRCodeSystem.Model
         }
         #endregion
 
+        #region QUERY
         /// <summary>
         /// Get list PREMAC 6-4-9 from txt file
         /// </summary>
@@ -201,5 +202,6 @@ namespace PC_QRCodeSystem.Model
                 sw.Close();
             }
         }
+        #endregion
     }
 }

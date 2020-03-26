@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 
@@ -34,6 +33,7 @@ namespace PC_QRCodeSystem.Model
         }
         #endregion
 
+        #region QUERY
         /// <summary>
         /// Search list request
         /// </summary>
@@ -320,5 +320,6 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
             return result;
         }
+        #endregion
     }
 }

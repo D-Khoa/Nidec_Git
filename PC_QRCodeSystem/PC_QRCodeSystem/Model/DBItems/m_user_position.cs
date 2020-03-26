@@ -13,13 +13,13 @@ namespace PC_QRCodeSystem.Model
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public BindingList<m_user_position> listUserPosition { get; set; }
-        #endregion
-
         public m_user_position()
         {
             listUserPosition = new BindingList<m_user_position>();
         }
+        #endregion
 
+        #region QUERY
         /// <summary>
         /// Get list user position
         /// </summary>
@@ -130,6 +130,7 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
             return result;
         }
-       
+        #endregion
+
     }
 }

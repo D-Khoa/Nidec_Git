@@ -40,7 +40,7 @@ namespace PC_QRCodeSystem.Model
         /// </summary>
         public void Close()
         {
-            NpgsqlConnection.ClearAllPools();
+            //NpgsqlConnection.ClearAllPools();
             connection.Close();
         }
 

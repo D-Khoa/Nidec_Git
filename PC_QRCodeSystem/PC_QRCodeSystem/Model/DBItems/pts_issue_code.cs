@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -92,6 +89,11 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
         }
 
+        /// <summary>
+        /// Add new issue code
+        /// </summary>
+        /// <param name="addptsissuecd"></param>
+        /// <returns></returns>
         public int AddIssueCode(pts_issue_code addptsissuecd)
         {
             //SQL library
@@ -106,9 +108,15 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
 
+        /// <summary>
+        /// Update issue code
+        /// </summary>
+        /// <param name="UpdateIssueCd"></param>
+        /// <returns></returns>
         public int UpdateIssueCode(pts_issue_code UpdateIssueCd)
         {
             //SQL library
@@ -122,9 +130,15 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
 
+        /// <summary>
+        /// Delete issue code
+        /// </summary>
+        /// <param name="issue"></param>
+        /// <returns></returns>
         public int Delete(int issue)
         {
             //SQL library
@@ -137,8 +151,8 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
-
         }
     }
 }

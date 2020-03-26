@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PC_QRCodeSystem.Model
 {
     public class m_mes_user_role
     {
+        #region ALL FIELDS
         public int user_role_id { get; set; }
         public string user_cd { get; set; }
         public string role_cd { get; set; }
@@ -16,12 +14,13 @@ namespace PC_QRCodeSystem.Model
         public DateTime registration_date_time { get; set; }
         public string factory_cd { get; set; }
         public List<m_mes_user_role> listMesUserRole { get; set; }
-
         public m_mes_user_role()
         {
             listMesUserRole = new List<m_mes_user_role>();
         }
+        #endregion
 
+        #region QUERY
         /// <summary>
         /// Get list role of user
         /// </summary>
@@ -48,5 +47,6 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
             return list;
         }
+        #endregion
     }
 }

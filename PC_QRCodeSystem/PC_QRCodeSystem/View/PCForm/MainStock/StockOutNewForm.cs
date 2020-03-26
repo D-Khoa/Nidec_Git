@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -41,7 +39,7 @@ namespace PC_QRCodeSystem.View
                 GetCmb();
                 txtUserCode.Select();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -86,6 +84,25 @@ namespace PC_QRCodeSystem.View
                         labelQty = double.Parse(barcode[5].Trim());
                         txtSetOutQty.Text = labelQty.ToString();
                         txtSetBarcode.ResetText();
+
+                        #region GET INDEX OF ITEM IF IT IS EXIST IN SET LIST
+                        try
+                        {
+                            int rindex = dgvSetData.Rows.Cast<DataGridViewRow>()
+                                         .Where(x => x.Cells["low_level_item"].Value.ToString() == barcode[0].Trim())
+                                         .Select(x => x.Index).First();
+                            dgvSetData.Rows[rindex].Selected = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomMessageBox.Error("This item is not exist in set!" + Environment.NewLine + "Nguyên liệu không có trong danh sách!" + Environment.NewLine + ex.Message);
+                            txtSetBarcode.ResetText();
+                            txtSetInvoice.ResetText();
+                            txtSetBarcode.Focus();
+                            return true;
+                        }
+                        #endregion
+
                         txtSetOutQty.Focus();
                         return true;
                     }
@@ -166,7 +183,7 @@ namespace PC_QRCodeSystem.View
             {
                 MainSearch();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -179,7 +196,7 @@ namespace PC_QRCodeSystem.View
                 if (dgvPrint.Rows.Count > 0) tc_Main.SelectedTab = tab_Print;
                 else CustomMessageBox.Notice("No item in print list!" + Environment.NewLine + "Không có tem cần in!");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -197,7 +214,7 @@ namespace PC_QRCodeSystem.View
             {
                 MainClear();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -484,7 +501,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                InputSet();
+                InputSet(dgvSetData.SelectedRows[0].Index);
             }
             catch (Exception ex)
             {
@@ -496,7 +513,6 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                ClearDataList();
                 OutSet();
             }
             catch (Exception ex)
@@ -524,7 +540,7 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region FIELDS EVENT
-        private void InputSet()
+        private void InputSet(int rindex)
         {
             string itemCode = txtSetItemCD.Text;
             pts_stock stockData = new pts_stock();
@@ -541,21 +557,22 @@ namespace PC_QRCodeSystem.View
             #endregion
 
             #region GET INDEX OF ITEM IF IT IS EXIST IN SET LIST
-            int rindex = 0;
-            try
-            {
-                rindex = dgvSetData.Rows.Cast<DataGridViewRow>()
-                            .Where(x => x.Cells["low_level_item"].Value.ToString() == itemCode)
-                            .Select(x => x.Index).First();
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error("This item is not exist in set!" + Environment.NewLine + "Nguyên liệu không có trong danh sách!" + Environment.NewLine + ex.Message);
-                txtSetBarcode.ResetText();
-                txtSetInvoice.ResetText();
-                txtSetBarcode.Focus();
-                return;
-            }
+            //int rindex = 0;
+            //try
+            //{
+            //    rindex = dgvSetData.Rows.Cast<DataGridViewRow>()
+            //                .Where(x => x.Cells["low_level_item"].Value.ToString() == itemCode)
+            //                .Select(x => x.Index).First();
+            //    dgvSetData.Rows[rindex].Selected = true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    CustomMessageBox.Error("This item is not exist in set!" + Environment.NewLine + "Nguyên liệu không có trong danh sách!" + Environment.NewLine + ex.Message);
+            //    txtSetBarcode.ResetText();
+            //    txtSetInvoice.ResetText();
+            //    txtSetBarcode.Focus();
+            //    return;
+            //}
             #endregion
 
             DataGridViewRow dr = dgvSetData.Rows[rindex];
@@ -660,7 +677,7 @@ namespace PC_QRCodeSystem.View
                 });
                 try
                 {
-                    int lbindex = listLabel.Where(x => x.Item_Number == txtItemCode.Text && x.Invoice == stockData.invoice && x.Delivery_Qty == deliveryQty)
+                    int lbindex = listLabel.Where(x => x.Item_Number == item.item_cd && x.Invoice == item.invoice && x.Delivery_Qty == deliveryQty)
                                            .Select(x => listLabel.IndexOf(x)).First();
                     listLabel[lbindex].Label_Qty += 1;
                 }
@@ -668,13 +685,13 @@ namespace PC_QRCodeSystem.View
                 {
                     listLabel.Add(new PrintItem
                     {
-                        Item_Number = txtItemCode.Text,
+                        Item_Number = item.item_cd,
                         Item_Name = lbItemName.Text,
-                        SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = stockData.supplier_cd }).supplier_name,
-                        Invoice = stockData.invoice,
+                        SupplierName = supplierData.GetSupplier(new pts_supplier { supplier_cd = item.supplier_cd }).supplier_name,
+                        Invoice = item.invoice,
                         Delivery_Date = dtpStockOutDate.Value,
                         Delivery_Qty = deliveryQty,
-                        SupplierCD = stockData.supplier_cd,
+                        SupplierCD = item.supplier_cd,
                         isRec = false,
                         Label_Qty = 1,
                     });
@@ -838,7 +855,10 @@ namespace PC_QRCodeSystem.View
                 listOut[0].ExportCSV(listOut.ToList());
                 listStock[0].UpdateMultiItem(listStock.ToList());
                 listStockOut[0].AddMultiItem(listStockOut.ToList());
+                pts_item itemData = new pts_item();
+                itemData.ListStockOutUpdateValue(listOut.ToList());
                 CustomMessageBox.Notice("Register data completed!" + Environment.NewLine + "Dữ liệu được đăng ký hoàn tất!");
+                isChecked = false;
                 ClearDataList();
             }
             catch (Exception ex)
@@ -886,7 +906,7 @@ namespace PC_QRCodeSystem.View
                 UpdateGridStockOut(listStockOut);
                 UpdateGridLabel(listLabel);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -900,7 +920,7 @@ namespace PC_QRCodeSystem.View
                 ClearDataList();
                 CustomMessageBox.Notice("Clear all data!" + Environment.NewLine + "Đã xóa toàn bộ dữ liệu!");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -986,7 +1006,7 @@ namespace PC_QRCodeSystem.View
                 {
                     int lb = (int)dgvLabel.Rows[i].Cells["Label_Qty"].Value;
                     double dQty = (double)dgvLabel.Rows[i].Cells["Delivery_Qty"].Value;
-                    if ((lb * dQty) == (lbQty * deliveryQty))
+                    if ((lb * dQty) == (lbQty * deliveryQty) && i == rindex)
                     {
                         listLabel[i].Remark = "Checked";
                         dgvLabel.Rows[i].DefaultCellStyle.BackColor = Color.Lime;

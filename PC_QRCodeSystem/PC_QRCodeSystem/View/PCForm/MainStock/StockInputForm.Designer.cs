@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlOption = new System.Windows.Forms.Panel();
-            this.btnMainClear = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnManualPacking = new System.Windows.Forms.Button();
             this.rbtnOdd = new System.Windows.Forms.RadioButton();
@@ -38,6 +37,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.rbtnEven = new System.Windows.Forms.RadioButton();
             this.txtCapacity = new System.Windows.Forms.TextBox();
+            this.btnMainClear = new System.Windows.Forms.Button();
             this.btnPrintList = new System.Windows.Forms.Button();
             this.btnInspection = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
@@ -102,6 +102,10 @@
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtInsInvoice = new System.Windows.Forms.TextBox();
+            this.txtInQty = new System.Windows.Forms.TextBox();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -120,8 +124,8 @@
             // 
             // pnlOption
             // 
-            this.pnlOption.Controls.Add(this.btnMainClear);
             this.pnlOption.Controls.Add(this.panel6);
+            this.pnlOption.Controls.Add(this.btnMainClear);
             this.pnlOption.Controls.Add(this.btnPrintList);
             this.pnlOption.Controls.Add(this.btnInspection);
             this.pnlOption.Controls.Add(this.btnSetting);
@@ -131,17 +135,6 @@
             this.pnlOption.Name = "pnlOption";
             this.pnlOption.Size = new System.Drawing.Size(1018, 60);
             this.pnlOption.TabIndex = 2;
-            // 
-            // btnMainClear
-            // 
-            this.btnMainClear.Location = new System.Drawing.Point(900, 5);
-            this.btnMainClear.Margin = new System.Windows.Forms.Padding(4);
-            this.btnMainClear.Name = "btnMainClear";
-            this.btnMainClear.Size = new System.Drawing.Size(100, 50);
-            this.btnMainClear.TabIndex = 23;
-            this.btnMainClear.Text = "Clear\r\nXóa Thông Tin";
-            this.btnMainClear.UseVisualStyleBackColor = true;
-            this.btnMainClear.Click += new System.EventHandler(this.btnMainClear_Click);
             // 
             // panel6
             // 
@@ -155,12 +148,12 @@
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(532, 60);
+            this.panel6.Size = new System.Drawing.Size(512, 60);
             this.panel6.TabIndex = 23;
             // 
             // btnManualPacking
             // 
-            this.btnManualPacking.Location = new System.Drawing.Point(370, 5);
+            this.btnManualPacking.Location = new System.Drawing.Point(360, 5);
             this.btnManualPacking.Margin = new System.Windows.Forms.Padding(4);
             this.btnManualPacking.Name = "btnManualPacking";
             this.btnManualPacking.Size = new System.Drawing.Size(150, 50);
@@ -197,7 +190,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(260, 5);
+            this.label14.Location = new System.Drawing.Point(250, 5);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(96, 17);
@@ -221,7 +214,7 @@
             // txtCapacity
             // 
             this.txtCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCapacity.Location = new System.Drawing.Point(260, 30);
+            this.txtCapacity.Location = new System.Drawing.Point(250, 30);
             this.txtCapacity.Margin = new System.Windows.Forms.Padding(4);
             this.txtCapacity.Name = "txtCapacity";
             this.txtCapacity.Size = new System.Drawing.Size(100, 23);
@@ -229,12 +222,23 @@
             this.txtCapacity.Text = "0";
             this.txtCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // btnMainClear
+            // 
+            this.btnMainClear.Location = new System.Drawing.Point(880, 5);
+            this.btnMainClear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMainClear.Name = "btnMainClear";
+            this.btnMainClear.Size = new System.Drawing.Size(120, 50);
+            this.btnMainClear.TabIndex = 23;
+            this.btnMainClear.Text = "Clear\r\nXóa Thông Tin";
+            this.btnMainClear.UseVisualStyleBackColor = true;
+            this.btnMainClear.Click += new System.EventHandler(this.btnMainClear_Click);
+            // 
             // btnPrintList
             // 
-            this.btnPrintList.Location = new System.Drawing.Point(540, 4);
+            this.btnPrintList.Location = new System.Drawing.Point(520, 5);
             this.btnPrintList.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintList.Name = "btnPrintList";
-            this.btnPrintList.Size = new System.Drawing.Size(100, 50);
+            this.btnPrintList.Size = new System.Drawing.Size(120, 50);
             this.btnPrintList.TabIndex = 20;
             this.btnPrintList.Text = "3. Print List\r\nDanh Sách In";
             this.btnPrintList.UseVisualStyleBackColor = true;
@@ -242,10 +246,10 @@
             // 
             // btnInspection
             // 
-            this.btnInspection.Location = new System.Drawing.Point(660, 5);
+            this.btnInspection.Location = new System.Drawing.Point(640, 5);
             this.btnInspection.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspection.Name = "btnInspection";
-            this.btnInspection.Size = new System.Drawing.Size(100, 50);
+            this.btnInspection.Size = new System.Drawing.Size(120, 50);
             this.btnInspection.TabIndex = 21;
             this.btnInspection.Text = "4. Inspection\r\nKiểm Tra";
             this.btnInspection.UseVisualStyleBackColor = true;
@@ -253,10 +257,10 @@
             // 
             // btnSetting
             // 
-            this.btnSetting.Location = new System.Drawing.Point(780, 5);
+            this.btnSetting.Location = new System.Drawing.Point(760, 5);
             this.btnSetting.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(100, 50);
+            this.btnSetting.Size = new System.Drawing.Size(120, 50);
             this.btnSetting.TabIndex = 22;
             this.btnSetting.Text = "Setting\r\nCài Đặt";
             this.btnSetting.UseVisualStyleBackColor = true;
@@ -315,15 +319,15 @@
             this.dgvPreInput.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPreInput.Name = "dgvPreInput";
             this.dgvPreInput.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.NullValue = null;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPreInput.RowHeadersVisible = false;
             this.dgvPreInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPreInput.Size = new System.Drawing.Size(1018, 174);
@@ -362,9 +366,9 @@
             this.cbCheckDate.AutoSize = true;
             this.cbCheckDate.Location = new System.Drawing.Point(600, 10);
             this.cbCheckDate.Name = "cbCheckDate";
-            this.cbCheckDate.Size = new System.Drawing.Size(121, 38);
+            this.cbCheckDate.Size = new System.Drawing.Size(124, 38);
             this.cbCheckDate.TabIndex = 10;
-            this.cbCheckDate.Text = "Check Date\r\nKiểm Tra Ngày";
+            this.cbCheckDate.Text = "Check Date\r\nTìm Theo Ngày";
             this.cbCheckDate.UseVisualStyleBackColor = true;
             // 
             // label10
@@ -538,6 +542,10 @@
             // 
             // pnlInspection
             // 
+            this.pnlInspection.Controls.Add(this.txtInQty);
+            this.pnlInspection.Controls.Add(this.txtInsInvoice);
+            this.pnlInspection.Controls.Add(this.label19);
+            this.pnlInspection.Controls.Add(this.label18);
             this.pnlInspection.Controls.Add(this.label16);
             this.pnlInspection.Controls.Add(this.label15);
             this.pnlInspection.Controls.Add(this.txtLabelQty);
@@ -685,12 +693,11 @@
             // 
             // txtBarcode
             // 
-            this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBarcode.Location = new System.Drawing.Point(120, 10);
             this.txtBarcode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtBarcode.Multiline = true;
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(560, 50);
+            this.txtBarcode.Size = new System.Drawing.Size(560, 53);
             this.txtBarcode.TabIndex = 3;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
@@ -945,6 +952,42 @@
             this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
             this.tsTotalQty.Text = "None";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(690, 10);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(52, 17);
+            this.label18.TabIndex = 29;
+            this.label18.Text = "Invoice";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(690, 80);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(30, 17);
+            this.label19.TabIndex = 30;
+            this.label19.Text = "Qty";
+            // 
+            // txtInsInvoice
+            // 
+            this.txtInsInvoice.Location = new System.Drawing.Point(690, 40);
+            this.txtInsInvoice.Name = "txtInsInvoice";
+            this.txtInsInvoice.ReadOnly = true;
+            this.txtInsInvoice.Size = new System.Drawing.Size(170, 23);
+            this.txtInsInvoice.TabIndex = 31;
+            this.txtInsInvoice.TabStop = false;
+            // 
+            // txtInQty
+            // 
+            this.txtInQty.Location = new System.Drawing.Point(720, 80);
+            this.txtInQty.Name = "txtInQty";
+            this.txtInQty.ReadOnly = true;
+            this.txtInQty.Size = new System.Drawing.Size(140, 23);
+            this.txtInQty.TabIndex = 32;
+            this.txtInQty.TabStop = false;
+            // 
             // StockInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1066,5 +1109,9 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtInQty;
+        private System.Windows.Forms.TextBox txtInsInvoice;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
     }
 }

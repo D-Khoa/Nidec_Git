@@ -384,8 +384,7 @@ namespace NewModelCheckingResult
                     }
                 }
                 #endregion
-
-
+                
                 if (!Directory.Exists(@"C:\IQC_Excel")) Directory.CreateDirectory(@"C:\IQC_Excel");
                 xlWorkBook.SaveAs(@"C:\IQC_Excel\" + inBox.part_box_cd + ".xlsx", Excel.XlFileFormat.xlWorkbookDefault, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
                 MessageBox.Show("Excel file created, you can find in the folder C:\\IQC_Excel", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);

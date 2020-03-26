@@ -63,6 +63,12 @@ namespace PC_QRCodeSystem.Model
             //Close SQL connection
             SQL.Close();
         }
+
+        /// <summary>
+        /// Add new destination
+        /// </summary>
+        /// <param name="adddest"></param>
+        /// <returns></returns>
         public int AddDestination(pts_destination adddest)
         {
             //SQL library
@@ -76,8 +82,42 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
+
+        /// <summary>
+        /// Add multi destination code
+        /// </summary>
+        /// <param name="inList"></param>
+        /// <returns></returns>
+        public int AddMultiDestination(List<pts_destination> inList)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_destination(destination_cd, destination_name, dept_cd, registration_user_cd) VALUES";
+            for (int i = 0; i < inList.Count; i++)
+            {
+                query += " ('" + inList[i].destination_cd + "','" + inList[i].destination_name + "','";
+                query += inList[i].dept_cd + "','" + inList[i].registration_user_cd + "'),";
+            }
+            query = query.Remove(query.Length - 1);
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Update an destination
+        /// </summary>
+        /// <param name="updest"></param>
+        /// <returns></returns>
         public int UpdateDest(pts_destination updest)
         {
             //SQL library
@@ -86,14 +126,21 @@ namespace PC_QRCodeSystem.Model
             //Open SQL connection
             SQL.Open();
             //SQL query string
-            query = "UPDATE pts_destination SET destination_cd='" + updest.destination_cd + "',destination_name = '" + updest.destination_name+ "',dept_cd = '" + updest.dept_cd;
+            query = "UPDATE pts_destination SET destination_cd='" + updest.destination_cd + "',destination_name = '" + updest.destination_name + "',dept_cd = '" + updest.dept_cd;
             query += "', registration_user_cd ='" + updest.registration_user_cd;
             query += "', registration_date_time = now() where destination_id ='" + updest.destination_id + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
+
+        /// <summary>
+        /// Delete an destination
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public int DeleteDest(int id)
         {
             //SQL library
@@ -106,8 +153,8 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
-
         }
     }
 }

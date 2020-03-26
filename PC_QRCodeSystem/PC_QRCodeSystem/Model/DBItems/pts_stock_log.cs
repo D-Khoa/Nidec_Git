@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PC_QRCodeSystem.Model
 {
@@ -25,6 +22,7 @@ namespace PC_QRCodeSystem.Model
         }
         #endregion
 
+        #region QUERY
         /// <summary>
         /// Search list log
         /// </summary>
@@ -98,6 +96,11 @@ namespace PC_QRCodeSystem.Model
             return result;
         }
 
+        /// <summary>
+        /// Add multi logs
+        /// </summary>
+        /// <param name="inList"></param>
+        /// <returns></returns>
         public int AddMultiLog(List<pts_stock_log> inList)
         {
             //SQL library
@@ -124,5 +127,6 @@ namespace PC_QRCodeSystem.Model
         {
             this.GetType().GetProperty(name).SetValue(this, value);
         }
+        #endregion
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -246,5 +248,30 @@ namespace PC_QRCodeSystem.View
             btnDelete.Enabled = true;
         }
         #endregion
+
+        private void btnUpdateDes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                pts_destination desData = new pts_destination();
+                List<pts_destination> listDes = new List<pts_destination>();
+                desData.GetListDestination(string.Empty, string.Empty);
+                listDes = supplierData.GetListDestination();
+                for (int j = 0; j < desData.listdestination.Count; j++)
+                {
+                    try
+                    {
+                        int desIndex = listDes.Where(x => x.destination_cd == desData.listdestination[j].destination_cd).Select(x => listDes.IndexOf(x)).First();
+                        listDes.RemoveAt(desIndex);
+                    }
+                    catch { continue; }
+                }
+                desData.AddMultiDestination(listDes);
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace PC_QRCodeSystem.Model
         }
         #endregion
 
+        #region QUERY
         /// <summary>
         /// Get infomation of an item with item id
         /// </summary>
@@ -215,6 +216,9 @@ namespace PC_QRCodeSystem.Model
             }
         }
 
+        /// <summary>
+        /// Get list item level
+        /// </summary>
         public void GetListItemLv()
         {
             try
@@ -306,6 +310,7 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
 
@@ -330,6 +335,7 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
 
@@ -352,6 +358,7 @@ namespace PC_QRCodeSystem.Model
                 //Execute non query for read database
                 int result = SQL.Command(query).ExecuteNonQuery();
                 query = string.Empty;
+                SQL.Close();
                 return result;
             }
             catch (Exception ex)
@@ -441,5 +448,6 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
             return result;
         }
+        #endregion
     }
 }

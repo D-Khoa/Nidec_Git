@@ -52,6 +52,7 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsSupplierTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlSubButtons = new System.Windows.Forms.Panel();
+            this.btnUpdateDes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataSupllier)).BeginInit();
             this.panel4.SuspendLayout();
             this.pnlButtons.SuspendLayout();
@@ -217,6 +218,7 @@
             // 
             // pnlButtons
             // 
+            this.pnlButtons.Controls.Add(this.btnUpdateDes);
             this.pnlButtons.Controls.Add(this.btnSearch);
             this.pnlButtons.Controls.Add(this.btnUpdate);
             this.pnlButtons.Controls.Add(this.btnDelete);
@@ -244,7 +246,7 @@
             // btnUpdate
             // 
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(374, 5);
+            this.btnUpdate.Location = new System.Drawing.Point(304, 5);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 50);
@@ -256,7 +258,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(546, 5);
+            this.btnDelete.Location = new System.Drawing.Point(441, 5);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 50);
@@ -268,7 +270,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(202, 5);
+            this.btnAdd.Location = new System.Drawing.Point(167, 5);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 50);
@@ -280,7 +282,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(718, 5);
+            this.btnClear.Location = new System.Drawing.Point(715, 5);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(100, 50);
@@ -332,6 +334,18 @@
             this.pnlSubButtons.Name = "pnlSubButtons";
             this.pnlSubButtons.Size = new System.Drawing.Size(899, 60);
             this.pnlSubButtons.TabIndex = 2;
+            // 
+            // btnUpdateDes
+            // 
+            this.btnUpdateDes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateDes.Location = new System.Drawing.Point(578, 5);
+            this.btnUpdateDes.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdateDes.Name = "btnUpdateDes";
+            this.btnUpdateDes.Size = new System.Drawing.Size(100, 50);
+            this.btnUpdateDes.TabIndex = 14;
+            this.btnUpdateDes.Text = "Update Destination";
+            this.btnUpdateDes.UseVisualStyleBackColor = true;
+            this.btnUpdateDes.Click += new System.EventHandler(this.btnUpdateDes_Click);
             // 
             // SupplierForm
             // 
@@ -397,5 +411,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tsSupplierTotal;
         private System.Windows.Forms.Panel pnlSubButtons;
+        private System.Windows.Forms.Button btnUpdateDes;
     }
 }

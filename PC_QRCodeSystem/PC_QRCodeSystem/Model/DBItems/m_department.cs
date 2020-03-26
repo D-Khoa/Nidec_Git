@@ -68,6 +68,7 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
         public int UpdateDept(m_department updept)
@@ -84,6 +85,7 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
         public int DeleteDept(int id)
@@ -98,8 +100,8 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
-
         }
     }
 }

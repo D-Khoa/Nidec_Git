@@ -132,6 +132,7 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
 
@@ -155,6 +156,7 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
 
@@ -175,8 +177,42 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
+        }
 
+        /// <summary>
+        /// Get destination code from supplier
+        /// </summary>
+        /// <returns></returns>
+        public List<pts_destination> GetListDestination()
+        {
+            List<pts_destination> outList = new List<pts_destination>();
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT supplier_cd, supplier_name FROM pts_supplier WHERE supplier_cd like '999%' ORDER BY supplier_cd";
+            //Execute non query for read database
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            query = string.Empty;
+            while(reader.Read())
+            {
+                pts_destination outItem = new pts_destination()
+                {
+                    dept_cd = "Other",
+                    destination_cd = reader["supplier_cd"].ToString(),
+                    destination_name = reader["supplier_name"].ToString(),
+                    registration_user_cd = UserData.usercode,
+                    registration_date_time = DateTime.Now
+                };
+                outList.Add(outItem);
+            }
+            reader.Close();
+            SQL.Close();
+            return outList;
         }
         #endregion
     }

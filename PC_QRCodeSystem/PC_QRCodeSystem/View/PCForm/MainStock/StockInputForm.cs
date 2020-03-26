@@ -13,6 +13,7 @@ namespace PC_QRCodeSystem.View
     public partial class StockInputForm : FormCommon
     {
         #region ITEMS
+        PrintItem lbData { get; set; }
         pts_item itemData { get; set; }
         pre_649 premacData { get; set; }
         pts_stock stockItem { get; set; }
@@ -30,6 +31,7 @@ namespace PC_QRCodeSystem.View
         public StockInputForm()
         {
             InitializeComponent();
+            lbData = new PrintItem();
             itemData = new pts_item();
             printItem = new PrintItem();
             stockItem = new pts_stock();
@@ -125,7 +127,7 @@ namespace PC_QRCodeSystem.View
                 double sizePerLot = 1;
                 double qtymod = 0;
                 //Each row in datagridview
-                foreach (DataGridViewRow dr in dgvPreInput.Rows)
+                foreach (DataGridViewRow dr in dgvPreInput.SelectedRows)
                 {
                     qtymod = 0;
                     //If item number is not exist in item database then skip it
@@ -138,20 +140,23 @@ namespace PC_QRCodeSystem.View
                     //Calculator number of lot
                     numberOfLot = (int)((double)dr.Cells["delivery_qty"].Value / sizePerLot);
                     //Add new label item into print list
-                    printItem.ListPrintItem.Add(new PrintItem
+                    if (numberOfLot > 0)
                     {
-                        Item_Number = dr.Cells["item_number"].Value.ToString(),
-                        Item_Name = dr.Cells["item_name"].Value.ToString(),
-                        SupplierCD = dr.Cells["supplier_cd"].Value.ToString(),
-                        SupplierName = dr.Cells["supplier_name"].Value.ToString(),
-                        Invoice = dr.Cells["supplier_invoice"].Value.ToString(),
-                        Delivery_Date = (DateTime)dr.Cells["delivery_date"].Value,
-                        Delivery_Qty = sizePerLot,
-                        //OrderNo = dr.Cells["order_number"].Value.ToString(),
-                        Remark = "P",
-                        isRec = true,
-                        Label_Qty = numberOfLot
-                    });
+                        printItem.ListPrintItem.Add(new PrintItem
+                        {
+                            Item_Number = dr.Cells["item_number"].Value.ToString(),
+                            Item_Name = dr.Cells["item_name"].Value.ToString(),
+                            SupplierCD = dr.Cells["supplier_cd"].Value.ToString(),
+                            SupplierName = dr.Cells["supplier_name"].Value.ToString(),
+                            Invoice = dr.Cells["supplier_invoice"].Value.ToString(),
+                            Delivery_Date = (DateTime)dr.Cells["delivery_date"].Value,
+                            Delivery_Qty = sizePerLot,
+                            //OrderNo = dr.Cells["order_number"].Value.ToString(),
+                            Remark = "P",
+                            isRec = true,
+                            Label_Qty = numberOfLot
+                        });
+                    }
                     //If the last lot is not enough, create an odd label for it
                     if (sizePerLot * numberOfLot < (double)dr.Cells["delivery_qty"].Value)
                     {
@@ -332,7 +337,7 @@ namespace PC_QRCodeSystem.View
                 UpdatePremacGrid(false);
                 dgvPreInput.DataSource = null;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -576,7 +581,7 @@ namespace PC_QRCodeSystem.View
                 printItem.ListPrintItem.Clear();
                 dgvPrintList.DataSource = null;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -639,6 +644,7 @@ namespace PC_QRCodeSystem.View
                     if (listInputPremac.Count > 0)
                         premacData.ExportCSV(GroupByPremac());
                 }
+                CustomMessageBox.Notice("Register Successful!" + Environment.NewLine + "Đăng ký hoàn tất!");
             }
             catch (Exception ex)
             {
@@ -700,7 +706,7 @@ namespace PC_QRCodeSystem.View
                 dgvInspection.DataSource = null;
                 txtBarcode.Focus();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
@@ -712,6 +718,26 @@ namespace PC_QRCodeSystem.View
         {
             if (e.KeyCode == Keys.Enter)
             {
+                string[] barcode = txtBarcode.Text.Split(';');
+                //Label of PREMAC 6-4-9 have more 2 fields
+                lbData = new PrintItem
+                {
+                    Item_Number = barcode[0].Trim(),
+                    Item_Name = barcode[1].Trim(),
+                    SupplierName = barcode[2].Trim(),
+                    Invoice = barcode[3].Trim(),
+                    Delivery_Date = DateTime.Parse(barcode[4].Trim()),
+                    Delivery_Qty = int.Parse(barcode[5].Trim()),
+                    SupplierCD = string.Empty,
+                    Remark = string.Empty
+                };
+                if (barcode.Length > 7)
+                {
+                    if (!string.IsNullOrEmpty(barcode[6])) lbData.SupplierCD = barcode[6].Trim();
+                    if (!string.IsNullOrEmpty(barcode[7])) lbData.Remark = barcode[7].Trim();
+                }
+                txtInsInvoice.Text = lbData.Invoice;
+                txtInQty.Text = lbData.Delivery_Qty.ToString();
                 txtLabelQty.Focus();
             }
         }
@@ -720,8 +746,12 @@ namespace PC_QRCodeSystem.View
         {
             if (e.KeyCode == Keys.Enter)
             {
-                AddNewItem(int.Parse(txtLabelQty.Text));
-                txtBarcode.Clear();
+                AddNewItem(lbData, int.Parse(txtLabelQty.Text));
+                txtInQty.ResetText();
+                txtBarcode.ResetText();
+                txtInsInvoice.ResetText();
+                txtSupplierCD.ResetText();
+                txtSupplierName.Text = "Supplier Name";
                 txtBarcode.Focus();
                 txtLabelQty.Text = "1";
             }
@@ -829,27 +859,20 @@ namespace PC_QRCodeSystem.View
         /// <summary>
         /// Add new stock item into temp list
         /// </summary>
-        private void AddNewItem(int labelQty)
+        private void AddNewItem(PrintItem lbItem, int labelQty)
         {
             try
             {
                 int n = 0;
                 int temp = 0;
                 string invoice = "None";
-                string remark = string.Empty;
-                string suppliercd = string.Empty;
-                string[] barcode = txtBarcode.Text.Split(';');
+                //string remark = string.Empty;
+                //string suppliercd = string.Empty;
                 txtSupplierCD.Clear();
                 txtSupplierName.Clear();
-                //Label of PREMAC 6-4-9 have more 2 fields
-                if (barcode.Length > 7)
-                {
-                    if (!string.IsNullOrEmpty(barcode[6])) suppliercd = barcode[6].Trim();
-                    if (!string.IsNullOrEmpty(barcode[7])) remark = barcode[7].Trim();
-                }
                 try
                 {
-                    itemData.GetItem(barcode[0]);
+                    itemData.GetItem(lbItem.Item_Number);
                 }
                 catch
                 {
@@ -858,11 +881,11 @@ namespace PC_QRCodeSystem.View
                 }
                 #region CHECK SUPPLIER & NOTICE FOR USER
                 errorProvider.SetError(txtSupplierCD, null);
-                txtSupplierName.Text = barcode[2];
+                txtSupplierName.Text = lbItem.SupplierName;
                 try
                 {
                     //If don't have supplier code then search with supplier name and return supplier code
-                    if (string.IsNullOrEmpty(suppliercd))
+                    if (string.IsNullOrEmpty(lbItem.SupplierCD))
                     {
                         supplierItem = supplierItem.GetSupplier(new pts_supplier
                         {
@@ -873,7 +896,7 @@ namespace PC_QRCodeSystem.View
                     }
                     else
                     {
-                        txtSupplierCD.Text = suppliercd;
+                        txtSupplierCD.Text = lbItem.SupplierCD;
                         //Searh with supplier code
                         supplierItem = supplierItem.GetSupplier(new pts_supplier
                         {
@@ -894,12 +917,12 @@ namespace PC_QRCodeSystem.View
                 try
                 {
                     //Search item in stock with invoice number
-                    if (stockItem.SearchItem(new pts_stock { item_cd = barcode[0], invoice = barcode[3] }))
+                    if (stockItem.SearchItem(new pts_stock { item_cd = lbItem.Item_Number, invoice = lbItem.Invoice }))
                     {
-                        double totalStockIn = (from x in stockItem.listStockItems where x.item_cd == barcode[0] select x.stockin_qty).Sum();
-                        double totalPacking = (from x in stockItem.listStockItems where x.item_cd == barcode[0] select x.packing_qty).Sum();
+                        double totalStockIn = (from x in stockItem.listStockItems where x.item_cd == lbItem.Item_Number select x.stockin_qty).Sum();
+                        double totalPacking = (from x in stockItem.listStockItems where x.item_cd == lbItem.Item_Number select x.packing_qty).Sum();
                         //If this item is exist, notice user
-                        string mess = "Item code: " + barcode[0] + " and Invoice: " + barcode[3] + "is exist!" + Environment.NewLine;
+                        string mess = "Item code: " + lbItem.Item_Number + " and Invoice: " + lbItem.Invoice + "is exist!" + Environment.NewLine;
                         mess += "Total stock-in: " + totalStockIn + Environment.NewLine + "Total packing: " + totalPacking + Environment.NewLine;
                         mess += "Are you sure add new packing with this Invoice?";
                         if (CustomMessageBox.Question(mess) == DialogResult.No) return;
@@ -926,7 +949,7 @@ namespace PC_QRCodeSystem.View
                     //Create new number of packing with Invoice number
                     foreach (pts_stock item in listStockItem)
                     {
-                        if (item.invoice == barcode[3])
+                        if (item.invoice == lbItem.Invoice)
                         {
                             if (!string.IsNullOrEmpty(item.invoice))
                                 temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
@@ -936,35 +959,35 @@ namespace PC_QRCodeSystem.View
                         }
                     }
                     n++;
-                    if (!string.IsNullOrEmpty(barcode[3].Trim())) invoice = barcode[3];
+                    if (!string.IsNullOrEmpty(lbItem.Invoice)) invoice = lbItem.Invoice;
                     string packingcd = invoice + "-" + n.ToString("00");
                     #endregion
 
                     //Add new barcode item into list stock item
                     listStockItem.Add(new pts_stock
                     {
-                        item_cd = barcode[0],
+                        item_cd = lbItem.Item_Number,
                         supplier_cd = txtSupplierCD.Text,
-                        invoice = barcode[3],
-                        stockin_date = DateTime.Parse(barcode[4]),
-                        stockin_qty = double.Parse(barcode[5]),
+                        invoice = lbItem.Invoice,
+                        stockin_date = lbItem.Delivery_Date,
+                        stockin_qty = lbItem.Delivery_Qty,
                         stockin_user_cd = txtUserCD.Text,
                         //order_no = orderno,
                         packing_cd = packingcd,
-                        packing_qty = double.Parse(barcode[5]),
+                        packing_qty = lbItem.Delivery_Qty,
                         registration_user_cd = UserData.usercode,
                     });
-                    if (remark != "P")
+                    if (lbItem.Remark != "P")
                     {
                         listInputPremac.Add(new pre_649
                         {
-                            item_number = barcode[0],
-                            item_name = barcode[1],
+                            item_number = lbItem.Item_Number,
+                            item_name = lbItem.Item_Name,
                             supplier_cd = txtSupplierCD.Text,
                             supplier_name = txtSupplierName.Text,
-                            supplier_invoice = barcode[3],
-                            delivery_date = DateTime.Parse(barcode[4]),
-                            delivery_qty = double.Parse(barcode[5]),
+                            supplier_invoice = lbItem.Invoice,
+                            delivery_date = lbItem.Delivery_Date,
+                            delivery_qty = lbItem.Delivery_Qty,
                             incharge = txtUserCD.Text,
                             //order_number = orderno,
                         });

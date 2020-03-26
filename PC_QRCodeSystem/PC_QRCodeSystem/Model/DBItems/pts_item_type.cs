@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 
@@ -16,13 +15,13 @@ namespace PC_QRCodeSystem.Model
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public BindingList<pts_item_type> listItemType { get; set; }
-        #endregion
-
         public pts_item_type()
         {
             listItemType = new BindingList<pts_item_type>();
         }
+        #endregion
 
+        #region QUERY
         /// <summary>
         /// Get infomation of an item type
         /// </summary>
@@ -110,6 +109,7 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
 
@@ -132,6 +132,7 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
         }
 
@@ -152,8 +153,9 @@ namespace PC_QRCodeSystem.Model
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
+            SQL.Close();
             return result;
-
         }
+        #endregion
     }
 }

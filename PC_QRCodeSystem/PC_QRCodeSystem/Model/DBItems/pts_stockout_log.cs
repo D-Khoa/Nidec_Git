@@ -25,6 +25,7 @@ namespace PC_QRCodeSystem.Model
         }
         #endregion
 
+        #region QUERY
         /// <summary>
         /// Search list stock out item
         /// </summary>
@@ -329,5 +330,6 @@ namespace PC_QRCodeSystem.Model
             SQL.Close();
             return result;
         }
+        #endregion
     }
 }
