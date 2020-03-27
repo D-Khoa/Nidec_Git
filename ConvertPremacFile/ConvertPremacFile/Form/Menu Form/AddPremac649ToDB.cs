@@ -46,6 +46,8 @@ namespace ConvertPremacFile
                         cbSupplier232.Checked = Boolean.Parse(line.Split('=')[1].Trim());
                     if (line.Contains("CheckStruct223="))
                         cbStruct223.Checked = Boolean.Parse(line.Split('=')[1].Trim());
+                    if (line.Contains("CheckStockIn6123="))
+                        cbStockIn6123.Checked = Boolean.Parse(line.Split('=')[1].Trim());
                     if (line.Contains("StockIn649URL"))
                         txtStockIn649.Text = line.Split('=')[1].Trim();
                     if (line.Contains("StockOut649URL"))
@@ -56,6 +58,8 @@ namespace ConvertPremacFile
                         txtSupplier232.Text = line.Split('=')[1].Trim();
                     if (line.Contains("Premac223URL"))
                         txtStruct223.Text = line.Split('=')[1].Trim();
+                    if (line.Contains("StockIn6123URL"))
+                        txtStockIn6123.Text = line.Split('=')[1].Trim();
                     if (line.Contains("log"))
                         dataLogs.Add(new ConvertLogs
                         {
@@ -176,6 +180,27 @@ namespace ConvertPremacFile
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnBrowserStockIn6123_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openf = new OpenFileDialog();
+                openf.Filter = "Text file (*.txt)|*.txt|All file (*.*)|*.*";
+                openf.FileName = "CPBE0023.TXT";
+                openf.CheckFileExists = false;
+                openf.CheckPathExists = false;
+                openf.ValidateNames = true;
+                if (openf.ShowDialog() == DialogResult.OK)
+                {
+                    txtStockIn6123.Text = Path.GetDirectoryName(openf.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         #region BUTTON
         private void btnStart_Click(object sender, EventArgs e)
@@ -218,6 +243,11 @@ namespace ConvertPremacFile
                 Thread.Sleep(3000);
                 AddPre223();
             }
+            if (cbStockIn6123.Checked)
+            {
+                Thread.Sleep(3000);
+                AddStockIn6123();
+            }
         }
         #endregion
         #region TIMER
@@ -225,7 +255,7 @@ namespace ConvertPremacFile
         {
             if (isStart)
             {
-                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss"))
+                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss") || DateTime.Now.ToString("HHmmss") == dtpTimeConvert2.Value.ToString("HHmmss"))
                 {
                     if (cbStockIn649.Checked)
                     {
@@ -268,11 +298,13 @@ namespace ConvertPremacFile
                 settingList.Add("CheckItem212=" + cbItem212.Checked);
                 settingList.Add("CheckSupplier232=" + cbSupplier232.Checked);
                 settingList.Add("CheckStruct223=" + cbStruct223.Checked);
+                settingList.Add("CheckStockIn6123=" + cbStockIn6123.Checked);
                 settingList.Add("StockIn649URL =" + txtStockIn649.Text);
                 settingList.Add("StockOut649URL =" + txtStockOut649.Text);
                 settingList.Add("Premac212URL=" + txtItem212.Text);
                 settingList.Add("Premac232URL=" + txtSupplier232.Text);
                 settingList.Add("Premac223URL=" + txtStruct223.Text);
+                settingList.Add("StockIn6123URL=" + txtStockIn6123.Text);
                 foreach (DataGridViewRow dr in dgvLogs.Rows)
                 {
                     error = dr.DataBoundItem as ConvertLogs;
@@ -444,6 +476,36 @@ namespace ConvertPremacFile
             }
             UpdateGrid();
         }
+
+        private void AddStockIn6123()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtStockIn6123.Text))
+                {
+                    string[] files = Directory.GetFiles(txtStockIn6123.Text, "*CPFE0123*");
+                    foreach (string file in files)
+                    {
+                        stockin649.GetListItem6123(file);
+                        stockin649.WriteToDB(stockin649.listPremacItem);
+                        dataLogs.Add(new ConvertLogs
+                        {
+                            Log_Time = DateTime.Now,
+                            Log_Message = "Add stock-in file: " + file + " completed"
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dataLogs.Add(new ConvertLogs
+                {
+                    Log_Time = DateTime.Now,
+                    Log_Message = ex.Message
+                });
+            }
+            UpdateGrid();
+        }
         #endregion
         #region UPDATEGRID
         private void UpdateGrid()
@@ -459,8 +521,8 @@ namespace ConvertPremacFile
             dgvLogs.DataSource = null;
             dataLogs.Clear();
         }
+        #endregion
     }
-    #endregion
     #region CONVERT LOGS
     class ConvertLogs
     {

@@ -49,9 +49,34 @@ namespace ConvertPremacFile.Model
                                                    supplier_name = Regex.Replace(columns[1], " {2,}", " ").Trim(),
                                                    supplier_invoice = Regex.Replace(columns[29], " {2,}", " ").Trim(),
                                                    delivery_date = DateTime.Parse(Regex.Replace(columns[9], " {2,}", " ").Trim()),
-                                                   delivery_qty = !string.IsNullOrEmpty(Regex.Replace(columns[10], " {2,}", " ").Trim()) ? double.Parse(Regex.Replace(columns[10], " {2,}", " ").Trim()) : 0,
+                                                   delivery_qty = !string.IsNullOrEmpty(Regex.Replace(columns[10], " {2,}", " ").Trim()) ? 
+                                                   double.Parse(Regex.Replace(columns[10], " {2,}", " ").Trim()) : 0,
                                                    incharge = Regex.Replace(columns[14], " {2,}", " ").Trim(),
                                                };
+            listPremacItem = query.ToList();
+            listPremacItem.Sort((a, b) => a.item_number.CompareTo(b.item_number));
+        }
+
+        public void GetListItem6123(string premacfile)
+        {
+            string[] csvlines = File.ReadAllLines(premacfile);
+            IEnumerable<pre_649> query = from csvline in csvlines
+                                         where (!csvline.Contains("SupplierCD"))
+                                         let columns = csvline.Split('?')
+                                         select new pre_649
+                                         {
+                                             item_number = Regex.Replace(columns[2], " {2,}", " ").Trim(),
+                                             item_name = Regex.Replace(columns[3], " {2,}", " ").Trim(),
+                                             po_number = Regex.Replace(columns[18], " {2,}", " ").Trim(),//
+                                             order_number = Regex.Replace(columns[4], " {2,}", " ").Trim(),//
+                                             supplier_cd = Regex.Replace(columns[0], " {2,}", " ").Trim(),
+                                             supplier_name = Regex.Replace(columns[1], " {2,}", " ").Trim(),
+                                             supplier_invoice = Regex.Replace(columns[4], " {2,}", " ").Trim(),//
+                                             delivery_date = DateTime.Parse(Regex.Replace(columns[8], " {2,}", " ").Trim()),
+                                             delivery_qty = !string.IsNullOrEmpty(Regex.Replace(columns[13], " {2,}", " ").Trim()) ?
+                                             double.Parse(Regex.Replace(columns[13], " {2,}", " ").Trim()) : 0,
+                                             incharge = Regex.Replace(columns[22], " {2,}", " ").Trim(),
+                                         };
             listPremacItem = query.ToList();
             listPremacItem.Sort((a, b) => a.item_number.CompareTo(b.item_number));
         }

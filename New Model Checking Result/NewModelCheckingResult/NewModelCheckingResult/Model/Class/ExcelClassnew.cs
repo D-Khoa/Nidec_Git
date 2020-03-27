@@ -320,7 +320,7 @@ namespace NewModelCheckingResult
                 xlApp = new Excel.Application();
                 if (!Directory.Exists(folderExcel)) Directory.CreateDirectory(folderExcel);
                 if (File.Exists(templateFile)) File.Delete(templateFile);
-                File.Move(serverFile, templateFile);
+                File.Copy(serverFile, templateFile);
                 xlWorkBook = xlApp.Workbooks.Open(templateFile, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
 
                 #region ADD BOX INFO

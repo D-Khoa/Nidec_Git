@@ -27,7 +27,6 @@ namespace NewModelCheckingResult.View.Common
             get { return lbName.Text; }
             set { lbName.Text = value; }
         }
-       
 
         public string tittle
         {
@@ -47,8 +46,7 @@ namespace NewModelCheckingResult.View.Common
             name = UserData.username;
             code = UserData.usercode;
             this.Text = tittle + "- IQC Model Checking Result";
-            btnCreatAccount.Enabled = UserData.isadmin;           
-            
+            btnCreatAccount.Enabled = UserData.isadmin;
             AddEventLoad(this, true);
         }
 
@@ -78,7 +76,7 @@ namespace NewModelCheckingResult.View.Common
 
         private void ControlLeaveEvent(object sender, EventArgs e)
         {
-            ((Control)sender).BackColor = tempColor;
+            ((Control)sender).BackColor = Color.FromKnownColor(KnownColor.Window);
             if (sender.GetType().Name == "Button") ((Button)sender).UseVisualStyleBackColor = true;
         }
 
@@ -99,6 +97,6 @@ namespace NewModelCheckingResult.View.Common
             cracc.ShowDialog();
         }
 
-     
+
     }
 }

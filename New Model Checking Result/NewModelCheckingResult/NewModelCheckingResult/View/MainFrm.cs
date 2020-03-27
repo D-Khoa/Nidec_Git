@@ -13,13 +13,26 @@ namespace NewModelCheckingResult.View
 {
     public partial class MainFrm : Common.FormCommon
     {
-        private bool isBoxMode { get; set; }
-
         #region FORM EVENT
+        private bool _isBoxMode;
+        public bool IsBoxMode
+        {
+            get
+            {
+                return _isBoxMode;
+            }
+
+            set
+            {
+                _isBoxMode = value;
+                btnMeasurement.Visible = !_isBoxMode;
+            }
+        }
+
         public MainFrm()
         {
             InitializeComponent();
-            isBoxMode = true;
+            IsBoxMode = true;
             dtpDate.Value = DateTime.Today;
         }
 
@@ -27,6 +40,7 @@ namespace NewModelCheckingResult.View
         {
             try
             {
+                btnDeletebox.Enabled = UserData.isadmin;
             }
             catch (Exception ex)
             {
@@ -137,7 +151,7 @@ namespace NewModelCheckingResult.View
                 tbl_part_box boxData = new tbl_part_box();
                 tbl_inspect_data insData = new tbl_inspect_data();
                 tbl_inspect_master masterData = new tbl_inspect_master();
-                if (isBoxMode)
+                if (IsBoxMode)
                 {
                     if (dgvMain.SelectedRows.Count <= 0)
                     {
@@ -170,9 +184,9 @@ namespace NewModelCheckingResult.View
             try
             {
                 if (dgvMain.SelectedRows.Count <= 0) return;
-                if (isBoxMode)
+                if (IsBoxMode)
                 {
-                    if (CustomMessageBox.Question("Are you sure delete this box?" + Environment.NewLine + "Bạn có đồng ý xóa hộp dữ liệu này?") == DialogResult.No)
+                    if (CustomMessageBox.Question("Are you sure delete this box?" + Environment.NewLine + "Bạn có muốn xóa hộp dữ liệu này?") == DialogResult.No)
                         return;
                     tbl_part_box boxData = dgvMain.SelectedRows[0].DataBoundItem as tbl_part_box;
                     int n = boxData.Delete(boxData.part_box_id);
@@ -180,7 +194,8 @@ namespace NewModelCheckingResult.View
                 }
                 else
                 {
-
+                    if (CustomMessageBox.Question("Are you sure delete this inspect?" + Environment.NewLine + "Bạn có muốn xóa hạng mục này?") == DialogResult.No)
+                        return;
                 }
             }
             catch (Exception ex)
@@ -228,6 +243,7 @@ namespace NewModelCheckingResult.View
                 }, cbCheckDate.Checked);
                 //CustomMessageBox.Notice("Found " + itemQty + " boxes!" + Environment.NewLine + "Tìm được " + itemQty + " hộp dữ liệu!");
             }
+            IsBoxMode = true;
             dgvMain.DataSource = null;
             dgvMain.DataSource = boxData.listBox;
             dgvMain.Columns["part_box_id"].HeaderText = "Box ID";
@@ -268,6 +284,7 @@ namespace NewModelCheckingResult.View
                 string insName = masterData.listMaster.Where(x => x.inspect_id == id).Select(x => x.inspect_name).First();
                 dtFinal.Rows[i]["inspect_id"] = insName;
             }
+            IsBoxMode = false;
             dgvMain.DataSource = dtFinal;
             dgvMain.Update();
             dgvMain.Refresh();
@@ -338,9 +355,6 @@ namespace NewModelCheckingResult.View
             foreach (TextBox c in ctrl.Controls.OfType<TextBox>())
             {
                 c.ReadOnly = isLock;
-                c.TabStop = !isLock;
-                if (isLock) c.BackColor = Color.FromKnownColor(KnownColor.Control);
-                else c.BackColor = Color.FromKnownColor(KnownColor.WindowText);
             }
         }
 
@@ -351,5 +365,15 @@ namespace NewModelCheckingResult.View
             //boxfrm.ShowDialog();
         }
         #endregion
+
+        private void txtPartNumber_ReadOnlyChanged(object sender, EventArgs e)
+        {
+            TextBox control = ((TextBox)sender);
+            control.TabStop = !control.ReadOnly;
+            if (control.ReadOnly) control.BackColor = Color.FromKnownColor(KnownColor.Control);
+            else control.BackColor = Color.FromKnownColor(KnownColor.Window);
+            control.Update();
+            control.Refresh();
+        }
     }
 }
