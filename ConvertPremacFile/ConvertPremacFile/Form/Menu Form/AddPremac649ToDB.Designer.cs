@@ -171,6 +171,7 @@
             this.dgvLogs.Location = new System.Drawing.Point(0, 277);
             this.dgvLogs.Name = "dgvLogs";
             this.dgvLogs.ReadOnly = true;
+            this.dgvLogs.RowHeadersVisible = false;
             this.dgvLogs.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.dgvLogs.Size = new System.Drawing.Size(864, 176);
             this.dgvLogs.TabIndex = 8;
