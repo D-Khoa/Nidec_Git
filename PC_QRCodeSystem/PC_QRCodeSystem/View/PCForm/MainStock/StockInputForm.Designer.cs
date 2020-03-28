@@ -67,6 +67,10 @@
             this.tab_Inspection = new System.Windows.Forms.TabPage();
             this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.pnlInspection = new System.Windows.Forms.Panel();
+            this.txtInQty = new System.Windows.Forms.TextBox();
+            this.txtInsInvoice = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.txtLabelQty = new System.Windows.Forms.TextBox();
@@ -102,10 +106,6 @@
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtInsInvoice = new System.Windows.Forms.TextBox();
-            this.txtInQty = new System.Windows.Forms.TextBox();
             this.pnlOption.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tc_Main.SuspendLayout();
@@ -566,6 +566,42 @@
             this.pnlInspection.TabIndex = 2;
             this.pnlInspection.Visible = false;
             // 
+            // txtInQty
+            // 
+            this.txtInQty.Location = new System.Drawing.Point(720, 80);
+            this.txtInQty.Name = "txtInQty";
+            this.txtInQty.ReadOnly = true;
+            this.txtInQty.Size = new System.Drawing.Size(140, 23);
+            this.txtInQty.TabIndex = 32;
+            this.txtInQty.TabStop = false;
+            // 
+            // txtInsInvoice
+            // 
+            this.txtInsInvoice.Location = new System.Drawing.Point(690, 40);
+            this.txtInsInvoice.Name = "txtInsInvoice";
+            this.txtInsInvoice.ReadOnly = true;
+            this.txtInsInvoice.Size = new System.Drawing.Size(170, 23);
+            this.txtInsInvoice.TabIndex = 31;
+            this.txtInsInvoice.TabStop = false;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(690, 80);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(30, 17);
+            this.label19.TabIndex = 30;
+            this.label19.Text = "Qty";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(690, 10);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(52, 17);
+            this.label18.TabIndex = 29;
+            this.label18.Text = "Invoice";
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -654,7 +690,6 @@
             this.txtSupplierCD.Name = "txtSupplierCD";
             this.txtSupplierCD.Size = new System.Drawing.Size(120, 23);
             this.txtSupplierCD.TabIndex = 4;
-            this.txtSupplierCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSupplierCD_KeyDown);
             // 
             // label2
             // 
@@ -951,42 +986,6 @@
             this.tsTotalQty.Name = "tsTotalQty";
             this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
             this.tsTotalQty.Text = "None";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(690, 10);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(52, 17);
-            this.label18.TabIndex = 29;
-            this.label18.Text = "Invoice";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(690, 80);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(30, 17);
-            this.label19.TabIndex = 30;
-            this.label19.Text = "Qty";
-            // 
-            // txtInsInvoice
-            // 
-            this.txtInsInvoice.Location = new System.Drawing.Point(690, 40);
-            this.txtInsInvoice.Name = "txtInsInvoice";
-            this.txtInsInvoice.ReadOnly = true;
-            this.txtInsInvoice.Size = new System.Drawing.Size(170, 23);
-            this.txtInsInvoice.TabIndex = 31;
-            this.txtInsInvoice.TabStop = false;
-            // 
-            // txtInQty
-            // 
-            this.txtInQty.Location = new System.Drawing.Point(720, 80);
-            this.txtInQty.Name = "txtInQty";
-            this.txtInQty.ReadOnly = true;
-            this.txtInQty.Size = new System.Drawing.Size(140, 23);
-            this.txtInQty.TabIndex = 32;
-            this.txtInQty.TabStop = false;
             // 
             // StockInputForm
             // 

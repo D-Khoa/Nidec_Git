@@ -57,6 +57,33 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F2)
+            {
+                try
+                {
+                    //Press F2 for add new supplier
+                    supplierItem.AddSupplier(new pts_supplier
+                    {
+                        supplier_cd = txtSupplierCD.Text,
+                        supplier_name = txtSupplierName.Text,
+                        registration_user_cd = UserData.usercode,
+                    });
+                    CustomMessageBox.Notice("New supplier has been added with supplier code : " + txtSupplierCD.Text + Environment.NewLine + "NSX mới được thêm vào với mã: " + txtSupplierCD.Text);
+                    txtSupplierCD.Clear();
+                    errorProvider.SetError(txtSupplierCD, null);
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Error(ex.Message);
+                }
+                txtBarcode.Focus();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         #endregion
 
         #region MAIN TAB
@@ -199,7 +226,7 @@ namespace PC_QRCodeSystem.View
                 double sizePerLot = 1;
                 if (dgvPreInput.SelectedRows.Count <= 0)
                 {
-                    CustomMessageBox.Notice("Please select a row before packing!");
+                    CustomMessageBox.Notice("Please select a row before packing!" + Environment.NewLine + "Vui lòng chọn 1 nguyên liệu!");
                     return;
                 }
                 if (rbtnEven.Checked)
@@ -209,7 +236,7 @@ namespace PC_QRCodeSystem.View
                         double deliveryQty = (double)dr.Cells["delivery_qty"].Value;
                         if (deliveryQty <= 0)
                         {
-                            CustomMessageBox.Notice("This lot is null");
+                            CustomMessageBox.Notice("This lot is null" + Environment.NewLine + "Lô này trống!");
                             return;
                         }
                         sizePerLot = double.Parse(txtCapacity.Text);
@@ -259,7 +286,7 @@ namespace PC_QRCodeSystem.View
                     double deliveryQty = (double)dr.Cells["delivery_qty"].Value;
                     if (deliveryQty <= 0)
                     {
-                        CustomMessageBox.Notice("This lot is null");
+                        CustomMessageBox.Notice("This lot is null" + Environment.NewLine + "Lô này trông!");
                         return;
                     }
                     else
@@ -471,7 +498,7 @@ namespace PC_QRCodeSystem.View
             if (e.RowIndex < 0) return;
             DataGridViewRow dr = dgvPreInput.Rows[e.RowIndex];
             txtItemNum.Text = dr.Cells["item_number"].Value.ToString();
-            txtSupplierCD.Text = dr.Cells["supplier_cd"].Value.ToString();
+            txtSupplierCode.Text = dr.Cells["supplier_cd"].Value.ToString();
             txtSupplierInvoice.Text = dr.Cells["supplier_invoice"].Value.ToString();
             txtIncharge.Text = dr.Cells["incharge"].Value.ToString();
         }
@@ -486,13 +513,13 @@ namespace PC_QRCodeSystem.View
             {
                 if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
-                    CustomMessageBox.Notice("Printer is offline");
+                    CustomMessageBox.Notice("Printer is offline" + Environment.NewLine + "Máy in chưa kết nối!");
                     return;
                 }
                 listPrintItem.Clear();
                 if (dgvPrintList.SelectedRows.Count <= 0)
                 {
-                    CustomMessageBox.Notice("Please choose item first!");
+                    CustomMessageBox.Notice("Please choose item first!" + Environment.NewLine + "Vui lòng chọn tem cần in!");
                     return;
                 }
                 foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
@@ -501,7 +528,7 @@ namespace PC_QRCodeSystem.View
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
                 if (printItem.PrintItems(listPrintItem, false))
-                    CustomMessageBox.Notice("Print items are completed!");
+                    CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
             catch (Exception ex)
             {
@@ -515,13 +542,13 @@ namespace PC_QRCodeSystem.View
             {
                 if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
-                    CustomMessageBox.Notice("Printer is offline");
+                    CustomMessageBox.Notice("Printer is offline" + Environment.NewLine + "Máy in chưa kết nối!");
                     return;
                 }
                 listPrintItem.Clear();
                 if (dgvPrintList.Rows.Count == 0)
                 {
-                    CustomMessageBox.Error("Don't have item to print!");
+                    CustomMessageBox.Error("Don't have item to print!" + Environment.NewLine + "Không có tem để in!");
                     return;
                 }
                 foreach (DataGridViewRow dr in dgvPrintList.Rows)
@@ -530,7 +557,7 @@ namespace PC_QRCodeSystem.View
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
                 if (printItem.PrintItems(listPrintItem, false))
-                    CustomMessageBox.Notice("Print items are completed!");
+                    CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
             catch (Exception ex)
             {
@@ -544,13 +571,13 @@ namespace PC_QRCodeSystem.View
             {
                 if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
                 {
-                    CustomMessageBox.Notice("Printer is offline");
+                    CustomMessageBox.Notice("Printer is offline" + Environment.NewLine + "Máy in chưa kết nối!");
                     return;
                 }
                 listPrintItem.Clear();
                 if (dgvPrintList.SelectedRows.Count == 0)
                 {
-                    CustomMessageBox.Notice("Please choose item first!");
+                    CustomMessageBox.Notice("Please choose item first!" + Environment.NewLine + "Vui lòng chọn tem muốn in!");
                     return;
                 }
                 foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
@@ -559,7 +586,7 @@ namespace PC_QRCodeSystem.View
                     dr.DefaultCellStyle.BackColor = Color.Yellow;
                 }
                 if (printItem.PrintItems(listPrintItem, int.Parse(txtPrintLabelQty.Text)))
-                    CustomMessageBox.Notice("Print " + txtPrintLabelQty.Text + " items are completed!");
+                    CustomMessageBox.Notice("Print " + txtPrintLabelQty.Text + " items are completed!" + Environment.NewLine + "Đã in " + txtPrintLabelQty.Text + " tem!");
                 txtPrintLabelQty.Text = "1";
             }
             catch (Exception ex)
@@ -621,7 +648,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (CustomMessageBox.Question("Are you sure register this list?") == DialogResult.No)
+                if (CustomMessageBox.Question("Are you sure register this list?" + Environment.NewLine + "Bạn có muốn đăng ký danh sách này?") == DialogResult.No)
                     return;
                 for (int i = 0; i < dgvInspection.Rows.Count; i++)
                 {
@@ -663,7 +690,7 @@ namespace PC_QRCodeSystem.View
             {
                 foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
                 {
-                    if (CustomMessageBox.Warring("Are you sure delete this item?") == DialogResult.Yes)
+                    if (CustomMessageBox.Warring("Are you sure delete this item?" + Environment.NewLine + "Bạn có chắc xóa tem này?") == DialogResult.Yes)
                     {
                         //Search item want to delete
                         stockItem = dr.DataBoundItem as pts_stock;
@@ -693,7 +720,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
-                if (CustomMessageBox.Warring("This list is not register. Are you sure to clear all?") == DialogResult.No)
+                if (CustomMessageBox.Warring("This list is not register. Are you sure to clear all?" + Environment.NewLine + "Danh sách này chưa được đăng ký. Bạn có chắc muốn xóa tất cả?") == DialogResult.No)
                     return;
                 txtUserCD.Clear();
                 txtBarcode.Clear();
@@ -760,31 +787,6 @@ namespace PC_QRCodeSystem.View
         private void txtLabelQty_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true;
-        }
-
-        private void txtSupplierCD_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                //Press F2 for add new supplier
-                if (e.KeyCode == Keys.F2)
-                {
-                    supplierItem.AddSupplier(new pts_supplier
-                    {
-                        supplier_cd = txtSupplierCD.Text,
-                        supplier_name = txtSupplierName.Text,
-                        registration_user_cd = UserData.usercode,
-                    });
-                    CustomMessageBox.Notice("New supplier has been added with supplier code : " + txtSupplierCD.Text);
-                    txtSupplierCD.Clear();
-                    errorProvider.SetError(txtSupplierCD, null);
-                }
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-            txtBarcode.Focus();
         }
 
         private void txtUserCD_KeyDown(object sender, KeyEventArgs e)
@@ -876,7 +878,7 @@ namespace PC_QRCodeSystem.View
                 }
                 catch
                 {
-                    CustomMessageBox.Error("This item is not exisits! Please check and try again!");
+                    CustomMessageBox.Error("This item is not exisits! Please check and try again!" + Environment.NewLine + "Nguyên liệu này không tồn tại!");
                     return;
                 }
                 #region CHECK SUPPLIER & NOTICE FOR USER
@@ -908,7 +910,7 @@ namespace PC_QRCodeSystem.View
                 catch (Exception ex)
                 {
                     //If supplier is not exist, create a supplier with simple info
-                    errorProvider.SetError(txtSupplierCD, "This supplier is not exist!" + Environment.NewLine + "Please fill supplier code and press F2 for add new supplier (" + ex.Message + ")");
+                    errorProvider.SetError(txtSupplierCD, "This supplier is not exist!" + Environment.NewLine + "Please fill supplier code and press F2 for add new supplier (" + ex.Message + ")" + Environment.NewLine + "NSX này không tồn tại! Vui lòng điền mã NSX và nhấn F2 để thêm mới NSX");
                     return;
                 }
                 #endregion
@@ -924,7 +926,7 @@ namespace PC_QRCodeSystem.View
                         //If this item is exist, notice user
                         string mess = "Item code: " + lbItem.Item_Number + " and Invoice: " + lbItem.Invoice + "is exist!" + Environment.NewLine;
                         mess += "Total stock-in: " + totalStockIn + Environment.NewLine + "Total packing: " + totalPacking + Environment.NewLine;
-                        mess += "Are you sure add new packing with this Invoice?";
+                        mess += "Are you sure add new packing with this Invoice?" + Environment.NewLine + "Bạn có muốn thêm gói mới với mã hóa đơn này không?";
                         if (CustomMessageBox.Question(mess) == DialogResult.No) return;
                     }
                 }
@@ -1033,7 +1035,6 @@ namespace PC_QRCodeSystem.View
             return list;
         }
         #endregion
-
         #endregion
     }
 }

@@ -25,6 +25,7 @@ namespace PC_QRCodeSystem.View
         public StockOutNewForm()
         {
             InitializeComponent();
+            tc_Main.ItemSize = new Size(0, 1);
             listLabel = new BindingList<PrintItem>();
             listOut = new BindingList<OutputItem>();
             listPrint = new BindingList<PrintItem>();

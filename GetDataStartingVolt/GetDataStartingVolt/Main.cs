@@ -118,7 +118,7 @@ namespace GetDataStartingVolt
                         valuerecieved = datarecieved;
                         valuerecieved.Replace(" ", "");
                         valuerecieved = valuerecieved.Split('=')[1];
-                        valuerecieved = valuerecieved.Remove(valuerecieved.IndexOf('V'));
+                        valuerecieved = valuerecieved.Remove(valuerecieved.IndexOf('V') + 1);
                         SaveFile(txtBarcode.Text, valuerecieved);
                         rtxtLogs.AppendText(txtBarcode.Text + " - " + valuerecieved + Environment.NewLine);
                         txtBarcode.ResetText();
