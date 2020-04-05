@@ -929,6 +929,12 @@ namespace PC_QRCodeSystem.View
 
         private void btnInsBack_Click(object sender, EventArgs e)
         {
+            if(dgvLabel.Rows.Count > 0 && dgvStockOut.Rows.Count >0)
+            {
+                if (CustomMessageBox.Warring("If you go back, the current data is clear. Are you sure to go back?" + Environment.NewLine + "Nếu bạn trở lại menu chính, dữ liệu hiện tại sẽ bị xóa. Bạn có chắc muốn trở lại?") == DialogResult.No)
+                    return;
+            }
+            ClearDataList();
             tc_Main.SelectedTab = tab_Main;
         }
         #endregion
