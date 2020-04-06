@@ -874,6 +874,25 @@ namespace PC_QRCodeSystem.View
                 }
                 if (CustomMessageBox.Question("Do you want register this data?" + Environment.NewLine + "Bạn có muốn đăng ký dữ liệu này?") == DialogResult.No)
                     return;
+                if (issueFlag == "20")
+                {
+                    pts_plan planData = new pts_plan()
+                    {
+                        plan_cd = processCD,
+                        plan_qty = double.Parse(txtSetRequestQty.Text),
+                        plan_date = DateTime.Parse(txtSetRequestDate.Text),
+                        set_number = txtSetNumber.Text,
+                        model_cd = txtSetModelCD.Text,
+                        delivery_date = dtpStockOutDate.Value,
+                        plan_usercd = txtSetUserCD.Text,
+                        comment = txtComment.Text
+                    };
+                    planData.Add(planData);
+                }
+                else
+                {
+
+                }
                 listOut[0].ExportCSV(listOut.ToList());
                 listStock[0].UpdateMultiItem(listStock.ToList());
                 listStockOut[0].AddMultiItem(listStockOut.ToList());
