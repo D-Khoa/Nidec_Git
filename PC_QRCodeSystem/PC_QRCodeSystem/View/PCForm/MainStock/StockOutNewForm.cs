@@ -821,13 +821,24 @@ namespace PC_QRCodeSystem.View
 
         private void btnPrintInspection_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow dr in dgvPrint.Rows)
+            {
+                if (dr.DefaultCellStyle.BackColor != Color.FromKnownColor(KnownColor.ActiveCaption))
+                {
+                    if (CustomMessageBox.Warring("Have label no print yet! Are you sure continue?" + Environment.NewLine + "Có nhãn chưa in! Bạn có muốn tiếp tục?") == DialogResult.No)
+                        return;
+                }
+            }
             tc_Main.SelectedTab = tab_Inspection;
             txtInsBarcode.Focus();
         }
 
         private void btnPrintBack_Click(object sender, EventArgs e)
         {
-            tc_Main.SelectedTab = tab_Main;
+            if (issueFlag == "20")
+                tc_Main.SelectedTab = tab_Set;
+            else
+                tc_Main.SelectedTab = tab_Main;
         }
         #endregion
         /// <summary>
@@ -877,6 +888,11 @@ namespace PC_QRCodeSystem.View
                 int rindex = dgvLabel.SelectedRows[0].Index;
                 InputCommon inputfrm = new InputCommon(false);
                 if (inputfrm.ShowDialog() == DialogResult.OK) deleteqty = inputfrm.inputQty;
+                if (deleteqty == 0)
+                {
+                    CustomMessageBox.Error("At least one label must be selected" + Environment.NewLine + "Ít nhất phải chọn 1 tem!");
+                    return;
+                }
                 if (deleteqty > listLabel[rindex].Label_Qty)
                 {
                     CustomMessageBox.Error("Delete qty more than label qty!" + Environment.NewLine + "Số lượng xóa lớn hơn số lượng tem hiện có!");
@@ -929,7 +945,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnInsBack_Click(object sender, EventArgs e)
         {
-            if(dgvLabel.Rows.Count > 0 && dgvStockOut.Rows.Count >0)
+            if (dgvLabel.Rows.Count > 0 && dgvStockOut.Rows.Count > 0)
             {
                 if (CustomMessageBox.Warring("If you go back, the current data is clear. Are you sure to go back?" + Environment.NewLine + "Nếu bạn trở lại menu chính, dữ liệu hiện tại sẽ bị xóa. Bạn có chắc muốn trở lại?") == DialogResult.No)
                     return;
@@ -1270,5 +1286,10 @@ namespace PC_QRCodeSystem.View
             lbSetDesName.Text = cmbDestination.Text.Split(':')[1].Trim();
         }
         #endregion
+
+        private void tc_Main_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Text = "Stock Out - " + tc_Main.SelectedTab.Text;
+        }
     }
 }

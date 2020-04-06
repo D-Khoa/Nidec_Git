@@ -45,6 +45,9 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClear = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnBrowserIssue655 = new System.Windows.Forms.Button();
+            this.txtIssue655 = new System.Windows.Forms.TextBox();
+            this.cbIssue655 = new System.Windows.Forms.CheckBox();
             this.dtpTimeConvert2 = new System.Windows.Forms.DateTimePicker();
             this.btnBrowserStockIn6123 = new System.Windows.Forms.Button();
             this.txtStockIn6123 = new System.Windows.Forms.TextBox();
@@ -94,7 +97,7 @@
             this.btnConvert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnConvert.Location = new System.Drawing.Point(305, 3);
             this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(296, 54);
+            this.btnConvert.Size = new System.Drawing.Size(296, 59);
             this.btnConvert.TabIndex = 11;
             this.btnConvert.Text = "Convert Now";
             this.btnConvert.UseVisualStyleBackColor = true;
@@ -105,7 +108,7 @@
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStart.Location = new System.Drawing.Point(3, 3);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(296, 54);
+            this.btnStart.Size = new System.Drawing.Size(296, 59);
             this.btnStart.TabIndex = 10;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -143,7 +146,7 @@
             // 
             this.dtpTimeConvert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtpTimeConvert.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTimeConvert.Location = new System.Drawing.Point(175, 183);
+            this.dtpTimeConvert.Location = new System.Drawing.Point(175, 213);
             this.dtpTimeConvert.Name = "dtpTimeConvert";
             this.dtpTimeConvert.ShowUpDown = true;
             this.dtpTimeConvert.Size = new System.Drawing.Size(339, 20);
@@ -153,9 +156,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 180);
+            this.label2.Location = new System.Drawing.Point(3, 210);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(166, 34);
+            this.label2.Size = new System.Drawing.Size(166, 30);
             this.label2.TabIndex = 7;
             this.label2.Text = "Time Set:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -168,12 +171,12 @@
             this.dgvLogs.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLogs.Location = new System.Drawing.Point(0, 277);
+            this.dgvLogs.Location = new System.Drawing.Point(0, 306);
             this.dgvLogs.Name = "dgvLogs";
             this.dgvLogs.ReadOnly = true;
             this.dgvLogs.RowHeadersVisible = false;
             this.dgvLogs.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dgvLogs.Size = new System.Drawing.Size(864, 176);
+            this.dgvLogs.Size = new System.Drawing.Size(864, 147);
             this.dgvLogs.TabIndex = 8;
             this.dgvLogs.TabStop = false;
             // 
@@ -184,7 +187,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(864, 277);
+            this.panel1.Size = new System.Drawing.Size(864, 306);
             this.panel1.TabIndex = 9;
             // 
             // tableLayoutPanel2
@@ -197,11 +200,11 @@
             this.tableLayoutPanel2.Controls.Add(this.btnClear, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnConvert, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 214);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 240);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(864, 60);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(864, 65);
             this.tableLayoutPanel2.TabIndex = 27;
             // 
             // btnClear
@@ -209,7 +212,7 @@
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.Location = new System.Drawing.Point(607, 3);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(254, 54);
+            this.btnClear.Size = new System.Drawing.Size(254, 59);
             this.btnClear.TabIndex = 12;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -221,14 +224,17 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Controls.Add(this.dtpTimeConvert2, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.btnBrowserStockIn6123, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtStockIn6123, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.cbStockIn6123, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.btnBrowserIssue655, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txtIssue655, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.cbIssue655, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.dtpTimeConvert2, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.btnBrowserStockIn6123, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtStockIn6123, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.cbStockIn6123, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.cbStockIn649, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbStruct223, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.dtpTimeConvert, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.dtpTimeConvert, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.txtStockIn649, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtStruct223, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnBrowserStruct223, 2, 4);
@@ -245,7 +251,7 @@
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 8;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -253,14 +259,48 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(864, 214);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(864, 240);
             this.tableLayoutPanel1.TabIndex = 26;
+            // 
+            // btnBrowserIssue655
+            // 
+            this.btnBrowserIssue655.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBrowserIssue655.Location = new System.Drawing.Point(521, 150);
+            this.btnBrowserIssue655.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.btnBrowserIssue655.Name = "btnBrowserIssue655";
+            this.btnBrowserIssue655.Size = new System.Drawing.Size(100, 30);
+            this.btnBrowserIssue655.TabIndex = 32;
+            this.btnBrowserIssue655.Text = "Browser";
+            this.btnBrowserIssue655.UseVisualStyleBackColor = true;
+            this.btnBrowserIssue655.Click += new System.EventHandler(this.btnBrowserIssue655_Click);
+            // 
+            // txtIssue655
+            // 
+            this.txtIssue655.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtIssue655.Location = new System.Drawing.Point(175, 153);
+            this.txtIssue655.Name = "txtIssue655";
+            this.txtIssue655.Size = new System.Drawing.Size(339, 20);
+            this.txtIssue655.TabIndex = 31;
+            // 
+            // cbIssue655
+            // 
+            this.cbIssue655.AutoSize = true;
+            this.cbIssue655.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbIssue655.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbIssue655.Location = new System.Drawing.Point(3, 153);
+            this.cbIssue655.Name = "cbIssue655";
+            this.cbIssue655.Size = new System.Drawing.Size(166, 24);
+            this.cbIssue655.TabIndex = 30;
+            this.cbIssue655.Text = "Issue 655";
+            this.cbIssue655.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbIssue655.UseVisualStyleBackColor = true;
             // 
             // dtpTimeConvert2
             // 
             this.dtpTimeConvert2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtpTimeConvert2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTimeConvert2.Location = new System.Drawing.Point(520, 183);
+            this.dtpTimeConvert2.Location = new System.Drawing.Point(520, 213);
             this.dtpTimeConvert2.Name = "dtpTimeConvert2";
             this.dtpTimeConvert2.ShowUpDown = true;
             this.dtpTimeConvert2.Size = new System.Drawing.Size(341, 20);
@@ -269,7 +309,7 @@
             // btnBrowserStockIn6123
             // 
             this.btnBrowserStockIn6123.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnBrowserStockIn6123.Location = new System.Drawing.Point(521, 150);
+            this.btnBrowserStockIn6123.Location = new System.Drawing.Point(521, 180);
             this.btnBrowserStockIn6123.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.btnBrowserStockIn6123.Name = "btnBrowserStockIn6123";
             this.btnBrowserStockIn6123.Size = new System.Drawing.Size(100, 30);
@@ -281,7 +321,7 @@
             // txtStockIn6123
             // 
             this.txtStockIn6123.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtStockIn6123.Location = new System.Drawing.Point(175, 153);
+            this.txtStockIn6123.Location = new System.Drawing.Point(175, 183);
             this.txtStockIn6123.Name = "txtStockIn6123";
             this.txtStockIn6123.Size = new System.Drawing.Size(339, 20);
             this.txtStockIn6123.TabIndex = 27;
@@ -291,7 +331,7 @@
             this.cbStockIn6123.AutoSize = true;
             this.cbStockIn6123.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cbStockIn6123.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbStockIn6123.Location = new System.Drawing.Point(3, 153);
+            this.cbStockIn6123.Location = new System.Drawing.Point(3, 183);
             this.cbStockIn6123.Name = "cbStockIn6123";
             this.cbStockIn6123.Size = new System.Drawing.Size(166, 24);
             this.cbStockIn6123.TabIndex = 26;
@@ -504,5 +544,8 @@
         private System.Windows.Forms.Button btnBrowserStockIn6123;
         private System.Windows.Forms.TextBox txtStockIn6123;
         private System.Windows.Forms.CheckBox cbStockIn6123;
+        private System.Windows.Forms.Button btnBrowserIssue655;
+        private System.Windows.Forms.TextBox txtIssue655;
+        private System.Windows.Forms.CheckBox cbIssue655;
     }
 }

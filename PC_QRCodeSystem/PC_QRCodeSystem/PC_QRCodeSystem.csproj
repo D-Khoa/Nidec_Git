@@ -26,7 +26,7 @@
     <InstallUrl>http://192.168.145.7/software/WHQrTracy/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.html</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -187,18 +187,6 @@
     <Compile Include="View\PCForm\MainStock\StockOutNewForm.Designer.cs">
       <DependentUpon>StockOutNewForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PCForm\MainStock\StockOutputForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PCForm\MainStock\StockOutputForm.Designer.cs">
-      <DependentUpon>StockOutputForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\PCForm\MainStock\StockOutV2Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PCForm\MainStock\StockOutV2Form.Designer.cs">
-      <DependentUpon>StockOutV2Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\PCForm\PCForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,12 +286,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\MainStock\StockOutNewForm.resx">
       <DependentUpon>StockOutNewForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\MainStock\StockOutputForm.resx">
-      <DependentUpon>StockOutputForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PCForm\MainStock\StockOutV2Form.resx">
-      <DependentUpon>StockOutV2Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PCForm\PCForm.resx">
       <DependentUpon>PCForm.cs</DependentUpon>

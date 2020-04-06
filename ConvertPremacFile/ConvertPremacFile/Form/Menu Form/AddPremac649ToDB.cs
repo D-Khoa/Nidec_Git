@@ -17,6 +17,7 @@ namespace ConvertPremacFile
         pre_232 premacfile232 = new pre_232();
         pre_649 stockin649 = new pre_649();
         pre_223 struct223 = new pre_223();
+        pre_655 issue655 = new pre_655();
 
         List<string> settingList { get; set; }
         List<ConvertLogs> dataLogs { get; set; }
@@ -46,6 +47,8 @@ namespace ConvertPremacFile
                         cbSupplier232.Checked = Boolean.Parse(line.Split('=')[1].Trim());
                     if (line.Contains("CheckStruct223="))
                         cbStruct223.Checked = Boolean.Parse(line.Split('=')[1].Trim());
+                    if (line.Contains("CheckIssue655="))
+                        cbIssue655.Checked = Boolean.Parse(line.Split('=')[1].Trim());
                     if (line.Contains("CheckStockIn6123="))
                         cbStockIn6123.Checked = Boolean.Parse(line.Split('=')[1].Trim());
                     if (line.Contains("StockIn649URL"))
@@ -58,6 +61,8 @@ namespace ConvertPremacFile
                         txtSupplier232.Text = line.Split('=')[1].Trim();
                     if (line.Contains("Premac223URL"))
                         txtStruct223.Text = line.Split('=')[1].Trim();
+                    if (line.Contains("Premac655URL"))
+                        txtIssue655.Text = line.Split('=')[1].Trim();
                     if (line.Contains("StockIn6123URL"))
                         txtStockIn6123.Text = line.Split('=')[1].Trim();
                     if (line.Contains("log"))
@@ -173,6 +178,27 @@ namespace ConvertPremacFile
                 if (openf.ShowDialog() == DialogResult.OK)
                 {
                     txtStruct223.Text = Path.GetDirectoryName(openf.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnBrowserIssue655_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openf = new OpenFileDialog();
+                openf.Filter = "Text file (*.txt)|*.txt|All file (*.*)|*.*";
+                openf.FileName = "CsvExported.TXT";
+                openf.CheckFileExists = false;
+                openf.CheckPathExists = false;
+                openf.ValidateNames = true;
+                if (openf.ShowDialog() == DialogResult.OK)
+                {
+                    txtIssue655.Text = Path.GetDirectoryName(openf.FileName);
                 }
             }
             catch (Exception ex)
@@ -298,12 +324,14 @@ namespace ConvertPremacFile
                 settingList.Add("CheckItem212=" + cbItem212.Checked);
                 settingList.Add("CheckSupplier232=" + cbSupplier232.Checked);
                 settingList.Add("CheckStruct223=" + cbStruct223.Checked);
+                settingList.Add("CheckIssue655=" + cbIssue655.Checked);
                 settingList.Add("CheckStockIn6123=" + cbStockIn6123.Checked);
                 settingList.Add("StockIn649URL =" + txtStockIn649.Text);
                 settingList.Add("StockOut649URL =" + txtStockOut649.Text);
                 settingList.Add("Premac212URL=" + txtItem212.Text);
                 settingList.Add("Premac232URL=" + txtSupplier232.Text);
                 settingList.Add("Premac223URL=" + txtStruct223.Text);
+                settingList.Add("Premac655URL=" + txtIssue655.Text);
                 settingList.Add("StockIn6123URL=" + txtStockIn6123.Text);
                 foreach (DataGridViewRow dr in dgvLogs.Rows)
                 {
@@ -462,6 +490,37 @@ namespace ConvertPremacFile
                         {
                             Log_Time = DateTime.Now,
                             Log_Message = "Add product struct file: " + file + " completed"
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dataLogs.Add(new ConvertLogs
+                {
+                    Log_Time = DateTime.Now,
+                    Log_Message = ex.Message
+                });
+            }
+            UpdateGrid();
+        }
+
+        private void AddPre655()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtIssue655.Text))
+                {
+                    string[] files = Directory.GetFiles(txtIssue655.Text, "*CsvExported*");
+                    foreach (string file in files)
+                    {
+                        issue655.GetListPremacItem(file);
+                        issue655.DeleteFromDB();
+                        issue655.WriteToDB(issue655.list655);
+                        dataLogs.Add(new ConvertLogs
+                        {
+                            Log_Time = DateTime.Now,
+                            Log_Message = "Add issue query file: " + file + " completed"
                         });
                     }
                 }

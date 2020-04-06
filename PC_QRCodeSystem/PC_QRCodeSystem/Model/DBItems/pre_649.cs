@@ -195,7 +195,11 @@ namespace PC_QRCodeSystem.Model
                 for (int i = 0; i < inList.Count; i++)
                 {
                     var propretiesValue = inList[i].GetType().GetProperties();
-                    line = string.Join("?", propretiesValue.Where(x => x.Name != "premac_id").Select(x => x.GetValue(inList[i], null)));
+                    line = string.Join("?", (from x in propretiesValue
+                                             where x.Name != "premac_id"
+                                             select x.Name == "delivery_date" ?
+                                             ((DateTime)x.GetValue(inList[i], null)).ToString("yyyy-MM-dd")
+                                             : x.GetValue(inList[i], null)));
                     sw.WriteLine(line);
                 }
                 sw.Flush();
