@@ -268,8 +268,18 @@ namespace PC_QRCodeSystem.View
         private void cmbIssue_SelectedIndexChanged(object sender, EventArgs e)
         {
             issueFlag = cmbIssue.SelectedValue.ToString();
-            if (cmbIssue.SelectedIndex <= 0) tbpNoSet.Visible = false;
-            else tbpNoSet.Visible = true;
+            if (cmbIssue.SelectedIndex <= 0)
+            {
+                tbpNoSet.Visible = false;
+                cmbDestination.Enabled = false;
+                cmbDestination.TabStop = false;
+            }
+            else
+            {
+                tbpNoSet.Visible = true;
+                cmbDestination.Enabled = true;
+                cmbDestination.TabStop = true;
+            }
         }
 
         private void cmbIssue_Validated(object sender, EventArgs e)
@@ -1279,7 +1289,7 @@ namespace PC_QRCodeSystem.View
             txtSetModelCD.Text = txtItemCode.Text;
             txtSetRequestQty.Text = orderQty.ToString();
             txtSetRequestDate.Text = orderDate.ToString("yyyy-MM-dd");
-            txtSetDesCD.Text = cmbDestination.SelectedValue.ToString();
+            //txtSetDesCD.Text = cmbDestination.SelectedValue.ToString();
             txtSetOutDate.Text = dtpStockOutDate.Value.ToString("yyyy-MM-dd");
             lbSetUserName.Text = lbUserName.Text;
             lbSetModelName.Text = lbItemName.Text;

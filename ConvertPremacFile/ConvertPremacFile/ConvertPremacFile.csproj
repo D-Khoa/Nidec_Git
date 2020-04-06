@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Model\pre_223.cs" />
     <Compile Include="Model\pre_649_order.cs" />
+    <Compile Include="Model\pre_655.cs" />
     <Compile Include="Model\pts_premac649.cs" />
     <Compile Include="Model\pts_item.cs" />
     <Compile Include="Model\pre_232.cs" />
