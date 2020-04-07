@@ -32,22 +32,48 @@ namespace ConvertPremacFile.Model
         /// <returns></returns>
         public void GetListPremacItem(string premacfile)
         {
+            string low_temp = string.Empty;
+            string high_temp = string.Empty;
             string[] csvlines = File.ReadAllLines(premacfile);
-            IEnumerable<pre_655> query = from csvline in csvlines
-                                         where (!csvline.Contains("< T O T A L >") && !string.IsNullOrEmpty(csvline))
-                                         let columns = csvline.Split('?')
-                                         where (!string.IsNullOrEmpty(Regex.Replace(columns[5], " {2,}", " ").Trim()))
-                                         select new pre_655
-                                         {
-                                             low_level_item = Regex.Replace(columns[0], " {2,}", " ").Trim(),
-                                             high_level_item = Regex.Replace(columns[2], " {2,}", " ").Trim(),
-                                             order_number = Regex.Replace(columns[4], " {2,}", " ").Trim(),
-                                             request_qty = !string.IsNullOrEmpty(Regex.Replace(columns[6], " {2,}", " ").Trim()) ?
-                                             double.Parse(Regex.Replace(columns[6], " {2,}", " ").Trim()) : 0,
-                                             no_issue_qty = !string.IsNullOrEmpty(Regex.Replace(columns[7], " {2,}", " ").Trim()) ?
-                                             double.Parse(Regex.Replace(columns[7], " {2,}", " ").Trim()) : 0,
-                                         };
-            list655 = query.ToList();
+            //IEnumerable<pre_655> query = from csvline in csvlines
+            //                             where (!csvline.Contains("< T O T A L >") && !string.IsNullOrEmpty(csvline) && !csvline.Contains("Low-Level Item"))
+            //                             let columns = csvline.Split('?')
+            //                             where (!string.IsNullOrEmpty(Regex.Replace(columns[5], " {2,}", " ").Trim().Replace("\"", "")))
+            //                             select new pre_655
+            //                             {
+            //                                 low_level_item = Regex.Replace(columns[0], " {2,}", " ").Trim().Replace("\"", ""),
+            //                                 high_level_item = Regex.Replace(columns[2], " {2,}", " ").Trim().Replace("\"", ""),
+            //                                 order_number = Regex.Replace(columns[4], " {2,}", " ").Trim().Replace("\"", ""),
+            //                                 request_qty = !string.IsNullOrEmpty(Regex.Replace(columns[6], " {2,}", " ").Trim().Replace("\"", "")) ?
+            //                                 double.Parse(Regex.Replace(columns[6], " {2,}", " ").Trim().Replace("\"", "")) : 0,
+            //                                 no_issue_qty = !string.IsNullOrEmpty(Regex.Replace(columns[7], " {2,}", " ").Trim().Replace("\"", "")) ?
+            //                                 double.Parse(Regex.Replace(columns[7], " {2,}", " ").Trim().Replace("\"", "")) : 0,
+            //                             };
+            csvlines.ToList().ForEach(x =>
+            {
+                if (!x.Contains("< T O T A L >") && !string.IsNullOrEmpty(x) && !x.Contains("Low-Level Item"))
+                {
+                    var columns = x.Split('?');
+                    if (!string.IsNullOrEmpty(Regex.Replace(columns[5], " {2,}", " ").Trim().Replace("\"", "")))
+                    {
+                        low_temp = !string.IsNullOrEmpty(Regex.Replace(columns[0], " {2,}", " ").Trim().Replace("\"", "")) ?
+                                   Regex.Replace(columns[0], " {2,}", " ").Trim().Replace("\"", "") : low_temp;
+                        high_temp = !string.IsNullOrEmpty(Regex.Replace(columns[2], " {2,}", " ").Trim().Replace("\"", "")) ?
+                                   Regex.Replace(columns[2], " {2,}", " ").Trim().Replace("\"", "") : high_temp;
+                        list655.Add(new pre_655
+                        {
+                            low_level_item = low_temp,
+                            high_level_item = high_temp,
+                            order_number = Regex.Replace(columns[4], " {2,}", " ").Trim().Replace("\"", ""),
+                            request_qty = !string.IsNullOrEmpty(Regex.Replace(columns[6], " {2,}", " ").Trim().Replace("\"", "")) ?
+                                             double.Parse(Regex.Replace(columns[6], " {2,}", " ").Trim().Replace("\"", "")) : 0,
+                            no_issue_qty = !string.IsNullOrEmpty(Regex.Replace(columns[7], " {2,}", " ").Trim().Replace("\"", "")) ?
+                                             double.Parse(Regex.Replace(columns[7], " {2,}", " ").Trim().Replace("\"", "")) : 0,
+                        });
+                    }
+                }
+            });
+            //list655 = query.ToList();
             list655.Sort((a, b) => a.low_level_item.CompareTo(b.low_level_item));
         }
 

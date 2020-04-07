@@ -274,6 +274,11 @@ namespace ConvertPremacFile
                 Thread.Sleep(3000);
                 AddStockIn6123();
             }
+            if (cbIssue655.Checked)
+            {
+                Thread.Sleep(3000);
+                AddPre655();
+            }
         }
         #endregion
         #region TIMER
@@ -306,6 +311,11 @@ namespace ConvertPremacFile
                     {
                         Thread.Sleep(3000);
                         AddPre223();
+                    }
+                    if (cbIssue655.Checked)
+                    {
+                        Thread.Sleep(3000);
+                        AddPre655();
                     }
                 }
             }
