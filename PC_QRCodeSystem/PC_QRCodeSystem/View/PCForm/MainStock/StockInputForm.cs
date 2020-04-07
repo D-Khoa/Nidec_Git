@@ -24,7 +24,7 @@ namespace PC_QRCodeSystem.View
         List<pre_649> listInputPremac { get; set; }
         BindingList<pts_stock> listStockItem { get; set; }
 
-        TfPrint tfprinter = new TfPrint();
+        //TfPrint tfprinter = new TfPrint();
         Stopwatch stopWatch = new Stopwatch();
         ErrorProvider errorProvider = new ErrorProvider();
 

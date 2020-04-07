@@ -35,7 +35,7 @@ namespace PC_QRCodeSystem.Model
             premacFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CPFXE049.txt";
             outputTempFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             backupTempFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            printerName = "LUKHAN Label Printer";
+            printerName = "SEWOO Label Printer";
             premacFile = premacFolder;
             printerSName = printerName;
         }
