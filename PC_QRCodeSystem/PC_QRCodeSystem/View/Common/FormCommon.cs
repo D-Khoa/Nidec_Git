@@ -56,7 +56,7 @@ namespace PC_QRCodeSystem
         }
 
         /// <summary>
-        /// list role of user
+        /// list permision of user
         /// </summary>
         public List<string> listper { get; set; }
 
@@ -73,11 +73,13 @@ namespace PC_QRCodeSystem
         private void FormCommon_Load(object sender, EventArgs e)
         {
             tittle = this.Text;
+            //Load infomation of user
             dept = UserData.dept;
             name = UserData.username;
             position = UserData.position;
             logintime = UserData.logintime;
             listper = UserData.role_permision;
+
             this.Text = tittle + "- Warehouse QrCode Tracy System";
             lbOnlineTime.Text = TimeSpan.FromSeconds(UserData.onTime).ToString();
             SettingItem settingItem = new SettingItem();
@@ -87,20 +89,6 @@ namespace PC_QRCodeSystem
         #endregion
 
         #region BUTTONS EVENT
-        public void CheckPermision(Control.ControlCollection controls)
-        {
-            if (UserData.role_permision != null)
-            {
-                foreach (Control control in controls)
-                {
-                    if (!UserData.role_permision.Contains(control.Tag) && (control.Tag != null))
-                    {
-                        control.Enabled = false;
-                    }
-                }
-            }
-        }
-
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             ChangePasswordForm cpfrm = new ChangePasswordForm();
@@ -109,7 +97,7 @@ namespace PC_QRCodeSystem
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            if (CustomMessageBox.Question("Are you sure to log-out?") == DialogResult.Yes)
+            if (CustomMessageBox.Question("Are you sure to log-out?" + Environment.NewLine + "Bạn có muốn đăng xuất?") == DialogResult.Yes)
             {
                 m_login_password mlog = new m_login_password();
                 UserData.isOnline = mlog.LogIO(UserData.usercode, false);
@@ -124,6 +112,11 @@ namespace PC_QRCodeSystem
         #endregion
 
         #region SUB EVENT
+        /// <summary>
+        /// Add/remove event enter and leave for controls
+        /// </summary>
+        /// <param name="ctrl">parent control</param>
+        /// <param name="isAdd">true: add event</param>
         private void ControlLoadEvent(Control ctrl, bool isAdd)
         {
             foreach (Control c in ctrl.Controls)
@@ -154,7 +147,10 @@ namespace PC_QRCodeSystem
             if (sender.GetType().Name == "Button") ((Button)sender).UseVisualStyleBackColor = true;
         }
 
-        public void Show()
+        /// <summary>
+        /// Check current open form before show form
+        /// </summary>
+        public new void Show()
         {
             var isExist = Application.OpenForms.OfType<FormCommon>().Where(x => x.Name == base.Name).Select(x => x);
             if (isExist.Count() > 0)
@@ -171,6 +167,25 @@ namespace PC_QRCodeSystem
             CheckPermision(frm.Controls);
         }
 
+        /// <summary>
+        /// Check permision of user
+        /// </summary>
+        /// <param name="controls"></param>
+        public void CheckPermision(Control.ControlCollection controls)
+        {
+            if (UserData.role_permision != null)
+            {
+                foreach (Control control in controls)
+                {
+                    //If user's permision no have control tag then disable it
+                    if (!UserData.role_permision.Contains(control.Tag) && (control.Tag != null))
+                    {
+                        control.Enabled = false;
+                    }
+                }
+            }
+        }
+
         private void timerFormLoad_Tick(object sender, EventArgs e)
         {
             if (!UserData.isOnline && !string.IsNullOrEmpty(UserData.usercode)) this.Close();
@@ -179,11 +194,11 @@ namespace PC_QRCodeSystem
 
         private void FormCommon_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (UserData.isOnline)
-            {
-                if (CustomMessageBox.Question("Are you want to close?") == DialogResult.No)
-                    e.Cancel = true;
-            }
+            //if (UserData.isOnline)
+            //{
+            //    if (CustomMessageBox.Question("Are you want to close?") == DialogResult.No)
+            //        e.Cancel = true;
+            //}
         }
         #endregion
     }

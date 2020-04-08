@@ -1,14 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SoftPrintLabel.Model;
 
@@ -18,7 +10,6 @@ namespace SoftPrintLabel
     public partial class SoftPrintLabel : Form
     {
         Stopwatch stopwatch = new Stopwatch();
-        OpenFileDialog chooseFolder;
         List<PrintItem> listprint = new List<PrintItem>();
         public SoftPrintLabel()
         {
@@ -48,8 +39,9 @@ namespace SoftPrintLabel
 
         private void btnPrintItem_Click(object sender, EventArgs e)
         {
+            if (dgvData.SelectedRows.Count <= 0) return;
             //PrintItem printitem = new PrintItem();
-            foreach(DataGridViewRow dr in dgvData.SelectedRows)
+            foreach (DataGridViewRow dr in dgvData.SelectedRows)
             {
                 //printitem = dr.DataBoundItem as PrintItem;
                 TfPrint.printBarCodeNew(dr.Cells["Asset_No"].Value.ToString(), dr.Cells["Asset_Name"].Value.ToString(), dr.Cells["Model"].Value.ToString(), dr.Cells["Ser"].Value.ToString(), dr.Cells["Inv"].Value.ToString());
@@ -58,6 +50,7 @@ namespace SoftPrintLabel
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
+            if (dgvData.Rows.Count <= 0) return;
             foreach (DataGridViewRow dr in dgvData.Rows)
             {
                 TfPrint.printBarCodeNew(dr.Cells["Asset_No"].Value.ToString(), dr.Cells["Asset_Name"].Value.ToString(), dr.Cells["Model"].Value.ToString(), dr.Cells["Ser"].Value.ToString(), dr.Cells["Inv"].Value.ToString());
@@ -68,6 +61,7 @@ namespace SoftPrintLabel
         {
             this.Cursor = Cursors.WaitCursor;
             stopwatch.Restart();
+            dgvData.DataSource = null;
             ExcelClass excel = new ExcelClass(txtFile.Text);
             excel.OpenWorkBook(txtFile.Text);
             listprint = excel.ReadExcelToList();

@@ -101,20 +101,18 @@ namespace SoftPrintLabel
 
         public List<PrintItem> ReadExcelToList()
         {
-            List<PrintItem> listprint = new List<PrintItem>();
             cExcel.Range rng = ws.UsedRange;
-            for (int i = 4; i <= rng.Rows.Count; i++)
-            {
-                listprint.Add(new PrintItem
-                {
-                    Asset_Name = ws.Cells[i, 4].Value != null ? ws.Cells[i, 4].Value.ToString():"",
-                    Asset_No = ws.Cells[i, 3].Value != null ? ws.Cells[i, 3].Value.ToString():"",
-                    Model = ws.Cells[i, 5].Value != null ? ws.Cells[i, 5].Value.ToString():"",
-                    Ser = ws.Cells[i, 6].Value != null ? ws.Cells[i, 6].Value.ToString() : "",
-                    Inv = ws.Cells[i, 20].Value != null ? ws.Cells[i, 20].Value.ToString():"",
-                });
-            }
-            return listprint;
+            var list = (from x in rng.Rows.Cast<cExcel.Range>()
+                       where x.Row > 3
+                       select new PrintItem
+                       {
+                           Asset_Name = ws.Cells[x.Row, 4].Value != null ? ws.Cells[x.Row, 4].Value.ToString() : "",
+                           Asset_No = ws.Cells[x.Row, 3].Value != null ? ws.Cells[x.Row, 3].Value.ToString() : "",
+                           Model = ws.Cells[x.Row, 5].Value != null ? ws.Cells[x.Row, 5].Value.ToString() : "",
+                           Ser = ws.Cells[x.Row, 6].Value != null ? ws.Cells[x.Row, 6].Value.ToString() : "",
+                           Inv = ws.Cells[x.Row, 20].Value != null ? ws.Cells[x.Row, 20].Value.ToString() : "",
+                       }).ToList();
+            return list;
         }
 
         public void SaveAndExit()
