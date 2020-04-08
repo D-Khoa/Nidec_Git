@@ -77,7 +77,6 @@ namespace SoftPrintLabel
             stopwatch.Stop();
             tsTime.Text = stopwatch.Elapsed.ToString("s\\.ff") + " s";
             Cursor = Cursors.Default;
-
         }
     }
 }
