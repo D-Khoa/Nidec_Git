@@ -268,8 +268,18 @@ namespace PC_QRCodeSystem.View
         private void cmbIssue_SelectedIndexChanged(object sender, EventArgs e)
         {
             issueFlag = cmbIssue.SelectedValue.ToString();
-            if (cmbIssue.SelectedIndex <= 0) tbpNoSet.Visible = false;
-            else tbpNoSet.Visible = true;
+            if (cmbIssue.SelectedIndex <= 0)
+            {
+                tbpNoSet.Visible = false;
+                cmbDestination.Enabled = false;
+                cmbDestination.TabStop = false;
+            }
+            else
+            {
+                tbpNoSet.Visible = true;
+                cmbDestination.Enabled = true;
+                cmbDestination.TabStop = true;
+            }
         }
 
         private void cmbIssue_Validated(object sender, EventArgs e)
@@ -864,6 +874,25 @@ namespace PC_QRCodeSystem.View
                 }
                 if (CustomMessageBox.Question("Do you want register this data?" + Environment.NewLine + "Bạn có muốn đăng ký dữ liệu này?") == DialogResult.No)
                     return;
+                if (issueFlag == "20")
+                {
+                    pts_plan planData = new pts_plan()
+                    {
+                        plan_cd = processCD,
+                        plan_qty = double.Parse(txtSetRequestQty.Text),
+                        plan_date = DateTime.Parse(txtSetRequestDate.Text),
+                        set_number = txtSetNumber.Text,
+                        model_cd = txtSetModelCD.Text,
+                        delivery_date = dtpStockOutDate.Value,
+                        plan_usercd = txtSetUserCD.Text,
+                        comment = txtComment.Text
+                    };
+                    planData.Add(planData);
+                }
+                else
+                {
+
+                }
                 listOut[0].ExportCSV(listOut.ToList());
                 listStock[0].UpdateMultiItem(listStock.ToList());
                 listStockOut[0].AddMultiItem(listStockOut.ToList());
@@ -1279,7 +1308,7 @@ namespace PC_QRCodeSystem.View
             txtSetModelCD.Text = txtItemCode.Text;
             txtSetRequestQty.Text = orderQty.ToString();
             txtSetRequestDate.Text = orderDate.ToString("yyyy-MM-dd");
-            txtSetDesCD.Text = cmbDestination.SelectedValue.ToString();
+            //txtSetDesCD.Text = cmbDestination.SelectedValue.ToString();
             txtSetOutDate.Text = dtpStockOutDate.Value.ToString("yyyy-MM-dd");
             lbSetUserName.Text = lbUserName.Text;
             lbSetModelName.Text = lbItemName.Text;

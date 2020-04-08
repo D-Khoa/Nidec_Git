@@ -257,8 +257,10 @@
             // y = y position
             // z = Cell Size. (2 ~ 16)
             // L = ECC Level(L or M or Q or H)
-            x = 70 * cell; //80
-            y = 17 * cell; //32
+            //x = 70 * cell; //70
+            //y = 17 * cell; //17
+            x = 64 * cell; //60
+            y = 14 * cell; //16
             xdots = 3; //3
             model = 1;
             TwoBAR_Command = string.Format("b{0},{1},Q,{2},{3},L,\"{4}\"\r\n", x, y, model, xdots, QRCode_data);
@@ -269,7 +271,8 @@
             //LINE 1 - S3
             x = 5 * cell;
             y = (6 + (cell + 1) * 0 - 2) * cell;//Y=4
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, itemName);
+            //LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, itemName);
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 2, 1, 1, 0, supplier);
 
             //LINE 2 - S4
             string temp1 = string.Empty;
@@ -285,7 +288,8 @@
             }
             x = 5 * cell;
             y = (6 + (cell + 1) * 0 + 2) * cell; //Y=8
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, temp1);
+            //LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, temp1);
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, itemName);
 
             // 品目番号が２１～３０桁が存在する場合に印字
             if (string.IsNullOrEmpty(temp2))
@@ -297,8 +301,10 @@
 
             //LINE 3 - S2
             x = 5 * cell;
-            y = (6 + (cell + 1) * 1) * cell;//Y=13
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 2, 1, 1, 0, supplier);
+            y = (6 + (cell) * 1) * cell;//Y=12
+            //y = (6 + (cell + 1) * 1) * cell;//Y=13
+            //LKBPRINT.LK_PrintDeviceFont(x, y, 0, 2, 1, 1, 0, supplier);
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, temp1);
 
             //LINE 4 - S4
             x = 5 * cell;

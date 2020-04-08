@@ -16,7 +16,7 @@ namespace PC_QRCodeSystem.Model
         //public string item_name { get; set; }
         //public string supplier_cd { get; set; }
         //public string supplier_name { get; set; }
-        //public string supplier_invoice { get; set; }
+        public string supplier_invoice { get; set; }
         public double delivery_qty { get; set; }
         public DateTime delivery_date { get; set; }
         public string order_number { get; set; }

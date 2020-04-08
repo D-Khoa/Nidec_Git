@@ -40,7 +40,7 @@ namespace PC_QRCodeSystem.Model
                 query += "and destination_cd = '" + des_code + "' ";
             if (!string.IsNullOrEmpty(dept_code))
                 query += "and dept_cd = '" + dept_code + "' ";
-            query += "order by destination_id";
+            query += "order by destination_cd";
             //Execute reader for read database
             IDataReader reader = SQL.Command(query).ExecuteReader();
             query = string.Empty;
