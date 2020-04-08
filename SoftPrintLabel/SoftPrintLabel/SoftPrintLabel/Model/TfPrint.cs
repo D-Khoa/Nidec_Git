@@ -2,7 +2,7 @@
 {
     public class TfPrint
     {
-        public static string printerName = "LUKHAN Label Printer";
+        public static string printerName = "SEWOO Label Printer";
 
         // バーコードプリント機能
         public static void printBarCode(string itemNo, string itemName, string supplier, string invoice,
@@ -206,8 +206,7 @@
             LKBPRINT.LK_ClosePrinter();
         }
 
-        public static void printBarCodeNew(string Asset_No, string Asset_Name, string Model, string Ser,
-                                string Inv)
+        public static void printBarCodeNew(string Asset_No, string Asset_Name, string Model, string Ser, string Inv)
         {
             //itemNo = "A32-164D-X";
             //itemName = "SHAFT";
@@ -224,7 +223,7 @@
 
             int xdots, model; // ydots;
             string TwoBAR_Command;
-            string QRCode_data = Asset_No + ";" + Asset_Name + ";" + Model + ";" + Ser + ";" + Inv;
+            string QRCode_data = Asset_No + "," + Asset_Name + "," + Model + "," + Ser + "," + Inv;
 
             /* 1. LK_OpenPrinter() */
             if (LKBPRINT.LK_OpenPrinter(printerName) != LKBPRINT.LK_SUCCESS)
@@ -257,42 +256,42 @@
             // y = y position
             // z = Cell Size. (2 ~ 16)
             // L = ECC Level(L or M or Q or H)
-            x = 70 * cell; //80
-            y = 17 * cell; //32
-            xdots = 3; //3
+            x = 6 * cell; //80
+            y = 14 * cell; //32
+            xdots = 2; //3
             model = 1;
             TwoBAR_Command = string.Format("b{0},{1},Q,{2},{3},L,\"{4}\"\r\n", x, y, model, xdots, QRCode_data);
             LKBPRINT.LK_DirectCommand(TwoBAR_Command);
 
 
             //LINE 1 - S3
-            x = 5 * cell;
-            y = (6 + (cell + 1) * 0 - 2) * cell;//Y=4
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, Asset_No);
+            x = 20 * cell;
+            y = 6 * cell;//Y=4
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, Asset_No);
 
             //LINE 2 - S4
-         
-            x = 5 * cell;
-            y = (6 + (cell + 1) * 0 + 2) * cell; //Y=8
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0,4 , 1, 1, 0, Asset_Name);
+
+            x = 20 * cell;
+            y = 11 * cell; //Y=8
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, "Name: " + Asset_Name);
             //LINE 3 - S2
-            x = 5 * cell;
-            y = (6 + (cell + 1) * 1) * cell;//Y=13
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, Model);
+            x = 20 * cell;
+            y = 16 * cell;//Y=13
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, "Model: " + Model);
 
             //LINE 4 - S4
-            x = 5 * cell;
-            y = (6 + (cell + 1) * 1 + 4) * cell;//Y=17
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, Ser);
+            x = 20 * cell;
+            y = 21 * cell;//Y=17
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, "Ser: " + Ser);
 
             //LINE 5 - S2
-          
 
-            x = (5 + 5) * cell;
-            y = (6 + (cell + 1) * 2 + 2) * cell;//Y=22
-            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 4, 1, 1, 0, Inv);
 
-            
+            x = 20 * cell;
+            y = 26 * cell;//Y=22
+            LKBPRINT.LK_PrintDeviceFont(x, y, 0, 3, 1, 1, 0, "Inv: " + Inv);
+
+
             LKBPRINT.LK_EndPage();
 
             /* 4. LK_ClosePrinter() */

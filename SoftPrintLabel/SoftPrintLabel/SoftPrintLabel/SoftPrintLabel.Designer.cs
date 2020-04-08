@@ -30,15 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SoftPrintLabel));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnLoadFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFile = new System.Windows.Forms.TextBox();
-            this.btnBrowser = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
+            this.btnBrowser = new System.Windows.Forms.Button();
             this.btnPrintItem = new System.Windows.Forms.Button();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.btnLoadFile = new System.Windows.Forms.Button();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsRow = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -68,6 +73,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 418);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
+            // btnLoadFile
+            // 
+            this.btnLoadFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLoadFile.Location = new System.Drawing.Point(3, 49);
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(134, 40);
+            this.btnLoadFile.TabIndex = 6;
+            this.btnLoadFile.Text = "Load File";
+            this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -90,16 +106,6 @@
             this.txtFile.TabIndex = 1;
             this.txtFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnBrowser
-            // 
-            this.btnBrowser.Location = new System.Drawing.Point(423, 3);
-            this.btnBrowser.Name = "btnBrowser";
-            this.btnBrowser.Size = new System.Drawing.Size(119, 40);
-            this.btnBrowser.TabIndex = 2;
-            this.btnBrowser.Text = "Browser";
-            this.btnBrowser.UseVisualStyleBackColor = true;
-            this.btnBrowser.Click += new System.EventHandler(this.btnBrowser_Click);
-            // 
             // btnPrintAll
             // 
             this.btnPrintAll.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -110,6 +116,16 @@
             this.btnPrintAll.Text = "Print All";
             this.btnPrintAll.UseVisualStyleBackColor = true;
             this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
+            // 
+            // btnBrowser
+            // 
+            this.btnBrowser.Location = new System.Drawing.Point(423, 3);
+            this.btnBrowser.Name = "btnBrowser";
+            this.btnBrowser.Size = new System.Drawing.Size(119, 40);
+            this.btnBrowser.TabIndex = 2;
+            this.btnBrowser.Text = "Browser";
+            this.btnBrowser.UseVisualStyleBackColor = true;
+            this.btnBrowser.Click += new System.EventHandler(this.btnBrowser_Click);
             // 
             // btnPrintItem
             // 
@@ -129,25 +145,48 @@
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(3, 95);
             this.dgvData.Name = "dgvData";
+            this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvData.Size = new System.Drawing.Size(556, 320);
             this.dgvData.TabIndex = 5;
             // 
-            // btnLoadFile
+            // statusStrip2
             // 
-            this.btnLoadFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLoadFile.Location = new System.Drawing.Point(3, 49);
-            this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(134, 40);
-            this.btnLoadFile.TabIndex = 6;
-            this.btnLoadFile.Text = "Load File";
-            this.btnLoadFile.UseVisualStyleBackColor = true;
-            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel4,
+            this.tsRow,
+            this.tsTime});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 394);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(562, 24);
+            this.statusStrip2.TabIndex = 28;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(40, 19);
+            this.toolStripStatusLabel4.Text = "Row :";
+            // 
+            // tsRow
+            // 
+            this.tsRow.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsRow.Name = "tsRow";
+            this.tsRow.Size = new System.Drawing.Size(40, 19);
+            this.tsRow.Text = "None";
+            // 
+            // tsTime
+            // 
+            this.tsTime.Name = "tsTime";
+            this.tsTime.Size = new System.Drawing.Size(467, 19);
+            this.tsTime.Spring = true;
             // 
             // SoftPrintLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(562, 418);
+            this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SoftPrintLabel";
@@ -155,7 +194,10 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -169,6 +211,10 @@
         private System.Windows.Forms.Button btnPrintItem;
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.Button btnLoadFile;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel tsRow;
+        private System.Windows.Forms.ToolStripStatusLabel tsTime;
     }
 }
 
