@@ -86,17 +86,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\fw\NidecMES\Dll\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MachineMaintenance, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\fw\NidecMES\Dll\MachineMaintenance.dll</HintPath>
+    <Reference Include="MachineMaintenanceTTB">
+      <HintPath>..\..\FW\NidecMES\Dll\MachineMaintenanceTTB.dll</HintPath>
     </Reference>
     <Reference Include="npgsql, Version=3.1.9.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\fw\NidecMES\Dll\npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="SAPConnector_Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\fw\NidecMES\Dll\SAPConnector_Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

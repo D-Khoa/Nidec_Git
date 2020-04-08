@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using Com.Nidec.Mes.Framework.Login;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareHouse;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.AccountMainForm;
 
 namespace Com.Nidec.Mes.VCMS
 {
@@ -30,7 +32,8 @@ namespace Com.Nidec.Mes.VCMS
             SystemMaster_gpb.Visible = false;
             NcvpMaster_gpb.Visible = false;
             NCVC_Function_gr.Visible = false;
-
+            tabControlCommon1.ItemSize = new Size(0, 1);
+            tabControlCommon1.SelectedTab = tabPage3;
             //if (UserData.GetUserData().UserCode == "admin")
             //{
             //    SystemMaster_btn.Enabled = false;
@@ -359,14 +362,14 @@ namespace Com.Nidec.Mes.VCMS
 
         private void account_equipments_btn_Click(object sender, EventArgs e)
         {
-            //AccountMainForm accountForm = new AccountMainForm();
-            //accountForm.ShowDialog();
+            AccountMainForm accountForm = new AccountMainForm();
+            accountForm.ShowDialog();
         }
 
         private void WarehouseManagement_New_frm_Click(object sender, EventArgs e)
         {
-            //WarehouseMainForm nwe = new WarehouseMainForm();
-            //nwe.ShowDialog();
+            WarehouseMainForm nwe = new WarehouseMainForm();
+            nwe.ShowDialog();
         }
 
         private void DetailPosition_btn_Click(object sender, EventArgs e)
