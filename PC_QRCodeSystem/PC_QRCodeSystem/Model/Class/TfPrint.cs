@@ -1,8 +1,8 @@
 ﻿namespace PC_QRCodeSystem.Model
 {
-    public class TfPrint
+    public static class TfPrint
     {
-        public static string printerName = "LUKHAN Label Printer";
+        public static string printerName = "SEWOO Label Printer";
 
         // バーコードプリント機能
         public static void printBarCode(string itemNo, string itemName, string supplier, string invoice,

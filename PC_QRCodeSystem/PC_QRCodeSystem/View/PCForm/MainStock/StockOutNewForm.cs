@@ -272,13 +272,12 @@ namespace PC_QRCodeSystem.View
             {
                 tbpNoSet.Visible = false;
                 cmbDestination.Enabled = false;
-                cmbDestination.TabStop = false;
             }
             else
             {
                 tbpNoSet.Visible = true;
                 cmbDestination.Enabled = true;
-                cmbDestination.TabStop = true;
+                cmbDestination.Focus();
             }
         }
 
@@ -298,12 +297,12 @@ namespace PC_QRCodeSystem.View
 
         private void cmbDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbDestination.Text)) cmbDestination.Select();
+            if (string.IsNullOrEmpty(cmbDestination.Text) && cmbDestination.Enabled) cmbDestination.Select();
         }
 
         private void cmbDestination_Validated(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbDestination.Text)) cmbDestination.Select();
+            if (string.IsNullOrEmpty(cmbDestination.Text) && cmbDestination.Enabled) cmbDestination.Select();
         }
         #endregion
 
@@ -615,19 +614,6 @@ namespace PC_QRCodeSystem.View
             }
             dr.Cells["stockout_qty"].Value = stockoutQty;
 
-            #region ADD OUTPUT ITEM
-            listOut.Add(new OutputItem
-            {
-                issue_cd = 20,
-                destination_cd = cmbDestination.SelectedValue.ToString(),
-                item_number = itemCode,
-                delivery_qty = packingQty,
-                delivery_date = dtpStockOutDate.Value,
-                order_number = txtSetOrderNo.Text,
-                incharge = txtSetUserCD.Text,
-            });
-            #endregion
-
             pts_supplier supplierData = new pts_supplier();
             foreach (pts_stock item in stockData.listStockItems)
             {
@@ -708,6 +694,21 @@ namespace PC_QRCodeSystem.View
                     });
                 }
                 #endregion
+
+                #region ADD OUTPUT ITEM
+                listOut.Add(new OutputItem
+                {
+                    issue_cd = 20,
+                    destination_cd = cmbDestination.SelectedValue.ToString(),
+                    item_number = itemCode,
+                    supplier_invoice = item.invoice,
+                    delivery_qty = deliveryQty,
+                    delivery_date = dtpStockOutDate.Value,
+                    order_number = txtSetOrderNo.Text,
+                    incharge = txtSetUserCD.Text,
+                });
+                #endregion
+
                 listStock.Add(item);
                 if (packingQty == 0) break;
             }
@@ -1126,19 +1127,6 @@ namespace PC_QRCodeSystem.View
             txtWHQty.Text = (whQty - stockoutQty).ToString();
             processCD = "NP-" + dtpStockOutDate.Value.ToString("yyyyMMdd");
 
-            #region ADD OUT ITEM
-            listOut.Add(new OutputItem
-            {
-                issue_cd = (int)cmbIssue.SelectedValue,
-                destination_cd = cmbDestination.SelectedValue.ToString(),
-                item_number = txtItemCode.Text,
-                delivery_qty = stockoutQty,
-                delivery_date = dtpStockOutDate.Value,
-                order_number = string.Empty,
-                incharge = txtUserCode.Text,
-            });
-            #endregion
-
             pts_stock stockData = new pts_stock();
             pts_supplier supplierData = new pts_supplier();
             for (int i = 0; i < dgvSearch.Rows.Count; i++)
@@ -1216,6 +1204,19 @@ namespace PC_QRCodeSystem.View
                         Label_Qty = 1,
                     });
                 }
+                #endregion
+                #region ADD OUT ITEM
+                listOut.Add(new OutputItem
+                {
+                    issue_cd = (int)cmbIssue.SelectedValue,
+                    destination_cd = cmbDestination.SelectedValue.ToString(),
+                    item_number = txtItemCode.Text,
+                    supplier_invoice = stockData.invoice,
+                    delivery_qty = deliveryQty,
+                    delivery_date = dtpStockOutDate.Value,
+                    order_number = string.Empty,
+                    incharge = txtUserCode.Text,
+                });
                 #endregion
                 listStock.Add(stockData);
                 if (stockoutQty == 0) break;
