@@ -49,16 +49,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Framework">
-      <HintPath>..\..\NidecMES-FW\Dll\Framework.dll</HintPath>
+      <HintPath>..\..\FW\NidecMES\Dll\Framework.dll</HintPath>
     </Reference>
     <Reference Include="GlobalMasterMaintenance">
-      <HintPath>..\..\NidecMES-FW\Dll\GlobalMasterMaintenance.dll</HintPath>
+      <HintPath>..\..\FW\NidecMES\Dll\GlobalMasterMaintenance.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\..\NidecMES-FW\Dll\log4net.dll</HintPath>
+      <HintPath>..\..\FW\NidecMES\Dll\log4net.dll</HintPath>
     </Reference>
     <Reference Include="npgsql">
-      <HintPath>..\..\NidecMES-FW\Dll\npgsql.dll</HintPath>
+      <HintPath>..\..\FW\NidecMES\Dll\npgsql.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

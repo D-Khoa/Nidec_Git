@@ -14,6 +14,13 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareHouse;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.AccountMainForm;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.InventoryForm;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Asset;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Rank;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.UserLocation;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.AccountCodeForm;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.AccountLocationForm;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.DetailPositionForm;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Units;
 
 namespace Com.Nidec.Mes.VCMS
 {
@@ -320,18 +327,18 @@ namespace Com.Nidec.Mes.VCMS
         }
         private void Asset_btn_Click(object sender, EventArgs e)
         {
-            //AssetForm asf = new AssetForm();
-            //asf.ShowDialog();
+            AssetForm asf = new AssetForm();
+            asf.ShowDialog();
         }
         private void Rank_btn_Click(object sender, EventArgs e)
         {
-            //RankForm rkf = new RankForm();
-            //rkf.ShowDialog();
+            RankForm rkf = new RankForm();
+            rkf.ShowDialog();
         }
         private void User_Localtion_btn_Click(object sender, EventArgs e)
         {
-            //UserLocationForm ulf = new UserLocationForm();
-            //ulf.ShowDialog();
+            UserLocationForm ulf = new UserLocationForm();
+            ulf.ShowDialog();
         }
         #endregion
 
@@ -355,14 +362,14 @@ namespace Com.Nidec.Mes.VCMS
 
         private void AccountCode_btn_Click(object sender, EventArgs e)
         {
-            //AccountCodeForm acForm = new AccountCodeForm();
-            //acForm.ShowDialog();
+            AccountCodeForm acForm = new AccountCodeForm();
+            acForm.ShowDialog();
         }
 
         private void AccountLocation_btn_Click(object sender, EventArgs e)
         {
-            //AccountLocationForm acForm = new AccountLocationForm();
-            //acForm.ShowDialog();
+            AccountLocationForm acForm = new AccountLocationForm();
+            acForm.ShowDialog();
         }
 
         private void account_equipments_btn_Click(object sender, EventArgs e)
@@ -379,8 +386,8 @@ namespace Com.Nidec.Mes.VCMS
 
         private void DetailPosition_btn_Click(object sender, EventArgs e)
         {
-            //DetailPositionForm fdf = new DetailPositionForm();
-            //fdf.ShowDialog();
+            DetailPositionForm fdf = new DetailPositionForm();
+            fdf.ShowDialog();
         }
 
         private void production_controller_btn_Click(object sender, EventArgs e)
@@ -393,8 +400,8 @@ namespace Com.Nidec.Mes.VCMS
 
         private void Unit_btn_Click(object sender, EventArgs e)
         {
-            //UnitForm unitform = new UnitForm();
-            //unitform.ShowDialog();
+            UnitForm unitform = new UnitForm();
+            unitform.ShowDialog();
         }
 
         private void ovenrange_btn_Click(object sender, EventArgs e)
