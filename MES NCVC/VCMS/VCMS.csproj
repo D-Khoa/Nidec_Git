@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>\\192.168.193.1\mes%24\NidecMES\</PublishUrl>
+    <PublishUrl>\\192.168.193.1\mes%24\AccountMES\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -23,11 +23,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://192.168.193.1/mes/NidecMES/</InstallUrl>
+    <InstallUrl>http://192.168.193.1/mes/AccountMES/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.html</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>1.1.2.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -86,17 +86,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\fw\NidecMES\Dll\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MachineMaintenance, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\fw\NidecMES\Dll\MachineMaintenance.dll</HintPath>
+    <Reference Include="MachineMaintenanceTTB">
+      <HintPath>..\..\FW\NidecMES\Dll\MachineMaintenanceTTB.dll</HintPath>
     </Reference>
     <Reference Include="npgsql, Version=3.1.9.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\fw\NidecMES\Dll\npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="SAPConnector_Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\fw\NidecMES\Dll\SAPConnector_Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

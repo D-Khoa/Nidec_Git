@@ -11,6 +11,9 @@ using System.Windows.Forms;
 using Com.Nidec.Mes.Framework.Login;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareHouse;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.AccountMainForm;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.InventoryForm;
 
 namespace Com.Nidec.Mes.VCMS
 {
@@ -27,10 +30,12 @@ namespace Com.Nidec.Mes.VCMS
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            SystemMaster_gpb.Visible = false;
-            NcvpMaster_gpb.Visible = false;
-            NCVC_Function_gr.Visible = false;
-
+            tc_Main.ItemSize = new Size(0, 1);
+            tc_Main.SelectedTab = tabSystemMaster;
+            Master_tab.ItemSize = new Size(0, 1);
+            Master_tab.SelectedTab = ACC_WH;
+            tabControlCommon1.ItemSize = new Size(0, 1);
+            tabControlCommon1.SelectedTab = tabPage3;
             //if (UserData.GetUserData().UserCode == "admin")
             //{
             //    SystemMaster_btn.Enabled = false;
@@ -43,9 +48,10 @@ namespace Com.Nidec.Mes.VCMS
         /// <param name="e"></param>
         private void SystemMaster_btn_Click(object sender, EventArgs e)
         {
-            SystemMaster_gpb.Visible = true;
-            NcvpMaster_gpb.Visible = false;
-            NCVC_Function_gr.Visible = false;
+            //SystemMaster_gpb.Visible = true;
+            //NcvpMaster_gpb.Visible = false;
+            //NCVC_Function_gr.Visible = false;
+            tc_Main.SelectedTab = tabSystemMaster;
         }
         /// <summary>
         /// Local Master Click
@@ -54,9 +60,10 @@ namespace Com.Nidec.Mes.VCMS
         /// <param name="e"></param>
         private void NcvpMaster_btn_Click(object sender, EventArgs e)
         {
-            NcvpMaster_gpb.Visible = true;
-            SystemMaster_gpb.Visible = false;
-            NCVC_Function_gr.Visible = false;
+            //NcvpMaster_gpb.Visible = true;
+            //SystemMaster_gpb.Visible = false;
+            //NCVC_Function_gr.Visible = false;
+            tc_Main.SelectedTab = tabLocalMaster;
         }
         /// <summary>
         /// NCVC Function Click
@@ -65,9 +72,10 @@ namespace Com.Nidec.Mes.VCMS
         /// <param name="e"></param>
         private void ncvc_btn_Click(object sender, EventArgs e)
         {
-            NCVC_Function_gr.Visible = true;
-            SystemMaster_gpb.Visible = false;
-            NcvpMaster_gpb.Visible = false;
+            //NCVC_Function_gr.Visible = true;
+            //SystemMaster_gpb.Visible = false;
+            //NcvpMaster_gpb.Visible = false;
+            tc_Main.SelectedTab = tabNCVCFunction;
         }
 
         /// <summary>
@@ -359,14 +367,14 @@ namespace Com.Nidec.Mes.VCMS
 
         private void account_equipments_btn_Click(object sender, EventArgs e)
         {
-            //AccountMainForm accountForm = new AccountMainForm();
-            //accountForm.ShowDialog();
+            AccountMainForm accountForm = new AccountMainForm();
+            accountForm.ShowDialog();
         }
 
         private void WarehouseManagement_New_frm_Click(object sender, EventArgs e)
         {
-            //WarehouseMainForm nwe = new WarehouseMainForm();
-            //nwe.ShowDialog();
+            WarehouseMainForm nwe = new WarehouseMainForm();
+            nwe.ShowDialog();
         }
 
         private void DetailPosition_btn_Click(object sender, EventArgs e)
@@ -411,6 +419,18 @@ namespace Com.Nidec.Mes.VCMS
         {
             ProcessWForm prw = new ProcessWForm();
             prw.ShowDialog();
+        }
+
+        private void InventoryTime_btn_Click(object sender, EventArgs e)
+        {
+            InvertoryTimeForm inv = new InvertoryTimeForm();
+            inv.ShowDialog();
+        }
+
+        private void InventoryCheck_btn_Click(object sender, EventArgs e)
+        {
+            InvertoryCheckForm inv = new InvertoryCheckForm();
+            inv.ShowDialog();
         }
     }
 }

@@ -437,7 +437,7 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error("User code is empty" + Environment.NewLine + "Vui lòng điền mã số nhân viên!");
                 return false;
             }
-            if (string.IsNullOrEmpty(txtItemCode.Text))
+            if (string.IsNullOrEmpty(txtItemCode.Text) && issueFlag != "20")
             {
                 CustomMessageBox.Error("Item code is empty" + Environment.NewLine + "Vui lòng điền mã nguyên liệu!");
                 return false;
@@ -447,7 +447,7 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error("Issue code is empty" + Environment.NewLine + "Vui lòng chọn lí do xuất hàng!");
                 return false;
             }
-            if (string.IsNullOrEmpty(cmbDestination.Text))
+            if (string.IsNullOrEmpty(cmbDestination.Text) && issueFlag != "20")
             {
                 CustomMessageBox.Error("Destination code is empty" + Environment.NewLine + "Vui lòng chọn phòng ban!");
                 return false;
@@ -1238,12 +1238,31 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Tìm kiếm order number của các set chưa được xuất
                 pre_649_order orderData = new pre_649_order();
                 orderData.Search(new pre_649_order
                 {
                     item_number = itemNumber,
                     order_number = setNumber
                 });
+                //Tìm các order các set đã xuất (khuyến nghị tìm kiếm theo số order number)
+                if (orderData.listOrderItem.Count <= 0)
+                {
+                    pre_649 deliveriedData = new pre_649();
+                    deliveriedData.Search(new pre_649
+                    {
+                        item_number = itemNumber,
+                        order_number = setNumber
+                    });
+                    orderData.listOrderItem = deliveriedData.listPremacItem.Select(x => new pre_649_order
+                    {
+                        item_number = x.item_number,
+                        supplier_cd = x.supplier_cd,
+                        order_number = x.order_number,
+                        order_date = x.delivery_date,
+                        order_qty = x.delivery_qty,
+                    }).ToList();
+                }
                 UpdateGridSearchSet(orderData.listOrderItem);
             }
             catch (Exception ex)
@@ -1259,17 +1278,42 @@ namespace PC_QRCodeSystem.View
         private void OpenSet(int RowIndex)
         {
             if (!CheckFields()) return;
+            string orderNo = string.Empty;
             DataGridViewRow dr = dgvSearch.Rows[RowIndex];
-            GetSetOptions(dr.Cells["order_number"].Value.ToString(), (double)dr.Cells["order_qty"].Value, (DateTime)dr.Cells["order_date"].Value);
-            SearchLowItem(txtItemCode.Text, (double)dr.Cells["order_qty"].Value, dr.Cells["order_number"].Value.ToString());
+            if (string.IsNullOrEmpty(txtSetNumber.Text))
+                orderNo = dr.Cells["order_number"].Value.ToString();
+            else
+                orderNo = txtSetNumber.Text;
+            GetSetOptions(dr.Cells["item_number"].Value.ToString(), orderNo, (double)dr.Cells["order_qty"].Value, (DateTime)dr.Cells["order_date"].Value);
+            SearchLowItem(dr.Cells["item_number"].Value.ToString(), (double)dr.Cells["order_qty"].Value, orderNo);
             tc_Main.SelectedTab = tab_Set;
+            pre_655 issueData = new pre_655();
             pts_stockout_log stockoutData = new pts_stockout_log();
             double temp = 0;
             for (int i = 0; i < dgvSetData.Rows.Count; i++)
             {
-                temp = stockoutData.GetStockOutQty(dr.Cells["order_number"].Value.ToString(), dgvSetData.Rows[i].Cells["low_level_item"].Value.ToString());
-                //dgvSetData.Rows[i].Cells["stockout_qty"].Value = temp;
-                dgvSetData.Rows[i].Cells["request_qty"].Value = (double)dgvSetData.Rows[i].Cells["request_qty"].Value - temp;
+                temp = stockoutData.GetStockOutQty(orderNo, dgvSetData.Rows[i].Cells["low_level_item"].Value.ToString());
+                if (temp == 0)
+                {
+                    issueData.Search(new pre_655
+                    {
+                        low_level_item = dgvSetData.Rows[i].Cells["low_level_item"].Value.ToString(),
+                        high_level_item = txtSetModelCD.Text,
+                        order_number = orderNo
+                    });
+                    try
+                    {
+                        temp = issueData.listIssueItem[0].no_issue_qty;
+                        if (temp > 0)
+                            dgvSetData.Rows[i].Cells["request_qty"].Value = temp;
+                    }
+                    catch
+                    {
+                        //Ignore Issue
+                    }
+                }
+                else
+                    dgvSetData.Rows[i].Cells["request_qty"].Value = (double)dgvSetData.Rows[i].Cells["request_qty"].Value - temp;
             }
             txtSetBarcode.Select();
         }
@@ -1302,18 +1346,20 @@ namespace PC_QRCodeSystem.View
         /// <param name="orderNo">order number</param>
         /// <param name="orderQty">request qty</param>
         /// <param name="orderDate">request date</param>
-        private void GetSetOptions(string orderNo, double orderQty, DateTime orderDate)
+        private void GetSetOptions(string modelCode, string orderNo, double orderQty, DateTime orderDate)
         {
             txtSetOrderNo.Text = orderNo;
             txtSetUserCD.Text = txtUserCode.Text;
-            txtSetModelCD.Text = txtItemCode.Text;
+            txtSetModelCD.Text = modelCode;
             txtSetRequestQty.Text = orderQty.ToString();
             txtSetRequestDate.Text = orderDate.ToString("yyyy-MM-dd");
             //txtSetDesCD.Text = cmbDestination.SelectedValue.ToString();
             txtSetOutDate.Text = dtpStockOutDate.Value.ToString("yyyy-MM-dd");
             lbSetUserName.Text = lbUserName.Text;
-            lbSetModelName.Text = lbItemName.Text;
-            lbSetDesName.Text = cmbDestination.Text.Split(':')[1].Trim();
+            pts_item itemData = new pts_item();
+            itemData = itemData.GetItem(modelCode);
+            lbSetModelName.Text = itemData.item_name;
+            //lbSetDesName.Text = cmbDestination.Text.Split(':')[1].Trim();
         }
         #endregion
 
