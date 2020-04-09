@@ -387,6 +387,7 @@ namespace PC_QRCodeSystem.View
                 if (dgvPreInput.Columns.Contains("premac_id")) dgvPreInput.Columns.Remove("premac_id");
                 if (dgvPreInput.Columns.Contains("po_number")) dgvPreInput.Columns.Remove("po_number");
                 if (dgvPreInput.Columns.Contains("order_number")) dgvPreInput.Columns.Remove("order_number");
+                if (dgvPreInput.Columns.Contains("order_qty")) dgvPreInput.Columns.Remove("order_qty");
 
                 dgvPreInput.Columns["item_number"].HeaderText = "Item Number";
                 dgvPreInput.Columns["item_name"].HeaderText = "Item Name";

@@ -64,6 +64,8 @@ namespace BoxIdDb
             this.btnDeleteBoxId = new System.Windows.Forms.Button();
             this.txtBoxIdPrint = new System.Windows.Forms.TextBox();
             this.dgvDateCode2 = new System.Windows.Forms.DataGridView();
+            this.cmbModel = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassFail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDateCode)).BeginInit();
@@ -429,12 +431,32 @@ namespace BoxIdDb
             this.dgvDateCode2.TabIndex = 20;
             this.dgvDateCode2.Visible = false;
             // 
+            // cmbModel
+            // 
+            this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbModel.FormattingEnabled = true;
+            this.cmbModel.Location = new System.Drawing.Point(155, 123);
+            this.cmbModel.Name = "cmbModel";
+            this.cmbModel.Size = new System.Drawing.Size(121, 21);
+            this.cmbModel.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(31, 126);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(36, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Model";
+            // 
             // frmModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(922, 719);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cmbModel);
             this.Controls.Add(this.btnDeleteBoxId);
             this.Controls.Add(this.btnReplace);
             this.Controls.Add(this.dgvDateCode);
@@ -513,6 +535,8 @@ namespace BoxIdDb
         private System.Windows.Forms.DataGridView dgvProductSerial;
         private System.Windows.Forms.TextBox txtBoxIdPrint;
         private System.Windows.Forms.DataGridView dgvDateCode2;
+        private System.Windows.Forms.ComboBox cmbModel;
+        private System.Windows.Forms.Label label6;
     }
 }
 

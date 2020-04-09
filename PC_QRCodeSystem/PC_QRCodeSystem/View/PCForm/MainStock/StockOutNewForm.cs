@@ -13,6 +13,7 @@ namespace PC_QRCodeSystem.View
     {
         double labelQty = 0;
         bool isChecked = false;
+        bool isDeliveried = false;
         string issueFlag = string.Empty;
         string processCD = string.Empty;
         BindingList<PrintItem> listLabel { get; set; }
@@ -1245,11 +1246,13 @@ namespace PC_QRCodeSystem.View
                     item_number = itemNumber,
                     order_number = setNumber
                 });
+                isDeliveried = false;
                 //Tìm các order các set đã xuất (khuyến nghị tìm kiếm theo số order number)
                 if (orderData.listOrderItem.Count <= 0)
                 {
+                    isDeliveried = true;
                     pre_649 deliveriedData = new pre_649();
-                    deliveriedData.Search(new pre_649
+                    deliveriedData.SearchOrder(new pre_649
                     {
                         item_number = itemNumber,
                         order_number = setNumber
@@ -1259,8 +1262,8 @@ namespace PC_QRCodeSystem.View
                         item_number = x.item_number,
                         supplier_cd = x.supplier_cd,
                         order_number = x.order_number,
-                        order_date = x.delivery_date,
-                        order_qty = x.delivery_qty,
+                        order_date = x.order_date,
+                        order_qty = x.order_qty,
                     }).ToList();
                 }
                 UpdateGridSearchSet(orderData.listOrderItem);
@@ -1304,12 +1307,11 @@ namespace PC_QRCodeSystem.View
                     try
                     {
                         temp = issueData.listIssueItem[0].no_issue_qty;
-                        if (temp > 0)
-                            dgvSetData.Rows[i].Cells["request_qty"].Value = temp;
+                        if (temp > 0) dgvSetData.Rows[i].Cells["request_qty"].Value = temp;
                     }
                     catch
                     {
-                        //Ignore Issue
+                        if (isDeliveried) dgvSetData.Rows[i].Cells["request_qty"].Value = 0;
                     }
                 }
                 else

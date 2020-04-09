@@ -20,6 +20,8 @@ namespace PC_QRCodeSystem.Model
         public DateTime delivery_date { get; set; }
         public string order_number { get; set; }
         public string incharge { get; set; }
+        public double order_qty { get; set; }
+        public DateTime order_date { get; set; }
         public List<pre_649> listPremacItem;
         public pre_649()
         {
@@ -167,6 +169,44 @@ namespace PC_QRCodeSystem.Model
                     delivery_date = (DateTime)reader["delivery_date"],
                     //order_number = reader["order_number"].ToString(),
                     incharge = reader["incharge"].ToString()
+                };
+                //Add item into list
+                listPremacItem.Add(outItem);
+            }
+            reader.Close();
+            //Close SQL connection
+            SQL.Close();
+        }
+
+        public void SearchOrder(pre_649 inItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            listPremacItem = new List<pre_649>();
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "SELECT item_number, order_number, order_qty, order_date,supplier_cd ";
+            query += "FROM pre_649 WHERE 1=1 ";
+            if (!string.IsNullOrEmpty(inItem.item_number))
+                query += "AND item_number ='" + inItem.item_number + "' ";
+            if (!string.IsNullOrEmpty(inItem.order_number))
+                query += "AND order_number ='" + inItem.order_number + "' ";
+            query += "ORDER BY item_number, order_date";
+            //Execute reader for read database
+            IDataReader reader = SQL.Command(query).ExecuteReader();
+            query = string.Empty;
+            while (reader.Read())
+            {
+                //Get an item
+                pre_649 outItem = new pre_649
+                {
+                    item_number = reader["item_number"].ToString(),
+                    order_number = reader["order_number"].ToString(),
+                    order_qty = (double)reader["order_qty"],
+                    order_date = (DateTime)reader["order_date"],
+                    supplier_cd = reader["supplier_cd"].ToString(),
                 };
                 //Add item into list
                 listPremacItem.Add(outItem);

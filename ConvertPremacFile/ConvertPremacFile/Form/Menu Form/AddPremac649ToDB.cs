@@ -338,7 +338,14 @@ namespace ConvertPremacFile
                     if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
                     foreach (string file in files)
                     {
-                        stockin649.GetListPremacItem(file);
+                        try
+                        {
+                            stockin649.GetListPremacItem(file);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
                         stockin649.DeleteFromDB();
                         stockin649.WriteToDB(stockin649.listPremacItem);
                         File.Move(file, historypath + "\\" + Path.GetFileName(file));

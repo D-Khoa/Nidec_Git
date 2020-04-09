@@ -48,6 +48,12 @@ namespace BoxIdDb
         public frmModule()
         {
             InitializeComponent();
+            ShSQL SQL = new ShSQL();
+            string query = "Select model from model_tbl";
+            SQL.getComboBoxData(query, ref cmbModel);
+            //cmbModel.DisplayMember = "model_name";
+            //cmbModel.ValueMember = "model";
+            cmbModel.ResetText();
         }
 
         // Load event
@@ -74,6 +80,11 @@ namespace BoxIdDb
             dtOverall = new DataTable();
             defineAndReadDtOverall(ref dtOverall);
             updateDataGripViews(dtOverall, ref dgvProductSerial);
+            if (!string.IsNullOrEmpty(txtBoxId.Text))
+            {
+                int index = cmbModel.Items.IndexOf(txtBoxId.Text.Split('-')[0]);
+                cmbModel.SelectedIndex = index;
+            }
         }
 
         // Sub procedure: Read ini file content
@@ -100,6 +111,7 @@ namespace BoxIdDb
             txtUser.Text = user;
             txtProductSerial.Text = serialNo;
 
+            cmbModel.Enabled = editMode;
             txtProductSerial.Enabled = editMode;
             btnRegisterBoxId.Enabled = !editMode;
             btnDeleteAll.Visible = editMode;
@@ -495,7 +507,12 @@ namespace BoxIdDb
                             lot = VBStrings.Mid(serShort, 5, 3);
                             break;
                         default:
-                            if (serLong.Length == 13) { model = "BMS69"; lot = VBStrings.Mid(serShort, 3, 3); }
+                            if (serLong.Length == 13)
+                            {
+                                if (cmbModel.Text == "BMS_0069") model = "BMS69";
+                                else if (cmbModel.Text == "BMS_0070") model = "BMS70";
+                                lot = VBStrings.Mid(serShort, 3, 3);
+                            }
                             else if (serLong.Length == 8) { model = "LA10"; lot = VBStrings.Mid(serShort, 5, 3); }
                             else if (VBStrings.Mid(serLong, 6, 1) == "L") { model = "LS3L"; lot = VBStrings.Mid(serShort, 3, 3); }
                             else if (VBStrings.Left(serLong, 1) == "M") { model = "LMOD"; lot = VBStrings.Mid(serShort, 5, 3); }
@@ -549,6 +566,7 @@ namespace BoxIdDb
                             case "LS3P":
                             case "LMOD":
                             case "BMS69":
+                            case "BMS70":
                                 limit = limitls12;
                                 break;
                             case "LA10":
@@ -617,7 +635,19 @@ namespace BoxIdDb
                     break;
                 default:
                     if (serno.Length == 8) tablekey = "laa10_003"; filterkey = "LA10";
-                    if (serno.Length == 13) tablekey = "bms_0069"; filterkey = "BMS69";
+                    if (serno.Length == 13)
+                    {
+                        if (cmbModel.Text == "BMS_0069")
+                        {
+                            tablekey = "bms_0069";
+                            filterkey = "BMS69";
+                        }
+                        else if (cmbModel.Text == "BMS_0070")
+                        {
+                            tablekey = "bms_0070";
+                            filterkey = "BMS70";
+                        }
+                    }
                     if (VBStrings.Mid(serno, 6, 1) == "L") tablekey = "ls12_003l"; filterkey = "LS3L";
                     if (VBStrings.Left(serno, 1) == "M") tablekey = "ls12_003mod"; filterkey = "LMOD";
                     break;
@@ -798,7 +828,7 @@ namespace BoxIdDb
             DateTime dateOld = new DateTime(0);
             long numberOld = 0;
             string boxIdNew;
-            if (m_model == "BMS69")
+            if (m_model == "BMS69" || m_model == "BMS70")
             {
                 if (!string.IsNullOrEmpty(boxIdOld))
                 {
