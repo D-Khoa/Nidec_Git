@@ -10,6 +10,7 @@ namespace ConvertPremacFile
     public partial class AddPremac649ToDB : Form
     {
         #region SETTING FILE
+        int counter = 0;
         bool isStart = false;
         string settingfile = @"C:\ConvertPremac\setting.ini";
         pre_649_order stockout649 = new pre_649_order();
@@ -26,6 +27,7 @@ namespace ConvertPremacFile
         {
             InitializeComponent();
             timer1.Enabled = true;
+            rbtnTimeSet.Checked = true;
             settingList = new List<string>();
             dataLogs = new List<ConvertLogs>();
         }
@@ -37,35 +39,45 @@ namespace ConvertPremacFile
             {
                 foreach (string line in File.ReadLines(settingfile))
                 {
-                    if (line.Contains("CheckStockIn649="))
+                    if (line.StartsWith("CheckStockIn649="))
                         cbStockIn649.Checked = Boolean.Parse(line.Split('=')[1].Trim());
-                    if (line.Contains("CheckStockOut649="))
+                    if (line.StartsWith("CheckStockOut649="))
                         cbStockOut649.Checked = Boolean.Parse(line.Split('=')[1].Trim());
-                    if (line.Contains("CheckItem212="))
+                    if (line.StartsWith("CheckItem212="))
                         cbItem212.Checked = Boolean.Parse(line.Split('=')[1].Trim());
-                    if (line.Contains("CheckSupplier232="))
+                    if (line.StartsWith("CheckSupplier232="))
                         cbSupplier232.Checked = Boolean.Parse(line.Split('=')[1].Trim());
-                    if (line.Contains("CheckStruct223="))
+                    if (line.StartsWith("CheckStruct223="))
                         cbStruct223.Checked = Boolean.Parse(line.Split('=')[1].Trim());
-                    if (line.Contains("CheckIssue655="))
+                    if (line.StartsWith("CheckIssue655="))
                         cbIssue655.Checked = Boolean.Parse(line.Split('=')[1].Trim());
-                    if (line.Contains("CheckStockIn6123="))
+                    if (line.StartsWith("CheckStockIn6123="))
                         cbStockIn6123.Checked = Boolean.Parse(line.Split('=')[1].Trim());
-                    if (line.Contains("StockIn649URL"))
+                    if (line.StartsWith("StockIn649URL"))
                         txtStockIn649.Text = line.Split('=')[1].Trim();
-                    if (line.Contains("StockOut649URL"))
+                    if (line.StartsWith("StockOut649URL"))
                         txtStockOut649.Text = line.Split('=')[1].Trim();
-                    if (line.Contains("Premac212URL"))
+                    if (line.StartsWith("Premac212URL"))
                         txtItem212.Text = line.Split('=')[1].Trim();
-                    if (line.Contains("Premac232URL"))
+                    if (line.StartsWith("Premac232URL"))
                         txtSupplier232.Text = line.Split('=')[1].Trim();
-                    if (line.Contains("Premac223URL"))
+                    if (line.StartsWith("Premac223URL"))
                         txtStruct223.Text = line.Split('=')[1].Trim();
-                    if (line.Contains("Premac655URL"))
+                    if (line.StartsWith("Premac655URL"))
                         txtIssue655.Text = line.Split('=')[1].Trim();
-                    if (line.Contains("StockIn6123URL"))
+                    if (line.StartsWith("StockIn6123URL"))
                         txtStockIn6123.Text = line.Split('=')[1].Trim();
-                    if (line.Contains("log"))
+                    if (line.StartsWith("CheckTimeSet"))
+                        rbtnTimeSet.Checked = bool.Parse(line.Split('=')[1].Trim());
+                    if (line.StartsWith("CheckTimer"))
+                        rbtnTimer.Checked = bool.Parse(line.Split('=')[1].Trim());
+                    if (line.StartsWith("TimeSet1"))
+                        dtpTimeConvert.Value = DateTime.Parse(line.Split('=')[1].Trim());
+                    if (line.StartsWith("TimeSet2"))
+                        dtpTimeConvert2.Value = DateTime.Parse(line.Split('=')[1].Trim());
+                    if (line.StartsWith("Timer"))
+                        numTimer.Value = int.Parse(line.Split('=')[1].Trim());
+                    if (line.StartsWith("log"))
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Parse(line.Split('=')[1].Trim()),
@@ -240,45 +252,13 @@ namespace ConvertPremacFile
             {
                 isStart = true;
                 btnStart.Text = "Stop";
+                if (rbtnTimer.Checked) counter = (int)numTimer.Value * 60;
             }
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
-            if (cbStockIn649.Checked)
-            {
-                AddStockIn649();
-            }
-            if (cbStockOut649.Checked)
-            {
-                Thread.Sleep(3000);
-                AddStockOut649();
-            }
-            if (cbItem212.Checked)
-            {
-                Thread.Sleep(3000);
-                AddPre212();
-            }
-            if (cbSupplier232.Checked)
-            {
-                Thread.Sleep(3000);
-                AddPre232();
-            }
-            if (cbStruct223.Checked)
-            {
-                Thread.Sleep(3000);
-                AddPre223();
-            }
-            if (cbStockIn6123.Checked)
-            {
-                Thread.Sleep(3000);
-                AddStockIn6123();
-            }
-            if (cbIssue655.Checked)
-            {
-                Thread.Sleep(3000);
-                AddPre655();
-            }
+            ImportDB();
         }
         #endregion
         #region TIMER
@@ -286,40 +266,22 @@ namespace ConvertPremacFile
         {
             if (isStart)
             {
-                if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss") || DateTime.Now.ToString("HHmmss") == dtpTimeConvert2.Value.ToString("HHmmss"))
+                if (rbtnTimeSet.Checked)
                 {
-                    if (cbStockIn649.Checked)
+                    if (DateTime.Now.ToString("HHmmss") == dtpTimeConvert.Value.ToString("HHmmss") || DateTime.Now.ToString("HHmmss") == dtpTimeConvert2.Value.ToString("HHmmss")) ImportDB();
+                    tsStatus.Text = DateTime.Now.ToString("HH:mm:ss");
+                }
+                else if (rbtnTimer.Checked)
+                {
+                    tsStatus.Text = counter.ToString() + " s";
+                    counter--;
+                    if (counter == 0)
                     {
-                        AddStockIn649();
-                    }
-                    if (cbStockOut649.Checked)
-                    {
-                        Thread.Sleep(3000);
-                        AddStockOut649();
-                    }
-                    if (cbItem212.Checked)
-                    {
-                        Thread.Sleep(3000);
-                        AddPre212();
-                    }
-                    if (cbSupplier232.Checked)
-                    {
-                        Thread.Sleep(3000);
-                        AddPre232();
-                    }
-                    if (cbStruct223.Checked)
-                    {
-                        Thread.Sleep(3000);
-                        AddPre223();
-                    }
-                    if (cbIssue655.Checked)
-                    {
-                        Thread.Sleep(3000);
-                        AddPre655();
+                        ImportDB();
+                        counter = (int)numTimer.Value * 60;
                     }
                 }
             }
-            tsStatus.Text = DateTime.Now.ToString("HH:mm:ss");
         }
         #endregion
         #region FORM CLOSING
@@ -343,6 +305,11 @@ namespace ConvertPremacFile
                 settingList.Add("Premac223URL=" + txtStruct223.Text);
                 settingList.Add("Premac655URL=" + txtIssue655.Text);
                 settingList.Add("StockIn6123URL=" + txtStockIn6123.Text);
+                settingList.Add("CheckTimeSet=" + rbtnTimeSet.Checked);
+                settingList.Add("CheckTimer=" + rbtnTimer.Checked);
+                settingList.Add("TimeSet1=" + dtpTimeConvert.Value.ToString("HH:mm:ss"));
+                settingList.Add("TimeSet2=" + dtpTimeConvert2.Value.ToString("HH:mm:ss"));
+                settingList.Add("Timer=" + numTimer.Value.ToString());
                 foreach (DataGridViewRow dr in dgvLogs.Rows)
                 {
                     error = dr.DataBoundItem as ConvertLogs;
@@ -367,11 +334,14 @@ namespace ConvertPremacFile
                 if (!string.IsNullOrEmpty(txtStockIn649.Text))
                 {
                     string[] files = Directory.GetFiles(txtStockIn649.Text, "*CPFXE049*");
+                    string historypath = txtStockIn649.Text + @"\HISTORY";
+                    if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
                     foreach (string file in files)
                     {
                         stockin649.GetListPremacItem(file);
                         stockin649.DeleteFromDB();
                         stockin649.WriteToDB(stockin649.listPremacItem);
+                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
@@ -398,11 +368,14 @@ namespace ConvertPremacFile
                 if (!string.IsNullOrEmpty(txtStockOut649.Text))
                 {
                     string[] files = Directory.GetFiles(txtStockOut649.Text, "*CPFXE049*");
+                    string historypath = txtStockOut649.Text + @"\HISTORY";
+                    if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
                     foreach (string file in files)
                     {
                         stockout649.GetListPremacItem(file);
                         stockout649.DeleteFromDB();
                         stockout649.WriteToDB(stockout649.listOrderItem);
+                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
@@ -429,11 +402,14 @@ namespace ConvertPremacFile
                 if (!string.IsNullOrEmpty(txtItem212.Text))
                 {
                     string[] files = Directory.GetFiles(txtItem212.Text, "*CPBE0012*");
+                    string historypath = txtItem212.Text + @"\HISTORY";
+                    if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
                     foreach (string file in files)
                     {
                         premacfile212.GetListItems(file);
                         premacfile212.DeleteFromDB();
                         premacfile212.WriteToDB(premacfile212.listItems);
+                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
@@ -460,11 +436,14 @@ namespace ConvertPremacFile
                 if (!string.IsNullOrEmpty(txtSupplier232.Text))
                 {
                     string[] files = Directory.GetFiles(txtSupplier232.Text, "*CPBE0032*");
+                    string historypath = txtSupplier232.Text + @"\HISTORY";
+                    if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
                     foreach (string file in files)
                     {
                         premacfile232.GetListItems(file);
                         premacfile232.DeleteFromDB();
                         premacfile232.WriteToDB(premacfile232.listSupplier);
+                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
@@ -491,11 +470,14 @@ namespace ConvertPremacFile
                 if (!string.IsNullOrEmpty(txtSupplier232.Text))
                 {
                     string[] files = Directory.GetFiles(txtStruct223.Text, "*CPBE0023*");
+                    string historypath = txtStruct223.Text + @"\HISTORY";
+                    if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
                     foreach (string file in files)
                     {
                         struct223.GetListItems(file);
                         struct223.DeleteFromDB();
                         struct223.WriteToDB(struct223.listStructItem);
+                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
@@ -522,11 +504,14 @@ namespace ConvertPremacFile
                 if (!string.IsNullOrEmpty(txtIssue655.Text))
                 {
                     string[] files = Directory.GetFiles(txtIssue655.Text, "*CsvExported*");
+                    string historypath = txtIssue655.Text + @"\HISTORY";
+                    if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
                     foreach (string file in files)
                     {
                         issue655.GetListPremacItem(file);
                         issue655.DeleteFromDB();
                         issue655.WriteToDB(issue655.list655);
+                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
@@ -553,10 +538,14 @@ namespace ConvertPremacFile
                 if (!string.IsNullOrEmpty(txtStockIn6123.Text))
                 {
                     string[] files = Directory.GetFiles(txtStockIn6123.Text, "*CPFE0123*");
+                    string historypath = txtStockIn6123.Text + @"\HISTORY";
+                    if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
+
                     foreach (string file in files)
                     {
                         stockin649.GetListItem6123(file);
                         stockin649.WriteToDB(stockin649.listPremacItem);
+                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
@@ -574,6 +563,45 @@ namespace ConvertPremacFile
                 });
             }
             UpdateGrid();
+        }
+
+        private void ImportDB()
+        {
+            System.Diagnostics.Stopwatch stopWtch = new System.Diagnostics.Stopwatch();
+            Cursor = Cursors.WaitCursor;
+            stopWtch.Start();
+            if (cbStockIn649.Checked)
+            {
+                AddStockIn649();
+            }
+            if (cbStockOut649.Checked)
+            {
+                Thread.Sleep(3000);
+                AddStockOut649();
+            }
+            if (cbItem212.Checked)
+            {
+                Thread.Sleep(3000);
+                AddPre212();
+            }
+            if (cbSupplier232.Checked)
+            {
+                Thread.Sleep(3000);
+                AddPre232();
+            }
+            if (cbStruct223.Checked)
+            {
+                Thread.Sleep(3000);
+                AddPre223();
+            }
+            if (cbIssue655.Checked)
+            {
+                Thread.Sleep(3000);
+                AddPre655();
+            }
+            stopWtch.Stop();
+            tsExecuteTime.Text = stopWtch.Elapsed.ToString("s\\.ff") + " s";
+            Cursor = Cursors.Default;
         }
         #endregion
         #region UPDATEGRID
