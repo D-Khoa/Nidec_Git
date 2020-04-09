@@ -41,20 +41,24 @@ namespace SoftPrintLabel
         {
             if (dgvData.SelectedRows.Count <= 0) return;
             //PrintItem printitem = new PrintItem();
+            TfPrint.openPrinter();
             foreach (DataGridViewRow dr in dgvData.SelectedRows)
             {
                 //printitem = dr.DataBoundItem as PrintItem;
                 TfPrint.printBarCodeNew(dr.Cells["Asset_No"].Value.ToString(), dr.Cells["Asset_Name"].Value.ToString(), dr.Cells["Model"].Value.ToString(), dr.Cells["Ser"].Value.ToString(), dr.Cells["Inv"].Value.ToString());
             }
+            TfPrint.closePrinter();
         }
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
             if (dgvData.Rows.Count <= 0) return;
+            TfPrint.openPrinter();
             foreach (DataGridViewRow dr in dgvData.Rows)
             {
                 TfPrint.printBarCodeNew(dr.Cells["Asset_No"].Value.ToString(), dr.Cells["Asset_Name"].Value.ToString(), dr.Cells["Model"].Value.ToString(), dr.Cells["Ser"].Value.ToString(), dr.Cells["Inv"].Value.ToString());
             }
+            TfPrint.closePrinter();
         }
 
         private void btnLoadFile_Click(object sender, EventArgs e)
