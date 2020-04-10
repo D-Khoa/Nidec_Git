@@ -22,9 +22,11 @@ namespace PC_QRCodeSystem.Model
         public DateTime delivery_date { get; set; }
         public string order_number { get; set; }
         public string incharge { get; set; }
+        public List<string> errorColumns;
         public List<OutputItem> listOutputItem;
         public OutputItem()
         {
+            errorColumns = new List<string>();
             listOutputItem = new List<OutputItem>();
         }
         #endregion
@@ -98,6 +100,7 @@ namespace PC_QRCodeSystem.Model
                                                 delivery_date = DateTime.Parse(Regex.Replace(columns[5], " {2,}", " ").Trim()),
                                                 order_number = Regex.Replace(columns[6], " {2,}", " ").Trim(),
                                                 incharge = Regex.Replace(columns[7], " {2,}", " ").Trim(),
+                                                errorColumns = Regex.Replace(columns[8], " {2,}", " ").Trim().Split(',').ToList(),
                                             };
             listOutputItem.AddRange(query.ToList());
             listOutputItem.Sort((a, b) => a.item_number.CompareTo(b.item_number));

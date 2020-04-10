@@ -70,8 +70,10 @@
             this.btnStockOutLog = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
             this.tab_ErrorData = new System.Windows.Forms.TabPage();
-            this.dgvDataError = new System.Windows.Forms.DataGridView();
+            this.tbpError = new System.Windows.Forms.TableLayoutPanel();
             this.libFileName = new System.Windows.Forms.ListBox();
+            this.dgvDataError = new System.Windows.Forms.DataGridView();
+            this.dgvStockOutLog = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnOpenItem = new System.Windows.Forms.Button();
@@ -91,7 +93,9 @@
             this.pnlDataLogs.SuspendLayout();
             this.tab_Request.SuspendLayout();
             this.tab_ErrorData.SuspendLayout();
+            this.tbpError.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStockOutLog)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -577,8 +581,7 @@
             // 
             // tab_ErrorData
             // 
-            this.tab_ErrorData.Controls.Add(this.dgvDataError);
-            this.tab_ErrorData.Controls.Add(this.libFileName);
+            this.tab_ErrorData.Controls.Add(this.tbpError);
             this.tab_ErrorData.Controls.Add(this.panel1);
             this.tab_ErrorData.Location = new System.Drawing.Point(4, 25);
             this.tab_ErrorData.Name = "tab_ErrorData";
@@ -588,29 +591,62 @@
             this.tab_ErrorData.Text = "Error Data";
             this.tab_ErrorData.UseVisualStyleBackColor = true;
             // 
+            // tbpError
+            // 
+            this.tbpError.ColumnCount = 2;
+            this.tbpError.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tbpError.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tbpError.Controls.Add(this.dgvDataError, 1, 0);
+            this.tbpError.Controls.Add(this.libFileName, 0, 0);
+            this.tbpError.Controls.Add(this.dgvStockOutLog, 1, 1);
+            this.tbpError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbpError.Location = new System.Drawing.Point(3, 53);
+            this.tbpError.Name = "tbpError";
+            this.tbpError.RowCount = 2;
+            this.tbpError.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbpError.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbpError.Size = new System.Drawing.Size(780, 349);
+            this.tbpError.TabIndex = 3;
+            // 
+            // libFileName
+            // 
+            this.libFileName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.libFileName.FormattingEnabled = true;
+            this.libFileName.HorizontalScrollbar = true;
+            this.libFileName.Location = new System.Drawing.Point(3, 3);
+            this.libFileName.Name = "libFileName";
+            this.tbpError.SetRowSpan(this.libFileName, 2);
+            this.libFileName.Size = new System.Drawing.Size(228, 343);
+            this.libFileName.TabIndex = 2;
+            this.libFileName.SelectedIndexChanged += new System.EventHandler(this.libFileName_SelectedIndexChanged);
+            // 
             // dgvDataError
             // 
             this.dgvDataError.AllowUserToAddRows = false;
             this.dgvDataError.AllowUserToDeleteRows = false;
             this.dgvDataError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDataError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDataError.Location = new System.Drawing.Point(237, 53);
+            this.dgvDataError.Location = new System.Drawing.Point(237, 3);
             this.dgvDataError.Name = "dgvDataError";
             this.dgvDataError.ReadOnly = true;
             this.dgvDataError.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDataError.Size = new System.Drawing.Size(546, 349);
+            this.dgvDataError.Size = new System.Drawing.Size(540, 168);
             this.dgvDataError.TabIndex = 1;
             this.dgvDataError.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataError_CellDoubleClick);
+            this.dgvDataError.SelectionChanged += new System.EventHandler(this.dgvDataError_SelectionChanged);
             // 
-            // libFileName
+            // dgvStockOutLog
             // 
-            this.libFileName.Dock = System.Windows.Forms.DockStyle.Left;
-            this.libFileName.FormattingEnabled = true;
-            this.libFileName.Location = new System.Drawing.Point(3, 53);
-            this.libFileName.Name = "libFileName";
-            this.libFileName.Size = new System.Drawing.Size(234, 349);
-            this.libFileName.TabIndex = 2;
-            this.libFileName.SelectedIndexChanged += new System.EventHandler(this.libFileName_SelectedIndexChanged);
+            this.dgvStockOutLog.AllowUserToAddRows = false;
+            this.dgvStockOutLog.AllowUserToDeleteRows = false;
+            this.dgvStockOutLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStockOutLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvStockOutLog.Location = new System.Drawing.Point(237, 177);
+            this.dgvStockOutLog.Name = "dgvStockOutLog";
+            this.dgvStockOutLog.ReadOnly = true;
+            this.dgvStockOutLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvStockOutLog.Size = new System.Drawing.Size(540, 169);
+            this.dgvStockOutLog.TabIndex = 3;
             // 
             // panel1
             // 
@@ -687,7 +723,9 @@
             this.pnlDataLogs.ResumeLayout(false);
             this.tab_Request.ResumeLayout(false);
             this.tab_ErrorData.ResumeLayout(false);
+            this.tbpError.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStockOutLog)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -743,5 +781,7 @@
         private System.Windows.Forms.Button btnOpenItem;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ListBox libFileName;
+        private System.Windows.Forms.TableLayoutPanel tbpError;
+        private System.Windows.Forms.DataGridView dgvStockOutLog;
     }
 }

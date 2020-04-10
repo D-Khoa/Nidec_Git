@@ -247,6 +247,7 @@ namespace PC_QRCodeSystem.View
         #region ERROR DATA TAB
         //Danh sách dữ liệu lỗi
         BindingList<OutputItem> listOut = new BindingList<OutputItem>();
+        BindingList<pts_stockout_log> outlist = new BindingList<pts_stockout_log>();
 
         private void btnOpenItem_Click(object sender, EventArgs e)
         {
@@ -254,9 +255,10 @@ namespace PC_QRCodeSystem.View
             {
                 //Xem chi tiết dữ liệu đang chọn
                 OutputItem outData = dgvDataError.SelectedRows[0].DataBoundItem as OutputItem;
-                StockOutLogForm outlogs = new StockOutLogForm();
-                outlogs.SetFields(outData);
-                outlogs.Show();
+                UpdateStockOutGrid(outData);
+                //StockOutLogForm outlogs = new StockOutLogForm();
+                //outlogs.SetFields(outData);
+                //outlogs.Show();
             }
             catch (Exception ex)
             {
@@ -268,7 +270,16 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                if (dgvDataError.SelectedRows.Count <= 0) return;
                 if (CustomMessageBox.Question("Are you sure remove this item?" + Environment.NewLine + "Bạn có chắc muốn xóa dữ liệu này?") == DialogResult.No) return;
+                //Xóa dữ liệu trong stock out logs
+                pts_stockout_log stockoutData = new pts_stockout_log();
+                for (int i = 0; i < outlist.Count; i++)
+                {
+                    stockoutData.DeleteItem(outlist[i]);
+                    outlist.RemoveAt(i);
+                    i--;
+                }
                 //Xóa dữ liệu đang chọn
                 listOut.RemoveAt(dgvDataError.SelectedRows[0].Index);
                 //Xóa file chứa dữ liệu
@@ -293,8 +304,12 @@ namespace PC_QRCodeSystem.View
         private void libFileName_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Nếu danh sách file lớn hơn 0 thì cập nhật danh sách dữ liệu lỗi
-            if (libFileName.SelectedItems.Count > 0)
-                UpdateErrorDataGrid(libFileName.Text);
+            if (libFileName.SelectedItems.Count > 0) UpdateErrorDataGrid(libFileName.Text);
+        }
+
+        private void dgvDataError_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDataError.SelectedRows.Count > 0) btnOpenItem.PerformClick();
         }
 
         private void dgvDataError_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -322,6 +337,49 @@ namespace PC_QRCodeSystem.View
             listOut = new BindingList<OutputItem>(outData.listOutputItem);
             //Đưa dữ liệu lỗi vào datagridview
             dgvDataError.DataSource = listOut;
+            for (int i = 0; i < listOut.Count; i++)
+            {
+                if (listOut[i].errorColumns.Count > 0)
+                {
+                    for (int x = 0; x < listOut[i].errorColumns.Count; x++)
+                        dgvDataError.Rows[i].Cells[int.Parse(listOut[i].errorColumns[x])].Style.BackColor = Color.Red;
+                }
+            }
+            dgvDataError.ClearSelection();
+        }
+
+        private void UpdateStockOutGrid(OutputItem inItem)
+        {
+            pts_stockout_log stockoutData = new pts_stockout_log();
+            stockoutData.Search(new pts_stockout_log
+            {
+                issue_cd = inItem.issue_cd,
+                stockout_user_cd = inItem.incharge
+            }, inItem.item_number, inItem.supplier_invoice, inItem.order_number, inItem.destination_cd, inItem.delivery_date, inItem.delivery_date, true);
+            if (stockoutData.listStockOutItem != null)
+            {
+                outlist = new BindingList<pts_stockout_log>(stockoutData.listStockOutItem);
+                dgvStockOutLog.DataSource = outlist;
+            }
+            if (dgvStockOutLog.Rows.Count > 0)
+            {
+                for (int i = 0; i < dgvStockOutLog.Rows.Count; i++)
+                {
+                    dgvStockOutLog.Rows[i].HeaderCell.Value = (i + 1).ToString();
+                }
+                dgvStockOutLog.Columns["stockout_id"].HeaderText = "ID";
+                dgvStockOutLog.Columns["packing_cd"].HeaderText = "Packing Code";
+                dgvStockOutLog.Columns["process_cd"].HeaderText = "Process Code";
+                dgvStockOutLog.Columns["issue_cd"].HeaderText = "Issue Code";
+                dgvStockOutLog.Columns["stockout_date"].HeaderText = "Stock-Out Date";
+                dgvStockOutLog.Columns["stockout_user_cd"].HeaderText = "Incharge";
+                dgvStockOutLog.Columns["stockout_qty"].HeaderText = "Stoc-Out Qty";
+                dgvStockOutLog.Columns["real_qty"].HeaderText = "Real Qty";
+                dgvStockOutLog.Columns["received_user_cd"].HeaderText = "Receive User";
+                dgvStockOutLog.Columns["comment"].HeaderText = "Comment";
+                dgvStockOutLog.Columns["remark"].HeaderText = "Remark";
+                dgvStockOutLog.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            }
         }
 
         private void timerFormLoad_Tick(object sender, EventArgs e)

@@ -319,6 +319,7 @@ namespace PC_QRCodeSystem.View
                 stockoutData = dgvData.SelectedRows[0].DataBoundItem as pts_stockout_log;
                 stockoutData.DeleteItem(stockoutData);
                 CustomMessageBox.Notice("Delete item successful!" + Environment.NewLine + "Xóa nguyên liệu thành công!");
+                UpdateGrid(true);
             }
             catch (Exception ex)
             {
