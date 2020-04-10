@@ -514,7 +514,7 @@
             this.tbpMain.SetRowSpan(this.label1, 2);
             this.label1.Size = new System.Drawing.Size(144, 61);
             this.label1.TabIndex = 51;
-            this.label1.Text = "5B. BARCODE /\r\nMã Model";
+            this.label1.Text = "5B. BARCODE\r\nHoặc mã Model";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbItemName

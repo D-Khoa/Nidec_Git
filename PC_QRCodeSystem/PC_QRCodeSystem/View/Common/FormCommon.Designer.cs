@@ -287,6 +287,6 @@
         private System.Windows.Forms.Button btnCloseForm;
         private System.Windows.Forms.Label lbOnlineTime;
         private System.Windows.Forms.Label lbOnlineUser;
-        private System.Windows.Forms.Timer timerFormLoad;
+        protected System.Windows.Forms.Timer timerFormLoad;
     }
 }

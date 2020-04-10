@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
@@ -7,7 +11,9 @@ namespace PC_QRCodeSystem.View
 {
     public partial class PCForm : FormCommon
     {
+        #region FORM EVENT
         bool pcmMocde = false;
+        bool isEditErrorData = false;
         pts_item itemData { get; set; }
         pts_request_log requestData { get; set; }
 
@@ -30,13 +36,9 @@ namespace PC_QRCodeSystem.View
             }
             rbtnAllRequest.Checked = true;
         }
+        #endregion
 
         #region MAIN TAB
-        /// <summary>
-        /// Open Stock In Window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnStockIn_Click(object sender, EventArgs e)
         {
             //StockInForm inFrm = new StockInForm();
@@ -44,11 +46,6 @@ namespace PC_QRCodeSystem.View
             inFrm.Show();
         }
 
-        /// <summary>
-        /// Open Stock Out Window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnStockOut_Click(object sender, EventArgs e)
         {
             //StockOutV2Form outFrm = new StockOutV2Form();
@@ -57,11 +54,6 @@ namespace PC_QRCodeSystem.View
             outFrm.Show();
         }
 
-        /// <summary>
-        /// Open Stock Detail Window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnStockDetail_Click(object sender, EventArgs e)
         {
             StockDetailForm dtlFrm = new StockDetailForm();
@@ -102,6 +94,30 @@ namespace PC_QRCodeSystem.View
         private void btnRequestLog_Click(object sender, EventArgs e)
         {
             grt_Main.SelectedTab = tab_Request;
+        }
+
+        private void btnPlanning_Click(object sender, EventArgs e)
+        {
+            PlanningForm planFrm = new PlanningForm();
+            planFrm.Show();
+        }
+
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            SettingForm settingFrm = new SettingForm();
+            settingFrm.Show();
+        }
+
+        private void btnStockOutLog_Click(object sender, EventArgs e)
+        {
+            StockOutLogForm stockoutLogFrm = new StockOutLogForm();
+            stockoutLogFrm.Show();
+        }
+
+        private void btnErrorData_Click(object sender, EventArgs e)
+        {
+            isEditErrorData = true;
+            grt_Main.SelectedTab = tab_ErrorData;
         }
         #endregion
 
@@ -228,22 +244,98 @@ namespace PC_QRCodeSystem.View
         }
         #endregion
 
-        private void btnPlanning_Click(object sender, EventArgs e)
+        #region ERROR DATA TAB
+        //Danh sách dữ liệu lỗi
+        BindingList<OutputItem> listOut = new BindingList<OutputItem>();
+
+        private void btnOpenItem_Click(object sender, EventArgs e)
         {
-            PlanningForm planFrm = new PlanningForm();
-            planFrm.Show();
+            try
+            {
+                //Xem chi tiết dữ liệu đang chọn
+                OutputItem outData = dgvDataError.SelectedRows[0].DataBoundItem as OutputItem;
+                StockOutLogForm outlogs = new StockOutLogForm();
+                outlogs.SetFields(outData);
+                outlogs.Show();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
-        private void btnSetting_Click(object sender, EventArgs e)
+        private void btnRemove_Click(object sender, EventArgs e)
         {
-            SettingForm settingFrm = new SettingForm();
-            settingFrm.Show();
+            try
+            {
+                if (CustomMessageBox.Question("Are you sure remove this item?" + Environment.NewLine + "Bạn có chắc muốn xóa dữ liệu này?") == DialogResult.No) return;
+                //Xóa dữ liệu đang chọn
+                listOut.RemoveAt(dgvDataError.SelectedRows[0].Index);
+                //Xóa file chứa dữ liệu
+                if (File.Exists(libFileName.Text)) File.Delete(libFileName.Text);
+                //Nếu danh sách còn dữ liệu thì tạo lại file ngược lại xóa file
+                if (listOut.Count > 0) listOut[0].ExportCSV(listOut.ToList(), libFileName.Text);
+                else libFileName.Items.RemoveAt(libFileName.Items.IndexOf(libFileName.Text));
+                CustomMessageBox.Notice("Delete successful!" + Environment.NewLine + "Xóa thành công!");
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
-        private void btnStockOutLog_Click(object sender, EventArgs e)
+        private void btnErrorBack_Click(object sender, EventArgs e)
         {
-            StockOutLogForm stockoutLogFrm = new StockOutLogForm();
-            stockoutLogFrm.Show();
+            isEditErrorData = false;
+            grt_Main.SelectedTab = tab_Menu;
         }
+
+        private void libFileName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Nếu danh sách file lớn hơn 0 thì cập nhật danh sách dữ liệu lỗi
+            if (libFileName.SelectedItems.Count > 0)
+                UpdateErrorDataGrid(libFileName.Text);
+        }
+
+        private void dgvDataError_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            btnOpenItem.PerformClick();
+        }
+
+        private void UpdateListBoxErrorFiled()
+        {
+            //Nếu thư mục ErrorLogs tồn tại thì lấy địa chỉ tất cả các file chứa trong nó
+            if (Directory.Exists(SettingItem.outputFolder + @"\ErrorLogs"))
+            {
+                libFileName.Items.Clear();
+                string[] files = Directory.GetFiles(SettingItem.outputFolder + @"\ErrorLogs");
+                libFileName.Items.AddRange(files);
+            }
+        }
+
+        private void UpdateErrorDataGrid(string filename)
+        {
+            OutputItem outData = new OutputItem();
+            //Lấy dữ liệu từ file
+            outData.ImportCSV(filename);
+            listOut = new BindingList<OutputItem>(outData.listOutputItem);
+            //Đưa dữ liệu lỗi vào datagridview
+            dgvDataError.DataSource = listOut;
+        }
+
+        private void timerFormLoad_Tick(object sender, EventArgs e)
+        {
+            //Nếu đang ở main menu thì cập nhật danh sách file lỗi, ngược lại thì vào chế độ chỉnh sửa
+            if (!isEditErrorData)
+            {
+                UpdateListBoxErrorFiled();
+                if (libFileName.Items.Count > 0) btnErrorData.BackColor = Color.Red;
+                else btnErrorData.UseVisualStyleBackColor = true;
+                btnErrorData.Update();
+                btnErrorData.Refresh();
+            }
+        }
+        #endregion
     }
 }

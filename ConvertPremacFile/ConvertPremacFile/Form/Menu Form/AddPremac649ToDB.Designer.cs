@@ -37,6 +37,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsExecuteTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dtpTimeConvert = new System.Windows.Forms.DateTimePicker();
             this.dgvLogs = new System.Windows.Forms.DataGridView();
@@ -67,7 +68,6 @@
             this.btnBrowserStruct223 = new System.Windows.Forms.Button();
             this.btnBrowserIssue655 = new System.Windows.Forms.Button();
             this.btnBrowserStockIn6123 = new System.Windows.Forms.Button();
-            this.tsExecuteTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).BeginInit();
             this.panel1.SuspendLayout();
@@ -140,8 +140,14 @@
             // tsStatus
             // 
             this.tsStatus.Name = "tsStatus";
-            this.tsStatus.Size = new System.Drawing.Size(696, 17);
+            this.tsStatus.Size = new System.Drawing.Size(727, 17);
             this.tsStatus.Spring = true;
+            // 
+            // tsExecuteTime
+            // 
+            this.tsExecuteTime.Name = "tsExecuteTime";
+            this.tsExecuteTime.Size = new System.Drawing.Size(36, 17);
+            this.tsExecuteTime.Text = "None";
             // 
             // timer1
             // 
@@ -531,12 +537,6 @@
             this.btnBrowserStockIn6123.Text = "Browser";
             this.btnBrowserStockIn6123.UseVisualStyleBackColor = true;
             this.btnBrowserStockIn6123.Click += new System.EventHandler(this.btnBrowserStockIn6123_Click);
-            // 
-            // tsExecuteTime
-            // 
-            this.tsExecuteTime.Name = "tsExecuteTime";
-            this.tsExecuteTime.Size = new System.Drawing.Size(36, 17);
-            this.tsExecuteTime.Text = "None";
             // 
             // AddPremac649ToDB
             // 

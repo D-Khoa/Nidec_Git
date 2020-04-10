@@ -509,8 +509,8 @@ namespace BoxIdDb
                         default:
                             if (serLong.Length == 13)
                             {
-                                if (cmbModel.Text == "BMS_0069") model = "BMS69";
-                                else if (cmbModel.Text == "BMS_0070") model = "BMS70";
+                                if (cmbModel.Text == "BMS69") model = "BMS69";
+                                else if (cmbModel.Text == "BMS70") model = "BMS70";
                                 lot = VBStrings.Mid(serShort, 3, 3);
                             }
                             else if (serLong.Length == 8) { model = "LA10"; lot = VBStrings.Mid(serShort, 5, 3); }
@@ -637,12 +637,12 @@ namespace BoxIdDb
                     if (serno.Length == 8) tablekey = "laa10_003"; filterkey = "LA10";
                     if (serno.Length == 13)
                     {
-                        if (cmbModel.Text == "BMS_0069")
+                        if (cmbModel.Text == "BMS69")
                         {
                             tablekey = "bms_0069";
                             filterkey = "BMS69";
                         }
-                        else if (cmbModel.Text == "BMS_0070")
+                        else if (cmbModel.Text == "BMS70")
                         {
                             tablekey = "bms_0070";
                             filterkey = "BMS70";

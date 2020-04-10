@@ -63,11 +63,19 @@
             this.btnUserPosition = new System.Windows.Forms.Button();
             this.btnDepartment = new System.Windows.Forms.Button();
             this.pnlDataLogs = new System.Windows.Forms.Panel();
+            this.btnErrorData = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.btnPlanning = new System.Windows.Forms.Button();
             this.btnRequestLog = new System.Windows.Forms.Button();
             this.btnStockOutLog = new System.Windows.Forms.Button();
             this.tab_Request = new System.Windows.Forms.TabPage();
+            this.tab_ErrorData = new System.Windows.Forms.TabPage();
+            this.dgvDataError = new System.Windows.Forms.DataGridView();
+            this.libFileName = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnOpenItem = new System.Windows.Forms.Button();
+            this.btnErrorBack = new System.Windows.Forms.Button();
             this.pnlMainStock.SuspendLayout();
             this.pnlRequest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequest)).BeginInit();
@@ -82,7 +90,14 @@
             this.pnlAdminManagement.SuspendLayout();
             this.pnlDataLogs.SuspendLayout();
             this.tab_Request.SuspendLayout();
+            this.tab_ErrorData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataError)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // timerFormLoad
+            // 
+            this.timerFormLoad.Tick += new System.EventHandler(this.timerFormLoad_Tick);
             // 
             // pnlMainStock
             // 
@@ -300,6 +315,7 @@
             this.grt_Main.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.grt_Main.Controls.Add(this.tab_Menu);
             this.grt_Main.Controls.Add(this.tab_Request);
+            this.grt_Main.Controls.Add(this.tab_ErrorData);
             this.grt_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grt_Main.Location = new System.Drawing.Point(150, 70);
             this.grt_Main.Name = "grt_Main";
@@ -484,6 +500,7 @@
             // 
             // pnlDataLogs
             // 
+            this.pnlDataLogs.Controls.Add(this.btnErrorData);
             this.pnlDataLogs.Controls.Add(this.label7);
             this.pnlDataLogs.Controls.Add(this.btnPlanning);
             this.pnlDataLogs.Controls.Add(this.btnRequestLog);
@@ -494,6 +511,16 @@
             this.pnlDataLogs.Size = new System.Drawing.Size(474, 93);
             this.pnlDataLogs.TabIndex = 9;
             this.pnlDataLogs.Tag = "pcmp003";
+            // 
+            // btnErrorData
+            // 
+            this.btnErrorData.Location = new System.Drawing.Point(346, 24);
+            this.btnErrorData.Name = "btnErrorData";
+            this.btnErrorData.Size = new System.Drawing.Size(100, 50);
+            this.btnErrorData.TabIndex = 14;
+            this.btnErrorData.Text = "Error Data Logs\r\nDữ liệu lỗi";
+            this.btnErrorData.UseVisualStyleBackColor = true;
+            this.btnErrorData.Click += new System.EventHandler(this.btnErrorData_Click);
             // 
             // label7
             // 
@@ -548,6 +575,87 @@
             this.tab_Request.Text = "Request";
             this.tab_Request.UseVisualStyleBackColor = true;
             // 
+            // tab_ErrorData
+            // 
+            this.tab_ErrorData.Controls.Add(this.dgvDataError);
+            this.tab_ErrorData.Controls.Add(this.libFileName);
+            this.tab_ErrorData.Controls.Add(this.panel1);
+            this.tab_ErrorData.Location = new System.Drawing.Point(4, 25);
+            this.tab_ErrorData.Name = "tab_ErrorData";
+            this.tab_ErrorData.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_ErrorData.Size = new System.Drawing.Size(786, 405);
+            this.tab_ErrorData.TabIndex = 2;
+            this.tab_ErrorData.Text = "Error Data";
+            this.tab_ErrorData.UseVisualStyleBackColor = true;
+            // 
+            // dgvDataError
+            // 
+            this.dgvDataError.AllowUserToAddRows = false;
+            this.dgvDataError.AllowUserToDeleteRows = false;
+            this.dgvDataError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDataError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDataError.Location = new System.Drawing.Point(237, 53);
+            this.dgvDataError.Name = "dgvDataError";
+            this.dgvDataError.ReadOnly = true;
+            this.dgvDataError.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDataError.Size = new System.Drawing.Size(546, 349);
+            this.dgvDataError.TabIndex = 1;
+            this.dgvDataError.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataError_CellDoubleClick);
+            // 
+            // libFileName
+            // 
+            this.libFileName.Dock = System.Windows.Forms.DockStyle.Left;
+            this.libFileName.FormattingEnabled = true;
+            this.libFileName.Location = new System.Drawing.Point(3, 53);
+            this.libFileName.Name = "libFileName";
+            this.libFileName.Size = new System.Drawing.Size(234, 349);
+            this.libFileName.TabIndex = 2;
+            this.libFileName.SelectedIndexChanged += new System.EventHandler(this.libFileName_SelectedIndexChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnRemove);
+            this.panel1.Controls.Add(this.btnOpenItem);
+            this.panel1.Controls.Add(this.btnErrorBack);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(780, 50);
+            this.panel1.TabIndex = 0;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRemove.Location = new System.Drawing.Point(100, 0);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(100, 50);
+            this.btnRemove.TabIndex = 2;
+            this.btnRemove.Text = "Remove Item";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnOpenItem
+            // 
+            this.btnOpenItem.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnOpenItem.Location = new System.Drawing.Point(0, 0);
+            this.btnOpenItem.Name = "btnOpenItem";
+            this.btnOpenItem.Size = new System.Drawing.Size(100, 50);
+            this.btnOpenItem.TabIndex = 1;
+            this.btnOpenItem.Text = "Open Item";
+            this.btnOpenItem.UseVisualStyleBackColor = true;
+            this.btnOpenItem.Click += new System.EventHandler(this.btnOpenItem_Click);
+            // 
+            // btnErrorBack
+            // 
+            this.btnErrorBack.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnErrorBack.Location = new System.Drawing.Point(680, 0);
+            this.btnErrorBack.Name = "btnErrorBack";
+            this.btnErrorBack.Size = new System.Drawing.Size(100, 50);
+            this.btnErrorBack.TabIndex = 0;
+            this.btnErrorBack.Text = "Back";
+            this.btnErrorBack.UseVisualStyleBackColor = true;
+            this.btnErrorBack.Click += new System.EventHandler(this.btnErrorBack_Click);
+            // 
             // PCForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -578,6 +686,9 @@
             this.pnlAdminManagement.ResumeLayout(false);
             this.pnlDataLogs.ResumeLayout(false);
             this.tab_Request.ResumeLayout(false);
+            this.tab_ErrorData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataError)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -624,5 +735,13 @@
         private System.Windows.Forms.Button btnPlanning;
         private System.Windows.Forms.Button btnSetting;
         private System.Windows.Forms.TableLayoutPanel tbpMain;
+        private System.Windows.Forms.TabPage tab_ErrorData;
+        private System.Windows.Forms.DataGridView dgvDataError;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnErrorBack;
+        private System.Windows.Forms.Button btnErrorData;
+        private System.Windows.Forms.Button btnOpenItem;
+        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.ListBox libFileName;
     }
 }

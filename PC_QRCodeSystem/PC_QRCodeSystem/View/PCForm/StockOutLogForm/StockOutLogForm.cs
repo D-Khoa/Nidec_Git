@@ -33,11 +33,26 @@ namespace PC_QRCodeSystem.View
             issueCode = new pts_issue_code();
             requestData = new pts_request_log();
             stockoutData = new pts_stockout_log();
+            dtpToDate.Value = DateTime.Today;
+            dtpFromDate.Value = DateTime.Today.AddMonths(-1);
+            GetCmb();
         }
 
         private void StockOutLogForm_Load(object sender, EventArgs e)
         {
-            GetCmb();
+        }
+
+        public void SetFields(OutputItem inItem)
+        {
+            txtUserCD.Text = inItem.incharge;
+            txtItemCD.Text = inItem.item_number;
+            txtSetNumber.Text = inItem.order_number;
+            txtInvoice.Text = inItem.supplier_invoice;
+            dtpToDate.Value = inItem.delivery_date;
+            dtpFromDate.Value = inItem.delivery_date;
+            cmbIssueCD.SelectedValue = inItem.issue_cd;
+            if (!string.IsNullOrEmpty(inItem.destination_cd)) cmbDestination.SelectedValue = inItem.destination_cd;
+            btnSearch.PerformClick();
         }
         #endregion
 
@@ -192,6 +207,9 @@ namespace PC_QRCodeSystem.View
                 txtInvoice.Text = barcode[3];
                 dtpFromDate.Value = DateTime.Parse(barcode[4]);
                 dtpToDate.Value = DateTime.Parse(barcode[4]);
+                btnSearch.PerformClick();
+                txtBarcode.ResetText();
+                txtBarcode.Focus();
             }
         }
 
@@ -288,9 +306,24 @@ namespace PC_QRCodeSystem.View
             UpdateGrid(true);
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (dgvData.SelectedRows.Count <= 0)
+                {
+                    CustomMessageBox.Notice("Please choose an item to delete!" + Environment.NewLine + "Vui lòng chọn nguyên liệu cần xóa!");
+                    return;
+                }
+                if (CustomMessageBox.Question("Are you sure to delete this item?" + Environment.NewLine + "Bạn có chắc muốn xóa nguyên liệu này?") == DialogResult.No) return;
+                stockoutData = dgvData.SelectedRows[0].DataBoundItem as pts_stockout_log;
+                stockoutData.DeleteItem(stockoutData);
+                CustomMessageBox.Notice("Delete item successful!" + Environment.NewLine + "Xóa nguyên liệu thành công!");
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)

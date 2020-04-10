@@ -224,7 +224,9 @@ namespace PC_QRCodeSystem.Model
         {
             var properties = inList[0].GetType().GetProperties();
             string foldername = SettingItem.outputFolder + @"\StockIn";
+            string bkfoldername = SettingItem.backupFolder + @"\BKStockIn";
             if (!Directory.Exists(foldername)) Directory.CreateDirectory(foldername);
+            if (!Directory.Exists(bkfoldername)) Directory.CreateDirectory(bkfoldername);
             string filename = @"\stockin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             using (StreamWriter sw = new StreamWriter(foldername + filename))
             {
@@ -245,6 +247,7 @@ namespace PC_QRCodeSystem.Model
                 sw.Flush();
                 sw.Close();
             }
+            File.Copy(foldername + filename, bkfoldername + filename);
         }
         #endregion
     }
