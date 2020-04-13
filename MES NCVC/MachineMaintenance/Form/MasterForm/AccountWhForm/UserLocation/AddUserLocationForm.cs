@@ -91,7 +91,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.UserL
             UserLocationCode_txt.Text = UserLocationCode_txt.Text.Trim();
             UserLocationName_txt.Text = UserLocationName_txt.Text.Trim();
             UserLocationVo outVo = new UserLocationVo(),
-                inVo = new UserLocationVo { UserLocationId = vo.UserLocationId, UserLocationCode = UserLocationCode_txt.Text };
+                inVo = new UserLocationVo { UserLocationId = vo.UserLocationId, UserLocationCode = UserLocationCode_txt.Text, DeptCode = locationcode_cmb.Text };
             try
             {
                 outVo = (UserLocationVo)DefaultCbmInvoker.Invoke(new CheckUserLocationCbm(), inVo);

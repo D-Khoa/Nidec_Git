@@ -81,7 +81,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
                 txtAssetCode.Enabled = false;
                 cmbNoNumber.Enabled = false;
 
-                cmbBeforeLocation.Text = WareHouseMainVo.BeforeLocationCd;
+                cmbBeforeLocation.Text = WareHouseMainVo.AfterLocationCd; // change before to after
                 cmbAfterLocation.Text = WareHouseMainVo.AfterLocationCd;
                 cmbDetailPosition.Text = WareHouseMainVo.DetailPositionCd;
                 cmbNoNumber.Text = WareHouseMainVo.AssetNo.ToString();
@@ -122,7 +122,6 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
             LocationVo Locationvo = (LocationVo)DefaultCbmInvoker.Invoke(new GetLocationMasterMntCbm(), new LocationVo());
             cmbAfterLocation.DataSource = Locationvo.LocationListVo;
             cmbAfterLocation.DisplayMember = "LocationCode";
-
         }
         private void ok_btn_Click(object sender, EventArgs e)
         {

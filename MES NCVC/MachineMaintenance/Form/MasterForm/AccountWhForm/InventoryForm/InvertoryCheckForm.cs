@@ -11,6 +11,7 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.InvertoryCh
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.InvertoryTimeCbm;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.RankMasterCbm;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo.AccountWhVo;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.UserLocationMasterCbm;
 
 namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.InventoryForm
 {
@@ -30,25 +31,27 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
             InvertoryTimeCode_cbm.DisplayMember = "InvertoryTimeCode";
             InvertoryTimeCode_cbm.DataSource = detailposition.GetList();
             InvertoryTimeCode_cbm.Text = "";
-            
 
-            LocationVo Locationvo = (LocationVo)DefaultCbmInvoker.Invoke(new GetLocationMasterMntCbm(), new LocationVo());
-            location_cbm.DisplayMember = "LocationCode";
-            location_cbm.DataSource = Locationvo.LocationListVo;
-            location_cbm.Text = "";
+
+            //LocationVo Locationvo = (LocationVo)DefaultCbmInvoker.Invoke(new GetLocationMasterMntCbm(), new LocationVo());
+            //location_cbm.DisplayMember = "LocationCode";
+            //location_cbm.DataSource = Locationvo.LocationListVo;
+            //location_cbm.Text = "";
+
+            UserData userData = UserData.GetUserData();
+            ValueObjectList<UserLocationVo> ListUserVo = (ValueObjectList<UserLocationVo>)DefaultCbmInvoker.Invoke(new GetUserLocationCbm(), new UserLocationVo
+            {
+                UserLocationCode = userData.UserCode
+            });
+            location_cbm.DisplayMember = "DeptCode";
+            location_cbm.DataSource = ListUserVo.GetList();
+            location_cbm.ResetText();
             asset_Code_cmb.Select();
-            //  ValueObjectList<RankVo> rankcode = (ValueObjectList<RankVo>)DefaultCbmInvoker.Invoke(new GetRankCbm(), new RankVo());
-            //InvertoryCheck_dgv.
-            //    DisplayMember = "RankCode";
-            //rank_code_cbm.DataSource = rankcode.GetList();
-            //rank_code_cbm.Text = "";
         }
-        // public InvertoryVo CheckoutVo = new InvertoryVo();
+
         public ValueObjectList<WareHouseMainVo> warehouseMainID = new ValueObjectList<WareHouseMainVo>();
-    
         public string assetcodetrim;
         public string test = "a";
-
 
         void GridBind()
         {
@@ -76,7 +79,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
                     {
                         InvertoryCheck_dgv.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                     }
-                }               
+                }
             }
             if (thongbao >= 1)
             {
@@ -167,7 +170,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
 
                         if (checkvo.AffectedCount == 1)
                         {
-                            mess +=  assetcodetrim + " is checked into " + InvertoryTimeCode_cbm.Text + "\n";
+                            mess += assetcodetrim + " is checked into " + InvertoryTimeCode_cbm.Text + "\n";
                             //if(i == Wlist.Count -1)
                             //{
                             //    MessageBox.Show(mess, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -234,7 +237,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
 
         private void Inventory_Offline_btn_Click(object sender, EventArgs e)
         {
-            if (location_cbm.Text != "" && InvertoryTimeCode_cbm.Text != "" )
+            if (location_cbm.Text != "" && InvertoryTimeCode_cbm.Text != "")
             {
                 thongbao = 0;
                 test = "a";
@@ -294,7 +297,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
             }
-            if(thongbao >= 1)
+            if (thongbao >= 1)
             {
                 MessageBox.Show(mess, "Messager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

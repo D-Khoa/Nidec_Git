@@ -18,10 +18,15 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
             sql.Append(" from  m_user_location");
             sql.Append(" Where 1=1 ");
     
-            if (!String.IsNullOrEmpty(inVo.FactoryCode))
+            if (!string.IsNullOrEmpty(inVo.FactoryCode))
             {
                 sql.Append(" and factory_cd = :factory_cd ");
                 sqlParameter.AddParameterString("factory_cd", inVo.FactoryCode);
+            }
+            if (!string.IsNullOrEmpty(inVo.DeptCode))
+            {
+                sql.Append(" and dept_cd = :dept_cd ");
+                sqlParameter.AddParameterString("dept_cd", inVo.DeptCode);
             }
             if (!string.IsNullOrEmpty(inVo.UserLocationCode))
             {

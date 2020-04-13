@@ -38,7 +38,7 @@ namespace Com.Nidec.Mes.VCMS
         private void MainForm_Load(object sender, EventArgs e)
         {
             tc_Main.ItemSize = new Size(0, 1);
-            tc_Main.SelectedTab = tabSystemMaster;
+            tc_Main.Visible = false;
             Master_tab.ItemSize = new Size(0, 1);
             Master_tab.SelectedTab = ACC_WH;
             tabControlCommon1.ItemSize = new Size(0, 1);
@@ -58,6 +58,7 @@ namespace Com.Nidec.Mes.VCMS
             //SystemMaster_gpb.Visible = true;
             //NcvpMaster_gpb.Visible = false;
             //NCVC_Function_gr.Visible = false;
+            tc_Main.Visible = true;
             tc_Main.SelectedTab = tabSystemMaster;
         }
         /// <summary>
@@ -70,6 +71,7 @@ namespace Com.Nidec.Mes.VCMS
             //NcvpMaster_gpb.Visible = true;
             //SystemMaster_gpb.Visible = false;
             //NCVC_Function_gr.Visible = false;
+            tc_Main.Visible = true;
             tc_Main.SelectedTab = tabLocalMaster;
         }
         /// <summary>
@@ -82,6 +84,7 @@ namespace Com.Nidec.Mes.VCMS
             //NCVC_Function_gr.Visible = true;
             //SystemMaster_gpb.Visible = false;
             //NcvpMaster_gpb.Visible = false;
+            tc_Main.Visible = true;
             tc_Main.SelectedTab = tabNCVCFunction;
         }
 

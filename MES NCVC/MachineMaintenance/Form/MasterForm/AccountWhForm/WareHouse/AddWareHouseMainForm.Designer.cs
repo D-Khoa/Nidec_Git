@@ -493,7 +493,7 @@
             this.life_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.life_lbl.Location = new System.Drawing.Point(54, 30);
             this.life_lbl.Name = "life_lbl";
-            this.life_lbl.Size = new System.Drawing.Size(66, 15);
+            this.life_lbl.Size = new System.Drawing.Size(65, 15);
             this.life_lbl.TabIndex = 64;
             this.life_lbl.Text = "Life (Year):";
             // 
@@ -505,7 +505,7 @@
             this.net_value_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.net_value_lbl.Location = new System.Drawing.Point(645, 68);
             this.net_value_lbl.Name = "net_value_lbl";
-            this.net_value_lbl.Size = new System.Drawing.Size(63, 15);
+            this.net_value_lbl.Size = new System.Drawing.Size(62, 15);
             this.net_value_lbl.TabIndex = 64;
             this.net_value_lbl.Text = "Net Value:";
             // 
@@ -649,6 +649,7 @@
             // cmbBeforeLocation
             // 
             this.cmbBeforeLocation.ControlId = null;
+            this.cmbBeforeLocation.Enabled = false;
             this.cmbBeforeLocation.Font = new System.Drawing.Font("Arial", 9F);
             this.cmbBeforeLocation.FormattingEnabled = true;
             this.cmbBeforeLocation.Location = new System.Drawing.Point(563, 201);
