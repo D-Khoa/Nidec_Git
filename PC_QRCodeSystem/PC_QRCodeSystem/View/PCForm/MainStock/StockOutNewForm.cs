@@ -13,23 +13,56 @@ namespace PC_QRCodeSystem.View
     {
         #region VARIABLE
         double labelQty = 0;
+        /// <summary>
+        /// Biến kiểm tra tem khâu cuối
+        /// </summary>
         bool isChecked = false;
+        /// <summary>
+        /// Biến kiểm tra nguyên liệu còn order number hay không
+        /// </summary>
         bool isDeliveried = false;
+        /// <summary>
+        /// Biến chứa code xuất hàng
+        /// </summary>
         string issueFlag = string.Empty;
+        /// <summary>
+        /// Biến chứa tên noplan/plan trong 2 bảng tương ứng
+        /// </summary>
         string processCD = string.Empty;
+        /// <summary>
+        /// Danh sách tem cần kiểm tra
+        /// </summary>
         BindingList<PrintItem> listLabel { get; set; }
+        /// <summary>
+        /// Danh sách nguyên liệu xuất ra csv
+        /// </summary>
         BindingList<OutputItem> listOut { get; set; }
+        /// <summary>
+        /// Danh sách tem cần in
+        /// </summary>
         BindingList<PrintItem> listPrint { get; set; }
+        /// <summary>
+        /// Danh sách nguyên liệu thay đổi số lượng tồn
+        /// </summary>
         BindingList<pts_stock> listStock { get; set; }
+        /// <summary>
+        /// Danh sách nguyên liệu xuất theo gói tồn kho
+        /// </summary>
         BindingList<pts_stockout_log> listStockOut { get; set; }
         #endregion
 
         #region FORM EVENT
+        /// <summary>
+        /// Form xuất hàng
+        /// </summary>
         public StockOutNewForm()
         {
             InitializeComponent();
+            //Ẩn thẻ tab
             tc_Main.ItemSize = new Size(0, 1);
+            //Set ngày xuất là ngày hiện tại
             dtpStockOutDate.Value = DateTime.Today;
+            //Khai báo các danh sách
             listLabel = new BindingList<PrintItem>();
             listOut = new BindingList<OutputItem>();
             listPrint = new BindingList<PrintItem>();
@@ -41,6 +74,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Lấy dữ liệu vào các combobox
                 GetCmb();
                 txtUserCode.Select();
             }
@@ -52,10 +86,13 @@ namespace PC_QRCodeSystem.View
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            //Khi nhấn phím Enter
             if (keyData == Keys.Enter)
             {
+                //Nhập barcode trong Main menu
                 if (ActiveControl == txtBarcode)
                 {
+                    //Lấy dữ liệu từ barcode điền vào các trường tương ứng
                     #region GET BARCODE INFO
                     string temp = txtBarcode.Text;
                     if (temp.Contains(";"))
@@ -74,11 +111,13 @@ namespace PC_QRCodeSystem.View
                     }
                     txtBarcode.ResetText();
                     #endregion
-
+                    //Thực hiện tìm kiếm danh sách nguyên liệu theo mã xuất hàng và mã nguyên liệu
                     MainSearch();
                 }
+                //Nhập barcode trong set menu
                 if (ActiveControl == txtSetBarcode)
                 {
+                    //Lấy dữ liệu barcode
                     #region GET SET BARCODE INFO
                     string temp = txtSetBarcode.Text;
                     if (temp.Contains(";"))
@@ -89,7 +128,7 @@ namespace PC_QRCodeSystem.View
                         labelQty = double.Parse(barcode[5].Trim());
                         txtSetOutQty.Text = labelQty.ToString();
                         txtSetBarcode.ResetText();
-
+                        //Tìm dòng chứa nguyên liệu tương ứng
                         #region GET INDEX OF ITEM IF IT IS EXIST IN SET LIST
                         try
                         {
@@ -120,19 +159,24 @@ namespace PC_QRCodeSystem.View
                     }
                     #endregion
                 }
+                //Nhập số lượng xuất sau khi nhập barcode trong set menu
                 if (ActiveControl == txtSetOutQty)
                 {
+                    //Nhập số lượng vào hàng nguyên liệu tương ứng
                     btnSetInputQty.PerformClick();
                     txtSetBarcode.Focus();
                     return true;
                 }
+                //Nhập số lượng tem cần kiểm tra khâu cuối
                 if (ActiveControl == txtInsLabelQty)
                 {
+                    //Kiểm tra tem
                     #region CHECK LABEL
                     string temp = txtInsBarcode.Text;
                     if (temp.Contains(";"))
                     {
                         string[] barcode = temp.Split(';');
+                        //Nếu tem khớp với tem được lưu trong danh sách ListLabel thì OK
                         isChecked = CheckLabel(barcode[0].Trim(), barcode[3].Trim(), double.Parse(barcode[5].Trim()));
                     }
                     else CustomMessageBox.Error("Wrong format barcode!" + Environment.NewLine + "Barcode sai!");
@@ -141,11 +185,14 @@ namespace PC_QRCodeSystem.View
                     return true;
                     #endregion
                 }
+                //Nhảy đến control kế tiếp
                 SelectNextControl(ActiveControl, true, true, true, true);
                 return true;
             }
+            //Khi nhấn nút ESC
             else if (keyData == Keys.Escape)
             {
+                //Lùi lại control trước đó
                 SelectNextControl(ActiveControl, false, true, true, true);
                 return true;
             }
@@ -159,11 +206,13 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Nếu mã xuất là 30 thì bắt buộc nhập lí do hủy hàng
                 if (issueFlag == "30" && string.IsNullOrEmpty(txtComment.Text))
                 {
                     CustomMessageBox.Notice("Need comment when scrap item!" + Environment.NewLine + "Vui lòng điền lí do hủy hàng!");
                     return;
                 }
+                //Nếu mã xuất là 20 thì mở set menu
                 else if (issueFlag == "20")
                 {
                     int i = dgvSearch.SelectedRows[0].Index;
@@ -174,6 +223,7 @@ namespace PC_QRCodeSystem.View
                     }
                     else OpenSet(i);
                 }
+                //Các mã xuất còn lại thì xuất thẳng
                 else OutNoSet();
             }
             catch (Exception ex)
@@ -186,6 +236,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Tìm kiếm nguyên liệu
                 MainSearch();
             }
             catch (Exception ex)
@@ -198,6 +249,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Nếu trong danh sách có tem cần in thì chuyển vào menu in tem
                 if (dgvPrint.Rows.Count > 0) tc_Main.SelectedTab = tab_Print;
                 else CustomMessageBox.Notice("No item in print list!" + Environment.NewLine + "Không có tem cần in!");
             }
@@ -209,6 +261,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnInspection_Click(object sender, EventArgs e)
         {
+            //Chuyển đến menu kiểm tra khâu cuối
             tc_Main.SelectedTab = tab_Inspection;
             txtInsBarcode.Focus();
         }
@@ -217,6 +270,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Xóa các trường dữ liệu trong main menu
                 MainClear();
             }
             catch (Exception ex)
@@ -600,12 +654,12 @@ namespace PC_QRCodeSystem.View
 
             #region CHECK ITEM QTY
             //Kiểm tra số lượng tồn trên PREMAC
-            //double whQty = (double)dr.Cells["wh_qty"].Value;
-            //if (packingQty > whQty)
-            //{
-            //    CustomMessageBox.Error("This item is not enough in PREMAC!" + Environment.NewLine + "Số lượng hàng tồn trên PREMAC không đủ!");
-            //    return;
-            //}
+            double whQty = (double)dr.Cells["wh_qty"].Value;
+            if (packingQty > whQty)
+            {
+                CustomMessageBox.Error("This item is not enough in PREMAC!" + Environment.NewLine + "Số lượng hàng tồn trên PREMAC không đủ!");
+                return;
+            }
 
             //Kiểm tra số lượng tồn trên SQL DB
             double totalpackingQty = stockData.listStockItems.Sum(x => x.packing_qty);
@@ -1167,7 +1221,7 @@ namespace PC_QRCodeSystem.View
                 return;
             }
             //Kiểm tra số lượng tồn kho trong PREMAC và SQL DB
-            if (/*stockoutQty > whQty ||*/ stockoutQty > totalPackQty)
+            if (stockoutQty > whQty || stockoutQty > totalPackQty)
             {
                 CustomMessageBox.Notice("Stock-Out Q'ty can't more than Stock Q'ty!" + Environment.NewLine + "Số lượng xuất không thể lớn hơn số lượng tồn!");
                 return;

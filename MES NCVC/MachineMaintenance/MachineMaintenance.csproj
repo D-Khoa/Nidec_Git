@@ -143,6 +143,7 @@
     <Compile Include="Cbm\AccountWhCbm\UserLocationMasterCbm\AddUserLocationCbm.cs" />
     <Compile Include="Cbm\AccountWhCbm\UserLocationMasterCbm\CheckUserLocationCbm.cs" />
     <Compile Include="Cbm\AccountWhCbm\UserLocationMasterCbm\DeleteUserLocationCbm.cs" />
+    <Compile Include="Cbm\AccountWhCbm\UserLocationMasterCbm\GetListLocationCbm.cs" />
     <Compile Include="Cbm\AccountWhCbm\UserLocationMasterCbm\GetUserLocationCbm.cs" />
     <Compile Include="Cbm\AccountWhCbm\UserLocationMasterCbm\UpdateUserLocationCbm.cs" />
     <Compile Include="Cbm\AccountWhCbm\WareHouseMainCbm\AddWareHouseHistoryMainCbm.cs" />
@@ -458,6 +459,7 @@
     <Compile Include="Dao\AccountWhDao\UnitMasterDao\DeleteUnitDao.cs" />
     <Compile Include="Dao\AccountWhDao\UnitMasterDao\GetUnitDao.cs" />
     <Compile Include="Dao\AccountWhDao\UnitMasterDao\UpdateUnitDao.cs" />
+    <Compile Include="Dao\AccountWhDao\UserLocationMasterDao\GetListLocationDao.cs" />
     <Compile Include="Dao\AccountWhDao\WareHouseMainDao\AddWareHouseHistoryMainDao.cs" />
     <Compile Include="Dao\AccountWhDao\WareHouseMainDao\AddWareHouseMainDao.cs" />
     <Compile Include="Dao\AccountWhDao\WareHouseMainDao\GetAssetInvoiceDao.cs" />

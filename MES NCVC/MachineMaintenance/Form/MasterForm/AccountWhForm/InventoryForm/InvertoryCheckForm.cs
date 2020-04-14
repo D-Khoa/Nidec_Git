@@ -32,19 +32,14 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
             InvertoryTimeCode_cbm.DataSource = detailposition.GetList();
             InvertoryTimeCode_cbm.Text = "";
 
-
-            //LocationVo Locationvo = (LocationVo)DefaultCbmInvoker.Invoke(new GetLocationMasterMntCbm(), new LocationVo());
-            //location_cbm.DisplayMember = "LocationCode";
-            //location_cbm.DataSource = Locationvo.LocationListVo;
-            //location_cbm.Text = "";
-
             UserData userData = UserData.GetUserData();
-            ValueObjectList<UserLocationVo> ListUserVo = (ValueObjectList<UserLocationVo>)DefaultCbmInvoker.Invoke(new GetUserLocationCbm(), new UserLocationVo
+            ValueObjectList<UserLocationVo> userLocationData = (ValueObjectList<UserLocationVo>)DefaultCbmInvoker.Invoke(new GetUserLocationCbm(), new UserLocationVo
             {
                 UserLocationCode = userData.UserCode
             });
-            location_cbm.DisplayMember = "DeptCode";
-            location_cbm.DataSource = ListUserVo.GetList();
+            ValueObjectList<LocationVo> ListLocationVo = (ValueObjectList<LocationVo>)DefaultCbmInvoker.Invoke(new GetListLocationCbm(), userLocationData.GetList()[0]);
+            location_cbm.DisplayMember = "LocationCode";
+            location_cbm.DataSource = ListLocationVo.GetList();
             location_cbm.ResetText();
             asset_Code_cmb.Select();
         }
