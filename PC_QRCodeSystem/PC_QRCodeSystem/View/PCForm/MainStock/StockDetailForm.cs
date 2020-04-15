@@ -14,7 +14,7 @@ namespace PC_QRCodeSystem.View
         private pts_item olditemData { get; set; }
         private pts_stock stockData { get; set; }
         private pts_stock oldStockData { get; set; }
-        private m_mes_user userData { get; set; }
+        private pre_user userData { get; set; }
         private pts_stock_log stockLog { get; set; }
         private pts_item_type typeData { get; set; }
         private pts_supplier supplierData { get; set; }
@@ -31,7 +31,7 @@ namespace PC_QRCodeSystem.View
             olditemData = new pts_item();
             stockData = new pts_stock();
             oldStockData = new pts_stock();
-            userData = new m_mes_user();
+            userData = new pre_user();
             stockLog = new pts_stock_log();
             typeData = new pts_item_type();
             supplierData = new pts_supplier();
@@ -134,10 +134,10 @@ namespace PC_QRCodeSystem.View
 
         private void txtInCharge_Validated(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtItemCD.Text))
+            if (string.IsNullOrEmpty(txtInCharge.Text))
             {
-                lbItemName.Text = "Item Name";
-                lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                lbInchagre.Text = "User Name";
+                lbInchagre.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
             }
             else
             {

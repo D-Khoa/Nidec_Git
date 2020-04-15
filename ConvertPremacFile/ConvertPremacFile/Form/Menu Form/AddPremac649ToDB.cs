@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using ConvertPremacFile.Model;
@@ -19,7 +20,7 @@ namespace ConvertPremacFile
         pre_649 stockin649 = new pre_649();
         pre_223 struct223 = new pre_223();
         pre_655 issue655 = new pre_655();
-
+        pre_user user = new pre_user();
         List<string> settingList { get; set; }
         List<ConvertLogs> dataLogs { get; set; }
 
@@ -53,6 +54,8 @@ namespace ConvertPremacFile
                         cbIssue655.Checked = Boolean.Parse(line.Split('=')[1].Trim());
                     if (line.StartsWith("CheckStockIn6123="))
                         cbStockIn6123.Checked = Boolean.Parse(line.Split('=')[1].Trim());
+                    if (line.StartsWith("CheckUser9984="))
+                        cbUser.Checked = Boolean.Parse(line.Split('=')[1].Trim());
                     if (line.StartsWith("StockIn649URL"))
                         txtStockIn649.Text = line.Split('=')[1].Trim();
                     if (line.StartsWith("StockOut649URL"))
@@ -67,6 +70,8 @@ namespace ConvertPremacFile
                         txtIssue655.Text = line.Split('=')[1].Trim();
                     if (line.StartsWith("StockIn6123URL"))
                         txtStockIn6123.Text = line.Split('=')[1].Trim();
+                    if (line.StartsWith("User9984URL"))
+                        txtUser.Text = line.Split('=')[1].Trim();
                     if (line.StartsWith("CheckTimeSet"))
                         rbtnTimeSet.Checked = bool.Parse(line.Split('=')[1].Trim());
                     if (line.StartsWith("CheckTimer"))
@@ -239,6 +244,27 @@ namespace ConvertPremacFile
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnBrowserUser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openf = new OpenFileDialog();
+                openf.Filter = "Text file (*.txt)|*.txt|All file (*.*)|*.*";
+                openf.FileName = "CsvExported.TXT";
+                openf.CheckFileExists = false;
+                openf.CheckPathExists = false;
+                openf.ValidateNames = true;
+                if (openf.ShowDialog() == DialogResult.OK)
+                {
+                    txtUser.Text = Path.GetDirectoryName(openf.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         #region BUTTON
         private void btnStart_Click(object sender, EventArgs e)
@@ -298,6 +324,7 @@ namespace ConvertPremacFile
                 settingList.Add("CheckStruct223=" + cbStruct223.Checked);
                 settingList.Add("CheckIssue655=" + cbIssue655.Checked);
                 settingList.Add("CheckStockIn6123=" + cbStockIn6123.Checked);
+                settingList.Add("CheckUser9984=" + cbUser.Checked);
                 settingList.Add("StockIn649URL =" + txtStockIn649.Text);
                 settingList.Add("StockOut649URL =" + txtStockOut649.Text);
                 settingList.Add("Premac212URL=" + txtItem212.Text);
@@ -305,6 +332,7 @@ namespace ConvertPremacFile
                 settingList.Add("Premac223URL=" + txtStruct223.Text);
                 settingList.Add("Premac655URL=" + txtIssue655.Text);
                 settingList.Add("StockIn6123URL=" + txtStockIn6123.Text);
+                settingList.Add("User9984URL=" + txtUser.Text);
                 settingList.Add("CheckTimeSet=" + rbtnTimeSet.Checked);
                 settingList.Add("CheckTimer=" + rbtnTimer.Checked);
                 settingList.Add("TimeSet1=" + dtpTimeConvert.Value.ToString("HH:mm:ss"));
@@ -333,14 +361,15 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtStockIn649.Text))
                 {
-                    string[] files = Directory.GetFiles(txtStockIn649.Text, "*CPFXE049*");
+                    var files = new DirectoryInfo(txtStockIn649.Text).GetFiles("*CPFXE049*")
+                                                                     .OrderBy(x => x.LastWriteTime).ToList();
                     string historypath = txtStockIn649.Text + @"\HISTORY";
                     if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
-                    foreach (string file in files)
+                    foreach (var file in files)
                     {
                         try
                         {
-                            stockin649.GetListPremacItem(file);
+                            stockin649.GetListPremacItem(file.FullName);
                         }
                         catch
                         {
@@ -348,11 +377,11 @@ namespace ConvertPremacFile
                         }
                         stockin649.DeleteFromDB();
                         stockin649.WriteToDB(stockin649.listPremacItem);
-                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
+                        File.Move(file.FullName, historypath + "\\" + Path.GetFileName(file.FullName));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Add stock-in file: " + file + " completed"
+                            Log_Message = "Add stock-in file: " + file.FullName + " completed"
                         });
                     }
                 }
@@ -374,19 +403,20 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtStockOut649.Text))
                 {
-                    string[] files = Directory.GetFiles(txtStockOut649.Text, "*CPFXE049*");
+                    var files = new DirectoryInfo(txtStockOut649.Text).GetFiles("*CPFXE049*")
+                                                                      .OrderBy(x => x.LastWriteTime).ToList();
                     string historypath = txtStockOut649.Text + @"\HISTORY";
                     if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
-                    foreach (string file in files)
+                    foreach (var file in files)
                     {
-                        stockout649.GetListPremacItem(file);
+                        stockout649.GetListPremacItem(file.FullName);
                         stockout649.DeleteFromDB();
                         stockout649.WriteToDB(stockout649.listOrderItem);
-                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
+                        File.Move(file.FullName, historypath + "\\" + Path.GetFileName(file.FullName));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Add stock-out file: " + file + " completed"
+                            Log_Message = "Add stock-out file: " + file.FullName + " completed"
                         });
                     }
                 }
@@ -408,19 +438,20 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtItem212.Text))
                 {
-                    string[] files = Directory.GetFiles(txtItem212.Text, "*CPBE0012*");
+                    var files = new DirectoryInfo(txtItem212.Text).GetFiles("*CPBE0012*")
+                                                                  .OrderBy(x => x.LastWriteTime).ToList();
                     string historypath = txtItem212.Text + @"\HISTORY";
                     if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
-                    foreach (string file in files)
+                    foreach (var file in files)
                     {
-                        premacfile212.GetListItems(file);
+                        premacfile212.GetListItems(file.FullName);
                         premacfile212.DeleteFromDB();
                         premacfile212.WriteToDB(premacfile212.listItems);
-                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
+                        File.Move(file.FullName, historypath + "\\" + Path.GetFileName(file.FullName));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Add item file: " + file + " completed"
+                            Log_Message = "Add item file: " + file.FullName + " completed"
                         });
                     }
                 }
@@ -442,19 +473,20 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtSupplier232.Text))
                 {
-                    string[] files = Directory.GetFiles(txtSupplier232.Text, "*CPBE0032*");
+                    var files = new DirectoryInfo(txtSupplier232.Text).GetFiles("*CPBE0032*")
+                                                                      .OrderBy(x => x.LastWriteTime).ToList();
                     string historypath = txtSupplier232.Text + @"\HISTORY";
                     if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
-                    foreach (string file in files)
+                    foreach (var file in files)
                     {
-                        premacfile232.GetListItems(file);
+                        premacfile232.GetListItems(file.FullName);
                         premacfile232.DeleteFromDB();
                         premacfile232.WriteToDB(premacfile232.listSupplier);
-                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
+                        File.Move(file.FullName, historypath + "\\" + Path.GetFileName(file.FullName));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Add supplier file: " + file + " completed"
+                            Log_Message = "Add supplier file: " + file.FullName + " completed"
                         });
                     }
                 }
@@ -476,19 +508,20 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtSupplier232.Text))
                 {
-                    string[] files = Directory.GetFiles(txtStruct223.Text, "*CPBE0023*");
+                    var files = new DirectoryInfo(txtStruct223.Text).GetFiles("*CPBE0023*")
+                                                                    .OrderBy(x => x.LastWriteTime).ToList();
                     string historypath = txtStruct223.Text + @"\HISTORY";
                     if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
-                    foreach (string file in files)
+                    foreach (var file in files)
                     {
-                        struct223.GetListItems(file);
+                        struct223.GetListItems(file.FullName);
                         struct223.DeleteFromDB();
                         struct223.WriteToDB(struct223.listStructItem);
-                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
+                        File.Move(file.FullName, historypath + "\\" + Path.GetFileName(file.FullName));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Add product struct file: " + file + " completed"
+                            Log_Message = "Add product struct file: " + file.FullName + " completed"
                         });
                     }
                 }
@@ -510,19 +543,20 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtIssue655.Text))
                 {
-                    string[] files = Directory.GetFiles(txtIssue655.Text, "*CsvExported*");
+                    var files = new DirectoryInfo(txtIssue655.Text).GetFiles("*CsvExported*")
+                                                                   .OrderBy(x => x.LastWriteTime).ToList();
                     string historypath = txtIssue655.Text + @"\HISTORY";
                     if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
-                    foreach (string file in files)
+                    foreach (var file in files)
                     {
-                        issue655.GetListPremacItem(file);
+                        issue655.GetListPremacItem(file.FullName);
                         issue655.DeleteFromDB();
                         issue655.WriteToDB(issue655.list655);
-                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
+                        File.Move(file.FullName, historypath + "\\" + Path.GetFileName(file.FullName));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Add issue query file: " + file + " completed"
+                            Log_Message = "Add issue query file: " + file.FullName + " completed"
                         });
                     }
                 }
@@ -544,19 +578,54 @@ namespace ConvertPremacFile
             {
                 if (!string.IsNullOrEmpty(txtStockIn6123.Text))
                 {
-                    string[] files = Directory.GetFiles(txtStockIn6123.Text, "*CPFE0123*");
+                    var files = new DirectoryInfo(txtStockIn6123.Text).GetFiles("*CPFE0123*")
+                                                                      .OrderBy(x => x.LastWriteTime).ToList();
                     string historypath = txtStockIn6123.Text + @"\HISTORY";
                     if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
-
-                    foreach (string file in files)
+                    foreach (var file in files)
                     {
-                        stockin649.GetListItem6123(file);
+                        stockin649.GetListItem6123(file.FullName);
                         stockin649.WriteToDB(stockin649.listPremacItem);
-                        File.Move(file, historypath + "\\" + Path.GetFileName(file));
+                        File.Move(file.FullName, historypath + "\\" + Path.GetFileName(file.FullName));
                         dataLogs.Add(new ConvertLogs
                         {
                             Log_Time = DateTime.Now,
-                            Log_Message = "Add stock-in file: " + file + " completed"
+                            Log_Message = "Add stock-in file: " + file.FullName + " completed"
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                dataLogs.Add(new ConvertLogs
+                {
+                    Log_Time = DateTime.Now,
+                    Log_Message = ex.Message
+                });
+            }
+            UpdateGrid();
+        }
+
+        private void AddUser9984()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtUser.Text))
+                {
+                    var files = new DirectoryInfo(txtUser.Text).GetFiles("*CsvExported*")
+                                                                    .OrderBy(x => x.LastWriteTime).ToList();
+                    string historypath = txtUser.Text + @"\HISTORY";
+                    if (!Directory.Exists(historypath)) Directory.CreateDirectory(historypath);
+                    foreach (var file in files)
+                    {
+                        user.GetListItems(file.FullName);
+                        user.DeleteFromDB();
+                        user.WriteToDB(user.listUser);
+                        File.Move(file.FullName, historypath + "\\" + Path.GetFileName(file.FullName));
+                        dataLogs.Add(new ConvertLogs
+                        {
+                            Log_Time = DateTime.Now,
+                            Log_Message = "Add user file: " + file.FullName + " completed"
                         });
                     }
                 }
@@ -580,6 +649,11 @@ namespace ConvertPremacFile
             if (cbStockIn649.Checked)
             {
                 AddStockIn649();
+            }
+            if (cbStockIn6123.Checked)
+            {
+                Thread.Sleep(3000);
+                AddStockIn6123();
             }
             if (cbStockOut649.Checked)
             {
@@ -605,6 +679,11 @@ namespace ConvertPremacFile
             {
                 Thread.Sleep(3000);
                 AddPre655();
+            }
+            if (cbUser.Checked)
+            {
+                Thread.Sleep(3000);
+                AddUser9984();
             }
             stopWtch.Stop();
             tsExecuteTime.Text = stopWtch.Elapsed.ToString("s\\.ff") + " s";

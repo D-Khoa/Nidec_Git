@@ -41,7 +41,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dtpTimeConvert = new System.Windows.Forms.DateTimePicker();
             this.dgvLogs = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClear = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -68,9 +67,11 @@
             this.btnBrowserStruct223 = new System.Windows.Forms.Button();
             this.btnBrowserIssue655 = new System.Windows.Forms.Button();
             this.btnBrowserStockIn6123 = new System.Windows.Forms.Button();
+            this.cbUser = new System.Windows.Forms.CheckBox();
+            this.txtUser = new System.Windows.Forms.TextBox();
+            this.btnBrowserUser = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).BeginInit();
-            this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTimer)).BeginInit();
@@ -102,7 +103,7 @@
             this.btnConvert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnConvert.Location = new System.Drawing.Point(305, 3);
             this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(296, 59);
+            this.btnConvert.Size = new System.Drawing.Size(296, 54);
             this.btnConvert.TabIndex = 11;
             this.btnConvert.Text = "Convert Now";
             this.btnConvert.UseVisualStyleBackColor = true;
@@ -113,7 +114,7 @@
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStart.Location = new System.Drawing.Point(3, 3);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(296, 59);
+            this.btnStart.Size = new System.Drawing.Size(296, 54);
             this.btnStart.TabIndex = 10;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -158,7 +159,7 @@
             // 
             this.dtpTimeConvert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtpTimeConvert.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTimeConvert.Location = new System.Drawing.Point(175, 213);
+            this.dtpTimeConvert.Location = new System.Drawing.Point(175, 243);
             this.dtpTimeConvert.Name = "dtpTimeConvert";
             this.dtpTimeConvert.ShowUpDown = true;
             this.dtpTimeConvert.Size = new System.Drawing.Size(166, 20);
@@ -172,24 +173,14 @@
             this.dgvLogs.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLogs.Location = new System.Drawing.Point(0, 337);
+            this.dgvLogs.Location = new System.Drawing.Point(0, 360);
             this.dgvLogs.Name = "dgvLogs";
             this.dgvLogs.ReadOnly = true;
             this.dgvLogs.RowHeadersVisible = false;
             this.dgvLogs.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dgvLogs.Size = new System.Drawing.Size(864, 116);
+            this.dgvLogs.Size = new System.Drawing.Size(864, 93);
             this.dgvLogs.TabIndex = 8;
             this.dgvLogs.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.tableLayoutPanel2);
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(864, 337);
-            this.panel1.TabIndex = 9;
             // 
             // tableLayoutPanel2
             // 
@@ -201,11 +192,11 @@
             this.tableLayoutPanel2.Controls.Add(this.btnClear, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnConvert, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 270);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 300);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(864, 65);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(864, 60);
             this.tableLayoutPanel2.TabIndex = 27;
             // 
             // btnClear
@@ -213,7 +204,7 @@
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.Location = new System.Drawing.Point(607, 3);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(254, 59);
+            this.btnClear.Size = new System.Drawing.Size(254, 54);
             this.btnClear.TabIndex = 12;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -227,15 +218,15 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.rbtnTimeSet, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.rbtnTimeSet, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.txtIssue655, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.cbIssue655, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.dtpTimeConvert2, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.dtpTimeConvert2, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.txtStockIn6123, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.cbStockIn6123, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.cbStockIn649, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbStruct223, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.dtpTimeConvert, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.dtpTimeConvert, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.txtStockIn649, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtStruct223, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.cbSupplier232, 0, 3);
@@ -244,8 +235,8 @@
             this.tableLayoutPanel1.Controls.Add(this.txtStockOut649, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtSupplier232, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtItem212, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.numTimer, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.rbtnTimer, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.numTimer, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.rbtnTimer, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.btnBrowserStockIn649, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnBrowserStockOut649, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnBrowseritem, 4, 2);
@@ -253,10 +244,13 @@
             this.tableLayoutPanel1.Controls.Add(this.btnBrowserStruct223, 4, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnBrowserIssue655, 4, 5);
             this.tableLayoutPanel1.Controls.Add(this.btnBrowserStockIn6123, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.cbUser, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.txtUser, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.btnBrowserUser, 4, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 9;
+            this.tableLayoutPanel1.RowCount = 10;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -265,8 +259,9 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(864, 270);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(864, 300);
             this.tableLayoutPanel1.TabIndex = 26;
             // 
             // rbtnTimeSet
@@ -274,7 +269,7 @@
             this.rbtnTimeSet.AutoSize = true;
             this.rbtnTimeSet.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rbtnTimeSet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rbtnTimeSet.Location = new System.Drawing.Point(3, 213);
+            this.rbtnTimeSet.Location = new System.Drawing.Point(3, 243);
             this.rbtnTimeSet.Name = "rbtnTimeSet";
             this.rbtnTimeSet.Size = new System.Drawing.Size(166, 24);
             this.rbtnTimeSet.TabIndex = 36;
@@ -309,7 +304,7 @@
             // 
             this.dtpTimeConvert2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtpTimeConvert2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTimeConvert2.Location = new System.Drawing.Point(347, 213);
+            this.dtpTimeConvert2.Location = new System.Drawing.Point(347, 243);
             this.dtpTimeConvert2.Name = "dtpTimeConvert2";
             this.dtpTimeConvert2.ShowUpDown = true;
             this.dtpTimeConvert2.Size = new System.Drawing.Size(166, 20);
@@ -441,7 +436,7 @@
             // numTimer
             // 
             this.numTimer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numTimer.Location = new System.Drawing.Point(175, 243);
+            this.numTimer.Location = new System.Drawing.Point(175, 273);
             this.numTimer.Maximum = new decimal(new int[] {
             120,
             0,
@@ -457,7 +452,7 @@
             this.rbtnTimer.AutoSize = true;
             this.rbtnTimer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rbtnTimer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rbtnTimer.Location = new System.Drawing.Point(3, 243);
+            this.rbtnTimer.Location = new System.Drawing.Point(3, 273);
             this.rbtnTimer.Name = "rbtnTimer";
             this.rbtnTimer.Size = new System.Drawing.Size(166, 24);
             this.rbtnTimer.TabIndex = 35;
@@ -538,13 +533,48 @@
             this.btnBrowserStockIn6123.UseVisualStyleBackColor = true;
             this.btnBrowserStockIn6123.Click += new System.EventHandler(this.btnBrowserStockIn6123_Click);
             // 
+            // cbUser
+            // 
+            this.cbUser.AutoSize = true;
+            this.cbUser.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbUser.Location = new System.Drawing.Point(3, 213);
+            this.cbUser.Name = "cbUser";
+            this.cbUser.Size = new System.Drawing.Size(166, 24);
+            this.cbUser.TabIndex = 37;
+            this.cbUser.Text = "User 99-8-4";
+            this.cbUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbUser.UseVisualStyleBackColor = true;
+            // 
+            // txtUser
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.txtUser, 3);
+            this.txtUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtUser.Location = new System.Drawing.Point(175, 213);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(510, 20);
+            this.txtUser.TabIndex = 38;
+            // 
+            // btnBrowserUser
+            // 
+            this.btnBrowserUser.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBrowserUser.Location = new System.Drawing.Point(692, 210);
+            this.btnBrowserUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.btnBrowserUser.Name = "btnBrowserUser";
+            this.btnBrowserUser.Size = new System.Drawing.Size(100, 30);
+            this.btnBrowserUser.TabIndex = 39;
+            this.btnBrowserUser.Text = "Browser";
+            this.btnBrowserUser.UseVisualStyleBackColor = true;
+            this.btnBrowserUser.Click += new System.EventHandler(this.btnBrowserUser_Click);
+            // 
             // AddPremac649ToDB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 475);
             this.Controls.Add(this.dgvLogs);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -555,7 +585,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -576,7 +605,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DateTimePicker dtpTimeConvert;
         private System.Windows.Forms.DataGridView dgvLogs;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSupplier;
         private System.Windows.Forms.TextBox txtSupplier232;
         private System.Windows.Forms.Button btnBrowseritem;
@@ -605,5 +633,8 @@
         private System.Windows.Forms.NumericUpDown numTimer;
         private System.Windows.Forms.RadioButton rbtnTimer;
         private System.Windows.Forms.ToolStripStatusLabel tsExecuteTime;
+        private System.Windows.Forms.CheckBox cbUser;
+        private System.Windows.Forms.TextBox txtUser;
+        private System.Windows.Forms.Button btnBrowserUser;
     }
 }

@@ -229,19 +229,25 @@ namespace PC_QRCodeSystem.View
                     CustomMessageBox.Notice("Please select a row before packing!" + Environment.NewLine + "Vui lòng chọn 1 nguyên liệu!");
                     return;
                 }
+                //Chọn xuất chẵn
                 if (rbtnEven.Checked)
                 {
                     foreach (DataGridViewRow dr in dgvPreInput.SelectedRows)
                     {
+                        //Khai báo số lượng nhập vào PREMAC
                         double deliveryQty = (double)dr.Cells["delivery_qty"].Value;
                         if (deliveryQty <= 0)
                         {
                             CustomMessageBox.Notice("This lot is null" + Environment.NewLine + "Lô này trống!");
                             return;
                         }
+                        //Nhập lot size
                         sizePerLot = double.Parse(txtCapacity.Text);
+                        //Nếu lot size = 0 thì lot size = tổng số lượng nhập vào
                         if (sizePerLot == 0) sizePerLot = deliveryQty;
+                        //Số lượng lot = tổng số lượng / lot size
                         numberOfLot = (int)(deliveryQty / sizePerLot);
+                        //Tạo tem và số lượng tem tương ứng số lượng lot
                         printItem.ListPrintItem.Add(new PrintItem
                         {
                             Item_Number = dr.Cells["item_number"].Value.ToString(),
@@ -251,11 +257,11 @@ namespace PC_QRCodeSystem.View
                             Invoice = dr.Cells["supplier_invoice"].Value.ToString(),
                             Delivery_Date = (DateTime)dr.Cells["delivery_date"].Value,
                             Delivery_Qty = sizePerLot,
-                            //OrderNo = dr.Cells["order_number"].Value.ToString(),
                             Remark = "P",
                             isRec = true,
                             Label_Qty = numberOfLot
                         });
+                        //Nếu còn thừa số lượng < lot size thì tạo tem tương ứng số lượng thừa
                         if (sizePerLot * numberOfLot < deliveryQty)
                         {
                             qtymod = deliveryQty - (sizePerLot * numberOfLot);
@@ -268,12 +274,12 @@ namespace PC_QRCodeSystem.View
                                 Invoice = dr.Cells["supplier_invoice"].Value.ToString(),
                                 Delivery_Date = (DateTime)dr.Cells["delivery_date"].Value,
                                 Delivery_Qty = qtymod,
-                                //OrderNo = dr.Cells["order_number"].Value.ToString(),
                                 Remark = "P",
                                 isRec = true,
                                 Label_Qty = 1
                             });
                         }
+                        //Chuyển tổng số lượng nhập vào = 0 và tô màu
                         dr.Cells["delivery_qty"].Value = 0;
                         dr.DefaultCellStyle.BackColor = Color.Lime;
                     }
@@ -372,23 +378,29 @@ namespace PC_QRCodeSystem.View
 
         private void rbtnEven_CheckedChanged(object sender, EventArgs e)
         {
+            //Nếu tách lot chẵn thì cho phép chọn nhiều dòng dữ liệu
             if (rbtnEven.Checked) dgvPreInput.MultiSelect = true;
             if (rbtnOdd.Checked) dgvPreInput.MultiSelect = false;
         }
         #endregion
 
         #region SUB EVENT
+        /// <summary>
+        /// Update datagridview search PREMAC
+        /// </summary>
+        /// <param name="isLock"></param>
         private void UpdatePremacGrid(bool isLock)
         {
             btnPremacImport.Enabled = !isLock;
             btnSearchPreInput.Enabled = !isLock;
             if (dgvPreInput.DataSource != null)
             {
+                //Xóa bỏ các cột không cần thiết
                 if (dgvPreInput.Columns.Contains("premac_id")) dgvPreInput.Columns.Remove("premac_id");
                 if (dgvPreInput.Columns.Contains("po_number")) dgvPreInput.Columns.Remove("po_number");
                 if (dgvPreInput.Columns.Contains("order_number")) dgvPreInput.Columns.Remove("order_number");
                 if (dgvPreInput.Columns.Contains("order_qty")) dgvPreInput.Columns.Remove("order_qty");
-
+                //Đổi tên cột
                 dgvPreInput.Columns["item_number"].HeaderText = "Item Number";
                 dgvPreInput.Columns["item_name"].HeaderText = "Item Name";
                 dgvPreInput.Columns["supplier_cd"].HeaderText = "Supplier Code";
@@ -398,6 +410,7 @@ namespace PC_QRCodeSystem.View
                 dgvPreInput.Columns["delivery_date"].HeaderText = "Delivery Date";
                 dgvPreInput.Columns["incharge"].HeaderText = "Incharge";
                 dgvPrintList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+                //Nếu số lượng dòng > 0 thì đếm tổng số dòng và tính tổng số lượng
                 if (dgvPreInput.Rows.Count > 0)
                 {
                     double total = dgvPreInput.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["delivery_qty"].Value));
@@ -412,6 +425,9 @@ namespace PC_QRCodeSystem.View
             }
         }
 
+        /// <summary>
+        /// Search PREMAC file data with fields in main menu
+        /// </summary>
         private void SearchPremacFile()
         {
             try
@@ -622,6 +638,9 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region SUB EVENT
+        /// <summary>
+        /// Update datagridview print items
+        /// </summary>
         private void UpdatePrintGrid()
         {
             dgvPrintList.DataSource = printItem.ListPrintItem;
@@ -656,6 +675,7 @@ namespace PC_QRCodeSystem.View
                     //Register item into stock
                     try
                     {
+                        //Add item into database and remove from list item
                         if (stockItem.AddItem(dgvInspection.Rows[i].DataBoundItem as pts_stock) > 0)
                         {
                             listStockItem.Remove(dgvInspection.Rows[i].DataBoundItem as pts_stock);
@@ -664,6 +684,7 @@ namespace PC_QRCodeSystem.View
                     }
                     catch (Exception ex)
                     {
+                        //If add error then change color to red
                         CustomMessageBox.Error(ex.Message);
                         dgvInspection.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                         continue;
@@ -678,6 +699,7 @@ namespace PC_QRCodeSystem.View
             {
                 CustomMessageBox.Error(ex.Message);
             }
+            //Update stock value
             if (listInputPremac.Count > 0)
                 itemData.ListStockInUpdateValue(GroupByPremac());
             listInputPremac.Clear();
@@ -800,7 +822,7 @@ namespace PC_QRCodeSystem.View
                 else txtUserCD.Text = temp;
                 try
                 {
-                    m_mes_user mUser = new m_mes_user();
+                    pre_user mUser = new pre_user();
                     lbUserName.Text = mUser.GetUser(txtUserCD.Text).user_name;
                     lbUserName.BackColor = Color.Lime;
                     pnlInspection.Visible = true;

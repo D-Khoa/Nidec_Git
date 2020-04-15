@@ -281,6 +281,7 @@ namespace PC_QRCodeSystem.View
         #endregion
 
         #region FIELDS EVENT
+        //Người dùng
         #region USER
         private void txtUserCode_Validated(object sender, EventArgs e)
         {
@@ -293,7 +294,7 @@ namespace PC_QRCodeSystem.View
             try
             {
                 //Lấy username
-                m_mes_user muser = new m_mes_user();
+                pre_user muser = new pre_user();
                 muser = muser.GetUser(txtUserCode.Text);
                 lbUserName.Text = muser.user_name;
                 lbUserName.BackColor = Color.Lime;
@@ -309,6 +310,7 @@ namespace PC_QRCodeSystem.View
 
         private void txtUserCode_TextChanged(object sender, EventArgs e)
         {
+            //Khi user code trống thì label user name về mặc định
             if (string.IsNullOrEmpty(txtUserCode.Text))
             {
                 lbUserName.Text = "User Name";
@@ -316,10 +318,11 @@ namespace PC_QRCodeSystem.View
             }
         }
         #endregion
-
+        //Lí do xuất hàng
         #region ISSUE
         private void cmbIssue_Format(object sender, ListControlConvertEventArgs e)
         {
+            //Hiển thị mã lí do xuất và tên lí do xuất hàng
             string code = ((pts_issue_code)e.ListItem).issue_cd.ToString();
             string iname = ((pts_issue_code)e.ListItem).issue_name;
             e.Value = code + ": " + iname;
@@ -329,6 +332,7 @@ namespace PC_QRCodeSystem.View
         {
             //Đặt biến issueFlag đại diện mã xuất hàng
             issueFlag = cmbIssue.SelectedValue.ToString();
+            //Nếu chọn lí do xuất theo set thì ẩn panel xuất lẻ
             if (cmbIssue.SelectedIndex <= 0)
             {
                 tbpNoSet.Visible = false;
@@ -344,13 +348,15 @@ namespace PC_QRCodeSystem.View
 
         private void cmbIssue_Validated(object sender, EventArgs e)
         {
+            //Nếu không chọn lí do xuất thì không thể chọn qua mục khác
             if (string.IsNullOrEmpty(cmbIssue.Text)) cmbIssue.Select();
         }
         #endregion
-
+        //Phòng ban
         #region DESTINATION
         private void cmbDestination_Format(object sender, ListControlConvertEventArgs e)
         {
+            //Hiển thị mã và tên phòng ban
             string code = ((pts_destination)e.ListItem).destination_cd;
             string iname = ((pts_destination)e.ListItem).destination_name;
             e.Value = code + ": " + iname;
@@ -358,20 +364,23 @@ namespace PC_QRCodeSystem.View
 
         private void cmbDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Nếu phòng ban chưa chọn thì không thể qua mục khác
             if (string.IsNullOrEmpty(cmbDestination.Text) && cmbDestination.Enabled) cmbDestination.Select();
         }
 
         private void cmbDestination_Validated(object sender, EventArgs e)
         {
+            //Nếu phòng ban chưa chọn thì không thể qua mục khác
             if (string.IsNullOrEmpty(cmbDestination.Text) && cmbDestination.Enabled) cmbDestination.Select();
         }
         #endregion
-
+        //Nguyên liệu
         #region ITEM
         private void txtItemCode_TextChanged(object sender, EventArgs e)
         {
             try
             {
+                //Nếu mã nguyên liệu trống thì hiển thị mặc định
                 if (string.IsNullOrEmpty(txtItemCode.Text))
                 {
                     lbItemName.Text = "Item Name";
@@ -395,10 +404,11 @@ namespace PC_QRCodeSystem.View
             }
         }
         #endregion
-
+        //Số lượng
         #region ITEM QTY
         private void CheckDigit_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //Không cho nhập kí tự vào ô nhập số lượng
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
                 e.Handled = true;
         }
@@ -410,23 +420,31 @@ namespace PC_QRCodeSystem.View
             else txtStockOutQty.Text = txtStockOutQty.Text.Replace("-", "");
         }
         #endregion
-
+        //Data
         #region DATAGRIDVIEW
         private void dgvSearch_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            if (cmbIssue.SelectedValue.ToString() == "20")
+            //Nếu xuất hàng theo set
+            if (issueFlag == "20")
             {
+                //Đổi tên button stock out thành open set
                 btnStockOut.Text = "9. OPEN SET /" + Environment.NewLine + "Mở Bộ NL";
+                //Khi nhấn button open set tại dòng nào thì open set theo dữ liệu dòng đó
                 if (e.ColumnIndex == dgvSearch.Columns["btnOpenSet"].Index) OpenSet(e.RowIndex);
             }
+            //Các trường hợp xuất hàng khác thì đổi tên button stock out thành stock out
             else btnStockOut.Text = "9. STOCK-OUT /" + Environment.NewLine + "Xuất Hàng";
         }
 
         private void dgvSearch_DataSourceChanged(object sender, EventArgs e)
         {
+            //Khi thay đổi datasource của datagridview
+            //Nếu datagridview null thì bỏ qua sự kiện này
             if (dgvSearch.DataSource == null) return;
-            if (cmbIssue.SelectedValue.ToString() == "20") btnStockOut.Text = "9. OPEN SET /" + Environment.NewLine + "Mở Bộ NL";
+            //Nếu lí do xuất hàng là theo set thì đổi tên button stock out thành open set
+            if (issueFlag == "20") btnStockOut.Text = "9. OPEN SET /" + Environment.NewLine + "Mở Bộ NL";
+            //Các lí do khác đổi tên thành stock out
             else btnStockOut.Text = "9. STOCK-OUT /" + Environment.NewLine + "Xuất Hàng";
             dgvSearch.ClearSelection();
         }
@@ -460,7 +478,9 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Nếu lí do xuất hàng theo set thì tìm kiếm các set theo mã model / order number
                 if (issueFlag == "20") SearchItemSet(txtItemCode.Text, txtSetNumber.Text);
+                //Các lí do khác tìm kiếm theo mã nguyên liệu
                 else SearchNoSet(txtItemCode.Text, txtInvoice.Text);
             }
             catch (Exception ex)
@@ -499,6 +519,7 @@ namespace PC_QRCodeSystem.View
         /// <returns></returns>
         private bool CheckFields()
         {
+            //Kiểm tra các hạng mục có rỗng thì báo lỗi
             if (string.IsNullOrEmpty(txtUserCode.Text))
             {
                 CustomMessageBox.Error("User code is empty" + Environment.NewLine + "Vui lòng điền mã số nhân viên!");
@@ -528,8 +549,13 @@ namespace PC_QRCodeSystem.View
         /// <param name="inList"></param>
         private void UpdateGridSearchNoSet(BindingList<pts_stock> inList)
         {
+            //Xóa các cột của datagridview
+            dgvSearch.Columns.Clear();
+            //Nạp dữ liệu tìm kiếm theo mã nguyên liệu vào datagridview
             dgvSearch.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.Window);
+            //Nạp danh sách nguyên liệu tìm được vào datasource
             dgvSearch.DataSource = inList;
+            //Đổi tên các cột datagridview
             dgvSearch.Columns["packing_cd"].HeaderText = "Packing Code";
             dgvSearch.Columns["item_cd"].HeaderText = "Item Number";
             dgvSearch.Columns["supplier_cd"].HeaderText = "Supplier Code";
@@ -538,11 +564,14 @@ namespace PC_QRCodeSystem.View
             dgvSearch.Columns["stockin_user_cd"].HeaderText = "Incharge";
             dgvSearch.Columns["stockin_qty"].HeaderText = "Stock-In Qty";
             dgvSearch.Columns["packing_qty"].HeaderText = "Packing Qty";
+            //Xóa các cột không cần dùng tới
             if (dgvSearch.Columns.Contains("stock_id")) dgvSearch.Columns.Remove("stock_id");
             if (dgvSearch.Columns.Contains("order_no")) dgvSearch.Columns.Remove("order_no");
             if (dgvSearch.Columns.Contains("registration_user_cd")) dgvSearch.Columns.Remove("registration_user_cd");
             if (dgvSearch.Columns.Contains("registration_date_time")) dgvSearch.Columns.Remove("registration_date_time");
+            //Đổi tên button stock out thành stock out
             btnStockOut.Text = "9. STOCK-OUT /" + Environment.NewLine + "Xuất Hàng";
+            //Cập nhật datagridview
             dgvSearch.Update();
             dgvSearch.Refresh();
             dgvSearch.ClearSelection();
@@ -552,28 +581,40 @@ namespace PC_QRCodeSystem.View
         /// Update datagridview show set item
         /// </summary>
         /// <param name="inList"></param>
-        /// <param name="isOld"></param>
+        /// <param name="isOld">old set</param>
         private void UpdateGridSearchSet(List<pre_649_order> inList, bool isOld)
         {
+            //Xóa các cột datagridview
             dgvSearch.Columns.Clear();
+            //Nếu là các set cũ thì tô màu xanh
             if (isOld) dgvSearch.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+            //Các set mới tô màu mặc định
             else dgvSearch.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.Window);
+            //Nạp danh sách set nguyên liệu vào datasource
             dgvSearch.DataSource = inList;
+            //Đổi tên các cột
             dgvSearch.Columns["item_number"].HeaderText = "Item Number";
             dgvSearch.Columns["order_number"].HeaderText = "Order Number";
             dgvSearch.Columns["order_qty"].HeaderText = "Order Qty";
             dgvSearch.Columns["order_date"].HeaderText = "Order Date";
             dgvSearch.Columns["supplier_cd"].HeaderText = "Supplier Code";
+            //Nếu chưa có cột chứa button open set thì add thêm vào
             if (!dgvSearch.Columns.Contains("btnOpenSet"))
             {
+                //Khai báo cột kiểu button
                 DataGridViewButtonColumn col = new DataGridViewButtonColumn();
+                //Tên cột
                 col.Name = "btnOpenSet";
+                //Tên header của cột
                 col.HeaderText = "Open Set";
+                //Button text
                 col.Text = "Open";
                 col.UseColumnTextForButtonValue = true;
                 dgvSearch.Columns.Insert(0, col);
             }
+            //Đổi tên button stock out thành open set
             btnStockOut.Text = "9. OPEN SET /" + Environment.NewLine + "Mở Bộ NL";
+            //Cập nhật datagridview
             dgvSearch.Update();
             dgvSearch.Refresh();
             dgvSearch.ClearSelection();
@@ -587,6 +628,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Nhập liệu vào datagirdview khi nhấn nút input
                 InputSet(dgvSetData.SelectedRows[0].Index);
             }
             catch (Exception ex)
@@ -599,6 +641,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Xuất set và in tem
                 OutSet();
             }
             catch (Exception ex)
@@ -611,6 +654,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Xóa dữ liệu nguyên liệu được chọn
                 DeleteLowItem();
             }
             catch (Exception ex)
@@ -621,6 +665,7 @@ namespace PC_QRCodeSystem.View
 
         private void btnSetBack_Click(object sender, EventArgs e)
         {
+            //Chuyển về main menu
             tc_Main.SelectedTab = tab_Main;
         }
         #endregion
@@ -629,13 +674,16 @@ namespace PC_QRCodeSystem.View
         /// <summary>
         /// Input a low level item into list
         /// </summary>
-        /// <param name="rindex"></param>
+        /// <param name="rindex">row index of item</param>
         private void InputSet(int rindex)
         {
+            //Mã nguyên liệu
             string itemCode = txtSetItemCD.Text;
+            //Khai báo dữ liệu tồn kho trên database
             pts_stock stockData = new pts_stock();
             //Kiểm tra nguyên liệu đã stock in chưa
             #region CHECK ITEM IS EXIST IN STOCK?
+            //Nếu nguyên liệu tồn tại trên database thì sẽ thêm vào danh sách nguyên liệu tồn
             if (!stockData.SearchItem(new pts_stock { item_cd = itemCode, invoice = txtSetInvoice.Text }))
             {
                 CustomMessageBox.Error("This item is not exist in stock!" + Environment.NewLine + "Nguyên liệu không có trong kho!");
@@ -645,13 +693,16 @@ namespace PC_QRCodeSystem.View
                 return;
             }
             #endregion
-
+            //Duyệt đến dòng dữ liệu tương ứng rindex
             DataGridViewRow dr = dgvSetData.Rows[rindex];
+            //Khai báo số lượng chuyển
             double deliveryQty = 0;
+            //Khai báo số lượng muốn xuất
             double packingQty = double.Parse(txtSetOutQty.Text);
+            //Khai báo số lượng yêu cầu
             double orderQty = (double)dr.Cells["request_qty"].Value;
+            //Khai báo số lượng xuất hiện tại
             double stockoutQty = (double)dr.Cells["stockout_qty"].Value;
-
             #region CHECK ITEM QTY
             //Kiểm tra số lượng tồn trên PREMAC
             double whQty = (double)dr.Cells["wh_qty"].Value;
@@ -660,7 +711,6 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error("This item is not enough in PREMAC!" + Environment.NewLine + "Số lượng hàng tồn trên PREMAC không đủ!");
                 return;
             }
-
             //Kiểm tra số lượng tồn trên SQL DB
             double totalpackingQty = stockData.listStockItems.Sum(x => x.packing_qty);
             if (packingQty > totalpackingQty)
@@ -669,7 +719,6 @@ namespace PC_QRCodeSystem.View
                 return;
             }
             #endregion
-
             //Cộng dồn số lượng xuất
             stockoutQty += packingQty;
             //Nếu số lượng xuất lớn hơn số lượng yêu cầu thì xuất bằng yêu cầu
@@ -678,15 +727,21 @@ namespace PC_QRCodeSystem.View
                 packingQty -= stockoutQty - orderQty;
                 stockoutQty = orderQty;
             }
+            //Nhập số lượng xuất của nguyên liệu
             dr.Cells["stockout_qty"].Value = stockoutQty;
-
+            //Khai báo supplier
             pts_supplier supplierData = new pts_supplier();
+            //Duyệt danh sách nguyên liệu tồn
             foreach (pts_stock item in stockData.listStockItems)
             {
+                //Nếu số lượng tồn của gói bằng 0 thì bỏ qua
                 if (item.packing_qty == 0) continue;
+                //Nếu số lượng xuất nhỏ hơn số lượng tồn của gói thì tách gói
                 if (packingQty < item.packing_qty)
                 {
+                    //Số lượng chuyển = số lượng xuất / gói
                     deliveryQty = packingQty;
+                    //Trừ số lượng tồn của gói
                     item.packing_qty -= packingQty;
                     //Thêm item vào danh sách in nếu tách tem
                     #region ADD PRINT ITEM
@@ -719,10 +774,14 @@ namespace PC_QRCodeSystem.View
                     #endregion
                     packingQty = 0;
                 }
+                //Nếu số lượng tồn của gói nhỏ hoặc bằng số lượng xuất / gói
                 else
                 {
+                    //Số lượng chuyển = số lượng tồn
                     deliveryQty = item.packing_qty;
+                    //Trừ số lượng xuất / gói
                     packingQty -= item.packing_qty;
+                    //Số lượng tồn = 0
                     item.packing_qty = 0;
                 }
                 #region ADD STOCK OUT ITEM
@@ -742,12 +801,16 @@ namespace PC_QRCodeSystem.View
                 //Nếu tem đã tồn tại thì cộng dồn lên, nếu chưa thì thêm vào
                 try
                 {
-                    int lbindex = listLabel.Where(x => x.Item_Number == item.item_cd && x.Invoice == item.invoice && x.Delivery_Qty == deliveryQty)
+                    //Lấy index của tem mới quét vào trong danh sách tem kiểm tra
+                    int lbindex = listLabel.Where(x => x.Item_Number == item.item_cd
+                                                  && x.Invoice == item.invoice && x.Delivery_Qty == deliveryQty)
                                            .Select(x => listLabel.IndexOf(x)).First();
+                    //Nếu tồn tại index thì số lượng tem cộng thêm 1
                     listLabel[lbindex].Label_Qty += 1;
                 }
                 catch
                 {
+                    //Nếu không tồn tại index thì thêm tem vào danh sách tem kiểm tra
                     listLabel.Add(new PrintItem
                     {
                         Item_Number = item.item_cd,
@@ -776,7 +839,9 @@ namespace PC_QRCodeSystem.View
                     incharge = txtSetUserCD.Text,
                 });
                 #endregion
+                //Thêm nguyên liệu đã chỉnh sửa số lượng vào danh sách nguyên liệu tồn
                 listStock.Add(item);
+                //Nếu số lượng xuất = 0 thì thoát vòng lặp
                 if (packingQty == 0) break;
             }
             //Tô màu những nguyên liệu đã xuất
@@ -795,11 +860,14 @@ namespace PC_QRCodeSystem.View
         {
             if (CustomMessageBox.Question("Do you want stock-out this set?" + Environment.NewLine + "Bạn có muốn xuất bộ nguyên liệu?") == DialogResult.No)
                 return;
+            //Xuất các danh sách xuất hàng, tem kiểm tra, danh sách in để in và kiểm tra
             UpdateGridStockOut(listStockOut);
             UpdateGridLabel(listLabel);
             UpdateGridPrint(listPrint);
             CustomMessageBox.Notice("Stock out this set successful! Please print label and check data!" + Environment.NewLine + "Đã xuất bộ nguyên liệu! Vui lòng in tem và kiểm tra!");
+            //Nếu danh sách tem cần in > 0 thì đến menu in tem
             if (dgvPrint.Rows.Count > 0) tc_Main.SelectedTab = tab_Print;
+            //Ngược lại thì đến menu kiểm tra cuối
             else
             {
                 CustomMessageBox.Notice("No item in print list!" + Environment.NewLine + "Không có tem cần in!");
@@ -815,11 +883,17 @@ namespace PC_QRCodeSystem.View
         {
             if (CustomMessageBox.Question("Are you sure delete this item?" + Environment.NewLine + "Bạn có chắc xóa nguyên liệu này?") == DialogResult.No)
                 return;
+            //Lấy mã nguyên liệu cần xóa
             string itemCD = dgvSetData.SelectedRows[0].Cells["low_level_item"].Value.ToString();
+            //Cho số lượng xuất về bằng 0
             dgvSetData.SelectedRows[0].Cells["stockout_qty"].Value = "0";
+            //Lấy danh sách các gói nguyên liệu xóa từ danh sách tồn
             var listDel = listStock.Where(x => x.item_cd == itemCD).Select(x => x).ToList();
+            //Lấy index của nguyên liệu trong danh sách xuất ra csv
             var outIndex = listOut.Where(x => x.item_number == itemCD).Select(x => listOut.IndexOf(x)).First();
+            //Xóa nguyên liệu trong danh sách xuất dựa theo index vừa tìm
             listOut.RemoveAt(outIndex);
+            //Duyệt danh sách tem cần in nếu mã nguyên liệu = mã nguyên liệu cần xóa thì xóa
             for (int i = 0; i < listPrint.Count; i++)
             {
                 if (listPrint[i].Item_Number == itemCD)
@@ -828,9 +902,12 @@ namespace PC_QRCodeSystem.View
                     i--;
                 }
             }
+            //Duyệt danh sách nguyên liệu cần xóa
             for (int i = 0; i < listDel.Count; i++)
             {
+                //Lấy index của gói nguyên liệu cần xóa trong danh sách xuất
                 var stockoutIndex = listStockOut.Where(x => x.packing_cd == listDel[i].packing_cd).Select(x => listStockOut.IndexOf(x)).First();
+                //Xóa gói nguyên liệu
                 listStockOut.RemoveAt(stockoutIndex);
                 listDel.RemoveAt(i);
                 i--;
@@ -847,21 +924,25 @@ namespace PC_QRCodeSystem.View
             try
             {
                 List<PrintItem> listPrintItems = new List<PrintItem>();
+                //Nếu danh sách tem = 0 thì báo lỗi
                 if (dgvPrint.Rows.Count == 0)
                 {
                     CustomMessageBox.Notice("Don't have item to print!" + Environment.NewLine + "Không có tem cần in!");
                     return;
                 }
+                //Kiểm tra máy in có online hay không
                 if (listPrint[0].CheckPrinterIsOffline(SettingItem.printerSName))
                 {
                     CustomMessageBox.Notice("Printer is offline" + Environment.NewLine + "Máy in chưa mở!");
                     return;
                 }
+                //Duyệt danh sách các tem cần in và tô màu
                 foreach (DataGridViewRow dr in dgvPrint.Rows)
                 {
                     listPrintItems.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
                 }
+                //In danh sách tem
                 if (listPrint[0].PrintItems(listPrintItems, false))
                     CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
@@ -876,21 +957,25 @@ namespace PC_QRCodeSystem.View
             try
             {
                 List<PrintItem> listPrintItems = new List<PrintItem>();
-                if (dgvPrint.Rows.Count == 0)
+                //Nếu không có tem được chọn thì báo lỗi
+                if (dgvPrint.SelectedRows.Count == 0)
                 {
                     CustomMessageBox.Notice("Don't have item to print!" + Environment.NewLine + "Không có tem cần in!");
                     return;
                 }
+                //Kiểm tra kết nối máy in
                 if (listPrint[0].CheckPrinterIsOffline(SettingItem.printerSName))
                 {
                     CustomMessageBox.Notice("Printer is offline" + Environment.NewLine + "Máy in chưa mở!");
                     return;
                 }
+                //Duyệt và tô màu danh sách tem in
                 foreach (DataGridViewRow dr in dgvPrint.SelectedRows)
                 {
                     listPrintItems.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
                 }
+                //In danh sách tem
                 if (listPrint[0].PrintItems(listPrintItems, false))
                     CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
@@ -902,20 +987,24 @@ namespace PC_QRCodeSystem.View
 
         private void btnPrintInspection_Click(object sender, EventArgs e)
         {
+            //Duyệt danh sách tem in
             foreach (DataGridViewRow dr in dgvPrint.Rows)
             {
+                //Nếu còn tem chưa được tô màu thì thông báo
                 if (dr.DefaultCellStyle.BackColor != Color.FromKnownColor(KnownColor.ActiveCaption))
                 {
                     if (CustomMessageBox.Warring("Have label no print yet! Are you sure continue?" + Environment.NewLine + "Có nhãn chưa in! Bạn có muốn tiếp tục?") == DialogResult.No)
                         return;
                 }
             }
+            //Tất cả tem được tô màu thì chuyển sang inspection menu
             tc_Main.SelectedTab = tab_Inspection;
             txtInsBarcode.Focus();
         }
 
         private void btnPrintBack_Click(object sender, EventArgs e)
         {
+            //Nếu lí do xuất là 20 thì về lại set menu ngược lại về main menu
             if (issueFlag == "20")
                 tc_Main.SelectedTab = tab_Set;
             else
@@ -928,6 +1017,7 @@ namespace PC_QRCodeSystem.View
         /// <param name="inList"></param>
         private void UpdateGridPrint(BindingList<PrintItem> inList)
         {
+            //Nhập danh sách tem cần in vào datagridview
             dgvPrint.DataSource = inList;
         }
         #endregion
@@ -938,6 +1028,7 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Nếu chưa kiểm tra tem thì báo lỗi
                 if (!isChecked)
                 {
                     CustomMessageBox.Notice("Please check all label before register!" + Environment.NewLine + "Vui lòng kiểm tra tất cả tem trước khi đăng ký!");
@@ -945,11 +1036,16 @@ namespace PC_QRCodeSystem.View
                 }
                 if (CustomMessageBox.Question("Do you want register this data?" + Environment.NewLine + "Bạn có muốn đăng ký dữ liệu này?") == DialogResult.No)
                     return;
+                //Xuất danh sách nguyên liệu ra file csv
                 listOut[0].ExportCSV(listOut.ToList());
+                //Cập nhật danh sách các gói nguyên liệu tồn kho
                 listStock[0].UpdateMultiItem(listStock.ToList());
+                //Thêm danh sách các gói nguyên liệu được xuất vào database
                 listStockOut[0].AddMultiItem(listStockOut.ToList());
+                //Khai báo bảng item và cập nhật số lượng tồn kho
                 pts_item itemData = new pts_item();
                 itemData.ListStockOutUpdateValue(listOut.ToList());
+                //Nếu lí do xuất là 20 thì thêm lịch sử kế hoạch xuất
                 if (issueFlag == "20")
                 {
                     pts_plan planData = new pts_plan()
@@ -965,6 +1061,7 @@ namespace PC_QRCodeSystem.View
                     };
                     planData.Add(planData);
                 }
+                //Ngược lại thêm lịch sử xuất không kế hoạch
                 else
                 {
                     pts_noplan noPlanData = new pts_noplan()
@@ -980,6 +1077,7 @@ namespace PC_QRCodeSystem.View
                 }
                 CustomMessageBox.Notice("Register data completed!" + Environment.NewLine + "Dữ liệu được đăng ký hoàn tất!");
                 isChecked = false;
+                //Xóa các danh sách nguyên liệu hiện có sau khi đăng kí dữ liệu
                 ClearDataList();
             }
             catch (Exception ex)
@@ -1063,11 +1161,13 @@ namespace PC_QRCodeSystem.View
 
         private void btnInsBack_Click(object sender, EventArgs e)
         {
+            //Nếu các danh sách nguyên liệu và tem khác rỗng thì cảnh báo
             if (dgvLabel.Rows.Count > 0 && dgvStockOut.Rows.Count > 0)
             {
                 if (CustomMessageBox.Warring("If you go back, the current data is clear. Are you sure to go back?" + Environment.NewLine + "Nếu bạn trở lại menu chính, dữ liệu hiện tại sẽ bị xóa. Bạn có chắc muốn trở lại?") == DialogResult.No)
                     return;
             }
+            //Xóa hết các danh sach dữ liệu và trở lại main menu
             ClearDataList();
             tc_Main.SelectedTab = tab_Main;
         }
@@ -1095,6 +1195,7 @@ namespace PC_QRCodeSystem.View
             dgvLabel.Columns.Clear();
             dgvLabel.DataSource = null;
             dgvLabel.DataSource = inlist;
+            //Nếu không tồn tại cột check_qty thì thêm vào
             if (!dgvLabel.Columns.Contains("check_qty"))
             {
                 DataGridViewTextBoxColumn dc = new DataGridViewTextBoxColumn();
@@ -1113,14 +1214,11 @@ namespace PC_QRCodeSystem.View
         private void UpdateGridStockOut(BindingList<pts_stockout_log> inList)
         {
             dgvStockOut.DataSource = inList;
-            //dgvStockOut.Columns["stockout_id"].HeaderText = "ID";
             dgvStockOut.Columns["process_cd"].HeaderText = "Process Code";
             dgvStockOut.Columns["issue_cd"].HeaderText = "Issue Code";
             dgvStockOut.Columns["stockout_date"].HeaderText = "Stock-out date";
             dgvStockOut.Columns["stockout_user_cd"].HeaderText = "Incharge";
             dgvStockOut.Columns["stockout_qty"].HeaderText = "Stock-out Qty";
-            //dgvStockOut.Columns["real_qty"].HeaderText = "Real Qty";
-            //dgvStockOut.Columns["received_user_cd"].HeaderText = "Received User";
             dgvStockOut.Columns["comment"].HeaderText = "Comment";
             dgvStockOut.Columns["remark"].HeaderText = "Remark";
             if (dgvStockOut.Columns.Contains("stockout_id")) dgvStockOut.Columns.Remove("stockout_id");
@@ -1189,14 +1287,17 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                //Lấy giá trị tồn kho của nguyên liệu
                 pts_item itemdata = new pts_item();
                 itemdata = itemdata.GetItem(itemNumber);
                 double totalWHQty = itemdata.wh_qty;
                 txtWHQty.Text = totalWHQty.ToString();
+                //Lấy tổng số lượng các gói nguyên liệu trong stock
                 pts_stock stockdata = new pts_stock();
                 stockdata.SearchItem(new pts_stock { item_cd = itemNumber, invoice = invoiceText }, false);
                 double totalPackingQty = stockdata.listStockItems.Select(x => x.packing_qty).Sum();
                 txtTotalPackingQty.Text = totalPackingQty.ToString();
+                //Cập nhật danh sách tìm kiếm không theo set
                 UpdateGridSearchNoSet(stockdata.listStockItems);
             }
             catch (Exception ex)
@@ -1210,11 +1311,17 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         private void OutNoSet()
         {
+            //Kiểm tra rỗng các hạng mục trong main menu
             if (!CheckFields()) return;
+            //Khai báo số lượng chuyển
             double deliveryQty = 0;
+            //Khai báo số lượng tồn kho
             double whQty = double.Parse(txtWHQty.Text);
+            //Khai báo số lượng xuất
             double stockoutQty = double.Parse(txtStockOutQty.Text);
+            //Khai báo tổng số lượng các gói nguyên liệu trong stock
             double totalPackQty = double.Parse(txtTotalPackingQty.Text);
+            //Kiểm tra số lượng xuất
             if (stockoutQty == 0 || string.IsNullOrEmpty(txtStockOutQty.Text))
             {
                 CustomMessageBox.Notice("Please fill Stock-Out Q'ty" + Environment.NewLine + "Vui lòng điền số lượng cần xuất!");
@@ -1226,27 +1333,42 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Notice("Stock-Out Q'ty can't more than Stock Q'ty!" + Environment.NewLine + "Số lượng xuất không thể lớn hơn số lượng tồn!");
                 return;
             }
+            //Số lượng tồn = số lượng tồn trừ số lượng xuất
             txtWHQty.Text = (whQty - stockoutQty).ToString();
+            //Khai báo mã xuất không theo set
             processCD = "NP-" + dtpStockOutDate.Value.ToString("yyyyMMdd");
-
+            //Khai báo truy xuất stock và supplier
             pts_stock stockData = new pts_stock();
             pts_supplier supplierData = new pts_supplier();
+            //Dựa theo danh sách các gói nguyên liệu tìm được
             for (int i = 0; i < dgvSearch.Rows.Count; i++)
             {
+                //Lấy dữ liệu từng gói nguyên liệu
                 stockData = dgvSearch.Rows[i].DataBoundItem as pts_stock;
+                //Nếu số lượng tồn của gói = 0 thì bỏ qua
                 if (stockData.packing_qty == 0) continue;
+                //Nếu số lượng xuất lớn hơn hoặc bằng số lượng tồn
                 if (stockoutQty >= stockData.packing_qty)
                 {
+                    //Số lượng chuyển = số lượng tồn
                     deliveryQty = stockData.packing_qty;
+                    //Số lượng xuất trừ số lượng tồn
                     stockoutQty -= stockData.packing_qty;
+                    //Số lượng tồn  = 0
                     stockData.packing_qty = 0;
                 }
+                //Nếu số lượng tồn lớn hơn số lượng xuất
                 else
                 {
+                    //Số lượng chuyển = số lượng xuất
                     deliveryQty = stockoutQty;
+                    //Số lượng xuất = 0
                     stockoutQty = 0;
+                    //Số lượng tồn trừ số lượng xuất
                     stockData.packing_qty -= deliveryQty;
+                    //Thêm tem cần in vào danh sách
                     #region ADD PRINT ITEM
+                    //Thêm tem nguyên liệu tồn
                     listPrint.Add(new PrintItem
                     {
                         Item_Number = txtItemCode.Text,
@@ -1259,6 +1381,7 @@ namespace PC_QRCodeSystem.View
                         isRec = true,
                         Label_Qty = 1,
                     });
+                    //Thêm tem nguyên liệu xuất
                     listPrint.Add(new PrintItem
                     {
                         Item_Number = txtItemCode.Text,
@@ -1273,7 +1396,9 @@ namespace PC_QRCodeSystem.View
                     });
                     #endregion
                 }
+                //Thêm nguyên liệu cần xuất và tem cần kiểm tra vào danh sách
                 #region ADD LIST STOCK-OUT AND LABEL
+                //Thêm nguyên liệu cần xuất vào danh sách
                 listStockOut.Add(new pts_stockout_log
                 {
                     packing_cd = stockData.packing_cd,
@@ -1287,12 +1412,14 @@ namespace PC_QRCodeSystem.View
                 });
                 try
                 {
+                    //Lấy index của tem vừa xuất, nếu tồn tại thì số lượng tem + 1
                     int lbindex = listLabel.Where(x => x.Item_Number == txtItemCode.Text && x.Invoice == stockData.invoice && x.Delivery_Qty == deliveryQty)
                                            .Select(x => listLabel.IndexOf(x)).First();
                     listLabel[lbindex].Label_Qty += 1;
                 }
                 catch
                 {
+                    //Nếu không tồn tại index thì thêm tem vào danh sách tem cần kiểm tra
                     listLabel.Add(new PrintItem
                     {
                         Item_Number = txtItemCode.Text,
@@ -1307,6 +1434,7 @@ namespace PC_QRCodeSystem.View
                     });
                 }
                 #endregion
+                //Thêm nguyên liệu cần xuất vào danh sách xuất ra file csv
                 #region ADD OUT ITEM
                 listOut.Add(new OutputItem
                 {
@@ -1320,10 +1448,13 @@ namespace PC_QRCodeSystem.View
                     incharge = txtUserCode.Text,
                 });
                 #endregion
+                //Thêm gói nguyên liệu tồn vào danh sách nguyên liệu tồn
                 listStock.Add(stockData);
+                //Nếu số lượng xuất = 0 thì thoát vòng lặp
                 if (stockoutQty == 0) break;
             }
             CustomMessageBox.Notice("Stock out " + txtItemCode.Text + " successful! Qty: " + txtStockOutQty.Text + Environment.NewLine + "Xuất " + txtItemCode.Text + " thành công! Số lượng: " + txtStockOutQty.Text);
+            //Cập nhật các danh sách nguyên liệu xuất, tem cần in, tem cần kiểm tra
             UpdateGridStockOut(listStockOut);
             UpdateGridLabel(listLabel);
             UpdateGridPrint(listPrint);
@@ -1341,6 +1472,7 @@ namespace PC_QRCodeSystem.View
             try
             {
                 //Tìm kiếm order number của các set chưa được xuất
+                //Tìm danh sách các order number từ menu 6-4-9 (mới)
                 pre_649_order orderData = new pre_649_order();
                 orderData.Search(new pre_649_order
                 {
@@ -1352,12 +1484,14 @@ namespace PC_QRCodeSystem.View
                 if (orderData.listOrderItem.Count <= 0)
                 {
                     isDeliveried = true;
+                    //Tìm danh sách các order number từ menu 6-4-9 (cũ)
                     pre_649 deliveriedData = new pre_649();
                     deliveriedData.SearchOrder(new pre_649
                     {
                         item_number = itemNumber,
                         order_number = setNumber
                     });
+                    //Chuyển danh sách các order number từ bảng 6-4-9 sang bảng 6-4-9 order
                     orderData.listOrderItem = deliveriedData.listPremacItem.Select(x => new pre_649_order
                     {
                         item_number = x.item_number,
@@ -1366,8 +1500,10 @@ namespace PC_QRCodeSystem.View
                         order_date = x.order_date,
                         order_qty = x.order_qty,
                     }).ToList();
+                    //Cập nhật danh sách tìm kiếm theo set (có tô màu)
                     UpdateGridSearchSet(orderData.listOrderItem, true);
                 }
+                //Cập nhật danh sách tìm kiếm theo set (không tô màu)
                 else UpdateGridSearchSet(orderData.listOrderItem, false);
             }
             catch (Exception ex)
@@ -1382,24 +1518,36 @@ namespace PC_QRCodeSystem.View
         /// <param name="RowIndex">index of row in list item set</param>
         private void OpenSet(int RowIndex)
         {
+            //Kiểm tra rỗng các hạng mục dữ liệu main menu
             if (!CheckFields()) return;
+            //Khai báo order number
             string orderNo = string.Empty;
+            //Lấy dữ liệu hàng được chọn
             DataGridViewRow dr = dgvSearch.Rows[RowIndex];
+            //Nếu textbox order number rỗng thì lấy order number từ dữ liệu được chọn
             if (string.IsNullOrEmpty(txtSetNumber.Text))
                 orderNo = dr.Cells["order_number"].Value.ToString();
             else
                 orderNo = txtSetNumber.Text;
+            //Nhập các hạng mục giá trị từ main menu sang set menu
             GetSetOptions(dr.Cells["item_number"].Value.ToString(), orderNo, (double)dr.Cells["order_qty"].Value, (DateTime)dr.Cells["order_date"].Value);
+            //Tìm kiếm danh sách nguyên liệu theo set model
             SearchLowItem(dr.Cells["item_number"].Value.ToString(), (double)dr.Cells["order_qty"].Value, orderNo);
+            //Chuyển sang set menu
             tc_Main.SelectedTab = tab_Set;
+            //Kiểm tra theo menu 6-5-5
             pre_655 issueData = new pre_655();
             pts_stockout_log stockoutData = new pts_stockout_log();
             double temp = 0;
+            //Duyệt danh sách nguyên liệu theo set
             for (int i = 0; i < dgvSetData.Rows.Count; i++)
             {
+                //Lấy số lượng nguyên liệu được xuất cho order number hiện tại
                 temp = stockoutData.GetStockOutQty(orderNo, dgvSetData.Rows[i].Cells["low_level_item"].Value.ToString());
+                //Nếu số lượng xuất = 0
                 if (temp == 0)
                 {
+                    //Tìm kiếm trong bảng 655
                     issueData.Search(new pre_655
                     {
                         low_level_item = dgvSetData.Rows[i].Cells["low_level_item"].Value.ToString(),
@@ -1408,14 +1556,20 @@ namespace PC_QRCodeSystem.View
                     });
                     try
                     {
+                        //Lấy số lượng chưa được xuất của nguyên liệu từ menu 6-5-5
                         temp = issueData.listIssueItem[0].no_issue_qty;
+                        //Nếu số lượng chưa được xuất > 0 
+                        //thì số lượng yêu cầu của nguyên liệu trong set = số lượng chưa được xuất
                         if (temp > 0) dgvSetData.Rows[i].Cells["request_qty"].Value = temp;
                     }
                     catch
                     {
+                        //Nếu nguyên liệu không tồn tại trong menu 655 nhưng mã order number đã chuyển 
+                        //thì số lượng yêu cầu của nguyên liệu trong set = 0
                         if (isDeliveried) dgvSetData.Rows[i].Cells["request_qty"].Value = 0;
                     }
                 }
+                //Nếu số lượng xuất khác 0 thì số lượng yêu cầu của nguyên liêu sẽ trừ số lượng đã xuất
                 else
                     dgvSetData.Rows[i].Cells["request_qty"].Value = (double)dgvSetData.Rows[i].Cells["request_qty"].Value - temp;
             }
@@ -1430,8 +1584,10 @@ namespace PC_QRCodeSystem.View
         /// <param name="orderNumber">order number</param>
         private void SearchLowItem(string hiItem, double orderQty, string orderNumber)
         {
+            //Khai báo dữ liệu menu 223
             pre_223 structData = new pre_223();
             List<pre_223_view> listData = new List<pre_223_view>();
+            //Tìm kiếm danh sách nguyên liệu theo set tương ứng với model
             listData = structData.Search(hiItem, orderQty);
             dgvSetData.DataSource = listData;
             dgvSetData.Columns["low_level_item"].HeaderText = "Part Number";
@@ -1452,6 +1608,7 @@ namespace PC_QRCodeSystem.View
         /// <param name="orderDate">request date</param>
         private void GetSetOptions(string modelCode, string orderNo, double orderQty, DateTime orderDate)
         {
+            //Chuyển dữ liệu từ main menu sang set menu
             txtSetOrderNo.Text = orderNo;
             txtSetUserCD.Text = txtUserCode.Text;
             txtSetModelCD.Text = modelCode;

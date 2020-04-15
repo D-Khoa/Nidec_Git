@@ -59,14 +59,5 @@ namespace ConvertPremacFile.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string CONNECTSTRING_MES {
-            get {
-                return ResourceManager.GetString("CONNECTSTRING_MES", resourceCulture);
-            }
-        }
     }
 }
