@@ -227,7 +227,7 @@
             this.asset_type_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.asset_type_lbl.Location = new System.Drawing.Point(267, 146);
             this.asset_type_lbl.Name = "asset_type_lbl";
-            this.asset_type_lbl.Size = new System.Drawing.Size(70, 15);
+            this.asset_type_lbl.Size = new System.Drawing.Size(69, 15);
             this.asset_type_lbl.TabIndex = 70;
             this.asset_type_lbl.Text = "Asset Type:";
             // 
@@ -350,7 +350,7 @@
             this.full_asset_code_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.full_asset_code_lbl.Location = new System.Drawing.Point(2, 117);
             this.full_asset_code_lbl.Name = "full_asset_code_lbl";
-            this.full_asset_code_lbl.Size = new System.Drawing.Size(94, 15);
+            this.full_asset_code_lbl.Size = new System.Drawing.Size(93, 15);
             this.full_asset_code_lbl.TabIndex = 59;
             this.full_asset_code_lbl.Text = "Full Asset Code";
             // 
@@ -591,6 +591,8 @@
             // 
             // detail_position_cmb
             // 
+            this.detail_position_cmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.detail_position_cmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.detail_position_cmb.ControlId = null;
             this.detail_position_cmb.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.detail_position_cmb.FormattingEnabled = true;
@@ -631,6 +633,8 @@
             // 
             // location_cbm
             // 
+            this.location_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.location_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.location_cbm.ControlId = null;
             this.location_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.location_cbm.FormattingEnabled = true;
@@ -830,7 +834,7 @@
             this.colAssetType.HeaderText = "Asset Type";
             this.colAssetType.Name = "colAssetType";
             this.colAssetType.ReadOnly = true;
-            this.colAssetType.Width = 92;
+            this.colAssetType.Width = 91;
             // 
             // coluserlocationname
             // 
@@ -1000,7 +1004,7 @@
             this.colNetValue.HeaderText = "Net Value ($)";
             this.colNetValue.Name = "colNetValue";
             this.colNetValue.ReadOnly = true;
-            this.colNetValue.Width = 103;
+            this.colNetValue.Width = 102;
             // 
             // colAssetInvoice
             // 
@@ -1053,7 +1057,7 @@
             this.netvalue_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.netvalue_lbl.Location = new System.Drawing.Point(529, 175);
             this.netvalue_lbl.Name = "netvalue_lbl";
-            this.netvalue_lbl.Size = new System.Drawing.Size(63, 15);
+            this.netvalue_lbl.Size = new System.Drawing.Size(62, 15);
             this.netvalue_lbl.TabIndex = 84;
             this.netvalue_lbl.Text = "Net Value:";
             // 

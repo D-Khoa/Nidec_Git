@@ -207,6 +207,8 @@
             // 
             // cmbAfterLocation
             // 
+            this.cmbAfterLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbAfterLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbAfterLocation.ControlId = null;
             this.cmbAfterLocation.Font = new System.Drawing.Font("Arial", 9F);
             this.cmbAfterLocation.FormattingEnabled = true;
@@ -626,6 +628,8 @@
             // 
             // cmbDetailPosition
             // 
+            this.cmbDetailPosition.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbDetailPosition.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbDetailPosition.ControlId = null;
             this.cmbDetailPosition.Font = new System.Drawing.Font("Arial", 9F);
             this.cmbDetailPosition.FormattingEnabled = true;
@@ -648,6 +652,8 @@
             // 
             // cmbBeforeLocation
             // 
+            this.cmbBeforeLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbBeforeLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbBeforeLocation.ControlId = null;
             this.cmbBeforeLocation.Enabled = false;
             this.cmbBeforeLocation.Font = new System.Drawing.Font("Arial", 9F);

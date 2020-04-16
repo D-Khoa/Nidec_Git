@@ -274,6 +274,8 @@
             // 
             // location_cbm
             // 
+            this.location_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.location_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.location_cbm.ControlId = null;
             this.location_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.location_cbm.FormattingEnabled = true;
