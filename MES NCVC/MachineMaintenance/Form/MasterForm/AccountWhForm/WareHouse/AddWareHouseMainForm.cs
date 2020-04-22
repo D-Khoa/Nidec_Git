@@ -224,7 +224,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
 
         private void user_location_code_txt_TextChanged(object sender, EventArgs e)
         {
-            if ((txtUserCode.Text.Length == 13) || (txtUserCode.Text.Length == 10))
+            if ((txtUserCode.Text.Length == 13) || (txtUserCode.Text.Length == 10) || (txtUserCode.Text == "admin"))
             {
                 WareHouseMainVo inVo = new WareHouseMainVo()
                 {
