@@ -52,10 +52,11 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
         {
             InvertoryVo inVo = new InvertoryVo()
             {
-                AssetCode = assetcodetrim,
-                InvertoryTimeCode = InvertoryTimeCode_cbm.Text,
+                AssetCode = asset_Code_cmb.Text.Trim(),
+                //InvertoryTimeCode = InvertoryTimeCode_cbm.Text,
                 NowLocation = location_cbm.Text,
             };
+            if (cbInventoryCode.Checked) inVo.InvertoryTimeCode = InvertoryTimeCode_cbm.Text;
             try
             {
                 ValueObjectList<InvertoryVo> listvo = (ValueObjectList<InvertoryVo>)DefaultCbmInvoker.Invoke(new SearchInvertoryCheckCbm(), inVo);
@@ -215,7 +216,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
             }
             if (InvertoryTimeCode_cbm.Text == "")
             {
-                messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, InvertoryTimeCode_lbl.Text);
+                messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, cbInventoryCode.Text);
                 popUpMessage.Warning(messageData, Text);
                 InvertoryTimeCode_cbm.Focus();
                 return false;

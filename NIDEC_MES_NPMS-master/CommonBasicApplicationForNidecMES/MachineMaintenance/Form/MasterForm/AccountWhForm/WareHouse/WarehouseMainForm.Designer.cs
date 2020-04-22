@@ -131,7 +131,6 @@
             this.AssetPO_cmb = new Com.Nidec.Mes.Framework.ComboBoxCommon();
             this.AssetPO_lbl = new Com.Nidec.Mes.Framework.LabelCommon();
             this.invertory_cmb = new Com.Nidec.Mes.Framework.ComboBoxCommon();
-            this.invertory_lbl = new Com.Nidec.Mes.Framework.LabelCommon();
             this.counter_dgv = new Com.Nidec.Mes.Framework.DataGridViewCommon();
             this.colAcquisitionCostCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCurrentDepreciationcount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -142,6 +141,7 @@
             this.coltotalcount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inventoryLocation_cbm = new Com.Nidec.Mes.Framework.ComboBoxCommon();
             this.labelCommon1 = new Com.Nidec.Mes.Framework.LabelCommon();
+            this.cbInventory = new System.Windows.Forms.CheckBox();
             this.setting_gbc.SuspendLayout();
             this.groupBoxCommon1.SuspendLayout();
             this.groupBoxCommon2.SuspendLayout();
@@ -227,7 +227,7 @@
             this.asset_type_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.asset_type_lbl.Location = new System.Drawing.Point(267, 146);
             this.asset_type_lbl.Name = "asset_type_lbl";
-            this.asset_type_lbl.Size = new System.Drawing.Size(70, 15);
+            this.asset_type_lbl.Size = new System.Drawing.Size(69, 15);
             this.asset_type_lbl.TabIndex = 70;
             this.asset_type_lbl.Text = "Asset Type:";
             // 
@@ -350,7 +350,7 @@
             this.full_asset_code_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.full_asset_code_lbl.Location = new System.Drawing.Point(2, 117);
             this.full_asset_code_lbl.Name = "full_asset_code_lbl";
-            this.full_asset_code_lbl.Size = new System.Drawing.Size(94, 15);
+            this.full_asset_code_lbl.Size = new System.Drawing.Size(93, 15);
             this.full_asset_code_lbl.TabIndex = 59;
             this.full_asset_code_lbl.Text = "Full Asset Code";
             // 
@@ -571,6 +571,8 @@
             // 
             // rank_code_cbm
             // 
+            this.rank_code_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.rank_code_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.rank_code_cbm.ControlId = null;
             this.rank_code_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rank_code_cbm.FormattingEnabled = true;
@@ -581,6 +583,8 @@
             // 
             // asset_type_cbm
             // 
+            this.asset_type_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.asset_type_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.asset_type_cbm.ControlId = null;
             this.asset_type_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.asset_type_cbm.FormattingEnabled = true;
@@ -591,6 +595,8 @@
             // 
             // detail_position_cmb
             // 
+            this.detail_position_cmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.detail_position_cmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.detail_position_cmb.ControlId = null;
             this.detail_position_cmb.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.detail_position_cmb.FormattingEnabled = true;
@@ -601,6 +607,8 @@
             // 
             // select_search_cbm
             // 
+            this.select_search_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.select_search_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.select_search_cbm.ControlId = null;
             this.select_search_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.select_search_cbm.FormattingEnabled = true;
@@ -611,6 +619,8 @@
             // 
             // invoice_cbm
             // 
+            this.invoice_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.invoice_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.invoice_cbm.ControlId = null;
             this.invoice_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoice_cbm.FormattingEnabled = true;
@@ -621,6 +631,8 @@
             // 
             // asset_model_cbm
             // 
+            this.asset_model_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.asset_model_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.asset_model_cbm.ControlId = null;
             this.asset_model_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.asset_model_cbm.FormattingEnabled = true;
@@ -631,6 +643,8 @@
             // 
             // location_cbm
             // 
+            this.location_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.location_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.location_cbm.ControlId = null;
             this.location_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.location_cbm.FormattingEnabled = true;
@@ -642,6 +656,8 @@
             // 
             // asset_name_cbm
             // 
+            this.asset_name_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.asset_name_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.asset_name_cbm.ControlId = null;
             this.asset_name_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.asset_name_cbm.FormattingEnabled = true;
@@ -830,7 +846,7 @@
             this.colAssetType.HeaderText = "Asset Type";
             this.colAssetType.Name = "colAssetType";
             this.colAssetType.ReadOnly = true;
-            this.colAssetType.Width = 92;
+            this.colAssetType.Width = 91;
             // 
             // coluserlocationname
             // 
@@ -1000,7 +1016,7 @@
             this.colNetValue.HeaderText = "Net Value ($)";
             this.colNetValue.Name = "colNetValue";
             this.colNetValue.ReadOnly = true;
-            this.colNetValue.Width = 103;
+            this.colNetValue.Width = 102;
             // 
             // colAssetInvoice
             // 
@@ -1020,6 +1036,8 @@
             // 
             // labelstatus_cmb
             // 
+            this.labelstatus_cmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.labelstatus_cmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.labelstatus_cmb.ControlId = null;
             this.labelstatus_cmb.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelstatus_cmb.FormattingEnabled = true;
@@ -1034,12 +1052,15 @@
             // 
             // net_value_cmb
             // 
+            this.net_value_cmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.net_value_cmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.net_value_cmb.ControlId = null;
             this.net_value_cmb.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.net_value_cmb.FormattingEnabled = true;
             this.net_value_cmb.Items.AddRange(new object[] {
+            "All",
             "0$",
-            "1$"});
+            ">0$"});
             this.net_value_cmb.Location = new System.Drawing.Point(593, 172);
             this.net_value_cmb.Name = "net_value_cmb";
             this.net_value_cmb.Size = new System.Drawing.Size(152, 23);
@@ -1053,7 +1074,7 @@
             this.netvalue_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.netvalue_lbl.Location = new System.Drawing.Point(529, 175);
             this.netvalue_lbl.Name = "netvalue_lbl";
-            this.netvalue_lbl.Size = new System.Drawing.Size(63, 15);
+            this.netvalue_lbl.Size = new System.Drawing.Size(62, 15);
             this.netvalue_lbl.TabIndex = 84;
             this.netvalue_lbl.Text = "Net Value:";
             // 
@@ -1071,6 +1092,8 @@
             // 
             // AssetPO_cmb
             // 
+            this.AssetPO_cmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.AssetPO_cmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.AssetPO_cmb.ControlId = null;
             this.AssetPO_cmb.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AssetPO_cmb.FormattingEnabled = true;
@@ -1093,6 +1116,8 @@
             // 
             // invertory_cmb
             // 
+            this.invertory_cmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.invertory_cmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.invertory_cmb.ControlId = null;
             this.invertory_cmb.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invertory_cmb.FormattingEnabled = true;
@@ -1100,18 +1125,6 @@
             this.invertory_cmb.Name = "invertory_cmb";
             this.invertory_cmb.Size = new System.Drawing.Size(152, 23);
             this.invertory_cmb.TabIndex = 90;
-            // 
-            // invertory_lbl
-            // 
-            this.invertory_lbl.AutoSize = true;
-            this.invertory_lbl.ControlId = null;
-            this.invertory_lbl.Font = new System.Drawing.Font("Arial", 9F);
-            this.invertory_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.invertory_lbl.Location = new System.Drawing.Point(40, 176);
-            this.invertory_lbl.Name = "invertory_lbl";
-            this.invertory_lbl.Size = new System.Drawing.Size(58, 15);
-            this.invertory_lbl.TabIndex = 89;
-            this.invertory_lbl.Text = "Inventory:";
             // 
             // counter_dgv
             // 
@@ -1211,6 +1224,8 @@
             // 
             // inventoryLocation_cbm
             // 
+            this.inventoryLocation_cbm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.inventoryLocation_cbm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.inventoryLocation_cbm.ControlId = null;
             this.inventoryLocation_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inventoryLocation_cbm.FormattingEnabled = true;
@@ -1231,15 +1246,25 @@
             this.labelCommon1.TabIndex = 92;
             this.labelCommon1.Text = "Inventory Location:";
             // 
+            // cbInventory
+            // 
+            this.cbInventory.AutoSize = true;
+            this.cbInventory.Location = new System.Drawing.Point(10, 175);
+            this.cbInventory.Name = "cbInventory";
+            this.cbInventory.Size = new System.Drawing.Size(73, 17);
+            this.cbInventory.TabIndex = 12;
+            this.cbInventory.Text = "Inventory:";
+            this.cbInventory.UseVisualStyleBackColor = true;
+            // 
             // WarehouseMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1370, 699);
+            this.Controls.Add(this.cbInventory);
             this.Controls.Add(this.inventoryLocation_cbm);
             this.Controls.Add(this.labelCommon1);
             this.Controls.Add(this.counter_dgv);
             this.Controls.Add(this.invertory_cmb);
-            this.Controls.Add(this.invertory_lbl);
             this.Controls.Add(this.AssetPO_cmb);
             this.Controls.Add(this.AssetPO_lbl);
             this.Controls.Add(this.labelstatus_cmb);
@@ -1274,6 +1299,7 @@
             this.Name = "WarehouseMainForm";
             this.Text = "Equipment Management";
             this.TitleText = "Equipment Management";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.WareHouseMainForm_Load);
             this.Controls.SetChildIndex(this.account_depreciation_dgv, 0);
             this.Controls.SetChildIndex(this.warehouse_main_dgv, 0);
@@ -1306,11 +1332,11 @@
             this.Controls.SetChildIndex(this.labelstatus_cmb, 0);
             this.Controls.SetChildIndex(this.AssetPO_lbl, 0);
             this.Controls.SetChildIndex(this.AssetPO_cmb, 0);
-            this.Controls.SetChildIndex(this.invertory_lbl, 0);
             this.Controls.SetChildIndex(this.invertory_cmb, 0);
             this.Controls.SetChildIndex(this.counter_dgv, 0);
             this.Controls.SetChildIndex(this.labelCommon1, 0);
             this.Controls.SetChildIndex(this.inventoryLocation_cbm, 0);
+            this.Controls.SetChildIndex(this.cbInventory, 0);
             this.setting_gbc.ResumeLayout(false);
             this.groupBoxCommon1.ResumeLayout(false);
             this.groupBoxCommon2.ResumeLayout(false);
@@ -1373,7 +1399,6 @@
         private Framework.ComboBoxCommon AssetPO_cmb;
         private Framework.LabelCommon AssetPO_lbl;
         private Framework.ComboBoxCommon invertory_cmb;
-        private Framework.LabelCommon invertory_lbl;
         private Framework.DataGridViewCommon counter_dgv;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAcquisitionCostCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCurrentDepreciationcount;
@@ -1420,5 +1445,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNetValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssetInvoice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssetPO;
+        private System.Windows.Forms.CheckBox cbInventory;
     }
 }

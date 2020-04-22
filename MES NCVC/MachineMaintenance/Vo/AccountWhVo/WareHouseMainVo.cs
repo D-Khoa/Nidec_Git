@@ -66,6 +66,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo.AccountWhVo
         public string DetailPositionCd { get; set; }
         public string AssetPO { get; set; }
         public string NowLocation { get; set; }
+        public string InventoryTime { get; set; }
         //end
 
         //giao dien

@@ -112,6 +112,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
                     AssetPO = AssetPO_cmb.Text,
                     NowLocation = inventoryLocation_cbm.Text,
                 };
+                if (cbInventory.Checked) whvos.InventoryTime = invertory_cmb.Text;
                 if (checkdata())
                 {
                     if (select_search_cbm.Text == "Search History")

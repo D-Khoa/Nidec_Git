@@ -122,6 +122,10 @@
             this.NcvpMaster_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.SystemMaster_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.Menu_gpb = new Com.Nidec.Mes.Framework.GroupBoxCommon();
+            this.tc_MainMenu = new System.Windows.Forms.TabControl();
+            this.tabSystemMaster = new System.Windows.Forms.TabPage();
+            this.tabLocalMaster = new System.Windows.Forms.TabPage();
+            this.tabNCVPFunction = new System.Windows.Forms.TabPage();
             this.NcvpMaster_gpb.SuspendLayout();
             this.Master_tab.SuspendLayout();
             this.Master.SuspendLayout();
@@ -149,6 +153,10 @@
             this.groupBoxCommon7.SuspendLayout();
             this.groupBoxCommon1.SuspendLayout();
             this.Menu_gpb.SuspendLayout();
+            this.tc_MainMenu.SuspendLayout();
+            this.tabSystemMaster.SuspendLayout();
+            this.tabLocalMaster.SuspendLayout();
+            this.tabNCVPFunction.SuspendLayout();
             this.SuspendLayout();
             // 
             // NcvpMaster_gpb
@@ -156,19 +164,17 @@
             this.NcvpMaster_gpb.ControlId = null;
             this.NcvpMaster_gpb.Controls.Add(this.Master_tab);
             this.NcvpMaster_gpb.Controls.Add(this.labelCommon1);
+            this.NcvpMaster_gpb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NcvpMaster_gpb.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.NcvpMaster_gpb.Location = new System.Drawing.Point(170, 107);
+            this.NcvpMaster_gpb.Location = new System.Drawing.Point(3, 3);
             this.NcvpMaster_gpb.Name = "NcvpMaster_gpb";
-            this.NcvpMaster_gpb.Size = new System.Drawing.Size(697, 572);
+            this.NcvpMaster_gpb.Size = new System.Drawing.Size(686, 537);
             this.NcvpMaster_gpb.TabIndex = 52;
             this.NcvpMaster_gpb.TabStop = false;
             this.NcvpMaster_gpb.Text = "Local Master";
             // 
             // Master_tab
             // 
-            this.Master_tab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.Master_tab.ControlId = "";
             this.Master_tab.Controls.Add(this.Master);
             this.Master_tab.Controls.Add(this.ACC_WH);
@@ -176,11 +182,12 @@
             this.Master_tab.Controls.Add(this.Jig_Draw);
             this.Master_tab.Controls.Add(this.Oven_Downtime);
             this.Master_tab.Controls.Add(this.tabPage5);
+            this.Master_tab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Master_tab.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Master_tab.Location = new System.Drawing.Point(6, 49);
+            this.Master_tab.Location = new System.Drawing.Point(3, 49);
             this.Master_tab.Name = "Master_tab";
             this.Master_tab.SelectedIndex = 0;
-            this.Master_tab.Size = new System.Drawing.Size(687, 517);
+            this.Master_tab.Size = new System.Drawing.Size(680, 485);
             this.Master_tab.TabIndex = 55;
             // 
             // Master
@@ -744,7 +751,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(679, 489);
+            this.tabPage5.Size = new System.Drawing.Size(672, 457);
             this.tabPage5.TabIndex = 5;
             this.tabPage5.Text = "Control";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -765,15 +772,14 @@
             // 
             // labelCommon1
             // 
-            this.labelCommon1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCommon1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.labelCommon1.ControlId = null;
+            this.labelCommon1.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelCommon1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.labelCommon1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelCommon1.Location = new System.Drawing.Point(6, 25);
+            this.labelCommon1.Location = new System.Drawing.Point(3, 25);
             this.labelCommon1.Name = "labelCommon1";
-            this.labelCommon1.Size = new System.Drawing.Size(691, 24);
+            this.labelCommon1.Size = new System.Drawing.Size(680, 24);
             this.labelCommon1.TabIndex = 46;
             this.labelCommon1.Text = "Local Master";
             this.labelCommon1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -794,10 +800,11 @@
             this.SystemMaster_gpb.Controls.Add(this.factory_bt);
             this.SystemMaster_gpb.Controls.Add(this.language_bt);
             this.SystemMaster_gpb.Controls.Add(this.local_user_btn);
+            this.SystemMaster_gpb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SystemMaster_gpb.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.SystemMaster_gpb.Location = new System.Drawing.Point(168, 112);
+            this.SystemMaster_gpb.Location = new System.Drawing.Point(3, 3);
             this.SystemMaster_gpb.Name = "SystemMaster_gpb";
-            this.SystemMaster_gpb.Size = new System.Drawing.Size(696, 572);
+            this.SystemMaster_gpb.Size = new System.Drawing.Size(686, 537);
             this.SystemMaster_gpb.TabIndex = 50;
             this.SystemMaster_gpb.TabStop = false;
             this.SystemMaster_gpb.Text = "System Master";
@@ -812,7 +819,7 @@
             this.PlaceMaster_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PlaceMaster_lbl.Location = new System.Drawing.Point(7, 336);
             this.PlaceMaster_lbl.Name = "PlaceMaster_lbl";
-            this.PlaceMaster_lbl.Size = new System.Drawing.Size(689, 24);
+            this.PlaceMaster_lbl.Size = new System.Drawing.Size(679, 24);
             this.PlaceMaster_lbl.TabIndex = 37;
             this.PlaceMaster_lbl.Text = "Place Master";
             this.PlaceMaster_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -827,7 +834,7 @@
             this.RoleMaster_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RoleMaster_lbl.Location = new System.Drawing.Point(5, 181);
             this.RoleMaster_lbl.Name = "RoleMaster_lbl";
-            this.RoleMaster_lbl.Size = new System.Drawing.Size(691, 24);
+            this.RoleMaster_lbl.Size = new System.Drawing.Size(681, 24);
             this.RoleMaster_lbl.TabIndex = 36;
             this.RoleMaster_lbl.Text = "Role Master";
             this.RoleMaster_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -842,7 +849,7 @@
             this.UserMaster_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.UserMaster_lbl.Location = new System.Drawing.Point(6, 25);
             this.UserMaster_lbl.Name = "UserMaster_lbl";
-            this.UserMaster_lbl.Size = new System.Drawing.Size(690, 24);
+            this.UserMaster_lbl.Size = new System.Drawing.Size(680, 24);
             this.UserMaster_lbl.TabIndex = 35;
             this.UserMaster_lbl.Text = "User Master";
             this.UserMaster_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -989,9 +996,6 @@
             // 
             // tabControlCommon1
             // 
-            this.tabControlCommon1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlCommon1.ControlId = null;
             this.tabControlCommon1.Controls.Add(this.tabPage1);
             this.tabControlCommon1.Controls.Add(this.tabPage2);
@@ -999,11 +1003,12 @@
             this.tabControlCommon1.Controls.Add(this.tabPage4);
             this.tabControlCommon1.Controls.Add(this.tabPage6);
             this.tabControlCommon1.Controls.Add(this.tabFAMG);
+            this.tabControlCommon1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlCommon1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlCommon1.Location = new System.Drawing.Point(6, 49);
+            this.tabControlCommon1.Location = new System.Drawing.Point(3, 49);
             this.tabControlCommon1.Name = "tabControlCommon1";
             this.tabControlCommon1.SelectedIndex = 0;
-            this.tabControlCommon1.Size = new System.Drawing.Size(687, 518);
+            this.tabControlCommon1.Size = new System.Drawing.Size(680, 485);
             this.tabControlCommon1.TabIndex = 49;
             // 
             // tabPage1
@@ -1012,7 +1017,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(679, 490);
+            this.tabPage1.Size = new System.Drawing.Size(672, 457);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Technical Maintenance";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1342,15 +1347,14 @@
             // 
             // labelCommon2
             // 
-            this.labelCommon2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCommon2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.labelCommon2.ControlId = null;
+            this.labelCommon2.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelCommon2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.labelCommon2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelCommon2.Location = new System.Drawing.Point(6, 25);
+            this.labelCommon2.Location = new System.Drawing.Point(3, 25);
             this.labelCommon2.Name = "labelCommon2";
-            this.labelCommon2.Size = new System.Drawing.Size(691, 24);
+            this.labelCommon2.Size = new System.Drawing.Size(680, 24);
             this.labelCommon2.TabIndex = 47;
             this.labelCommon2.Text = "NCVP Function";
             this.labelCommon2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1358,12 +1362,13 @@
             // NCVP_Function_gr
             // 
             this.NCVP_Function_gr.ControlId = null;
-            this.NCVP_Function_gr.Controls.Add(this.labelCommon2);
             this.NCVP_Function_gr.Controls.Add(this.tabControlCommon1);
+            this.NCVP_Function_gr.Controls.Add(this.labelCommon2);
+            this.NCVP_Function_gr.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NCVP_Function_gr.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.NCVP_Function_gr.Location = new System.Drawing.Point(170, 112);
+            this.NCVP_Function_gr.Location = new System.Drawing.Point(3, 3);
             this.NCVP_Function_gr.Name = "NCVP_Function_gr";
-            this.NCVP_Function_gr.Size = new System.Drawing.Size(697, 572);
+            this.NCVP_Function_gr.Size = new System.Drawing.Size(686, 537);
             this.NCVP_Function_gr.TabIndex = 51;
             this.NCVP_Function_gr.TabStop = false;
             this.NCVP_Function_gr.Text = "NCVP Function";
@@ -1387,8 +1392,9 @@
             // 
             this.groupBoxCommon7.ControlId = null;
             this.groupBoxCommon7.Controls.Add(this.ncvp_btn);
+            this.groupBoxCommon7.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxCommon7.Font = new System.Drawing.Font("Arial", 9F);
-            this.groupBoxCommon7.Location = new System.Drawing.Point(6, 133);
+            this.groupBoxCommon7.Location = new System.Drawing.Point(3, 131);
             this.groupBoxCommon7.Name = "groupBoxCommon7";
             this.groupBoxCommon7.Size = new System.Drawing.Size(161, 381);
             this.groupBoxCommon7.TabIndex = 2;
@@ -1415,8 +1421,9 @@
             this.groupBoxCommon1.ControlId = null;
             this.groupBoxCommon1.Controls.Add(this.NcvpMaster_btn);
             this.groupBoxCommon1.Controls.Add(this.SystemMaster_btn);
+            this.groupBoxCommon1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxCommon1.Font = new System.Drawing.Font("Arial", 9F);
-            this.groupBoxCommon1.Location = new System.Drawing.Point(6, 21);
+            this.groupBoxCommon1.Location = new System.Drawing.Point(3, 25);
             this.groupBoxCommon1.Name = "groupBoxCommon1";
             this.groupBoxCommon1.Size = new System.Drawing.Size(161, 106);
             this.groupBoxCommon1.TabIndex = 1;
@@ -1456,16 +1463,64 @@
             // Menu_gpb
             // 
             this.Menu_gpb.ControlId = null;
-            this.Menu_gpb.Controls.Add(this.ChangePass_btn);
             this.Menu_gpb.Controls.Add(this.groupBoxCommon7);
+            this.Menu_gpb.Controls.Add(this.ChangePass_btn);
             this.Menu_gpb.Controls.Add(this.groupBoxCommon1);
+            this.Menu_gpb.Dock = System.Windows.Forms.DockStyle.Left;
             this.Menu_gpb.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.Menu_gpb.Location = new System.Drawing.Point(0, 106);
+            this.Menu_gpb.Location = new System.Drawing.Point(0, 107);
             this.Menu_gpb.Name = "Menu_gpb";
             this.Menu_gpb.Size = new System.Drawing.Size(167, 572);
             this.Menu_gpb.TabIndex = 49;
             this.Menu_gpb.TabStop = false;
             this.Menu_gpb.Text = "Menu";
+            // 
+            // tc_MainMenu
+            // 
+            this.tc_MainMenu.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tc_MainMenu.Controls.Add(this.tabSystemMaster);
+            this.tc_MainMenu.Controls.Add(this.tabLocalMaster);
+            this.tc_MainMenu.Controls.Add(this.tabNCVPFunction);
+            this.tc_MainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tc_MainMenu.Location = new System.Drawing.Point(167, 107);
+            this.tc_MainMenu.Name = "tc_MainMenu";
+            this.tc_MainMenu.SelectedIndex = 0;
+            this.tc_MainMenu.Size = new System.Drawing.Size(700, 572);
+            this.tc_MainMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tc_MainMenu.TabIndex = 52;
+            // 
+            // tabSystemMaster
+            // 
+            this.tabSystemMaster.Controls.Add(this.SystemMaster_gpb);
+            this.tabSystemMaster.Location = new System.Drawing.Point(4, 25);
+            this.tabSystemMaster.Name = "tabSystemMaster";
+            this.tabSystemMaster.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSystemMaster.Size = new System.Drawing.Size(692, 543);
+            this.tabSystemMaster.TabIndex = 0;
+            this.tabSystemMaster.Text = "System Master";
+            this.tabSystemMaster.UseVisualStyleBackColor = true;
+            // 
+            // tabLocalMaster
+            // 
+            this.tabLocalMaster.Controls.Add(this.NcvpMaster_gpb);
+            this.tabLocalMaster.Location = new System.Drawing.Point(4, 25);
+            this.tabLocalMaster.Name = "tabLocalMaster";
+            this.tabLocalMaster.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLocalMaster.Size = new System.Drawing.Size(692, 543);
+            this.tabLocalMaster.TabIndex = 1;
+            this.tabLocalMaster.Text = "Local Master";
+            this.tabLocalMaster.UseVisualStyleBackColor = true;
+            // 
+            // tabNCVPFunction
+            // 
+            this.tabNCVPFunction.Controls.Add(this.NCVP_Function_gr);
+            this.tabNCVPFunction.Location = new System.Drawing.Point(4, 25);
+            this.tabNCVPFunction.Name = "tabNCVPFunction";
+            this.tabNCVPFunction.Padding = new System.Windows.Forms.Padding(3);
+            this.tabNCVPFunction.Size = new System.Drawing.Size(692, 543);
+            this.tabNCVPFunction.TabIndex = 2;
+            this.tabNCVPFunction.Text = "NCVP Function";
+            this.tabNCVPFunction.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -1473,20 +1528,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 679);
             this.ControlId = "frm001";
+            this.Controls.Add(this.tc_MainMenu);
             this.Controls.Add(this.Menu_gpb);
-            this.Controls.Add(this.NcvpMaster_gpb);
-            this.Controls.Add(this.SystemMaster_gpb);
-            this.Controls.Add(this.NCVP_Function_gr);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "NCVP Master Maintance";
             this.TitleText = "NCVP Master Maintance";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Controls.SetChildIndex(this.NCVP_Function_gr, 0);
-            this.Controls.SetChildIndex(this.SystemMaster_gpb, 0);
-            this.Controls.SetChildIndex(this.NcvpMaster_gpb, 0);
             this.Controls.SetChildIndex(this.Menu_gpb, 0);
+            this.Controls.SetChildIndex(this.tc_MainMenu, 0);
             this.NcvpMaster_gpb.ResumeLayout(false);
             this.Master_tab.ResumeLayout(false);
             this.Master.ResumeLayout(false);
@@ -1514,6 +1565,10 @@
             this.groupBoxCommon7.ResumeLayout(false);
             this.groupBoxCommon1.ResumeLayout(false);
             this.Menu_gpb.ResumeLayout(false);
+            this.tc_MainMenu.ResumeLayout(false);
+            this.tabSystemMaster.ResumeLayout(false);
+            this.tabLocalMaster.ResumeLayout(false);
+            this.tabNCVPFunction.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1612,5 +1667,9 @@
         private Framework.ButtonCommon btnDataViewer;
         private System.Windows.Forms.TabPage tabFAMG;
         private System.Windows.Forms.Button btnWHEq;
+        private System.Windows.Forms.TabControl tc_MainMenu;
+        private System.Windows.Forms.TabPage tabSystemMaster;
+        private System.Windows.Forms.TabPage tabLocalMaster;
+        private System.Windows.Forms.TabPage tabNCVPFunction;
     }
 }

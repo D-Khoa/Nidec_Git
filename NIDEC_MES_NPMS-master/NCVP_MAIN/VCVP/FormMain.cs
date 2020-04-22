@@ -25,6 +25,7 @@ namespace Com.Nidec.Mes.VCVP
         public FormMain()
         {
             InitializeComponent();
+            tc_MainMenu.ItemSize = new System.Drawing.Size(0, 1);
         }
         /// <summary>
         /// Main form loading
@@ -33,9 +34,10 @@ namespace Com.Nidec.Mes.VCVP
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            SystemMaster_gpb.Visible = false;
-            NcvpMaster_gpb.Visible = false;
-            NCVP_Function_gr.Visible = false;
+            tc_MainMenu.Visible = false;
+            //SystemMaster_gpb.Visible = false;
+            //NcvpMaster_gpb.Visible = false;
+            //NCVP_Function_gr.Visible = false;
 
             //if (UserData.GetUserData().UserCode == "admin")
             //{
@@ -49,9 +51,11 @@ namespace Com.Nidec.Mes.VCVP
         /// <param name="e"></param>
         private void SystemMaster_btn_Click(object sender, EventArgs e)
         {
-            SystemMaster_gpb.Visible = true;
-            NcvpMaster_gpb.Visible = false;
-            NCVP_Function_gr.Visible = false;
+            tc_MainMenu.Visible = true;
+            tc_MainMenu.SelectedTab = tabSystemMaster;
+            //SystemMaster_gpb.Visible = true;
+            //NcvpMaster_gpb.Visible = false;
+            //NCVP_Function_gr.Visible = false;
         }
         /// <summary>
         /// Local Master Click
@@ -60,9 +64,11 @@ namespace Com.Nidec.Mes.VCVP
         /// <param name="e"></param>
         private void NcvpMaster_btn_Click(object sender, EventArgs e)
         {
-            NcvpMaster_gpb.Visible = true;
-            SystemMaster_gpb.Visible = false;
-            NCVP_Function_gr.Visible = false;
+            tc_MainMenu.Visible = true;
+            tc_MainMenu.SelectedTab = tabLocalMaster;
+            //NcvpMaster_gpb.Visible = true;
+            //SystemMaster_gpb.Visible = false;
+            //NCVP_Function_gr.Visible = false;
         }
         /// <summary>
         /// NCVP Function Click
@@ -71,9 +77,11 @@ namespace Com.Nidec.Mes.VCVP
         /// <param name="e"></param>
         private void ncvp_btn_Click(object sender, EventArgs e)
         {
-            NCVP_Function_gr.Visible = true;
-            SystemMaster_gpb.Visible = false;
-            NcvpMaster_gpb.Visible = false;
+            tc_MainMenu.Visible = true;
+            tc_MainMenu.SelectedTab = tabNCVPFunction;
+            //NCVP_Function_gr.Visible = true;
+            //SystemMaster_gpb.Visible = false;
+            //NcvpMaster_gpb.Visible = false;
         }
         /// <summary>
         /// DownTime button click
@@ -496,7 +504,7 @@ namespace Com.Nidec.Mes.VCVP
         {
             Warehouse_Equipment_Form wheq = new Warehouse_Equipment_Form();
             wheq.ShowDialog();
-            
+
         }
     }
 }

@@ -52,7 +52,6 @@
             this.select_location_lbl = new Com.Nidec.Mes.Framework.LabelCommon();
             this.Invertory_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.asset_Code_cmb = new Com.Nidec.Mes.Framework.ComboBoxCommon();
-            this.InvertoryTimeCode_lbl = new Com.Nidec.Mes.Framework.LabelCommon();
             this.InvertoryTimeCode_cbm = new Com.Nidec.Mes.Framework.ComboBoxCommon();
             this.Inventory_Offline_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.linksave_txt = new Com.Nidec.Mes.Framework.TextBoxCommon();
@@ -62,6 +61,7 @@
             this.ExportExcel_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.linkexport_txt = new Com.Nidec.Mes.Framework.TextBoxCommon();
             this.exportlink_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
+            this.cbInventoryCode = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.InvertoryCheck_dgv)).BeginInit();
             this.groupBoxCommon1.SuspendLayout();
             this.groupBoxCommon2.SuspendLayout();
@@ -227,13 +227,13 @@
             // groupBoxCommon1
             // 
             this.groupBoxCommon1.ControlId = null;
+            this.groupBoxCommon1.Controls.Add(this.cbInventoryCode);
             this.groupBoxCommon1.Controls.Add(this.update_btn);
             this.groupBoxCommon1.Controls.Add(this.Search_btn);
             this.groupBoxCommon1.Controls.Add(this.location_cbm);
             this.groupBoxCommon1.Controls.Add(this.select_location_lbl);
             this.groupBoxCommon1.Controls.Add(this.Invertory_btn);
             this.groupBoxCommon1.Controls.Add(this.asset_Code_cmb);
-            this.groupBoxCommon1.Controls.Add(this.InvertoryTimeCode_lbl);
             this.groupBoxCommon1.Controls.Add(this.InvertoryTimeCode_cbm);
             this.groupBoxCommon1.Controls.Add(this.asset_code_lbl);
             this.groupBoxCommon1.Font = new System.Drawing.Font("Arial", 9F);
@@ -319,18 +319,6 @@
             this.asset_Code_cmb.Name = "asset_Code_cmb";
             this.asset_Code_cmb.Size = new System.Drawing.Size(162, 23);
             this.asset_Code_cmb.TabIndex = 82;
-            // 
-            // InvertoryTimeCode_lbl
-            // 
-            this.InvertoryTimeCode_lbl.AutoSize = true;
-            this.InvertoryTimeCode_lbl.ControlId = null;
-            this.InvertoryTimeCode_lbl.Font = new System.Drawing.Font("Arial", 9F);
-            this.InvertoryTimeCode_lbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.InvertoryTimeCode_lbl.Location = new System.Drawing.Point(54, 90);
-            this.InvertoryTimeCode_lbl.Name = "InvertoryTimeCode_lbl";
-            this.InvertoryTimeCode_lbl.Size = new System.Drawing.Size(91, 15);
-            this.InvertoryTimeCode_lbl.TabIndex = 81;
-            this.InvertoryTimeCode_lbl.Text = "Inventory Code:";
             // 
             // InvertoryTimeCode_cbm
             // 
@@ -445,6 +433,16 @@
             this.exportlink_btn.UseVisualStyleBackColor = false;
             this.exportlink_btn.Click += new System.EventHandler(this.exportlink_btn_Click);
             // 
+            // cbInventoryCode
+            // 
+            this.cbInventoryCode.AutoSize = true;
+            this.cbInventoryCode.Location = new System.Drawing.Point(33, 87);
+            this.cbInventoryCode.Name = "cbInventoryCode";
+            this.cbInventoryCode.Size = new System.Drawing.Size(110, 19);
+            this.cbInventoryCode.TabIndex = 85;
+            this.cbInventoryCode.Text = "Inventory Code:";
+            this.cbInventoryCode.UseVisualStyleBackColor = true;
+            // 
             // InvertoryCheckForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -477,7 +475,6 @@
         private Framework.LabelCommon asset_code_lbl;
         private Framework.GroupBoxCommon groupBoxCommon1;
         private Framework.ComboBoxCommon InvertoryTimeCode_cbm;
-        private Framework.LabelCommon InvertoryTimeCode_lbl;
         private Framework.ComboBoxCommon asset_Code_cmb;
         private Framework.ButtonCommon Invertory_btn;
         private Framework.ButtonCommon Inventory_Offline_btn;
@@ -504,5 +501,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colInvertoryValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUserAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDateTime;
+        private System.Windows.Forms.CheckBox cbInventoryCode;
     }
 }
