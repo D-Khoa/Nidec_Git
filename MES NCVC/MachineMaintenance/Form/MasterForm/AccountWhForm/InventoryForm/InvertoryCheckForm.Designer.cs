@@ -61,7 +61,7 @@
             this.ExportExcel_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.linkexport_txt = new Com.Nidec.Mes.Framework.TextBoxCommon();
             this.exportlink_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
-            this.cbInventoryCode = new System.Windows.Forms.CheckBox();
+            this.inventorycode_lbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.InvertoryCheck_dgv)).BeginInit();
             this.groupBoxCommon1.SuspendLayout();
             this.groupBoxCommon2.SuspendLayout();
@@ -73,9 +73,6 @@
             this.InvertoryCheck_dgv.AllowUserToAddRows = false;
             this.InvertoryCheck_dgv.AllowUserToDeleteRows = false;
             this.InvertoryCheck_dgv.AllowUserToResizeRows = false;
-            this.InvertoryCheck_dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.InvertoryCheck_dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(232)))), ((int)(((byte)(180)))));
@@ -108,8 +105,9 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.InvertoryCheck_dgv.DefaultCellStyle = dataGridViewCellStyle2;
+            this.InvertoryCheck_dgv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.InvertoryCheck_dgv.EnableHeadersVisualStyles = false;
-            this.InvertoryCheck_dgv.Location = new System.Drawing.Point(0, 249);
+            this.InvertoryCheck_dgv.Location = new System.Drawing.Point(0, 237);
             this.InvertoryCheck_dgv.MultiSelect = false;
             this.InvertoryCheck_dgv.Name = "InvertoryCheck_dgv";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -121,7 +119,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.InvertoryCheck_dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.InvertoryCheck_dgv.RowTemplate.Height = 21;
-            this.InvertoryCheck_dgv.Size = new System.Drawing.Size(1261, 393);
+            this.InvertoryCheck_dgv.Size = new System.Drawing.Size(1261, 405);
             this.InvertoryCheck_dgv.TabIndex = 19;
             // 
             // colInvertoryEquipmentId
@@ -227,7 +225,9 @@
             // groupBoxCommon1
             // 
             this.groupBoxCommon1.ControlId = null;
-            this.groupBoxCommon1.Controls.Add(this.cbInventoryCode);
+            this.groupBoxCommon1.Controls.Add(this.inventorycode_lbl);
+            this.groupBoxCommon1.Controls.Add(this.groupBoxCommon3);
+            this.groupBoxCommon1.Controls.Add(this.groupBoxCommon2);
             this.groupBoxCommon1.Controls.Add(this.update_btn);
             this.groupBoxCommon1.Controls.Add(this.Search_btn);
             this.groupBoxCommon1.Controls.Add(this.location_cbm);
@@ -236,10 +236,11 @@
             this.groupBoxCommon1.Controls.Add(this.asset_Code_cmb);
             this.groupBoxCommon1.Controls.Add(this.InvertoryTimeCode_cbm);
             this.groupBoxCommon1.Controls.Add(this.asset_code_lbl);
+            this.groupBoxCommon1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxCommon1.Font = new System.Drawing.Font("Arial", 9F);
-            this.groupBoxCommon1.Location = new System.Drawing.Point(12, 113);
+            this.groupBoxCommon1.Location = new System.Drawing.Point(0, 107);
             this.groupBoxCommon1.Name = "groupBoxCommon1";
-            this.groupBoxCommon1.Size = new System.Drawing.Size(485, 130);
+            this.groupBoxCommon1.Size = new System.Drawing.Size(1261, 130);
             this.groupBoxCommon1.TabIndex = 77;
             this.groupBoxCommon1.TabStop = false;
             this.groupBoxCommon1.Text = "Check";
@@ -376,7 +377,7 @@
             this.groupBoxCommon2.Controls.Add(this.linksave_txt);
             this.groupBoxCommon2.Controls.Add(this.browser_btn);
             this.groupBoxCommon2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxCommon2.Location = new System.Drawing.Point(525, 113);
+            this.groupBoxCommon2.Location = new System.Drawing.Point(498, 11);
             this.groupBoxCommon2.Name = "groupBoxCommon2";
             this.groupBoxCommon2.Size = new System.Drawing.Size(425, 59);
             this.groupBoxCommon2.TabIndex = 81;
@@ -389,9 +390,9 @@
             this.groupBoxCommon3.Controls.Add(this.linkexport_txt);
             this.groupBoxCommon3.Controls.Add(this.exportlink_btn);
             this.groupBoxCommon3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxCommon3.Location = new System.Drawing.Point(525, 177);
+            this.groupBoxCommon3.Location = new System.Drawing.Point(498, 70);
             this.groupBoxCommon3.Name = "groupBoxCommon3";
-            this.groupBoxCommon3.Size = new System.Drawing.Size(425, 66);
+            this.groupBoxCommon3.Size = new System.Drawing.Size(425, 57);
             this.groupBoxCommon3.TabIndex = 82;
             this.groupBoxCommon3.TabStop = false;
             // 
@@ -433,32 +434,27 @@
             this.exportlink_btn.UseVisualStyleBackColor = false;
             this.exportlink_btn.Click += new System.EventHandler(this.exportlink_btn_Click);
             // 
-            // cbInventoryCode
+            // inventorycode_lbl
             // 
-            this.cbInventoryCode.AutoSize = true;
-            this.cbInventoryCode.Location = new System.Drawing.Point(33, 87);
-            this.cbInventoryCode.Name = "cbInventoryCode";
-            this.cbInventoryCode.Size = new System.Drawing.Size(110, 19);
-            this.cbInventoryCode.TabIndex = 85;
-            this.cbInventoryCode.Text = "Inventory Code:";
-            this.cbInventoryCode.UseVisualStyleBackColor = true;
+            this.inventorycode_lbl.AutoSize = true;
+            this.inventorycode_lbl.Location = new System.Drawing.Point(55, 88);
+            this.inventorycode_lbl.Name = "inventorycode_lbl";
+            this.inventorycode_lbl.Size = new System.Drawing.Size(88, 15);
+            this.inventorycode_lbl.TabIndex = 85;
+            this.inventorycode_lbl.Text = "Inventory code:";
             // 
             // InvertoryCheckForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1261, 642);
-            this.Controls.Add(this.groupBoxCommon3);
-            this.Controls.Add(this.groupBoxCommon2);
-            this.Controls.Add(this.groupBoxCommon1);
             this.Controls.Add(this.InvertoryCheck_dgv);
+            this.Controls.Add(this.groupBoxCommon1);
             this.Name = "InvertoryCheckForm";
             this.Text = "Equipment Inventory";
             this.TitleText = "Equipment Inventory";
             this.Load += new System.EventHandler(this.InvertoryCheckForm_Load);
-            this.Controls.SetChildIndex(this.InvertoryCheck_dgv, 0);
             this.Controls.SetChildIndex(this.groupBoxCommon1, 0);
-            this.Controls.SetChildIndex(this.groupBoxCommon2, 0);
-            this.Controls.SetChildIndex(this.groupBoxCommon3, 0);
+            this.Controls.SetChildIndex(this.InvertoryCheck_dgv, 0);
             ((System.ComponentModel.ISupportInitialize)(this.InvertoryCheck_dgv)).EndInit();
             this.groupBoxCommon1.ResumeLayout(false);
             this.groupBoxCommon1.PerformLayout();
@@ -501,6 +497,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colInvertoryValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUserAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDateTime;
-        private System.Windows.Forms.CheckBox cbInventoryCode;
+        private System.Windows.Forms.Label inventorycode_lbl;
     }
 }
