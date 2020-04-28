@@ -47,12 +47,11 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
         public ValueObjectList<WareHouseMainVo> warehouseMainID = new ValueObjectList<WareHouseMainVo>();
         public string assetcodetrim;
         public string test = "a";
-
         void GridBind()
         {
             InvertoryVo inVo = new InvertoryVo()
             {
-                AssetCode = asset_Code_cmb.Text.Trim(),
+                AssetCode = assetcodetrim,
                 InvertoryTimeCode = InvertoryTimeCode_cbm.Text,
                 NowLocation = location_cbm.Text,
             };
