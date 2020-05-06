@@ -46,6 +46,15 @@
             this.colDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asset_code_lbl = new Com.Nidec.Mes.Framework.LabelCommon();
             this.groupBoxCommon1 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
+            this.inventorycode_lbl = new System.Windows.Forms.Label();
+            this.groupBoxCommon3 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
+            this.ExportExcel_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
+            this.linkexport_txt = new Com.Nidec.Mes.Framework.TextBoxCommon();
+            this.exportlink_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
+            this.groupBoxCommon2 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
+            this.Inventory_Offline_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
+            this.linksave_txt = new Com.Nidec.Mes.Framework.TextBoxCommon();
+            this.browser_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.update_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.Search_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.location_cbm = new Com.Nidec.Mes.Framework.ComboBoxCommon();
@@ -53,19 +62,15 @@
             this.Invertory_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.asset_Code_cmb = new Com.Nidec.Mes.Framework.ComboBoxCommon();
             this.InvertoryTimeCode_cbm = new Com.Nidec.Mes.Framework.ComboBoxCommon();
-            this.Inventory_Offline_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
-            this.linksave_txt = new Com.Nidec.Mes.Framework.TextBoxCommon();
-            this.browser_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
-            this.groupBoxCommon2 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
-            this.groupBoxCommon3 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
-            this.ExportExcel_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
-            this.linkexport_txt = new Com.Nidec.Mes.Framework.TextBoxCommon();
-            this.exportlink_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
-            this.inventorycode_lbl = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsInventoryTotal = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.InvertoryCheck_dgv)).BeginInit();
             this.groupBoxCommon1.SuspendLayout();
-            this.groupBoxCommon2.SuspendLayout();
             this.groupBoxCommon3.SuspendLayout();
+            this.groupBoxCommon2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // InvertoryCheck_dgv
@@ -194,14 +199,14 @@
             this.colInvertoryValue.Name = "colInvertoryValue";
             this.colInvertoryValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colInvertoryValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colInvertoryValue.Width = 104;
+            this.colInvertoryValue.Width = 105;
             // 
             // colUserAdd
             // 
             this.colUserAdd.DataPropertyName = "RegistrationUserCode";
             this.colUserAdd.HeaderText = "User Add";
             this.colUserAdd.Name = "colUserAdd";
-            this.colUserAdd.Width = 76;
+            this.colUserAdd.Width = 77;
             // 
             // colDateTime
             // 
@@ -244,6 +249,118 @@
             this.groupBoxCommon1.TabIndex = 77;
             this.groupBoxCommon1.TabStop = false;
             this.groupBoxCommon1.Text = "Check";
+            // 
+            // inventorycode_lbl
+            // 
+            this.inventorycode_lbl.AutoSize = true;
+            this.inventorycode_lbl.Location = new System.Drawing.Point(55, 88);
+            this.inventorycode_lbl.Name = "inventorycode_lbl";
+            this.inventorycode_lbl.Size = new System.Drawing.Size(88, 15);
+            this.inventorycode_lbl.TabIndex = 85;
+            this.inventorycode_lbl.Text = "Inventory code:";
+            // 
+            // groupBoxCommon3
+            // 
+            this.groupBoxCommon3.ControlId = null;
+            this.groupBoxCommon3.Controls.Add(this.ExportExcel_btn);
+            this.groupBoxCommon3.Controls.Add(this.linkexport_txt);
+            this.groupBoxCommon3.Controls.Add(this.exportlink_btn);
+            this.groupBoxCommon3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxCommon3.Location = new System.Drawing.Point(498, 70);
+            this.groupBoxCommon3.Name = "groupBoxCommon3";
+            this.groupBoxCommon3.Size = new System.Drawing.Size(425, 57);
+            this.groupBoxCommon3.TabIndex = 82;
+            this.groupBoxCommon3.TabStop = false;
+            // 
+            // ExportExcel_btn
+            // 
+            this.ExportExcel_btn.BackColor = System.Drawing.SystemColors.Control;
+            this.ExportExcel_btn.ControlId = null;
+            this.ExportExcel_btn.Font = new System.Drawing.Font("Arial", 9F);
+            this.ExportExcel_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ExportExcel_btn.Location = new System.Drawing.Point(327, 18);
+            this.ExportExcel_btn.Name = "ExportExcel_btn";
+            this.ExportExcel_btn.Size = new System.Drawing.Size(91, 32);
+            this.ExportExcel_btn.TabIndex = 78;
+            this.ExportExcel_btn.Text = "Export Excel";
+            this.ExportExcel_btn.UseVisualStyleBackColor = true;
+            this.ExportExcel_btn.Click += new System.EventHandler(this.ExportExcel_btn_Click);
+            // 
+            // linkexport_txt
+            // 
+            this.linkexport_txt.ControlId = null;
+            this.linkexport_txt.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkexport_txt.InputType = Com.Nidec.Mes.Framework.TextBoxCommon.InputTypeList.All;
+            this.linkexport_txt.Location = new System.Drawing.Point(135, 23);
+            this.linkexport_txt.Name = "linkexport_txt";
+            this.linkexport_txt.Size = new System.Drawing.Size(182, 21);
+            this.linkexport_txt.TabIndex = 80;
+            // 
+            // exportlink_btn
+            // 
+            this.exportlink_btn.BackColor = System.Drawing.SystemColors.Control;
+            this.exportlink_btn.ControlId = null;
+            this.exportlink_btn.Font = new System.Drawing.Font("Arial", 9F);
+            this.exportlink_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.exportlink_btn.Location = new System.Drawing.Point(6, 17);
+            this.exportlink_btn.Name = "exportlink_btn";
+            this.exportlink_btn.Size = new System.Drawing.Size(111, 33);
+            this.exportlink_btn.TabIndex = 79;
+            this.exportlink_btn.Text = "Browser Export";
+            this.exportlink_btn.UseVisualStyleBackColor = false;
+            this.exportlink_btn.Click += new System.EventHandler(this.exportlink_btn_Click);
+            // 
+            // groupBoxCommon2
+            // 
+            this.groupBoxCommon2.ControlId = null;
+            this.groupBoxCommon2.Controls.Add(this.Inventory_Offline_btn);
+            this.groupBoxCommon2.Controls.Add(this.linksave_txt);
+            this.groupBoxCommon2.Controls.Add(this.browser_btn);
+            this.groupBoxCommon2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxCommon2.Location = new System.Drawing.Point(498, 11);
+            this.groupBoxCommon2.Name = "groupBoxCommon2";
+            this.groupBoxCommon2.Size = new System.Drawing.Size(425, 59);
+            this.groupBoxCommon2.TabIndex = 81;
+            this.groupBoxCommon2.TabStop = false;
+            // 
+            // Inventory_Offline_btn
+            // 
+            this.Inventory_Offline_btn.BackColor = System.Drawing.SystemColors.Control;
+            this.Inventory_Offline_btn.ControlId = null;
+            this.Inventory_Offline_btn.Font = new System.Drawing.Font("Arial", 9F);
+            this.Inventory_Offline_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Inventory_Offline_btn.Location = new System.Drawing.Point(328, 19);
+            this.Inventory_Offline_btn.Name = "Inventory_Offline_btn";
+            this.Inventory_Offline_btn.Size = new System.Drawing.Size(91, 33);
+            this.Inventory_Offline_btn.TabIndex = 78;
+            this.Inventory_Offline_btn.Text = "Run Offline";
+            this.Inventory_Offline_btn.UseVisualStyleBackColor = true;
+            this.Inventory_Offline_btn.Click += new System.EventHandler(this.Inventory_Offline_btn_Click);
+            // 
+            // linksave_txt
+            // 
+            this.linksave_txt.ControlId = null;
+            this.linksave_txt.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linksave_txt.InputType = Com.Nidec.Mes.Framework.TextBoxCommon.InputTypeList.All;
+            this.linksave_txt.Location = new System.Drawing.Point(136, 25);
+            this.linksave_txt.Name = "linksave_txt";
+            this.linksave_txt.ReadOnly = true;
+            this.linksave_txt.Size = new System.Drawing.Size(182, 21);
+            this.linksave_txt.TabIndex = 80;
+            // 
+            // browser_btn
+            // 
+            this.browser_btn.BackColor = System.Drawing.SystemColors.Control;
+            this.browser_btn.ControlId = null;
+            this.browser_btn.Font = new System.Drawing.Font("Arial", 9F);
+            this.browser_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.browser_btn.Location = new System.Drawing.Point(6, 19);
+            this.browser_btn.Name = "browser_btn";
+            this.browser_btn.Size = new System.Drawing.Size(111, 33);
+            this.browser_btn.TabIndex = 79;
+            this.browser_btn.Text = "Browser  Import ";
+            this.browser_btn.UseVisualStyleBackColor = false;
+            this.browser_btn.Click += new System.EventHandler(this.browser_btn_Click);
             // 
             // update_btn
             // 
@@ -331,122 +448,45 @@
             this.InvertoryTimeCode_cbm.Size = new System.Drawing.Size(162, 23);
             this.InvertoryTimeCode_cbm.TabIndex = 80;
             // 
-            // Inventory_Offline_btn
+            // statusStrip1
             // 
-            this.Inventory_Offline_btn.BackColor = System.Drawing.SystemColors.Control;
-            this.Inventory_Offline_btn.ControlId = null;
-            this.Inventory_Offline_btn.Font = new System.Drawing.Font("Arial", 9F);
-            this.Inventory_Offline_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Inventory_Offline_btn.Location = new System.Drawing.Point(328, 19);
-            this.Inventory_Offline_btn.Name = "Inventory_Offline_btn";
-            this.Inventory_Offline_btn.Size = new System.Drawing.Size(91, 33);
-            this.Inventory_Offline_btn.TabIndex = 78;
-            this.Inventory_Offline_btn.Text = "Run Offline";
-            this.Inventory_Offline_btn.UseVisualStyleBackColor = true;
-            this.Inventory_Offline_btn.Click += new System.EventHandler(this.Inventory_Offline_btn_Click);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsTime,
+            this.toolStripStatusLabel2,
+            this.tsInventoryTotal});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 618);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1261, 24);
+            this.statusStrip1.TabIndex = 78;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // linksave_txt
+            // tsTime
             // 
-            this.linksave_txt.ControlId = null;
-            this.linksave_txt.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linksave_txt.InputType = Com.Nidec.Mes.Framework.TextBoxCommon.InputTypeList.All;
-            this.linksave_txt.Location = new System.Drawing.Point(136, 25);
-            this.linksave_txt.Name = "linksave_txt";
-            this.linksave_txt.ReadOnly = true;
-            this.linksave_txt.Size = new System.Drawing.Size(182, 21);
-            this.linksave_txt.TabIndex = 80;
+            this.tsTime.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.tsTime.Name = "tsTime";
+            this.tsTime.Size = new System.Drawing.Size(1126, 19);
+            this.tsTime.Spring = true;
             // 
-            // browser_btn
+            // toolStripStatusLabel2
             // 
-            this.browser_btn.BackColor = System.Drawing.SystemColors.Control;
-            this.browser_btn.ControlId = null;
-            this.browser_btn.Font = new System.Drawing.Font("Arial", 9F);
-            this.browser_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.browser_btn.Location = new System.Drawing.Point(6, 19);
-            this.browser_btn.Name = "browser_btn";
-            this.browser_btn.Size = new System.Drawing.Size(111, 33);
-            this.browser_btn.TabIndex = 79;
-            this.browser_btn.Text = "Browser  Import ";
-            this.browser_btn.UseVisualStyleBackColor = false;
-            this.browser_btn.Click += new System.EventHandler(this.browser_btn_Click);
+            this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(44, 19);
+            this.toolStripStatusLabel2.Text = "Total :";
             // 
-            // groupBoxCommon2
+            // tsInventoryTotal
             // 
-            this.groupBoxCommon2.ControlId = null;
-            this.groupBoxCommon2.Controls.Add(this.Inventory_Offline_btn);
-            this.groupBoxCommon2.Controls.Add(this.linksave_txt);
-            this.groupBoxCommon2.Controls.Add(this.browser_btn);
-            this.groupBoxCommon2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxCommon2.Location = new System.Drawing.Point(498, 11);
-            this.groupBoxCommon2.Name = "groupBoxCommon2";
-            this.groupBoxCommon2.Size = new System.Drawing.Size(425, 59);
-            this.groupBoxCommon2.TabIndex = 81;
-            this.groupBoxCommon2.TabStop = false;
-            // 
-            // groupBoxCommon3
-            // 
-            this.groupBoxCommon3.ControlId = null;
-            this.groupBoxCommon3.Controls.Add(this.ExportExcel_btn);
-            this.groupBoxCommon3.Controls.Add(this.linkexport_txt);
-            this.groupBoxCommon3.Controls.Add(this.exportlink_btn);
-            this.groupBoxCommon3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxCommon3.Location = new System.Drawing.Point(498, 70);
-            this.groupBoxCommon3.Name = "groupBoxCommon3";
-            this.groupBoxCommon3.Size = new System.Drawing.Size(425, 57);
-            this.groupBoxCommon3.TabIndex = 82;
-            this.groupBoxCommon3.TabStop = false;
-            // 
-            // ExportExcel_btn
-            // 
-            this.ExportExcel_btn.BackColor = System.Drawing.SystemColors.Control;
-            this.ExportExcel_btn.ControlId = null;
-            this.ExportExcel_btn.Font = new System.Drawing.Font("Arial", 9F);
-            this.ExportExcel_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ExportExcel_btn.Location = new System.Drawing.Point(327, 18);
-            this.ExportExcel_btn.Name = "ExportExcel_btn";
-            this.ExportExcel_btn.Size = new System.Drawing.Size(91, 32);
-            this.ExportExcel_btn.TabIndex = 78;
-            this.ExportExcel_btn.Text = "Export Excel";
-            this.ExportExcel_btn.UseVisualStyleBackColor = true;
-            this.ExportExcel_btn.Click += new System.EventHandler(this.ExportExcel_btn_Click);
-            // 
-            // linkexport_txt
-            // 
-            this.linkexport_txt.ControlId = null;
-            this.linkexport_txt.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkexport_txt.InputType = Com.Nidec.Mes.Framework.TextBoxCommon.InputTypeList.All;
-            this.linkexport_txt.Location = new System.Drawing.Point(135, 23);
-            this.linkexport_txt.Name = "linkexport_txt";
-            this.linkexport_txt.Size = new System.Drawing.Size(182, 21);
-            this.linkexport_txt.TabIndex = 80;
-            // 
-            // exportlink_btn
-            // 
-            this.exportlink_btn.BackColor = System.Drawing.SystemColors.Control;
-            this.exportlink_btn.ControlId = null;
-            this.exportlink_btn.Font = new System.Drawing.Font("Arial", 9F);
-            this.exportlink_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.exportlink_btn.Location = new System.Drawing.Point(6, 17);
-            this.exportlink_btn.Name = "exportlink_btn";
-            this.exportlink_btn.Size = new System.Drawing.Size(111, 33);
-            this.exportlink_btn.TabIndex = 79;
-            this.exportlink_btn.Text = "Browser Export";
-            this.exportlink_btn.UseVisualStyleBackColor = false;
-            this.exportlink_btn.Click += new System.EventHandler(this.exportlink_btn_Click);
-            // 
-            // inventorycode_lbl
-            // 
-            this.inventorycode_lbl.AutoSize = true;
-            this.inventorycode_lbl.Location = new System.Drawing.Point(55, 88);
-            this.inventorycode_lbl.Name = "inventorycode_lbl";
-            this.inventorycode_lbl.Size = new System.Drawing.Size(88, 15);
-            this.inventorycode_lbl.TabIndex = 85;
-            this.inventorycode_lbl.Text = "Inventory code:";
+            this.tsInventoryTotal.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsInventoryTotal.Name = "tsInventoryTotal";
+            this.tsInventoryTotal.Size = new System.Drawing.Size(40, 19);
+            this.tsInventoryTotal.Text = "None";
             // 
             // InvertoryCheckForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1261, 642);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.InvertoryCheck_dgv);
             this.Controls.Add(this.groupBoxCommon1);
             this.Name = "InvertoryCheckForm";
@@ -455,14 +495,18 @@
             this.Load += new System.EventHandler(this.InvertoryCheckForm_Load);
             this.Controls.SetChildIndex(this.groupBoxCommon1, 0);
             this.Controls.SetChildIndex(this.InvertoryCheck_dgv, 0);
+            this.Controls.SetChildIndex(this.statusStrip1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.InvertoryCheck_dgv)).EndInit();
             this.groupBoxCommon1.ResumeLayout(false);
             this.groupBoxCommon1.PerformLayout();
-            this.groupBoxCommon2.ResumeLayout(false);
-            this.groupBoxCommon2.PerformLayout();
             this.groupBoxCommon3.ResumeLayout(false);
             this.groupBoxCommon3.PerformLayout();
+            this.groupBoxCommon2.ResumeLayout(false);
+            this.groupBoxCommon2.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -498,5 +542,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colUserAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDateTime;
         private System.Windows.Forms.Label inventorycode_lbl;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel tsInventoryTotal;
     }
 }

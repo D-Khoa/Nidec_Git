@@ -12,6 +12,7 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.InvertoryTi
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.RankMasterCbm;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo.AccountWhVo;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.UserLocationMasterCbm;
+using System.Diagnostics;
 
 namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.InventoryForm
 {
@@ -21,6 +22,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
         {
             InitializeComponent();
             InvertoryCheck_dgv.AutoGenerateColumns = false;
+            
         }
 
 
@@ -313,11 +315,27 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
         }
         private void Search_btn_Click(object sender, EventArgs e)
         {
-            assetcodetrim = "";
-            GridBind();
-            InvertoryCheck_dgv.Columns["colRankNameNowTextBox"].Visible = false;
-            InvertoryCheck_dgv.Columns["colRankNameNow"].Visible = false;
-            asset_Code_cmb.Select();
+            Stopwatch stopWatch = new Stopwatch();
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                stopWatch.Restart();
+                assetcodetrim = "";
+                GridBind();
+                InvertoryCheck_dgv.Columns["colRankNameNowTextBox"].Visible = false;
+                InvertoryCheck_dgv.Columns["colRankNameNow"].Visible = false;
+                asset_Code_cmb.Select();
+                stopWatch.Stop();
+                tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
+                if (InvertoryCheck_dgv.Rows.Count > 0)
+                    tsInventoryTotal.Text = InvertoryCheck_dgv.Rows.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            this.Cursor = Cursors.Default;
+
         }
         private void exportlink_btn_Click(object sender, EventArgs e)
         {
