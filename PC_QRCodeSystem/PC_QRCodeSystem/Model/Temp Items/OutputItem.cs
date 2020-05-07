@@ -32,6 +32,19 @@ namespace PC_QRCodeSystem.Model
         #endregion
 
         #region QUERY
+        public string AddLenData(string datastring, int leng)
+        {
+            int datalen = datastring.Length;
+            if (datalen < leng)
+            {
+                for (int i = 0; i < (leng - datalen); i++)
+                {
+                    datastring += " ";
+                }
+            }
+            return datastring;
+        }
+
         public void ExportCSV(List<OutputItem> inList)
         {
             var properties = inList[0].GetType().GetProperties();
@@ -48,11 +61,19 @@ namespace PC_QRCodeSystem.Model
                 sw.WriteLine(line);
                 for (int i = 0; i < inList.Count; i++)
                 {
-                    var propretiesValue = inList[i].GetType().GetProperties();
-                    line = string.Join("?", (from x in propretiesValue
-                                             select x.Name == "delivery_date" ?
-                                             ((DateTime)x.GetValue(inList[i], null)).ToString("yyyy-MM-dd")
-                                             : x.GetValue(inList[i], null)));
+                    //var propretiesValue = inList[i].GetType().GetProperties();
+                    //line = string.Join("?", (from x in propretiesValue
+                    //                         select x.Name == "delivery_date" ?
+                    //                         ((DateTime)x.GetValue(inList[i], null)).ToString("yyyy-MM-dd")
+                    //                         : x.GetValue(inList[i], null)));
+                    line = AddLenData(inList[i].issue_cd.ToString(), 30);
+                    line += "?" + AddLenData(inList[i].destination_cd.ToString(), 30);
+                    line += "?" + AddLenData(inList[i].item_number.ToString(), 30);
+                    line += "?" + AddLenData(inList[i].supplier_invoice.ToString(), 30);
+                    line += "?" + AddLenData(inList[i].delivery_qty.ToString(), 30);
+                    line += "?" + AddLenData(inList[i].delivery_date.ToString("yyyy-MM-dd"), 30);
+                    line += "?" + AddLenData(inList[i].order_number.ToString(), 30);
+                    line += "?" + AddLenData(inList[i].incharge.ToString(), 30);
                     sw.WriteLine(line);
                 }
                 sw.Flush();
