@@ -1036,15 +1036,6 @@ namespace PC_QRCodeSystem.View
                 }
                 if (CustomMessageBox.Question("Do you want register this data?" + Environment.NewLine + "Bạn có muốn đăng ký dữ liệu này?") == DialogResult.No)
                     return;
-                //Xuất danh sách nguyên liệu ra file csv
-                listOut[0].ExportCSV(listOut.ToList());
-                //Cập nhật danh sách các gói nguyên liệu tồn kho
-                listStock[0].UpdateMultiItem(listStock.ToList());
-                //Thêm danh sách các gói nguyên liệu được xuất vào database
-                listStockOut[0].AddMultiItem(listStockOut.ToList());
-                //Khai báo bảng item và cập nhật số lượng tồn kho
-                pts_item itemData = new pts_item();
-                itemData.ListStockOutUpdateValue(listOut.ToList());
                 //Nếu lí do xuất là 20 thì thêm lịch sử kế hoạch xuất
                 if (issueFlag == "20")
                 {
@@ -1075,6 +1066,15 @@ namespace PC_QRCodeSystem.View
                     };
                     noPlanData.AddItem(noPlanData);
                 }
+                //Cập nhật danh sách các gói nguyên liệu tồn kho
+                listStock[0].UpdateMultiItem(listStock.ToList());
+                //Thêm danh sách các gói nguyên liệu được xuất vào database
+                listStockOut[0].AddMultiItem(listStockOut.ToList());
+                //Khai báo bảng item và cập nhật số lượng tồn kho
+                pts_item itemData = new pts_item();
+                itemData.ListStockOutUpdateValue(listOut.ToList());
+                //Xuất danh sách nguyên liệu ra file csv
+                listOut[0].ExportCSV(listOut.ToList());
                 CustomMessageBox.Notice("Register data completed!" + Environment.NewLine + "Dữ liệu được đăng ký hoàn tất!");
                 isChecked = false;
                 //Xóa các danh sách nguyên liệu hiện có sau khi đăng kí dữ liệu
