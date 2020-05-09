@@ -11,6 +11,7 @@ namespace PC_QRCodeSystem.Model
     public class OutputItem
     {
         #region ALL FIELDS
+        public int stockout_id {get;set;}
         public int issue_cd { get; set; }
         public string destination_cd { get; set; }
         public string item_number { get; set; }
@@ -67,7 +68,8 @@ namespace PC_QRCodeSystem.Model
                     //                         select x.Name == "delivery_date" ?
                     //                         ((DateTime)x.GetValue(inList[i], null)).ToString("yyyy-MM-dd")
                     //                         : x.GetValue(inList[i], null)));
-                    line = AddLenData(inList[i].issue_cd.ToString(), 2);
+                    line = AddLenData(inList[i].stockout_id.ToString(), 10);
+                    line += "?" + AddLenData(inList[i].issue_cd.ToString(), 2);
                     line += "?" + AddLenData(inList[i].destination_cd.ToString(), 10);
                     line += "?" + AddLenData(inList[i].item_number.ToString(), 30);
                     line += "?" + AddLenData(inList[i].supplier_invoice.ToString(), 20);
