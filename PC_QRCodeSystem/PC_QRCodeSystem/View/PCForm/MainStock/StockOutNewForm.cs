@@ -829,6 +829,7 @@ namespace PC_QRCodeSystem.View
                 #region ADD OUTPUT ITEM
                 listOut.Add(new OutputItem
                 {
+                    out_id = GetTimestamp(DateTime.Now);
                     issue_cd = 20,
                     destination_cd = cmbDestination.SelectedValue.ToString(),
                     item_number = itemCode,
