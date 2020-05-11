@@ -54,10 +54,12 @@ namespace PC_QRCodeSystem.Model
             if (!Directory.Exists(foldername)) Directory.CreateDirectory(foldername);
             if (!Directory.Exists(bkfoldername)) Directory.CreateDirectory(bkfoldername);
             string filename = @"\STOCKOUT" + ".txt";
+            // ghi nhiều client vào 1 file
             if (!Directory.Exists(filename)) Directory.CreateDirectory(filename);
             if (Directory.Exists(filename))
             {
-                using (StreamWriter sw = File.AppendText(foldername + filename))
+               // using (StreamReader sw = new StreamWriter(foldername + filename)) // ghi từng file
+                using (StreamWriter sw = File.AppendText(foldername + filename)) // ghi nhiều client vào 1 file
                 {
 
                     string line = string.Empty;
