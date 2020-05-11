@@ -55,6 +55,7 @@ namespace PC_QRCodeSystem.View
         /// <summary>
         /// Form xuất hàng
         /// </summary>
+        string record = DateTime.Now.ToString("yyyyMMddHHmmssffff");
         public StockOutNewForm()
         {
             InitializeComponent();
@@ -731,6 +732,7 @@ namespace PC_QRCodeSystem.View
             dr.Cells["stockout_qty"].Value = stockoutQty;
             //Khai báo supplier
             pts_supplier supplierData = new pts_supplier();
+
             //Duyệt danh sách nguyên liệu tồn
             foreach (pts_stock item in stockData.listStockItems)
             {
@@ -788,6 +790,7 @@ namespace PC_QRCodeSystem.View
                 //Thêm nguyên liệu vào lịch sử xuất
                 listStockOut.Add(new pts_stockout_log
                 {
+                    record_id = record,
                     packing_cd = item.packing_cd,
                     process_cd = txtSetOrderNo.Text,
                     issue_cd = 20,
@@ -827,9 +830,10 @@ namespace PC_QRCodeSystem.View
                 #endregion
                 //Thêm nguyên liệu vào danh sách xuất CSV
                 #region ADD OUTPUT ITEM
+
                 listOut.Add(new OutputItem
                 {
-                    out_id = GetTimestamp(DateTime.Now);
+                    record_id = record,
                     issue_cd = 20,
                     destination_cd = cmbDestination.SelectedValue.ToString(),
                     item_number = itemCode,
@@ -1400,8 +1404,10 @@ namespace PC_QRCodeSystem.View
                 //Thêm nguyên liệu cần xuất và tem cần kiểm tra vào danh sách
                 #region ADD LIST STOCK-OUT AND LABEL
                 //Thêm nguyên liệu cần xuất vào danh sách
+
                 listStockOut.Add(new pts_stockout_log
                 {
+                    record_id = record,
                     packing_cd = stockData.packing_cd,
                     process_cd = processCD,
                     issue_cd = (int)cmbIssue.SelectedValue,
@@ -1439,7 +1445,7 @@ namespace PC_QRCodeSystem.View
                 #region ADD OUT ITEM
                 listOut.Add(new OutputItem
                 {
-					out_id = GetTimestamp(DateTime.Now);
+                    record_id = record,
                     issue_cd = (int)cmbIssue.SelectedValue,
                     destination_cd = cmbDestination.SelectedValue.ToString(),
                     item_number = txtItemCode.Text,

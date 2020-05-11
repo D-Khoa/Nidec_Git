@@ -11,7 +11,7 @@ namespace PC_QRCodeSystem.Model
     public class OutputItem
     {
         #region ALL FIELDS
-        public string out_id {get;set;}
+        public string record_id { get; set; }
         public int issue_cd { get; set; }
         public string destination_cd { get; set; }
         public string item_number { get; set; }
@@ -53,9 +53,18 @@ namespace PC_QRCodeSystem.Model
             string bkfoldername = SettingItem.backupFolder + @"\BKStockOut";
             if (!Directory.Exists(foldername)) Directory.CreateDirectory(foldername);
             if (!Directory.Exists(bkfoldername)) Directory.CreateDirectory(bkfoldername);
-            string filename = @"\stockout_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            string filename = @"\STOCKOUT" + ".txt";
+            //if (!Directory.Exists(filename)) Directory.CreateDirectory(filename);
+            //if (Directory.Exists(filename))
+            //{
+            //    foreach (string lines in File.WriteAllLines(filename))
+            //    {
+
+            //    }
+            //}
             using (StreamWriter sw = new StreamWriter(foldername + filename))
             {
+
                 string line = string.Empty;
                 //Write columns
                 // dong tieu de file
@@ -68,7 +77,7 @@ namespace PC_QRCodeSystem.Model
                     //                         select x.Name == "delivery_date" ?
                     //                         ((DateTime)x.GetValue(inList[i], null)).ToString("yyyy-MM-dd")
                     //                         : x.GetValue(inList[i], null)));
-                    line = AddLenData(inList[i].out_id.ToString(), 30);
+                    line = AddLenData(inList[i].record_id.ToString(), 20);
                     line += "?" + AddLenData(inList[i].issue_cd.ToString(), 2);
                     line += "?" + AddLenData(inList[i].destination_cd.ToString(), 10);
                     line += "?" + AddLenData(inList[i].item_number.ToString(), 30);
