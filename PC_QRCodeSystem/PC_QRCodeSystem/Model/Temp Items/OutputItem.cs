@@ -62,7 +62,7 @@ namespace PC_QRCodeSystem.Model
 
             //    }
             //}
-            using (StreamWriter sw = new StreamWriter(foldername + filename))
+            using (StreamWriter sw = new StreamWriter(foldername + filename, true))
             {
 
                 string line = string.Empty;
