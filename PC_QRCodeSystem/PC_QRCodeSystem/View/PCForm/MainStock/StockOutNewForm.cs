@@ -55,7 +55,6 @@ namespace PC_QRCodeSystem.View
         /// <summary>
         /// Form xuất hàng
         /// </summary>
-        string record = DateTime.Now.ToString("yyyyMMddHHmmssffff");
         public StockOutNewForm()
         {
             InitializeComponent();
@@ -787,6 +786,7 @@ namespace PC_QRCodeSystem.View
                     item.packing_qty = 0;
                 }
                 #region ADD STOCK OUT ITEM
+                string record = DateTime.Now.ToString("yyyyMMddHHmmssffff");
                 //Thêm nguyên liệu vào lịch sử xuất
                 listStockOut.Add(new pts_stockout_log
                 {
@@ -1404,7 +1404,7 @@ namespace PC_QRCodeSystem.View
                 //Thêm nguyên liệu cần xuất và tem cần kiểm tra vào danh sách
                 #region ADD LIST STOCK-OUT AND LABEL
                 //Thêm nguyên liệu cần xuất vào danh sách
-
+                string record = DateTime.Now.ToString("yyyyMMddHHmmssffff");
                 listStockOut.Add(new pts_stockout_log
                 {
                     record_id = record,
