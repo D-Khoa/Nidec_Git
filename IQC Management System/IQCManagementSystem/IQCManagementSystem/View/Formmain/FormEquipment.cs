@@ -181,6 +181,7 @@ namespace IQCManagementSystem.View
             savef.AddExtension = true;
             if (savef.ShowDialog() == DialogResult.OK)
             {
+                dt = (DataTable)dgvdata.DataSource;
                 ExcelClass excel = new ExcelClass(savef.FileName);
                 excel.CreateWorkBook();
                 excel.AddDatatable(dt);
