@@ -21,6 +21,7 @@ namespace PC_QRCodeSystem.Model
         public string invoice { get; set; }
         public DateTime stockout_date { get; set; }
         public double stockout_qty { get; set; }
+        public string remark { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
         public BindingList<pts_stockout> listStockItems;
@@ -46,7 +47,7 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "SELECT stockout_id, packing_cd, item_cd, item_name, supplier_name, invoice, stockout_date, ";
-            query += "stockout_qty, registration_user_cd, registration_date_time FROM pts_stockout WHERE 1=1 ";
+            query += "stockout_qty, remark, registration_user_cd, registration_date_time FROM pts_stockout WHERE 1=1 ";
             if (!string.IsNullOrEmpty(inItem.packing_cd))
                 query += "AND packing_cd ='" + inItem.packing_cd + "' ";
             if (!string.IsNullOrEmpty(inItem.item_cd))
@@ -75,6 +76,7 @@ namespace PC_QRCodeSystem.Model
                 invoice = reader["invoice"].ToString(),
                 stockout_date = (DateTime)reader["stockout_date"],
                 stockout_qty = (double)reader["stockout_qty"],
+                remark = invoice = reader["remark"].ToString(),
                 registration_user_cd = reader["registration_user_cd"].ToString(),
                 registration_date_time = (DateTime)reader["registration_date_time"],
             };
@@ -102,7 +104,7 @@ namespace PC_QRCodeSystem.Model
                 SQL.Open();
                 //SQL query string
                 query = "SELECT stockout_id, packing_cd, item_cd, item_name, supplier_name, invoice, stockout_date, ";
-                query += "stockout_qty, registration_user_cd, registration_date_time FROM pts_stockout WHERE 1=1 ";
+                query += "stockout_qty, remark, registration_user_cd, registration_date_time FROM pts_stockout WHERE 1=1 ";
                 if (!string.IsNullOrEmpty(inItem.packing_cd))
                     query += "AND packing_cd ='" + inItem.packing_cd + "' ";
                 if (!string.IsNullOrEmpty(inItem.item_cd))
@@ -128,6 +130,7 @@ namespace PC_QRCodeSystem.Model
                         invoice = reader["invoice"].ToString(),
                         stockout_date = (DateTime)reader["stockout_date"],
                         stockout_qty = (double)reader["stockout_qty"],
+                        remark = invoice = reader["remark"].ToString(),
                         registration_user_cd = reader["registration_user_cd"].ToString(),
                         registration_date_time = (DateTime)reader["registration_date_time"],
                     };
@@ -158,7 +161,7 @@ namespace PC_QRCodeSystem.Model
                 SQL.Open();
                 //SQL query string
                 query = "SELECT stockout_id, packing_cd, item_cd, item_name, supplier_name, invoice, stockout_date, ";
-                query += "stockout_qty, registration_user_cd, registration_date_time FROM pts_stockout WHERE 1=1 ";
+                query += "stockout_qty, remark, registration_user_cd, registration_date_time FROM pts_stockout WHERE 1=1 ";
                 if (!string.IsNullOrEmpty(inItem.packing_cd))
                     query += "AND packing_cd ='" + inItem.packing_cd + "' ";
                 if (!string.IsNullOrEmpty(inItem.item_cd))
@@ -184,6 +187,7 @@ namespace PC_QRCodeSystem.Model
                         invoice = reader["invoice"].ToString(),
                         stockout_date = (DateTime)reader["stockout_date"],
                         stockout_qty = (double)reader["stockout_qty"],
+                        remark = invoice = reader["remark"].ToString(),
                         registration_user_cd = reader["registration_user_cd"].ToString(),
                         registration_date_time = (DateTime)reader["registration_date_time"],
                     };
@@ -221,7 +225,7 @@ namespace PC_QRCodeSystem.Model
                 SQL.Open();
                 //SQL query string
                 query = "SELECT stockout_id, packing_cd, item_cd, item_name, supplier_name, invoice, stockout_date, ";
-                query += "stockout_qty, registration_user_cd, registration_date_time FROM pts_stockout WHERE 1=1 ";
+                query += "stockout_qty, remark, registration_user_cd, registration_date_time FROM pts_stockout WHERE 1=1 ";
                 if (!string.IsNullOrEmpty(inItem.packing_cd))
                     query += "AND packing_cd ='" + inItem.packing_cd + "' ";
                 if (!string.IsNullOrEmpty(inItem.item_cd))
@@ -252,6 +256,7 @@ namespace PC_QRCodeSystem.Model
                         invoice = reader["invoice"].ToString(),
                         stockout_date = (DateTime)reader["stockout_date"],
                         stockout_qty = (double)reader["stockout_qty"],
+                        remark = invoice = reader["remark"].ToString(),
                         registration_user_cd = reader["registration_user_cd"].ToString(),
                         registration_date_time = (DateTime)reader["registration_date_time"],
                     };
@@ -284,10 +289,36 @@ namespace PC_QRCodeSystem.Model
             SQL.Open();
             //SQL query string
             query = "INSERT INTO pts_stockout(packing_cd, item_cd, item_name, supplier_name, invoice, stockout_date,";
-            query += "stockout_qty, registration_user_cd) VALUES ";
+            query += "stockout_qty, remark, registration_user_cd) VALUES ";
             query += "('" + inItem.packing_cd + "','" + inItem.item_cd + "','" + inItem.item_name + "','" + inItem.supplier_name;
             query += "','" + inItem.invoice + "','" + inItem.stockout_date + "','";
-            query += inItem.stockout_qty + "','" + inItem.registration_user_cd + "')";
+            query += inItem.stockout_qty + "','" + inItem.remark + "','";
+            query += inItem.registration_user_cd + "')";
+            //Execute non query for read database
+            int result = SQL.Command(query).ExecuteNonQuery();
+            query = string.Empty;
+            SQL.Close();
+            return result;
+        }
+
+        public int AddMultiItem(List<pts_stockout> listItem)
+        {
+            //SQL library
+            PSQL SQL = new PSQL();
+            string query = string.Empty;
+            //Open SQL connection
+            SQL.Open();
+            //SQL query string
+            query = "INSERT INTO pts_stockout(packing_cd, item_cd, item_name, supplier_name, invoice, stockout_date,";
+            query += "stockout_qty, remark, registration_user_cd) VALUES ";
+            foreach (pts_stockout inItem in listItem)
+            {
+                query += "('" + inItem.packing_cd + "','" + inItem.item_cd + "','" + inItem.item_name + "','" + inItem.supplier_name;
+                query += "','" + inItem.invoice + "','" + inItem.stockout_date + "','";
+                query += inItem.stockout_qty + "','" + inItem.remark + "','";
+                query += inItem.registration_user_cd + "'),";
+            }
+            query.Remove(query.Length - 1, 1);
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;
@@ -310,8 +341,8 @@ namespace PC_QRCodeSystem.Model
             //SQL query string
             query = "UPDATE pts_stockout SET packing_cd ='" + inItem.packing_cd + "', item_cd ='" + inItem.item_cd + "', item_name ='";
             query += inItem.item_name + "', supplier_name ='" + inItem.supplier_name + "', invoice ='" + inItem.invoice;
-            query += "', stockout_date ='" + inItem.stockout_date;
-            query += "', stockout_qty ='" + inItem.stockout_qty + "', registration_user_cd ='";
+            query += "', stockout_date ='" + inItem.stockout_date + "', stockout_qty ='" + inItem.stockout_qty;
+            query += "', remark ='" + inItem.remark + "', registration_user_cd ='";
             query += inItem.registration_user_cd + "' WHERE stockout_id ='" + inItem.stockout_id + "'";
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
@@ -333,8 +364,8 @@ namespace PC_QRCodeSystem.Model
             {
                 query = "UPDATE pts_stockout SET packing_cd ='" + inItem.packing_cd + "', item_cd ='" + inItem.item_cd + "', item_name ='";
                 query += inItem.item_name + "', supplier_name ='" + inItem.supplier_name + "', invoice ='" + inItem.invoice;
-                query += "', stockout_date ='" + inItem.stockout_date;
-                query += "', stockout_qty ='" + inItem.stockout_qty + "', registration_user_cd ='";
+                query += "', stockout_date ='" + inItem.stockout_date + "', stockout_qty ='" + inItem.stockout_qty;
+                query += "', remark ='" + inItem.remark + "', registration_user_cd ='";
                 query += inItem.registration_user_cd + "' WHERE stockout_id ='" + inItem.stockout_id + "'";
                 //Execute non query for read database
                 result += SQL.Command(query).ExecuteNonQuery();
