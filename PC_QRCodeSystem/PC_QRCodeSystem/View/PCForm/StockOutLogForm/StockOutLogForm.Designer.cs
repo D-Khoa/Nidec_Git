@@ -28,365 +28,414 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtProcessCD = new System.Windows.Forms.TextBox();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.cbSearchDate = new System.Windows.Forms.CheckBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.tc_Main = new System.Windows.Forms.TabControl();
+            this.tab_Inspection = new System.Windows.Forms.TabPage();
+            this.dgvInspection = new System.Windows.Forms.DataGridView();
+            this.pnlInspection = new System.Windows.Forms.Panel();
+            this.txtInQty = new System.Windows.Forms.TextBox();
+            this.txtDeliveryDate = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtSetNumber = new System.Windows.Forms.TextBox();
+            this.txtItemNumber = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtInvoice = new System.Windows.Forms.TextBox();
+            this.txtInsInvoice = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtItemName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.btnInsBack = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtLabelQty = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lbItemName = new System.Windows.Forms.Label();
-            this.txtItemCD = new System.Windows.Forms.TextBox();
-            this.cmbIssueCD = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lbUserName = new System.Windows.Forms.Label();
-            this.txtUserCD = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.cmbDestination = new System.Windows.Forms.ComboBox();
+            this.btnInspectionClear = new System.Windows.Forms.Button();
+            this.txtSupplierName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.txtBarcode = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.dgvData = new System.Windows.Forms.DataGridView();
-            this.dgvProcess = new System.Windows.Forms.DataGridView();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProcess)).BeginInit();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsRow = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tc_Main.SuspendLayout();
+            this.tab_Inspection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).BeginInit();
+            this.pnlInspection.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel6
+            // tc_Main
             // 
-            this.panel6.Controls.Add(this.label2);
-            this.panel6.Controls.Add(this.txtProcessCD);
-            this.panel6.Controls.Add(this.btnClear);
-            this.panel6.Controls.Add(this.cbSearchDate);
-            this.panel6.Controls.Add(this.btnDelete);
-            this.panel6.Controls.Add(this.dtpToDate);
-            this.panel6.Controls.Add(this.btnSearch);
-            this.panel6.Controls.Add(this.label10);
-            this.panel6.Controls.Add(this.dtpFromDate);
-            this.panel6.Controls.Add(this.label6);
-            this.panel6.Controls.Add(this.txtSetNumber);
-            this.panel6.Controls.Add(this.label4);
-            this.panel6.Controls.Add(this.txtInvoice);
-            this.panel6.Controls.Add(this.label1);
-            this.panel6.Controls.Add(this.lbItemName);
-            this.panel6.Controls.Add(this.txtItemCD);
-            this.panel6.Controls.Add(this.cmbIssueCD);
-            this.panel6.Controls.Add(this.label13);
-            this.panel6.Controls.Add(this.label14);
-            this.panel6.Controls.Add(this.lbUserName);
-            this.panel6.Controls.Add(this.txtUserCD);
-            this.panel6.Controls.Add(this.label20);
-            this.panel6.Controls.Add(this.cmbDestination);
-            this.panel6.Controls.Add(this.txtBarcode);
-            this.panel6.Controls.Add(this.label22);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(150, 70);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(734, 220);
-            this.panel6.TabIndex = 2;
+            this.tc_Main.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tc_Main.Controls.Add(this.tab_Inspection);
+            this.tc_Main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tc_Main.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tc_Main.Location = new System.Drawing.Point(150, 70);
+            this.tc_Main.Margin = new System.Windows.Forms.Padding(4);
+            this.tc_Main.Name = "tc_Main";
+            this.tc_Main.SelectedIndex = 0;
+            this.tc_Main.Size = new System.Drawing.Size(1102, 412);
+            this.tc_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tc_Main.TabIndex = 4;
             // 
-            // label2
+            // tab_Inspection
             // 
-            this.label2.Location = new System.Drawing.Point(480, 130);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 20);
-            this.label2.TabIndex = 46;
-            this.label2.Text = "Process Code";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tab_Inspection.Controls.Add(this.dgvInspection);
+            this.tab_Inspection.Controls.Add(this.pnlInspection);
+            this.tab_Inspection.Location = new System.Drawing.Point(4, 28);
+            this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
+            this.tab_Inspection.Name = "tab_Inspection";
+            this.tab_Inspection.Padding = new System.Windows.Forms.Padding(4);
+            this.tab_Inspection.Size = new System.Drawing.Size(1094, 380);
+            this.tab_Inspection.TabIndex = 2;
+            this.tab_Inspection.Text = "Inspection";
+            this.tab_Inspection.UseVisualStyleBackColor = true;
             // 
-            // txtProcessCD
+            // dgvInspection
             // 
-            this.txtProcessCD.Location = new System.Drawing.Point(580, 130);
-            this.txtProcessCD.Name = "txtProcessCD";
-            this.txtProcessCD.Size = new System.Drawing.Size(120, 22);
-            this.txtProcessCD.TabIndex = 45;
+            this.dgvInspection.AllowUserToAddRows = false;
+            this.dgvInspection.AllowUserToDeleteRows = false;
+            this.dgvInspection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInspection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInspection.Location = new System.Drawing.Point(4, 218);
+            this.dgvInspection.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvInspection.Name = "dgvInspection";
+            this.dgvInspection.ReadOnly = true;
+            this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvInspection.Size = new System.Drawing.Size(1086, 158);
+            this.dgvInspection.TabIndex = 9;
             // 
-            // btnClear
+            // pnlInspection
             // 
-            this.btnClear.Location = new System.Drawing.Point(390, 160);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(80, 50);
-            this.btnClear.TabIndex = 5;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.pnlInspection.Controls.Add(this.txtInQty);
+            this.pnlInspection.Controls.Add(this.txtDeliveryDate);
+            this.pnlInspection.Controls.Add(this.label6);
+            this.pnlInspection.Controls.Add(this.txtItemNumber);
+            this.pnlInspection.Controls.Add(this.label5);
+            this.pnlInspection.Controls.Add(this.label4);
+            this.pnlInspection.Controls.Add(this.txtInsInvoice);
+            this.pnlInspection.Controls.Add(this.label18);
+            this.pnlInspection.Controls.Add(this.txtItemName);
+            this.pnlInspection.Controls.Add(this.label3);
+            this.pnlInspection.Controls.Add(this.label19);
+            this.pnlInspection.Controls.Add(this.btnInsBack);
+            this.pnlInspection.Controls.Add(this.label16);
+            this.pnlInspection.Controls.Add(this.txtLabelQty);
+            this.pnlInspection.Controls.Add(this.label11);
+            this.pnlInspection.Controls.Add(this.label1);
+            this.pnlInspection.Controls.Add(this.btnInspectionClear);
+            this.pnlInspection.Controls.Add(this.txtSupplierName);
+            this.pnlInspection.Controls.Add(this.label2);
+            this.pnlInspection.Controls.Add(this.btnDelete);
+            this.pnlInspection.Controls.Add(this.btnPrint);
+            this.pnlInspection.Controls.Add(this.txtBarcode);
+            this.pnlInspection.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlInspection.Location = new System.Drawing.Point(4, 4);
+            this.pnlInspection.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlInspection.Name = "pnlInspection";
+            this.pnlInspection.Size = new System.Drawing.Size(1086, 214);
+            this.pnlInspection.TabIndex = 2;
             // 
-            // cbSearchDate
+            // txtInQty
             // 
-            this.cbSearchDate.Location = new System.Drawing.Point(480, 70);
-            this.cbSearchDate.Name = "cbSearchDate";
-            this.cbSearchDate.Size = new System.Drawing.Size(90, 20);
-            this.cbSearchDate.TabIndex = 41;
-            this.cbSearchDate.Text = "From Date";
-            this.cbSearchDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cbSearchDate.UseVisualStyleBackColor = true;
+            this.txtInQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInQty.Location = new System.Drawing.Point(748, 19);
+            this.txtInQty.Margin = new System.Windows.Forms.Padding(4);
+            this.txtInQty.Name = "txtInQty";
+            this.txtInQty.Size = new System.Drawing.Size(120, 50);
+            this.txtInQty.TabIndex = 4;
+            this.txtInQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtInQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtInQty_KeyDown);
             // 
-            // btnDelete
+            // txtDeliveryDate
             // 
-            this.btnDelete.Location = new System.Drawing.Point(304, 160);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 50);
-            this.btnDelete.TabIndex = 3;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // dtpToDate
-            // 
-            this.dtpToDate.CustomFormat = "yyyy-MM-dd";
-            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpToDate.Location = new System.Drawing.Point(580, 100);
-            this.dtpToDate.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(120, 22);
-            this.dtpToDate.TabIndex = 44;
-            this.dtpToDate.Value = new System.DateTime(2020, 4, 10, 0, 0, 0, 0);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(120, 160);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(80, 50);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(480, 100);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(90, 25);
-            this.label10.TabIndex = 42;
-            this.label10.Text = "To Date";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dtpFromDate
-            // 
-            this.dtpFromDate.CustomFormat = "yyyy-MM-dd";
-            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFromDate.Location = new System.Drawing.Point(580, 70);
-            this.dtpFromDate.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(120, 22);
-            this.dtpFromDate.TabIndex = 43;
-            this.dtpFromDate.Value = new System.DateTime(2020, 3, 4, 0, 0, 0, 0);
+            this.txtDeliveryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDeliveryDate.Location = new System.Drawing.Point(354, 179);
+            this.txtDeliveryDate.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDeliveryDate.Name = "txtDeliveryDate";
+            this.txtDeliveryDate.ReadOnly = true;
+            this.txtDeliveryDate.Size = new System.Drawing.Size(292, 23);
+            this.txtDeliveryDate.TabIndex = 40;
+            this.txtDeliveryDate.TabStop = false;
+            this.txtDeliveryDate.Text = "Delivery Date";
+            this.txtDeliveryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(480, 10);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(253, 182);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 20);
-            this.label6.TabIndex = 40;
-            this.label6.Text = "Set Number";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label6.Size = new System.Drawing.Size(93, 17);
+            this.label6.TabIndex = 39;
+            this.label6.Text = "Delivery Date";
             // 
-            // txtSetNumber
+            // txtItemNumber
             // 
-            this.txtSetNumber.Location = new System.Drawing.Point(580, 10);
-            this.txtSetNumber.Name = "txtSetNumber";
-            this.txtSetNumber.Size = new System.Drawing.Size(120, 22);
-            this.txtSetNumber.TabIndex = 10;
+            this.txtItemNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtItemNumber.Location = new System.Drawing.Point(354, 114);
+            this.txtItemNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.txtItemNumber.Name = "txtItemNumber";
+            this.txtItemNumber.ReadOnly = true;
+            this.txtItemNumber.Size = new System.Drawing.Size(292, 23);
+            this.txtItemNumber.TabIndex = 37;
+            this.txtItemNumber.TabStop = false;
+            this.txtItemNumber.Text = "Item Number";
+            this.txtItemNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(246, 117);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 25);
+            this.label5.TabIndex = 38;
+            this.label5.Text = "Item Number";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(480, 40);
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label4.Location = new System.Drawing.Point(699, 46);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 20);
+            this.label4.Size = new System.Drawing.Size(42, 17);
             this.label4.TabIndex = 36;
-            this.label4.Text = "Invoice";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label4.Text = "Enter";
             // 
-            // txtInvoice
+            // txtInsInvoice
             // 
-            this.txtInvoice.Location = new System.Drawing.Point(580, 40);
-            this.txtInvoice.Name = "txtInvoice";
-            this.txtInvoice.Size = new System.Drawing.Size(120, 22);
-            this.txtInvoice.TabIndex = 35;
-            this.txtInvoice.TabStop = false;
+            this.txtInsInvoice.Location = new System.Drawing.Point(118, 149);
+            this.txtInsInvoice.Name = "txtInsInvoice";
+            this.txtInsInvoice.ReadOnly = true;
+            this.txtInsInvoice.Size = new System.Drawing.Size(120, 23);
+            this.txtInsInvoice.TabIndex = 35;
+            this.txtInsInvoice.TabStop = false;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(58, 152);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(52, 17);
+            this.label18.TabIndex = 34;
+            this.label18.Text = "Invoice";
+            // 
+            // txtItemName
+            // 
+            this.txtItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtItemName.Location = new System.Drawing.Point(354, 77);
+            this.txtItemName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtItemName.Name = "txtItemName";
+            this.txtItemName.ReadOnly = true;
+            this.txtItemName.Size = new System.Drawing.Size(292, 23);
+            this.txtItemName.TabIndex = 33;
+            this.txtItemName.TabStop = false;
+            this.txtItemName.Text = "Item Name";
+            this.txtItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(246, 77);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 23);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Item Name";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(695, 29);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(46, 17);
+            this.label19.TabIndex = 30;
+            this.label19.Text = "2. Qty";
+            // 
+            // btnInsBack
+            // 
+            this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsBack.Location = new System.Drawing.Point(1002, 149);
+            this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInsBack.Name = "btnInsBack";
+            this.btnInsBack.Size = new System.Drawing.Size(100, 50);
+            this.btnInsBack.TabIndex = 2;
+            this.btnInsBack.Text = "Back\r\nTrờ Lại";
+            this.btnInsBack.UseVisualStyleBackColor = true;
+            this.btnInsBack.Click += new System.EventHandler(this.btnInsBack_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label16.Location = new System.Drawing.Point(68, 35);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(42, 17);
+            this.label16.TabIndex = 28;
+            this.label16.Text = "Enter";
+            // 
+            // txtLabelQty
+            // 
+            this.txtLabelQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLabelQty.Location = new System.Drawing.Point(118, 69);
+            this.txtLabelQty.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLabelQty.Name = "txtLabelQty";
+            this.txtLabelQty.Size = new System.Drawing.Size(120, 50);
+            this.txtLabelQty.TabIndex = 5;
+            this.txtLabelQty.Text = "1";
+            this.txtLabelQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(10, 71);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 40);
+            this.label11.TabIndex = 26;
+            this.label11.Text = " Label Qty\r\n";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(10, 40);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 20);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "Item Code";
+            this.label1.Size = new System.Drawing.Size(100, 25);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "1. Barcode";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lbItemName
+            // btnInspectionClear
             // 
-            this.lbItemName.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lbItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbItemName.Location = new System.Drawing.Point(270, 40);
-            this.lbItemName.Name = "lbItemName";
-            this.lbItemName.Size = new System.Drawing.Size(200, 20);
-            this.lbItemName.TabIndex = 31;
-            this.lbItemName.Text = "Item Name";
-            this.lbItemName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnInspectionClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInspectionClear.Location = new System.Drawing.Point(886, 149);
+            this.btnInspectionClear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInspectionClear.Name = "btnInspectionClear";
+            this.btnInspectionClear.Size = new System.Drawing.Size(100, 50);
+            this.btnInspectionClear.TabIndex = 8;
+            this.btnInspectionClear.Text = "Clear All\r\nXóa Hết";
+            this.btnInspectionClear.UseVisualStyleBackColor = true;
+            this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
             // 
-            // txtItemCD
+            // txtSupplierName
             // 
-            this.txtItemCD.Location = new System.Drawing.Point(120, 40);
-            this.txtItemCD.Name = "txtItemCD";
-            this.txtItemCD.Size = new System.Drawing.Size(120, 22);
-            this.txtItemCD.TabIndex = 30;
-            this.txtItemCD.TabStop = false;
-            this.txtItemCD.TextChanged += new System.EventHandler(this.txtItemCD_TextChanged);
+            this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSupplierName.Location = new System.Drawing.Point(354, 149);
+            this.txtSupplierName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSupplierName.Name = "txtSupplierName";
+            this.txtSupplierName.ReadOnly = true;
+            this.txtSupplierName.Size = new System.Drawing.Size(292, 23);
+            this.txtSupplierName.TabIndex = 8;
+            this.txtSupplierName.TabStop = false;
+            this.txtSupplierName.Text = "Supplier Name";
+            this.txtSupplierName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // cmbIssueCD
+            // label2
             // 
-            this.cmbIssueCD.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbIssueCD.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbIssueCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbIssueCD.FormattingEnabled = true;
-            this.cmbIssueCD.Location = new System.Drawing.Point(120, 70);
-            this.cmbIssueCD.Name = "cmbIssueCD";
-            this.cmbIssueCD.Size = new System.Drawing.Size(350, 24);
-            this.cmbIssueCD.TabIndex = 5;
-            this.cmbIssueCD.SelectedIndexChanged += new System.EventHandler(this.cmbIssueCD_SelectedIndexChanged);
-            this.cmbIssueCD.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbIssueCD_Format);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(246, 152);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 25);
+            this.label2.TabIndex = 23;
+            this.label2.Text = " Supplier";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label13
+            // btnDelete
             // 
-            this.label13.Location = new System.Drawing.Point(10, 130);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(100, 20);
-            this.label13.TabIndex = 27;
-            this.label13.Text = "User Code";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(770, 149);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 50);
+            this.btnDelete.TabIndex = 7;
+            this.btnDelete.Text = "4. Delete\r\nXóa Tem";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // label14
+            // btnPrint
             // 
-            this.label14.Location = new System.Drawing.Point(10, 10);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(100, 20);
-            this.label14.TabIndex = 26;
-            this.label14.Text = "Barcode";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbUserName
-            // 
-            this.lbUserName.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lbUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUserName.Location = new System.Drawing.Point(270, 130);
-            this.lbUserName.Name = "lbUserName";
-            this.lbUserName.Size = new System.Drawing.Size(200, 20);
-            this.lbUserName.TabIndex = 10;
-            this.lbUserName.Text = "User Name";
-            this.lbUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtUserCD
-            // 
-            this.txtUserCD.Location = new System.Drawing.Point(120, 130);
-            this.txtUserCD.Name = "txtUserCD";
-            this.txtUserCD.Size = new System.Drawing.Size(120, 22);
-            this.txtUserCD.TabIndex = 7;
-            this.txtUserCD.TextChanged += new System.EventHandler(this.txtUserCD_TextChanged);
-            // 
-            // label20
-            // 
-            this.label20.Location = new System.Drawing.Point(10, 70);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(100, 20);
-            this.label20.TabIndex = 6;
-            this.label20.Text = "Issue Code";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cmbDestination
-            // 
-            this.cmbDestination.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDestination.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDestination.FormattingEnabled = true;
-            this.cmbDestination.Location = new System.Drawing.Point(120, 100);
-            this.cmbDestination.Name = "cmbDestination";
-            this.cmbDestination.Size = new System.Drawing.Size(350, 24);
-            this.cmbDestination.TabIndex = 6;
-            this.cmbDestination.SelectedIndexChanged += new System.EventHandler(this.cmbDestination_SelectedIndexChanged);
-            this.cmbDestination.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbDestination_Format);
+            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Location = new System.Drawing.Point(654, 152);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(100, 50);
+            this.btnPrint.TabIndex = 6;
+            this.btnPrint.Text = "3. Print        In Tem";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // txtBarcode
             // 
+            this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBarcode.Location = new System.Drawing.Point(120, 10);
+            this.txtBarcode.Margin = new System.Windows.Forms.Padding(4);
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(350, 22);
-            this.txtBarcode.TabIndex = 4;
+            this.txtBarcode.Size = new System.Drawing.Size(550, 53);
+            this.txtBarcode.TabIndex = 3;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
-            // label22
+            // statusStrip2
             // 
-            this.label22.Location = new System.Drawing.Point(10, 100);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(100, 20);
-            this.label22.TabIndex = 0;
-            this.label22.Text = "Destination";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel4,
+            this.tsRow,
+            this.tsTime,
+            this.toolStripStatusLabel5,
+            this.tsTotalQty});
+            this.statusStrip2.Location = new System.Drawing.Point(150, 458);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(1102, 24);
+            this.statusStrip2.TabIndex = 28;
+            this.statusStrip2.Text = "statusStrip2";
             // 
-            // dgvData
+            // toolStripStatusLabel4
             // 
-            this.dgvData.AllowUserToAddRows = false;
-            this.dgvData.AllowUserToDeleteRows = false;
-            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(150, 364);
-            this.dgvData.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvData.MultiSelect = false;
-            this.dgvData.Name = "dgvData";
-            this.dgvData.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvData.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvData.Size = new System.Drawing.Size(734, 108);
-            this.dgvData.TabIndex = 4;
-            this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
+            this.toolStripStatusLabel4.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(40, 19);
+            this.toolStripStatusLabel4.Text = "Row :";
             // 
-            // dgvProcess
+            // tsRow
             // 
-            this.dgvProcess.AllowUserToAddRows = false;
-            this.dgvProcess.AllowUserToDeleteRows = false;
-            this.dgvProcess.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvProcess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProcess.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgvProcess.Location = new System.Drawing.Point(150, 290);
-            this.dgvProcess.Name = "dgvProcess";
-            this.dgvProcess.ReadOnly = true;
-            this.dgvProcess.RowHeadersVisible = false;
-            this.dgvProcess.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProcess.Size = new System.Drawing.Size(734, 74);
-            this.dgvProcess.TabIndex = 5;
+            this.tsRow.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsRow.Name = "tsRow";
+            this.tsRow.Size = new System.Drawing.Size(40, 19);
+            this.tsRow.Text = "None";
+            // 
+            // tsTime
+            // 
+            this.tsTime.Name = "tsTime";
+            this.tsTime.Size = new System.Drawing.Size(902, 19);
+            this.tsTime.Spring = true;
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(69, 19);
+            this.toolStripStatusLabel5.Text = "Total Q\'ty :";
+            // 
+            // tsTotalQty
+            // 
+            this.tsTotalQty.Name = "tsTotalQty";
+            this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
+            this.tsTotalQty.Text = "None";
             // 
             // StockOutLogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 472);
-            this.Controls.Add(this.dgvData);
-            this.Controls.Add(this.dgvProcess);
-            this.Controls.Add(this.panel6);
+            this.ClientSize = new System.Drawing.Size(1252, 482);
+            this.Controls.Add(this.statusStrip2);
+            this.Controls.Add(this.tc_Main);
             this.dept = "";
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listper = null;
@@ -394,50 +443,57 @@
             this.name = "";
             this.Name = "StockOutLogForm";
             this.position = "";
-            this.Text = "StockOutLogForm";
+            this.Text = "StockOutForm";
             this.tittle = "FormCommon";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StockOutLogForm_Load);
-            this.Controls.SetChildIndex(this.panel6, 0);
-            this.Controls.SetChildIndex(this.dgvProcess, 0);
-            this.Controls.SetChildIndex(this.dgvData, 0);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProcess)).EndInit();
+            this.Controls.SetChildIndex(this.tc_Main, 0);
+            this.Controls.SetChildIndex(this.statusStrip2, 0);
+            this.tc_Main.ResumeLayout(false);
+            this.tab_Inspection.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).EndInit();
+            this.pnlInspection.ResumeLayout(false);
+            this.pnlInspection.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtSetNumber;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtInvoice;
+        private System.Windows.Forms.TabControl tc_Main;
+        private System.Windows.Forms.TabPage tab_Inspection;
+        private System.Windows.Forms.DataGridView dgvInspection;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel tsRow;
+        private System.Windows.Forms.ToolStripStatusLabel tsTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel tsTotalQty;
+        private System.Windows.Forms.Panel pnlInspection;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btnInsBack;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtLabelQty;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbItemName;
-        private System.Windows.Forms.TextBox txtItemCD;
-        private System.Windows.Forms.ComboBox cmbIssueCD;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label lbUserName;
-        private System.Windows.Forms.TextBox txtUserCD;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.ComboBox cmbDestination;
-        private System.Windows.Forms.TextBox txtBarcode;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DataGridView dgvData;
-        private System.Windows.Forms.CheckBox cbSearchDate;
-        private System.Windows.Forms.DateTimePicker dtpToDate;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker dtpFromDate;
+        private System.Windows.Forms.Button btnInspectionClear;
+        private System.Windows.Forms.TextBox txtSupplierName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtProcessCD;
-        private System.Windows.Forms.DataGridView dgvProcess;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.TextBox txtBarcode;
+        private System.Windows.Forms.TextBox txtInsInvoice;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtItemName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtItemNumber;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtDeliveryDate;
+        private System.Windows.Forms.TextBox txtInQty;
     }
 }

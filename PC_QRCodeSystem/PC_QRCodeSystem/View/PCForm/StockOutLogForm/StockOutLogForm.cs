@@ -2,324 +2,217 @@
 using System.Drawing;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Diagnostics;
 
 namespace PC_QRCodeSystem.View
 {
     public partial class StockOutLogForm : FormCommon
     {
-        #region VARIABLE
-        private pts_item itemData { get; set; }
-        private pts_plan planData { get; set; }
-        private m_mes_user userData { get; set; }
-        private pts_stock stockData { get; set; }
-        private pts_noplan noplanData { get; set; }
-        private pts_destination desCode { get; set; }
-        private pts_issue_code issueCode { get; set; }
-        private pts_request_log requestData { get; set; }
-        private pts_stockout_log stockoutData { get; set; }
-        private ErrorProvider errorProvider = new ErrorProvider();
-        #endregion
-
-        #region FORM EVENT
+        PrintItem lbData { get; set; }
+        PrintItem printItem { get; set; }
+        pts_item itemData { get; set; }
+        pts_stockout stockItem { get; set; }
+        ErrorProvider errorProvider = new ErrorProvider();
+        BindingList<pts_stockout> listStockItem { get; set; }
+        List<PrintItem> listPrintItem { get; set; }
         public StockOutLogForm()
         {
             InitializeComponent();
+            tc_Main.ItemSize = new Size(0, 1);
+            lbData = new PrintItem();
             itemData = new pts_item();
-            planData = new pts_plan();
-            userData = new m_mes_user();
-            stockData = new pts_stock();
-            noplanData = new pts_noplan();
-            desCode = new pts_destination();
-            issueCode = new pts_issue_code();
-            requestData = new pts_request_log();
-            stockoutData = new pts_stockout_log();
-            dtpToDate.Value = DateTime.Today;
-            dtpFromDate.Value = DateTime.Today.AddMonths(-1);
-            GetCmb();
+            stockItem = new pts_stockout();
+            listStockItem = new BindingList<pts_stockout>();
+            printItem = new PrintItem();
+            listPrintItem = new List<PrintItem>();
         }
 
         private void StockOutLogForm_Load(object sender, EventArgs e)
         {
-        }
 
-        public void SetFields(OutputItem inItem)
-        {
-            txtUserCD.Text = inItem.incharge;
-            txtItemCD.Text = inItem.item_number;
-            txtSetNumber.Text = inItem.order_number;
-            txtInvoice.Text = inItem.supplier_invoice;
-            dtpToDate.Value = inItem.delivery_date;
-            dtpFromDate.Value = inItem.delivery_date;
-            cmbIssueCD.SelectedValue = inItem.issue_cd;
-            if (!string.IsNullOrEmpty(inItem.destination_cd)) cmbDestination.SelectedValue = inItem.destination_cd;
-            btnSearch.PerformClick();
-        }
-        #endregion
-
-        #region SUB EVENT
-        /// <summary>
-        /// Get list issue code, destination into combobox
-        /// </summary>
-        private void GetCmb()
-        {
-            try
-            {
-                //Get list issue code
-                issueCode.GetListIssueCode();
-                cmbIssueCD.DataSource = issueCode.listIssueCode;
-                cmbIssueCD.DisplayMember = "issue_name";
-                cmbIssueCD.ValueMember = "issue_cd";
-                cmbIssueCD.Text = null;
-                //Get list destination code
-                desCode.GetListDestination(string.Empty, string.Empty);
-                cmbDestination.DataSource = desCode.listdestination;
-                cmbDestination.DisplayMember = "destination_name";
-                cmbDestination.ValueMember = "destination_cd";
-                cmbDestination.Text = null;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
-        /// Update data grid
-        /// </summary>
-        /// <param name="isSearch"></param>
-        private void UpdateGrid(bool isSearch)
-        {
-            if (isSearch)
-            {
-                int issuecode = 0;
-                string descode = string.Empty;
-                if (cmbIssueCD.SelectedValue != null) issuecode = (int)cmbIssueCD.SelectedValue;
-                if (cmbDestination.SelectedValue != null) descode = cmbDestination.SelectedValue.ToString();
-                stockoutData.Search(new pts_stockout_log
-                {
-                    issue_cd = issuecode,
-                    process_cd = txtProcessCD.Text,
-                    stockout_user_cd = txtUserCD.Text
-                }, txtItemCD.Text, txtInvoice.Text, txtSetNumber.Text, descode, dtpFromDate.Value, dtpToDate.Value, cbSearchDate.Checked);
-            }
-            if (stockoutData.listStockOutItem != null)
-                dgvData.DataSource = stockoutData.listStockOutItem;
-            if (dgvData.Rows.Count > 0)
-            {
-                for (int i = 0; i < dgvData.Rows.Count; i++)
-                {
-                    dgvData.Rows[i].HeaderCell.Value = (i + 1).ToString();
-                }
-            }
-            dgvData.Columns["stockout_id"].HeaderText = "ID";
-            dgvData.Columns["packing_cd"].HeaderText = "Packing Code";
-            dgvData.Columns["process_cd"].HeaderText = "Process Code";
-            dgvData.Columns["issue_cd"].HeaderText = "Issue Code";
-            dgvData.Columns["stockout_date"].HeaderText = "Stock-Out Date";
-            dgvData.Columns["stockout_user_cd"].HeaderText = "Incharge";
-            dgvData.Columns["stockout_qty"].HeaderText = "Stoc-Out Qty";
-            dgvData.Columns["real_qty"].HeaderText = "Real Qty";
-            dgvData.Columns["received_user_cd"].HeaderText = "Receive User";
-            dgvData.Columns["comment"].HeaderText = "Comment";
-            dgvData.Columns["remark"].HeaderText = "Remark";
-            dgvData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-        }
-
-        /// <summary>
-        /// Update process grid with data from noplan, plan, request
-        /// </summary>
-        private void UpdateProcessGrid()
-        {
-            if (planData.listPlan.Count > 0)
-            {
-                dgvProcess.DataSource = planData.listPlan;
-                dgvProcess.Columns["plan_id"].HeaderText = "ID";
-                dgvProcess.Columns["plan_cd"].HeaderText = "Process ID";
-                dgvProcess.Columns["destination_cd"].HeaderText = "Destination Code";
-                dgvProcess.Columns["model_cd"].HeaderText = "Model Code";
-                dgvProcess.Columns["set_number"].HeaderText = "Set Number";
-                dgvProcess.Columns["plan_date"].HeaderText = "Plan Date";
-                dgvProcess.Columns["plan_qty"].HeaderText = "Qty";
-                dgvProcess.Columns["plan_usercd"].HeaderText = "Incharge";
-                dgvProcess.Columns["delivery_date"].HeaderText = "Delivery Date";
-                dgvProcess.Columns["comment"].HeaderText = "Comment";
-            }
-            if (noplanData.listNoPlan.Count > 0)
-            {
-                dgvProcess.DataSource = noplanData.listNoPlan;
-                dgvProcess.Columns["noplan_id"].HeaderText = "ID";
-                dgvProcess.Columns["noplan_cd"].HeaderText = "Process Code";
-                dgvProcess.Columns["destination_cd"].HeaderText = "Destination Code";
-                dgvProcess.Columns["item_cd"].HeaderText = "Item Code";
-                dgvProcess.Columns["noplan_qty"].HeaderText = "Qty";
-                dgvProcess.Columns["noplan_usercd"].HeaderText = "Incharge";
-                dgvProcess.Columns["noplan_date"].HeaderText = "Date";
-            }
-            if (requestData.listRequestItem.Count > 0)
-            {
-                dgvProcess.DataSource = requestData.listRequestItem;
-                dgvProcess.Columns["request_id"].HeaderText = "ID";
-                dgvProcess.Columns["request_cd"].HeaderText = "Process Code";
-                dgvProcess.Columns["item_cd"].HeaderText = "Item Code";
-                dgvProcess.Columns["model_cd"].HeaderText = "Model Code";
-                dgvProcess.Columns["destination_cd"].HeaderText = "Destination Code";
-                dgvProcess.Columns["use_date"].HeaderText = "Use Date";
-                dgvProcess.Columns["request_date"].HeaderText = "Request Date";
-                dgvProcess.Columns["request_qty"].HeaderText = "Request Qty";
-                dgvProcess.Columns["request_usercd"].HeaderText = "Request User";
-                dgvProcess.Columns["m_confirm"].HeaderText = "Manager Confirm";
-                dgvProcess.Columns["gm_confirm"].HeaderText = "GM Confirm";
-                dgvProcess.Columns["available_qty"].HeaderText = "Available Qty";
-                dgvProcess.Columns["approve_usercd"].HeaderText = "Approve User";
-                dgvProcess.Columns["pc_m_cofirm"].HeaderText = "PC Confirm";
-                dgvProcess.Columns["comment"].HeaderText = "Comment";
-                dgvProcess.Columns["remark"].HeaderText = "Remark";
-            }
-            dgvProcess.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-        }
-
-        private void ClearFields()
-        {
-            txtUserCD.Clear();
-            txtItemCD.Clear();
-            txtBarcode.Clear();
-            txtInvoice.Clear();
-            txtProcessCD.Clear();
-            txtSetNumber.Clear();
-            cmbIssueCD.Text = null;
-            cmbDestination.Text = null;
-            planData.listPlan.Clear();
-            noplanData.listNoPlan.Clear();
-            requestData.listRequestItem.Clear();
-            stockoutData.listStockOutItem.Clear();
-            dgvData.DataSource = null;
-            dgvProcess.DataSource = null;
-        }
-        #endregion
-
-        #region FIELDS EVENT
-        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                string[] barcode = txtBarcode.Text.Split(';');
-                txtItemCD.Text = barcode[0];
-                txtInvoice.Text = barcode[3];
-                dtpFromDate.Value = DateTime.Parse(barcode[4]);
-                dtpToDate.Value = DateTime.Parse(barcode[4]);
-                btnSearch.PerformClick();
-                txtBarcode.ResetText();
-                txtBarcode.Focus();
-            }
-        }
-
-        private void cmbIssueCD_Format(object sender, ListControlConvertEventArgs e)
-        {
-            string code = ((pts_issue_code)e.ListItem).issue_cd.ToString();
-            string iname = ((pts_issue_code)e.ListItem).issue_name;
-            e.Value = code + ": " + iname;
-        }
-
-        private void cmbDestination_Format(object sender, ListControlConvertEventArgs e)
-        {
-            string code = ((pts_destination)e.ListItem).destination_cd;
-            string iname = ((pts_destination)e.ListItem).destination_name;
-            e.Value = code + ": " + iname;
-        }
-
-        private void cmbIssueCD_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbIssueCD.Text))
-                errorProvider.SetError(cmbIssueCD, null);
-        }
-
-        private void cmbDestination_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbDestination.Text))
-                errorProvider.SetError(cmbDestination, null);
-        }
-
-        private void txtItemCD_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.SetError(txtItemCD, null);
-            lbItemName.Text = "Item Name";
-            lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            if (!string.IsNullOrEmpty(txtItemCD.Text))
-            {
-                try
-                {
-                    lbItemName.Text = itemData.GetItem(txtItemCD.Text).item_name;
-                    lbItemName.BackColor = Color.Lime;
-                }
-                catch (Exception ex)
-                {
-                    errorProvider.SetError(txtItemCD, "Wrong Item Code" +
-                                           Environment.NewLine + ex.Message);
-                }
-            }
-        }
-
-        private void txtUserCD_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.SetError(txtUserCD, null);
-            lbUserName.Text = "User Name";
-            lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            if (!string.IsNullOrEmpty(txtUserCD.Text))
-            {
-                try
-                {
-                    lbUserName.Text = userData.GetUser(txtUserCD.Text).user_name;
-                    lbUserName.BackColor = Color.Lime;
-                }
-                catch (Exception ex)
-                {
-                    errorProvider.SetError(txtUserCD, "Wrong User Code" +
-                                           Environment.NewLine + ex.Message);
-                }
-            }
-        }
-
-        private void dgvData_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvData.SelectedCells.Count <= 0) return;
-            stockoutData = dgvData.Rows[dgvData.SelectedCells[0].RowIndex].DataBoundItem as pts_stockout_log;
-            try
-            {
-                planData.listPlan.Clear();
-                noplanData.listNoPlan.Clear();
-                requestData.listRequestItem.Clear();
-                planData.Search(new pts_plan { plan_cd = stockoutData.process_cd });
-                noplanData.Search(new pts_noplan { noplan_cd = stockoutData.process_cd });
-                requestData.Search(new pts_request_log { request_cd = stockoutData.process_cd }, false, false, false);
-                UpdateProcessGrid();
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-        #endregion
-
-        #region BUTTONS EVENT
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            UpdateGrid(true);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+
+        }
+
+
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
             try
             {
-                if (dgvData.SelectedRows.Count <= 0)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    CustomMessageBox.Notice("Please choose an item to delete!" + Environment.NewLine + "Vui lòng chọn nguyên liệu cần xóa!");
+                    string[] barcode = txtBarcode.Text.Split(';');
+                    //Label of PREMAC 6-4-9 have more 2 fields
+                    lbData = new PrintItem
+                    {
+                        Item_Number = barcode[0].Trim(),
+                        Item_Name = barcode[1].Trim(),
+                        SupplierName = barcode[2].Trim(),
+                        Invoice = barcode[3].Trim(),
+                        Delivery_Date = DateTime.Parse(barcode[4].Trim()),
+                        Delivery_Qty = int.Parse(barcode[5].Trim()),
+                        Remark = string.Empty
+                    };
+                    if (barcode.Length > 7)
+                    {
+                        if (!string.IsNullOrEmpty(barcode[6])) lbData.SupplierCD = barcode[6].Trim();
+                        if (!string.IsNullOrEmpty(barcode[7])) lbData.Remark = barcode[7].Trim();
+                    }
+                    txtInsInvoice.Text = lbData.Invoice;
+                    txtDeliveryDate.Text = lbData.Delivery_Date.ToString("yyyy-MM-dd");
+                    txtItemName.Text = lbData.Item_Name;
+                    txtItemNumber.Text = lbData.Item_Number;
+                    txtSupplierName.Text = lbData.SupplierName;
+                    txtInQty.Text = lbData.Delivery_Qty.ToString();
+                    txtInQty.Focus();
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void txtInQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    double qtymod = 0;
+                    int numberOfLot = 1;
+                    double sizePerLot = 1;
+                    qtymod = 0;
+                    sizePerLot = double.Parse(txtInQty.Text);
+                    double deliveryQty = lbData.Delivery_Qty;
+                    deliveryQty -= sizePerLot;
+                    if (deliveryQty < 0)
+                    {
+                        CustomMessageBox.Notice("This lot is null" + Environment.NewLine + "Lô này trống!");
+                        return;
+                    }
+                    if (deliveryQty == 0)
+                    {
+                        CustomMessageBox.Notice("This lot is null" + Environment.NewLine + "Trùng tem Stockin!");
+                        return;
+                    }
+
+                    //if (deliveryQty <= 0)
+                    //{
+                    //    sizePerLot = lbData.Delivery_Qty;
+                    //    lbData.Delivery_Qty = 0;
+                    //}
+                    else lbData.Delivery_Qty = deliveryQty;
+                    printItem.ListPrintItem.Add(new PrintItem
+                    {
+                        Item_Number = lbData.Item_Number,
+                        Item_Name = lbData.Item_Name,
+                        SupplierName = lbData.SupplierName,
+                        Invoice = lbData.Invoice,
+                        Delivery_Date = lbData.Delivery_Date,
+                        Delivery_Qty = sizePerLot,
+                        Remark = "P",
+                        isRec = true,
+                        Label_Qty = 1
+                    });
+                    if (sizePerLot * numberOfLot <= deliveryQty)
+                    {
+                        qtymod = deliveryQty;
+                        // qtymod = deliveryQty - (sizePerLot * numberOfLot);
+                        printItem.ListPrintItem.Add(new PrintItem
+                        {
+                            Item_Number = lbData.Item_Number,
+                            Item_Name = lbData.Item_Name,
+                            SupplierName = lbData.SupplierName,
+                            Invoice = lbData.Invoice,
+                            Delivery_Date = lbData.Delivery_Date,
+                            Delivery_Qty = qtymod,
+                            Remark = "R",
+                            isRec = true,
+                            Label_Qty = numberOfLot
+                        });
+                    }
+                    if (sizePerLot * numberOfLot > deliveryQty)
+                    {
+                        qtymod = deliveryQty;
+                        // qtymod = deliveryQty - (sizePerLot * numberOfLot);
+                        printItem.ListPrintItem.Add(new PrintItem
+                        {
+                            Item_Number = lbData.Item_Number,
+                            Item_Name = lbData.Item_Name,
+                            SupplierName = lbData.SupplierName,
+                            Invoice = lbData.Invoice,
+                            Delivery_Date = lbData.Delivery_Date,
+                            Delivery_Qty = qtymod,
+                            Remark = "R",
+                            isRec = true,
+                            Label_Qty = numberOfLot
+                        });
+                    }
+                    UpdatePrintGrid();
+                    txtBarcode.ResetText();
+                    txtInQty.ResetText();
+                    txtLabelQty.Text = "1";
+                    txtInsInvoice.ResetText();
+                    txtItemName.ResetText();
+                    txtItemNumber.ResetText();
+                    txtDeliveryDate.ResetText();
+                    txtSupplierName.ResetText();
+                    txtItemName.Text = "Item Name";
+                    txtItemNumber.Text = "Item Number";
+                    txtSupplierName.Text = "Supplier Name";
+                    txtBarcode.Focus();
+                }
+
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Error(ex.Message);
+                }
+            }
+        }
+        private void UpdatePrintGrid()
+        {
+            dgvInspection.DataSource = printItem.ListPrintItem;
+            dgvInspection.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            double total = dgvInspection.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
+            tsTotalQty.Text = total.ToString();
+            tsRow.Text = dgvInspection.Rows.Count.ToString();
+        }
+
+        private void btnInsBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
+                {
+                    CustomMessageBox.Notice("Printer is offline" + Environment.NewLine + "Máy in chưa kết nối!");
                     return;
                 }
-                if (CustomMessageBox.Question("Are you sure to delete this item?" + Environment.NewLine + "Bạn có chắc muốn xóa nguyên liệu này?") == DialogResult.No) return;
-                stockoutData = dgvData.SelectedRows[0].DataBoundItem as pts_stockout_log;
-                stockoutData.DeleteItem(stockoutData);
-                CustomMessageBox.Notice("Delete item successful!" + Environment.NewLine + "Xóa nguyên liệu thành công!");
-                UpdateGrid(true);
+                listPrintItem.Clear();
+                if (dgvInspection.Rows.Count == 0)
+                {
+                    CustomMessageBox.Error("Don't have item to print!" + Environment.NewLine + "Không có tem để in!");
+                    return;
+                }
+                foreach (DataGridViewRow dr in dgvInspection.Rows)
+                {
+                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                    dr.DefaultCellStyle.BackColor = Color.Lime;
+                }
+                if (printItem.PrintItems(listPrintItem, false))
+                    CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
             catch (Exception ex)
             {
@@ -327,10 +220,9 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private void btnInspectionClear_Click(object sender, EventArgs e)
         {
-            ClearFields();
+            dgvInspection.DataSource = null;
         }
-        #endregion
     }
 }

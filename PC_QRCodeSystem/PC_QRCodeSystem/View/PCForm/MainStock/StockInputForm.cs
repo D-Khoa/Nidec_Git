@@ -745,7 +745,7 @@ namespace PC_QRCodeSystem.View
             {
                 if (CustomMessageBox.Warring("This list is not register. Are you sure to clear all?" + Environment.NewLine + "Danh sách này chưa được đăng ký. Bạn có chắc muốn xóa tất cả?") == DialogResult.No)
                     return;
-                txtUserCD.Clear();
+              //  txtUserCD.Clear();
                 txtBarcode.Clear();
                 txtSupplierCD.Clear();
                 listStockItem.Clear();
@@ -812,47 +812,39 @@ namespace PC_QRCodeSystem.View
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true;
         }
 
-        private void txtUserCD_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                string temp = txtUserCD.Text;
-                if (temp.Contains(";")) temp = temp.Split(';')[0].Trim();
-                if (temp.Length > 6) txtUserCD.Text = temp.Substring(temp.Length - 6);
-                else txtUserCD.Text = temp;
-                try
-                {
-                    pre_user mUser = new pre_user();
-                    lbUserName.Text = mUser.GetUser(txtUserCD.Text).user_name;
-                    lbUserName.BackColor = Color.Lime;
-                    pnlInspection.Visible = true;
-                    txtBarcode.Focus();
-                }
-                catch (Exception ex)
-                {
-                    txtUserCD.Focus();
-                    lbUserName.Text = "User Name";
-                    lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-                    CustomMessageBox.Error("Wrong User Code!" + Environment.NewLine + "(" + ex.Message + ")");
-                }
-            }
-        }
+        //private void txtUserCD_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        string temp = txtUserCD.Text;
+        //        if (temp.Contains(";")) temp = temp.Split(';')[0].Trim();
+        //        if (temp.Length > 6) txtUserCD.Text = temp.Substring(temp.Length - 6);
+        //        else txtUserCD.Text = temp;
+        //        try
+        //        {
+        //            pre_user mUser = new pre_user();
+        //            lbUserName.Text = mUser.GetUser(txtUserCD.Text).user_name;
+        //            lbUserName.BackColor = Color.Lime;
+        //            pnlInspection.Visible = true;
+        //            txtBarcode.Focus();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            txtUserCD.Focus();
+        //            lbUserName.Text = "User Name";
+        //            lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+        //            CustomMessageBox.Error("Wrong User Code!" + Environment.NewLine + "(" + ex.Message + ")");
+        //        }
+        //    }
+        //}
 
-        private void txtUserCD_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtUserCD.Text))
-            {
-                pnlInspection.Visible = false;
-                lbUserName.Text = "User Name";
-                lbUserName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            }
-        }
+       
 
         private void tab_Inspection_Paint(object sender, PaintEventArgs e)
         {
             UpdateInspectionGrid();
             txtBarcode.Focus();
-            if (!pnlInspection.Visible) txtUserCD.Focus();
+         //   if (!pnlInspection.Visible);
         }
         #endregion
 
@@ -996,7 +988,7 @@ namespace PC_QRCodeSystem.View
                         invoice = lbItem.Invoice,
                         stockin_date = lbItem.Delivery_Date,
                         stockin_qty = lbItem.Delivery_Qty,
-                        stockin_user_cd = txtUserCD.Text,
+                        //stockin_user_cd = txtUserCD.Text,
                         //order_no = orderno,
                         packing_cd = packingcd,
                         packing_qty = lbItem.Delivery_Qty,
@@ -1013,7 +1005,7 @@ namespace PC_QRCodeSystem.View
                             supplier_invoice = lbItem.Invoice,
                             delivery_date = lbItem.Delivery_Date,
                             delivery_qty = lbItem.Delivery_Qty,
-                            incharge = txtUserCD.Text,
+                           // incharge = txtUserCD.Text,
                             //order_number = orderno,
                         });
                     }
@@ -1058,6 +1050,9 @@ namespace PC_QRCodeSystem.View
             return list;
         }
         #endregion
+
         #endregion
+
+       
     }
 }

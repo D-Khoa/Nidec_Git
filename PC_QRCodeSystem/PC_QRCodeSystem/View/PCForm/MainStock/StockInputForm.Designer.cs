@@ -71,6 +71,7 @@
             this.txtInsInvoice = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.btnInsBack = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.txtLabelQty = new System.Windows.Forms.TextBox();
@@ -83,12 +84,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtBarcode = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.lbUserName = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtUserCD = new System.Windows.Forms.TextBox();
-            this.btnInsBack = new System.Windows.Forms.Button();
             this.tab_Print = new System.Windows.Forms.TabPage();
             this.dgvPrintList = new System.Windows.Forms.DataGridView();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -115,7 +110,6 @@
             this.tab_Inspection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).BeginInit();
             this.pnlInspection.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tab_Print.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).BeginInit();
             this.panel7.SuspendLayout();
@@ -269,7 +263,7 @@
             // btnPremacImport
             // 
             this.btnPremacImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPremacImport.Location = new System.Drawing.Point(360, 140);
+            this.btnPremacImport.Location = new System.Drawing.Point(40, 144);
             this.btnPremacImport.Margin = new System.Windows.Forms.Padding(4);
             this.btnPremacImport.Name = "btnPremacImport";
             this.btnPremacImport.Size = new System.Drawing.Size(200, 50);
@@ -503,19 +497,19 @@
             // 
             // btnSearchPreInput
             // 
-            this.btnSearchPreInput.Location = new System.Drawing.Point(120, 140);
+            this.btnSearchPreInput.Location = new System.Drawing.Point(283, 144);
             this.btnSearchPreInput.Name = "btnSearchPreInput";
             this.btnSearchPreInput.Size = new System.Drawing.Size(200, 50);
             this.btnSearchPreInput.TabIndex = 13;
             this.btnSearchPreInput.Text = "1a. Search From Database\r\nTìm Kiếm Trong CSDL";
             this.btnSearchPreInput.UseVisualStyleBackColor = true;
+            this.btnSearchPreInput.Visible = false;
             this.btnSearchPreInput.Click += new System.EventHandler(this.btnSearchPreInput_Click);
             // 
             // tab_Inspection
             // 
             this.tab_Inspection.Controls.Add(this.dgvInspection);
             this.tab_Inspection.Controls.Add(this.pnlInspection);
-            this.tab_Inspection.Controls.Add(this.panel1);
             this.tab_Inspection.Location = new System.Drawing.Point(4, 28);
             this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Inspection.Name = "tab_Inspection";
@@ -532,12 +526,12 @@
             this.dgvInspection.AllowUserToDeleteRows = false;
             this.dgvInspection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInspection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInspection.Location = new System.Drawing.Point(4, 254);
+            this.dgvInspection.Location = new System.Drawing.Point(4, 194);
             this.dgvInspection.Margin = new System.Windows.Forms.Padding(4);
             this.dgvInspection.Name = "dgvInspection";
             this.dgvInspection.ReadOnly = true;
             this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInspection.Size = new System.Drawing.Size(1018, 185);
+            this.dgvInspection.Size = new System.Drawing.Size(1018, 245);
             this.dgvInspection.TabIndex = 9;
             // 
             // pnlInspection
@@ -546,6 +540,7 @@
             this.pnlInspection.Controls.Add(this.txtInsInvoice);
             this.pnlInspection.Controls.Add(this.label19);
             this.pnlInspection.Controls.Add(this.label18);
+            this.pnlInspection.Controls.Add(this.btnInsBack);
             this.pnlInspection.Controls.Add(this.label16);
             this.pnlInspection.Controls.Add(this.label15);
             this.pnlInspection.Controls.Add(this.txtLabelQty);
@@ -559,16 +554,15 @@
             this.pnlInspection.Controls.Add(this.btnRegister);
             this.pnlInspection.Controls.Add(this.txtBarcode);
             this.pnlInspection.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlInspection.Location = new System.Drawing.Point(4, 64);
+            this.pnlInspection.Location = new System.Drawing.Point(4, 4);
             this.pnlInspection.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInspection.Name = "pnlInspection";
             this.pnlInspection.Size = new System.Drawing.Size(1018, 190);
             this.pnlInspection.TabIndex = 2;
-            this.pnlInspection.Visible = false;
             // 
             // txtInQty
             // 
-            this.txtInQty.Location = new System.Drawing.Point(720, 80);
+            this.txtInQty.Location = new System.Drawing.Point(323, 94);
             this.txtInQty.Name = "txtInQty";
             this.txtInQty.ReadOnly = true;
             this.txtInQty.Size = new System.Drawing.Size(140, 23);
@@ -577,7 +571,7 @@
             // 
             // txtInsInvoice
             // 
-            this.txtInsInvoice.Location = new System.Drawing.Point(690, 40);
+            this.txtInsInvoice.Location = new System.Drawing.Point(681, 91);
             this.txtInsInvoice.Name = "txtInsInvoice";
             this.txtInsInvoice.ReadOnly = true;
             this.txtInsInvoice.Size = new System.Drawing.Size(170, 23);
@@ -587,7 +581,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(690, 80);
+            this.label19.Location = new System.Drawing.Point(293, 94);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(30, 17);
             this.label19.TabIndex = 30;
@@ -596,11 +590,23 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(690, 10);
+            this.label18.Location = new System.Drawing.Point(604, 94);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(52, 17);
             this.label18.TabIndex = 29;
             this.label18.Text = "Invoice";
+            // 
+            // btnInsBack
+            // 
+            this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsBack.Location = new System.Drawing.Point(903, 127);
+            this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInsBack.Name = "btnInsBack";
+            this.btnInsBack.Size = new System.Drawing.Size(100, 50);
+            this.btnInsBack.TabIndex = 2;
+            this.btnInsBack.Text = "Back\r\nTrờ Lại";
+            this.btnInsBack.UseVisualStyleBackColor = true;
+            this.btnInsBack.Click += new System.EventHandler(this.btnPrintBack_Click);
             // 
             // label16
             // 
@@ -616,7 +622,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label15.Location = new System.Drawing.Point(68, 150);
+            this.label15.Location = new System.Drawing.Point(54, 117);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(42, 17);
             this.label15.TabIndex = 27;
@@ -625,7 +631,7 @@
             // txtLabelQty
             // 
             this.txtLabelQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLabelQty.Location = new System.Drawing.Point(120, 120);
+            this.txtLabelQty.Location = new System.Drawing.Point(120, 81);
             this.txtLabelQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtLabelQty.Name = "txtLabelQty";
             this.txtLabelQty.Size = new System.Drawing.Size(120, 50);
@@ -638,12 +644,12 @@
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(10, 110);
+            this.label11.Location = new System.Drawing.Point(10, 71);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(100, 40);
             this.label11.TabIndex = 26;
-            this.label11.Text = "3. Label Qty\r\nSố lượng tem";
+            this.label11.Text = "2. Label Qty\r\nSố lượng tem";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
@@ -654,13 +660,13 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 25);
             this.label1.TabIndex = 24;
-            this.label1.Text = "2. Barcode";
+            this.label1.Text = "1. Barcode";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnInspectionClear
             // 
             this.btnInspectionClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInspectionClear.Location = new System.Drawing.Point(470, 120);
+            this.btnInspectionClear.Location = new System.Drawing.Point(792, 127);
             this.btnInspectionClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspectionClear.Name = "btnInspectionClear";
             this.btnInspectionClear.Size = new System.Drawing.Size(100, 50);
@@ -672,11 +678,11 @@
             // txtSupplierName
             // 
             this.txtSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSupplierName.Location = new System.Drawing.Point(250, 80);
+            this.txtSupplierName.Location = new System.Drawing.Point(250, 141);
             this.txtSupplierName.Margin = new System.Windows.Forms.Padding(4);
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.ReadOnly = true;
-            this.txtSupplierName.Size = new System.Drawing.Size(430, 23);
+            this.txtSupplierName.Size = new System.Drawing.Size(292, 23);
             this.txtSupplierName.TabIndex = 8;
             this.txtSupplierName.TabStop = false;
             this.txtSupplierName.Text = "Supplier Name";
@@ -685,7 +691,7 @@
             // txtSupplierCD
             // 
             this.txtSupplierCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSupplierCD.Location = new System.Drawing.Point(120, 80);
+            this.txtSupplierCD.Location = new System.Drawing.Point(122, 141);
             this.txtSupplierCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtSupplierCD.Name = "txtSupplierCD";
             this.txtSupplierCD.Size = new System.Drawing.Size(120, 23);
@@ -694,18 +700,18 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 70);
+            this.label2.Location = new System.Drawing.Point(10, 137);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 40);
             this.label2.TabIndex = 23;
-            this.label2.Text = "4. Supplier\r\nMã NSX";
+            this.label2.Text = "3. Supplier\r\nMã NSX";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(360, 120);
+            this.btnDelete.Location = new System.Drawing.Point(681, 127);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 50);
@@ -717,7 +723,7 @@
             // btnRegister
             // 
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(250, 120);
+            this.btnRegister.Location = new System.Drawing.Point(570, 127);
             this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(100, 50);
@@ -732,77 +738,9 @@
             this.txtBarcode.Location = new System.Drawing.Point(120, 10);
             this.txtBarcode.Margin = new System.Windows.Forms.Padding(4);
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(560, 53);
+            this.txtBarcode.Size = new System.Drawing.Size(731, 53);
             this.txtBarcode.TabIndex = 3;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label17);
-            this.panel1.Controls.Add(this.lbUserName);
-            this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.txtUserCD);
-            this.panel1.Controls.Add(this.btnInsBack);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(4, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1018, 60);
-            this.panel1.TabIndex = 1;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label17.Location = new System.Drawing.Point(117, 37);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(42, 17);
-            this.label17.TabIndex = 29;
-            this.label17.Text = "Enter";
-            // 
-            // lbUserName
-            // 
-            this.lbUserName.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUserName.Location = new System.Drawing.Point(250, 10);
-            this.lbUserName.Name = "lbUserName";
-            this.lbUserName.Size = new System.Drawing.Size(200, 23);
-            this.lbUserName.TabIndex = 29;
-            this.lbUserName.Text = "User Name";
-            this.lbUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(10, 10);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 40);
-            this.label12.TabIndex = 28;
-            this.label12.Text = "1. User Code\r\nMã số NV";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // txtUserCD
-            // 
-            this.txtUserCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserCD.Location = new System.Drawing.Point(120, 10);
-            this.txtUserCD.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUserCD.Name = "txtUserCD";
-            this.txtUserCD.Size = new System.Drawing.Size(120, 23);
-            this.txtUserCD.TabIndex = 1;
-            this.txtUserCD.TextChanged += new System.EventHandler(this.txtUserCD_TextChanged);
-            this.txtUserCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserCD_KeyDown);
-            // 
-            // btnInsBack
-            // 
-            this.btnInsBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsBack.Location = new System.Drawing.Point(760, 5);
-            this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
-            this.btnInsBack.Name = "btnInsBack";
-            this.btnInsBack.Size = new System.Drawing.Size(100, 50);
-            this.btnInsBack.TabIndex = 2;
-            this.btnInsBack.Text = "Back\r\nTrờ Lại";
-            this.btnInsBack.UseVisualStyleBackColor = true;
-            this.btnInsBack.Click += new System.EventHandler(this.btnPrintBack_Click);
             // 
             // tab_Print
             // 
@@ -1020,8 +958,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).EndInit();
             this.pnlInspection.ResumeLayout(false);
             this.pnlInspection.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.tab_Print.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrintList)).EndInit();
             this.panel7.ResumeLayout(false);
@@ -1099,15 +1035,10 @@
         private System.Windows.Forms.Button btnRegPre649;
         private System.Windows.Forms.TextBox txtLabelQty;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lbUserName;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtUserCD;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtPrintLabelQty;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtInQty;
         private System.Windows.Forms.TextBox txtInsInvoice;
         private System.Windows.Forms.Label label19;

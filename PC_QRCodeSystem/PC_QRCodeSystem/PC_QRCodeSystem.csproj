@@ -106,6 +106,7 @@
     <Compile Include="Model\DBItems\pts_noplan.cs" />
     <Compile Include="Model\DBItems\pts_plan.cs" />
     <Compile Include="Model\DBItems\pre_649.cs" />
+    <Compile Include="Model\DBItems\pts_stockout.cs" />
     <Compile Include="Model\DBItems\pts_stock_log.cs" />
     <Compile Include="Model\Temp Items\OutputItem.cs" />
     <Compile Include="Model\Temp Items\pre661.cs" />

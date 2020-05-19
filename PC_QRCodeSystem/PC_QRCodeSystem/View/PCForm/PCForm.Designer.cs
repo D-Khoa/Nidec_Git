@@ -71,8 +71,8 @@
             this.tab_Request = new System.Windows.Forms.TabPage();
             this.tab_ErrorData = new System.Windows.Forms.TabPage();
             this.tbpError = new System.Windows.Forms.TableLayoutPanel();
-            this.libFileName = new System.Windows.Forms.ListBox();
             this.dgvDataError = new System.Windows.Forms.DataGridView();
+            this.libFileName = new System.Windows.Forms.ListBox();
             this.dgvStockOutLog = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -515,6 +515,7 @@
             this.pnlDataLogs.Size = new System.Drawing.Size(474, 93);
             this.pnlDataLogs.TabIndex = 9;
             this.pnlDataLogs.Tag = "pcmp003";
+            this.pnlDataLogs.Visible = false;
             // 
             // btnErrorData
             // 
@@ -608,18 +609,6 @@
             this.tbpError.Size = new System.Drawing.Size(780, 349);
             this.tbpError.TabIndex = 3;
             // 
-            // libFileName
-            // 
-            this.libFileName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.libFileName.FormattingEnabled = true;
-            this.libFileName.HorizontalScrollbar = true;
-            this.libFileName.Location = new System.Drawing.Point(3, 3);
-            this.libFileName.Name = "libFileName";
-            this.tbpError.SetRowSpan(this.libFileName, 2);
-            this.libFileName.Size = new System.Drawing.Size(228, 343);
-            this.libFileName.TabIndex = 2;
-            this.libFileName.SelectedIndexChanged += new System.EventHandler(this.libFileName_SelectedIndexChanged);
-            // 
             // dgvDataError
             // 
             this.dgvDataError.AllowUserToAddRows = false;
@@ -634,6 +623,18 @@
             this.dgvDataError.TabIndex = 1;
             this.dgvDataError.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataError_CellDoubleClick);
             this.dgvDataError.SelectionChanged += new System.EventHandler(this.dgvDataError_SelectionChanged);
+            // 
+            // libFileName
+            // 
+            this.libFileName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.libFileName.FormattingEnabled = true;
+            this.libFileName.HorizontalScrollbar = true;
+            this.libFileName.Location = new System.Drawing.Point(3, 3);
+            this.libFileName.Name = "libFileName";
+            this.tbpError.SetRowSpan(this.libFileName, 2);
+            this.libFileName.Size = new System.Drawing.Size(228, 343);
+            this.libFileName.TabIndex = 2;
+            this.libFileName.SelectedIndexChanged += new System.EventHandler(this.libFileName_SelectedIndexChanged);
             // 
             // dgvStockOutLog
             // 
