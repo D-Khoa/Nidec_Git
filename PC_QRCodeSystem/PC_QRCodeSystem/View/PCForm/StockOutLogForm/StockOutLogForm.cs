@@ -29,12 +29,17 @@ namespace PC_QRCodeSystem.View
 
         private void StockOutLogForm_Load(object sender, EventArgs e)
         {
-
+            txtBarcode.Focus();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            if (CustomMessageBox.Question("Are you sure delete this item?" + Environment.NewLine + "Bạn có chắc xóa nguyên liệu này?") == DialogResult.No)
+                return;
+            foreach (DataGridViewRow item in this.dgvInspection.SelectedRows)
+            {
+                dgvInspection.Rows.RemoveAt(item.Index);
+            }
         }
 
 
@@ -227,7 +232,16 @@ namespace PC_QRCodeSystem.View
 
         private void btnInspectionClear_Click(object sender, EventArgs e)
         {
-            dgvInspection.DataSource = null;
+            try
+            {
+                listPrintItem.Clear();
+                printItem.ListPrintItem.Clear();
+                dgvInspection.DataSource = null;
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
         }
     }
 }

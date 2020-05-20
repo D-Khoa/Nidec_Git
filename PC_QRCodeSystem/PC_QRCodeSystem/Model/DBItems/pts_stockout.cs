@@ -318,7 +318,8 @@ namespace PC_QRCodeSystem.Model
                 query += inItem.stockout_qty + "','" + inItem.remark + "','";
                 query += inItem.registration_user_cd + "'),";
             }
-            query.Remove(query.Length - 1, 1);
+            query = query.Remove(query.Length - 1);
+
             //Execute non query for read database
             int result = SQL.Command(query).ExecuteNonQuery();
             query = string.Empty;

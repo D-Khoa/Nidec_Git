@@ -4,602 +4,220 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
+using System.Diagnostics;
+using System.Data;
 
 namespace PC_QRCodeSystem.View
 {
     public partial class StockDetailForm : FormCommon
     {
         #region VARIABLE
-        private pts_item itemData { get; set; }
-        private pts_item olditemData { get; set; }
-        private pts_stock stockData { get; set; }
-        private pts_stock oldStockData { get; set; }
-        private pre_user userData { get; set; }
-        private pts_stock_log stockLog { get; set; }
-        private pts_item_type typeData { get; set; }
-        private pts_supplier supplierData { get; set; }
-        private List<pts_stock_log> listStockLog { get; set; }
-        private string[] barcode;
-        private bool isEditData;
+        private pts_stockout stockData { get; set; }
+        PrintItem lbData { get; set; }
+        Stopwatch stopwatch = new Stopwatch();
+        DataTable dt2;
+        DataTable dt;
+        List<PrintItem> listPrintItem { get; set; }
+        PrintItem printItem { get; set; }
         #endregion
-
         #region FORM EVENT
         public StockDetailForm()
         {
             InitializeComponent();
-            itemData = new pts_item();
-            olditemData = new pts_item();
-            stockData = new pts_stock();
-            oldStockData = new pts_stock();
-            userData = new pre_user();
-            stockLog = new pts_stock_log();
-            typeData = new pts_item_type();
-            supplierData = new pts_supplier();
-            listStockLog = new List<pts_stock_log>();
+            stockData = new pts_stockout();
+            lbData = new PrintItem();
+            listPrintItem = new List<PrintItem>();
+            printItem = new PrintItem();
+            dt2 = new DataTable();
+            dt = new DataTable();
             tc_MainStockDetail.ItemSize = new Size(0, 1);
+
         }
 
         private void StockDetailForm_Load(object sender, EventArgs e)
         {
-            try
-            {
-                ClearFields();
-                txtBarcode.Focus();
-                isEditData = false;
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
-                tc_MainStockDetail.SelectedTab = tab_StockDetail;
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
+            PSQL con = new PSQL();
+            string sql = "select distinct remark from pts_stockout order by remark";
+            con.getComboBoxData(sql, ref cmbRemark);
+            txtBarcode.Focus();
+            btnExport.Enabled = false;
+            btnClear.Enabled = false;
+            dtpFromDate.Checked = false;
+            dtpToDate.Checked = false;
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Enter)
-            {
-                if (ActiveControl == txtBarcode)
-                {
-                    string temp = txtBarcode.Text;
-                    if (temp.Contains(";"))
-                    {
-                        string[] barcode = temp.Split(';');
-                        txtItemCD.Text = barcode[0].Trim();
-                        txtInvoice.Text = barcode[3].Trim();
-                    }
-                }
-                SelectNextControl(ActiveControl, true, true, true, true);
-                return true;
-            }
-            if (keyData == Keys.Escape)
-            {
-                SelectNextControl(ActiveControl, false, true, true, true);
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
+
         #endregion
 
-        #region FIELDS EVENT
-        private void txtItemCD_Validated(object sender, EventArgs e)
+        #region BUTTONS
+        private void btnBack_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtItemCD.Text))
-            {
-                lbItemName.Text = "Item Name";
-                lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            }
-            else
-            {
-                try
-                {
-                    itemData = itemData.GetItem(txtItemCD.Text);
-                    lbItemName.Text = itemData.item_name;
-                    lbItemName.BackColor = Color.Lime;
-                }
-                catch
-                {
-                    lbItemName.Text = "Wrong Item Code";
-                    lbItemName.BackColor = Color.FromKnownColor(KnownColor.Yellow);
-                }
-            }
+            this.Close();
         }
-
-        private void txtSupplierCD_Validated(object sender, EventArgs e)
+        private void btnExport_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtItemCD.Text))
+            SaveFileDialog savef = new SaveFileDialog();
+            savef.Filter = "Excel Workbook (*.xlsx)|*.xlsx|Excel 97-2003 Workbook (*.xls)|*.xls|All file (*.*)|*.*";
+            savef.AddExtension = true;
+            if (savef.ShowDialog() == DialogResult.OK)
             {
-                lbItemName.Text = "Item Name";
-                lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
+                dt = (DataTable)dgvData.DataSource;
+                ExcelClass excel = new ExcelClass(savef.FileName);
+                excel.CreateWorkBook();
+                excel.AddDatatable(dt);
+                excel.SaveAndExit();
             }
-            else
-            {
-                try
-                {
-                    lbSupplierName.Text = supplierData.GetSupplier(new pts_supplier
-                    {
-                        supplier_id = 0,
-                        supplier_cd = txtSupplierCD.Text
-                    }).supplier_name;
-                    lbSupplierName.BackColor = Color.Lime;
-                }
-                catch
-                {
-                    lbSupplierName.Text = "Wrong Supplier Code";
-                    lbSupplierName.BackColor = Color.FromKnownColor(KnownColor.Yellow);
-                }
-            }
+            MessageBox.Show("Export Successfully", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private void txtInCharge_Validated(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtInCharge.Text))
-            {
-                lbInchagre.Text = "User Name";
-                lbInchagre.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            }
-            else
-            {
-                try
-                {
-                    userData = userData.GetUser(txtInCharge.Text);
-                    lbInchagre.Text = userData.user_name;
-                    lbInchagre.BackColor = Color.Lime;
-                }
-                catch
-                {
-                    lbInchagre.Text = "Wrong User Code";
-                    lbInchagre.BackColor = Color.FromKnownColor(KnownColor.Yellow);
-                }
-            }
-        }
-        #endregion
-
-        #region BUTTONS EVENT
         private void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-                UpdateGrid(true);
-            }
-            catch(Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (CustomMessageBox.Question("Do you want update this item?") == DialogResult.No)
-                    return;
-                UpdateStock();
-                ClearFields();
-                UpdateGrid(false);
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (CustomMessageBox.Question("Do you want delete this item?") == DialogResult.No)
-                    return;
-                DeleteStock();
-                ClearFields();
-                UpdateGrid(false);
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-
-        private void btnExport_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenFileDialog openFrm = new OpenFileDialog();
-                openFrm.Filter = "CSV document (*.csv)|*.csv|Text file (*.txt)|*.txt|All file (*.*)|*.*";
-                if (openFrm.ShowDialog() == DialogResult.OK)
+                this.Cursor = Cursors.WaitCursor;
+                stopwatch.Restart();
+                dt2 = new DataTable();
+                dgvData.DataSource = dt2;
+                SearchData(ref dt2);
+                stopwatch.Stop();
+                tsTime.Text = stopwatch.Elapsed.ToString("s\\.ff") + " s";
+                if (dgvData.Rows.Count > 0)
                 {
-                    stockData.ExportToCSV((List<pts_stock>)dgvStockDetail.DataSource, openFrm.FileName);
+                    tsTotal.Text = (dgvData.Rows.Count - 1).ToString();
+
                 }
-                CustomMessageBox.Notice("Export data to " + openFrm.FileName + " completed!");
+                btnExport.Enabled = true;
+                btnClear.Enabled = true;
             }
-            catch (Exception ex)
+            
+            catch (Exception)
             {
-                CustomMessageBox.Error(ex.Message);
+
             }
+            txtBarcode.Clear();
+            this.Cursor = Cursors.Default;
         }
 
-        private void btnLogs_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                tc_MainStockDetail.SelectedTab = tab_LogDetail;
-                //Search all logs
-                stockLog.Search(new pts_stock_log
-                {
-                    log_action = string.Empty,
-                    log_user_cd = string.Empty,
-                    stock_field = string.Empty,
-                }, DateTime.Now, DateTime.Now, false);
-                dgvLogDetail.DataSource = stockLog.listStockLog;
-                for (int i = 0; i < dgvLogDetail.Rows.Count; i++)
-                {
-                    dgvLogDetail.Rows[i].HeaderCell.Value = (i + 1).ToString();
-                }
-                if (dgvLogDetail.Rows.Count > 0)
-                    tsStockDetailRows.Text = dgvLogDetail.Rows.Count.ToString();
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-
+       
         private void btnClear_Click(object sender, EventArgs e)
         {
             try
             {
-                ClearFields();
+                listPrintItem.Clear();
+                printItem.ListPrintItem.Clear();
+                dgvData.DataSource = null;
+                txtBarcode.Clear();
+                txtInvoice.Clear();
+                txtItemName.Clear();
+                txtItemNumber.Clear();
+                txtQty.Clear();
+                txtSupplierName.Clear();
+                cmbRemark.Text = null;
+                dtpFromDate.Checked = false;
+                dtpToDate.Checked = false;
+                btnExport.Enabled = false;
+                btnClear.Enabled = false;
             }
-            catch(Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-
-        private void btnLogsBack_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                tc_MainStockDetail.SelectedTab = tab_StockDetail;
-            }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
         }
         #endregion
-
-        #region SUB EVENTS
-        /// <summary>
-        /// Update Stock Detail Grid
-        /// </summary>
-        /// <param name="isSearch">true if search items</param>
-        private void UpdateGrid(bool isSearch)
+        #region BARCODE KEY DOWN
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
-                if (isSearch)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    stockData.SearchItem(new pts_stock
+                    string[] barcode = txtBarcode.Text.Split(';');
+                    //Label of PREMAC 6-4-9 have more 2 fields
+                    lbData = new PrintItem
                     {
-                        item_cd = txtItemCD.Text,
-                        supplier_cd = txtSupplierCD.Text,
-                        order_no = txtOrderNo.Text,
-                        invoice = txtInvoice.Text,
-                        stockin_user_cd = txtInCharge.Text,
-                    }, dtpFromDate.Value, dtpToDate.Value, cbSearchDate.Checked);
-                }
-                dgvStockDetail.DataSource = stockData.listStockItems;
-                dgvStockDetail.Columns["stock_id"].HeaderText = "Stock ID";
-                dgvStockDetail.Columns["packing_cd"].HeaderText = "Packing Code";
-                dgvStockDetail.Columns["item_cd"].HeaderText = "Item Code";
-                dgvStockDetail.Columns["supplier_cd"].HeaderText = "Supplier Code";
-                dgvStockDetail.Columns["order_no"].HeaderText = "Order No";
-                dgvStockDetail.Columns["invoice"].HeaderText = "Invoice";
-                dgvStockDetail.Columns["stockin_date"].HeaderText = "Stock-In Date";
-                dgvStockDetail.Columns["stockin_user_cd"].HeaderText = "Stock-In User";
-                dgvStockDetail.Columns["stockin_qty"].HeaderText = "Stock-In Qty";
-                dgvStockDetail.Columns["packing_qty"].HeaderText = "Packing Qty";
-                dgvStockDetail.Columns["registration_user_cd"].HeaderText = "Reg User";
-                dgvStockDetail.Columns["registration_date_time"].HeaderText = "Reg Date";
-                //if (dgvStockDetail.Columns.Contains("order_no")) dgvStockDetail.Columns.Remove("order_no");
-                if (dgvStockDetail.Rows.Count > 0)
-                    tsStockDetailRows.Text = dgvStockDetail.Rows.Count.ToString();
-                else
-                    tsStockDetailRows.Text = "None";
-                this.ValidateChildren();
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
+                        Item_Number = barcode[0].Trim(),
+                        Item_Name = barcode[1].Trim(),
+                        SupplierName = barcode[2].Trim(),
+                        Invoice = barcode[3].Trim(),
+                        Delivery_Date = DateTime.Parse(barcode[4].Trim()),
+                        Delivery_Qty = int.Parse(barcode[5].Trim()),
+                        Remark = barcode[7].Trim(),
 
-        /// <summary>
-        /// Update Item Info Grid
-        /// </summary>
-        private void UpdateGrid()
-        {
-            dgvItemInfo.DataSource = itemData.listItems;
-            //dgvItemInfo.Columns["item_id"].HeaderText = "Item ID";
-            dgvItemInfo.Columns["type_id"].HeaderText = "Type";
-            dgvItemInfo.Columns["item_cd"].HeaderText = "Item Code";
-            dgvItemInfo.Columns["item_name"].HeaderText = "Item Name";
-            dgvItemInfo.Columns["item_location"].HeaderText = "Location";
-            dgvItemInfo.Columns["item_unit"].HeaderText = "Unit";
-            dgvItemInfo.Columns["lot_size"].HeaderText = "Lot Size";
-            dgvItemInfo.Columns["wh_qty"].HeaderText = "WH Qty";
-            dgvItemInfo.Columns["wip_qty"].HeaderText = "W.I.P Qty";
-            dgvItemInfo.Columns["repair_qty"].HeaderText = "Repair Qty";
-            dgvItemInfo.Columns["registration_user_cd"].HeaderText = "Reg User";
-            dgvItemInfo.Columns["registration_date_time"].HeaderText = "Reg Date";
-            if (dgvItemInfo.Rows.Count > 0)
-            {
-                int t = (int)dgvItemInfo.Rows[0].Cells["type_id"].Value;
-                typeData = typeData.GetItemType(t);
-                lbItemTypeName.Text = typeData.type_name;
-                lbItemTypeName.BackColor = Color.Lime;
-            }
-            this.ValidateChildren();
-        }
-
-        /// <summary>
-        /// Clear all fields
-        /// </summary>
-        private void ClearFields()
-        {
-            try
-            {
-                txtItemCD.Clear();
-                txtInvoice.Clear();
-                txtOrderNo.Clear();
-                txtInCharge.Clear();
-                txtPackingCD.Clear();
-                txtPackingQty.Clear();
-                txtStockInQty.Clear();
-                txtSupplierCD.Clear();
-                itemData.listItems.Clear();
-                stockData.listStockItems.Clear();
-                lbInchagre.Text = "User Incharge";
-                lbInchagre.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-                lbItemName.Text = "Item Name";
-                lbItemName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-                lbItemTypeName.Text = "Item Type Name";
-                lbItemTypeName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-                lbSupplierName.Text = "Supplier Name";
-                lbSupplierName.BackColor = Color.FromKnownColor(KnownColor.ActiveCaption);
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Update stock item
-        /// </summary>
-        private void UpdateStock()
-        {
-            try
-            {
-                listStockLog.Clear();
-                #region CHECK ITEM CHANGE INFO AND ADD LOG INTO LIST LOGS
-                if (txtItemCD.Text != oldStockData.item_cd)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.item_cd),
-                        before_value = oldStockData.item_cd,
-                        after_value = txtItemCD.Text
-                    });
-                }
-                if (txtSupplierCD.Text != oldStockData.supplier_cd)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.supplier_cd),
-                        before_value = oldStockData.item_cd,
-                        after_value = txtSupplierCD.Text
-                    });
-                }
-                if (txtInCharge.Text != oldStockData.stockin_user_cd)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.stockin_user_cd),
-                        before_value = oldStockData.stockin_user_cd,
-                        after_value = txtInCharge.Text
-                    });
-                }
-                if (txtInvoice.Text != oldStockData.invoice)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.invoice),
-                        before_value = oldStockData.invoice,
-                        after_value = txtInvoice.Text
-                    });
-                }
-                if (txtOrderNo.Text != oldStockData.order_no)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.order_no),
-                        before_value = oldStockData.order_no,
-                        after_value = txtOrderNo.Text
-                    });
-                }
-                if (txtPackingCD.Text != oldStockData.packing_cd)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.packing_cd),
-                        before_value = oldStockData.packing_cd,
-                        after_value = txtPackingCD.Text
-                    });
-                }
-                if (double.Parse(txtStockInQty.Text) != oldStockData.stockin_qty)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.stockin_qty),
-                        before_value = oldStockData.stockin_qty.ToString(),
-                        after_value = txtStockInQty.Text
-                    });
-                }
-                if (double.Parse(txtPackingQty.Text) != oldStockData.packing_qty)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.packing_qty),
-                        before_value = oldStockData.packing_qty.ToString(),
-                        after_value = txtPackingQty.Text
-                    });
-                }
-                if (dtpFromDate.Value != oldStockData.stockin_date)
-                {
-                    listStockLog.Add(new pts_stock_log
-                    {
-                        log_action = "Update",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = nameof(oldStockData.stockin_date),
-                        before_value = oldStockData.stockin_date.ToString(),
-                        after_value = dtpFromDate.Value.ToString()
-                    });
-                }
-                #endregion
-
-                string pack = oldStockData.packing_cd;
-                int n = 0;
-                if (listStockLog.Count <= 0)
-                {
-                    CustomMessageBox.Notice("No change has been detected!");
-                    return;
-                }
-                n = stockLog.AddMultiLog(listStockLog);
-                //Update stock item
-                stockData.UpdateItem(new pts_stock
-                {
-                    stock_id = oldStockData.stock_id,
-                    item_cd = txtItemCD.Text,
-                    supplier_cd = txtSupplierCD.Text,
-                    stockin_user_cd = txtInCharge.Text,
-                    invoice = txtInvoice.Text,
-                    order_no = txtOrderNo.Text,
-                    packing_cd = txtPackingCD.Text,
-                    stockin_qty = double.Parse(txtStockInQty.Text),
-                    packing_qty = double.Parse(txtPackingQty.Text),
-                    stockin_date = dtpFromDate.Value,
-                    registration_user_cd = UserData.usercode,
-                    registration_date_time = DateTime.Now
-                });
-                CustomMessageBox.Notice("Update package: " + pack + " successful!" + Environment.NewLine + "Update " + n + " Logs!");
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Delete stock item
-        /// </summary>
-        private void DeleteStock()
-        {
-            try
-            {
-                listStockLog.Clear();
-                //Get all old data of fields in stock item
-                for (int i = 0; i < oldStockData.GetType().GetProperties().Length; i++)
-                {
-                    stockLog = new pts_stock_log
-                    {
-                        log_action = "Delete",
-                        log_user_cd = UserData.usercode,
-                        stock_id = oldStockData.stock_id.ToString(),
-                        stock_field = oldStockData.GetType().GetProperties()[i].Name,
-                        before_value = oldStockData.GetType().GetProperties()[i].GetValue(oldStockData).ToString(),
-                        after_value = "Deleted"
                     };
-                    //Add logs item into list
-                    listStockLog.Add(stockLog);
+                    if (barcode.Length > 7)
+                    {
+                        if (!string.IsNullOrEmpty(barcode[6])) lbData.SupplierCD = barcode[6].Trim();
+                        if (!string.IsNullOrEmpty(barcode[7])) lbData.Remark = barcode[7].Trim();
+                    }
+                    txtInvoice.Text = lbData.Invoice;
+                    txtItemName.Text = lbData.Item_Name;
+                    txtItemNumber.Text = lbData.Item_Number;
+                    txtSupplierName.Text = lbData.SupplierName;
+                    txtQty.Text = lbData.Delivery_Qty.ToString();
+                    //dtpFromDate.Value = lbData.Delivery_Date;
+                    cmbRemark.Text = lbData.Remark;
+                }        
+            }
+            
+            catch (Exception)
+            {
+
+            }
+           
+        }
+        #endregion
+        #region SUB EVENT SEARCH DATA
+        public void SearchData(ref DataTable dt1)
+        {
+            dt1.Clear();
+            string sql = ""; string sql1 = ""; string sql2 = ""; string sql3 = ""; string sql4 = ""; string sql5 = ""; string sql6 = "";
+            string sql8 = ""; string sql9 = "";
+            if (dtpToDate.Checked || dtpFromDate.Checked)
+            {
+                sql = "select * from pts_stockout where stockout_date between ";
+                if (dtpFromDate.Text != "")
+                {
+                    sql8 = "'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "'";
+
                 }
-                int id = oldStockData.stock_id;
-                int n = stockLog.AddMultiLog(listStockLog);
-                //Delete stock data
-                oldStockData.DeleteItem();
-                CustomMessageBox.Notice("Deleted item : " + id + " Successful!" + Environment.NewLine + "Update " + n + " logs!");
+                if (dtpToDate.Text != "")
+                {
+                    sql9 = "and '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "'";
+                }
+                PSQL con1 = new PSQL();
+                con1.sqlDataAdapterFillDatatable(sql + sql8 + sql9, ref dt1);
             }
-            catch (Exception ex)
+            else
             {
-                CustomMessageBox.Error(ex.Message);
-            }
-        }
+                sql = "select * from pts_stockout where 1=1";
+                if (txtItemNumber.Text != "")
+                {
+                    sql1 = " and item_cd = '" + txtItemNumber.Text + "'";
+                }
+                if (txtItemName.Text != "")
+                {
+                    sql2 = "and item_name = '" + txtItemName.Text + "'";
 
-        private void dgvStockDetail_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-                return;
-            if (isEditData)
-            {
-                if (CustomMessageBox.Question("This item is edited but not update. Do you want cancel it?") == DialogResult.No)
-                    return;
-                isEditData = false;
-            }
-            itemData.listItems.Clear();
-            olditemData = itemData.GetItem(dgvStockDetail.Rows[e.RowIndex].Cells["item_cd"].Value.ToString());
-            //Get old stock data and show it in fields
-            oldStockData = dgvStockDetail.Rows[e.RowIndex].DataBoundItem as pts_stock;
-            txtItemCD.Text = oldStockData.item_cd;
-            txtInvoice.Text = oldStockData.invoice;
-            txtOrderNo.Text = oldStockData.order_no;
-            txtPackingCD.Text = oldStockData.packing_cd;
-            txtPackingQty.Text = oldStockData.packing_qty.ToString();
-            txtStockInQty.Text = oldStockData.stockin_qty.ToString();
-            txtSupplierCD.Text = oldStockData.supplier_cd;
-            txtInCharge.Text = oldStockData.stockin_user_cd;
-            dtpFromDate.Value = oldStockData.stockin_date;
-            dtpToDate.Value = oldStockData.stockin_date;
-            itemData.listItems.Add(olditemData);
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
-            UpdateGrid();
-        }
+                }
+                if (txtSupplierName.Text != "")
+                {
+                    sql3 = "and supplier_name = '" + txtSupplierName.Text + "'";
+                }
+                if (txtInvoice.Text != "")
+                {
+                    sql4 = "and invoice = '" + txtInvoice.Text + "'";
+                }
+                if (txtQty.Text != "")
+                {
+                    sql5 = "and stockout_qty = '" + txtQty.Text + "'";
+                }
+                if (cmbRemark.Text != "")
+                {
+                    sql6 = "and remark = '" + cmbRemark.Text + "'";
+                }
 
-        private void dgvStockDetail_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            for (int i = 0; i < dgvStockDetail.Rows.Count; i++)
-                dgvStockDetail.Rows[i].HeaderCell.Value = (i + 1).ToString();
+                PSQL con = new PSQL();
+                con.sqlDataAdapterFillDatatable(sql + sql1 + sql2 + sql3 + sql4 + sql5 + sql6, ref dt1);
+            }
         }
         #endregion
     }
