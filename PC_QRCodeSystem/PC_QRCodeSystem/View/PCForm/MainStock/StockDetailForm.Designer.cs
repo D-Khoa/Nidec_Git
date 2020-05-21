@@ -33,11 +33,11 @@
             this.tc_MainStockDetail = new System.Windows.Forms.TabControl();
             this.tab_StockDetail = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dgvData = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotal = new System.Windows.Forms.ToolStripStatusLabel();
-            this.dgvData = new System.Windows.Forms.DataGridView();
             this.tbpMain = new System.Windows.Forms.TableLayoutPanel();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.btnClear = new System.Windows.Forms.Button();
@@ -64,8 +64,8 @@
             this.tc_MainStockDetail.SuspendLayout();
             this.tab_StockDetail.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.tbpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,13 +118,22 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.dgvData);
+            this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(4, 273);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(899, 352);
             this.panel1.TabIndex = 6;
+            // 
+            // dgvData
+            // 
+            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvData.Location = new System.Drawing.Point(0, 0);
+            this.dgvData.Name = "dgvData";
+            this.dgvData.Size = new System.Drawing.Size(899, 328);
+            this.dgvData.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -159,15 +168,6 @@
             this.tsTotal.Name = "tsTotal";
             this.tsTotal.Size = new System.Drawing.Size(40, 19);
             this.tsTotal.Text = "None";
-            // 
-            // dgvData
-            // 
-            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(0, 0);
-            this.dgvData.Name = "dgvData";
-            this.dgvData.Size = new System.Drawing.Size(899, 352);
-            this.dgvData.TabIndex = 0;
             // 
             // tbpMain
             // 
@@ -226,7 +226,7 @@
             this.dtpToDate.ShowCheckBox = true;
             this.dtpToDate.Size = new System.Drawing.Size(213, 22);
             this.dtpToDate.TabIndex = 57;
-            this.dtpToDate.Value = new System.DateTime(2020, 5, 20, 13, 2, 32, 0);
+            this.dtpToDate.Value = new System.DateTime(2020, 5, 21, 0, 0, 0, 0);
             // 
             // btnClear
             // 
@@ -367,7 +367,7 @@
             this.dtpFromDate.ShowCheckBox = true;
             this.dtpFromDate.Size = new System.Drawing.Size(213, 22);
             this.dtpFromDate.TabIndex = 7;
-            this.dtpFromDate.Value = new System.DateTime(2020, 5, 20, 13, 2, 32, 0);
+            this.dtpFromDate.Value = new System.DateTime(2020, 5, 7, 0, 0, 0, 0);
             // 
             // label8
             // 
@@ -477,7 +477,7 @@
             this.name = "";
             this.Name = "StockDetailForm";
             this.position = "";
-            this.Text = "Stock Detail";
+            this.Text = "StockDetail";
             this.tittle = "FormCommon";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StockDetailForm_Load);
@@ -486,9 +486,9 @@
             this.tab_StockDetail.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.tbpMain.ResumeLayout(false);
             this.tbpMain.PerformLayout();
             this.ResumeLayout(false);

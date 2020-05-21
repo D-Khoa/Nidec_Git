@@ -126,7 +126,7 @@
             this.btnStockDetail.Name = "btnStockDetail";
             this.btnStockDetail.Size = new System.Drawing.Size(254, 100);
             this.btnStockDetail.TabIndex = 2;
-            this.btnStockDetail.Text = "Stock Detail\r\nChi Tiết NL Tồn";
+            this.btnStockDetail.Text = "Stockout Detail\r\nChi Tiết Xuất NL ";
             this.btnStockDetail.UseVisualStyleBackColor = true;
             this.btnStockDetail.Click += new System.EventHandler(this.btnStockDetail_Click);
             // 

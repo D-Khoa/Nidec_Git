@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
 
+
 namespace PC_QRCodeSystem.View
 {
     public partial class PCForm : FormCommon
@@ -48,7 +49,8 @@ namespace PC_QRCodeSystem.View
 
         private void btnStockOut_Click(object sender, EventArgs e)
         {
-            StockOutLogForm outFrm = new StockOutLogForm();
+            Form1 outFrm = new Form1();
+            //StockOutLogForm outFrm = new StockOutLogForm();
             //StockOutNewForm outFrm = new StockOutNewForm();
             outFrm.Show();
         }

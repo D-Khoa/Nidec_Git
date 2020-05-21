@@ -31,11 +31,12 @@ namespace PC_QRCodeSystem.View
             dt2 = new DataTable();
             dt = new DataTable();
             tc_MainStockDetail.ItemSize = new Size(0, 1);
-
         }
 
         private void StockDetailForm_Load(object sender, EventArgs e)
         {
+            dtpFromDate.Value = DateTime.Now;
+            dtpToDate.Value = DateTime.Now;
             PSQL con = new PSQL();
             string sql = "select distinct remark from pts_stockout order by remark";
             con.getComboBoxData(sql, ref cmbRemark);
@@ -88,7 +89,7 @@ namespace PC_QRCodeSystem.View
                 btnExport.Enabled = true;
                 btnClear.Enabled = true;
             }
-            
+
             catch (Exception)
             {
 
@@ -97,7 +98,7 @@ namespace PC_QRCodeSystem.View
             this.Cursor = Cursors.Default;
         }
 
-       
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             try
@@ -116,6 +117,8 @@ namespace PC_QRCodeSystem.View
                 dtpToDate.Checked = false;
                 btnExport.Enabled = false;
                 btnClear.Enabled = false;
+                tsTime.Text = null;
+                tsTotal.Text = null;
             }
             catch (Exception ex)
             {
@@ -155,14 +158,14 @@ namespace PC_QRCodeSystem.View
                     txtQty.Text = lbData.Delivery_Qty.ToString();
                     //dtpFromDate.Value = lbData.Delivery_Date;
                     cmbRemark.Text = lbData.Remark;
-                }        
+                }
             }
-            
+
             catch (Exception)
             {
 
             }
-           
+
         }
         #endregion
         #region SUB EVENT SEARCH DATA
@@ -170,8 +173,8 @@ namespace PC_QRCodeSystem.View
         {
             dt1.Clear();
             string sql = ""; string sql1 = ""; string sql2 = ""; string sql3 = ""; string sql4 = ""; string sql5 = ""; string sql6 = "";
-            string sql8 = ""; string sql9 = "";
-            if (dtpToDate.Checked || dtpFromDate.Checked)
+            string sql8 = ""; string sql9 = ""; string sql10 = "";
+            if (dtpToDate.Checked && dtpFromDate.Checked)
             {
                 sql = "select * from pts_stockout where stockout_date between ";
                 if (dtpFromDate.Text != "")
@@ -188,7 +191,7 @@ namespace PC_QRCodeSystem.View
             }
             else
             {
-                sql = "select * from pts_stockout where 1=1";
+            sql = "select * from pts_stockout where 1=1";
                 if (txtItemNumber.Text != "")
                 {
                     sql1 = " and item_cd = '" + txtItemNumber.Text + "'";
@@ -214,9 +217,13 @@ namespace PC_QRCodeSystem.View
                 {
                     sql6 = "and remark = '" + cmbRemark.Text + "'";
                 }
-
+                if (dtpFromDate.Checked)
+                {
+                    sql10 = " and stockout_date = '" + dtpFromDate.Value + "'";
+                }
+            
                 PSQL con = new PSQL();
-                con.sqlDataAdapterFillDatatable(sql + sql1 + sql2 + sql3 + sql4 + sql5 + sql6, ref dt1);
+                con.sqlDataAdapterFillDatatable(sql + sql1 + sql2 + sql3 + sql4 + sql5 + sql6+ sql10, ref dt1);
             }
         }
         #endregion

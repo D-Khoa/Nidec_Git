@@ -1,6 +1,6 @@
 ﻿namespace PC_QRCodeSystem.View
 {
-    partial class StockOutLogForm
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tc_Main = new System.Windows.Forms.TabControl();
-            this.tab_Inspection = new System.Windows.Forms.TabPage();
-            this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.pnlInspection = new System.Windows.Forms.Panel();
             this.txtInQty = new System.Windows.Forms.TextBox();
             this.txtDeliveryDate = new System.Windows.Forms.TextBox();
@@ -54,59 +51,17 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.txtBarcode = new System.Windows.Forms.TextBox();
+            this.dgvInspection = new System.Windows.Forms.DataGridView();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsRow = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tc_Main.SuspendLayout();
-            this.tab_Inspection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).BeginInit();
             this.pnlInspection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).BeginInit();
             this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tc_Main
-            // 
-            this.tc_Main.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tc_Main.Controls.Add(this.tab_Inspection);
-            this.tc_Main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tc_Main.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tc_Main.Location = new System.Drawing.Point(150, 70);
-            this.tc_Main.Margin = new System.Windows.Forms.Padding(4);
-            this.tc_Main.Name = "tc_Main";
-            this.tc_Main.SelectedIndex = 0;
-            this.tc_Main.Size = new System.Drawing.Size(1102, 412);
-            this.tc_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tc_Main.TabIndex = 4;
-            // 
-            // tab_Inspection
-            // 
-            this.tab_Inspection.Controls.Add(this.dgvInspection);
-            this.tab_Inspection.Controls.Add(this.pnlInspection);
-            this.tab_Inspection.Location = new System.Drawing.Point(4, 28);
-            this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
-            this.tab_Inspection.Name = "tab_Inspection";
-            this.tab_Inspection.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Inspection.Size = new System.Drawing.Size(1094, 380);
-            this.tab_Inspection.TabIndex = 2;
-            this.tab_Inspection.Text = "Inspection";
-            this.tab_Inspection.UseVisualStyleBackColor = true;
-            // 
-            // dgvInspection
-            // 
-            this.dgvInspection.AllowUserToAddRows = false;
-            this.dgvInspection.AllowUserToDeleteRows = false;
-            this.dgvInspection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInspection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInspection.Location = new System.Drawing.Point(4, 218);
-            this.dgvInspection.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvInspection.Name = "dgvInspection";
-            this.dgvInspection.ReadOnly = true;
-            this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInspection.Size = new System.Drawing.Size(1086, 158);
-            this.dgvInspection.TabIndex = 9;
             // 
             // pnlInspection
             // 
@@ -133,11 +88,12 @@
             this.pnlInspection.Controls.Add(this.btnPrint);
             this.pnlInspection.Controls.Add(this.txtBarcode);
             this.pnlInspection.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlInspection.Location = new System.Drawing.Point(4, 4);
+            this.pnlInspection.Location = new System.Drawing.Point(150, 70);
             this.pnlInspection.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInspection.Name = "pnlInspection";
-            this.pnlInspection.Size = new System.Drawing.Size(1086, 214);
-            this.pnlInspection.TabIndex = 2;
+            this.pnlInspection.Size = new System.Drawing.Size(1144, 214);
+            this.pnlInspection.TabIndex = 3;
+            this.pnlInspection.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlInspection_Paint);
             // 
             // txtInQty
             // 
@@ -166,6 +122,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(253, 182);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(93, 17);
@@ -202,7 +159,7 @@
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label4.Location = new System.Drawing.Point(699, 46);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 17);
+            this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 36;
             this.label4.Text = "Enter";
             // 
@@ -211,7 +168,7 @@
             this.txtInsInvoice.Location = new System.Drawing.Point(118, 149);
             this.txtInsInvoice.Name = "txtInsInvoice";
             this.txtInsInvoice.ReadOnly = true;
-            this.txtInsInvoice.Size = new System.Drawing.Size(120, 23);
+            this.txtInsInvoice.Size = new System.Drawing.Size(120, 20);
             this.txtInsInvoice.TabIndex = 35;
             this.txtInsInvoice.TabStop = false;
             // 
@@ -220,7 +177,7 @@
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(58, 152);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(52, 17);
+            this.label18.Size = new System.Drawing.Size(42, 13);
             this.label18.TabIndex = 34;
             this.label18.Text = "Invoice";
             // 
@@ -253,7 +210,7 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(695, 29);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(46, 17);
+            this.label19.Size = new System.Drawing.Size(35, 13);
             this.label19.TabIndex = 30;
             this.label19.Text = "2. Qty";
             // 
@@ -275,7 +232,7 @@
             this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label16.Location = new System.Drawing.Point(68, 35);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(42, 17);
+            this.label16.Size = new System.Drawing.Size(32, 13);
             this.label16.TabIndex = 28;
             this.label16.Text = "Enter";
             // 
@@ -382,6 +339,20 @@
             this.txtBarcode.TabIndex = 3;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
+            // dgvInspection
+            // 
+            this.dgvInspection.AllowUserToAddRows = false;
+            this.dgvInspection.AllowUserToDeleteRows = false;
+            this.dgvInspection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInspection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInspection.Location = new System.Drawing.Point(150, 284);
+            this.dgvInspection.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvInspection.Name = "dgvInspection";
+            this.dgvInspection.ReadOnly = true;
+            this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvInspection.Size = new System.Drawing.Size(1144, 171);
+            this.dgvInspection.TabIndex = 10;
+            // 
             // statusStrip2
             // 
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -390,10 +361,10 @@
             this.tsTime,
             this.toolStripStatusLabel5,
             this.tsTotalQty});
-            this.statusStrip2.Location = new System.Drawing.Point(150, 458);
+            this.statusStrip2.Location = new System.Drawing.Point(150, 455);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1102, 24);
-            this.statusStrip2.TabIndex = 29;
+            this.statusStrip2.Size = new System.Drawing.Size(1144, 24);
+            this.statusStrip2.TabIndex = 30;
             this.statusStrip2.Text = "statusStrip2";
             // 
             // toolStripStatusLabel4
@@ -413,7 +384,7 @@
             // tsTime
             // 
             this.tsTime.Name = "tsTime";
-            this.tsTime.Size = new System.Drawing.Size(902, 19);
+            this.tsTime.Size = new System.Drawing.Size(944, 19);
             this.tsTime.Spring = true;
             // 
             // toolStripStatusLabel5
@@ -429,31 +400,30 @@
             this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
             this.tsTotalQty.Text = "None";
             // 
-            // StockOutLogForm
+            // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1252, 482);
+            this.ClientSize = new System.Drawing.Size(1294, 479);
+            this.Controls.Add(this.dgvInspection);
             this.Controls.Add(this.statusStrip2);
-            this.Controls.Add(this.tc_Main);
+            this.Controls.Add(this.pnlInspection);
             this.dept = "";
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listper = null;
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
-            this.Name = "StockOutLogForm";
+            this.Name = "Form1";
             this.position = "";
-            this.Text = "StockOut";
+            this.Text = "Stockout";
             this.tittle = "FormCommon";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.StockOutLogForm_Load);
-            this.Controls.SetChildIndex(this.tc_Main, 0);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Controls.SetChildIndex(this.pnlInspection, 0);
             this.Controls.SetChildIndex(this.statusStrip2, 0);
-            this.tc_Main.ResumeLayout(false);
-            this.tab_Inspection.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).EndInit();
+            this.Controls.SetChildIndex(this.dgvInspection, 0);
             this.pnlInspection.ResumeLayout(false);
             this.pnlInspection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInspection)).EndInit();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -463,15 +433,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tc_Main;
-        private System.Windows.Forms.TabPage tab_Inspection;
-        private System.Windows.Forms.DataGridView dgvInspection;
-        private System.Windows.Forms.StatusStrip statusStrip2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel tsRow;
-        private System.Windows.Forms.ToolStripStatusLabel tsTime;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.ToolStripStatusLabel tsTotalQty;
         private System.Windows.Forms.Panel pnlInspection;
         private System.Windows.Forms.TextBox txtInQty;
         private System.Windows.Forms.TextBox txtDeliveryDate;
@@ -495,5 +456,12 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.TextBox txtBarcode;
+        private System.Windows.Forms.DataGridView dgvInspection;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel tsRow;
+        private System.Windows.Forms.ToolStripStatusLabel tsTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel tsTotalQty;
     }
 }

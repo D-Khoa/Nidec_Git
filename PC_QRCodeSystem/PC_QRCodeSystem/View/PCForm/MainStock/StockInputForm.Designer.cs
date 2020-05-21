@@ -940,7 +940,7 @@
             this.name = "";
             this.Name = "StockInputForm";
             this.position = "";
-            this.Text = "Stock In";
+            this.Text = "StockIn";
             this.tittle = "FormCommon";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StockInputForm_Load);
