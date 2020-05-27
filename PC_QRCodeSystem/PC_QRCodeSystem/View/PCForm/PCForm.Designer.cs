@@ -393,6 +393,7 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "PC-Management";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label2.Visible = false;
             // 
             // btnIssueCode
             // 
@@ -402,6 +403,7 @@
             this.btnIssueCode.TabIndex = 3;
             this.btnIssueCode.Text = "Issue Code\r\nMã Xuất NL";
             this.btnIssueCode.UseVisualStyleBackColor = true;
+            this.btnIssueCode.Visible = false;
             this.btnIssueCode.Click += new System.EventHandler(this.btnIssueCode_Click);
             // 
             // btnSupplier
@@ -412,6 +414,7 @@
             this.btnSupplier.TabIndex = 2;
             this.btnSupplier.Text = "Supplier\r\nNhà Sản Xuất";
             this.btnSupplier.UseVisualStyleBackColor = true;
+            this.btnSupplier.Visible = false;
             this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
             // 
             // btnItem
@@ -422,6 +425,7 @@
             this.btnItem.TabIndex = 0;
             this.btnItem.Text = "Item Management\r\nQL Nguyên Liệu";
             this.btnItem.UseVisualStyleBackColor = true;
+            this.btnItem.Visible = false;
             this.btnItem.Click += new System.EventHandler(this.btnItem_Click);
             // 
             // pnlSetting

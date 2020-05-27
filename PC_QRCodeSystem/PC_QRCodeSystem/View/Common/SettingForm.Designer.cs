@@ -57,6 +57,9 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.grOutFolder = new System.Windows.Forms.GroupBox();
+            this.btnBrowserBackup = new System.Windows.Forms.Button();
+            this.txtBackupFolder = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.btnBrowserOutput = new System.Windows.Forms.Button();
             this.txtOutputFolder = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,9 +67,6 @@
             this.btnPasswordOK = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnBrowserBackup = new System.Windows.Forms.Button();
-            this.txtBackupFolder = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.grPrinter.SuspendLayout();
             this.grPremacFolder.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -391,6 +391,36 @@
             this.grOutFolder.TabIndex = 3;
             this.grOutFolder.TabStop = false;
             this.grOutFolder.Text = "Output Folder";
+            this.grOutFolder.Visible = false;
+            // 
+            // btnBrowserBackup
+            // 
+            this.btnBrowserBackup.Location = new System.Drawing.Point(470, 65);
+            this.btnBrowserBackup.Margin = new System.Windows.Forms.Padding(5);
+            this.btnBrowserBackup.Name = "btnBrowserBackup";
+            this.btnBrowserBackup.Size = new System.Drawing.Size(100, 30);
+            this.btnBrowserBackup.TabIndex = 14;
+            this.btnBrowserBackup.Text = "Browser";
+            this.btnBrowserBackup.UseVisualStyleBackColor = true;
+            this.btnBrowserBackup.Click += new System.EventHandler(this.btnBrowserBackup_Click);
+            // 
+            // txtBackupFolder
+            // 
+            this.txtBackupFolder.Location = new System.Drawing.Point(150, 69);
+            this.txtBackupFolder.Margin = new System.Windows.Forms.Padding(5);
+            this.txtBackupFolder.Name = "txtBackupFolder";
+            this.txtBackupFolder.Size = new System.Drawing.Size(300, 23);
+            this.txtBackupFolder.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(30, 69);
+            this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(99, 17);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Backup Folder";
             // 
             // btnBrowserOutput
             // 
@@ -466,35 +496,6 @@
             this.label8.Size = new System.Drawing.Size(69, 17);
             this.label8.TabIndex = 0;
             this.label8.Text = "Password";
-            // 
-            // btnBrowserBackup
-            // 
-            this.btnBrowserBackup.Location = new System.Drawing.Point(470, 65);
-            this.btnBrowserBackup.Margin = new System.Windows.Forms.Padding(5);
-            this.btnBrowserBackup.Name = "btnBrowserBackup";
-            this.btnBrowserBackup.Size = new System.Drawing.Size(100, 30);
-            this.btnBrowserBackup.TabIndex = 14;
-            this.btnBrowserBackup.Text = "Browser";
-            this.btnBrowserBackup.UseVisualStyleBackColor = true;
-            this.btnBrowserBackup.Click += new System.EventHandler(this.btnBrowserBackup_Click);
-            // 
-            // txtBackupFolder
-            // 
-            this.txtBackupFolder.Location = new System.Drawing.Point(150, 69);
-            this.txtBackupFolder.Margin = new System.Windows.Forms.Padding(5);
-            this.txtBackupFolder.Name = "txtBackupFolder";
-            this.txtBackupFolder.Size = new System.Drawing.Size(300, 23);
-            this.txtBackupFolder.TabIndex = 13;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 69);
-            this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(99, 17);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Backup Folder";
             // 
             // SettingForm
             // 

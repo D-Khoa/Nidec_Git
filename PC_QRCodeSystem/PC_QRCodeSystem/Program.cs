@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PC_QRCodeSystem.View;
+using System;
 using System.Windows.Forms;
 
 namespace PC_QRCodeSystem
@@ -13,7 +14,7 @@ namespace PC_QRCodeSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new PCForm());
         }
     }
 }

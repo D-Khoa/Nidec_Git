@@ -107,6 +107,7 @@
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(150, 402);
             this.pnlUser.TabIndex = 1;
+            this.pnlUser.Visible = false;
             // 
             // lbOnlineTime
             // 
