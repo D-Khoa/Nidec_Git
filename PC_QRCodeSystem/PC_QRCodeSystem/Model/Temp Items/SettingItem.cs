@@ -11,10 +11,12 @@ namespace PC_QRCodeSystem.Model
         public static string backupFolder { get; set; }
         public static string premacFile { get; set; }
         public static string printerSName { get; set; }
+        public static string checkSaved { get; set; }
         public string outputTempFolder { get; set; }
         public string backupTempFolder { get; set; }
         public string premacFolder { get; set; }
         public string printerName { get; set; }
+        public string checkSave { get; set; }
         public string settingFolder;
         public string settingPath;
         public SettingItem()
@@ -56,6 +58,7 @@ namespace PC_QRCodeSystem.Model
             listSetting.Add(nameof(outputTempFolder) + "=" + outputTempFolder);
             listSetting.Add(nameof(premacFolder) + "=" + premacFolder);
             listSetting.Add(nameof(printerName) + "=" + printerName);
+            listSetting.Add(nameof(checkSave) + "=" + checkSave);
             File.WriteAllLines(settingPath, listSetting);
             outputFolder = outputTempFolder;
             backupFolder = backupTempFolder;
@@ -83,6 +86,7 @@ namespace PC_QRCodeSystem.Model
             backupFolder = backupTempFolder;
             printerSName = printerName;
             premacFile = premacFolder;
+            checkSaved = checkSave;
         }
         #endregion
     }

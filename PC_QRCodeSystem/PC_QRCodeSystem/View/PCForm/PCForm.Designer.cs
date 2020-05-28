@@ -441,9 +441,10 @@
             // 
             // btnSetting
             // 
-            this.btnSetting.Location = new System.Drawing.Point(20, 25);
+            this.btnSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSetting.Location = new System.Drawing.Point(375, 23);
             this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(100, 50);
+            this.btnSetting.Size = new System.Drawing.Size(97, 48);
             this.btnSetting.TabIndex = 13;
             this.btnSetting.Text = "Setting\r\nCài Đặt";
             this.btnSetting.UseVisualStyleBackColor = true;

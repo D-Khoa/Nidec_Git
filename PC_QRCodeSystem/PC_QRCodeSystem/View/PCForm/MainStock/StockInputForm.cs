@@ -1049,10 +1049,14 @@ namespace PC_QRCodeSystem.View
                     }).OrderBy(x => x.supplier_invoice).ToList();
             return list;
         }
-        #endregion
 
         #endregion
 
-       
+        #endregion
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

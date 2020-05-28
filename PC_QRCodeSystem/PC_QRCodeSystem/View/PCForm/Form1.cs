@@ -63,11 +63,13 @@ namespace PC_QRCodeSystem.View
                         if (!string.IsNullOrEmpty(barcode[6])) lbData.SupplierCD = barcode[6].Trim();
                         if (!string.IsNullOrEmpty(barcode[7])) lbData.Remark = barcode[7].Trim();
                     }
-                    txtInsInvoice.Text = lbData.Invoice;
-                    txtItemName.Text = lbData.Item_Name;
-                    txtItemNumber.Text = lbData.Item_Number;
-                    txtSupplierName.Text = lbData.SupplierName;
-                    txtDeliveryDate.Text = lbData.Delivery_Date.ToString("yyyy-MM-dd");
+                    int n = dgvOldData.Rows.Add();
+                    dgvOldData.Rows[n].Cells[0].Value = lbData.Item_Number;
+                    dgvOldData.Rows[n].Cells[1].Value = lbData.Item_Name;
+                    dgvOldData.Rows[n].Cells[2].Value = lbData.SupplierName;
+                    dgvOldData.Rows[n].Cells[3].Value = lbData.Invoice;
+                    dgvOldData.Rows[n].Cells[4].Value = lbData.Delivery_Qty;
+                    dgvOldData.Rows[n].Cells[5].Value = lbData.Delivery_Date;
                     txtInQty.Text = lbData.Delivery_Qty.ToString();
                     txtInQty.Focus();
                 }
@@ -160,15 +162,6 @@ namespace PC_QRCodeSystem.View
                     UpdatePrintGrid();
                     txtBarcode.ResetText();
                     txtInQty.ResetText();
-                    txtLabelQty.Text = "1";
-                    txtInsInvoice.ResetText();
-                    txtItemName.ResetText();
-                    txtItemNumber.ResetText();
-                    txtDeliveryDate.ResetText();
-                    txtSupplierName.ResetText();
-                    txtItemName.Text = "Item Name";
-                    txtItemNumber.Text = "Item Number";
-                    txtSupplierName.Text = "Supplier Name";
                     txtBarcode.Focus();
                 }
                 catch (Exception ex)
@@ -212,28 +205,71 @@ namespace PC_QRCodeSystem.View
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
                 //Thêm dữ liệu vào database
-                stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
+                if (bool.Parse(SettingItem.checkSaved))
+                {
+                    stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
+                }
                 if (printItem.PrintItems(listPrintItem, false))
-                    CustomMessageBox.Notice("Print items and insert database are completed!"
-                        + Environment.NewLine + "In và thêm dữ liệu vào CSDL hoàn tất!");
+                    CustomMessageBox.Notice("Print items are completed!"
+                        + Environment.NewLine + "In hoàn tất!");
                 //Xóa dữ liệu sau khi in
                 stockoutItem.listStockItems.Clear();
                 printItem.ListPrintItem.Clear();
                 dgvInspection.DataSource = null;
+                dgvOldData.Rows.Clear();
+                txtBarcode.Focus();
             }
             catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
         }
-
+        private void btnPrintItems_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
+                {
+                    CustomMessageBox.Notice("Printer is offline" + Environment.NewLine + "Máy in chưa kết nối!");
+                    return;
+                }
+                listPrintItem.Clear();
+                if (dgvInspection.SelectedRows.Count <= 0)
+                {
+                    CustomMessageBox.Notice("Please choose item first!" + Environment.NewLine + "Vui lòng chọn tem cần in!");
+                    return;
+                }
+                foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
+                {
+                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                    dr.DefaultCellStyle.BackColor = Color.Lime;
+                }
+                if (bool.Parse(SettingItem.checkSaved))
+                {
+                    stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
+                }
+                if (printItem.PrintItems(listPrintItem, false))
+                    CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
+                txtBarcode.Focus();
+                // stockoutItem.listStockItems.Clear();
+                // printItem.ListPrintItem.Clear();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
+            }
+        }
         private void btnInspectionClear_Click(object sender, EventArgs e)
         {
             try
             {
+                dgvOldData.Rows.Clear();
                 listPrintItem.Clear();
                 printItem.ListPrintItem.Clear();
                 dgvInspection.DataSource = null;
+                txtBarcode.Clear();
+                txtInQty.Clear();
+                txtBarcode.Focus();
             }
             catch (Exception ex)
             {
@@ -241,9 +277,10 @@ namespace PC_QRCodeSystem.View
             }
         }
 
-        private void pnlInspection_Paint(object sender, PaintEventArgs e)
+        private void dgvInspection_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            txtInQty.Text = dgvInspection.CurrentRow.Cells[5].Value.ToString();
+            txtInQty.Focus();
         }
     }
 }

@@ -119,6 +119,12 @@
     <Compile Include="Model\Temp Items\pre_223_view.cs" />
     <Compile Include="Model\Temp Items\PrintItem.cs" />
     <Compile Include="Model\Temp Items\SettingItem.cs" />
+    <Compile Include="View\Common\AddCheckUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\AddCheckUser.Designer.cs">
+      <DependentUpon>AddCheckUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Common\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,9 @@
     <Compile Include="View\PCForm\StockOutLogForm\StockOutLogForm.Designer.cs">
       <DependentUpon>StockOutLogForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\Common\AddCheckUser.resx">
+      <DependentUpon>AddCheckUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Common\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
+using PC_QRCodeSystem.View.Common;
 
 namespace PC_QRCodeSystem.View
 {
@@ -14,11 +15,13 @@ namespace PC_QRCodeSystem.View
         #region VARIABLE
         private PrintItem printItem { get; set; }
         private SettingItem settingItem { get; set; }
+        private Color tempColor { get; set; }
         public SettingForm()
         {
             InitializeComponent();
             printItem = new PrintItem();
             settingItem = new SettingItem();
+            tempColor = new Color();
         }
 
         private void SettingForm_Load(object sender, EventArgs e)
@@ -28,6 +31,7 @@ namespace PC_QRCodeSystem.View
             else settingItem.LoadSetting();
             SetField();
             LockPanel(true);
+            checkSave.Checked = bool.Parse(settingItem.checkSave);
             //AcceptButton = btnPasswordOK;
         }
         #endregion
@@ -123,8 +127,17 @@ namespace PC_QRCodeSystem.View
             settingItem.backupTempFolder = txtBackupFolder.Text;
             settingItem.premacFolder = txtPremacFolder.Text;
             settingItem.printerName = cmbPrinter.Text;
+            settingItem.checkSave = checkSave.Checked.ToString();
             settingItem.SaveSetting();
-            this.Close();
+            // this.Close();
+            if (checkSave.Checked == true)
+            {
+                Login log = new Login();
+                log.ShowDialog();
+            }
+            else
+                this.Close();
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -178,5 +191,20 @@ namespace PC_QRCodeSystem.View
                 e.Handled = true;
         }
         #endregion
+
+        private void checkSave_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (checkSave.Checked && grPrinter.Enabled)
+            //{
+            //    AddCheckUser adck = new AddCheckUser();
+            //    if (adck.ShowDialog() == DialogResult.OK)
+            //    {
+            //        checkSave.Checked = true;
+            //    }
+            //    else checkSave.Checked = false;
+
+            //}
+
+        }
     }
 }

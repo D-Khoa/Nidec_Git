@@ -30,15 +30,16 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlOption = new System.Windows.Forms.Panel();
+            this.btnBack = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnManualPacking = new System.Windows.Forms.Button();
             this.rbtnOdd = new System.Windows.Forms.RadioButton();
-            this.btnAutoPacking = new System.Windows.Forms.Button();
+            this.btnPrintList = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.rbtnEven = new System.Windows.Forms.RadioButton();
             this.txtCapacity = new System.Windows.Forms.TextBox();
             this.btnMainClear = new System.Windows.Forms.Button();
-            this.btnPrintList = new System.Windows.Forms.Button();
+            this.btnAutoPacking = new System.Windows.Forms.Button();
             this.btnInspection = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
             this.btnPremacImport = new System.Windows.Forms.Button();
@@ -118,23 +119,35 @@
             // 
             // pnlOption
             // 
+            this.pnlOption.Controls.Add(this.btnBack);
             this.pnlOption.Controls.Add(this.panel6);
             this.pnlOption.Controls.Add(this.btnMainClear);
-            this.pnlOption.Controls.Add(this.btnPrintList);
+            this.pnlOption.Controls.Add(this.btnAutoPacking);
             this.pnlOption.Controls.Add(this.btnInspection);
             this.pnlOption.Controls.Add(this.btnSetting);
             this.pnlOption.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlOption.Location = new System.Drawing.Point(4, 4);
             this.pnlOption.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOption.Name = "pnlOption";
-            this.pnlOption.Size = new System.Drawing.Size(1018, 60);
+            this.pnlOption.Size = new System.Drawing.Size(1092, 60);
             this.pnlOption.TabIndex = 2;
+            // 
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(776, 6);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(120, 50);
+            this.btnBack.TabIndex = 24;
+            this.btnBack.Text = "    6. Back         Trở Lại";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // panel6
             // 
             this.panel6.Controls.Add(this.btnManualPacking);
             this.panel6.Controls.Add(this.rbtnOdd);
-            this.panel6.Controls.Add(this.btnAutoPacking);
+            this.panel6.Controls.Add(this.btnPrintList);
             this.panel6.Controls.Add(this.label14);
             this.panel6.Controls.Add(this.rbtnEven);
             this.panel6.Controls.Add(this.txtCapacity);
@@ -147,12 +160,12 @@
             // 
             // btnManualPacking
             // 
-            this.btnManualPacking.Location = new System.Drawing.Point(360, 5);
+            this.btnManualPacking.Location = new System.Drawing.Point(229, 6);
             this.btnManualPacking.Margin = new System.Windows.Forms.Padding(4);
             this.btnManualPacking.Name = "btnManualPacking";
             this.btnManualPacking.Size = new System.Drawing.Size(150, 50);
             this.btnManualPacking.TabIndex = 16;
-            this.btnManualPacking.Text = "2b-2. Manual Cutting\r\nTách Thủ Công";
+            this.btnManualPacking.Text = "2. Manual Cutting\r\nTách Thủ Công";
             this.btnManualPacking.UseVisualStyleBackColor = true;
             this.btnManualPacking.Click += new System.EventHandler(this.btnManualPacking_Click);
             // 
@@ -160,7 +173,7 @@
             // 
             this.rbtnOdd.AutoSize = true;
             this.rbtnOdd.BackColor = System.Drawing.Color.Yellow;
-            this.rbtnOdd.Location = new System.Drawing.Point(140, 30);
+            this.rbtnOdd.Location = new System.Drawing.Point(9, 31);
             this.rbtnOdd.Name = "rbtnOdd";
             this.rbtnOdd.Size = new System.Drawing.Size(83, 21);
             this.rbtnOdd.TabIndex = 18;
@@ -169,34 +182,34 @@
             this.rbtnOdd.UseVisualStyleBackColor = false;
             this.rbtnOdd.CheckedChanged += new System.EventHandler(this.rbtnEven_CheckedChanged);
             // 
-            // btnAutoPacking
+            // btnPrintList
             // 
-            this.btnAutoPacking.Location = new System.Drawing.Point(10, 5);
-            this.btnAutoPacking.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAutoPacking.Name = "btnAutoPacking";
-            this.btnAutoPacking.Size = new System.Drawing.Size(120, 50);
-            this.btnAutoPacking.TabIndex = 15;
-            this.btnAutoPacking.Text = "2a. Auto Cutting\r\nTự Động Tách";
-            this.btnAutoPacking.UseVisualStyleBackColor = true;
-            this.btnAutoPacking.Click += new System.EventHandler(this.btnAutoPacking_Click);
+            this.btnPrintList.Location = new System.Drawing.Point(388, 6);
+            this.btnPrintList.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintList.Name = "btnPrintList";
+            this.btnPrintList.Size = new System.Drawing.Size(120, 50);
+            this.btnPrintList.TabIndex = 20;
+            this.btnPrintList.Text = "3. Print List\r\nDanh Sách In";
+            this.btnPrintList.UseVisualStyleBackColor = true;
+            this.btnPrintList.Click += new System.EventHandler(this.btnPrintList_Click);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(250, 5);
+            this.label14.Location = new System.Drawing.Point(119, 6);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(96, 17);
+            this.label14.Size = new System.Drawing.Size(75, 17);
             this.label14.TabIndex = 19;
-            this.label14.Text = "2b-1. Lot Size";
+            this.label14.Text = "1. Lot Size";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // rbtnEven
             // 
             this.rbtnEven.AutoSize = true;
             this.rbtnEven.BackColor = System.Drawing.Color.Lime;
-            this.rbtnEven.Location = new System.Drawing.Point(140, 5);
+            this.rbtnEven.Location = new System.Drawing.Point(9, 6);
             this.rbtnEven.Name = "rbtnEven";
             this.rbtnEven.Size = new System.Drawing.Size(105, 21);
             this.rbtnEven.TabIndex = 17;
@@ -208,7 +221,7 @@
             // txtCapacity
             // 
             this.txtCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCapacity.Location = new System.Drawing.Point(250, 30);
+            this.txtCapacity.Location = new System.Drawing.Point(119, 31);
             this.txtCapacity.Margin = new System.Windows.Forms.Padding(4);
             this.txtCapacity.Name = "txtCapacity";
             this.txtCapacity.Size = new System.Drawing.Size(100, 23);
@@ -218,45 +231,47 @@
             // 
             // btnMainClear
             // 
-            this.btnMainClear.Location = new System.Drawing.Point(880, 5);
+            this.btnMainClear.Location = new System.Drawing.Point(520, 6);
             this.btnMainClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnMainClear.Name = "btnMainClear";
             this.btnMainClear.Size = new System.Drawing.Size(120, 50);
             this.btnMainClear.TabIndex = 23;
-            this.btnMainClear.Text = "Clear\r\nXóa Thông Tin";
+            this.btnMainClear.Text = "4. Clear\r\nXóa Thông Tin";
             this.btnMainClear.UseVisualStyleBackColor = true;
             this.btnMainClear.Click += new System.EventHandler(this.btnMainClear_Click);
             // 
-            // btnPrintList
+            // btnAutoPacking
             // 
-            this.btnPrintList.Location = new System.Drawing.Point(520, 5);
-            this.btnPrintList.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrintList.Name = "btnPrintList";
-            this.btnPrintList.Size = new System.Drawing.Size(120, 50);
-            this.btnPrintList.TabIndex = 20;
-            this.btnPrintList.Text = "3. Print List\r\nDanh Sách In";
-            this.btnPrintList.UseVisualStyleBackColor = true;
-            this.btnPrintList.Click += new System.EventHandler(this.btnPrintList_Click);
+            this.btnAutoPacking.Location = new System.Drawing.Point(925, 6);
+            this.btnAutoPacking.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAutoPacking.Name = "btnAutoPacking";
+            this.btnAutoPacking.Size = new System.Drawing.Size(120, 50);
+            this.btnAutoPacking.TabIndex = 15;
+            this.btnAutoPacking.Text = "2a. Auto Cutting\r\nTự Động Tách";
+            this.btnAutoPacking.UseVisualStyleBackColor = true;
+            this.btnAutoPacking.Visible = false;
+            this.btnAutoPacking.Click += new System.EventHandler(this.btnAutoPacking_Click);
             // 
             // btnInspection
             // 
-            this.btnInspection.Location = new System.Drawing.Point(640, 5);
+            this.btnInspection.Location = new System.Drawing.Point(953, 4);
             this.btnInspection.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspection.Name = "btnInspection";
             this.btnInspection.Size = new System.Drawing.Size(120, 50);
             this.btnInspection.TabIndex = 21;
             this.btnInspection.Text = "4. Inspection\r\nKiểm Tra";
             this.btnInspection.UseVisualStyleBackColor = true;
+            this.btnInspection.Visible = false;
             this.btnInspection.Click += new System.EventHandler(this.btnInspection_Click);
             // 
             // btnSetting
             // 
-            this.btnSetting.Location = new System.Drawing.Point(760, 5);
+            this.btnSetting.Location = new System.Drawing.Point(648, 6);
             this.btnSetting.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetting.Name = "btnSetting";
             this.btnSetting.Size = new System.Drawing.Size(120, 50);
             this.btnSetting.TabIndex = 22;
-            this.btnSetting.Text = "Setting\r\nCài Đặt";
+            this.btnSetting.Text = "5. Setting\r\nCài Đặt";
             this.btnSetting.UseVisualStyleBackColor = true;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
@@ -284,7 +299,7 @@
             this.tc_Main.Margin = new System.Windows.Forms.Padding(4);
             this.tc_Main.Name = "tc_Main";
             this.tc_Main.SelectedIndex = 0;
-            this.tc_Main.Size = new System.Drawing.Size(1034, 475);
+            this.tc_Main.Size = new System.Drawing.Size(1108, 475);
             this.tc_Main.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tc_Main.TabIndex = 3;
             // 
@@ -297,7 +312,7 @@
             this.tab_Main.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Main.Name = "tab_Main";
             this.tab_Main.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Main.Size = new System.Drawing.Size(1026, 443);
+            this.tab_Main.Size = new System.Drawing.Size(1100, 443);
             this.tab_Main.TabIndex = 0;
             this.tab_Main.Text = "Main";
             this.tab_Main.UseVisualStyleBackColor = true;
@@ -324,7 +339,7 @@
             this.dgvPreInput.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPreInput.RowHeadersVisible = false;
             this.dgvPreInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPreInput.Size = new System.Drawing.Size(1018, 174);
+            this.dgvPreInput.Size = new System.Drawing.Size(1092, 174);
             this.dgvPreInput.TabIndex = 3;
             this.dgvPreInput.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPreInput_CellDoubleClick);
             // 
@@ -352,7 +367,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(4, 64);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1018, 201);
+            this.panel8.Size = new System.Drawing.Size(1092, 201);
             this.panel8.TabIndex = 1;
             // 
             // cbCheckDate
@@ -514,7 +529,7 @@
             this.tab_Inspection.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Inspection.Name = "tab_Inspection";
             this.tab_Inspection.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Inspection.Size = new System.Drawing.Size(1026, 443);
+            this.tab_Inspection.Size = new System.Drawing.Size(1100, 443);
             this.tab_Inspection.TabIndex = 2;
             this.tab_Inspection.Text = "Inspection";
             this.tab_Inspection.UseVisualStyleBackColor = true;
@@ -531,7 +546,7 @@
             this.dgvInspection.Name = "dgvInspection";
             this.dgvInspection.ReadOnly = true;
             this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInspection.Size = new System.Drawing.Size(1018, 245);
+            this.dgvInspection.Size = new System.Drawing.Size(1092, 245);
             this.dgvInspection.TabIndex = 9;
             // 
             // pnlInspection
@@ -557,7 +572,7 @@
             this.pnlInspection.Location = new System.Drawing.Point(4, 4);
             this.pnlInspection.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInspection.Name = "pnlInspection";
-            this.pnlInspection.Size = new System.Drawing.Size(1018, 190);
+            this.pnlInspection.Size = new System.Drawing.Size(1092, 190);
             this.pnlInspection.TabIndex = 2;
             // 
             // txtInQty
@@ -750,7 +765,7 @@
             this.tab_Print.Margin = new System.Windows.Forms.Padding(4);
             this.tab_Print.Name = "tab_Print";
             this.tab_Print.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_Print.Size = new System.Drawing.Size(1026, 443);
+            this.tab_Print.Size = new System.Drawing.Size(1100, 443);
             this.tab_Print.TabIndex = 3;
             this.tab_Print.Text = "Print";
             this.tab_Print.UseVisualStyleBackColor = true;
@@ -767,7 +782,7 @@
             this.dgvPrintList.Name = "dgvPrintList";
             this.dgvPrintList.ReadOnly = true;
             this.dgvPrintList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrintList.Size = new System.Drawing.Size(1018, 375);
+            this.dgvPrintList.Size = new System.Drawing.Size(1092, 375);
             this.dgvPrintList.TabIndex = 8;
             // 
             // panel7
@@ -784,13 +799,13 @@
             this.panel7.Location = new System.Drawing.Point(4, 4);
             this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1018, 60);
+            this.panel7.Size = new System.Drawing.Size(1092, 60);
             this.panel7.TabIndex = 1;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(320, 5);
+            this.label13.Location = new System.Drawing.Point(496, 5);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(129, 17);
             this.label13.TabIndex = 10;
@@ -798,7 +813,7 @@
             // 
             // txtPrintLabelQty
             // 
-            this.txtPrintLabelQty.Location = new System.Drawing.Point(320, 30);
+            this.txtPrintLabelQty.Location = new System.Drawing.Point(496, 30);
             this.txtPrintLabelQty.Name = "txtPrintLabelQty";
             this.txtPrintLabelQty.Size = new System.Drawing.Size(100, 23);
             this.txtPrintLabelQty.TabIndex = 3;
@@ -809,19 +824,20 @@
             // btnRegPre649
             // 
             this.btnRegPre649.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegPre649.Location = new System.Drawing.Point(660, 5);
+            this.btnRegPre649.Location = new System.Drawing.Point(894, 2);
             this.btnRegPre649.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegPre649.Name = "btnRegPre649";
             this.btnRegPre649.Size = new System.Drawing.Size(100, 50);
             this.btnRegPre649.TabIndex = 5;
             this.btnRegPre649.Text = "2. Inspection\r\nKiểm Tra";
             this.btnRegPre649.UseVisualStyleBackColor = true;
+            this.btnRegPre649.Visible = false;
             this.btnRegPre649.Click += new System.EventHandler(this.btnRegPre649_Click);
             // 
             // btnPrintClear
             // 
             this.btnPrintClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintClear.Location = new System.Drawing.Point(780, 5);
+            this.btnPrintClear.Location = new System.Drawing.Point(654, 3);
             this.btnPrintClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintClear.Name = "btnPrintClear";
             this.btnPrintClear.Size = new System.Drawing.Size(100, 50);
@@ -833,7 +849,7 @@
             // btnManualPrint
             // 
             this.btnManualPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManualPrint.Location = new System.Drawing.Point(470, 4);
+            this.btnManualPrint.Location = new System.Drawing.Point(334, 4);
             this.btnManualPrint.Margin = new System.Windows.Forms.Padding(4);
             this.btnManualPrint.Name = "btnManualPrint";
             this.btnManualPrint.Size = new System.Drawing.Size(140, 50);
@@ -857,7 +873,7 @@
             // btnPrintAll
             // 
             this.btnPrintAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintAll.Location = new System.Drawing.Point(170, 5);
+            this.btnPrintAll.Location = new System.Drawing.Point(172, 5);
             this.btnPrintAll.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintAll.Name = "btnPrintAll";
             this.btnPrintAll.Size = new System.Drawing.Size(140, 50);
@@ -869,7 +885,7 @@
             // btnPrintBack
             // 
             this.btnPrintBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintBack.Location = new System.Drawing.Point(900, 5);
+            this.btnPrintBack.Location = new System.Drawing.Point(774, 3);
             this.btnPrintBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintBack.Name = "btnPrintBack";
             this.btnPrintBack.Size = new System.Drawing.Size(100, 50);
@@ -888,7 +904,7 @@
             this.tsTotalQty});
             this.statusStrip2.Location = new System.Drawing.Point(150, 545);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1034, 24);
+            this.statusStrip2.Size = new System.Drawing.Size(1108, 24);
             this.statusStrip2.TabIndex = 27;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -909,7 +925,7 @@
             // tsTime
             // 
             this.tsTime.Name = "tsTime";
-            this.tsTime.Size = new System.Drawing.Size(834, 19);
+            this.tsTime.Size = new System.Drawing.Size(908, 19);
             this.tsTime.Spring = true;
             // 
             // toolStripStatusLabel5
@@ -929,7 +945,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 569);
+            this.ClientSize = new System.Drawing.Size(1258, 569);
             this.Controls.Add(this.tc_Main);
             this.Controls.Add(this.statusStrip2);
             this.dept = "";
@@ -1043,5 +1059,6 @@
         private System.Windows.Forms.TextBox txtInsInvoice;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button btnBack;
     }
 }

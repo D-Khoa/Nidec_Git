@@ -30,6 +30,7 @@
         {
             this.btnReset = new System.Windows.Forms.Button();
             this.grPrinter = new System.Windows.Forms.GroupBox();
+            this.checkSave = new System.Windows.Forms.CheckBox();
             this.cbReceive = new System.Windows.Forms.CheckBox();
             this.dtpDateTest = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
@@ -87,6 +88,7 @@
             // 
             // grPrinter
             // 
+            this.grPrinter.Controls.Add(this.checkSave);
             this.grPrinter.Controls.Add(this.cbReceive);
             this.grPrinter.Controls.Add(this.dtpDateTest);
             this.grPrinter.Controls.Add(this.label7);
@@ -112,10 +114,21 @@
             this.grPrinter.Margin = new System.Windows.Forms.Padding(5);
             this.grPrinter.Name = "grPrinter";
             this.grPrinter.Padding = new System.Windows.Forms.Padding(5);
-            this.grPrinter.Size = new System.Drawing.Size(586, 242);
+            this.grPrinter.Size = new System.Drawing.Size(614, 242);
             this.grPrinter.TabIndex = 4;
             this.grPrinter.TabStop = false;
             this.grPrinter.Text = "Printer";
+            // 
+            // checkSave
+            // 
+            this.checkSave.AutoSize = true;
+            this.checkSave.Location = new System.Drawing.Point(390, 73);
+            this.checkSave.Name = "checkSave";
+            this.checkSave.Size = new System.Drawing.Size(124, 21);
+            this.checkSave.TabIndex = 22;
+            this.checkSave.Text = "Save Database";
+            this.checkSave.UseVisualStyleBackColor = true;
+            this.checkSave.CheckedChanged += new System.EventHandler(this.checkSave_CheckedChanged);
             // 
             // cbReceive
             // 
@@ -244,7 +257,7 @@
             // 
             // btnPrinterCheck
             // 
-            this.btnPrinterCheck.Location = new System.Drawing.Point(470, 30);
+            this.btnPrinterCheck.Location = new System.Drawing.Point(390, 30);
             this.btnPrinterCheck.Margin = new System.Windows.Forms.Padding(5);
             this.btnPrinterCheck.Name = "btnPrinterCheck";
             this.btnPrinterCheck.Size = new System.Drawing.Size(100, 30);
@@ -304,7 +317,7 @@
             this.grPremacFolder.Margin = new System.Windows.Forms.Padding(5);
             this.grPremacFolder.Name = "grPremacFolder";
             this.grPremacFolder.Padding = new System.Windows.Forms.Padding(5);
-            this.grPremacFolder.Size = new System.Drawing.Size(586, 80);
+            this.grPremacFolder.Size = new System.Drawing.Size(614, 80);
             this.grPremacFolder.TabIndex = 2;
             this.grPremacFolder.TabStop = false;
             this.grPremacFolder.Text = "Premac Folder";
@@ -358,7 +371,7 @@
             this.panel5.Location = new System.Drawing.Point(0, 507);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(586, 80);
+            this.panel5.Size = new System.Drawing.Size(614, 80);
             this.panel5.TabIndex = 5;
             // 
             // btnCancel
@@ -387,7 +400,7 @@
             this.grOutFolder.Margin = new System.Windows.Forms.Padding(5);
             this.grOutFolder.Name = "grOutFolder";
             this.grOutFolder.Padding = new System.Windows.Forms.Padding(5);
-            this.grOutFolder.Size = new System.Drawing.Size(586, 105);
+            this.grOutFolder.Size = new System.Drawing.Size(614, 105);
             this.grOutFolder.TabIndex = 3;
             this.grOutFolder.TabStop = false;
             this.grOutFolder.Text = "Output Folder";
@@ -462,7 +475,7 @@
             this.grPass.Margin = new System.Windows.Forms.Padding(5);
             this.grPass.Name = "grPass";
             this.grPass.Padding = new System.Windows.Forms.Padding(5);
-            this.grPass.Size = new System.Drawing.Size(586, 80);
+            this.grPass.Size = new System.Drawing.Size(614, 80);
             this.grPass.TabIndex = 1;
             this.grPass.TabStop = false;
             this.grPass.Text = "Unlock Setting";
@@ -503,7 +516,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(586, 587);
+            this.ClientSize = new System.Drawing.Size(614, 587);
             this.ControlBox = false;
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.grPrinter);
@@ -570,5 +583,6 @@
         private System.Windows.Forms.Button btnBrowserBackup;
         private System.Windows.Forms.TextBox txtBackupFolder;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox checkSave;
     }
 }

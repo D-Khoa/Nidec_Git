@@ -237,7 +237,7 @@
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(213, 54);
             this.btnClear.TabIndex = 10;
-            this.btnClear.Text = "Clear \r\nXóa Thông Tin";
+            this.btnClear.Text = "3. Clear \r\nXóa Thông Tin";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
@@ -390,7 +390,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(213, 54);
             this.btnBack.TabIndex = 11;
-            this.btnBack.Text = "Back\r\nTrở Lại";
+            this.btnBack.Text = "4. Back\r\nTrở Lại";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -446,7 +446,7 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(213, 54);
             this.btnExport.TabIndex = 9;
-            this.btnExport.Text = "Export Excel \r\nXuất Excel";
+            this.btnExport.Text = "2. Export Excel \r\nXuất Excel";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
@@ -459,7 +459,7 @@
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(213, 54);
             this.btnSearch.TabIndex = 8;
-            this.btnSearch.Text = "Search\r\nTìm Kiếm";
+            this.btnSearch.Text = "1. Search\r\nTìm Kiếm";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
