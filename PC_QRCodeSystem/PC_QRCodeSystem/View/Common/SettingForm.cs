@@ -31,7 +31,8 @@ namespace PC_QRCodeSystem.View
             else settingItem.LoadSetting();
             SetField();
             LockPanel(true);
-            checkSave.Checked = bool.Parse(settingItem.checkSave);
+            if (!string.IsNullOrEmpty(SettingItem.checkSaved))
+                checkSave.Checked = bool.Parse(settingItem.checkSave);
             //AcceptButton = btnPasswordOK;
         }
         #endregion
@@ -202,7 +203,6 @@ namespace PC_QRCodeSystem.View
             //        checkSave.Checked = true;
             //    }
             //    else checkSave.Checked = false;
-
             //}
 
         }

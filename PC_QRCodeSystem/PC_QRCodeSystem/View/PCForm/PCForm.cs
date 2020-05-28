@@ -396,5 +396,14 @@ namespace PC_QRCodeSystem.View
             }
         }
         #endregion
+
+        private void PCForm_Load(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved))
+            {
+                Login logfrm = new Login();
+                logfrm.ShowDialog();
+            }
+        }
     }
 }

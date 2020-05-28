@@ -243,13 +243,20 @@ namespace PC_QRCodeSystem.View
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Lime;
-                }
-                if (bool.Parse(SettingItem.checkSaved))
-                {
-                    stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
+                    dgvInspection.Rows.Remove(dr);
                 }
                 if (printItem.PrintItems(listPrintItem, false))
-                    CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
+                {
+                    if (string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved))
+                    {
+                        stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
+                        CustomMessageBox.Notice("Print items & add database are completed!" + Environment.NewLine + "In hoàn tất!");
+                    }
+                    else
+                    {
+                        CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
+                    }
+                }
                 txtBarcode.Focus();
                 // stockoutItem.listStockItems.Clear();
                 // printItem.ListPrintItem.Clear();

@@ -712,6 +712,7 @@
             this.position = "";
             this.Text = "PC Management";
             this.tittle = "FormCommon";
+            this.Load += new System.EventHandler(this.PCForm_Load);
             this.Controls.SetChildIndex(this.grt_Main, 0);
             this.pnlMainStock.ResumeLayout(false);
             this.pnlRequest.ResumeLayout(false);
