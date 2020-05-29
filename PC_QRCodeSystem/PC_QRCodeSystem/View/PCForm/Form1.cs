@@ -11,6 +11,7 @@ namespace PC_QRCodeSystem.View
 {
     public partial class Form1 : FormCommon
     {
+        bool isdgvDup = false;
         PrintItem lbData { get; set; }
         PrintItem printItem { get; set; }
         pts_stockout stockoutItem { get; set; }
@@ -70,8 +71,10 @@ namespace PC_QRCodeSystem.View
                     dgvOldData.Rows[n].Cells[3].Value = lbData.Invoice;
                     dgvOldData.Rows[n].Cells[4].Value = lbData.Delivery_Qty;
                     dgvOldData.Rows[n].Cells[5].Value = lbData.Delivery_Date;
+                    txtOld.Text = lbData.Delivery_Qty.ToString();
                     txtInQty.Text = lbData.Delivery_Qty.ToString();
                     txtInQty.Focus();
+                    isdgvDup = false;
                 }
             }
             catch (Exception)
@@ -87,87 +90,107 @@ namespace PC_QRCodeSystem.View
             {
                 try
                 {
-                    //Số lượng xuất được nhập vào
-                    double stockoutQty = double.Parse(txtInQty.Text);
-                    //Số lượng tồn
-                    double stockQty = lbData.Delivery_Qty - stockoutQty;
-                    if (stockoutQty <= 0)
+                    InputCommon inLabelFrm = new InputCommon(false);
+                    if (inLabelFrm.ShowDialog() == DialogResult.OK)
                     {
-                        CustomMessageBox.Notice("Please enter stock out qty!" + Environment.NewLine + "Nhập số lượng xuất!");
-                        return;
+                        CalcQty(inLabelFrm.inputQty);
                     }
-
-                    if (stockQty < 0)
-                    {
-                        CustomMessageBox.Notice("This lot not enough!" + Environment.NewLine + "Lô này không đủ!");
-                        return;
-                    }
-                    //Nếu còn tồn thì mới in tem
-                    if (stockQty > 0)
-                    {
-                        //Thêm tem xuất vào danh sách in
-                        printItem.ListPrintItem.Add(new PrintItem
-                        {
-                            Item_Number = lbData.Item_Number,
-                            Item_Name = lbData.Item_Name,
-                            SupplierName = lbData.SupplierName,
-                            Invoice = lbData.Invoice,
-                            Delivery_Date = lbData.Delivery_Date,
-                            Delivery_Qty = stockoutQty,
-                            Remark = "O",
-                            isRec = false,
-                            Label_Qty = 1
-                        });
-                        //Thêm tem tồn vào danh sách in
-                        printItem.ListPrintItem.Add(new PrintItem
-                        {
-                            Item_Number = lbData.Item_Number,
-                            Item_Name = lbData.Item_Name,
-                            SupplierName = lbData.SupplierName,
-                            Invoice = lbData.Invoice,
-                            Delivery_Date = lbData.Delivery_Date,
-                            Delivery_Qty = stockQty,
-                            Remark = "R",
-                            isRec = true,
-                            Label_Qty = 1
-                        });
-                        //Nếu còn tồn thì lưu lại vào database
-                        stockoutItem.listStockItems.Add(new pts_stockout
-                        {
-                            packing_cd = string.Format("{0}-{1}", lbData.Invoice, lbData.Item_Number),
-                            item_cd = lbData.Item_Number,
-                            item_name = lbData.Item_Name,
-                            supplier_name = lbData.SupplierName,
-                            invoice = lbData.Invoice,
-                            stockout_date = DateTime.Now,
-                            stockout_qty = stockQty,
-                            remark = "R",
-                            registration_user_cd = UserData.usercode,
-                        });
-                    }
-                    //Lưu số lượng xuất vào database
-                    stockoutItem.listStockItems.Add(new pts_stockout
-                    {
-                        packing_cd = string.Format("{0}-{1}", lbData.Invoice, lbData.Item_Number),
-                        item_cd = lbData.Item_Number,
-                        item_name = lbData.Item_Name,
-                        supplier_name = lbData.SupplierName,
-                        invoice = lbData.Invoice,
-                        stockout_date = DateTime.Now,
-                        stockout_qty = stockoutQty,
-                        remark = "O",
-                        registration_user_cd = UserData.usercode,
-                    });
-                    //Thêm tem tồn vào danh sách
-                    UpdatePrintGrid();
-                    txtBarcode.ResetText();
-                    txtInQty.ResetText();
-                    txtBarcode.Focus();
+                    else CalcQty(1);
                 }
+
                 catch (Exception ex)
                 {
                     CustomMessageBox.Error(ex.Message);
                 }
+            }
+        }
+
+        private void CalcQty(int lbQty)
+        {
+            //Số lượng xuất được nhập vào
+            double stockoutQty = double.Parse(txtInQty.Text);
+
+            //Số lượng tồn
+            double totalQty = double.Parse(txtOld.Text);
+            double stockQty = totalQty - (stockoutQty * lbQty);
+            txtOld.Text = stockQty.ToString();
+            if (stockoutQty <= 0)
+            {
+                CustomMessageBox.Notice("Please enter stock out qty!" + Environment.NewLine + "Nhập số lượng xuất!");
+                return;
+            }
+
+            if (stockQty < 0)
+            {
+                CustomMessageBox.Notice("This lot not enough!" + Environment.NewLine + "Lô này không đủ!");
+                return;
+            }
+            //Nếu còn tồn thì mới in tem
+            if (stockQty > 0)
+            {
+                //Thêm tem xuất vào danh sách in
+                printItem.ListPrintItem.Add(new PrintItem
+                {
+                    Item_Number = lbData.Item_Number,
+                    Item_Name = lbData.Item_Name,
+                    SupplierName = lbData.SupplierName,
+                    Invoice = lbData.Invoice,
+                    Delivery_Date = lbData.Delivery_Date,
+                    Delivery_Qty = stockoutQty,
+                    Remark = "O",
+                    isRec = false,
+                    Label_Qty = lbQty
+                });
+                //Thêm tem tồn vào danh sách in
+                printItem.ListPrintItem.Add(new PrintItem
+                {
+                    Item_Number = lbData.Item_Number,
+                    Item_Name = lbData.Item_Name,
+                    SupplierName = lbData.SupplierName,
+                    Invoice = lbData.Invoice,
+                    Delivery_Date = lbData.Delivery_Date,
+                    Delivery_Qty = stockQty,
+                    Remark = "R",
+                    isRec = true,
+                    Label_Qty = 1
+                });
+                //Nếu còn tồn thì lưu lại vào database
+                stockoutItem.listStockItems.Add(new pts_stockout
+                {
+                    packing_cd = string.Format("{0}-{1}", lbData.Invoice, lbData.Item_Number),
+                    item_cd = lbData.Item_Number,
+                    item_name = lbData.Item_Name,
+                    supplier_name = lbData.SupplierName,
+                    invoice = lbData.Invoice,
+                    stockout_date = DateTime.Now,
+                    stockout_qty = stockQty,
+                    remark = "R",
+                    registration_user_cd = UserData.usercode,
+                });
+            }
+            //Lưu số lượng xuất vào database
+            stockoutItem.listStockItems.Add(new pts_stockout
+            {
+                packing_cd = string.Format("{0}-{1}", lbData.Invoice, lbData.Item_Number),
+                item_cd = lbData.Item_Number,
+                item_name = lbData.Item_Name,
+                supplier_name = lbData.SupplierName,
+                invoice = lbData.Invoice,
+                stockout_date = DateTime.Now,
+                stockout_qty = stockoutQty,
+                remark = "O",
+                registration_user_cd = UserData.usercode,
+            });
+
+            //Thêm tem tồn vào danh sách
+            UpdatePrintGrid();
+            txtBarcode.ResetText();
+            txtInQty.ResetText();
+            //txtBarcode.Focus();
+            if (isdgvDup)
+            {
+                dgvInspection.Rows.RemoveAt(dgvInspection.SelectedRows[0].Index);
+                isdgvDup = false;
             }
         }
         private void UpdatePrintGrid()
@@ -286,7 +309,11 @@ namespace PC_QRCodeSystem.View
 
         private void dgvInspection_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtInQty.Text = dgvInspection.CurrentRow.Cells[5].Value.ToString();
+            //txtInQty.Text = dgvInspection.CurrentRow.Cells[5].Value.ToString();
+            //txtInQty.Focus();
+            isdgvDup = true;
+            lbData = dgvInspection.Rows[e.RowIndex].DataBoundItem as PrintItem;
+            txtOld.Text = lbData.Delivery_Qty.ToString();
             txtInQty.Focus();
         }
     }

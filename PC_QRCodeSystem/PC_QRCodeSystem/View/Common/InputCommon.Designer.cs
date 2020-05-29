@@ -52,16 +52,16 @@
             this.tbpInput.RowCount = 2;
             this.tbpInput.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tbpInput.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tbpInput.Size = new System.Drawing.Size(566, 82);
+            this.tbpInput.Size = new System.Drawing.Size(316, 78);
             this.tbpInput.TabIndex = 0;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.Location = new System.Drawing.Point(116, 33);
+            this.btnCancel.Location = new System.Drawing.Point(66, 33);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(220, 46);
+            this.btnCancel.Size = new System.Drawing.Size(120, 42);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -74,7 +74,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 30);
+            this.label1.Size = new System.Drawing.Size(57, 30);
             this.label1.TabIndex = 2;
             this.label1.Text = "Input";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -83,18 +83,18 @@
             // 
             this.tbpInput.SetColumnSpan(this.txtInput, 2);
             this.txtInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInput.Location = new System.Drawing.Point(116, 3);
+            this.txtInput.Location = new System.Drawing.Point(66, 3);
             this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(447, 20);
+            this.txtInput.Size = new System.Drawing.Size(247, 20);
             this.txtInput.TabIndex = 1;
             this.txtInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInput_KeyPress);
             // 
             // btnOK
             // 
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOK.Location = new System.Drawing.Point(342, 33);
+            this.btnOK.Location = new System.Drawing.Point(192, 33);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(221, 46);
+            this.btnOK.Size = new System.Drawing.Size(121, 42);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -106,7 +106,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(566, 82);
+            this.ClientSize = new System.Drawing.Size(316, 78);
             this.ControlBox = false;
             this.Controls.Add(this.tbpInput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

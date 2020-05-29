@@ -130,14 +130,14 @@ namespace PC_QRCodeSystem.View
             settingItem.printerName = cmbPrinter.Text;
             settingItem.checkSave = checkSave.Checked.ToString();
             settingItem.SaveSetting();
-            // this.Close();
-            if (checkSave.Checked == true)
-            {
-                Login log = new Login();
-                log.ShowDialog();
-            }
-            else
-                this.Close();
+            this.Close();
+            //if (checkSave.Checked == true)
+            //{
+            //    Login log = new Login();
+            //    log.ShowDialog();
+            //}
+            //else
+            //    this.Close();
 
         }
 

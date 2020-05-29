@@ -43,6 +43,7 @@
             this.btnInsBack = new System.Windows.Forms.Button();
             this.btnInspectionClear = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtOld = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtInQty = new System.Windows.Forms.TextBox();
             this.txtBarcode = new System.Windows.Forms.TextBox();
@@ -197,6 +198,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtOld);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.txtInQty);
             this.panel1.Controls.Add(this.txtBarcode);
@@ -208,6 +210,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1208, 104);
             this.panel1.TabIndex = 37;
+            // 
+            // txtOld
+            // 
+            this.txtOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOld.Location = new System.Drawing.Point(1024, 30);
+            this.txtOld.Margin = new System.Windows.Forms.Padding(4);
+            this.txtOld.Name = "txtOld";
+            this.txtOld.Size = new System.Drawing.Size(120, 50);
+            this.txtOld.TabIndex = 37;
+            this.txtOld.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -396,5 +408,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.TextBox txtOld;
     }
 }
