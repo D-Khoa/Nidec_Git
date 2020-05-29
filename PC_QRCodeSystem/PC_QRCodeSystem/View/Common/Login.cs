@@ -90,13 +90,13 @@ namespace PC_QRCodeSystem
                     UserData.logintime = loginpass.last_login_time;
                     UserData.role_permision = userrole.GetListRole(loginpass.user_cd);
                     //Show main form
-                    PCForm main = new PCForm();
+                    //PCForm main = new PCForm();
                     this.Hide();
                     txtpass.Clear();
-                    main.ShowDialog();
+                    //main.ShowDialog();
                     loginpass.LogIO(txtUsername.Text, false);
-                    this.Show();
-                    this.Focus();
+                    //this.Show();
+                    //this.Focus();
                 }
                 else
                 {

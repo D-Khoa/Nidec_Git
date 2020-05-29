@@ -90,13 +90,18 @@ namespace PC_QRCodeSystem.View
             {
                 try
                 {
-                    InputCommon inLabelFrm = new InputCommon(false);
-                    if (inLabelFrm.ShowDialog() == DialogResult.OK)
-                    {
-                        CalcQty(inLabelFrm.inputQty);
-                    }
-                    else CalcQty(1);
+
+                    CalcQty(1);
                 }
+                //    try
+                //    {
+                //        InputCommon inLabelFrm = new InputCommon(false);
+                //        if (inLabelFrm.ShowDialog() == DialogResult.OK)
+                //        {
+                //            CalcQty(inLabelFrm.inputQty);
+                //        }
+                //        else CalcQty(1);
+                //    }
 
                 catch (Exception ex)
                 {
@@ -107,6 +112,7 @@ namespace PC_QRCodeSystem.View
 
         private void CalcQty(int lbQty)
         {
+            lbQty = int.Parse(txtLabelQty.Text);
             //Số lượng xuất được nhập vào
             double stockoutQty = double.Parse(txtInQty.Text);
 
@@ -268,18 +274,25 @@ namespace PC_QRCodeSystem.View
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                     dgvInspection.Rows.Remove(dr);
                 }
-                if (printItem.PrintItems(listPrintItem, false))
+                if (bool.Parse(SettingItem.checkSaved))
                 {
-                    if (string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved))
-                    {
-                        stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
-                        CustomMessageBox.Notice("Print items & add database are completed!" + Environment.NewLine + "In hoàn tất!");
-                    }
-                    else
-                    {
-                        CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
-                    }
+                    stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
                 }
+                if (printItem.PrintItems(listPrintItem, false))
+                    CustomMessageBox.Notice("Print items are completed!"
+                        + Environment.NewLine + "In hoàn tất!");
+                //if (printItem.PrintItems(listPrintItem, false))
+                //{
+                //    if (string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved))
+                //    {
+                //        stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
+                //        CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
+                //    }
+                //    else
+                //    {
+                //        CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
+                //    }
+            //}
                 txtBarcode.Focus();
                 // stockoutItem.listStockItems.Clear();
                 // printItem.ListPrintItem.Clear();
@@ -299,6 +312,8 @@ namespace PC_QRCodeSystem.View
                 dgvInspection.DataSource = null;
                 txtBarcode.Clear();
                 txtInQty.Clear();
+                txtOld.Clear();
+                txtLabelQty.Clear();
                 txtBarcode.Focus();
             }
             catch (Exception ex)
@@ -309,8 +324,8 @@ namespace PC_QRCodeSystem.View
 
         private void dgvInspection_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //txtInQty.Text = dgvInspection.CurrentRow.Cells[5].Value.ToString();
-            //txtInQty.Focus();
+            txtInQty.Text = dgvInspection.CurrentRow.Cells[5].Value.ToString();
+            txtInQty.Focus();
             isdgvDup = true;
             lbData = dgvInspection.Rows[e.RowIndex].DataBoundItem as PrintItem;
             txtOld.Text = lbData.Delivery_Qty.ToString();

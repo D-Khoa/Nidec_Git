@@ -43,6 +43,8 @@
             this.btnInsBack = new System.Windows.Forms.Button();
             this.btnInspectionClear = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtLabelQty = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtOld = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtInQty = new System.Windows.Forms.TextBox();
@@ -194,10 +196,12 @@
             this.btnInspectionClear.TabIndex = 8;
             this.btnInspectionClear.Text = "6. Clear All\r\nXóa Hết";
             this.btnInspectionClear.UseVisualStyleBackColor = true;
-            this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
+//            this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtLabelQty);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtOld);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.txtInQty);
@@ -211,15 +215,36 @@
             this.panel1.Size = new System.Drawing.Size(1208, 104);
             this.panel1.TabIndex = 37;
             // 
+            // txtLabelQty
+            // 
+            this.txtLabelQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLabelQty.Location = new System.Drawing.Point(983, 28);
+            this.txtLabelQty.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLabelQty.Name = "txtLabelQty";
+            this.txtLabelQty.Size = new System.Drawing.Size(120, 50);
+            this.txtLabelQty.TabIndex = 38;
+            this.txtLabelQty.Text = "1";
+            this.txtLabelQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(912, 36);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.TabIndex = 39;
+            this.label3.Text = "3. Label Qty";
+            // 
             // txtOld
             // 
             this.txtOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOld.Location = new System.Drawing.Point(1024, 30);
+            this.txtOld.Location = new System.Drawing.Point(1124, 28);
             this.txtOld.Margin = new System.Windows.Forms.Padding(4);
             this.txtOld.Name = "txtOld";
             this.txtOld.Size = new System.Drawing.Size(120, 50);
             this.txtOld.TabIndex = 37;
             this.txtOld.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtOld.Visible = false;
             // 
             // label1
             // 
@@ -235,7 +260,7 @@
             // txtInQty
             // 
             this.txtInQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInQty.Location = new System.Drawing.Point(839, 31);
+            this.txtInQty.Location = new System.Drawing.Point(774, 31);
             this.txtInQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtInQty.Name = "txtInQty";
             this.txtInQty.Size = new System.Drawing.Size(120, 50);
@@ -257,7 +282,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label4.Location = new System.Drawing.Point(787, 53);
+            this.label4.Location = new System.Drawing.Point(722, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 36;
@@ -276,7 +301,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(783, 36);
+            this.label19.Location = new System.Drawing.Point(718, 36);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(35, 13);
             this.label19.TabIndex = 30;
@@ -295,7 +320,7 @@
             this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInspection.Size = new System.Drawing.Size(1208, 171);
             this.dgvInspection.TabIndex = 10;
-            this.dgvInspection.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInspection_CellDoubleClick);
+//            this.dgvInspection.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInspection_CellDoubleClick);
             // 
             // statusStrip2
             // 
@@ -409,5 +434,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.TextBox txtOld;
+        private System.Windows.Forms.TextBox txtLabelQty;
+        private System.Windows.Forms.Label label3;
     }
 }

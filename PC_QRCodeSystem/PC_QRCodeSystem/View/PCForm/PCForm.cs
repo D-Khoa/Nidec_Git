@@ -404,11 +404,6 @@ namespace PC_QRCodeSystem.View
                 Login logfrm = new Login();
                 logfrm.ShowDialog();
             }
-            else
-            {
-                PCForm pcf = new PCForm();
-                pcf.ShowDialog();
-            }
         }
     }
 }
