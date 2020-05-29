@@ -308,13 +308,24 @@ namespace PC_QRCodeSystem.View
             }
             if (stockoutQty == totalQty)
             {
-                CustomMessageBox.Notice("Duplicate label!" + Environment.NewLine + "Trùng tem!");
+                CustomMessageBox.Notice("Duplicate label stockin! Please try again " + Environment.NewLine + "Trùng tem! Vui lòng nhập lại");
                 return;
             }
             if (stockQty < 0)
             {
-                CustomMessageBox.Notice("This lot not enough!" + Environment.NewLine + "Lô này không đủ!");
-                return;
+                CustomMessageBox.Notice("This lot not enough! Please try again" + Environment.NewLine + "Lô này không đủ! Vui lòng nhập lại");
+                // stockQty = lbData.Delivery_Qty;
+                dgvOldData.Rows.Clear();
+                listPrintItem.Clear();
+                printItem.ListPrintItem.Clear();
+                dgvInspection.Rows.Clear();
+                txtBarcode.Clear();
+                txtInQty.Clear();
+                txtOld.Clear();
+                txtLabelQty.Clear();
+                txtBarcode.Focus();
+                txtLabelQty.Text = "1";
+
             }
             //Nếu còn tồn thì mới in tem
             if (stockQty > 0)

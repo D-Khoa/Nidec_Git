@@ -77,8 +77,8 @@ namespace PC_QRCodeSystem
                 if (!string.IsNullOrEmpty(txtUsername.Text))
                 {
                     loginpass = loginpass.CheckLogIn(txtUsername.Text, txtpass.Text);
-                    if (loginpass.is_online)
-                        if (CustomMessageBox.Question("This user is online." + Environment.NewLine + "Are you want re-login?") == DialogResult.No) return;
+                    //if (loginpass.is_online)
+                    //    if (CustomMessageBox.Question("This user is online." + Environment.NewLine + "Are you want re-login?") == DialogResult.No) return;
                     UserData.isOnline = loginpass.LogIO(txtUsername.Text, true);
                     mesuser = mesuser.GetUser(loginpass.user_cd);
                     UserData.onTime = 0;

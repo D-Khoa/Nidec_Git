@@ -133,7 +133,11 @@ namespace PC_QRCodeSystem.View
             // this.Close();
             if (checkSave.Checked == true)
             {
-                Application.Exit();
+                CustomMessageBox.Notice("Please login to continue!!" + Environment.NewLine + "Vui lòng đăng nhập để tiếp tục!!");
+                this.Close();
+                Login lgf = new Login();
+                lgf.ShowDialog();
+
             }
             else
                 this.Close();
