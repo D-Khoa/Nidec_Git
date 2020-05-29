@@ -59,6 +59,7 @@
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTotalQty = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label2 = new System.Windows.Forms.Label();
             this.pnlInspection.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOldData)).BeginInit();
@@ -200,6 +201,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtLabelQty);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtOld);
@@ -218,11 +220,11 @@
             // txtLabelQty
             // 
             this.txtLabelQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLabelQty.Location = new System.Drawing.Point(983, 28);
+            this.txtLabelQty.Location = new System.Drawing.Point(761, 30);
             this.txtLabelQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtLabelQty.Name = "txtLabelQty";
             this.txtLabelQty.Size = new System.Drawing.Size(120, 50);
-            this.txtLabelQty.TabIndex = 5;
+            this.txtLabelQty.TabIndex = 2;
             this.txtLabelQty.Text = "1";
             this.txtLabelQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtLabelQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLabelQty_KeyDown);
@@ -230,7 +232,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(912, 36);
+            this.label3.Location = new System.Drawing.Point(690, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 39;
@@ -245,6 +247,7 @@
             this.txtOld.Size = new System.Drawing.Size(120, 50);
             this.txtOld.TabIndex = 37;
             this.txtOld.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtOld.Visible = false;
             // 
             // label1
             // 
@@ -260,7 +263,7 @@
             // txtInQty
             // 
             this.txtInQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInQty.Location = new System.Drawing.Point(774, 31);
+            this.txtInQty.Location = new System.Drawing.Point(983, 30);
             this.txtInQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtInQty.Name = "txtInQty";
             this.txtInQty.Size = new System.Drawing.Size(120, 50);
@@ -282,7 +285,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label4.Location = new System.Drawing.Point(722, 53);
+            this.label4.Location = new System.Drawing.Point(944, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 36;
@@ -301,7 +304,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(718, 36);
+            this.label19.Location = new System.Drawing.Point(941, 36);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(35, 13);
             this.label19.TabIndex = 30;
@@ -368,6 +371,16 @@
             this.tsTotalQty.Name = "tsTotalQty";
             this.tsTotalQty.Size = new System.Drawing.Size(36, 19);
             this.tsTotalQty.Text = "None";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label2.Location = new System.Drawing.Point(703, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Enter";
             // 
             // Form1
             // 
@@ -436,5 +449,6 @@
         private System.Windows.Forms.TextBox txtOld;
         private System.Windows.Forms.TextBox txtLabelQty;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
