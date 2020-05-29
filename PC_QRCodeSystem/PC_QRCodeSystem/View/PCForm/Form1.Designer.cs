@@ -99,7 +99,7 @@
             this.btnPrintItems.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintItems.Name = "btnPrintItems";
             this.btnPrintItems.Size = new System.Drawing.Size(100, 50);
-            this.btnPrintItems.TabIndex = 10;
+            this.btnPrintItems.TabIndex = 7;
             this.btnPrintItems.Text = "4. Print Item    In Từng Tem";
             this.btnPrintItems.UseVisualStyleBackColor = true;
             this.btnPrintItems.Click += new System.EventHandler(this.btnPrintItems_Click);
@@ -169,7 +169,7 @@
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 50);
-            this.btnDelete.TabIndex = 7;
+            this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "5. Delete\r\nXóa Tem";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -181,7 +181,7 @@
             this.btnInsBack.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsBack.Name = "btnInsBack";
             this.btnInsBack.Size = new System.Drawing.Size(100, 50);
-            this.btnInsBack.TabIndex = 2;
+            this.btnInsBack.TabIndex = 10;
             this.btnInsBack.Text = "7. Back\r\nTrờ Lại";
             this.btnInsBack.UseVisualStyleBackColor = true;
             this.btnInsBack.Click += new System.EventHandler(this.btnInsBack_Click);
@@ -193,10 +193,10 @@
             this.btnInspectionClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspectionClear.Name = "btnInspectionClear";
             this.btnInspectionClear.Size = new System.Drawing.Size(100, 50);
-            this.btnInspectionClear.TabIndex = 8;
+            this.btnInspectionClear.TabIndex = 9;
             this.btnInspectionClear.Text = "6. Clear All\r\nXóa Hết";
             this.btnInspectionClear.UseVisualStyleBackColor = true;
-//            this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click);
+            this.btnInspectionClear.Click += new System.EventHandler(this.btnInspectionClear_Click_1);
             // 
             // panel1
             // 
@@ -222,9 +222,10 @@
             this.txtLabelQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtLabelQty.Name = "txtLabelQty";
             this.txtLabelQty.Size = new System.Drawing.Size(120, 50);
-            this.txtLabelQty.TabIndex = 38;
+            this.txtLabelQty.TabIndex = 5;
             this.txtLabelQty.Text = "1";
             this.txtLabelQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLabelQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLabelQty_KeyDown);
             // 
             // label3
             // 
@@ -244,7 +245,6 @@
             this.txtOld.Size = new System.Drawing.Size(120, 50);
             this.txtOld.TabIndex = 37;
             this.txtOld.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtOld.Visible = false;
             // 
             // label1
             // 
@@ -275,7 +275,7 @@
             this.txtBarcode.Margin = new System.Windows.Forms.Padding(4);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(550, 53);
-            this.txtBarcode.TabIndex = 3;
+            this.txtBarcode.TabIndex = 1;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
             // label4
@@ -320,7 +320,7 @@
             this.dgvInspection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInspection.Size = new System.Drawing.Size(1208, 171);
             this.dgvInspection.TabIndex = 10;
-//            this.dgvInspection.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInspection_CellDoubleClick);
+            this.dgvInspection.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInspection_CellDoubleClick_1);
             // 
             // statusStrip2
             // 

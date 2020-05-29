@@ -92,6 +92,7 @@ namespace PC_QRCodeSystem.View
                 {
 
                     CalcQty(1);
+                    
                 }
                 //    try
                 //    {
@@ -302,7 +303,45 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
         }
-        private void btnInspectionClear_Click(object sender, EventArgs e)
+
+
+        private void dgvInspection_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            txtInQty.Text = dgvInspection.CurrentRow.Cells[5].Value.ToString();
+            txtInQty.Focus();
+            isdgvDup = true;
+            lbData = dgvInspection.Rows[e.RowIndex].DataBoundItem as PrintItem;
+            txtOld.Text = lbData.Delivery_Qty.ToString();
+            txtInQty.Focus();
+        }
+
+        private void txtLabelQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    try
+            //    {
+
+            //        CalcQty(1);
+            //    }
+            //    //    try
+            //    //    {
+            //    //        InputCommon inLabelFrm = new InputCommon(false);
+            //    //        if (inLabelFrm.ShowDialog() == DialogResult.OK)
+            //    //        {
+            //    //            CalcQty(inLabelFrm.inputQty);
+            //    //        }
+            //    //        else CalcQty(1);
+            //    //    }
+
+            //    catch (Exception ex)
+            //    {
+            //        CustomMessageBox.Error(ex.Message);
+            //    }
+            //}
+        }
+
+        private void btnInspectionClear_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -315,21 +354,12 @@ namespace PC_QRCodeSystem.View
                 txtOld.Clear();
                 txtLabelQty.Clear();
                 txtBarcode.Focus();
+                txtLabelQty.Text = "1";
             }
             catch (Exception ex)
             {
                 CustomMessageBox.Error(ex.Message);
             }
-        }
-
-        private void dgvInspection_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            txtInQty.Text = dgvInspection.CurrentRow.Cells[5].Value.ToString();
-            txtInQty.Focus();
-            isdgvDup = true;
-            lbData = dgvInspection.Rows[e.RowIndex].DataBoundItem as PrintItem;
-            txtOld.Text = lbData.Delivery_Qty.ToString();
-            txtInQty.Focus();
         }
     }
 }
