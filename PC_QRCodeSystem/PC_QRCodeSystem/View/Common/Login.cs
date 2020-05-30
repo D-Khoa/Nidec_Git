@@ -77,8 +77,8 @@ namespace PC_QRCodeSystem
                 if (!string.IsNullOrEmpty(txtUsername.Text))
                 {
                     loginpass = loginpass.CheckLogIn(txtUsername.Text, txtpass.Text);
-                    if (loginpass.is_online)
-                        if (CustomMessageBox.Question("This user is online." + Environment.NewLine + "Are you want re-login?") == DialogResult.No) return;
+                    //if (loginpass.is_online)
+                    //    if (CustomMessageBox.Question("This user is online." + Environment.NewLine + "Are you want re-login?") == DialogResult.No) return;
                     UserData.isOnline = loginpass.LogIO(txtUsername.Text, true);
                     mesuser = mesuser.GetUser(loginpass.user_cd);
                     UserData.onTime = 0;
@@ -90,13 +90,13 @@ namespace PC_QRCodeSystem
                     UserData.logintime = loginpass.last_login_time;
                     UserData.role_permision = userrole.GetListRole(loginpass.user_cd);
                     //Show main form
-                    PCForm main = new PCForm();
+                    //PCForm main = new PCForm();
                     this.Hide();
                     txtpass.Clear();
-                    main.ShowDialog();
+                    //main.ShowDialog();
                     loginpass.LogIO(txtUsername.Text, false);
-                    this.Show();
-                    this.Focus();
+                    //this.Show();
+                    //this.Focus();
                 }
                 else
                 {

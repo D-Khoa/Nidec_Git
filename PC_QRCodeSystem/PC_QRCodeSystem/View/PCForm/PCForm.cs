@@ -399,7 +399,7 @@ namespace PC_QRCodeSystem.View
 
         private void PCForm_Load(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved))
+            if (!string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved) && string.IsNullOrEmpty(UserData.usercode))
             {
                 Login logfrm = new Login();
                 logfrm.ShowDialog();
