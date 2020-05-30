@@ -126,5 +126,23 @@ namespace PC_QRCodeSystem
         {
             UserData.onTime++;
         }
+
+        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode ==Keys.Enter)
+                {
+                    string temp = txtUsername.Text;
+                    if (temp.Contains(",")) temp = temp.Split(',')[0].Trim();
+                    if (temp.Length > 10) txtUsername.Text = temp.Substring(temp.Length - 10);
+                    else txtUsername.Text = temp;
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
 }
