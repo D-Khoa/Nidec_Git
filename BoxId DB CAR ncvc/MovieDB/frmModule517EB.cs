@@ -434,20 +434,41 @@ namespace BoxIdDb
                 {
                     string model = cmbModel.Text;
                     //Data OQC
-                    string sql2 = "SELECT inspect, inspectdata, judge, inspectdate FROM " + testerThisMonth + " WHERE serno = '" + serial + "' AND inspect in ('CIR_CCW', 'CG_CCW', 'CNR_CCW') AND judge = '0' order by inspectdate desc, inspect asc";
-                    string sql3 = "SELECT inspect, inspectdata, judge, inspectdate FROM " + testerLastMonth + " WHERE serno = '" + serial + "' AND inspect in ('CIR_CCW', 'CG_CCW', 'CNR_CCW') AND judge = '0' order by inspectdate desc, inspect asc";
+                    //string sql2 = "SELECT inspect, inspectdata, judge, inspectdate FROM " + testerThisMonth + " WHERE serno = '" + serial + "' AND inspect in ('CIR_CCW', 'CG_CCW', 'CNR_CCW') AND judge = '0' order by inspectdate desc, inspect asc";
+                    //string sql3 = "SELECT inspect, inspectdata, judge, inspectdate FROM " + testerLastMonth + " WHERE serno = '" + serial + "' AND inspect in ('CIR_CCW', 'CG_CCW', 'CNR_CCW') AND judge = '0' order by inspectdate desc, inspect asc";
 
                     //string sql5 = "(SELECT serno FROM " + testerTableThisMonth + " WHERE lot = '" + comp_ser + "' and process = 'NO53' limit 1) UNION ALL (SELECT serno FROM " + testerTableLastMonth + " WHERE lot = '" + comp_ser + "' and process = 'NO53' limit 1)";
+                    string sql2 = "select serno, tjudge, inspectdate, " +
+                        "MAX(case inspect when 'CG_CCW' then inspectdata else null end) as CG_CCW," +
+                        "MAX(case inspect when 'CIR_CCW' then inspectdata else null end) as CIR_CCW," +
+                        "MAX(case inspect when 'CNR_CCW' then inspectdata else null end) as CNR_CCW" +
+                        " FROM" +
+                        " (select d.serno, d.tjudge, c.inspectdate, c.inspect, c.inspectdata, c.judge from (select SERNO, INSPECTDATE, INSPECT, INSPECTDATA, JUDGE from (select SERNO, INSPECT, INSPECTDATA, JUDGE, max(inspectdate) as inspectdate, row_number() OVER(PARTITION BY inspect ORDER BY max(inspectdate) desc) as flag from (select * from " + testerTableThisMonth + "data" +
+                        " WHERE serno = (select serno from " + testerTableThisMonth + " where process = 'NMT4' and serno = '" + serial + "' LIMIT 1) and inspect in ('CG_CCW','CIR_CCW','CNR_CCW'))" + "a group by SERNO, INSPECTDATE , INSPECT , INSPECTDATA , JUDGE ) b where flag = 1) c," + "(select serno, tjudge from " + testerTableThisMonth + " where serno = '" + serial + "' and process = 'NMT4' and tjudge = '0' order by inspectdate desc LIMIT 1) d" +
+                        " group by d.serno, d.tjudge, c.inspectdate, c.inspect, c.inspectdata, c.judge) e " +
+                        " GROUP BY serno, tjudge, inspectdate" +
+
+                        " UNION ALL " +
+
+                        "select serno, tjudge, inspectdate, " +
+                        "MAX(case inspect when 'CG_CCW' then inspectdata else null end) as CG_CCW," +
+                        "MAX(case inspect when 'CIR_CCW' then inspectdata else null end) as CIR_CCW," +
+                        "MAX(case inspect when 'CNR_CCW' then inspectdata else null end) as CNR_CCW" +
+                        " FROM" +
+                        " (select d.serno, d.tjudge, c.inspectdate, c.inspect, c.inspectdata, c.judge from (select SERNO, INSPECTDATE, INSPECT, INSPECTDATA, JUDGE from (select SERNO, INSPECT, INSPECTDATA, JUDGE, max(inspectdate) as inspectdate, row_number() OVER(PARTITION BY inspect ORDER BY max(inspectdate) desc) as flag from (select * from " + testerTableLastMonth + "data" +
+                        " WHERE serno = (select serno from " + testerTableLastMonth + " where process = 'NMT4' and serno = '" + serial + "' LIMIT 1) and inspect in ('CG_CCW','CIR_CCW','CNR_CCW'))" + "a group by SERNO, INSPECTDATE , INSPECT , INSPECTDATA , JUDGE ) b where flag = 1) c," + "(select serno, tjudge from " + testerTableLastMonth + " where serno = '" + serial + "' and process = 'NMT4' and tjudge = '0' order by inspectdate desc LIMIT 1) d" +
+                        " group by d.serno, d.tjudge, c.inspectdate, c.inspect, c.inspectdata, c.judge) e " +
+                        " GROUP BY serno, tjudge, inspectdate";
 
                     System.Diagnostics.Debug.Print(System.Environment.NewLine + sql2);
                     DataTable dt2 = new DataTable();
                     TfSQL tf = new TfSQL();
                     tf.sqlDataAdapterFillDatatableOqc517EB(sql2, ref dt2);
 
-                    if (dt2.Rows.Count == 0)
-                    {
-                        tf.sqlDataAdapterFillDatatableOqc517EB(sql3, ref dt2);
-                    }
+                    //if (dt2.Rows.Count == 0)
+                    //{
+                    //    tf.sqlDataAdapterFillDatatableOqc517EB(sql3, ref dt2);
+                    //}
                     string sql1;
                     //Data INLINE
                     //switch (VBS.Mid(model, 6, 4))
@@ -602,7 +623,7 @@ namespace BoxIdDb
                         //}
                         dr["judge"] = linepass;
                     }
-
+                    else dr["judge"] = "FAIL";
                     if (dt1.Rows.Count != 0)
                     {
                         dr["aio_ccw"] = dt1.Rows[0]["aio_ccw"].ToString();
@@ -646,6 +667,7 @@ namespace BoxIdDb
         {
             string model = VBS.Mid(cmbModel.Text, 6, 4);
             string model_c = VBS.Left(cmbModel.Text, 9);
+
             switch (model)
             {
                 case "517C":
