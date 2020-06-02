@@ -407,6 +407,9 @@ namespace PC_QRCodeSystem.View
             if (isdgvDup)
             {
                 dgvInspection.Rows.RemoveAt(dgvInspection.SelectedRows[0].Index);
+                var tempList = stockoutItem.listStockItems.Where(x => x.item_cd != lbData.Item_Number
+                               && x.invoice != lbData.Invoice && x.stockout_qty != lbData.Delivery_Qty).ToList();
+                stockoutItem.listStockItems = new System.ComponentModel.BindingList<pts_stockout>(tempList);
                 isdgvDup = false;
             }
             // }

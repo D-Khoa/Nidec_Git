@@ -16,13 +16,15 @@ namespace PC_QRCodeSystem.View
         PrintItem lbData { get; set; }
         pts_item itemData { get; set; }
         pre_649 premacData { get; set; }
-        pts_stock stockItem { get; set; }
+        //pts_stock stockItem { get; set; }
+        pts_stockout stockoutItem { get; set; }
         PrintItem printItem { get; set; }
         pts_supplier supplierItem { get; set; }
         List<PrintItem> listPrintItem { get; set; }
         List<pre_649> listPremac { get; set; }
         List<pre_649> listInputPremac { get; set; }
-        BindingList<pts_stock> listStockItem { get; set; }
+        //BindingList<pts_stock> listStockItem { get; set; }
+        BindingList<pts_stockout> listStockOutItem { get; set; }
 
         //TfPrint tfprinter = new TfPrint();
         Stopwatch stopWatch = new Stopwatch();
@@ -34,13 +36,15 @@ namespace PC_QRCodeSystem.View
             lbData = new PrintItem();
             itemData = new pts_item();
             printItem = new PrintItem();
-            stockItem = new pts_stock();
+            //stockItem = new pts_stock();
             premacData = new pre_649();
             supplierItem = new pts_supplier();
             listPrintItem = new List<PrintItem>();
             listPremac = new List<pre_649>();
             listInputPremac = new List<pre_649>();
-            listStockItem = new BindingList<pts_stock>();
+            stockoutItem = new pts_stockout();
+            //listStockItem = new BindingList<pts_stock>();
+            listStockOutItem = new BindingList<pts_stockout>();
             tc_Main.ItemSize = new Size(0, 1);
         }
 
@@ -676,11 +680,20 @@ namespace PC_QRCodeSystem.View
                     try
                     {
                         //Add item into database and remove from list item
-                        if (stockItem.AddItem(dgvInspection.Rows[i].DataBoundItem as pts_stock) > 0)
+                        #region OLD
+                        //if (stockItem.AddItem(dgvInspection.Rows[i].DataBoundItem as pts_stock) > 0)
+                        //{
+                        //    listStockItem.Remove(dgvInspection.Rows[i].DataBoundItem as pts_stock);
+                        //    i--;
+                        //}
+                        #endregion
+                        #region NEW
+                        if (stockoutItem.AddItem(dgvInspection.Rows[i].DataBoundItem as pts_stockout) > 0)
                         {
-                            listStockItem.Remove(dgvInspection.Rows[i].DataBoundItem as pts_stock);
+                            listStockOutItem.Remove(dgvInspection.Rows[i].DataBoundItem as pts_stockout);
                             i--;
                         }
+                        #endregion
                     }
                     catch (Exception ex)
                     {
@@ -711,25 +724,48 @@ namespace PC_QRCodeSystem.View
         {
             try
             {
+                #region OLD
+                //foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
+                //{
+                //    if (CustomMessageBox.Warring("Are you sure delete this item?" + Environment.NewLine + "Bạn có chắc xóa tem này?") == DialogResult.Yes)
+                //    {
+                //        //Search item want to delete
+                //        stockItem = dr.DataBoundItem as pts_stock;
+                //        var tempItem = (from x in listInputPremac
+                //                        where x.item_number == stockItem.item_cd &&
+                //                              x.supplier_cd == stockItem.supplier_cd &&
+                //                              x.supplier_invoice == stockItem.invoice &&
+                //                              x.delivery_date == stockItem.stockin_date &&
+                //                              x.delivery_qty == stockItem.stockin_qty
+                //                        select x);
+                //        //Delete item from list
+                //        listInputPremac.Remove(tempItem.FirstOrDefault());
+                //        listStockItem.Remove(stockItem);
+                //    }
+                //}
+                //dgvInspection.DataSource = listStockItem;
+                #endregion
+                #region NEW
                 foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
                 {
                     if (CustomMessageBox.Warring("Are you sure delete this item?" + Environment.NewLine + "Bạn có chắc xóa tem này?") == DialogResult.Yes)
                     {
                         //Search item want to delete
-                        stockItem = dr.DataBoundItem as pts_stock;
+                        stockoutItem = dr.DataBoundItem as pts_stockout;
                         var tempItem = (from x in listInputPremac
-                                        where x.item_number == stockItem.item_cd &&
-                                              x.supplier_cd == stockItem.supplier_cd &&
-                                              x.supplier_invoice == stockItem.invoice &&
-                                              x.delivery_date == stockItem.stockin_date &&
-                                              x.delivery_qty == stockItem.stockin_qty
+                                        where x.item_number == stockoutItem.item_cd &&
+                                              x.supplier_name == stockoutItem.supplier_name &&
+                                              x.supplier_invoice == stockoutItem.invoice &&
+                                              x.delivery_date == stockoutItem.stockout_date &&
+                                              x.delivery_qty == stockoutItem.stockout_qty
                                         select x);
                         //Delete item from list
                         listInputPremac.Remove(tempItem.FirstOrDefault());
-                        listStockItem.Remove(stockItem);
+                        listStockOutItem.Remove(stockoutItem);
                     }
                 }
-                dgvInspection.DataSource = listStockItem;
+                dgvInspection.DataSource = listStockOutItem;
+                #endregion
             }
             catch (Exception ex)
             {
@@ -748,7 +784,8 @@ namespace PC_QRCodeSystem.View
               //  txtUserCD.Clear();
                 txtBarcode.Clear();
                 txtSupplierCD.Clear();
-                listStockItem.Clear();
+                //listStockItem.Clear();
+                listStockOutItem.Clear();
                 listInputPremac.Clear();
                 txtSupplierName.Text = "Supplier Name";
                 errorProvider.SetError(txtSupplierCD, null);
@@ -854,23 +891,32 @@ namespace PC_QRCodeSystem.View
         /// </summary>
         private void UpdateInspectionGrid()
         {
-            dgvInspection.DataSource = listStockItem;
-            dgvInspection.Columns["stock_id"].HeaderText = "Stock ID";
-            dgvInspection.Columns["packing_cd"].HeaderText = "Packing Code";
-            dgvInspection.Columns["item_cd"].HeaderText = "Item Code";
-            dgvInspection.Columns["supplier_cd"].HeaderText = "Supplier Code";
-            dgvInspection.Columns["order_no"].HeaderText = "Order Number";
-            dgvInspection.Columns["invoice"].HeaderText = "Invoice";
-            dgvInspection.Columns["stockin_date"].HeaderText = "Stock In Date";
-            dgvInspection.Columns["stockin_user_cd"].HeaderText = "Incharge";
-            dgvInspection.Columns["stockin_qty"].HeaderText = "Stock In Qty";
-            dgvInspection.Columns["packing_qty"].HeaderText = "Packing Qty";
-            dgvInspection.Columns["registration_user_cd"].HeaderText = "Reg User";
-            dgvInspection.Columns["registration_date_time"].HeaderText = "Reg Date";
+            #region OLD
+            //dgvInspection.DataSource = listStockItem;
+            //dgvInspection.Columns["stock_id"].HeaderText = "Stock ID";
+            //dgvInspection.Columns["packing_cd"].HeaderText = "Packing Code";
+            //dgvInspection.Columns["item_cd"].HeaderText = "Item Code";
+            //dgvInspection.Columns["supplier_cd"].HeaderText = "Supplier Code";
+            //dgvInspection.Columns["order_no"].HeaderText = "Order Number";
+            //dgvInspection.Columns["invoice"].HeaderText = "Invoice";
+            //dgvInspection.Columns["stockin_date"].HeaderText = "Stock In Date";
+            //dgvInspection.Columns["stockin_user_cd"].HeaderText = "Incharge";
+            //dgvInspection.Columns["stockin_qty"].HeaderText = "Stock In Qty";
+            //dgvInspection.Columns["packing_qty"].HeaderText = "Packing Qty";
+            //dgvInspection.Columns["registration_user_cd"].HeaderText = "Reg User";
+            //dgvInspection.Columns["registration_date_time"].HeaderText = "Reg Date";
+            //dgvInspection.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            //double total = listStockItem.Sum(x => x.stockin_qty);
+            //tsRow.Text = dgvInspection.Rows.Count.ToString();
+            //tsTotalQty.Text = total.ToString();
+            #endregion
+            #region NEW
+            dgvInspection.DataSource = listStockOutItem;
             dgvInspection.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            double total = listStockItem.Sum(x => x.stockin_qty);
+            double total = listStockOutItem.Sum(x => x.stockout_qty);
             tsRow.Text = dgvInspection.Rows.Count.ToString();
             tsTotalQty.Text = total.ToString();
+            #endregion
         }
 
         /// <summary>
@@ -933,17 +979,34 @@ namespace PC_QRCodeSystem.View
                 #region CHECK INVOICE EXIST
                 try
                 {
+                    #region OLD
                     //Search item in stock with invoice number
-                    if (stockItem.SearchItem(new pts_stock { item_cd = lbItem.Item_Number, invoice = lbItem.Invoice }))
+                    //if (stockItem.SearchItem(new pts_stock { item_cd = lbItem.Item_Number, invoice = lbItem.Invoice }))
+                    //{
+                    //    double totalStockIn = (from x in stockItem.listStockItems where x.item_cd == lbItem.Item_Number select x.stockin_qty).Sum();
+                    //    double totalPacking = (from x in stockItem.listStockItems where x.item_cd == lbItem.Item_Number select x.packing_qty).Sum();
+                    //    //If this item is exist, notice user
+                    //    string mess = "Item code: " + lbItem.Item_Number + " and Invoice: " + lbItem.Invoice + "is exist!" + Environment.NewLine;
+                    //    mess += "Total stock-in: " + totalStockIn + Environment.NewLine + "Total packing: " + totalPacking + Environment.NewLine;
+                    //    mess += "Are you sure add new packing with this Invoice?" + Environment.NewLine + "Bạn có muốn thêm gói mới với mã hóa đơn này không?";
+                    //    if (CustomMessageBox.Question(mess) == DialogResult.No) return;
+                    //}
+                    #endregion
+
+                    #region NEW
+                    if (stockoutItem.SearchItem(new pts_stockout { item_cd = lbItem.Item_Number, invoice = lbItem.Invoice }))
                     {
-                        double totalStockIn = (from x in stockItem.listStockItems where x.item_cd == lbItem.Item_Number select x.stockin_qty).Sum();
-                        double totalPacking = (from x in stockItem.listStockItems where x.item_cd == lbItem.Item_Number select x.packing_qty).Sum();
+                        double totalStockIn = (from x in stockoutItem.listStockItems where x.item_cd == lbItem.Item_Number  
+                                               && x.remark =="I" select x.stockout_qty).Sum();
+                        double totalPacking = (from x in stockoutItem.listStockItems where x.item_cd == lbItem.Item_Number 
+                                               && x.remark == "I" select x.stockout_qty).Sum();
                         //If this item is exist, notice user
                         string mess = "Item code: " + lbItem.Item_Number + " and Invoice: " + lbItem.Invoice + "is exist!" + Environment.NewLine;
                         mess += "Total stock-in: " + totalStockIn + Environment.NewLine + "Total packing: " + totalPacking + Environment.NewLine;
                         mess += "Are you sure add new packing with this Invoice?" + Environment.NewLine + "Bạn có muốn thêm gói mới với mã hóa đơn này không?";
                         if (CustomMessageBox.Question(mess) == DialogResult.No) return;
                     }
+                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -953,10 +1016,38 @@ namespace PC_QRCodeSystem.View
 
                 for (int i = 0; i < labelQty; i++)
                 {
-                    #region CHECK INVOICE AND CREATE PACKING CODE
+                    #region CHECK INVOICE AND CREATE PACKING CODE OLD
+                    ////Get max number packing of this Invoice in database
+                    //foreach (pts_stock item in stockItem.listStockItems)
+                    //{
+                    //    if (!string.IsNullOrEmpty(item.invoice))
+                    //        temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
+                    //    else
+                    //        temp = int.Parse(item.packing_cd.Substring(5));
+                    //    if (temp > n) n = temp;
+                    //}
+                    ////Create new number of packing with Invoice number
+                    //foreach (pts_stock item in listStockItem)
+                    //{
+                    //    if (item.invoice == lbItem.Invoice)
+                    //    {
+                    //        if (!string.IsNullOrEmpty(item.invoice))
+                    //            temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
+                    //        else
+                    //            temp = int.Parse(item.packing_cd.Substring(5));
+                    //        if (temp > n) n = temp;
+                    //    }
+                    //}
+                    //n++;
+                    //if (!string.IsNullOrEmpty(lbItem.Invoice)) invoice = lbItem.Invoice;
+                    //string packingcd = invoice + "-" + n.ToString("00");
+                    #endregion
+
+                    #region CHECK INVOICE AND CREATE PACKING CODE NEW
                     //Get max number packing of this Invoice in database
-                    foreach (pts_stock item in stockItem.listStockItems)
+                    foreach (pts_stockout item in stockoutItem.listStockItems)
                     {
+                        if (item.remark != "I") continue;
                         if (!string.IsNullOrEmpty(item.invoice))
                             temp = int.Parse(item.packing_cd.Substring(item.invoice.Length + 1));
                         else
@@ -964,7 +1055,7 @@ namespace PC_QRCodeSystem.View
                         if (temp > n) n = temp;
                     }
                     //Create new number of packing with Invoice number
-                    foreach (pts_stock item in listStockItem)
+                    foreach (pts_stockout item in listStockOutItem)
                     {
                         if (item.invoice == lbItem.Invoice)
                         {
@@ -981,18 +1072,18 @@ namespace PC_QRCodeSystem.View
                     #endregion
 
                     //Add new barcode item into list stock item
-                    listStockItem.Add(new pts_stock
+                    listStockOutItem.Add(new pts_stockout
                     {
                         item_cd = lbItem.Item_Number,
-                        supplier_cd = txtSupplierCD.Text,
+                        item_name = lbItem.Item_Name,
+                        supplier_name = lbItem.SupplierName,
                         invoice = lbItem.Invoice,
-                        stockin_date = lbItem.Delivery_Date,
-                        stockin_qty = lbItem.Delivery_Qty,
-                        //stockin_user_cd = txtUserCD.Text,
-                        //order_no = orderno,
+                        stockout_date = lbItem.Delivery_Date,
+                        stockout_qty = lbItem.Delivery_Qty,
                         packing_cd = packingcd,
-                        packing_qty = lbItem.Delivery_Qty,
+                        remark = "I",
                         registration_user_cd = UserData.usercode,
+                        registration_date_time = DateTime.Today,
                     });
                     if (lbItem.Remark != "P")
                     {

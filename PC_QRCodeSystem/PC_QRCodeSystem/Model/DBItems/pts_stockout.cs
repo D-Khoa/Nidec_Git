@@ -24,7 +24,7 @@ namespace PC_QRCodeSystem.Model
         public string remark { get; set; }
         public string registration_user_cd { get; set; }
         public DateTime registration_date_time { get; set; }
-        public BindingList<pts_stockout> listStockItems;
+        public BindingList<pts_stockout> listStockItems { get; set; }
         public pts_stockout()
         {
             listStockItems = new BindingList<pts_stockout>();
