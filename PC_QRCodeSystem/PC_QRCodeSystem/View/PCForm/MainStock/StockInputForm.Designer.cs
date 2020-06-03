@@ -242,7 +242,7 @@
             // 
             // btnAutoPacking
             // 
-            this.btnAutoPacking.Location = new System.Drawing.Point(925, 6);
+            this.btnAutoPacking.Location = new System.Drawing.Point(976, -9);
             this.btnAutoPacking.Margin = new System.Windows.Forms.Padding(4);
             this.btnAutoPacking.Name = "btnAutoPacking";
             this.btnAutoPacking.Size = new System.Drawing.Size(120, 50);
@@ -254,14 +254,13 @@
             // 
             // btnInspection
             // 
-            this.btnInspection.Location = new System.Drawing.Point(953, 4);
+            this.btnInspection.Location = new System.Drawing.Point(925, 3);
             this.btnInspection.Margin = new System.Windows.Forms.Padding(4);
             this.btnInspection.Name = "btnInspection";
             this.btnInspection.Size = new System.Drawing.Size(120, 50);
             this.btnInspection.TabIndex = 21;
             this.btnInspection.Text = "4. Inspection\r\nKiểm Tra";
             this.btnInspection.UseVisualStyleBackColor = true;
-            this.btnInspection.Visible = false;
             this.btnInspection.Click += new System.EventHandler(this.btnInspection_Click);
             // 
             // btnSetting

@@ -109,32 +109,29 @@ namespace PC_QRCodeSystem.View
                 }
                 foreach (DataGridViewRow dr in dgvInspection.SelectedRows)
                 {
-                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
-                    dr.DefaultCellStyle.BackColor = Color.Lime;
+                    PrintItem lbTemp = dr.DataBoundItem as PrintItem;
+                    listPrintItem.Add(lbTemp);
                     dgvInspection.Rows.Remove(dr);
-                }
-                if (bool.Parse(SettingItem.checkSaved))
-                {
-                    stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
+                    if (bool.Parse(SettingItem.checkSaved))
+                    {
+                        stockoutItem.AddItem(new pts_stockout
+                        {
+                            packing_cd = string.Format("{0}-{1}", lbTemp.Invoice, lbTemp.Item_Number),
+                            item_cd = lbTemp.Item_Number,
+                            item_name = lbTemp.Item_Name,
+                            supplier_name = lbTemp.SupplierName,
+                            invoice = lbTemp.Invoice,
+                            stockout_date = DateTime.Now,
+                            stockout_qty = lbTemp.Delivery_Qty,
+                            remark = lbTemp.Remark,
+                            registration_user_cd = UserData.usercode,
+                        });
+                    }
                 }
                 if (printItem.PrintItems(listPrintItem, false))
                     CustomMessageBox.Notice("Print items are completed!"
                         + Environment.NewLine + "In hoàn tất!");
-                //if (printItem.PrintItems(listPrintItem, false))
-                //{
-                //    if (string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved))
-                //    {
-                //        stockoutItem.AddMultiItem(stockoutItem.listStockItems.ToList());
-                //        CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
-                //    }
-                //    else
-                //    {
-                //        CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
-                //    }
-                //}
                 txtBarcode.Focus();
-                // stockoutItem.listStockItems.Clear();
-                // printItem.ListPrintItem.Clear();
             }
             catch (Exception ex)
             {
@@ -256,16 +253,7 @@ namespace PC_QRCodeSystem.View
                     txtOld.Text = txtInQty.Text;
 
                 }
-                //    try
-                //    {
-                //        InputCommon inLabelFrm = new InputCommon(false);
-                //        if (inLabelFrm.ShowDialog() == DialogResult.OK)
-                //        {
-                //            CalcQty(inLabelFrm.inputQty);
-                //        }
-                //        else CalcQty(1);
-                //    }
-
+               
                 catch (Exception ex)
                 {
                     CustomMessageBox.Error(ex.Message);
@@ -407,9 +395,9 @@ namespace PC_QRCodeSystem.View
             if (isdgvDup)
             {
                 dgvInspection.Rows.RemoveAt(dgvInspection.SelectedRows[0].Index);
-                var tempList = stockoutItem.listStockItems.Where(x => x.item_cd != lbData.Item_Number
-                               && x.invoice != lbData.Invoice && x.stockout_qty != lbData.Delivery_Qty).ToList();
-                stockoutItem.listStockItems = new System.ComponentModel.BindingList<pts_stockout>(tempList);
+                var indexList = stockoutItem.listStockItems.Where(x => x.item_cd == lbData.Item_Number && x.invoice == lbData.Invoice && x.stockout_qty == lbData.Delivery_Qty)
+                                            .Select(x => stockoutItem.listStockItems.IndexOf(x)).First();
+                stockoutItem.listStockItems.RemoveAt(indexList);
                 isdgvDup = false;
             }
             // }

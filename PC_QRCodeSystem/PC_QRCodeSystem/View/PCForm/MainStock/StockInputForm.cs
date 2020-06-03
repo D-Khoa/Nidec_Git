@@ -92,6 +92,7 @@ namespace PC_QRCodeSystem.View
 
         #region MAIN TAB
         #region BUTTON EVENT
+        #region BUTTON PREMAC IMPORT
         private void btnPremacImport_Click(object sender, EventArgs e)
         {
             try
@@ -118,7 +119,8 @@ namespace PC_QRCodeSystem.View
             UpdatePremacGrid(false);
             this.Cursor = Cursors.Default;
         }
-
+        #endregion
+        #region BUTTON SEARCH
         private void btnSearchPreInput_Click(object sender, EventArgs e)
         {
             try
@@ -148,7 +150,8 @@ namespace PC_QRCodeSystem.View
             UpdatePremacGrid(false);
             this.Cursor = Cursors.Default;
         }
-
+        #endregion
+        #region BUTTON AUTO PACKING
         private void btnAutoPacking_Click(object sender, EventArgs e)
         {
             try
@@ -220,7 +223,8 @@ namespace PC_QRCodeSystem.View
             }
             this.Cursor = Cursors.Default;
         }
-
+        #endregion
+        #region BUTTON MANUAL PACKING
         private void btnManualPacking_Click(object sender, EventArgs e)
         {
             try
@@ -333,17 +337,8 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
         }
-
-        private void btnPrintList_Click(object sender, EventArgs e)
-        {
-            tc_Main.SelectedTab = tab_Print;
-        }
-
-        private void btnInspection_Click(object sender, EventArgs e)
-        {
-            tc_Main.SelectedTab = tab_Inspection;
-        }
-
+        #endregion
+        #region BUTTON SETTING
         private void btnSetting_Click(object sender, EventArgs e)
         {
             try
@@ -356,7 +351,8 @@ namespace PC_QRCodeSystem.View
                 CustomMessageBox.Error(ex.Message);
             }
         }
-
+        #endregion
+        #region BUTTON CLEAR
         private void btnMainClear_Click(object sender, EventArgs e)
         {
             try
@@ -378,6 +374,22 @@ namespace PC_QRCodeSystem.View
             {
                 CustomMessageBox.Error(ex.Message);
             }
+        }
+        #endregion
+        #region BUTTON BACK
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+        private void btnPrintList_Click(object sender, EventArgs e)
+        {
+            tc_Main.SelectedTab = tab_Print;
+        }
+
+        private void btnInspection_Click(object sender, EventArgs e)
+        {
+            tc_Main.SelectedTab = tab_Inspection;
         }
 
         private void rbtnEven_CheckedChanged(object sender, EventArgs e)
@@ -577,6 +589,7 @@ namespace PC_QRCodeSystem.View
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
+               
                 if (printItem.PrintItems(listPrintItem, false))
                     CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
@@ -605,6 +618,7 @@ namespace PC_QRCodeSystem.View
                 {
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Yellow;
+
                 }
                 if (printItem.PrintItems(listPrintItem, int.Parse(txtPrintLabelQty.Text)))
                     CustomMessageBox.Notice("Print " + txtPrintLabelQty.Text + " items are completed!" + Environment.NewLine + "Đã in " + txtPrintLabelQty.Text + " tem!");
@@ -781,7 +795,7 @@ namespace PC_QRCodeSystem.View
             {
                 if (CustomMessageBox.Warring("This list is not register. Are you sure to clear all?" + Environment.NewLine + "Danh sách này chưa được đăng ký. Bạn có chắc muốn xóa tất cả?") == DialogResult.No)
                     return;
-              //  txtUserCD.Clear();
+                //  txtUserCD.Clear();
                 txtBarcode.Clear();
                 txtSupplierCD.Clear();
                 //listStockItem.Clear();
@@ -875,13 +889,13 @@ namespace PC_QRCodeSystem.View
         //    }
         //}
 
-       
+
 
         private void tab_Inspection_Paint(object sender, PaintEventArgs e)
         {
             UpdateInspectionGrid();
             txtBarcode.Focus();
-         //   if (!pnlInspection.Visible);
+            //   if (!pnlInspection.Visible);
         }
         #endregion
 
@@ -996,10 +1010,14 @@ namespace PC_QRCodeSystem.View
                     #region NEW
                     if (stockoutItem.SearchItem(new pts_stockout { item_cd = lbItem.Item_Number, invoice = lbItem.Invoice }))
                     {
-                        double totalStockIn = (from x in stockoutItem.listStockItems where x.item_cd == lbItem.Item_Number  
-                                               && x.remark =="I" select x.stockout_qty).Sum();
-                        double totalPacking = (from x in stockoutItem.listStockItems where x.item_cd == lbItem.Item_Number 
-                                               && x.remark == "I" select x.stockout_qty).Sum();
+                        double totalStockIn = (from x in stockoutItem.listStockItems
+                                               where x.item_cd == lbItem.Item_Number
+         && x.remark == "I"
+                                               select x.stockout_qty).Sum();
+                        double totalPacking = (from x in stockoutItem.listStockItems
+                                               where x.item_cd == lbItem.Item_Number
+         && x.remark == "I"
+                                               select x.stockout_qty).Sum();
                         //If this item is exist, notice user
                         string mess = "Item code: " + lbItem.Item_Number + " and Invoice: " + lbItem.Invoice + "is exist!" + Environment.NewLine;
                         mess += "Total stock-in: " + totalStockIn + Environment.NewLine + "Total packing: " + totalPacking + Environment.NewLine;
@@ -1096,7 +1114,7 @@ namespace PC_QRCodeSystem.View
                             supplier_invoice = lbItem.Invoice,
                             delivery_date = lbItem.Delivery_Date,
                             delivery_qty = lbItem.Delivery_Qty,
-                           // incharge = txtUserCD.Text,
+                            // incharge = txtUserCD.Text,
                             //order_number = orderno,
                         });
                     }
@@ -1145,9 +1163,5 @@ namespace PC_QRCodeSystem.View
 
         #endregion
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }
