@@ -556,11 +556,16 @@ namespace PC_QRCodeSystem.View
                     CustomMessageBox.Notice("Please choose item first!" + Environment.NewLine + "Vui lòng chọn tem cần in!");
                     return;
                 }
-                foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
-                {
-                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
-                    dr.DefaultCellStyle.BackColor = Color.Lime;
-                }
+                CallAdd1RowDB();
+                //foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
+                //{
+                //    listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                //    dr.DefaultCellStyle.BackColor = Color.Lime;
+                //}
+                //if (bool.Parse(SettingItem.checkSaved))
+                //{
+                //    CallAdd1RowDB();
+                //}
                 if (printItem.PrintItems(listPrintItem, false))
                     CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
@@ -585,12 +590,17 @@ namespace PC_QRCodeSystem.View
                     CustomMessageBox.Error("Don't have item to print!" + Environment.NewLine + "Không có tem để in!");
                     return;
                 }
-                foreach (DataGridViewRow dr in dgvPrintList.Rows)
-                {
-                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
-                    dr.DefaultCellStyle.BackColor = Color.Lime;
-                }
-
+                CallAddDB();
+                //foreach (DataGridViewRow dr in dgvPrintList.Rows)
+                //{
+                //    listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                //    // dgvPrintList.Rows.Remove(dr);
+                //    dr.DefaultCellStyle.BackColor = Color.Lime;
+                //}
+                //if (bool.Parse(SettingItem.checkSaved))
+                //{
+                //    CallAddDB();
+                //}
                 if (printItem.PrintItems(listPrintItem, false))
                     CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
@@ -615,12 +625,18 @@ namespace PC_QRCodeSystem.View
                     CustomMessageBox.Notice("Please choose item first!" + Environment.NewLine + "Vui lòng chọn tem muốn in!");
                     return;
                 }
-                foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
-                {
-                    listPrintItem.Add(dr.DataBoundItem as PrintItem);
-                    dr.DefaultCellStyle.BackColor = Color.Yellow;
+                CallAddSelectRow();
+                //foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
+                //{
+                //    //listPrintItem.Add(dr.DataBoundItem as PrintItem);
+                //    //dr.DefaultCellStyle.BackColor = Color.Yellow;
+                //    CallAddSelectRow();
 
-                }
+                //}
+                //if (bool.Parse(SettingItem.checkSaved))
+                //{
+                //    CallAddSelectRow();
+                //}
                 if (printItem.PrintItems(listPrintItem, int.Parse(txtPrintLabelQty.Text)))
                     CustomMessageBox.Notice("Print " + txtPrintLabelQty.Text + " items are completed!" + Environment.NewLine + "Đã in " + txtPrintLabelQty.Text + " tem!");
                 txtPrintLabelQty.Text = "1";
@@ -1162,6 +1178,102 @@ namespace PC_QRCodeSystem.View
 
         #endregion
 
+        #endregion
+
+        #region CALL ADD DGV TO DATABASE
+        private void CallAddDB()
+        {
+            //for (int i = 0; i < dgvPrintList.Rows.Count; i++)
+            //{
+            //    string sql = "INSERT INTO pts_stockout( packing_cd, item_cd, item_name, supplier_name, invoice, stockout_date, stockout_qty, remark, registration_user_cd) VALUES ('" + "None" + "', '" + dgvPrintList.Rows[i].Cells[0].Value + "', '" + dgvPrintList.Rows[i].Cells[1].Value + "', '" + dgvPrintList.Rows[i].Cells[2].Value + "', '" + dgvPrintList.Rows[i].Cells[3].Value + "', '" + dgvPrintList.Rows[i].Cells[4].Value + "', '" + dgvPrintList.Rows[i].Cells[5].Value + "','" + "I" + "', '" + UserData.usercode + "')";
+
+            //    PSQL con = new PSQL();
+            //    con.sqlExecuteScalarString(sql);
+
+            //}
+            foreach (DataGridViewRow dr in dgvPrintList.Rows)
+            {
+                PrintItem lbTemp = dr.DataBoundItem as PrintItem;
+                listPrintItem.Add(lbTemp);
+                dr.DefaultCellStyle.BackColor = Color.Lime;
+                // dgvPrintList.Rows.Remove(dr);
+                if (bool.Parse(SettingItem.checkSaved))
+                {
+                    stockoutItem.AddItem(new pts_stockout
+                    {
+                        packing_cd = string.Format("{0}-{1}", lbTemp.Invoice, lbTemp.Item_Number),
+                        item_cd = lbTemp.Item_Number,
+                        item_name = lbTemp.Item_Name,
+                        supplier_name = lbTemp.SupplierName,
+                        invoice = lbTemp.Invoice,
+                        stockout_date = DateTime.Now,
+                        stockout_qty = lbTemp.Delivery_Qty * lbTemp.Label_Qty,
+                        remark = "I",
+                        registration_user_cd = UserData.usercode,
+                    });
+                }
+            }
+        }
+        #endregion
+        #region CALL ADD 1 ROW TO DB
+        private void CallAdd1RowDB()
+        {
+            foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
+            {
+                PrintItem lbTemp = dr.DataBoundItem as PrintItem;
+                listPrintItem.Add(lbTemp);
+                dr.DefaultCellStyle.BackColor = Color.Lime;
+                // dgvPrintList.Rows.Remove(dr);
+                if (bool.Parse(SettingItem.checkSaved))
+                {
+                    stockoutItem.AddItem(new pts_stockout
+                    {
+                        packing_cd = string.Format("{0}-{1}", lbTemp.Invoice, lbTemp.Item_Number),
+                        item_cd = lbTemp.Item_Number,
+                        item_name = lbTemp.Item_Name,
+                        supplier_name = lbTemp.SupplierName,
+                        invoice = lbTemp.Invoice,
+                        stockout_date = DateTime.Now,
+                        stockout_qty = lbTemp.Delivery_Qty * lbTemp.Label_Qty,
+                        remark = "I",
+                        registration_user_cd = UserData.usercode,
+                    });
+                }
+            }
+
+        }
+        #endregion
+        #region ADD SELECT ROW TO DB
+        private void CallAddSelectRow()
+        {
+            double lbelqty =double.Parse(txtPrintLabelQty.Text);
+           //if (txtPrintLabelQty.Text == lbelqty)
+           // {
+
+                foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
+                {
+                    PrintItem lbTemp = dr.DataBoundItem as PrintItem;
+                    listPrintItem.Add(lbTemp);
+                    dr.DefaultCellStyle.BackColor = Color.Lime;
+                    if (bool.Parse(SettingItem.checkSaved))
+                    {
+                        stockoutItem.AddItem(new pts_stockout
+                        {
+                            packing_cd = string.Format("{0}-{1}", lbTemp.Invoice, lbTemp.Item_Number),
+                            item_cd = lbTemp.Item_Number,
+                            item_name = lbTemp.Item_Name,
+                            supplier_name = lbTemp.SupplierName,
+                            invoice = lbTemp.Invoice,
+                            stockout_date = DateTime.Now,
+                            stockout_qty = lbTemp.Delivery_Qty * lbelqty,
+                            remark = "I",
+                            registration_user_cd = UserData.usercode,
+                        });
+                    }
+              //  }
+               
+            }
+        }
         #endregion
 
     }
