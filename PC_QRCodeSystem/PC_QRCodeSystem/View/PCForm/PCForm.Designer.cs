@@ -56,6 +56,8 @@
             this.btnSupplier = new System.Windows.Forms.Button();
             this.btnItem = new System.Windows.Forms.Button();
             this.pnlSetting = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnChangePass = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pnlAdminManagement = new System.Windows.Forms.Panel();
@@ -89,6 +91,7 @@
             this.tbpMain.SuspendLayout();
             this.pnlPCManagement.SuspendLayout();
             this.pnlSetting.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.pnlAdminManagement.SuspendLayout();
             this.pnlDataLogs.SuspendLayout();
             this.tab_Request.SuspendLayout();
@@ -430,7 +433,7 @@
             // 
             // pnlSetting
             // 
-            this.pnlSetting.Controls.Add(this.btnSetting);
+            this.pnlSetting.Controls.Add(this.tableLayoutPanel1);
             this.pnlSetting.Controls.Add(this.label8);
             this.pnlSetting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSetting.Location = new System.Drawing.Point(303, 300);
@@ -439,12 +442,41 @@
             this.pnlSetting.TabIndex = 10;
             this.pnlSetting.Tag = "pcmp004";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnChangePass, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnSetting, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(232, 20);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(242, 76);
+            this.tableLayoutPanel1.TabIndex = 15;
+            // 
+            // btnChangePass
+            // 
+            this.btnChangePass.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnChangePass.Location = new System.Drawing.Point(3, 3);
+            this.btnChangePass.Name = "btnChangePass";
+            this.btnChangePass.Size = new System.Drawing.Size(115, 50);
+            this.btnChangePass.TabIndex = 14;
+            this.btnChangePass.TabStop = false;
+            this.btnChangePass.Text = "Change Password\r\nĐổi Mật Khẩu";
+            this.btnChangePass.UseVisualStyleBackColor = true;
+            this.btnChangePass.Visible = false;
+            this.btnChangePass.Click += new System.EventHandler(this.btnChangePass_Click);
+            // 
             // btnSetting
             // 
-            this.btnSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSetting.Location = new System.Drawing.Point(375, 23);
+            this.btnSetting.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSetting.Location = new System.Drawing.Point(124, 3);
             this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(97, 48);
+            this.btnSetting.Size = new System.Drawing.Size(115, 48);
             this.btnSetting.TabIndex = 13;
             this.btnSetting.Text = "Setting\r\nCài Đặt";
             this.btnSetting.UseVisualStyleBackColor = true;
@@ -726,6 +758,7 @@
             this.tbpMain.ResumeLayout(false);
             this.pnlPCManagement.ResumeLayout(false);
             this.pnlSetting.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlAdminManagement.ResumeLayout(false);
             this.pnlDataLogs.ResumeLayout(false);
             this.tab_Request.ResumeLayout(false);
@@ -790,5 +823,7 @@
         private System.Windows.Forms.ListBox libFileName;
         private System.Windows.Forms.TableLayoutPanel tbpError;
         private System.Windows.Forms.DataGridView dgvStockOutLog;
+        private System.Windows.Forms.Button btnChangePass;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

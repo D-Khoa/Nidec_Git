@@ -20,6 +20,7 @@ namespace PC_QRCodeSystem.View
 
         public PCForm()
         {
+
             InitializeComponent();
             itemData = new pts_item();
             requestData = new pts_request_log();
@@ -399,11 +400,22 @@ namespace PC_QRCodeSystem.View
 
         private void PCForm_Load(object sender, EventArgs e)
         {
+
             if (!string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved) && string.IsNullOrEmpty(UserData.usercode))
             {
                 Login logfrm = new Login();
                 logfrm.ShowDialog();
             }
+            if (bool.Parse(SettingItem.checkSaved))
+            {
+                btnChangePass.Visible = true;
+            }
+        }
+
+        private void btnChangePass_Click(object sender, EventArgs e)
+        {
+            ChangePasswordForm cpfrm = new ChangePasswordForm();
+            cpfrm.ShowDialog();
         }
     }
 }
