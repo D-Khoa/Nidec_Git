@@ -246,7 +246,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 39;
-            this.label3.Text = "3. Label Qty";
+            this.label3.Text = "2. Label Qty";
             // 
             // txtOld
             // 
@@ -318,7 +318,7 @@
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(35, 13);
             this.label19.TabIndex = 30;
-            this.label19.Text = "2. Qty";
+            this.label19.Text = "3. Qty";
             // 
             // dgvInspection
             // 

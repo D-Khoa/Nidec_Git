@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
+using System.Data.SqlClient;
 
 namespace PC_QRCodeSystem.View
 {
@@ -589,7 +590,7 @@ namespace PC_QRCodeSystem.View
                     listPrintItem.Add(dr.DataBoundItem as PrintItem);
                     dr.DefaultCellStyle.BackColor = Color.Lime;
                 }
-               
+
                 if (printItem.PrintItems(listPrintItem, false))
                     CustomMessageBox.Notice("Print items are completed!" + Environment.NewLine + "In hoàn tất!");
             }
