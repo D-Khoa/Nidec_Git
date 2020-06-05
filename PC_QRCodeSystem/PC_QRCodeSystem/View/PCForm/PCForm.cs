@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
-
+using PC_QRCodeSystem.View.Common;
 
 namespace PC_QRCodeSystem.View
 {
@@ -400,22 +400,25 @@ namespace PC_QRCodeSystem.View
 
         private void PCForm_Load(object sender, EventArgs e)
         {
-
+           
             if (!string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved) && string.IsNullOrEmpty(UserData.usercode))
             {
                 Login logfrm = new Login();
                 logfrm.ShowDialog();
             }
-            if (bool.Parse(SettingItem.checkSaved))
-            {
-                btnChangePass.Visible = true;
-            }
+            dept = UserData.dept;
+            name = UserData.username;
+            position = UserData.position;
+            logintime = UserData.logintime;
+            listper = UserData.role_permision;
+            if (dept == "PC" || dept == "IS" && (position == "SV"|| position =="AMGR" ||position =="MGR" ||position =="GM" ||position =="SSV" ))
+                btnCreateAccount.Visible = true;
         }
 
-        private void btnChangePass_Click(object sender, EventArgs e)
+        private void btnCreateAccount_Click(object sender, EventArgs e)
         {
-            ChangePasswordForm cpfrm = new ChangePasswordForm();
-            cpfrm.ShowDialog();
+            CreateAccount crta = new CreateAccount();
+            crta.ShowDialog();
         }
     }
 }

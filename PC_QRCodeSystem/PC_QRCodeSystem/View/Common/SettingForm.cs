@@ -113,6 +113,8 @@ namespace PC_QRCodeSystem.View
                 AcceptButton = btnOK;
                 LockPanel(false);
             }
+            else
+                CustomMessageBox.Notice("Password not correct!!" + Environment.NewLine + "Mật khẩu không đúng!!");
         }
 
         private void btnReset_Click(object sender, EventArgs e)

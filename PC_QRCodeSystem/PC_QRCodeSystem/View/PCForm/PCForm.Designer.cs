@@ -57,8 +57,8 @@
             this.btnItem = new System.Windows.Forms.Button();
             this.pnlSetting = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnChangePass = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
+            this.btnCreateAccount = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pnlAdminManagement = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -447,8 +447,8 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.btnChangePass, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnSetting, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnCreateAccount, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(232, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -457,19 +457,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(242, 76);
             this.tableLayoutPanel1.TabIndex = 15;
-            // 
-            // btnChangePass
-            // 
-            this.btnChangePass.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnChangePass.Location = new System.Drawing.Point(3, 3);
-            this.btnChangePass.Name = "btnChangePass";
-            this.btnChangePass.Size = new System.Drawing.Size(115, 50);
-            this.btnChangePass.TabIndex = 14;
-            this.btnChangePass.TabStop = false;
-            this.btnChangePass.Text = "Change Password\r\nĐổi Mật Khẩu";
-            this.btnChangePass.UseVisualStyleBackColor = true;
-            this.btnChangePass.Visible = false;
-            this.btnChangePass.Click += new System.EventHandler(this.btnChangePass_Click);
             // 
             // btnSetting
             // 
@@ -481,6 +468,18 @@
             this.btnSetting.Text = "Setting\r\nCài Đặt";
             this.btnSetting.UseVisualStyleBackColor = true;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
+            // 
+            // btnCreateAccount
+            // 
+            this.btnCreateAccount.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCreateAccount.Location = new System.Drawing.Point(3, 3);
+            this.btnCreateAccount.Name = "btnCreateAccount";
+            this.btnCreateAccount.Size = new System.Drawing.Size(115, 48);
+            this.btnCreateAccount.TabIndex = 14;
+            this.btnCreateAccount.Text = "Create Account   Tạo Tài Khoản";
+            this.btnCreateAccount.UseVisualStyleBackColor = true;
+            this.btnCreateAccount.Visible = false;
+            this.btnCreateAccount.Click += new System.EventHandler(this.btnCreateAccount_Click);
             // 
             // label8
             // 
@@ -823,7 +822,7 @@
         private System.Windows.Forms.ListBox libFileName;
         private System.Windows.Forms.TableLayoutPanel tbpError;
         private System.Windows.Forms.DataGridView dgvStockOutLog;
-        private System.Windows.Forms.Button btnChangePass;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnCreateAccount;
     }
 }

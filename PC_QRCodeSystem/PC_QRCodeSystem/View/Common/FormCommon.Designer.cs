@@ -105,9 +105,8 @@
             this.pnlUser.ForeColor = System.Drawing.Color.Black;
             this.pnlUser.Location = new System.Drawing.Point(0, 70);
             this.pnlUser.Name = "pnlUser";
-            this.pnlUser.Size = new System.Drawing.Size(150, 402);
+            this.pnlUser.Size = new System.Drawing.Size(150, 464);
             this.pnlUser.TabIndex = 1;
-            this.pnlUser.Visible = false;
             // 
             // lbOnlineTime
             // 
@@ -132,7 +131,7 @@
             // 
             this.btnCloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCloseForm.Location = new System.Drawing.Point(15, 333);
+            this.btnCloseForm.Location = new System.Drawing.Point(15, 395);
             this.btnCloseForm.Name = "btnCloseForm";
             this.btnCloseForm.Size = new System.Drawing.Size(120, 50);
             this.btnCloseForm.TabIndex = 3;
@@ -164,7 +163,7 @@
             // 
             this.btnChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangePassword.Location = new System.Drawing.Point(15, 213);
+            this.btnChangePassword.Location = new System.Drawing.Point(15, 275);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(120, 50);
             this.btnChangePassword.TabIndex = 1;
@@ -177,7 +176,7 @@
             // 
             this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Location = new System.Drawing.Point(15, 273);
+            this.btnLogOut.Location = new System.Drawing.Point(15, 335);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(120, 50);
             this.btnLogOut.TabIndex = 2;
@@ -252,7 +251,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 472);
+            this.ClientSize = new System.Drawing.Size(750, 534);
             this.Controls.Add(this.pnlUser);
             this.Controls.Add(this.pnlTitle);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

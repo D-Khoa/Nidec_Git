@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using PC_QRCodeSystem.Model;
+using PC_QRCodeSystem.View.Common;
 
 namespace PC_QRCodeSystem
 {
@@ -85,6 +86,7 @@ namespace PC_QRCodeSystem
             SettingItem settingItem = new SettingItem();
             settingItem.LoadSetting();
             ControlLoadEvent(this, true);
+           
         }
         #endregion
 
@@ -201,5 +203,7 @@ namespace PC_QRCodeSystem
             //}
         }
         #endregion
+
+       
     }
 }
