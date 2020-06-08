@@ -400,7 +400,7 @@ namespace PC_QRCodeSystem.View
 
         private void PCForm_Load(object sender, EventArgs e)
         {
-           
+
             if (!string.IsNullOrEmpty(SettingItem.checkSaved) && bool.Parse(SettingItem.checkSaved) && string.IsNullOrEmpty(UserData.usercode))
             {
                 Login logfrm = new Login();
@@ -411,8 +411,17 @@ namespace PC_QRCodeSystem.View
             position = UserData.position;
             logintime = UserData.logintime;
             listper = UserData.role_permision;
-            if (dept == "PC" || dept == "IS" && (position == "SV"|| position =="AMGR" ||position =="MGR" ||position =="GM" ||position =="SSV" ))
+            if (dept == "PC" && (position == "SV" || position == "AMGR" || position == "MGR" || position == "GM" || position == "SSV"))
+            {
                 btnCreateAccount.Visible = true;
+            }
+
+            if (dept == "IS" && (position == "SV" || position == "AMGR" || position == "MGR" || position == "GM" || position == "SSV"))
+            {
+                btnCreateAccount.Visible = true;
+            }
+            else
+                btnCreateAccount.Visible = false;
         }
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
