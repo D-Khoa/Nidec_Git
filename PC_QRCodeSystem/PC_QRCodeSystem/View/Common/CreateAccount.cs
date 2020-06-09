@@ -140,23 +140,23 @@ namespace PC_QRCodeSystem.View.Common
             btnOK.Visible = false;
             btnCancel.Visible = false;
             btnSearch.Visible = true;
-            btnUpdate.Visible = false;
+            btnUpdate.Visible = true;
             btnAdd.Visible = true;
-            btnDelete.Visible = false;
+            btnDelete.Visible = true;
             btnBack.Visible = true;
-            btnClear.Visible = false;
+            btnClear.Visible = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            btnSearch.Visible = true;
-            btnAdd.Visible = true;
-            btnUpdate.Visible = true;
-            btnDelete.Visible = true;
+            btnSearch.Enabled = true;
+            btnAdd.Enabled = true;
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
             btnOK.Visible = false;
             btnCancel.Visible = false;
-            btnBack.Visible = true;
-            btnClear.Visible = true;
+            btnBack.Enabled = true;
+            btnClear.Enabled = true;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
