@@ -414,14 +414,19 @@ namespace PC_QRCodeSystem.View
             if (dept == "PC" && (position == "SV" || position == "AMGR" || position == "MGR" || position == "GM" || position == "SSV"))
             {
                 btnCreateAccount.Visible = true;
+                btnSetting.Visible = true;
             }
 
             if (dept == "IS" && (position == "SV" || position == "AMGR" || position == "MGR" || position == "GM" || position == "SSV"))
             {
                 btnCreateAccount.Visible = true;
+                btnSetting.Visible = true;
             }
             else
+            {
                 btnCreateAccount.Visible = false;
+                btnSetting.Visible = false;
+            }
         }
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
