@@ -49,6 +49,7 @@ namespace Scale_LBT52
             //cmbParity.SelectedIndex = 0; // None
             //cmbStopBit.SelectedIndex = 0; // None
             // Hiện thị Status cho Pro tí
+            btnDisconnect.Enabled = false;
             status.Text = "Please choose port com to continue!!";
 
         }
@@ -124,10 +125,28 @@ namespace Scale_LBT52
         {
             try
             {
-                P.Open();
-                btnDisconnect.Enabled = true;
-                btnConnect.Enabled = false;
-                status.Text = "Connected to Port: " + cmbCom.SelectedItem.ToString();
+                if (cmbCom.Text == "" && cmbDataBits.Text == "" && cmbParity.Text == "" && cmbRate.Text == "" && cmbStopBit.Text == "")
+                {
+                    MessageBox.Show("Please connect COM  and setting values default COM", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                if (cmbCom.Text != "" && cmbDataBits.Text != "" && cmbParity.Text != "" && cmbRate.Text != "" && cmbStopBit.Text != "")
+                {
+                    P.Open();
+                    btnDisconnect.Enabled = true;
+                    btnConnect.Enabled = false;
+                    status.Text = "Connected to Port: " + cmbCom.SelectedItem.ToString();
+                    MessageBox.Show("Connect Successfully","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    groupBox1.Enabled = false;
+                }
+                if (cmbCom.Text == "" && cmbDataBits.Text != "" && cmbParity.Text != "" && cmbRate.Text != "" && cmbStopBit.Text != "")
+                {
+                    MessageBox.Show("Please connect to PORT COM", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                if (cmbCom.Text != "" && cmbDataBits.Text == "" || cmbParity.Text == "" || cmbRate.Text == "" || cmbStopBit.Text == "")
+                {
+                    MessageBox.Show("Please setting values default COM", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -142,6 +161,7 @@ namespace Scale_LBT52
             btnDisconnect.Enabled = false;
             // Hiện thị Status
             status.Text = "Disconnect";
+            groupBox1.Enabled = true;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
