@@ -137,8 +137,12 @@ namespace PC_QRCodeSystem.View
             {
                 CustomMessageBox.Notice("Please login to continue!!" + Environment.NewLine + "Vui lòng đăng nhập để tiếp tục!!");
                 this.Close();
-                Login lgf = new Login();
-                lgf.ShowDialog();
+                
+               // Login lgf = new Login();
+                Application.Exit();
+               // lgf.ShowDialog();
+                
+
 
             }
             else

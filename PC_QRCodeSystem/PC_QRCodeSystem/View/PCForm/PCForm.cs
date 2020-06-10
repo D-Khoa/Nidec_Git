@@ -425,7 +425,7 @@ namespace PC_QRCodeSystem.View
             else
             {
                 btnCreateAccount.Visible = false;
-                btnSetting.Visible = false;
+                btnSetting.Visible = true;
             }
         }
 
