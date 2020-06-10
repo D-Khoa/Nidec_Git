@@ -108,7 +108,7 @@ namespace PC_QRCodeSystem.View
         }
         private void btnPasswordOK_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text == "NCVP#26qrcode")
+            if (txtPassword.Text == "admin")
             {
                 AcceptButton = btnOK;
                 LockPanel(false);
