@@ -15,7 +15,7 @@ namespace PC_QRCodeSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new PCForm());
         }
     }
 }
