@@ -135,12 +135,12 @@ namespace PC_QRCodeSystem.View
             // this.Close();
             if (checkSave.Checked == true)
             {
-                CustomMessageBox.Notice("Please login to continue!!" + Environment.NewLine + "Vui lòng đăng nhập để tiếp tục!!");
+                CustomMessageBox.Notice("Please login again to continue!!" + Environment.NewLine + "Vui lòng đăng nhập lại để tiếp tục!!");
                 this.Close();
                 
-                Login lgf = new Login();
-               // Application.Exit();
-                lgf.ShowDialog();
+               // Login lgf = new Login();
+                Application.Exit();
+               // lgf.ShowDialog();
               //  this.Close();
 
 

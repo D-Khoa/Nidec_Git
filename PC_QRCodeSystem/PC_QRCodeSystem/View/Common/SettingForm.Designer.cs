@@ -122,8 +122,6 @@
             // checkSave
             // 
             this.checkSave.AutoSize = true;
-            this.checkSave.Checked = true;
-            this.checkSave.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkSave.Location = new System.Drawing.Point(390, 73);
             this.checkSave.Name = "checkSave";
             this.checkSave.Size = new System.Drawing.Size(124, 21);
