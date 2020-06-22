@@ -116,9 +116,9 @@
             this.Column5,
             this.Column6});
             this.dgvOldData.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dgvOldData.Location = new System.Drawing.Point(594, 0);
+            this.dgvOldData.Location = new System.Drawing.Point(622, 0);
             this.dgvOldData.Name = "dgvOldData";
-            this.dgvOldData.Size = new System.Drawing.Size(614, 110);
+            this.dgvOldData.Size = new System.Drawing.Size(586, 110);
             this.dgvOldData.TabIndex = 9;
             // 
             // Column1

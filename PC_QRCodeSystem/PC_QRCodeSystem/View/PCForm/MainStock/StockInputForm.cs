@@ -1183,14 +1183,6 @@ namespace PC_QRCodeSystem.View
         #region CALL ADD DGV TO DATABASE
         private void CallAddDB()
         {
-            //for (int i = 0; i < dgvPrintList.Rows.Count; i++)
-            //{
-            //    string sql = "INSERT INTO pts_stockout( packing_cd, item_cd, item_name, supplier_name, invoice, stockout_date, stockout_qty, remark, registration_user_cd) VALUES ('" + "None" + "', '" + dgvPrintList.Rows[i].Cells[0].Value + "', '" + dgvPrintList.Rows[i].Cells[1].Value + "', '" + dgvPrintList.Rows[i].Cells[2].Value + "', '" + dgvPrintList.Rows[i].Cells[3].Value + "', '" + dgvPrintList.Rows[i].Cells[4].Value + "', '" + dgvPrintList.Rows[i].Cells[5].Value + "','" + "I" + "', '" + UserData.usercode + "')";
-
-            //    PSQL con = new PSQL();
-            //    con.sqlExecuteScalarString(sql);
-
-            //}
             foreach (DataGridViewRow dr in dgvPrintList.Rows)
             {
                 PrintItem lbTemp = dr.DataBoundItem as PrintItem;
@@ -1246,15 +1238,208 @@ namespace PC_QRCodeSystem.View
         #region ADD SELECT ROW TO DB
         private void CallAddSelectRow()
         {
-            double lbelqty =double.Parse(txtPrintLabelQty.Text);
-           //if (txtPrintLabelQty.Text == lbelqty)
-           // {
+            double lbelqty = double.Parse(txtPrintLabelQty.Text);
+            //if (txtPrintLabelQty.Text == lbelqty)
+            // {
 
-                foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
+            foreach (DataGridViewRow dr in dgvPrintList.SelectedRows)
+            {
+                PrintItem lbTemp = dr.DataBoundItem as PrintItem;
+                listPrintItem.Add(lbTemp);
+                dr.DefaultCellStyle.BackColor = Color.Lime;
+                if (bool.Parse(SettingItem.checkSaved))
+                {
+                    stockoutItem.AddItem(new pts_stockout
+                    {
+                        packing_cd = string.Format("{0}-{1}", lbTemp.Invoice, lbTemp.Item_Number),
+                        item_cd = lbTemp.Item_Number,
+                        item_name = lbTemp.Item_Name,
+                        supplier_name = lbTemp.SupplierName,
+                        invoice = lbTemp.Invoice,
+                        stockout_date = DateTime.Now,
+                        stockout_qty = lbTemp.Delivery_Qty * lbelqty,
+                        remark = "I",
+                        registration_user_cd = UserData.usercode,
+                    });
+                }
+                //  }
+
+            }
+        }
+        #endregion
+
+        #region PRINTITEM
+
+        private void btnPrintItem_Click_1(object sender, EventArgs e)
+        {
+            tc_Main.SelectedTab = tabPrintNew;
+            txtbarcodenew.Focus();
+        }
+        #endregion
+        #region BARCODE NEW KEYDOWN
+        private void txtbarcodenew_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    string[] barcode = txtbarcodenew.Text.Split(';');
+                    //Label of PREMAC 6-4-9 have more 2 fields
+                    lbData = new PrintItem
+                    {
+                        Item_Number = barcode[0].Trim(),
+                        Item_Name = barcode[1].Trim(),
+                        SupplierName = barcode[2].Trim(),
+                        Invoice = barcode[3].Trim(),
+                        Delivery_Date = DateTime.Parse(barcode[4].Trim()),
+                        Delivery_Qty = int.Parse(barcode[5].Trim()),
+                        Remark = barcode[7].Trim(),
+
+                    };
+                    if (barcode.Length > 7)
+                    {
+                        if (!string.IsNullOrEmpty(barcode[6])) lbData.SupplierCD = barcode[6].Trim();
+                        if (!string.IsNullOrEmpty(barcode[7])) lbData.Remark = barcode[7].Trim();
+                    }
+                    txtInvoice.Text = lbData.Invoice;
+                    txtItemName.Text = lbData.Item_Name;
+                    txtItemNumber.Text = lbData.Item_Number;
+                    txtsupliername.Text = lbData.SupplierName;
+                    txtQty.Text = lbData.Delivery_Qty.ToString();
+                    dtpfromdatenew.Value = lbData.Delivery_Date;
+                    cmbRemark.Text = lbData.Remark;
+
+                    //Thêm tem tồn vào danh sách in
+                    printItem.ListPrintItem.Add(new PrintItem
+                    {
+                        Item_Number = txtItemNumber.Text,
+                        Item_Name = txtItemName.Text,
+                        SupplierName = txtsupliername.Text,
+                        Invoice = txtInvoice.Text,
+                        Delivery_Date = dtpfromdatenew.Value,
+                        Delivery_Qty = double.Parse(txtQty.Text),
+                        Remark = cmbRemark.Text,
+                        isRec = true,
+                        Label_Qty = int.Parse(txtqtylabel.Text)
+                    });
+                    UpdatePrintNewGrid();
+                }
+
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Error(ex.Message);
+                }
+            }
+        }
+        #endregion
+
+        private void btnback2_Click(object sender, EventArgs e)
+        {
+            tc_Main.SelectedTab = tab_Main;
+
+        }
+
+        private void UpdatePrintNewGrid()
+        {
+            dgvData.DataSource = printItem.ListPrintItem;
+            dgvData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            double total = dgvData.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells["Delivery_Qty"].Value));
+            tsTotalQty.Text = total.ToString();
+            tsRow.Text = dgvData.Rows.Count.ToString();
+        }
+        #region BUTTON CLEAR
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtbarcodenew.Clear();
+            txtItemNumber.Clear();
+            txtItemName.Clear();
+            txtsupliername.Clear();
+            txtQty.Clear();
+            txtInvoice.Clear();
+            cmbRemark.Text = null;
+            dtpfromdatenew.Value = DateTime.Now;
+            dgvData.DataSource = null;
+        }
+        #endregion
+        private void txtInvoice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    string[] barcode = txtbarcodenew.Text.Split(';');
+                    //Label of PREMAC 6-4-9 have more 2 fields
+                    lbData = new PrintItem
+                    {
+                        Item_Number = barcode[0].Trim(),
+                        Item_Name = barcode[1].Trim(),
+                        SupplierName = barcode[2].Trim(),
+                        Invoice = barcode[3].Trim(),
+                        Delivery_Date = DateTime.Parse(barcode[4].Trim()),
+                        Delivery_Qty = int.Parse(barcode[5].Trim()),
+                        Remark = barcode[7].Trim(),
+
+                    };
+                    if (barcode.Length > 7)
+                    {
+                        if (!string.IsNullOrEmpty(barcode[6])) lbData.SupplierCD = barcode[6].Trim();
+                        if (!string.IsNullOrEmpty(barcode[7])) lbData.Remark = barcode[7].Trim();
+                    }
+                    txtInvoice.Text = txtInvoice.Text;
+                    txtItemName.Text = txtItemName.Text;
+                    txtItemNumber.Text = txtItemNumber.Text;
+                    txtsupliername.Text = txtsupliername.Text;
+                    txtQty.Text = txtQty.Text;
+                    dtpfromdatenew.Value = dtpfromdatenew.Value;
+                    cmbRemark.Text =cmbRemark.Text;
+
+                    //Thêm tem tồn vào danh sách in
+                    printItem.ListPrintItem.Add(new PrintItem
+                    {
+                        Item_Number = txtItemNumber.Text,
+                        Item_Name = txtItemName.Text,
+                        SupplierName = txtsupliername.Text,
+                        Invoice = txtInvoice.Text,
+                        Delivery_Date = dtpfromdatenew.Value,
+                        Delivery_Qty = double.Parse(txtQty.Text),
+                        Remark = cmbRemark.Text,
+                        isRec = true,
+                        Label_Qty = int.Parse(txtqtylabel.Text)
+                    });
+                    UpdatePrintNewGrid();
+                    dgvData.Rows.RemoveAt(0);
+                }
+
+                catch (Exception ex)
+                {
+                    CustomMessageBox.Error(ex.Message);
+                }
+            }
+
+        }
+ 
+      
+        #region PRINT SELECT 
+        private void btnPrintSelect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (printItem.CheckPrinterIsOffline(SettingItem.printerSName))
+                {
+                    CustomMessageBox.Notice("Printer is offline" + Environment.NewLine + "Máy in chưa kết nối!");
+                    return;
+                }
+                listPrintItem.Clear();
+                if (dgvData.SelectedRows.Count <= 0)
+                {
+                    CustomMessageBox.Notice("Please choose item first!" + Environment.NewLine + "Vui lòng chọn tem cần in!");
+                    return;
+                }
+                foreach (DataGridViewRow dr in dgvData.SelectedRows)
                 {
                     PrintItem lbTemp = dr.DataBoundItem as PrintItem;
                     listPrintItem.Add(lbTemp);
-                    dr.DefaultCellStyle.BackColor = Color.Lime;
+                    dgvData.Rows.Remove(dr);
                     if (bool.Parse(SettingItem.checkSaved))
                     {
                         stockoutItem.AddItem(new pts_stockout
@@ -1265,16 +1450,36 @@ namespace PC_QRCodeSystem.View
                             supplier_name = lbTemp.SupplierName,
                             invoice = lbTemp.Invoice,
                             stockout_date = DateTime.Now,
-                            stockout_qty = lbTemp.Delivery_Qty * lbelqty,
-                            remark = "I",
+                            stockout_qty = lbTemp.Delivery_Qty,
+                            remark = lbTemp.Remark,
                             registration_user_cd = UserData.usercode,
                         });
                     }
-              //  }
-               
+                }
+                if (printItem.PrintItems(listPrintItem, false))
+                    CustomMessageBox.Notice("Print items are completed!"
+                        + Environment.NewLine + "In hoàn tất!");
+                txtbarcodenew.Focus();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Error(ex.Message);
             }
         }
         #endregion
 
+        private void dgvData_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            txtItemNumber.Text = dgvData.CurrentRow.Cells[0].Value.ToString();
+            txtItemName.Text = dgvData.CurrentRow.Cells[1].Value.ToString();
+            txtsupliername.Text = dgvData.CurrentRow.Cells[2].Value.ToString();
+            txtInvoice.Text = dgvData.CurrentRow.Cells[3].Value.ToString();
+            dtpfromdatenew.Text = dgvData.CurrentRow.Cells[4].Value.ToString();
+            txtQty.Text = dgvData.CurrentRow.Cells[5].Value.ToString();
+            cmbRemark.Text = dgvData.CurrentRow.Cells[7].Value.ToString();
+            txtLabelQty.Text = dgvData.CurrentRow.Cells[8].Value.ToString();
+        }
+
+     
     }
 }
