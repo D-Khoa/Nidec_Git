@@ -48,6 +48,7 @@
             this.lbDeptUser = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
             this.timerFormLoad = new System.Windows.Forms.Timer(this.components);
+            this.label10 = new System.Windows.Forms.Label();
             this.pnlTitle.SuspendLayout();
             this.pnlUser.SuspendLayout();
             this.SuspendLayout();
@@ -87,6 +88,7 @@
             // 
             this.pnlUser.BackColor = System.Drawing.SystemColors.Control;
             this.pnlUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlUser.Controls.Add(this.label10);
             this.pnlUser.Controls.Add(this.lbOnlineTime);
             this.pnlUser.Controls.Add(this.lbOnlineUser);
             this.pnlUser.Controls.Add(this.btnCloseForm);
@@ -105,14 +107,14 @@
             this.pnlUser.ForeColor = System.Drawing.Color.Black;
             this.pnlUser.Location = new System.Drawing.Point(0, 70);
             this.pnlUser.Name = "pnlUser";
-            this.pnlUser.Size = new System.Drawing.Size(150, 464);
+            this.pnlUser.Size = new System.Drawing.Size(150, 504);
             this.pnlUser.TabIndex = 1;
             // 
             // lbOnlineTime
             // 
             this.lbOnlineTime.AutoSize = true;
             this.lbOnlineTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lbOnlineTime.Location = new System.Drawing.Point(10, 190);
+            this.lbOnlineTime.Location = new System.Drawing.Point(8, 205);
             this.lbOnlineTime.Name = "lbOnlineTime";
             this.lbOnlineTime.Size = new System.Drawing.Size(63, 13);
             this.lbOnlineTime.TabIndex = 11;
@@ -121,7 +123,7 @@
             // lbOnlineUser
             // 
             this.lbOnlineUser.AutoSize = true;
-            this.lbOnlineUser.Location = new System.Drawing.Point(10, 170);
+            this.lbOnlineUser.Location = new System.Drawing.Point(8, 185);
             this.lbOnlineUser.Name = "lbOnlineUser";
             this.lbOnlineUser.Size = new System.Drawing.Size(82, 13);
             this.lbOnlineUser.TabIndex = 10;
@@ -131,7 +133,7 @@
             // 
             this.btnCloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCloseForm.Location = new System.Drawing.Point(15, 395);
+            this.btnCloseForm.Location = new System.Drawing.Point(15, 435);
             this.btnCloseForm.Name = "btnCloseForm";
             this.btnCloseForm.Size = new System.Drawing.Size(120, 50);
             this.btnCloseForm.TabIndex = 3;
@@ -143,7 +145,7 @@
             // lbPosUser
             // 
             this.lbPosUser.AutoSize = true;
-            this.lbPosUser.Location = new System.Drawing.Point(10, 50);
+            this.lbPosUser.Location = new System.Drawing.Point(8, 65);
             this.lbPosUser.Name = "lbPosUser";
             this.lbPosUser.Size = new System.Drawing.Size(116, 13);
             this.lbPosUser.TabIndex = 8;
@@ -153,7 +155,7 @@
             // 
             this.lbPosition.AutoSize = true;
             this.lbPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lbPosition.Location = new System.Drawing.Point(10, 70);
+            this.lbPosition.Location = new System.Drawing.Point(8, 85);
             this.lbPosition.Name = "lbPosition";
             this.lbPosition.Size = new System.Drawing.Size(88, 13);
             this.lbPosition.TabIndex = 7;
@@ -163,7 +165,7 @@
             // 
             this.btnChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangePassword.Location = new System.Drawing.Point(15, 275);
+            this.btnChangePassword.Location = new System.Drawing.Point(15, 315);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(120, 50);
             this.btnChangePassword.TabIndex = 1;
@@ -176,7 +178,7 @@
             // 
             this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Location = new System.Drawing.Point(15, 335);
+            this.btnLogOut.Location = new System.Drawing.Point(15, 375);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(120, 50);
             this.btnLogOut.TabIndex = 2;
@@ -189,7 +191,7 @@
             // 
             this.lbDept.AutoSize = true;
             this.lbDept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lbDept.Location = new System.Drawing.Point(10, 110);
+            this.lbDept.Location = new System.Drawing.Point(8, 125);
             this.lbDept.Name = "lbDept";
             this.lbDept.Size = new System.Drawing.Size(34, 13);
             this.lbDept.TabIndex = 5;
@@ -198,7 +200,7 @@
             // lbNameUser
             // 
             this.lbNameUser.AutoSize = true;
-            this.lbNameUser.Location = new System.Drawing.Point(10, 10);
+            this.lbNameUser.Location = new System.Drawing.Point(8, 25);
             this.lbNameUser.Name = "lbNameUser";
             this.lbNameUser.Size = new System.Drawing.Size(127, 13);
             this.lbNameUser.TabIndex = 4;
@@ -208,7 +210,7 @@
             // 
             this.lbLoginTime.AutoSize = true;
             this.lbLoginTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lbLoginTime.Location = new System.Drawing.Point(10, 150);
+            this.lbLoginTime.Location = new System.Drawing.Point(8, 165);
             this.lbLoginTime.Name = "lbLoginTime";
             this.lbLoginTime.Size = new System.Drawing.Size(133, 13);
             this.lbLoginTime.TabIndex = 3;
@@ -217,7 +219,7 @@
             // lbLogUser
             // 
             this.lbLogUser.AutoSize = true;
-            this.lbLogUser.Location = new System.Drawing.Point(10, 130);
+            this.lbLogUser.Location = new System.Drawing.Point(8, 145);
             this.lbLogUser.Name = "lbLogUser";
             this.lbLogUser.Size = new System.Drawing.Size(77, 13);
             this.lbLogUser.TabIndex = 2;
@@ -226,7 +228,7 @@
             // lbDeptUser
             // 
             this.lbDeptUser.AutoSize = true;
-            this.lbDeptUser.Location = new System.Drawing.Point(10, 90);
+            this.lbDeptUser.Location = new System.Drawing.Point(8, 105);
             this.lbDeptUser.Name = "lbDeptUser";
             this.lbDeptUser.Size = new System.Drawing.Size(136, 13);
             this.lbDeptUser.TabIndex = 1;
@@ -236,7 +238,7 @@
             // 
             this.lbName.AutoSize = true;
             this.lbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lbName.Location = new System.Drawing.Point(10, 30);
+            this.lbName.Location = new System.Drawing.Point(8, 45);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(39, 13);
             this.lbName.TabIndex = 0;
@@ -247,17 +249,29 @@
             this.timerFormLoad.Interval = 500;
             this.timerFormLoad.Tick += new System.EventHandler(this.timerFormLoad_Tick);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(0, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(129, 12);
+            this.label10.TabIndex = 71;
+            this.label10.Text = "FA Department © 2020 NCVP";
+            // 
             // FormCommon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 534);
+            this.ClientSize = new System.Drawing.Size(750, 574);
             this.Controls.Add(this.pnlUser);
             this.Controls.Add(this.pnlTitle);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormCommon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormCommon";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCommon_FormClosing);
             this.Load += new System.EventHandler(this.FormCommon_Load);
             this.Shown += new System.EventHandler(this.FormCommon_Shown);
@@ -288,5 +302,6 @@
         private System.Windows.Forms.Label lbOnlineTime;
         private System.Windows.Forms.Label lbOnlineUser;
         protected System.Windows.Forms.Timer timerFormLoad;
+        private System.Windows.Forms.Label label10;
     }
 }
