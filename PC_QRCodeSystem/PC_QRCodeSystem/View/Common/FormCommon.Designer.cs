@@ -34,6 +34,7 @@
             this.lbTittle = new System.Windows.Forms.Label();
             this.pnlLogo = new System.Windows.Forms.Panel();
             this.pnlUser = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.lbOnlineTime = new System.Windows.Forms.Label();
             this.lbOnlineUser = new System.Windows.Forms.Label();
             this.btnCloseForm = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.lbDeptUser = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
             this.timerFormLoad = new System.Windows.Forms.Timer(this.components);
-            this.label10 = new System.Windows.Forms.Label();
             this.pnlTitle.SuspendLayout();
             this.pnlUser.SuspendLayout();
             this.SuspendLayout();
@@ -109,6 +109,17 @@
             this.pnlUser.Name = "pnlUser";
             this.pnlUser.Size = new System.Drawing.Size(150, 504);
             this.pnlUser.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(0, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(129, 12);
+            this.label10.TabIndex = 71;
+            this.label10.Text = "FA Department © 2020 NCVP";
             // 
             // lbOnlineTime
             // 
@@ -248,17 +259,6 @@
             // 
             this.timerFormLoad.Interval = 500;
             this.timerFormLoad.Tick += new System.EventHandler(this.timerFormLoad_Tick);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(0, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(129, 12);
-            this.label10.TabIndex = 71;
-            this.label10.Text = "FA Department © 2020 NCVP";
             // 
             // FormCommon
             // 
