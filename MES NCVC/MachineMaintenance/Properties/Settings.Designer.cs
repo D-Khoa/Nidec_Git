@@ -118,5 +118,29 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Properties {
                 this["PQM_CONNECTION_STRING"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.193.4;Port=5432;UserId=pqm;Password=dbuser;Database=pqmdb;")]
+        public string CONNECTION1_STRING {
+            get {
+                return ((string)(this["CONNECTION1_STRING"]));
+            }
+            set {
+                this["CONNECTION1_STRING"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.193.4;Port=5432;UserId=pqm;Password=dbuser;Database=pqmdb;")]
+        public string PQM_CONNECTION1_STRING {
+            get {
+                return ((string)(this["PQM_CONNECTION1_STRING"]));
+            }
+            set {
+                this["PQM_CONNECTION1_STRING"] = value;
+            }
+        }
     }
 }

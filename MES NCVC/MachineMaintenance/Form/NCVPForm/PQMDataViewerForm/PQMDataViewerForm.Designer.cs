@@ -37,8 +37,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsSernoRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsSpace = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsProcessing = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -81,8 +79,6 @@
             this.toolStripStatusLabel1,
             this.tsSernoRows,
             this.tsSpace,
-            this.toolStripStatusLabel2,
-            this.tsProcessing,
             this.toolStripStatusLabel3,
             this.tsTime});
             this.statusStrip1.Location = new System.Drawing.Point(0, 390);
@@ -109,22 +105,8 @@
             this.tsSpace.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.tsSpace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsSpace.Name = "tsSpace";
-            this.tsSpace.Size = new System.Drawing.Size(625, 19);
+            this.tsSpace.Size = new System.Drawing.Size(731, 19);
             this.tsSpace.Spring = true;
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(66, 19);
-            this.toolStripStatusLabel2.Text = "Data rows:";
-            // 
-            // tsProcessing
-            // 
-            this.tsProcessing.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.tsProcessing.Name = "tsProcessing";
-            this.tsProcessing.Size = new System.Drawing.Size(40, 19);
-            this.tsProcessing.Text = "None";
             // 
             // toolStripStatusLabel3
             // 
@@ -407,11 +389,11 @@
             this.btnCSV.BackColor = System.Drawing.SystemColors.Control;
             this.btnCSV.ControlId = null;
             this.btnCSV.Font = new System.Drawing.Font("Arial", 9F);
-            this.btnCSV.Location = new System.Drawing.Point(9, 275);
+            this.btnCSV.Location = new System.Drawing.Point(105, 275);
             this.btnCSV.Name = "btnCSV";
-            this.btnCSV.Size = new System.Drawing.Size(71, 27);
+            this.btnCSV.Size = new System.Drawing.Size(87, 27);
             this.btnCSV.TabIndex = 31;
-            this.btnCSV.Text = "To CSV";
+            this.btnCSV.Text = "Export CSV";
             this.btnCSV.UseVisualStyleBackColor = false;
             this.btnCSV.Click += new System.EventHandler(this.btnCSV_Click);
             // 
@@ -420,9 +402,9 @@
             this.btnSearch.BackColor = System.Drawing.SystemColors.Control;
             this.btnSearch.ControlId = null;
             this.btnSearch.Font = new System.Drawing.Font("Arial", 9F);
-            this.btnSearch.Location = new System.Drawing.Point(102, 275);
+            this.btnSearch.Location = new System.Drawing.Point(12, 275);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(71, 27);
+            this.btnSearch.Size = new System.Drawing.Size(87, 27);
             this.btnSearch.TabIndex = 32;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -490,7 +472,6 @@
 
         #endregion
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel tsProcessing;
         private System.Windows.Forms.ToolStripStatusLabel tsTime;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
@@ -516,7 +497,6 @@
         private Framework.ButtonCommon btnLoad;
         private Framework.ButtonCommon btnClear;
         private System.ComponentModel.BackgroundWorker bgwGetData;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tsSernoRows;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;

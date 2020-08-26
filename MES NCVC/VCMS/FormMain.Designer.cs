@@ -48,8 +48,11 @@
             this.Doc_Main_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.MachineWorkingStatus_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.InventoryCheck_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.WarehouseManagement_New_frm = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.account_equipments_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
+            this.tabPQM = new System.Windows.Forms.TabPage();
+            this.btnDataViewer = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.labelCommon2 = new Com.Nidec.Mes.Framework.LabelCommon();
             this.NcvpMaster_gpb = new Com.Nidec.Mes.Framework.GroupBoxCommon();
             this.Master_tab = new Com.Nidec.Mes.Framework.TabControlCommon();
@@ -63,6 +66,7 @@
             this.ProcessModel_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.ACC_WH = new System.Windows.Forms.TabPage();
             this.groupBoxCommon8 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
+            this.InventoryTime_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.Supplier_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.equipment_machine_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.Equipment_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
@@ -113,8 +117,6 @@
             this.tabSystemMaster = new System.Windows.Forms.TabPage();
             this.tabLocalMaster = new System.Windows.Forms.TabPage();
             this.tabNCVCFunction = new System.Windows.Forms.TabPage();
-            this.InventoryCheck_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
-            this.InventoryTime_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.Menu_gpb.SuspendLayout();
             this.groupBoxCommon7.SuspendLayout();
             this.groupBoxCommon1.SuspendLayout();
@@ -123,6 +125,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPQM.SuspendLayout();
             this.NcvpMaster_gpb.SuspendLayout();
             this.Master_tab.SuspendLayout();
             this.Master.SuspendLayout();
@@ -262,8 +265,10 @@
             this.tabControlCommon1.Controls.Add(this.tabPage1);
             this.tabControlCommon1.Controls.Add(this.tabPage2);
             this.tabControlCommon1.Controls.Add(this.tabPage3);
+            this.tabControlCommon1.Controls.Add(this.tabPQM);
             this.tabControlCommon1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlCommon1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControlCommon1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControlCommon1.ItemSize = new System.Drawing.Size(150, 24);
             this.tabControlCommon1.Location = new System.Drawing.Point(3, 49);
             this.tabControlCommon1.Name = "tabControlCommon1";
             this.tabControlCommon1.SelectedIndex = 0;
@@ -276,10 +281,10 @@
             this.tabPage1.Controls.Add(this.DownTime_bt);
             this.tabPage1.Controls.Add(this.jig_repair_btn);
             this.tabPage1.Controls.Add(this.DrawRegist_btn);
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
+            this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(640, 420);
+            this.tabPage1.Size = new System.Drawing.Size(640, 419);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Technical Maintenance";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -332,10 +337,10 @@
             this.tabPage2.Controls.Add(this.production_controller_btn);
             this.tabPage2.Controls.Add(this.Doc_Main_btn);
             this.tabPage2.Controls.Add(this.MachineWorkingStatus_btn);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(640, 420);
+            this.tabPage2.Size = new System.Drawing.Size(640, 419);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Control Management";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -401,13 +406,27 @@
             this.tabPage3.Controls.Add(this.InventoryCheck_btn);
             this.tabPage3.Controls.Add(this.WarehouseManagement_New_frm);
             this.tabPage3.Controls.Add(this.account_equipments_btn);
-            this.tabPage3.Location = new System.Drawing.Point(4, 27);
+            this.tabPage3.Location = new System.Drawing.Point(4, 28);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(640, 420);
+            this.tabPage3.Size = new System.Drawing.Size(640, 419);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Warehouse - Equipment";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // InventoryCheck_btn
+            // 
+            this.InventoryCheck_btn.BackColor = System.Drawing.SystemColors.Control;
+            this.InventoryCheck_btn.ControlId = "cpmb011";
+            this.InventoryCheck_btn.Font = new System.Drawing.Font("Arial", 9F);
+            this.InventoryCheck_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.InventoryCheck_btn.Location = new System.Drawing.Point(38, 107);
+            this.InventoryCheck_btn.Name = "InventoryCheck_btn";
+            this.InventoryCheck_btn.Size = new System.Drawing.Size(210, 64);
+            this.InventoryCheck_btn.TabIndex = 49;
+            this.InventoryCheck_btn.Text = "Inventory Check";
+            this.InventoryCheck_btn.UseVisualStyleBackColor = false;
+            this.InventoryCheck_btn.Click += new System.EventHandler(this.InventoryCheck_btn_Click);
             // 
             // WarehouseManagement_New_frm
             // 
@@ -437,6 +456,32 @@
             this.account_equipments_btn.UseVisualStyleBackColor = false;
             this.account_equipments_btn.Visible = false;
             this.account_equipments_btn.Click += new System.EventHandler(this.account_equipments_btn_Click);
+            // 
+            // tabPQM
+            // 
+            this.tabPQM.Controls.Add(this.btnDataViewer);
+            this.tabPQM.Location = new System.Drawing.Point(4, 28);
+            this.tabPQM.Name = "tabPQM";
+            this.tabPQM.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPQM.Size = new System.Drawing.Size(640, 419);
+            this.tabPQM.TabIndex = 3;
+            this.tabPQM.Text = "PQM DataViewer";
+            this.tabPQM.UseVisualStyleBackColor = true;
+            // 
+            // btnDataViewer
+            // 
+            this.btnDataViewer.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDataViewer.ControlId = "cpmb010";
+            this.btnDataViewer.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnDataViewer.Font = new System.Drawing.Font("Arial", 9F);
+            this.btnDataViewer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnDataViewer.Location = new System.Drawing.Point(16, 20);
+            this.btnDataViewer.Name = "btnDataViewer";
+            this.btnDataViewer.Size = new System.Drawing.Size(210, 64);
+            this.btnDataViewer.TabIndex = 2;
+            this.btnDataViewer.Text = "Data Viewer";
+            this.btnDataViewer.UseVisualStyleBackColor = false;
+            this.btnDataViewer.Click += new System.EventHandler(this.btnDataViewer_Click);
             // 
             // labelCommon2
             // 
@@ -626,6 +671,20 @@
             this.groupBoxCommon8.TabIndex = 51;
             this.groupBoxCommon8.TabStop = false;
             this.groupBoxCommon8.Text = "WareHouse";
+            // 
+            // InventoryTime_btn
+            // 
+            this.InventoryTime_btn.BackColor = System.Drawing.SystemColors.Control;
+            this.InventoryTime_btn.ControlId = "mmob026";
+            this.InventoryTime_btn.Font = new System.Drawing.Font("Arial", 9F);
+            this.InventoryTime_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.InventoryTime_btn.Location = new System.Drawing.Point(179, 173);
+            this.InventoryTime_btn.Name = "InventoryTime_btn";
+            this.InventoryTime_btn.Size = new System.Drawing.Size(132, 45);
+            this.InventoryTime_btn.TabIndex = 59;
+            this.InventoryTime_btn.Text = "Inventory Time";
+            this.InventoryTime_btn.UseVisualStyleBackColor = false;
+            this.InventoryTime_btn.Click += new System.EventHandler(this.InventoryTime_btn_Click);
             // 
             // Supplier_btn
             // 
@@ -1325,34 +1384,6 @@
             this.tabNCVCFunction.Text = "NCVC Function";
             this.tabNCVCFunction.UseVisualStyleBackColor = true;
             // 
-            // InventoryCheck_btn
-            // 
-            this.InventoryCheck_btn.BackColor = System.Drawing.SystemColors.Control;
-            this.InventoryCheck_btn.ControlId = "cpmb011";
-            this.InventoryCheck_btn.Font = new System.Drawing.Font("Arial", 9F);
-            this.InventoryCheck_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.InventoryCheck_btn.Location = new System.Drawing.Point(38, 107);
-            this.InventoryCheck_btn.Name = "InventoryCheck_btn";
-            this.InventoryCheck_btn.Size = new System.Drawing.Size(210, 64);
-            this.InventoryCheck_btn.TabIndex = 49;
-            this.InventoryCheck_btn.Text = "Inventory Check";
-            this.InventoryCheck_btn.UseVisualStyleBackColor = false;
-            this.InventoryCheck_btn.Click += new System.EventHandler(this.InventoryCheck_btn_Click);
-            // 
-            // InventoryTime_btn
-            // 
-            this.InventoryTime_btn.BackColor = System.Drawing.SystemColors.Control;
-            this.InventoryTime_btn.ControlId = "mmob026";
-            this.InventoryTime_btn.Font = new System.Drawing.Font("Arial", 9F);
-            this.InventoryTime_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.InventoryTime_btn.Location = new System.Drawing.Point(179, 173);
-            this.InventoryTime_btn.Name = "InventoryTime_btn";
-            this.InventoryTime_btn.Size = new System.Drawing.Size(132, 45);
-            this.InventoryTime_btn.TabIndex = 59;
-            this.InventoryTime_btn.Text = "Inventory Time";
-            this.InventoryTime_btn.UseVisualStyleBackColor = false;
-            this.InventoryTime_btn.Click += new System.EventHandler(this.InventoryTime_btn_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1378,6 +1409,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tabPQM.ResumeLayout(false);
             this.NcvpMaster_gpb.ResumeLayout(false);
             this.Master_tab.ResumeLayout(false);
             this.Master.ResumeLayout(false);
@@ -1412,10 +1444,6 @@
         private Framework.ButtonCommon SystemMaster_btn;
         private Framework.GroupBoxCommon NCVC_Function_gr;
         private Framework.LabelCommon labelCommon2;
-        private Framework.ButtonCommon Doc_Main_btn;
-        private Framework.ButtonCommon DrawRegist_btn;
-        private Framework.ButtonCommon DownTime_bt;
-        private Framework.ButtonCommon jig_repair_btn;
         private Framework.GroupBoxCommon NcvpMaster_gpb;
         private Framework.GroupBoxCommon groupBoxCommon3;
         private Framework.ButtonCommon Process_btn;
@@ -1443,17 +1471,11 @@
         private Framework.ButtonCommon Asset_btn;
         private Framework.ButtonCommon User_Localtion_btn;
         private Framework.ButtonCommon Rank_btn;
-        private Framework.ButtonCommon MachineWorkingStatus_btn;
         private Framework.GroupBoxCommon groupBoxCommon9;
         private Framework.ButtonCommon AddPlan_btn;
         private Framework.ButtonCommon AddMachineStatus_btn;
         private Framework.ButtonCommon AccountCode_btn;
         private Framework.ButtonCommon AccountLocation_btn;
-        private Framework.ButtonCommon account_equipments_btn;
-        private Framework.TabControlCommon tabControlCommon1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
         private Framework.TabControlCommon Master_tab;
         private System.Windows.Forms.TabPage Master;
         private System.Windows.Forms.TabPage ACC_WH;
@@ -1466,13 +1488,10 @@
         private Framework.ButtonCommon Draw_btn;
         private Framework.ButtonCommon JigResponse_btn;
         private Framework.ButtonCommon JigCause_btn;
-        private Framework.ButtonCommon WarehouseManagement_New_frm;
         private Framework.ButtonCommon DetailPosition_btn;
-        private Framework.ButtonCommon production_controller_btn;
         private Framework.ButtonCommon Unit_btn;
         private System.Windows.Forms.TabPage oven_downtime;
         private Framework.ButtonCommon ovenrange_btn;
-        private Framework.ButtonCommon ovenbarcode_btn;
         private Framework.GroupBoxCommon groupBoxCommon4;
         private Framework.ButtonCommon DefectiveCategory_btn;
         private Framework.ButtonCommon DefectiveReason_btn;
@@ -1487,7 +1506,22 @@
         private System.Windows.Forms.TabPage tabSystemMaster;
         private System.Windows.Forms.TabPage tabLocalMaster;
         private System.Windows.Forms.TabPage tabNCVCFunction;
-        private Framework.ButtonCommon InventoryCheck_btn;
         private Framework.ButtonCommon InventoryTime_btn;
+        private Framework.TabControlCommon tabControlCommon1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private Framework.ButtonCommon DownTime_bt;
+        private Framework.ButtonCommon jig_repair_btn;
+        private Framework.ButtonCommon DrawRegist_btn;
+        private System.Windows.Forms.TabPage tabPage2;
+        private Framework.ButtonCommon ovenbarcode_btn;
+        private Framework.ButtonCommon production_controller_btn;
+        private Framework.ButtonCommon Doc_Main_btn;
+        private Framework.ButtonCommon MachineWorkingStatus_btn;
+        private System.Windows.Forms.TabPage tabPage3;
+        private Framework.ButtonCommon InventoryCheck_btn;
+        private Framework.ButtonCommon WarehouseManagement_New_frm;
+        private Framework.ButtonCommon account_equipments_btn;
+        private System.Windows.Forms.TabPage tabPQM;
+        private Framework.ButtonCommon btnDataViewer;
     }
 }

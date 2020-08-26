@@ -9,6 +9,7 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.PQMDataViewerCbm;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
 {
@@ -16,11 +17,11 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
     {
         #region Variables
         //CONNECT TO PQM DB
-        public string connection = Properties.Settings.Default.PQM_CONNECTION_STRING;
+        public string connection = Properties.Settings.Default.PQM_CONNECTION1_STRING;
 
         PQMDataViewerVo Vo = new PQMDataViewerVo();
         List<string> temp = new List<string>();
-
+        Stopwatch stopWatch = new Stopwatch();
         //THREAD GET TABLE IN BACKGROUND
         Thread GetTable;
         #endregion
@@ -266,19 +267,32 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
         {
             try
             {
-                RenewData();
-                timer1.Enabled = true;
-                //CREATE THREAD TO RUN IN BACKGROUND
-                //GetTable = new Thread(GetDataToTable);
-                //GetTable.Start();
-                //GetTable.IsBackground = true;
-                dgvdt.DataSource = await GetDataToTable();
-                timer1.Enabled = false;
-                tsProcessing.Text = "processing...";
+                if (cmbModel.Text != "")
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    stopWatch.Restart();
+                    RenewData();
+                    timer1.Enabled = true;
+                    //CREATE THREAD TO RUN IN BACKGROUND
+                    //GetTable = new Thread(GetDataToTable);
+                    //GetTable.Start();
+                    //GetTable.IsBackground = true;
+                    dgvdt.DataSource = await GetDataToTable();
+                    timer1.Enabled = false;
+                    //tsProcessing.Text = "processing...";
+                    stopWatch.Stop();
+                    tsTime.Text = stopWatch.Elapsed.ToString("s\\.ff") + " s";
+                    tsSernoRows.Text = (dgvdt.Rows.Count - 1).ToString();
+                    this.Cursor = Cursors.Default;
+                }
+                else
+                    MessageBox.Show("Model not null", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "NoInspect", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please choose inspect", "NoInspect", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                stopWatch.Stop();
+                this.Cursor = Cursors.Default;
             }
         }
 
@@ -364,7 +378,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 Vo.CheckLot = true;
             else
                 Vo.CheckLot = false;
-           // Vo.ThreadComplete = false;
+            // Vo.ThreadComplete = false;
             Vo.Timer_Counter = 0;
             Vo.InspectList.Clear();
             Vo.JoinedTable = new DataTable();

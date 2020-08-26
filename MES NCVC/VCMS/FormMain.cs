@@ -41,8 +41,10 @@ namespace Com.Nidec.Mes.VCMS
             tc_Main.Visible = false;
             Master_tab.ItemSize = new Size(0, 1);
             Master_tab.SelectedTab = ACC_WH;
-            tabControlCommon1.ItemSize = new Size(0, 1);
-            tabControlCommon1.SelectedTab = tabPage3;
+
+            //tabControlCommon1.ItemSize = new Size(0, 1);
+            //tabControlCommon1.SelectedTab = tabPage3;
+            // tabControlCommon1.SelectedTab = tabPQM;
             //if (UserData.GetUserData().UserCode == "admin")
             //{
             //    SystemMaster_btn.Enabled = false;
@@ -86,6 +88,8 @@ namespace Com.Nidec.Mes.VCMS
             //NcvpMaster_gpb.Visible = false;
             tc_Main.Visible = true;
             tc_Main.SelectedTab = tabNCVCFunction;
+            tabControlCommon1.TabPages.Remove(tabPage1);
+            tabControlCommon1.TabPages.Remove(tabPage2);
         }
 
         /// <summary>
@@ -441,6 +445,12 @@ namespace Com.Nidec.Mes.VCMS
         {
             InvertoryCheckForm inv = new InvertoryCheckForm();
             inv.ShowDialog();
+        }
+
+        private void btnDataViewer_Click(object sender, EventArgs e)
+        {
+            PQMDataViewerForm dvf = new PQMDataViewerForm();
+            dvf.ShowDialog();
         }
     }
 }
