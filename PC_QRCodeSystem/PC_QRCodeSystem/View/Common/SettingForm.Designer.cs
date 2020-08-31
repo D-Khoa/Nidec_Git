@@ -68,6 +68,7 @@
             this.btnPasswordOK = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.checkPrint = new System.Windows.Forms.CheckBox();
             this.grPrinter.SuspendLayout();
             this.grPremacFolder.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -88,6 +89,7 @@
             // 
             // grPrinter
             // 
+            this.grPrinter.Controls.Add(this.checkPrint);
             this.grPrinter.Controls.Add(this.checkSave);
             this.grPrinter.Controls.Add(this.cbReceive);
             this.grPrinter.Controls.Add(this.dtpDateTest);
@@ -114,7 +116,7 @@
             this.grPrinter.Margin = new System.Windows.Forms.Padding(5);
             this.grPrinter.Name = "grPrinter";
             this.grPrinter.Padding = new System.Windows.Forms.Padding(5);
-            this.grPrinter.Size = new System.Drawing.Size(614, 242);
+            this.grPrinter.Size = new System.Drawing.Size(614, 264);
             this.grPrinter.TabIndex = 4;
             this.grPrinter.TabStop = false;
             this.grPrinter.Text = "Printer";
@@ -122,7 +124,7 @@
             // checkSave
             // 
             this.checkSave.AutoSize = true;
-            this.checkSave.Location = new System.Drawing.Point(390, 73);
+            this.checkSave.Location = new System.Drawing.Point(390, 100);
             this.checkSave.Name = "checkSave";
             this.checkSave.Size = new System.Drawing.Size(124, 21);
             this.checkSave.TabIndex = 22;
@@ -133,7 +135,7 @@
             // cbReceive
             // 
             this.cbReceive.AutoSize = true;
-            this.cbReceive.Location = new System.Drawing.Point(390, 189);
+            this.cbReceive.Location = new System.Drawing.Point(390, 216);
             this.cbReceive.Name = "cbReceive";
             this.cbReceive.Size = new System.Drawing.Size(86, 21);
             this.cbReceive.TabIndex = 20;
@@ -144,7 +146,7 @@
             // 
             this.dtpDateTest.CustomFormat = "yyyy-MM-dd";
             this.dtpDateTest.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDateTest.Location = new System.Drawing.Point(390, 130);
+            this.dtpDateTest.Location = new System.Drawing.Point(390, 157);
             this.dtpDateTest.Name = "dtpDateTest";
             this.dtpDateTest.Size = new System.Drawing.Size(150, 23);
             this.dtpDateTest.TabIndex = 18;
@@ -152,7 +154,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(320, 130);
+            this.label7.Location = new System.Drawing.Point(320, 157);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 17);
             this.label7.TabIndex = 19;
@@ -160,7 +162,7 @@
             // 
             // txtInvoiceTest
             // 
-            this.txtInvoiceTest.Location = new System.Drawing.Point(390, 100);
+            this.txtInvoiceTest.Location = new System.Drawing.Point(390, 127);
             this.txtInvoiceTest.Name = "txtInvoiceTest";
             this.txtInvoiceTest.Size = new System.Drawing.Size(150, 23);
             this.txtInvoiceTest.TabIndex = 17;
@@ -169,7 +171,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(320, 100);
+            this.label6.Location = new System.Drawing.Point(320, 127);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 17);
             this.label6.TabIndex = 17;
@@ -177,7 +179,7 @@
             // 
             // txtQtyTest
             // 
-            this.txtQtyTest.Location = new System.Drawing.Point(390, 160);
+            this.txtQtyTest.Location = new System.Drawing.Point(390, 187);
             this.txtQtyTest.Name = "txtQtyTest";
             this.txtQtyTest.Size = new System.Drawing.Size(150, 23);
             this.txtQtyTest.TabIndex = 19;
@@ -187,7 +189,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(320, 160);
+            this.label5.Location = new System.Drawing.Point(320, 187);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 17);
             this.label5.TabIndex = 15;
@@ -195,7 +197,7 @@
             // 
             // txtSupplierTest
             // 
-            this.txtSupplierTest.Location = new System.Drawing.Point(150, 160);
+            this.txtSupplierTest.Location = new System.Drawing.Point(150, 187);
             this.txtSupplierTest.Name = "txtSupplierTest";
             this.txtSupplierTest.Size = new System.Drawing.Size(150, 23);
             this.txtSupplierTest.TabIndex = 16;
@@ -204,7 +206,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 160);
+            this.label4.Location = new System.Drawing.Point(30, 187);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 17);
             this.label4.TabIndex = 13;
@@ -212,7 +214,7 @@
             // 
             // txtItemCDTest
             // 
-            this.txtItemCDTest.Location = new System.Drawing.Point(150, 130);
+            this.txtItemCDTest.Location = new System.Drawing.Point(150, 157);
             this.txtItemCDTest.Name = "txtItemCDTest";
             this.txtItemCDTest.Size = new System.Drawing.Size(150, 23);
             this.txtItemCDTest.TabIndex = 15;
@@ -221,7 +223,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 130);
+            this.label3.Location = new System.Drawing.Point(30, 157);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 17);
             this.label3.TabIndex = 11;
@@ -229,7 +231,7 @@
             // 
             // txtItemNameTest
             // 
-            this.txtItemNameTest.Location = new System.Drawing.Point(150, 100);
+            this.txtItemNameTest.Location = new System.Drawing.Point(150, 127);
             this.txtItemNameTest.Name = "txtItemNameTest";
             this.txtItemNameTest.Size = new System.Drawing.Size(150, 23);
             this.txtItemNameTest.TabIndex = 14;
@@ -238,7 +240,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 100);
+            this.label2.Location = new System.Drawing.Point(30, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 17);
             this.label2.TabIndex = 9;
@@ -246,7 +248,7 @@
             // 
             // btnPrintTest
             // 
-            this.btnPrintTest.Location = new System.Drawing.Point(30, 190);
+            this.btnPrintTest.Location = new System.Drawing.Point(30, 217);
             this.btnPrintTest.Margin = new System.Windows.Forms.Padding(5);
             this.btnPrintTest.Name = "btnPrintTest";
             this.btnPrintTest.Size = new System.Drawing.Size(100, 30);
@@ -257,7 +259,7 @@
             // 
             // btnPrinterCheck
             // 
-            this.btnPrinterCheck.Location = new System.Drawing.Point(390, 30);
+            this.btnPrinterCheck.Location = new System.Drawing.Point(387, 30);
             this.btnPrinterCheck.Margin = new System.Windows.Forms.Padding(5);
             this.btnPrinterCheck.Name = "btnPrinterCheck";
             this.btnPrinterCheck.Size = new System.Drawing.Size(100, 30);
@@ -270,7 +272,7 @@
             // 
             this.lbPrinterStatus.AutoSize = true;
             this.lbPrinterStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPrinterStatus.Location = new System.Drawing.Point(150, 70);
+            this.lbPrinterStatus.Location = new System.Drawing.Point(150, 97);
             this.lbPrinterStatus.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbPrinterStatus.Name = "lbPrinterStatus";
             this.lbPrinterStatus.Size = new System.Drawing.Size(46, 17);
@@ -280,7 +282,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(30, 70);
+            this.label13.Location = new System.Drawing.Point(30, 97);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(48, 17);
@@ -368,7 +370,7 @@
             this.panel5.Controls.Add(this.btnOK);
             this.panel5.Controls.Add(this.btnCancel);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 507);
+            this.panel5.Location = new System.Drawing.Point(0, 529);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(614, 80);
@@ -510,13 +512,23 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Password";
             // 
+            // checkPrint
+            // 
+            this.checkPrint.AutoSize = true;
+            this.checkPrint.Location = new System.Drawing.Point(390, 73);
+            this.checkPrint.Name = "checkPrint";
+            this.checkPrint.Size = new System.Drawing.Size(97, 21);
+            this.checkPrint.TabIndex = 23;
+            this.checkPrint.Text = "Print Large";
+            this.checkPrint.UseVisualStyleBackColor = true;
+            // 
             // SettingForm
             // 
             this.AcceptButton = this.btnPasswordOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(614, 587);
+            this.ClientSize = new System.Drawing.Size(614, 627);
             this.ControlBox = false;
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.grPrinter);
@@ -584,5 +596,6 @@
         private System.Windows.Forms.TextBox txtBackupFolder;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkSave;
+        private System.Windows.Forms.CheckBox checkPrint;
     }
 }

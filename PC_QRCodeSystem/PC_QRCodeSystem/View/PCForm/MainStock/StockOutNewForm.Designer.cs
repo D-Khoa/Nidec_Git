@@ -94,7 +94,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtSetBarcode = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtSetUserCD = new System.Windows.Forms.TextBox();
             this.lbSetUserName = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -123,6 +122,7 @@
             this.btnInsDelete = new System.Windows.Forms.Button();
             this.txtInsLabelQty = new System.Windows.Forms.TextBox();
             this.btnInsClear = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tc_Main.SuspendLayout();
             this.tab_Main.SuspendLayout();
@@ -884,7 +884,6 @@
             this.tbpSetMain.Controls.Add(this.label2, 0, 3);
             this.tbpSetMain.Controls.Add(this.txtSetBarcode, 1, 3);
             this.tbpSetMain.Controls.Add(this.label8, 0, 2);
-            this.tbpSetMain.Controls.Add(this.label10, 0, 0);
             this.tbpSetMain.Controls.Add(this.txtSetUserCD, 1, 0);
             this.tbpSetMain.Controls.Add(this.lbSetUserName, 2, 0);
             this.tbpSetMain.Controls.Add(this.label14, 0, 1);
@@ -906,6 +905,26 @@
             this.tbpSetMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tbpSetMain.Size = new System.Drawing.Size(780, 160);
             this.tbpSetMain.TabIndex = 2;
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetItemCD, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.label17, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.label16, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.label15, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.label14, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.lbSetUserName, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetUserCD, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.label8, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetBarcode, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.label2, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetModelCD, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.lbSetModelName, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.lbSetDesName, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetDesCD, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetRequestDate, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetRequestQty, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetOrderNo, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.txtSetInvoice, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.label7, 0);
+            this.tbpSetMain.Controls.SetChildIndex(this.label11, 0);
             // 
             // label11
             // 
@@ -1059,18 +1078,6 @@
             this.label8.TabIndex = 47;
             this.label8.Text = "DESTINATION /\r\nPhòng ban";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label10
-            // 
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 1);
-            this.label10.Margin = new System.Windows.Forms.Padding(0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(114, 30);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "USER ID /\r\nMã số nhân viên";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtSetUserCD
             // 
@@ -1467,6 +1474,18 @@
             this.btnInsClear.UseVisualStyleBackColor = true;
             this.btnInsClear.Click += new System.EventHandler(this.btnInsClear_Click);
             // 
+            // label10
+            // 
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(6, 1);
+            this.label10.Margin = new System.Windows.Forms.Padding(0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(114, 30);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "USER ID /\r\nMã số nhân viên";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Location = new System.Drawing.Point(150, 479);
@@ -1484,13 +1503,13 @@
             this.Controls.Add(this.statusStrip1);
             this.dept = "";
             this.listper = null;
+            this.Location = new System.Drawing.Point(0, 0);
             this.logintime = new System.DateTime(((long)(0)));
             this.name = "";
             this.Name = "StockOutNewForm";
             this.position = "";
             this.Text = "Stock Out";
             this.tittle = "FormCommon";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StockOutNewForm_Load);
             this.Controls.SetChildIndex(this.statusStrip1, 0);
             this.Controls.SetChildIndex(this.tc_Main, 0);

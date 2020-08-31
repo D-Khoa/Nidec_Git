@@ -54,15 +54,31 @@ namespace PC_QRCodeSystem.Model
             for (int i = 0; i < listPrintItem.Count; i++)
             {
                 if (printOneCoppy)
-                {
-                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, 1);
+                {// check print large
+                    if (SettingItem.checkPrintLarge == "False")
+                    {
+                        TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, 1);
+                    }
+                    else
+                    {
+                        TfPrint.printBarCodeLarge(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, 1);
+                    }
+
                 }
                 else
-                {
-                    //for (int j = 0; j < listPrintItem[i].Label_Qty; j++)
-                    //{
-                    TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, listPrintItem[i].Label_Qty);
-                    //}
+                {// check print large
+                    if (SettingItem.checkPrintLarge == "False")
+                    {
+                        //for (int j = 0; j < listPrintItem[i].Label_Qty; j++)
+                        //{
+                        TfPrint.printBarCodeNew(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, listPrintItem[i].Label_Qty);
+                        //}
+                    }
+                    else
+                    {// 
+                        TfPrint.printBarCodeLarge(listPrintItem[i].Item_Number, listPrintItem[i].Item_Name, listPrintItem[i].SupplierName, listPrintItem[i].Invoice, listPrintItem[i].Delivery_Date.ToString("yyyy/MM/dd"), listPrintItem[i].Delivery_Qty.ToString(), listPrintItem[i].SupplierCD, listPrintItem[i].Remark, listPrintItem[i].isRec, listPrintItem[i].Label_Qty);
+                    }
+
                 }
             }
             return true;

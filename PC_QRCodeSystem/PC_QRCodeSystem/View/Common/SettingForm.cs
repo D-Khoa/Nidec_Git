@@ -33,6 +33,8 @@ namespace PC_QRCodeSystem.View
             LockPanel(true);
             if (!string.IsNullOrEmpty(SettingItem.checkSaved))
                 checkSave.Checked = bool.Parse(settingItem.checkSave);
+            if (!string.IsNullOrEmpty(SettingItem.checkPrintLarge))
+                checkPrint.Checked = bool.Parse(settingItem.checkPrint);
             //AcceptButton = btnPasswordOK;
         }
         #endregion
@@ -131,7 +133,9 @@ namespace PC_QRCodeSystem.View
             settingItem.premacFolder = txtPremacFolder.Text;
             settingItem.printerName = cmbPrinter.Text;
             settingItem.checkSave = checkSave.Checked.ToString();
+            settingItem.checkPrint = checkPrint.Checked.ToString();
             settingItem.SaveSetting();
+           
             // this.Close();
             if (checkSave.Checked == true)
             {
