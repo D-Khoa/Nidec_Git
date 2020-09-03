@@ -78,7 +78,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(230, 10);
+            this.btnReset.Location = new System.Drawing.Point(211, 31);
             this.btnReset.Margin = new System.Windows.Forms.Padding(5);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(120, 60);
@@ -89,7 +89,6 @@
             // 
             // grPrinter
             // 
-            this.grPrinter.Controls.Add(this.checkPrint);
             this.grPrinter.Controls.Add(this.checkSave);
             this.grPrinter.Controls.Add(this.cbReceive);
             this.grPrinter.Controls.Add(this.dtpDateTest);
@@ -355,7 +354,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(422, 10);
+            this.btnOK.Location = new System.Drawing.Point(389, 31);
             this.btnOK.Margin = new System.Windows.Forms.Padding(5);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(120, 60);
@@ -366,6 +365,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.checkPrint);
             this.panel5.Controls.Add(this.btnReset);
             this.panel5.Controls.Add(this.btnOK);
             this.panel5.Controls.Add(this.btnCancel);
@@ -373,13 +373,13 @@
             this.panel5.Location = new System.Drawing.Point(0, 529);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(614, 80);
+            this.panel5.Size = new System.Drawing.Size(614, 150);
             this.panel5.TabIndex = 5;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(42, 10);
+            this.btnCancel.Location = new System.Drawing.Point(33, 31);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 60);
@@ -515,10 +515,10 @@
             // checkPrint
             // 
             this.checkPrint.AutoSize = true;
-            this.checkPrint.Location = new System.Drawing.Point(390, 73);
+            this.checkPrint.Location = new System.Drawing.Point(390, 3);
             this.checkPrint.Name = "checkPrint";
-            this.checkPrint.Size = new System.Drawing.Size(97, 21);
-            this.checkPrint.TabIndex = 23;
+            this.checkPrint.Size = new System.Drawing.Size(91, 20);
+            this.checkPrint.TabIndex = 25;
             this.checkPrint.Text = "Print Large";
             this.checkPrint.UseVisualStyleBackColor = true;
             // 
@@ -528,7 +528,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(614, 627);
+            this.ClientSize = new System.Drawing.Size(614, 676);
             this.ControlBox = false;
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.grPrinter);
@@ -547,6 +547,7 @@
             this.grPremacFolder.ResumeLayout(false);
             this.grPremacFolder.PerformLayout();
             this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.grOutFolder.ResumeLayout(false);
             this.grOutFolder.PerformLayout();
             this.grPass.ResumeLayout(false);
