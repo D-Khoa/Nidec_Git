@@ -44,7 +44,9 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBoxCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -194,11 +196,20 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(298, 60);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(182, 129);
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(315, 335);
+            this.ClientSize = new System.Drawing.Size(566, 335);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrint);
@@ -212,6 +223,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxCode.ResumeLayout(false);
             this.groupBoxCode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -233,6 +245,7 @@
         private System.Windows.Forms.DateTimePicker dtpyear;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

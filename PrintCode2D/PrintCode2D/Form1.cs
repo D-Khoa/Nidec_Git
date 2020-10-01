@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
+using System.Windows.Interop;
+using Spire.Barcode;
 
 namespace PrintCode2D
 {
@@ -57,8 +57,9 @@ namespace PrintCode2D
                 month = "C";
             string date = dtpDate.Value.ToString("dd");
             string seri = txtSerinumber.Text;
+            GeneralBarcode(cus + year + month + date + seri);
             TfPrint.openPrinter();
-            TfPrint.printBarCodeNew(cus, year, month, date, seri);
+            TfPrint.printBarCodeBMP("OutBarcode.png", cus + year + month + date + seri);
             TfPrint.closePrinter();
         }
 
@@ -86,6 +87,14 @@ namespace PrintCode2D
         private void btnReset_Click(object sender, EventArgs e)
         {
             txtSerinumber.Text = "00001";
+        }
+
+        private void GeneralBarcode(string code)
+        {
+            DataMatrix.net.DmtxImageEncoder encoder = new DataMatrix.net.DmtxImageEncoder();
+            Bitmap bmp = encoder.EncodeImage(code);
+            pictureBox1.Image = bmp;
+            bmp.Save("OutBarcode.png", System.Drawing.Imaging.ImageFormat.Png);
         }
     }
 }
