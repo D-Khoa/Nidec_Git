@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -39,89 +40,73 @@ namespace PrintCode2D
         #region BUTTON PRINT
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            PrintDocument printDoc = new PrintDocument();
+            printDoc.PrinterSettings.DefaultPageSettings.PaperSize = new PaperSize("Label barcode 2d", 104, 140);
+            string cus = txtCustomerCode.Text;
+            string year = dtpyear.Value.ToString("yyyy");
+            year = year.Substring(year.Length - 1, 1);
+            string month = dtpMonth.Value.ToString("MM");
+            if (month == "01")
+                month = "1";
+            if (month == "02")
+                month = "2";
+            if (month == "03")
+                month = "3";
+            if (month == "04")
+                month = "4";
+            if (month == "05")
+                month = "5";
+            if (month == "06")
+                month = "6";
+            if (month == "07")
+                month = "7";
+            if (month == "08")
+                month = "8";
+            if (month == "09")
+                month = "9";
+            if (month == "10")
+                month = "A";
+            if (month == "11")
+                month = "B";
+            if (month == "12")
+                month = "C";
+            string date = dtpDate.Value.ToString("dd");
+            string directory = @"C:\PrintCode2DImage\";
+            if (!int.TryParse(txtSerinumber.Text, out int seri))
+            {
+                seri = 1;
+            }
             #region PRINT AUTO
             //CHECK PRINT AUTO
             if (ckAuto.Checked == true && btnEditCode.Text == "Edit Code")
             {
-                string cus = txtCustomerCode.Text;
-                string year = dtpyear.Value.ToString("yyyy");
-                year = year.Substring(year.Length - 1, 1);
-                string month = dtpMonth.Value.ToString("MM");
-                if (month == "01")
-                    month = "1";
-                if (month == "02")
-                    month = "2";
-                if (month == "03")
-                    month = "3";
-                if (month == "04")
-                    month = "4";
-                if (month == "05")
-                    month = "5";
-                if (month == "06")
-                    month = "6";
-                if (month == "07")
-                    month = "7";
-                if (month == "08")
-                    month = "8";
-                if (month == "09")
-                    month = "9";
-                if (month == "10")
-                    month = "A";
-                if (month == "11")
-                    month = "B";
-                if (month == "12")
-                    month = "C";
-                string date = dtpDate.Value.ToString("dd");
-                string seri = txtSerinumber.Text;
-                if (seri == "")
+                int endSeri = seri + 30;
+                while (seri < endSeri)
                 {
-                    seri = "00001";
-                    GeneralBarcode(cus + year + month + date + seri);
-                    string directory = @"C:\PrintCode2DImage\";
-                    string[] files = System.IO.Directory.GetFiles(directory, "*", System.IO.SearchOption.AllDirectories);
+                    string code = string.Format("{0}{1}{2}{3}{4}", cus, year, month, date, seri);
+                    GeneralBarcode(code);
+                    seri++;
+                }
+                if (!cbPrintDocument.Checked)
+                {
+                    string[] files = Directory.GetFiles(directory, "*.bmp", SearchOption.AllDirectories);
                     for (int i = 0; i < files.Length; i++)
                     {
-
-                        string fname = System.IO.Path.GetFileName(files[i]);
-                        if (VBStrings.Right(fname.ToLower(), 4) == ".bmp")
-                        {
-                            string datecdFile = files[i];
-                            TfPrint.openPrinter();
-                            TfPrint.printBitmap(datecdFile, cus + year + month + date + seri);
-                            TfPrint.closePrinter();
-                            System.IO.File.Delete(files[i]);
-                            txtResult.Text = cus + year + month + date + seri;
-                            txtSerinumber.Text = seri;
-                        }
-
+                        txtSerinumber.Text = string.Format("{0:00000}", seri);
+                        string fname = Path.GetFileNameWithoutExtension(files[i]);
+                        string datecdFile = files[i];
+                        TfPrint.openPrinter();
+                        TfPrint.printBitmap(datecdFile, fname);
+                        TfPrint.closePrinter();
+                        File.Delete(files[i]);
+                        txtResult.Text = fname;
                     }
                 }
                 else
                 {
-                    int seris = int.Parse(seri.Substring(seri.Length - 5, 5));
-                    seris = seris + 1;
-                    textBox1.Text = seris.ToString("00000");
-                    string ser = textBox1.Text;
-                    GeneralBarcode(cus + year + month + date + ser);
-                    string directory = @"C:\PrintCode2DImage\";
-                    string[] files = System.IO.Directory.GetFiles(directory, "*", System.IO.SearchOption.AllDirectories);
-                    for (int i = 0; i < files.Length; i++)
-                    {
-
-                        string fname = System.IO.Path.GetFileName(files[i]);
-                        if (VBStrings.Right(fname.ToLower(), 4) == ".bmp")
-                        {
-                            string datecdFile = files[i];
-                            TfPrint.openPrinter();
-                            TfPrint.printBitmap(datecdFile, cus + year + month + date + ser);
-                            TfPrint.closePrinter();
-                            System.IO.File.Delete(files[i]);
-                            txtResult.Text = cus + year + month + date + ser;
-                            txtSerinumber.Text = ser;
-                        }
-
-                    }
-                }
+                    printDoc.PrintPage += PrintDoc_PrintPage;
+                    printDoc.Print();
+                }    
             }
             #endregion
             #region PRINT NORMAL
@@ -134,54 +119,27 @@ namespace PrintCode2D
                 }
                 else
                 {
-                    string cus = txtCustomerCode.Text;
-                    string year = dtpyear.Value.ToString("yyyy");
-                    year = year.Substring(year.Length - 1, 1);
-                    string month = dtpMonth.Value.ToString("MM");
-                    if (month == "01")
-                        month = "1";
-                    if (month == "02")
-                        month = "2";
-                    if (month == "03")
-                        month = "3";
-                    if (month == "04")
-                        month = "4";
-                    if (month == "05")
-                        month = "5";
-                    if (month == "06")
-                        month = "6";
-                    if (month == "07")
-                        month = "7";
-                    if (month == "08")
-                        month = "8";
-                    if (month == "09")
-                        month = "9";
-                    if (month == "10")
-                        month = "A";
-                    if (month == "11")
-                        month = "B";
-                    if (month == "12")
-                        month = "C";
-                    string date = dtpDate.Value.ToString("dd");
-                    string seri = txtSerinumber.Text;
-                    GeneralBarcode(cus + year + month + date + seri);
-                    string directory = @"C:\PrintCode2DImage\";
-                    string[] files = System.IO.Directory.GetFiles(directory, "*", System.IO.SearchOption.AllDirectories);
-                    for (int i = 0; i < files.Length; i++)
+                    string code = string.Format("{0}{1}{2}{3}{4}", cus, year, month, date, seri);
+                    GeneralBarcode(code);
+                    if (!cbPrintDocument.Checked)
                     {
-
-                        string fname = System.IO.Path.GetFileName(files[i]);
-                        if (VBStrings.Right(fname.ToLower(), 4) == ".bmp")
+                        string[] files = Directory.GetFiles(directory, "*.bmp", SearchOption.AllDirectories);
+                        for (int i = 0; i < files.Length; i++)
                         {
+                            txtSerinumber.Text = string.Format("{0:00000}", seri);
+                            string fname = Path.GetFileNameWithoutExtension(files[i]);
                             string datecdFile = files[i];
                             TfPrint.openPrinter();
-                            TfPrint.printBitmap(datecdFile, cus + year + month + date + seri);
+                            TfPrint.printBitmap(datecdFile, fname);
                             TfPrint.closePrinter();
-                            System.IO.File.Delete(files[i]);
-                            txtResult.Text = cus + year + month + date + seri;
-                            txtSerinumber.Text = seri;
+                            File.Delete(files[i]);
+                            txtResult.Text = fname;
                         }
-
+                    }
+                    else
+                    {
+                        printDoc.PrintPage += PrintDoc_PrintPage;
+                        printDoc.Print();
                     }
                 }
             }
@@ -189,6 +147,27 @@ namespace PrintCode2D
             if (btnEditCode.Text == "Apply")
             {
                 MessageBox.Show("Please apply button");
+            }
+        }
+
+        private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            string directory = @"C:\PrintCode2DImage\";
+            string[] files = Directory.GetFiles(directory, "*.bmp", SearchOption.AllDirectories);
+            Font barFont = new Font("Arial", 4, FontStyle.Regular);
+            if(files.Length > 0)
+            {
+                string fname = Path.GetFileNameWithoutExtension(files[0]);
+                Bitmap bmp = new Bitmap(files[0]);
+                e.Graphics.DrawImage(bmp, new PointF(78, 48));
+                e.Graphics.DrawString("SN", barFont, Brushes.Black, new PointF(97, 53));
+                e.Graphics.DrawString(fname, barFont, Brushes.Black, new PointF(97, 60));
+                File.Delete(files[0]);
+                e.HasMorePages = true;
+            }
+            else
+            {
+                e.HasMorePages = false;
             }
         }
         #endregion
@@ -268,7 +247,7 @@ namespace PrintCode2D
             DataMatrix.net.DmtxImageEncoder encoder = new DataMatrix.net.DmtxImageEncoder();
             Bitmap bmp = encoder.EncodeImage(code);
             pictureBox1.Image = bmp;
-            bmp.Save(@"C:\PrintCode2DImage\OutBarcode.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            bmp.Save(string.Format(@"C:\PrintCode2DImage\{0}.bmp", code), System.Drawing.Imaging.ImageFormat.Bmp);
         }
         #endregion
         #region SERI NUMBER

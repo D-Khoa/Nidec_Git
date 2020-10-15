@@ -50,6 +50,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.ckAuto = new System.Windows.Forms.CheckBox();
+            this.cbPrintDocument = new System.Windows.Forms.CheckBox();
             this.groupBoxCode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -262,11 +263,22 @@
             this.ckAuto.Text = "Print Auto";
             this.ckAuto.UseVisualStyleBackColor = true;
             // 
+            // cbPrintDocument
+            // 
+            this.cbPrintDocument.AutoSize = true;
+            this.cbPrintDocument.Location = new System.Drawing.Point(16, 371);
+            this.cbPrintDocument.Name = "cbPrintDocument";
+            this.cbPrintDocument.Size = new System.Drawing.Size(109, 19);
+            this.cbPrintDocument.TabIndex = 74;
+            this.cbPrintDocument.Text = "Print document";
+            this.cbPrintDocument.UseVisualStyleBackColor = true;
+            // 
             // PrintCode2D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(506, 402);
+            this.Controls.Add(this.cbPrintDocument);
             this.Controls.Add(this.ckAuto);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox1);
@@ -316,6 +328,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox ckAuto;
+        private System.Windows.Forms.CheckBox cbPrintDocument;
     }
 }
 
