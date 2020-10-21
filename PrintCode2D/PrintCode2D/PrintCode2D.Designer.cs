@@ -50,7 +50,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.ckAuto = new System.Windows.Forms.CheckBox();
-            this.cbPrintDocument = new System.Windows.Forms.CheckBox();
             this.groupBoxCode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -79,7 +78,7 @@
             // 
             this.txtCustomerCode.Location = new System.Drawing.Point(129, 29);
             this.txtCustomerCode.Name = "txtCustomerCode";
-            this.txtCustomerCode.Size = new System.Drawing.Size(96, 21);
+            this.txtCustomerCode.Size = new System.Drawing.Size(120, 21);
             this.txtCustomerCode.TabIndex = 2;
             this.txtCustomerCode.Text = "TLR2";
             // 
@@ -108,7 +107,7 @@
             this.txtSerinumber.Location = new System.Drawing.Point(129, 181);
             this.txtSerinumber.MaxLength = 5;
             this.txtSerinumber.Name = "txtSerinumber";
-            this.txtSerinumber.Size = new System.Drawing.Size(96, 21);
+            this.txtSerinumber.Size = new System.Drawing.Size(120, 21);
             this.txtSerinumber.TabIndex = 9;
             this.txtSerinumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSerinumber_KeyPress);
             // 
@@ -147,7 +146,7 @@
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(129, 140);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(96, 21);
+            this.dtpDate.Size = new System.Drawing.Size(120, 21);
             this.dtpDate.TabIndex = 12;
             // 
             // dtpMonth
@@ -156,7 +155,7 @@
             this.dtpMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMonth.Location = new System.Drawing.Point(129, 102);
             this.dtpMonth.Name = "dtpMonth";
-            this.dtpMonth.Size = new System.Drawing.Size(96, 21);
+            this.dtpMonth.Size = new System.Drawing.Size(120, 21);
             this.dtpMonth.TabIndex = 11;
             // 
             // dtpyear
@@ -165,7 +164,7 @@
             this.dtpyear.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpyear.Location = new System.Drawing.Point(129, 63);
             this.dtpyear.Name = "dtpyear";
-            this.dtpyear.Size = new System.Drawing.Size(96, 21);
+            this.dtpyear.Size = new System.Drawing.Size(120, 21);
             this.dtpyear.TabIndex = 10;
             // 
             // btnEditCode
@@ -238,7 +237,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(177, 21);
             this.textBox1.TabIndex = 21;
-            this.textBox1.Visible = false;
             // 
             // label10
             // 
@@ -263,22 +261,11 @@
             this.ckAuto.Text = "Print Auto";
             this.ckAuto.UseVisualStyleBackColor = true;
             // 
-            // cbPrintDocument
-            // 
-            this.cbPrintDocument.AutoSize = true;
-            this.cbPrintDocument.Location = new System.Drawing.Point(16, 371);
-            this.cbPrintDocument.Name = "cbPrintDocument";
-            this.cbPrintDocument.Size = new System.Drawing.Size(109, 19);
-            this.cbPrintDocument.TabIndex = 74;
-            this.cbPrintDocument.Text = "Print document";
-            this.cbPrintDocument.UseVisualStyleBackColor = true;
-            // 
             // PrintCode2D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(506, 402);
-            this.Controls.Add(this.cbPrintDocument);
             this.Controls.Add(this.ckAuto);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox1);
@@ -296,6 +283,7 @@
             this.MinimizeBox = false;
             this.Name = "PrintCode2D";
             this.Text = "BMD-0088 Print Label";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PrintCode2D_FormClosing_1);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxCode.ResumeLayout(false);
             this.groupBoxCode.PerformLayout();
@@ -328,7 +316,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox ckAuto;
-        private System.Windows.Forms.CheckBox cbPrintDocument;
     }
 }
 
