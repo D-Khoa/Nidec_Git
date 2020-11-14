@@ -475,9 +475,6 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.WareH
             exportexcel.exportexcel(ref warehouse_main_dgv, linksave_txt.Text, this.Text);
         }
 
-        private void warehouse_main_dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+       
     }
 }

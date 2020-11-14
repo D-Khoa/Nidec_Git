@@ -126,6 +126,7 @@
             this.tabSystemMaster = new System.Windows.Forms.TabPage();
             this.tabLocalMaster = new System.Windows.Forms.TabPage();
             this.tabNCVPFunction = new System.Windows.Forms.TabPage();
+            this.btnProducControl = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.NcvpMaster_gpb.SuspendLayout();
             this.Master_tab.SuspendLayout();
             this.Master.SuspendLayout();
@@ -197,7 +198,7 @@
             this.Master.Location = new System.Drawing.Point(4, 24);
             this.Master.Name = "Master";
             this.Master.Padding = new System.Windows.Forms.Padding(3);
-            this.Master.Size = new System.Drawing.Size(679, 489);
+            this.Master.Size = new System.Drawing.Size(672, 457);
             this.Master.TabIndex = 0;
             this.Master.Text = "Master";
             this.Master.UseVisualStyleBackColor = true;
@@ -305,7 +306,7 @@
             this.ACC_WH.Location = new System.Drawing.Point(4, 24);
             this.ACC_WH.Name = "ACC_WH";
             this.ACC_WH.Padding = new System.Windows.Forms.Padding(3);
-            this.ACC_WH.Size = new System.Drawing.Size(679, 489);
+            this.ACC_WH.Size = new System.Drawing.Size(672, 457);
             this.ACC_WH.TabIndex = 1;
             this.ACC_WH.Text = "Account-WH";
             this.ACC_WH.UseVisualStyleBackColor = true;
@@ -328,7 +329,7 @@
             this.groupBoxCommon8.Font = new System.Drawing.Font("Arial", 9F);
             this.groupBoxCommon8.Location = new System.Drawing.Point(3, 3);
             this.groupBoxCommon8.Name = "groupBoxCommon8";
-            this.groupBoxCommon8.Size = new System.Drawing.Size(673, 483);
+            this.groupBoxCommon8.Size = new System.Drawing.Size(666, 451);
             this.groupBoxCommon8.TabIndex = 51;
             this.groupBoxCommon8.TabStop = false;
             this.groupBoxCommon8.Text = "WareHouse";
@@ -493,7 +494,7 @@
             this.Work_Status.Location = new System.Drawing.Point(4, 24);
             this.Work_Status.Name = "Work_Status";
             this.Work_Status.Padding = new System.Windows.Forms.Padding(3);
-            this.Work_Status.Size = new System.Drawing.Size(679, 489);
+            this.Work_Status.Size = new System.Drawing.Size(672, 457);
             this.Work_Status.TabIndex = 2;
             this.Work_Status.Text = "Working Status";
             this.Work_Status.UseVisualStyleBackColor = true;
@@ -507,7 +508,7 @@
             this.groupBoxCommon9.Font = new System.Drawing.Font("Arial", 9F);
             this.groupBoxCommon9.Location = new System.Drawing.Point(3, 3);
             this.groupBoxCommon9.Name = "groupBoxCommon9";
-            this.groupBoxCommon9.Size = new System.Drawing.Size(673, 483);
+            this.groupBoxCommon9.Size = new System.Drawing.Size(666, 451);
             this.groupBoxCommon9.TabIndex = 54;
             this.groupBoxCommon9.TabStop = false;
             this.groupBoxCommon9.Text = "Working Status";
@@ -548,7 +549,7 @@
             this.Jig_Draw.Location = new System.Drawing.Point(4, 24);
             this.Jig_Draw.Name = "Jig_Draw";
             this.Jig_Draw.Padding = new System.Windows.Forms.Padding(3);
-            this.Jig_Draw.Size = new System.Drawing.Size(679, 489);
+            this.Jig_Draw.Size = new System.Drawing.Size(672, 457);
             this.Jig_Draw.TabIndex = 3;
             this.Jig_Draw.Text = "Jig - Draw";
             this.Jig_Draw.UseVisualStyleBackColor = true;
@@ -726,7 +727,7 @@
             this.Oven_Downtime.Controls.Add(this.ovenrangetemp_btn);
             this.Oven_Downtime.Location = new System.Drawing.Point(4, 24);
             this.Oven_Downtime.Name = "Oven_Downtime";
-            this.Oven_Downtime.Size = new System.Drawing.Size(679, 489);
+            this.Oven_Downtime.Size = new System.Drawing.Size(672, 457);
             this.Oven_Downtime.TabIndex = 4;
             this.Oven_Downtime.Text = "Oven-Downtime";
             this.Oven_Downtime.UseVisualStyleBackColor = true;
@@ -1046,7 +1047,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(679, 490);
+            this.tabPage2.Size = new System.Drawing.Size(672, 457);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Control Management";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1119,7 +1120,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(679, 490);
+            this.tabPage3.Size = new System.Drawing.Size(672, 457);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Account - Equipments";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1167,6 +1168,7 @@
             this.account_equipments_btn.TabIndex = 48;
             this.account_equipments_btn.Text = "Account Equipments";
             this.account_equipments_btn.UseVisualStyleBackColor = false;
+            this.account_equipments_btn.Visible = false;
             this.account_equipments_btn.Click += new System.EventHandler(this.account_equipments_btn_Click);
             // 
             // tabPage4
@@ -1181,7 +1183,7 @@
             this.tabPage4.Controls.Add(this.btn_noisecheck);
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(679, 490);
+            this.tabPage4.Size = new System.Drawing.Size(672, 457);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "GA1 Model";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1300,11 +1302,12 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.btnProducControl);
             this.tabPage6.Controls.Add(this.btnDataViewer);
             this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(679, 490);
+            this.tabPage6.Size = new System.Drawing.Size(672, 457);
             this.tabPage6.TabIndex = 4;
             this.tabPage6.Text = "PQM Database";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1330,7 +1333,7 @@
             this.tabFAMG.Location = new System.Drawing.Point(4, 24);
             this.tabFAMG.Name = "tabFAMG";
             this.tabFAMG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFAMG.Size = new System.Drawing.Size(679, 490);
+            this.tabFAMG.Size = new System.Drawing.Size(672, 457);
             this.tabFAMG.TabIndex = 5;
             this.tabFAMG.Text = "FA Management System";
             this.tabFAMG.UseVisualStyleBackColor = true;
@@ -1522,6 +1525,20 @@
             this.tabNCVPFunction.Text = "NCVP Function";
             this.tabNCVPFunction.UseVisualStyleBackColor = true;
             // 
+            // btnProducControl
+            // 
+            this.btnProducControl.BackColor = System.Drawing.SystemColors.Control;
+            this.btnProducControl.ControlId = "cpmb023";
+            this.btnProducControl.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnProducControl.Font = new System.Drawing.Font("Arial", 9F);
+            this.btnProducControl.Location = new System.Drawing.Point(265, 16);
+            this.btnProducControl.Name = "btnProducControl";
+            this.btnProducControl.Size = new System.Drawing.Size(210, 64);
+            this.btnProducControl.TabIndex = 6;
+            this.btnProducControl.Text = "Production Controll";
+            this.btnProducControl.UseVisualStyleBackColor = false;
+            this.btnProducControl.Click += new System.EventHandler(this.btnProducControl_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1671,5 +1688,6 @@
         private System.Windows.Forms.TabPage tabSystemMaster;
         private System.Windows.Forms.TabPage tabLocalMaster;
         private System.Windows.Forms.TabPage tabNCVPFunction;
+        private Framework.ButtonCommon btnProducControl;
     }
 }

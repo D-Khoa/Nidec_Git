@@ -741,7 +741,7 @@
             this.warehouse_main_dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.warehouse_main_dgv.Size = new System.Drawing.Size(1370, 410);
             this.warehouse_main_dgv.TabIndex = 75;
-            this.warehouse_main_dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.warehouse_main_dgv_CellContentClick);
+//            this.warehouse_main_dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.warehouse_main_dgv_CellContentClick);
             // 
             // colAcountMainId
             // 

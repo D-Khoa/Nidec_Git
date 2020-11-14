@@ -9,6 +9,7 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.PQMDataViewerCbm;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
 {
@@ -264,8 +265,11 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
         //****************************************************************************************************************//
         private async void btnSearch_Click(object sender, EventArgs e)
         {
+            Stopwatch stopWatch = new Stopwatch();
             try
             {
+                this.Cursor = Cursors.WaitCursor ;
+                stopWatch.Restart();
                 RenewData();
                 timer1.Enabled = true;
                 //CREATE THREAD TO RUN IN BACKGROUND
@@ -274,12 +278,16 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                 //GetTable.IsBackground = true;
                 dgvdt.DataSource = await GetDataToTable();
                 timer1.Enabled = false;
-                tsProcessing.Text = "processing...";
+                stopWatch.Stop();
+               // tsProcessing.Text = "processing...";
+                if (dgvdt.Rows.Count > 0)
+                    tsSernoRows.Text = dgvdt.Rows.Count.ToString();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "NoInspect", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void timer1_Tick(object sender, EventArgs e)

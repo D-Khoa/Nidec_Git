@@ -45,7 +45,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
 
             #region NEW SQL
             sql.Append("SELECT a.asset_id, a.asset_cd, a.asset_name, r.rank_name, lb.location_cd as beforelocation, ");
-            sql.Append("ln.location_cd as nowlocation, i.invertory_equipments_id, i.invertory_value, i.factory_cd, ");
+            sql.Append("ln.location_cd as nowlocation,  i.invertory_equipments_id, i.invertory_value, i.factory_cd, ");
             sql.Append("w.warehouse_main_id, i.registration_user_cd, i.registration_date_time ");
             sql.Append("FROM t_invertory_equipments i ");
             sql.Append("left join m_location ln on ln.location_id = i.location_id ");
@@ -54,6 +54,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
             sql.Append("left join m_asset a on a.asset_id = w.asset_id ");
             sql.Append("left join m_location lb on lb.location_id = w.after_location_id ");
             sql.Append("left join m_rank r on r.rank_id = w.rank_id ");
+            //sql.Append("left join m_detail_postion dt on dt.detail_postion_id = w.detail_position_id ");
             sql.Append("WHERE 1=1 ");
 
             if (!string.IsNullOrEmpty(inVo.AssetCode))
@@ -71,6 +72,11 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
                 sql.Append(" and ln.location_cd = :location_cd ");
                 sqlParameter.AddParameterString("location_cd", inVo.NowLocation);
             }
+            //if (!string.IsNullOrEmpty(inVo.DetailPosition))
+            //{
+            //    sql.Append("and ld.detail_postion_cd = :detail_postion_cd ");
+            //    sqlParameter.AddParameterString("detail_postion_cd", inVo.DetailPosition);
+            //}
             #endregion
             //create command
             //DbCommandAdaptor 
@@ -88,6 +94,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
                     InvertoryValue = bool.Parse(dataReader["invertory_value"].ToString()),
                     BeforeLocation = dataReader["beforelocation"].ToString(),
                     NowLocation = dataReader["nowlocation"].ToString(),
+                   // DetailPosition = dataReader["detailpostion"].ToString(),
                     RankNameBefore = dataReader["rank_name"].ToString(),
                     RegistrationUserCode = dataReader["registration_user_cd"].ToString(),
                     RegistrationDateTime = DateTime.Parse(dataReader["registration_date_time"].ToString()),

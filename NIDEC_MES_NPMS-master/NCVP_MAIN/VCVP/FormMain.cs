@@ -35,6 +35,8 @@ namespace Com.Nidec.Mes.VCVP
         private void MainForm_Load(object sender, EventArgs e)
         {
             tc_MainMenu.Visible = false;
+            tabControlCommon1.TabPages.Remove(tabFAMG);
+           
             //SystemMaster_gpb.Visible = false;
             //NcvpMaster_gpb.Visible = false;
             //NCVP_Function_gr.Visible = false;
@@ -505,6 +507,12 @@ namespace Com.Nidec.Mes.VCVP
             Warehouse_Equipment_Form wheq = new Warehouse_Equipment_Form();
             wheq.ShowDialog();
 
+        }
+
+        private void btnProducControl_Click(object sender, EventArgs e)
+        {
+            PQMProductionControlForm pqmf = new PQMProductionControlForm();
+            pqmf.ShowDialog();
         }
     }
 }

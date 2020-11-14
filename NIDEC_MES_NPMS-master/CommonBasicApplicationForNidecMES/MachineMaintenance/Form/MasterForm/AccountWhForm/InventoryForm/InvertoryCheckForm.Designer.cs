@@ -46,7 +46,10 @@
             this.colDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asset_code_lbl = new Com.Nidec.Mes.Framework.LabelCommon();
             this.groupBoxCommon1 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
-            this.cbInventoryCode = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbDetailLocation = new Com.Nidec.Mes.Framework.ComboBoxCommon();
+            this.inventorycode_lbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.update_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.Search_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.location_cbm = new Com.Nidec.Mes.Framework.ComboBoxCommon();
@@ -61,11 +64,15 @@
             this.ExportExcel_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.linkexport_txt = new Com.Nidec.Mes.Framework.TextBoxCommon();
             this.exportlink_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
-            this.label1 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsInventoryTotal = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.InvertoryCheck_dgv)).BeginInit();
             this.groupBoxCommon1.SuspendLayout();
             this.groupBoxCommon2.SuspendLayout();
             this.groupBoxCommon3.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // InvertoryCheck_dgv
@@ -109,7 +116,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.InvertoryCheck_dgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.InvertoryCheck_dgv.EnableHeadersVisualStyles = false;
-            this.InvertoryCheck_dgv.Location = new System.Drawing.Point(0, 249);
+            this.InvertoryCheck_dgv.Location = new System.Drawing.Point(0, 276);
             this.InvertoryCheck_dgv.MultiSelect = false;
             this.InvertoryCheck_dgv.Name = "InvertoryCheck_dgv";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -121,7 +128,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.InvertoryCheck_dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.InvertoryCheck_dgv.RowTemplate.Height = 21;
-            this.InvertoryCheck_dgv.Size = new System.Drawing.Size(1261, 393);
+            this.InvertoryCheck_dgv.Size = new System.Drawing.Size(1261, 366);
             this.InvertoryCheck_dgv.TabIndex = 19;
             // 
             // colInvertoryEquipmentId
@@ -227,8 +234,10 @@
             // groupBoxCommon1
             // 
             this.groupBoxCommon1.ControlId = null;
+            this.groupBoxCommon1.Controls.Add(this.label2);
+            this.groupBoxCommon1.Controls.Add(this.cmbDetailLocation);
+            this.groupBoxCommon1.Controls.Add(this.inventorycode_lbl);
             this.groupBoxCommon1.Controls.Add(this.label1);
-            this.groupBoxCommon1.Controls.Add(this.cbInventoryCode);
             this.groupBoxCommon1.Controls.Add(this.update_btn);
             this.groupBoxCommon1.Controls.Add(this.Search_btn);
             this.groupBoxCommon1.Controls.Add(this.location_cbm);
@@ -239,20 +248,47 @@
             this.groupBoxCommon1.Font = new System.Drawing.Font("Arial", 9F);
             this.groupBoxCommon1.Location = new System.Drawing.Point(12, 113);
             this.groupBoxCommon1.Name = "groupBoxCommon1";
-            this.groupBoxCommon1.Size = new System.Drawing.Size(485, 130);
+            this.groupBoxCommon1.Size = new System.Drawing.Size(485, 157);
             this.groupBoxCommon1.TabIndex = 77;
             this.groupBoxCommon1.TabStop = false;
             this.groupBoxCommon1.Text = "Check";
             // 
-            // cbInventoryCode
+            // label2
             // 
-            this.cbInventoryCode.AutoSize = true;
-            this.cbInventoryCode.Location = new System.Drawing.Point(33, 87);
-            this.cbInventoryCode.Name = "cbInventoryCode";
-            this.cbInventoryCode.Size = new System.Drawing.Size(110, 19);
-            this.cbInventoryCode.TabIndex = 86;
-            this.cbInventoryCode.Text = "Inventory Code:";
-            this.cbInventoryCode.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(55, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 15);
+            this.label2.TabIndex = 90;
+            this.label2.Text = "Detail location:";
+            // 
+            // cmbDetailLocation
+            // 
+            this.cmbDetailLocation.ControlId = null;
+            this.cmbDetailLocation.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDetailLocation.FormattingEnabled = true;
+            this.cmbDetailLocation.Location = new System.Drawing.Point(149, 80);
+            this.cmbDetailLocation.Name = "cmbDetailLocation";
+            this.cmbDetailLocation.Size = new System.Drawing.Size(162, 23);
+            this.cmbDetailLocation.TabIndex = 89;
+            // 
+            // inventorycode_lbl
+            // 
+            this.inventorycode_lbl.AutoSize = true;
+            this.inventorycode_lbl.Location = new System.Drawing.Point(55, 113);
+            this.inventorycode_lbl.Name = "inventorycode_lbl";
+            this.inventorycode_lbl.Size = new System.Drawing.Size(88, 15);
+            this.inventorycode_lbl.TabIndex = 88;
+            this.inventorycode_lbl.Text = "Inventory code:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(62, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 15);
+            this.label1.TabIndex = 87;
+            this.label1.Text = "Now location:";
             // 
             // update_btn
             // 
@@ -287,10 +323,11 @@
             this.location_cbm.ControlId = null;
             this.location_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.location_cbm.FormattingEnabled = true;
-            this.location_cbm.Location = new System.Drawing.Point(149, 52);
+            this.location_cbm.Location = new System.Drawing.Point(149, 50);
             this.location_cbm.Name = "location_cbm";
             this.location_cbm.Size = new System.Drawing.Size(162, 23);
             this.location_cbm.TabIndex = 84;
+            this.location_cbm.SelectedIndexChanged += new System.EventHandler(this.location_cbm_SelectedIndexChanged);
             // 
             // Invertory_btn
             // 
@@ -321,7 +358,7 @@
             this.InvertoryTimeCode_cbm.ControlId = null;
             this.InvertoryTimeCode_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InvertoryTimeCode_cbm.FormattingEnabled = true;
-            this.InvertoryTimeCode_cbm.Location = new System.Drawing.Point(149, 85);
+            this.InvertoryTimeCode_cbm.Location = new System.Drawing.Point(149, 110);
             this.InvertoryTimeCode_cbm.Name = "InvertoryTimeCode_cbm";
             this.InvertoryTimeCode_cbm.Size = new System.Drawing.Size(162, 23);
             this.InvertoryTimeCode_cbm.TabIndex = 80;
@@ -429,19 +466,45 @@
             this.exportlink_btn.UseVisualStyleBackColor = false;
             this.exportlink_btn.Click += new System.EventHandler(this.exportlink_btn_Click);
             // 
-            // label1
+            // statusStrip1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(62, 55);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 15);
-            this.label1.TabIndex = 87;
-            this.label1.Text = "Now location:";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsTime,
+            this.toolStripStatusLabel2,
+            this.tsInventoryTotal});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 618);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1261, 24);
+            this.statusStrip1.TabIndex = 83;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsTime
+            // 
+            this.tsTime.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
+            this.tsTime.Name = "tsTime";
+            this.tsTime.Size = new System.Drawing.Size(1157, 19);
+            this.tsTime.Spring = true;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(44, 19);
+            this.toolStripStatusLabel2.Text = "Total :";
+            // 
+            // tsInventoryTotal
+            // 
+            this.tsInventoryTotal.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.tsInventoryTotal.Name = "tsInventoryTotal";
+            this.tsInventoryTotal.Size = new System.Drawing.Size(40, 19);
+            this.tsInventoryTotal.Text = "None";
             // 
             // InvertoryCheckForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1261, 642);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBoxCommon3);
             this.Controls.Add(this.groupBoxCommon2);
             this.Controls.Add(this.groupBoxCommon1);
@@ -454,6 +517,7 @@
             this.Controls.SetChildIndex(this.groupBoxCommon1, 0);
             this.Controls.SetChildIndex(this.groupBoxCommon2, 0);
             this.Controls.SetChildIndex(this.groupBoxCommon3, 0);
+            this.Controls.SetChildIndex(this.statusStrip1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.InvertoryCheck_dgv)).EndInit();
             this.groupBoxCommon1.ResumeLayout(false);
             this.groupBoxCommon1.PerformLayout();
@@ -461,7 +525,10 @@
             this.groupBoxCommon2.PerformLayout();
             this.groupBoxCommon3.ResumeLayout(false);
             this.groupBoxCommon3.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -495,7 +562,13 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colInvertoryValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUserAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDateTime;
-        private System.Windows.Forms.CheckBox cbInventoryCode;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel tsInventoryTotal;
+        private System.Windows.Forms.Label inventorycode_lbl;
+        private System.Windows.Forms.Label label2;
+        private Framework.ComboBoxCommon cmbDetailLocation;
     }
 }

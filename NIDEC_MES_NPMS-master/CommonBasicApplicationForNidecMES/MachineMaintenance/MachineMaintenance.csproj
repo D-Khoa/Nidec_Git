@@ -306,6 +306,27 @@
     <Compile Include="Cbm\PQMDataViewerCbm\GetModelPQMCbm.cs" />
     <Compile Include="Cbm\PQMDataViewerCbm\GetProcessPQMCbm.cs" />
     <Compile Include="Cbm\PQMDataViewerCbm\GetSernoDataTablePQMCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\GetPQMProductionItemCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\GetPQMProductionLineCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\GetPQMProductionModelCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\GetPQMProductionProcessCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\GetPQMProductionRateNGRatioCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMNGNOICHKfromMesdbCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMNGThurstChartCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMOUTPUTByHourCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMOutputFinalCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionExportDataCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionGA1Cbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionInputByDateCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionINPUTCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionNGNOICHKCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionNGThurstCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionoOutputMotorCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionOUTPUTCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionProcessCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMProductionTotalCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\SearchPQMQtyNOICHKfromMesdbCbm.cs" />
+    <Compile Include="Cbm\PQMDataViewerCbm\PQMProductionControlCbm\TabMain\SearchPQMtabMainDGVCbm.cs" />
     <Compile Include="Cbm\ProductionControllerNCVCCbm\AddPersonProNCVCCbm.cs" />
     <Compile Include="Cbm\ProductionControllerNCVCCbm\CheckPersonNCVCCbm.cs" />
     <Compile Include="Cbm\ProductionControllerNCVCCbm\CheckPerson_DuplicateNCVCCbm.cs" />
@@ -642,6 +663,28 @@
     <Compile Include="Dao\PQMDataViewerDao\GetModelPQMDao.cs" />
     <Compile Include="Dao\PQMDataViewerDao\GetProcessPQMDao.cs" />
     <Compile Include="Dao\PQMDataViewerDao\GetSernoDataTablePQMDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\GetPQMProductionItemDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\GetPQMProductionLineDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\GetPQMProductionModelDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\GetPQMProductionProcessDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\GetPQMProductionRateNGRatioDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMNGNOICHKfromMesdbDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMNGThurstChartDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMOUTPUTByHourDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMOutputFinalDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionExportDataDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionGA1Dao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionInputByDateDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionINPUTDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionNGNOICHKDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionNGThurstDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionoOutputMotorDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionOUTPUTDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionProcessDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMProductionTotalDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\SearchPQMQtyNOICHKfromMesdbDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\TabMain\SearchPQMMainChartDGVDao.cs" />
+    <Compile Include="Dao\PQMDataViewerDao\PQMProductionControlDao\TabMain\SearchPQMtabMainDGVDao.cs" />
     <Compile Include="Dao\ProductionControllerNCVCDao\AddPersonProNCVCDao.cs" />
     <Compile Include="Dao\ProductionControllerNCVCDao\CheckPersonNCVCDao.cs" />
     <Compile Include="Dao\ProductionControllerNCVCDao\CheckPerson_DuplicateNCVCDao.cs" />
@@ -1022,6 +1065,12 @@
     <Compile Include="Form\NCVPForm\PQMDataViewerForm\PQMDataViewerForm.Designer.cs">
       <DependentUpon>PQMDataViewerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\NCVPForm\PQMDataViewerForm\PQMProductionControlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\NCVPForm\PQMDataViewerForm\PQMProductionControlForm.Designer.cs">
+      <DependentUpon>PQMProductionControlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\NCVPForm\ProductionControllerForm\AddPersonForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1234,6 +1283,7 @@
     <Compile Include="Vo\PQMConnectVo\RateNGVo.cs" />
     <Compile Include="Vo\PQMConnectVo\ProductionControllerGA1Vo.cs" />
     <Compile Include="Vo\PQMDataViewerVo\PQMDataViewerVo.cs" />
+    <Compile Include="Vo\PQMDataViewerVo\PQMProductionControlVo.cs" />
     <Compile Include="Vo\ProcessWorksVo.cs" />
     <Compile Include="Vo\ProductionControllerNCVCVo.cs" />
     <Compile Include="Vo\ProductionControllerVo.cs" />
@@ -1386,6 +1436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\NCVPForm\PQMDataViewerForm\PQMDataViewerForm.resx">
       <DependentUpon>PQMDataViewerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\NCVPForm\PQMDataViewerForm\PQMProductionControlForm.resx">
+      <DependentUpon>PQMProductionControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\NCVPForm\ProductionControllerForm\AddPersonForm.resx">
       <DependentUpon>AddPersonForm.cs</DependentUpon>

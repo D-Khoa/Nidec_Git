@@ -10,7 +10,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
         {
             InvertoryVo inVo = (InvertoryVo)vo;
             StringBuilder sql = new StringBuilder();
-            sql.Append("update  t_warehouse_main set invertory_time_id =:invertory_time_id where warehouse_main_id =:warehouse_main_id");
+            sql.Append("update  t_warehouse_main set invertory_time_id =:invertory_time_id, detail_position_id =:detail_position_id where warehouse_main_id =:warehouse_main_id");
 
             //create command
             DbCommandAdaptor sqlCommandAdapter = base.GetDbCommandAdaptor(trxContext, sql.ToString());
@@ -19,9 +19,9 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Dao
             DbParameterList sqlParameter = sqlCommandAdapter.CreateParameterList();
             sqlParameter.AddParameterInteger("warehouse_main_id", inVo.WarehouseMainId);
             sqlParameter.AddParameterInteger("invertory_time_id", inVo.InvertoryTimeId);
-          
+            sqlParameter.AddParameterInteger("detail_position_id", inVo.Detail_Position_ID);
 
- 
+
             //execute SQL
 
             InvertoryVo outVo = new InvertoryVo

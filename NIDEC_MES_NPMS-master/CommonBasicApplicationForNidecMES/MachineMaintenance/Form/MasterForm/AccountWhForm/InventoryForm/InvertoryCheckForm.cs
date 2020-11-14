@@ -11,6 +11,8 @@ using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.InvertoryCh
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.InvertoryTimeCbm;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.RankMasterCbm;
 using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo.AccountWhVo;
+using System.Diagnostics;
+using Com.Nidec.Mes.Common.Basic.MachineMaintenance.Cbm.AccountWhCbm.DetailPositionCbm;
 
 namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.InventoryForm
 {
@@ -30,13 +32,13 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
             InvertoryTimeCode_cbm.DisplayMember = "InvertoryTimeCode";
             InvertoryTimeCode_cbm.DataSource = detailposition.GetList();
             InvertoryTimeCode_cbm.Text = "";
-            
 
             LocationVo Locationvo = (LocationVo)DefaultCbmInvoker.Invoke(new GetLocationMasterMntCbm(), new LocationVo());
             location_cbm.DisplayMember = "LocationCode";
             location_cbm.DataSource = Locationvo.LocationListVo;
             location_cbm.Text = "";
             asset_Code_cmb.Select();
+
             //  ValueObjectList<RankVo> rankcode = (ValueObjectList<RankVo>)DefaultCbmInvoker.Invoke(new GetRankCbm(), new RankVo());
             //InvertoryCheck_dgv.
             //    DisplayMember = "RankCode";
@@ -45,7 +47,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
         }
         // public InvertoryVo CheckoutVo = new InvertoryVo();
         public ValueObjectList<WareHouseMainVo> warehouseMainID = new ValueObjectList<WareHouseMainVo>();
-    
+
         public string assetcodetrim;
         public string test = "a";
 
@@ -54,11 +56,13 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
         {
             InvertoryVo inVo = new InvertoryVo()
             {
-                AssetCode = asset_Code_cmb.Text.Trim(),
-                //InvertoryTimeCode = InvertoryTimeCode_cbm.Text,
+                AssetCode = assetcodetrim,
+                //  AssetCode = asset_Code_cmb.Text.Trim(),
+                InvertoryTimeCode = InvertoryTimeCode_cbm.Text,
                 NowLocation = location_cbm.Text,
+                DetailPosition = cmbDetailLocation.Text,
             };
-            if (cbInventoryCode.Checked) inVo.InvertoryTimeCode = InvertoryTimeCode_cbm.Text;
+            //if (cbInventoryCode.Checked) inVo.InvertoryTimeCode = InvertoryTimeCode_cbm.Text;
             try
             {
                 ValueObjectList<InvertoryVo> listvo = (ValueObjectList<InvertoryVo>)DefaultCbmInvoker.Invoke(new SearchInvertoryCheckCbm(), inVo);
@@ -77,7 +81,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
                     {
                         InvertoryCheck_dgv.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                     }
-                }               
+                }
             }
             if (thongbao >= 1)
             {
@@ -160,15 +164,20 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
                         RegistrationUserCode = UserData.GetUserData().UserName,
                         FactoryCode = UserData.GetUserData().FactoryCode,
                         LocationID = ((LocationVo)this.location_cbm.SelectedItem).LocationId,
+                        Detail_Position_ID = ((DetailPositionVo)this.cmbDetailLocation.SelectedItem).DetailPositionId,
+
                         //  RankID = ((RankVo)this.rank_name_cbm.SelectedItem).RankId,
                     };
+                    //DetailPositionVo inVoDe = new DetailPositionVo()
+                    //{
+                    //    DetailPositionId = ((DetailPositionVo)this.cmbDetailLocation.SelectedItem).DetailPositionId,
+                    //};
                     try
                     {
                         checkvo = (InvertoryVo)DefaultCbmInvoker.Invoke(new CheckInvertoryRowCbm(), inVo);
-
                         if (checkvo.AffectedCount == 1)
                         {
-                            mess +=  assetcodetrim + " is checked into " + InvertoryTimeCode_cbm.Text + "\n";
+                            mess += assetcodetrim + " is checked into " + InvertoryTimeCode_cbm.Text + "\n";
                             //if(i == Wlist.Count -1)
                             //{
                             //    MessageBox.Show(mess, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -181,6 +190,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
                             outVo = (InvertoryVo)DefaultCbmInvoker.Invoke(new AddInvertoryCheckCbm(), inVo);
                             outVo = (InvertoryVo)DefaultCbmInvoker.Invoke(new UpdateWHInvertoryCheckCbm(), inVo);
                             outVo = (InvertoryVo)DefaultCbmInvoker.Invoke(new UpdateACCInvertoryCheckCbm(), inVo);
+
                             //    outVo = (InvertoryVo)DefaultCbmInvoker.Invoke(new UpdateACCRankCheckCbm(), inVo);
                         }
                     }
@@ -218,7 +228,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
             }
             if (InvertoryTimeCode_cbm.Text == "")
             {
-                messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, cbInventoryCode.Text);
+                messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, inventorycode_lbl.Text);
                 popUpMessage.Warning(messageData, Text);
                 InvertoryTimeCode_cbm.Focus();
                 return false;
@@ -230,12 +240,19 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
                 location_cbm.Focus();
                 return false;
             }
+            if (cmbDetailLocation.Text == "")
+            {
+                messageData = new MessageData("mmcc00005", Properties.Resources.mmcc00005, "Detail Position");
+                popUpMessage.Warning(messageData, Text);
+                cmbDetailLocation.Focus();
+                return false;
+            }
             return true;
         }
 
         private void Inventory_Offline_btn_Click(object sender, EventArgs e)
         {
-            if (location_cbm.Text != "" && InvertoryTimeCode_cbm.Text != "" )
+            if (location_cbm.Text != "" && InvertoryTimeCode_cbm.Text != "")
             {
                 thongbao = 0;
                 test = "a";
@@ -251,11 +268,14 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
                 {
                     if (xlRange.Cells[i, 1] != null && xlRange.Cells[i, 1].Value != null && InvertoryTimeCode_cbm.Text != "")
                     {
-                        asset_Code_cmb.Text = (xlRange.Cells[i, 1].Value.ToString()).Substring(0, 10);
-                        addandupdate();
-                        GridBind();
-                        colRankNameNowTextBox.Visible = true;
-                        colRankNameNow.Visible = false;
+                       
+                        
+                            asset_Code_cmb.Text = (xlRange.Cells[i, 1].Value.ToString()).Substring(0, 10);
+                            addandupdate();
+                            GridBind();
+                            colRankNameNowTextBox.Visible = true;
+                            colRankNameNow.Visible = false;
+                       
                     }
                     if (InvertoryCheck_dgv.RowCount > 0)
                     {
@@ -295,7 +315,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
                 xlApp.Quit();
                 Marshal.ReleaseComObject(xlApp);
             }
-            if(thongbao >= 1)
+            if (thongbao >= 1)
             {
                 MessageBox.Show(mess, "Messager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -316,11 +336,26 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
         }
         private void Search_btn_Click(object sender, EventArgs e)
         {
-            assetcodetrim = "";
-            GridBind();
-            InvertoryCheck_dgv.Columns["colRankNameNowTextBox"].Visible = false;
-            InvertoryCheck_dgv.Columns["colRankNameNow"].Visible = false;
-            asset_Code_cmb.Select();
+            Stopwatch stopwatch = new Stopwatch();
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                stopwatch.Restart();
+                assetcodetrim = "";
+                GridBind();
+                InvertoryCheck_dgv.Columns["colRankNameNowTextBox"].Visible = false;
+                InvertoryCheck_dgv.Columns["colRankNameNow"].Visible = false;
+                asset_Code_cmb.Select();
+                stopwatch.Stop();
+                tsTime.Text = stopwatch.Elapsed.ToString("s\\.ff") + " s";
+                if (InvertoryCheck_dgv.Rows.Count > 0)
+                    tsInventoryTotal.Text = InvertoryCheck_dgv.Rows.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            this.Cursor = Cursors.Default;
         }
         private void exportlink_btn_Click(object sender, EventArgs e)
         {
@@ -339,6 +374,14 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form.AccountWhForm.Inven
         {
             Com.Nidec.Mes.Common.Basic.MachineMaintenance.Common.Excel_Class exportexcel = new Common.Excel_Class();
             exportexcel.exportexcel(ref InvertoryCheck_dgv, linkexport_txt.Text, this.Text);
+        }
+
+        private void location_cbm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValueObjectList<DetailPositionVo> detailposition = (ValueObjectList<DetailPositionVo>)DefaultCbmInvoker.Invoke(new GetDetailPositionCbm(), new DetailPositionVo() { LocationCd = location_cbm.Text, });
+            cmbDetailLocation.DisplayMember = "DetailPositionCode";
+            cmbDetailLocation.DataSource = detailposition.GetList();
+            cmbDetailLocation.Text = "";
         }
     }
 }

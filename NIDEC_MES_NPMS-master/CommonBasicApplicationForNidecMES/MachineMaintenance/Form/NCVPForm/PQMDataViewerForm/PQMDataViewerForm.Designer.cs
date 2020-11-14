@@ -37,8 +37,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsSernoRows = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsSpace = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsProcessing = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -81,8 +79,6 @@
             this.toolStripStatusLabel1,
             this.tsSernoRows,
             this.tsSpace,
-            this.toolStripStatusLabel2,
-            this.tsProcessing,
             this.toolStripStatusLabel3,
             this.tsTime});
             this.statusStrip1.Location = new System.Drawing.Point(0, 390);
@@ -109,22 +105,8 @@
             this.tsSpace.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.tsSpace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsSpace.Name = "tsSpace";
-            this.tsSpace.Size = new System.Drawing.Size(625, 19);
+            this.tsSpace.Size = new System.Drawing.Size(700, 19);
             this.tsSpace.Spring = true;
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(66, 19);
-            this.toolStripStatusLabel2.Text = "Data rows:";
-            // 
-            // tsProcessing
-            // 
-            this.tsProcessing.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.tsProcessing.Name = "tsProcessing";
-            this.tsProcessing.Size = new System.Drawing.Size(40, 19);
-            this.tsProcessing.Text = "None";
             // 
             // toolStripStatusLabel3
             // 
@@ -490,7 +472,6 @@
 
         #endregion
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel tsProcessing;
         private System.Windows.Forms.ToolStripStatusLabel tsTime;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
@@ -516,7 +497,6 @@
         private Framework.ButtonCommon btnLoad;
         private Framework.ButtonCommon btnClear;
         private System.ComponentModel.BackgroundWorker bgwGetData;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tsSernoRows;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
