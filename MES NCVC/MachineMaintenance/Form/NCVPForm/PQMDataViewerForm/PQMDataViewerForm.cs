@@ -17,8 +17,9 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
     {
         #region Variables
         //CONNECT TO PQM DB
-        public string connection = Properties.Settings.Default.PQM_CONNECTION1_STRING;
 
+        public string connection = Properties.Settings.Default.PQM_CONNECTION1_STRING;
+        // public string connection2 = Properties.Settings.Default.PQM_CONNECTION_STRING;
         PQMDataViewerVo Vo = new PQMDataViewerVo();
         List<string> temp = new List<string>();
         Stopwatch stopWatch = new Stopwatch();
@@ -45,7 +46,7 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
             dtDatef.SetDateTime(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 00, 00, 00));
             dtDatet.SetDateTime(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 00));
             ValueObjectList<PQMDataViewerVo> model = (ValueObjectList<PQMDataViewerVo>)DefaultCbmInvoker
-                                                   .Invoke(new GetModelPQMCbm(), new PQMDataViewerVo(), connection);
+                                        .Invoke(new GetModelPQMCbm(), new PQMDataViewerVo(), connection);
             cmbModel.DisplayMember = "Model";
             cmbModel.DataSource = model.GetList();
             cmbModel.Text = null;
@@ -286,14 +287,15 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Form
                     this.Cursor = Cursors.Default;
                 }
                 else
-                    MessageBox.Show("Model not null", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Model not null", "Warning!!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Please choose inspect", "NoInspect", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //  MessageBox.Show("Please choose inspect", "NoInspect", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message);
                 stopWatch.Stop();
                 this.Cursor = Cursors.Default;
-            }
+            }        
         }
 
         private void timer1_Tick(object sender, EventArgs e)

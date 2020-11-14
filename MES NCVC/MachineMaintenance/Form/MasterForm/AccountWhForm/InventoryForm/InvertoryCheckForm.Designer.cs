@@ -46,6 +46,8 @@
             this.colDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asset_code_lbl = new Com.Nidec.Mes.Framework.LabelCommon();
             this.groupBoxCommon1 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
+            this.cmbDetailPosition = new Com.Nidec.Mes.Framework.ComboBoxCommon();
+            this.labelCommon1 = new Com.Nidec.Mes.Framework.LabelCommon();
             this.inventorycode_lbl = new System.Windows.Forms.Label();
             this.groupBoxCommon3 = new Com.Nidec.Mes.Framework.GroupBoxCommon();
             this.ExportExcel_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
@@ -112,7 +114,7 @@
             this.InvertoryCheck_dgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.InvertoryCheck_dgv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.InvertoryCheck_dgv.EnableHeadersVisualStyles = false;
-            this.InvertoryCheck_dgv.Location = new System.Drawing.Point(0, 237);
+            this.InvertoryCheck_dgv.Location = new System.Drawing.Point(0, 283);
             this.InvertoryCheck_dgv.MultiSelect = false;
             this.InvertoryCheck_dgv.Name = "InvertoryCheck_dgv";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -124,7 +126,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.InvertoryCheck_dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.InvertoryCheck_dgv.RowTemplate.Height = 21;
-            this.InvertoryCheck_dgv.Size = new System.Drawing.Size(1261, 405);
+            this.InvertoryCheck_dgv.Size = new System.Drawing.Size(1261, 359);
             this.InvertoryCheck_dgv.TabIndex = 19;
             // 
             // colInvertoryEquipmentId
@@ -199,14 +201,14 @@
             this.colInvertoryValue.Name = "colInvertoryValue";
             this.colInvertoryValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colInvertoryValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colInvertoryValue.Width = 105;
+            this.colInvertoryValue.Width = 104;
             // 
             // colUserAdd
             // 
             this.colUserAdd.DataPropertyName = "RegistrationUserCode";
             this.colUserAdd.HeaderText = "User Add";
             this.colUserAdd.Name = "colUserAdd";
-            this.colUserAdd.Width = 77;
+            this.colUserAdd.Width = 76;
             // 
             // colDateTime
             // 
@@ -230,6 +232,8 @@
             // groupBoxCommon1
             // 
             this.groupBoxCommon1.ControlId = null;
+            this.groupBoxCommon1.Controls.Add(this.cmbDetailPosition);
+            this.groupBoxCommon1.Controls.Add(this.labelCommon1);
             this.groupBoxCommon1.Controls.Add(this.inventorycode_lbl);
             this.groupBoxCommon1.Controls.Add(this.groupBoxCommon3);
             this.groupBoxCommon1.Controls.Add(this.groupBoxCommon2);
@@ -245,15 +249,39 @@
             this.groupBoxCommon1.Font = new System.Drawing.Font("Arial", 9F);
             this.groupBoxCommon1.Location = new System.Drawing.Point(0, 107);
             this.groupBoxCommon1.Name = "groupBoxCommon1";
-            this.groupBoxCommon1.Size = new System.Drawing.Size(1261, 130);
+            this.groupBoxCommon1.Size = new System.Drawing.Size(1261, 176);
             this.groupBoxCommon1.TabIndex = 77;
             this.groupBoxCommon1.TabStop = false;
             this.groupBoxCommon1.Text = "Check";
             // 
+            // cmbDetailPosition
+            // 
+            this.cmbDetailPosition.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbDetailPosition.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbDetailPosition.ControlId = null;
+            this.cmbDetailPosition.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDetailPosition.FormattingEnabled = true;
+            this.cmbDetailPosition.Location = new System.Drawing.Point(149, 78);
+            this.cmbDetailPosition.Name = "cmbDetailPosition";
+            this.cmbDetailPosition.Size = new System.Drawing.Size(162, 23);
+            this.cmbDetailPosition.TabIndex = 87;
+            // 
+            // labelCommon1
+            // 
+            this.labelCommon1.AutoSize = true;
+            this.labelCommon1.ControlId = null;
+            this.labelCommon1.Font = new System.Drawing.Font("Arial", 9F);
+            this.labelCommon1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelCommon1.Location = new System.Drawing.Point(53, 81);
+            this.labelCommon1.Name = "labelCommon1";
+            this.labelCommon1.Size = new System.Drawing.Size(90, 15);
+            this.labelCommon1.TabIndex = 86;
+            this.labelCommon1.Text = "Detail Position:";
+            // 
             // inventorycode_lbl
             // 
             this.inventorycode_lbl.AutoSize = true;
-            this.inventorycode_lbl.Location = new System.Drawing.Point(55, 88);
+            this.inventorycode_lbl.Location = new System.Drawing.Point(55, 110);
             this.inventorycode_lbl.Name = "inventorycode_lbl";
             this.inventorycode_lbl.Size = new System.Drawing.Size(88, 15);
             this.inventorycode_lbl.TabIndex = 85;
@@ -397,10 +425,11 @@
             this.location_cbm.ControlId = null;
             this.location_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.location_cbm.FormattingEnabled = true;
-            this.location_cbm.Location = new System.Drawing.Point(149, 52);
+            this.location_cbm.Location = new System.Drawing.Point(149, 49);
             this.location_cbm.Name = "location_cbm";
             this.location_cbm.Size = new System.Drawing.Size(162, 23);
             this.location_cbm.TabIndex = 84;
+            this.location_cbm.SelectedIndexChanged += new System.EventHandler(this.location_cbm_SelectedIndexChanged);
             // 
             // select_location_lbl
             // 
@@ -443,7 +472,7 @@
             this.InvertoryTimeCode_cbm.ControlId = null;
             this.InvertoryTimeCode_cbm.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InvertoryTimeCode_cbm.FormattingEnabled = true;
-            this.InvertoryTimeCode_cbm.Location = new System.Drawing.Point(149, 85);
+            this.InvertoryTimeCode_cbm.Location = new System.Drawing.Point(149, 107);
             this.InvertoryTimeCode_cbm.Name = "InvertoryTimeCode_cbm";
             this.InvertoryTimeCode_cbm.Size = new System.Drawing.Size(162, 23);
             this.InvertoryTimeCode_cbm.TabIndex = 80;
@@ -465,7 +494,7 @@
             // 
             this.tsTime.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.tsTime.Name = "tsTime";
-            this.tsTime.Size = new System.Drawing.Size(1126, 19);
+            this.tsTime.Size = new System.Drawing.Size(1157, 19);
             this.tsTime.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -546,5 +575,7 @@
         private System.Windows.Forms.ToolStripStatusLabel tsTime;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel tsInventoryTotal;
+        private Framework.ComboBoxCommon cmbDetailPosition;
+        private Framework.LabelCommon labelCommon1;
     }
 }

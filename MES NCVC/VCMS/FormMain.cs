@@ -452,5 +452,11 @@ namespace Com.Nidec.Mes.VCMS
             PQMDataViewerForm dvf = new PQMDataViewerForm();
             dvf.ShowDialog();
         }
+
+        private void btnBDataViewer_Click(object sender, EventArgs e)
+        {
+            PQMBDataViewerForm dvf = new PQMBDataViewerForm();
+            dvf.ShowDialog();
+        }
     }
 }

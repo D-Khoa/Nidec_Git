@@ -36,8 +36,8 @@ namespace Com.Nidec.Mes.Common.Basic.MachineMaintenance.Vo.AccountWhVo
 
         public int LocationID { get; set; }
         public string NowLocation { get; set; }
-
-
+        public int Detail_Position_ID { get; set; }
+        public string DetailPosition { get; set; }
         public string   RankNameBefore { get; set; }
         public string RankNameNow { get; set; }
         public int RankID { get; set; }

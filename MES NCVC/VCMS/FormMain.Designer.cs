@@ -52,6 +52,7 @@
             this.WarehouseManagement_New_frm = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.account_equipments_btn = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.tabPQM = new System.Windows.Forms.TabPage();
+            this.btnBDataViewer = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.btnDataViewer = new Com.Nidec.Mes.Framework.ButtonCommon();
             this.labelCommon2 = new Com.Nidec.Mes.Framework.LabelCommon();
             this.NcvpMaster_gpb = new Com.Nidec.Mes.Framework.GroupBoxCommon();
@@ -459,6 +460,7 @@
             // 
             // tabPQM
             // 
+            this.tabPQM.Controls.Add(this.btnBDataViewer);
             this.tabPQM.Controls.Add(this.btnDataViewer);
             this.tabPQM.Location = new System.Drawing.Point(4, 28);
             this.tabPQM.Name = "tabPQM";
@@ -467,6 +469,21 @@
             this.tabPQM.TabIndex = 3;
             this.tabPQM.Text = "PQM DataViewer";
             this.tabPQM.UseVisualStyleBackColor = true;
+            // 
+            // btnBDataViewer
+            // 
+            this.btnBDataViewer.BackColor = System.Drawing.SystemColors.Control;
+            this.btnBDataViewer.ControlId = "cpmb010";
+            this.btnBDataViewer.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnBDataViewer.Font = new System.Drawing.Font("Arial", 9F);
+            this.btnBDataViewer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnBDataViewer.Location = new System.Drawing.Point(270, 20);
+            this.btnBDataViewer.Name = "btnBDataViewer";
+            this.btnBDataViewer.Size = new System.Drawing.Size(210, 64);
+            this.btnBDataViewer.TabIndex = 3;
+            this.btnBDataViewer.Text = "B Data Viewer";
+            this.btnBDataViewer.UseVisualStyleBackColor = false;
+            this.btnBDataViewer.Click += new System.EventHandler(this.btnBDataViewer_Click);
             // 
             // btnDataViewer
             // 
@@ -479,7 +496,7 @@
             this.btnDataViewer.Name = "btnDataViewer";
             this.btnDataViewer.Size = new System.Drawing.Size(210, 64);
             this.btnDataViewer.TabIndex = 2;
-            this.btnDataViewer.Text = "Data Viewer";
+            this.btnDataViewer.Text = "Haptic Data Viewer";
             this.btnDataViewer.UseVisualStyleBackColor = false;
             this.btnDataViewer.Click += new System.EventHandler(this.btnDataViewer_Click);
             // 
@@ -494,7 +511,7 @@
             this.labelCommon2.Name = "labelCommon2";
             this.labelCommon2.Size = new System.Drawing.Size(648, 24);
             this.labelCommon2.TabIndex = 47;
-            this.labelCommon2.Text = "NCVP Function";
+            this.labelCommon2.Text = "NCVC Function";
             this.labelCommon2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // NcvpMaster_gpb
@@ -1523,5 +1540,6 @@
         private Framework.ButtonCommon account_equipments_btn;
         private System.Windows.Forms.TabPage tabPQM;
         private Framework.ButtonCommon btnDataViewer;
+        private Framework.ButtonCommon btnBDataViewer;
     }
 }
